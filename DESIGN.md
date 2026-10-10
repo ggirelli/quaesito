@@ -83,6 +83,7 @@ numbered apart from questions and score nothing. A quiz needs at least one real 
 | `Number { answer }` | a number | the closest guess (ties included) |
 | `TrueFalse { answer }` | two buttons, True and False (labelled on phones) | `answer` |
 | `Parts { parts }` | one short text per part (label, accepted answers, optional picture) | each part like `Text`; points split evenly |
+| `Pin { answer, aspect, tolerance }` | a tap on the question's picture | the closer to `answer`, the more points |
 | `Order { items }` | the items, shown shuffled, tapped from first to last | `items` as listed |
 | `Slide { title }` | nothing | none: a title, text and/or picture on the big screen |
 
@@ -119,6 +120,11 @@ Typed answers: each group of identical (normalised) answers gets a `Judgement`, 
 end-of-quiz review. Scores are therefore signed.
 
 Closest number: the closest guesses earn 1000 points each, regardless of speed.
+
+Pin: spots are fractions of the picture's width and height; distances are measured in picture
+widths, using the picture's height-to-width ratio recorded when the spot is clicked in the editor.
+Within the tolerance's first distance a pin earns full points, beyond the second none, and in
+between a share falling evenly. Pictures of pin questions are never revealed gradually.
 
 Several answers: each part is matched, grouped and judged like a typed answer; judgement keys are
 the part's index and the normalised text (`2|the beatles`). Each part is worth an even share of

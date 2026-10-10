@@ -73,6 +73,8 @@ Any question can be worth more than the others: **Points ×2** (up to ×5) multi
 - **Several answers**: teams type a few answers at once, e.g. the title and the artist of a song, or the titles of five
   posters (each part can have its own picture). Each part is matched and judged like a typed answer, and the question's
   points are shared evenly between the parts; make it worth more with the points multiplier.
+- **Pin**: teams drop a pin on the question's picture — a map, a floor plan, a painting — and the closer they are to the
+  spot you clicked in the editor, the more points (tight, normal or loose tolerance). The reveal shows every pin.
 - **Order**: teams put 2–6 items in order (oldest first, biggest first…) by tapping them on their phones. Each item in
   its right place earns its share of the points.
 
