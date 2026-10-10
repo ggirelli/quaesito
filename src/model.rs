@@ -219,6 +219,9 @@ pub struct Question {
     /// Name of an uploaded picture, if any.
     #[serde(default)]
     pub image: Option<String>,
+    /// Show the picture blurred at first, sharpening as the clock runs out.
+    #[serde(default)]
+    pub blur_image: bool,
     /// Name of an uploaded soundtrack, if any. The host starts it, and the clock with it.
     #[serde(default)]
     pub audio: Option<String>,
@@ -434,6 +437,7 @@ mod tests {
             text: "Which planet has the most moons?".to_owned(),
             kind: QuestionKind::Choice,
             image: None,
+            blur_image: false,
             audio: None,
             time_limit_secs: None,
             answers: vec![answer("Jupiter", false), answer("Saturn", true)],

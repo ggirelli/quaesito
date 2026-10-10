@@ -70,6 +70,8 @@ pub struct QuestionInfo {
     pub total: usize,
     pub text: String,
     pub image: Option<String>,
+    /// The picture starts blurred and sharpens as the clock runs.
+    pub blur_image: bool,
     /// Media name of the soundtrack, if any.
     pub audio: Option<String>,
     pub input: InputKind,

@@ -21,6 +21,8 @@ use crate::{
 
 /// The lobby illustration is shown while fewer teams than this have joined.
 const LOBBY_ART_MAX_TEAMS: usize = 5;
+/// Blur of a gradually revealed picture when the clock starts, in CSS pixels.
+const MAX_BLUR_PX: f64 = 40.0;
 /// Seconds the host's "+" button adds to an open question.
 const EXTRA_SECS: u32 = 10;
 /// How many teams the between-questions leaderboard shows.
@@ -507,7 +509,7 @@ fn QuestionSlide(question: QuestionInfo, left_ms: f64, answered: usize, teams: u
         }
         div { class: "question-body",
             if let Some(image) = &question.image {
-                img { class: "question-image", src: media_url(image), alt: "" }
+                QuestionImage { image: image.clone(), blur: question.blur_image.then_some(fraction) }
             }
             div { class: "answered",
                 strong { "{answered}/{teams}" }
@@ -515,6 +517,27 @@ fn QuestionSlide(question: QuestionInfo, left_ms: f64, answered: usize, teams: u
             }
         }
         AnswersOrPrompt { question: question.clone() }
+    }
+}
+
+/// A question's picture; `blur` is the share of the clock left when it sharpens over time.
+#[component]
+fn QuestionImage(image: String, blur: Option<f64>) -> Element {
+    let Some(left) = blur else {
+        return rsx! {
+            img { class: "question-image", src: media_url(&image), alt: "" }
+        };
+    };
+    let px = MAX_BLUR_PX * left.clamp(0.0, 1.0);
+    rsx! {
+        div { class: "blur-frame",
+            img {
+                class: "question-image blurred",
+                src: media_url(&image),
+                alt: "",
+                style: "filter: blur({px:.1}px)",
+            }
+        }
     }
 }
 
@@ -547,7 +570,7 @@ fn ReadySlide(question: QuestionInfo, teams: usize) -> Element {
         }
         div { class: "question-body",
             if let Some(image) = &question.image {
-                img { class: "question-image", src: media_url(image), alt: "" }
+                QuestionImage { image: image.clone(), blur: question.blur_image.then_some(1.0) }
             }
             div { class: "answered",
                 strong { Icon { kind: IconKind::Music } }

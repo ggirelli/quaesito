@@ -464,6 +464,17 @@ fn QuestionCard(
                         onclick: move |_| draft.edit_question(index, |q| q.image = None),
                         "Remove picture"
                     }
+                    if !slide {
+                        label { class: "correct-toggle",
+                            title: "The picture starts blurred and sharpens as the clock runs",
+                            input {
+                                r#type: "checkbox",
+                                checked: question.blur_image,
+                                onchange: move |e| draft.edit_question(index, |q| q.blur_image = e.checked()),
+                            }
+                            span { "Reveal gradually" }
+                        }
+                    }
                 } else {
                     label { class: "button ghost",
                         if uploading() { "Uploading…" } else { "＋ Add picture" }

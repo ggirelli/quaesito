@@ -817,6 +817,19 @@ input.short {
   object-fit: contain;
 }
 
+/* A gradually revealed picture: the frame clips the blur's soft edges. */
+.blur-frame {
+  overflow: hidden;
+  border-radius: var(--radius);
+  display: flex;
+}
+
+.question-image.blurred {
+  border-radius: 0;
+  transform: scale(1.08);
+  transition: filter 0.25s linear;
+}
+
 .timer {
   position: relative;
   width: 4.5em;
