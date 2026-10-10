@@ -2571,11 +2571,14 @@ dependencies = [
  "anyhow",
  "dioxus",
  "futures-util",
+ "gloo-timers",
  "image",
+ "js-sys",
  "serde",
  "serde_json",
  "tokio",
  "uuid",
+ "web-sys",
 ]
 
 [[package]]

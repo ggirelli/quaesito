@@ -13,9 +13,9 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 4 | Admin auth and quiz API | ✅ done |
 | 5 | Game engine (session state machine) | ✅ done |
 | 6 | Live sessions over WebSockets, join API | ✅ done |
-| 7 | UI: routing, home, admin quiz list | ⏳ next |
-| 8 | UI: quiz editor | ⬜ todo |
-| 9 | UI: host slideshow and podium | ⬜ todo |
+| 7 | UI: routing, home, admin dashboard | ✅ done |
+| 8 | UI: quiz editor | ✅ done |
+| 9 | UI: host slideshow and podium | ⏳ next |
 | 10 | UI: player (phone) view | ⬜ todo |
 | 11 | README usage docs, end-to-end smoke test | ⬜ todo |
 
@@ -33,3 +33,10 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 - `src/server/sessions.rs`: live sessions by 6-digit code; a timer task per session fires deadlines and auto-advance.
 - `src/server/live.rs`: WebSocket loops (`/api/ws/host`, `/api/ws/player`) pushing full views on every change.
 - `src/server/net.rs`: join URL origin from `QUAESITO_PUBLIC_URL` or the LAN IP plus the host page's port (the QR code is drawn client-side, step 9).
+- `src/ui/`: router (`/`, `/admin`, `/admin/quiz/:id`), `ClientOnly` wrapper so `localStorage`-dependent pages hydrate cleanly, admin gate with token check, dashboard (create/duplicate/export/import/delete), editor with ~1 s autosave and live validation.
+- `GET /export/{id}?token=…` downloads a quiz as JSON.
+- `assets/main.css`: single offline stylesheet (no web fonts/CDNs, the LAN may have no internet).
+
+## Known gaps
+
+- Pictures removed from a quiz stay on disk (no garbage collection yet).

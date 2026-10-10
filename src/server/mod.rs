@@ -10,7 +10,15 @@ pub mod store;
 
 use std::{path::PathBuf, sync::OnceLock};
 
-use dioxus::fullstack::{axum::Router, routing::get};
+use dioxus::fullstack::{
+    axum::{
+        Router,
+        extract::{Path, Query},
+        http::{StatusCode, header},
+        response::{IntoResponse, Response},
+    },
+    routing::get,
+};
 
 use self::{auth::Auth, media::MediaStore, sessions::Sessions, store::QuizStore};
 
@@ -56,5 +64,54 @@ pub async fn init() -> anyhow::Result<()> {
 
 /// Routes served next to the Dioxus application.
 pub fn routes() -> Router {
-    Router::new().route("/media/{name}", get(media::serve))
+    Router::new()
+        .route("/media/{name}", get(media::serve))
+        .route("/export/{id}", get(export))
+}
+
+#[derive(serde::Deserialize)]
+struct ExportQuery {
+    token: String,
+}
+
+/// `GET /export/{id}?token=…`: downloads a quiz as JSON.
+async fn export(Path(id): Path<String>, Query(query): Query<ExportQuery>) -> Response {
+    let state = state();
+    if !state.auth.is_valid(&query.token) {
+        return StatusCode::UNAUTHORIZED.into_response();
+    }
+    let Ok(Some(quiz)) = state.quizzes.get(&id).await else {
+        return StatusCode::NOT_FOUND.into_response();
+    };
+    let Ok(json) = serde_json::to_string_pretty(&quiz) else {
+        return StatusCode::INTERNAL_SERVER_ERROR.into_response();
+    };
+    let file_name: String = quiz
+        .title
+        .chars()
+        .map(|c| {
+            if c.is_ascii_alphanumeric() {
+                c.to_ascii_lowercase()
+            } else {
+                '-'
+            }
+        })
+        .collect();
+    let file_name = file_name.trim_matches('-');
+    let file_name = if file_name.is_empty() {
+        "quiz"
+    } else {
+        file_name
+    };
+    (
+        [
+            (header::CONTENT_TYPE, "application/json".to_owned()),
+            (
+                header::CONTENT_DISPOSITION,
+                format!("attachment; filename=\"{file_name}.json\""),
+            ),
+        ],
+        json,
+    )
+        .into_response()
 }
