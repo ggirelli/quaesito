@@ -65,6 +65,7 @@ Any question can be worth more than the others: **Points ×2** (up to ×5) multi
 
 - **Choices**: coloured buttons; one or several answers can be correct. Each answer can have a picture (flags, logos,
   baby photos…), with or without text.
+- **True/false**: teams say whether a statement is true; phones always show the words True and False.
 - **Typed answer**: teams type a short answer. It is right when it matches an accepted answer, ignoring case, accents,
   punctuation and spacing (but not typos). On the reveal, identical answers are grouped and the host can judge each
   group: ✓ full, ½ half or ✗ no points, plus a bonus or malus in steps of 100. A malus can take a team below zero.

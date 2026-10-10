@@ -41,7 +41,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 32 | Admin test mode: big screen and auto-joined phones side by side | ✅ done |
 | 33 | Editor: move a question or slide to the top or bottom | ✅ done |
 | 34 | Points multiplier per question (×1–×5) | ✅ done |
-| 35 | True/false questions | ⏳ planned |
+| 35 | True/false questions | ✅ done |
 | 36 | Questions with several typed parts (title + artist, five posters…), judged per part | ⏳ planned |
 | 37 | Pin on a picture (a map, a floor plan…), scored by distance | ⏳ planned |
 
