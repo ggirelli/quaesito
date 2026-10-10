@@ -12,8 +12,9 @@ use super::{
 use crate::{
     api::{host_socket, join_origin},
     protocol::{
-        Grade, Guess, HostCommand, HostPhase, HostView, InputKind, Judgement, MAX_NAME_CHARS,
-        QuestionInfo, Reveal, SlideInfo, StandingRow, TeamInfo, TextGroup, Upcoming,
+        Fastest, Grade, Guess, HostCommand, HostPhase, HostView, InputKind, Judgement,
+        MAX_NAME_CHARS, QuestionInfo, Reveal, SlideInfo, StandingRow, TeamInfo, TextGroup,
+        Upcoming,
     },
     scoring::MAX_BONUS,
 };
@@ -131,20 +132,21 @@ fn HostScreen(code: String) -> Element {
                             teams: view.teams.len(),
                         }
                     },
-                    HostPhase::Closed { question, answered, reveal, standings, .. } => rsx! {
+                    HostPhase::Closed { question, answered, reveal, fastest, standings, .. } => rsx! {
                         ClosedSlide {
                             question: question.clone(),
                             answered: *answered,
                             teams: view.teams.len(),
                             reveal: reveal.clone(),
+                            fastest: fastest.clone(),
                             standings: standings.clone(),
                         }
                     },
                     HostPhase::Slide { slide, .. } => rsx! {
                         SlideView { slide: slide.clone() }
                     },
-                    HostPhase::Review { question, reveal, .. } => rsx! {
-                        ReviewSlide { question: question.clone(), reveal: reveal.clone() }
+                    HostPhase::Review { question, reveal, fastest, .. } => rsx! {
+                        ReviewSlide { question: question.clone(), reveal: reveal.clone(), fastest: fastest.clone() }
                     },
                     HostPhase::Podium { standings, finished } => rsx! {
                         Podium { standings: standings.clone(), finished: *finished, teams: view.teams.len() }
@@ -763,6 +765,7 @@ fn ClosedSlide(
     answered: usize,
     teams: usize,
     reveal: Option<Reveal>,
+    fastest: Option<Fastest>,
     standings: Option<Vec<StandingRow>>,
 ) -> Element {
     match (reveal, standings) {
@@ -771,7 +774,10 @@ fn ClosedSlide(
                 span { class: "muted", "{answered}/{teams} answered" }
             }
             div { class: "closed-layout",
-                RevealBody { question: question.clone(), reveal }
+                div { class: "stack",
+                    RevealBody { question: question.clone(), reveal }
+                    FastestNote { fastest }
+                }
                 Standings { rows: standings.into_iter().take(STANDINGS_SHOWN).collect::<Vec<_>>() }
             }
         },
@@ -787,7 +793,7 @@ fn ClosedSlide(
 }
 
 #[component]
-fn ReviewSlide(question: QuestionInfo, reveal: Reveal) -> Element {
+fn ReviewSlide(question: QuestionInfo, reveal: Reveal, fastest: Option<Fastest>) -> Element {
     rsx! {
         QuestionHeader { question: question.clone(),
             span { class: "muted", "The answers" }
@@ -798,7 +804,30 @@ fn ReviewSlide(question: QuestionInfo, reveal: Reveal) -> Element {
             }
         }
         RevealBody { question: question.clone(), reveal }
+        FastestNote { fastest }
     }
+}
+
+/// "⚡ Fastest: Owls in 2.3 s".
+#[component]
+fn FastestNote(fastest: Option<Fastest>) -> Element {
+    let Some(fastest) = fastest else {
+        return rsx! {};
+    };
+    rsx! {
+        p { class: "fastest",
+            "⚡ Fastest: "
+            strong { "{fastest.team}" }
+            " in {seconds(fastest.answer_ms)}"
+        }
+    }
+}
+
+/// Milliseconds as "2.3 s".
+fn seconds(ms: u64) -> String {
+    #[allow(clippy::cast_precision_loss, reason = "answer times are small")]
+    let secs = ms as f64 / 1000.0;
+    format!("{secs:.1} s")
 }
 
 #[component]
@@ -811,11 +840,49 @@ fn Standings(rows: Vec<StandingRow>) -> Element {
                     class: "standing",
                     style: "animation-delay: {i * 80}ms",
                     span { class: "rank", "{row.rank}" }
+                    if let Some(round) = row.round {
+                        RankChange { rank: row.rank, previous: round.previous_rank }
+                    }
                     TeamAvatar { team: row.team.clone() }
                     span { class: "name", "{row.team.name}" }
+                    if let Some(round) = row.round {
+                        span { class: "round",
+                            match round.points {
+                                0 => String::new(),
+                                p if p > 0 => format!("+{p}"),
+                                p => p.to_string(),
+                            }
+                            if let Some(ms) = round.answer_ms {
+                                span { class: "muted", " {seconds(ms)}" }
+                            }
+                        }
+                    }
                     span { class: "score", "{row.score}" }
                 }
             }
+        }
+    }
+}
+
+/// An arrow showing how many places a team moved with the last question.
+#[component]
+fn RankChange(rank: usize, previous: Option<usize>) -> Element {
+    let Some(previous) = previous else {
+        return rsx! {
+            span { class: "rank-change" }
+        };
+    };
+    rsx! {
+        match previous.cmp(&rank) {
+            std::cmp::Ordering::Greater => rsx! {
+                span { class: "rank-change up", title: "Up {previous - rank}", "▲{previous - rank}" }
+            },
+            std::cmp::Ordering::Less => rsx! {
+                span { class: "rank-change down", title: "Down {rank - previous}", "▼{rank - previous}" }
+            },
+            std::cmp::Ordering::Equal => rsx! {
+                span { class: "rank-change same", "–" }
+            },
         }
     }
 }

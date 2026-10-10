@@ -141,6 +141,25 @@ pub struct StandingRow {
     pub rank: usize,
     pub team: TeamInfo,
     pub score: i32,
+    /// How the team did on the question just revealed, in the standings shown after it.
+    pub round: Option<RoundResult>,
+}
+
+/// A team's result on the question just revealed.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+pub struct RoundResult {
+    pub points: i32,
+    /// How long the team took to answer, if it did.
+    pub answer_ms: Option<u64>,
+    /// Position before this question, if an earlier question was played.
+    pub previous_rank: Option<usize>,
+}
+
+/// The quickest fully correct answer to a question.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct Fastest {
+    pub team: String,
+    pub answer_ms: u64,
 }
 
 /// Everything the host screen shows.
@@ -176,6 +195,8 @@ pub enum HostPhase {
         question: QuestionInfo,
         answered: usize,
         reveal: Option<Reveal>,
+        /// The quickest right answer, when revealing (not for number questions).
+        fastest: Option<Fastest>,
         standings: Option<Vec<StandingRow>>,
         then: Upcoming,
     },
@@ -185,6 +206,7 @@ pub enum HostPhase {
     Review {
         question: QuestionInfo,
         reveal: Reveal,
+        fastest: Option<Fastest>,
         then: Upcoming,
     },
     /// Final ranking, revealed from 3rd to 1st. `standings` only holds rows revealed so far.

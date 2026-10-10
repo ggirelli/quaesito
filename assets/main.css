@@ -938,6 +938,41 @@ input.short {
   font-weight: 700;
 }
 
+.standing .round {
+  font-size: 0.75em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ok);
+}
+
+.rank-change {
+  width: 2.2em;
+  font-size: 0.7em;
+  font-weight: 800;
+  text-align: center;
+}
+
+.rank-change.up {
+  color: var(--ok);
+}
+
+.rank-change.down {
+  color: var(--danger);
+}
+
+.rank-change.same {
+  color: var(--muted);
+}
+
+.fastest {
+  margin: 0;
+  text-align: center;
+  color: var(--muted);
+}
+
+.fastest strong {
+  color: var(--accent);
+}
+
 .standing .score {
   font-variant-numeric: tabular-nums;
   font-weight: 800;

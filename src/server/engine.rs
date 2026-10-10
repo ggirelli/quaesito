@@ -22,9 +22,9 @@ use super::matching::normalize;
 use crate::{
     model::{AdvanceMode, MAX_TEXT_ANSWER_CHARS, Question, QuestionKind, Quiz, RevealMode},
     protocol::{
-        AnswerOutcome, Grade, Guess, HostPhase, HostView, InputKind, Judgement, MAX_NAME_CHARS,
-        PlayerPhase, PlayerView, QuestionInfo, Response, Reveal, SlideInfo, StandingRow, TeamInfo,
-        TextGroup, Upcoming,
+        AnswerOutcome, Fastest, Grade, Guess, HostPhase, HostView, InputKind, Judgement,
+        MAX_NAME_CHARS, PlayerPhase, PlayerView, QuestionInfo, Response, Reveal, RoundResult,
+        SlideInfo, StandingRow, TeamInfo, TextGroup, Upcoming,
     },
     scoring::{self, Tally},
 };
@@ -583,7 +583,8 @@ impl Game {
                     question: self.question_info(index),
                     answered: self.answered(index),
                     reveal: revealing.then(|| self.reveal(index)),
-                    standings: revealing.then(|| self.standings()),
+                    fastest: revealing.then(|| self.fastest(index)).flatten(),
+                    standings: revealing.then(|| self.standings_after(index)),
                     then: self.upcoming_after(index),
                 }
             }
@@ -594,6 +595,7 @@ impl Game {
             Phase::Review { index, .. } => HostPhase::Review {
                 question: self.question_info(index),
                 reveal: self.reveal(index),
+                fastest: self.fastest(index),
                 then: if self.question_from(index + 1).is_some() {
                     Upcoming::Question
                 } else {
@@ -975,7 +977,47 @@ impl Game {
     }
 
     fn standings(&self) -> Vec<StandingRow> {
-        let closed = self.closed_count();
+        self.standings_at(self.closed_count())
+    }
+
+    /// Standings once question `index` closed, with each team's result on it and rank change.
+    fn standings_after(&self, index: usize) -> Vec<StandingRow> {
+        let before = (self.quiz.ordinal(index) > 0).then(|| self.standings_at(index));
+        let mut rows = self.standings_at(index + 1);
+        for row in &mut rows {
+            let Some(team) = self.teams.iter().find(|t| t.id == row.team.id) else {
+                continue;
+            };
+            row.round = Some(RoundResult {
+                points: self.outcome(index, team).points,
+                answer_ms: team.submissions[index].as_ref().map(|s| millis(s.elapsed)),
+                previous_rank: before
+                    .as_ref()
+                    .and_then(|rows| rows.iter().find(|r| r.team.id == row.team.id))
+                    .map(|r| r.rank),
+            });
+        }
+        rows
+    }
+
+    /// The quickest fully correct answer to question `index`; speed means nothing for numbers.
+    fn fastest(&self, index: usize) -> Option<Fastest> {
+        if matches!(self.quiz.questions[index].kind, QuestionKind::Number { .. }) {
+            return None;
+        }
+        self.teams
+            .iter()
+            .filter(|t| self.outcome(index, t).fully_correct)
+            .filter_map(|t| Some((t, t.submissions[index].as_ref()?.elapsed)))
+            .min_by_key(|(_, elapsed)| *elapsed)
+            .map(|(t, elapsed)| Fastest {
+                team: t.name.clone(),
+                answer_ms: millis(elapsed),
+            })
+    }
+
+    /// Standings counting the first `closed` items.
+    fn standings_at(&self, closed: usize) -> Vec<StandingRow> {
         let mut tallies: Vec<Tally> = self
             .teams
             .iter()
@@ -1001,6 +1043,7 @@ impl Game {
                     rank: i + 1,
                     team: team.info(),
                     score: tally.score,
+                    round: None,
                 })
             })
             .collect()
@@ -1259,6 +1302,54 @@ mod tests {
             g.host_view(t0).phase,
             HostPhase::Closed { question, .. } if question.index == 1
         ));
+    }
+
+    #[test]
+    fn reveals_show_the_fastest_team_and_rank_changes() {
+        let t0 = Instant::now();
+        let mut g = game(QuizSettings::default());
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        g.next(t0).unwrap();
+        g.answer(cats, pick(&[1]), t0 + secs(1)).unwrap();
+        g.answer(owls, pick(&[0]), t0 + secs(4)).unwrap();
+        let HostPhase::Closed {
+            fastest, standings, ..
+        } = g.host_view(t0).phase
+        else {
+            panic!("expected results");
+        };
+        assert_eq!(
+            fastest,
+            Some(Fastest {
+                team: "Owls".to_owned(),
+                answer_ms: 4000
+            })
+        );
+        let rows = standings.unwrap();
+        assert_eq!(
+            rows[0].round,
+            Some(RoundResult {
+                points: 800,
+                answer_ms: Some(4000),
+                previous_rank: None
+            })
+        );
+
+        // Cats overtake Owls on question two.
+        g.next(t0).unwrap();
+        g.answer(cats, pick(&[0]), t0).unwrap();
+        g.answer(owls, pick(&[1]), t0).unwrap();
+        let HostPhase::Closed {
+            standings: Some(rows),
+            ..
+        } = g.host_view(t0).phase
+        else {
+            panic!("expected results");
+        };
+        assert_eq!(rows[0].team.id, cats);
+        assert_eq!(rows[0].round.unwrap().previous_rank, Some(2));
+        assert_eq!(rows[1].round.unwrap().previous_rank, Some(1));
     }
 
     #[test]
