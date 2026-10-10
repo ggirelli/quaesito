@@ -44,11 +44,16 @@ Ties in the final ranking are broken by lower total response time on correct ans
 
 ## Storage
 
-- SQLite (`sqlx`) for quizzes, questions and answers.
-- Uploaded images (question pictures, avatars) are re-encoded and resized server side and stored on
-  disk under content-hashed names.
+Everything lives under a data directory (`QUAESITO_DATA_DIR`, default `./data`):
+
+- `quizzes/<id>.json`: one JSON document per quiz. A quiz is always edited and saved as a whole,
+  so plain files written atomically (temp file + rename) are simpler than a database.
+- `media/<random>.{jpg,png}`: uploaded pictures. Question pictures are downscaled to fit
+  1600×1200 and re-encoded as JPEG; avatars are cropped square, resized to 256×256 and stored as
+  PNG. Re-encoding strips metadata and anything that is not plain pixels.
 - Running sessions take a snapshot of the quiz at start, so editing never affects a live game.
-- JSON export/import of quizzes for backup and sharing.
+  Sessions are kept in memory only.
+- JSON export/import of quizzes for backup and sharing (pictures are not included).
 
 ## Networking
 
