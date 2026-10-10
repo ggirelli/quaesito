@@ -3,7 +3,7 @@
 use dioxus::{fullstack::WebSocketOptions, prelude::*};
 
 use super::{
-    Route,
+    LOBBY_ART, Route,
     admin::{AdminGate, AdminToken},
     client,
     live::{ConnectionBanner, Live, remaining_ms, use_clock, use_live},
@@ -18,6 +18,8 @@ use crate::{
     scoring::MAX_BONUS,
 };
 
+/// The lobby illustration is shown while fewer teams than this have joined.
+const LOBBY_ART_MAX_TEAMS: usize = 5;
 /// How many teams the between-questions leaderboard shows.
 const STANDINGS_SHOWN: usize = 6;
 
@@ -391,6 +393,10 @@ fn Lobby(code: String, teams: Vec<TeamInfo>) -> Element {
                     } else {
                         "{teams.len()} teams are in"
                     }
+                }
+                // The illustration fills the room until enough teams have joined to take its place.
+                if teams.len() < LOBBY_ART_MAX_TEAMS {
+                    img { class: "lobby-art", src: LOBBY_ART, alt: "" }
                 }
                 div { class: "teams-grid",
                     for team in teams {

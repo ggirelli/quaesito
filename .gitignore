@@ -4,3 +4,7 @@
 /data
 *.db
 *.db-*
+
+# Full-size originals of the generated artwork; the committed copies are compressed.
+/assets/brand/lobby.png
+/assets/brand/social-preview.png

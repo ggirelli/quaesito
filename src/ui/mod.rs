@@ -23,6 +23,8 @@ const FAVICON: Asset = asset!("/assets/brand/icon.svg");
 const MAIN_CSS: Asset = asset!("/assets/main.css");
 /// The logo mark, used in page headers.
 pub const ICON: Asset = asset!("/assets/brand/icon.svg");
+/// Illustration on the big screen while teams join.
+pub const LOBBY_ART: Asset = asset!("/assets/brand/lobby.webp");
 
 /// All pages.
 #[derive(Routable, Clone, PartialEq)]

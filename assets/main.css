@@ -701,6 +701,13 @@ input.short {
   line-height: 1;
 }
 
+.lobby-art {
+  max-width: 100%;
+  max-height: 42vh;
+  align-self: center;
+  object-fit: contain;
+}
+
 .teams-grid {
   display: flex;
   flex-wrap: wrap;
