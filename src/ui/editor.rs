@@ -11,8 +11,8 @@ use crate::{
     api::{get_quiz, save_quiz, upload_question_audio, upload_question_image},
     model::{
         AdvanceMode, Answer, MAX_ANSWERS, MAX_TIME_LIMIT_SECS, MIN_ANSWERS, MIN_TIME_LIMIT_SECS,
-        MultiScoring, PhoneDisplay, Question, QuestionKind, Quiz, QuizSettings, RevealMode,
-        ValidationIssue,
+        MultiScoring, PhoneDisplay, PointsMode, Question, QuestionKind, Quiz, QuizSettings,
+        RevealMode, ValidationIssue,
     },
 };
 
@@ -278,6 +278,15 @@ fn SettingsCard(settings: QuizSettings) -> Element {
                     ],
                     selected: usize::from(settings.multi_scoring == MultiScoring::Partial),
                     on_select: move |i| draft.edit_settings(|s| s.multi_scoring = if i == 0 { MultiScoring::AllOrNothing } else { MultiScoring::Partial }),
+                }
+                Choice {
+                    label: "Points",
+                    options: vec![
+                        ("Speed", "Faster correct answers earn more: 1000 points when instant, down to 500 at the buzzer."),
+                        ("Correct answers only", "Every correct answer earns 1000 points, however long it took. Ties go to the faster team."),
+                    ],
+                    selected: usize::from(settings.points == PointsMode::Flat),
+                    on_select: move |i| draft.edit_settings(|s| s.points = if i == 0 { PointsMode::Speed } else { PointsMode::Flat }),
                 }
                 Choice {
                     label: "Moving on",

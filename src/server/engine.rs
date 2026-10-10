@@ -725,10 +725,11 @@ impl Game {
         };
         let question = &self.quiz.questions[index];
         let limit = Duration::from_secs(u64::from(question.time_limit_secs(&self.quiz.settings)));
+        let full = scoring::full_points(self.quiz.settings.points, submission.elapsed, limit);
         match (&question.kind, &submission.response) {
             (QuestionKind::Choice, Response::Choice(selected)) => {
                 let mode = self.quiz.settings.multi_scoring;
-                let points = scoring::score(question, selected, submission.elapsed, limit, mode);
+                let points = scoring::score(question, selected, full, mode);
                 AnswerOutcome {
                     points: i32::try_from(points).unwrap_or(i32::MAX),
                     fully_correct: scoring::correctness(question, selected, mode) >= 1.0,
@@ -737,7 +738,7 @@ impl Game {
             (QuestionKind::Text { .. }, Response::Text(text)) => {
                 let (judgement, _) = self.judgement(index, &normalize(text));
                 AnswerOutcome {
-                    points: scoring::text_points(judgement, submission.elapsed, limit),
+                    points: scoring::text_points(judgement, full),
                     fully_correct: judgement.grade == Grade::Full,
                 }
             }
@@ -1187,6 +1188,27 @@ mod tests {
         g.next(t0).unwrap();
         assert!(matches!(g.host_view(t0).phase, HostPhase::Podium { .. }));
         assert_eq!(g.standings()[0].score, 1000);
+    }
+
+    #[test]
+    fn flat_points_ignore_speed() {
+        let t0 = Instant::now();
+        let mut g = game(QuizSettings {
+            points: crate::model::PointsMode::Flat,
+            ..QuizSettings::default()
+        });
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        g.next(t0).unwrap();
+        g.answer(owls, pick(&[0]), t0 + secs(9)).unwrap();
+        g.answer(cats, pick(&[0]), t0 + secs(1)).unwrap();
+        let standings = g.standings();
+        assert_eq!(
+            standings.iter().map(|r| r.score).collect::<Vec<_>>(),
+            [1000, 1000]
+        );
+        // Same score: the faster team ranks first.
+        assert_eq!(standings[0].team.id, cats);
     }
 
     #[test]

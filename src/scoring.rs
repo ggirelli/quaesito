@@ -3,7 +3,7 @@
 use std::time::Duration;
 
 use crate::{
-    model::{MultiScoring, Question},
+    model::{MultiScoring, PointsMode, Question},
     protocol::{Grade, Judgement},
 };
 
@@ -22,6 +22,15 @@ pub fn speed_points(elapsed: Duration, limit: Duration) -> u32 {
     }
     let ratio = (elapsed.as_secs_f64() / limit.as_secs_f64()).clamp(0.0, 1.0);
     to_points(f64::from(MAX_POINTS) * (1.0 - 0.5 * ratio))
+}
+
+/// What a fully correct answer is worth, answered `elapsed` into a question lasting `limit`.
+#[must_use]
+pub fn full_points(mode: PointsMode, elapsed: Duration, limit: Duration) -> u32 {
+    match mode {
+        PointsMode::Speed => speed_points(elapsed, limit),
+        PointsMode::Flat => MAX_POINTS,
+    }
 }
 
 /// Correctness of a selection, from 0 (wrong) to 1 (fully right).
@@ -52,32 +61,27 @@ pub fn correctness(question: &Question, selected: &[usize], mode: MultiScoring) 
     }
 }
 
-/// Points earned by `selected`, answered `elapsed` into a question lasting `limit`.
+/// Points earned by `selected`, where a fully correct answer is worth `full` (see
+/// [`full_points`]).
 #[must_use]
-pub fn score(
-    question: &Question,
-    selected: &[usize],
-    elapsed: Duration,
-    limit: Duration,
-    mode: MultiScoring,
-) -> u32 {
+pub fn score(question: &Question, selected: &[usize], full: u32, mode: MultiScoring) -> u32 {
     let fraction = correctness(question, selected, mode);
     if fraction <= 0.0 {
         return 0;
     }
-    to_points(f64::from(speed_points(elapsed, limit)) * fraction)
+    to_points(f64::from(full) * fraction)
 }
 
-/// Points for a typed answer: speed points scaled by the judge's grade, plus the bonus (or
-/// minus the malus).
+/// Points for a typed answer: `full` (see [`full_points`]) scaled by the judge's grade, plus the
+/// bonus (or minus the malus).
 #[must_use]
-pub fn text_points(judgement: Judgement, elapsed: Duration, limit: Duration) -> i32 {
+pub fn text_points(judgement: Judgement, full: u32) -> i32 {
     let fraction = match judgement.grade {
         Grade::Full => 1.0,
         Grade::Half => 0.5,
         Grade::Wrong => 0.0,
     };
-    let base = to_points(f64::from(speed_points(elapsed, limit)) * fraction);
+    let base = to_points(f64::from(full) * fraction);
     i32::try_from(base).unwrap_or(i32::MAX) + judgement.bonus.clamp(-MAX_BONUS, MAX_BONUS)
 }
 
@@ -141,9 +145,16 @@ mod tests {
     }
 
     #[test]
+    fn flat_points_ignore_speed() {
+        assert_eq!(full_points(PointsMode::Speed, LIMIT, LIMIT), 500);
+        assert_eq!(full_points(PointsMode::Flat, LIMIT, LIMIT), 1000);
+        assert_eq!(full_points(PointsMode::Flat, Duration::ZERO, LIMIT), 1000);
+    }
+
+    #[test]
     fn single_answer_scoring() {
         let q = question(&[false, true, false]);
-        let s = |sel: &[usize]| score(&q, sel, Duration::ZERO, LIMIT, MultiScoring::Partial);
+        let s = |sel: &[usize]| score(&q, sel, 1000, MultiScoring::Partial);
         assert_eq!(s(&[1]), 1000);
         assert_eq!(s(&[0]), 0);
         assert_eq!(s(&[]), 0);
@@ -171,8 +182,7 @@ mod tests {
             score(
                 &q,
                 &[0],
-                Duration::from_secs(10),
-                LIMIT,
+                full_points(PointsMode::Speed, Duration::from_secs(10), LIMIT),
                 MultiScoring::Partial
             ),
             375
@@ -182,13 +192,13 @@ mod tests {
     #[test]
     fn typed_answers_follow_the_judgement() {
         let j = |grade, bonus| Judgement { grade, bonus };
-        let half_time = Duration::from_secs(10);
-        assert_eq!(text_points(j(Grade::Full, 0), half_time, LIMIT), 750);
-        assert_eq!(text_points(j(Grade::Half, 0), half_time, LIMIT), 375);
-        assert_eq!(text_points(j(Grade::Wrong, 0), half_time, LIMIT), 0);
-        assert_eq!(text_points(j(Grade::Half, 200), half_time, LIMIT), 575);
-        assert_eq!(text_points(j(Grade::Wrong, -300), half_time, LIMIT), -300);
-        assert_eq!(text_points(j(Grade::Wrong, -5000), half_time, LIMIT), -1000);
+        assert_eq!(text_points(j(Grade::Full, 0), 750), 750);
+        assert_eq!(text_points(j(Grade::Half, 0), 750), 375);
+        assert_eq!(text_points(j(Grade::Wrong, 0), 750), 0);
+        assert_eq!(text_points(j(Grade::Half, 200), 750), 575);
+        assert_eq!(text_points(j(Grade::Wrong, -300), 750), -300);
+        assert_eq!(text_points(j(Grade::Wrong, -5000), 750), -1000);
+        assert_eq!(text_points(j(Grade::Half, 0), 1000), 500);
     }
 
     #[test]

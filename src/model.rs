@@ -137,6 +137,7 @@ pub struct QuizSettings {
     pub default_time_limit_secs: u32,
     pub reveal: RevealMode,
     pub multi_scoring: MultiScoring,
+    pub points: PointsMode,
     pub advance: AdvanceMode,
     pub phone_display: PhoneDisplay,
 }
@@ -147,6 +148,7 @@ impl Default for QuizSettings {
             default_time_limit_secs: 20,
             reveal: RevealMode::default(),
             multi_scoring: MultiScoring::default(),
+            points: PointsMode::default(),
             advance: AdvanceMode::default(),
             phone_display: PhoneDisplay::default(),
         }
@@ -171,6 +173,16 @@ pub enum MultiScoring {
     AllOrNothing,
     /// Credit proportional to correct picks minus wrong picks.
     Partial,
+}
+
+/// What a correct answer is worth.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
+pub enum PointsMode {
+    /// Faster answers earn more: from 1000 points when instant down to 500 at the buzzer.
+    #[default]
+    Speed,
+    /// Every correct answer earns 1000 points, however long it took.
+    Flat,
 }
 
 /// Who moves the quiz forward between questions.
