@@ -48,7 +48,8 @@ and run locally from the moment the view arrived.
 
 ## Quiz model
 
-A quiz has an ordered list of questions. Each question has text, an optional picture, an optional soundtrack, a time limit
+A quiz has an ordered list of questions. Each question has text, an optional picture (optionally
+revealed gradually: the big screen blurs it in proportion to the clock left), an optional soundtrack, a time limit
 (defaulting to the quiz-wide one) and a kind. The list also holds slides (`Slide { title }`, with
 the question text as body and the picture), which separate rounds or explain rules; they are
 numbered apart from questions and score nothing. A quiz needs at least one real question.
