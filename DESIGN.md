@@ -58,6 +58,7 @@ numbered apart from questions and score nothing. A quiz needs at least one real 
 | `Choice` (default) | coloured buttons | two or more answers (text and/or picture), any of which may be marked correct |
 | `Text { accepted }` | a short typed text (≤ 60 characters) | equal to an accepted answer once normalised |
 | `Number { answer }` | a number | the closest guess (ties included) |
+| `Order { items }` | the items, shown shuffled, tapped from first to last | `items` as listed |
 | `Slide { title }` | nothing | none: a title, text and/or picture on the big screen |
 
 Typed answers are normalised before matching: Unicode NFKD, accents dropped, lowercase, and every
@@ -93,6 +94,10 @@ Typed answers: each group of identical (normalised) answers gets a `Judgement`, 
 end-of-quiz review. Scores are therefore signed.
 
 Closest number: the closest guesses earn 1000 points each, regardless of speed.
+
+Order: each game shuffles an order question's items once (never leaving them as listed). Phones
+answer with indexes into the shuffled list; the speed score is multiplied by the share of items
+put in their right place.
 
 Joker: with jokers on, a team may send `joker: true` with one answer in the whole game; that
 question's points (bonus or malus included) are doubled. Withdrawing the question by going back

@@ -30,7 +30,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 21 | Reveal details: fastest team, answer times, rank changes | ✅ done |
 | 22 | Joker: each team doubles one question's points | ✅ done |
 | 23 | Picture answers for multiple choice | ✅ done |
-| 24 | "Put in order" questions | ⏳ planned |
+| 24 | "Put in order" questions | ✅ done |
 | 25 | Pictures that sharpen while the clock runs | ⏳ planned |
 | 26 | Sound effects on the big screen | ⏳ planned |
 | 27 | End-of-game results page and download | ⏳ planned |

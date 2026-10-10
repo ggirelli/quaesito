@@ -8,7 +8,8 @@
 Quizzes among friends: a self-hosted, live quiz web app written in Rust with [Dioxus](https://dioxuslabs.com).
 
 - **Admin** builds quizzes in the browser: questions with optional pictures and soundtracks, time limits, and answers as
-  multiple choice (2–6 answers, one or several correct), a typed answer or a number (closest guess wins).
+  multiple choice (2–6 answers, one or several correct), a typed answer, a number (closest guess wins) or items to put
+  in order.
 - **Big screen** shows the quiz as a slideshow on a TV or projector, with a QR code to join. Slides with a title, text
   or a picture can sit between questions, e.g. to announce rounds.
 - **Team leaders** join from their phones by scanning the QR code or typing the game code, pick a team name and a picture, and answer against the clock. Faster correct answers earn more points.
@@ -52,6 +53,8 @@ wrong (VPNs, several network cards), set `QUAESITO_PUBLIC_URL`, e.g. `http://192
   punctuation and spacing (but not typos). On the reveal, identical answers are grouped and the host can judge each
   group: ✓ full, ½ half or ✗ no points, plus a bonus or malus in steps of 100. A malus can take a team below zero.
 - **Number**: teams enter a number; the closest guesses (ties included) earn 1000 points.
+- **Order**: teams put 2–6 items in order (oldest first, biggest first…) by tapping them on their phones. Each item in
+  its right place earns its share of the points.
 
 Between questions you can add **slides** (title, text and/or picture) to introduce rounds or explain rules. Phones show
 "Eyes on the big screen" meanwhile, and with automatic advance a slide stays up for 10 seconds.
