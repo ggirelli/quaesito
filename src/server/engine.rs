@@ -463,7 +463,7 @@ impl Game {
             title: self.quiz.title.clone(),
             team: team.info(),
             display: self.quiz.settings.phone_display,
-            score: score_visible.then(|| team.score()),
+            score: score_visible.then(|| team.score(self.closed_count())),
             phase,
         })
     }
@@ -530,16 +530,26 @@ impl Game {
         }
     }
 
+    /// How many questions, from the start, have closed and therefore count towards scores.
+    fn closed_count(&self) -> usize {
+        match self.phase {
+            Phase::Lobby => 0,
+            Phase::Ready { index } | Phase::Question { index, .. } => index,
+            Phase::Closed { index, .. } => index + 1,
+            Phase::Review { .. } | Phase::Podium { .. } => self.quiz.questions.len(),
+        }
+    }
+
     fn standings(&self) -> Vec<StandingRow> {
+        let closed = self.closed_count();
         let mut tallies: Vec<Tally> = self
             .teams
             .iter()
             .enumerate()
             .map(|(joined, t)| Tally {
                 team: t.id,
-                score: t.score(),
-                scoring_time: t
-                    .submissions
+                score: t.score(closed),
+                scoring_time: t.submissions[..closed]
                     .iter()
                     .flatten()
                     .filter(|s| s.points > 0)
@@ -584,8 +594,13 @@ impl Team {
         }
     }
 
-    fn score(&self) -> u32 {
-        self.submissions.iter().flatten().map(|s| s.points).sum()
+    /// Points from the first `closed` questions; open questions do not count yet.
+    fn score(&self, closed: usize) -> u32 {
+        self.submissions[..closed]
+            .iter()
+            .flatten()
+            .map(|s| s.points)
+            .sum()
     }
 }
 
@@ -847,6 +862,19 @@ mod tests {
         assert!(g.answer(owls, &[0, 1], t0).is_err());
         assert!(g.answer(owls, &[0], t0 + secs(10)).is_err());
         assert!(g.answer(99, &[0], t0).is_err());
+    }
+
+    #[test]
+    fn scores_do_not_move_while_a_question_is_open() {
+        let t0 = Instant::now();
+        let mut g = game(QuizSettings::default());
+        let owls = join(&mut g, "Owls");
+        join(&mut g, "Cats");
+        g.next(t0).unwrap();
+        g.answer(owls, &[0], t0).unwrap();
+        assert_eq!(g.player_view(owls, t0).unwrap().score, Some(0));
+        g.next(t0).unwrap();
+        assert_eq!(g.player_view(owls, t0).unwrap().score, Some(1000));
     }
 
     #[test]
