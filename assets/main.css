@@ -1787,3 +1787,61 @@ button.joker {
     transition: none !important;
   }
 }
+
+/* The admin's test page: the big screen and phones side by side, each a real page in a frame. */
+.test-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.test-tools {
+  flex-wrap: wrap;
+}
+
+.test-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: start;
+}
+
+.test-screen iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+
+.test-phones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: calc(2 * 330px + 1rem);
+}
+
+.test-phone {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.test-phone iframe {
+  width: 330px;
+  height: 640px;
+  border: 8px solid #000;
+  border-radius: 28px;
+  background: var(--bg);
+}
+
+@media (max-width: 1100px) {
+  .test-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .test-phones {
+    max-width: none;
+  }
+}

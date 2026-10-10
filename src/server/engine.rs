@@ -301,6 +301,21 @@ impl Game {
         &self.quiz.title
     }
 
+    /// Id of the quiz being played.
+    #[must_use]
+    pub fn quiz_id(&self) -> &str {
+        &self.quiz.id
+    }
+
+    /// Every team's name and reconnect token, in joining order (for the admin's test page).
+    #[must_use]
+    pub fn tickets(&self) -> Vec<(String, String)> {
+        self.teams
+            .iter()
+            .map(|t| (t.name.clone(), t.token.clone()))
+            .collect()
+    }
+
     /// Uploaded files the game shows: its quiz's media and the team pictures.
     #[must_use]
     pub fn media(&self) -> Vec<String> {

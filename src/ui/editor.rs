@@ -3,12 +3,13 @@
 use dioxus::prelude::*;
 
 use super::{
+    Route,
     admin::{AdminGate, AdminHeader, AdminToken},
     client,
     widgets::{AnswerBadge, ClientOnly, ErrorBox, Icon, IconKind, Spinner, media_url, message},
 };
 use crate::{
-    api::{get_quiz, save_quiz, upload_question_audio, upload_question_image},
+    api::{get_quiz, save_quiz, start_test, upload_question_audio, upload_question_image},
     model::{
         AdvanceMode, Answer, ImageReveal, MAX_ANSWERS, MAX_TIME_LIMIT_SECS, MIN_ANSWERS,
         MIN_TIME_LIMIT_SECS, MultiScoring, PhoneDisplay, PointsMode, Question, QuestionKind, Quiz,
@@ -133,6 +134,25 @@ fn EditorForm(quiz: Quiz) -> Element {
         .as_ref()
         .is_some_and(|(revision, _)| *revision == (draft.revision)());
 
+    let mut test_error = use_signal(|| None::<String>);
+    let nav = navigator();
+    // Save the latest edits first, so the test plays what is on screen.
+    let test = move |_| async move {
+        let quiz = draft.quiz.peek().clone();
+        let id = quiz.id.clone();
+        let result = match save_quiz(token.get(), quiz).await {
+            Ok(found) if found.is_empty() => start_test(token.get(), id).await,
+            Ok(_) => Err(ServerFnError::new("Fix the quiz before testing it.")),
+            Err(err) => Err(err),
+        };
+        match result {
+            Ok(code) => {
+                nav.push(Route::Test { code });
+            }
+            Err(err) => test_error.set(Some(message(&err))),
+        }
+    };
+
     let quiz = draft.quiz.read();
     let question_count = quiz.questions.len();
     let can_shuffle = quiz.can_shuffle();
@@ -145,6 +165,13 @@ fn EditorForm(quiz: Quiz) -> Element {
                     SaveState::Failed => "Not saved, retrying…",
                 }
             }
+            button {
+                class: "button",
+                disabled: !issues().is_empty(),
+                title: if issues().is_empty() { "Try the quiz with the big screen and two phones side by side" } else { "Fix the quiz before testing it" },
+                onclick: test,
+                "🧪 Test"
+            }
         }
         main { class: "page wide stack editor",
             input {
@@ -154,6 +181,7 @@ fn EditorForm(quiz: Quiz) -> Element {
                 oninput: move |e| draft.edit(|q| q.title = e.value()),
             }
             Issues { issues: issues() }
+            ErrorBox { error: test_error() }
             SettingsCard { settings: quiz.settings }
             for index in 0..question_count {
                 QuestionCard {

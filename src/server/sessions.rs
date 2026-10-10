@@ -28,15 +28,24 @@ pub struct Session {
     version: watch::Sender<u64>,
     /// Set when the session is ended, so it is no longer saved.
     ended: AtomicBool,
+    /// An admin's test game: never saved.
+    test: bool,
 }
 
 impl Session {
-    fn new(game: Game) -> Self {
+    fn new(game: Game, test: bool) -> Self {
         Self {
             game: Mutex::new(game),
             version: watch::channel(0).0,
             ended: AtomicBool::new(false),
+            test,
         }
+    }
+
+    /// Whether this is an admin's test game.
+    #[must_use]
+    pub fn is_test(&self) -> bool {
+        self.test
     }
 
     /// Reads the game.
@@ -93,7 +102,12 @@ impl Sessions {
             match read_snapshot(&path).await {
                 Ok(snapshot) => {
                     let code = snapshot.code().to_owned();
-                    sessions.start(&mut sessions.lock(), code, Game::restore(snapshot, now));
+                    sessions.start(
+                        &mut sessions.lock(),
+                        code,
+                        Game::restore(snapshot, now),
+                        false,
+                    );
                 }
                 Err(err) => dioxus::logger::tracing::warn!("skipping {}: {err:#}", path.display()),
             }
@@ -106,6 +120,18 @@ impl Sessions {
     /// # Errors
     /// Refuses quizzes that are not playable.
     pub fn create(&self, quiz: Quiz) -> Result<String, Refusal> {
+        self.create_with(quiz, false)
+    }
+
+    /// Starts an admin's test game: like [`Sessions::create`], but never saved.
+    ///
+    /// # Errors
+    /// Refuses quizzes that are not playable.
+    pub fn create_test(&self, quiz: Quiz) -> Result<String, Refusal> {
+        self.create_with(quiz, true)
+    }
+
+    fn create_with(&self, quiz: Quiz, test: bool) -> Result<String, Refusal> {
         let mut map = self.lock();
         let code = loop {
             let candidate = format!("{:06}", uuid::Uuid::new_v4().as_u128() % 1_000_000);
@@ -114,7 +140,7 @@ impl Sessions {
             }
         };
         let game = Game::new(code.clone(), quiz)?;
-        self.start(&mut map, code.clone(), game);
+        self.start(&mut map, code.clone(), game, test);
         Ok(code)
     }
 
@@ -154,6 +180,7 @@ impl Sessions {
                     title: g.title().to_owned(),
                     teams: g.team_count(),
                     finished: g.is_finished(),
+                    test: s.test,
                 })
             })
             .collect();
@@ -161,11 +188,11 @@ impl Sessions {
         list
     }
 
-    /// Registers a game and starts its timer and saving tasks.
-    fn start(&self, map: &mut HashMap<String, Arc<Session>>, code: String, game: Game) {
-        let session = Arc::new(Session::new(game));
+    /// Registers a game and starts its timer task, and its saving task unless it is a test.
+    fn start(&self, map: &mut HashMap<String, Arc<Session>>, code: String, game: Game, test: bool) {
+        let session = Arc::new(Session::new(game, test));
         tokio::spawn(run_timers(Arc::downgrade(&session), session.subscribe()));
-        if let Some(path) = self.path(&code) {
+        if let Some(path) = self.path(&code).filter(|_| !test) {
             tokio::spawn(run_saver(
                 Arc::downgrade(&session),
                 session.subscribe(),
@@ -293,6 +320,13 @@ mod tests {
         sessions.remove(&code);
         restored.remove(&code);
         assert!(!dir.join(format!("{code}.json")).exists());
+
+        // Test games are never saved.
+        let test = sessions.create_test(quiz()).unwrap();
+        assert!(sessions.get(&test).unwrap().is_test());
+        assert!(sessions.list().iter().any(|s| s.code == test && s.test));
+        tokio::time::sleep(Duration::from_millis(600)).await;
+        assert!(!dir.join(format!("{test}.json")).exists());
         let _ = std::fs::remove_dir_all(&dir);
     }
 }

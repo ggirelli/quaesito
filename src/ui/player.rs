@@ -64,7 +64,10 @@ pub fn JoinCodeForm() -> Element {
                     _ => String::new(),
                 };
                 if !code.is_empty() {
-                    nav.push(Route::Join { code });
+                    nav.push(Route::Join {
+                        code,
+                        ticket: String::new(),
+                    });
                 }
             },
             label { class: "field",
@@ -84,20 +87,29 @@ pub fn JoinCodeForm() -> Element {
     }
 }
 
-/// `/join/:code`: join (or rejoin) a game and play it.
+/// `/join/:code`: join (or rejoin) a game and play it. With a `ticket`, play as that team
+/// without storing it, so several test phones can share one browser.
 #[component]
-pub fn Join(code: String) -> Element {
+pub fn Join(code: String, #[props(default)] ticket: String) -> Element {
     rsx! {
         ClientOnly {
-            PlayerEntry { key: "{code}", code }
+            PlayerEntry { key: "{code}-{ticket}", code, ticket }
         }
     }
 }
 
 #[component]
-fn PlayerEntry(code: String) -> Element {
+fn PlayerEntry(code: String, ticket: String) -> Element {
+    // A given ticket is used as is and never stored.
+    let remember = ticket.is_empty();
     let code = use_signal(|| code);
-    let mut token = use_signal(|| client::storage_get(&ticket_key(&code())));
+    let mut token = use_signal(|| {
+        if remember {
+            client::storage_get(&ticket_key(&code()))
+        } else {
+            Some(ticket)
+        }
+    });
     let mut notice = use_signal(|| None::<&'static str>);
     // A stored ticket is only good while its game is running.
     let checked = use_resource(move || async move {
@@ -108,7 +120,9 @@ fn PlayerEntry(code: String) -> Element {
     });
     use_effect(move || {
         if checked() == Some(false) && token.peek().is_some() {
-            client::storage_remove(&ticket_key(&code.peek()));
+            if remember {
+                client::storage_remove(&ticket_key(&code.peek()));
+            }
             token.set(None);
         }
     });
@@ -118,7 +132,9 @@ fn PlayerEntry(code: String) -> Element {
                 code: code(),
                 token: t,
                 on_gone: move |()| {
-                    client::storage_remove(&ticket_key(&code.peek()));
+                    if remember {
+                        client::storage_remove(&ticket_key(&code.peek()));
+                    }
                     notice.set(Some("Your team was removed from the game. You can join again."));
                     token.set(None);
                 },
@@ -129,7 +145,9 @@ fn PlayerEntry(code: String) -> Element {
         },
         (None, _) => rsx! {
             JoinForm { code: code(), notice: notice(), on_joined: move |t: String| {
-                client::storage_set(&ticket_key(&code()), &t);
+                if remember {
+                    client::storage_set(&ticket_key(&code()), &t);
+                }
                 notice.set(None);
                 token.set(Some(t));
             } }

@@ -427,4 +427,22 @@ pub struct SessionSummary {
     pub title: String,
     pub teams: usize,
     pub finished: bool,
+    /// An admin's test game (not saved, ended from the test page).
+    pub test: bool,
+}
+
+/// What the admin's test page needs about a test game.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct TestInfo {
+    pub quiz_id: String,
+    pub title: String,
+    /// The test phones, in joining order.
+    pub phones: Vec<TestPhone>,
+}
+
+/// One test phone: its team name and the ticket its frame plays with.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct TestPhone {
+    pub name: String,
+    pub ticket: String,
 }

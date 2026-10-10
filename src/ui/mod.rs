@@ -8,6 +8,7 @@ mod host;
 mod live;
 mod player;
 mod sfx;
+mod test;
 mod widgets;
 
 use dioxus::prelude::*;
@@ -18,6 +19,7 @@ use self::{
     home::Home,
     host::Host,
     player::{Join, JoinBlank},
+    test::Test,
 };
 
 const FAVICON: Asset = asset!("/assets/brand/icon-192.png");
@@ -36,12 +38,15 @@ pub enum Route {
     // `?code=` is where the join form lands when submitted before the app has loaded.
     #[route("/join?:code")]
     JoinBlank { code: String },
-    #[route("/join/:code")]
-    Join { code: String },
+    // `?ticket=` plays as an existing team without remembering it (the admin's test phones).
+    #[route("/join/:code?:ticket")]
+    Join { code: String, ticket: String },
     #[route("/admin")]
     Admin {},
     #[route("/admin/quiz/:id")]
     Editor { id: String },
+    #[route("/admin/test/:code")]
+    Test { code: String },
     #[route("/host/:code")]
     Host { code: String },
     #[route("/:..segments")]

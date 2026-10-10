@@ -16,6 +16,7 @@ use crate::{
     model::{Quiz, QuizSummary, ValidationIssue},
     protocol::{
         GameResults, HostCommand, HostView, JoinTicket, PlayerCommand, PlayerView, SessionSummary,
+        TestInfo,
     },
 };
 
@@ -154,6 +155,96 @@ pub async fn start_session(token: String, quiz_id: String) -> ServerFnResult<Str
         .sessions
         .create(quiz)
         .map_err(|refusal| ServerFnError::new(refusal.0))
+}
+
+/// Phones a test game starts with.
+#[cfg(feature = "server")]
+const TEST_PHONES: usize = 2;
+/// Most phones a test game can have.
+#[cfg(feature = "server")]
+const MAX_TEST_PHONES: usize = 6;
+
+/// Starts an admin's test game, with phones already joined, and returns its join code.
+#[post("/api/admin/test/start")]
+pub async fn start_test(token: String, quiz_id: String) -> ServerFnResult<String> {
+    let state = crate::server::state();
+    state.auth.require(&token)?;
+    let quiz = state
+        .quizzes
+        .get(&quiz_id)
+        .await?
+        .ok_or_else(|| ServerFnError::new("This quiz does not exist."))?;
+    let code = state
+        .sessions
+        .create_test(quiz)
+        .map_err(|refusal| ServerFnError::new(refusal.0))?;
+    for _ in 0..TEST_PHONES {
+        add_test_phone(token.clone(), code.clone()).await?;
+    }
+    Ok(code)
+}
+
+/// The test page's view of a test game: its quiz and the phones' tickets.
+#[post("/api/admin/test/info")]
+pub async fn test_info(token: String, code: String) -> ServerFnResult<TestInfo> {
+    let session = test_session(&token, &code)?;
+    Ok(session.read(|g| TestInfo {
+        quiz_id: g.quiz_id().to_owned(),
+        title: g.title().to_owned(),
+        phones: g
+            .tickets()
+            .into_iter()
+            .map(|(name, ticket)| crate::protocol::TestPhone { name, ticket })
+            .collect(),
+    }))
+}
+
+/// Adds a phone to a test game, named after the first free "Phone N".
+#[post("/api/admin/test/add-phone")]
+pub async fn add_test_phone(token: String, code: String) -> ServerFnResult<()> {
+    let session = test_session(&token, &code)?;
+    session
+        .update(|g, _| {
+            if g.team_count() >= MAX_TEST_PHONES {
+                return Err(crate::server::engine::Refusal(
+                    "That is enough phones for a test.",
+                ));
+            }
+            let ticket = uuid::Uuid::new_v4().simple().to_string();
+            // A free name always exists among MAX_TEST_PHONES + 1 candidates.
+            (1..=MAX_TEST_PHONES + 1)
+                .find_map(|n| g.join(&format!("Phone {n}"), ticket.clone()).ok())
+                .map(|_| ())
+                .ok_or(crate::server::engine::Refusal("Could not add a phone."))
+        })
+        .map_err(|refusal| ServerFnError::new(refusal.0))
+}
+
+/// Removes a phone from a test game.
+#[post("/api/admin/test/remove-phone")]
+pub async fn remove_test_phone(token: String, code: String, ticket: String) -> ServerFnResult<()> {
+    let session = test_session(&token, &code)?;
+    session
+        .update(|g, now| match g.team_for_token(&ticket) {
+            Some(team) => g.remove_team(team, now),
+            None => Ok(()),
+        })
+        .map_err(|refusal| ServerFnError::new(refusal.0))
+}
+
+/// The test game behind `code`, for an admin.
+#[cfg(feature = "server")]
+fn test_session(
+    token: &str,
+    code: &str,
+) -> Result<std::sync::Arc<crate::server::sessions::Session>, ServerFnError> {
+    let state = crate::server::state();
+    state.auth.require(token)?;
+    state
+        .sessions
+        .get(code)
+        .filter(|s| s.is_test())
+        .ok_or_else(|| ServerFnError::new("This test is not running anymore."))
 }
 
 /// Live sessions.

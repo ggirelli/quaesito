@@ -8,7 +8,7 @@ use super::{
 };
 use crate::api::{
     admin_check, admin_login, create_quiz, delete_quiz, duplicate_quiz, end_session, import_quiz,
-    list_quizzes, list_sessions, start_session,
+    list_quizzes, list_sessions, start_session, start_test,
 };
 
 const TOKEN_KEY: &str = "quaesito.admin";
@@ -279,6 +279,20 @@ fn QuizActions(
             }
         }
     };
+    let test = {
+        let id = id.clone();
+        move |_| {
+            let id = id.clone();
+            async move {
+                match start_test(token.get(), id).await {
+                    Ok(code) => {
+                        navigator().push(Route::Test { code });
+                    }
+                    Err(err) => on_error.call(message(&err)),
+                }
+            }
+        }
+    };
     let mut confirming = use_signal(|| false);
     rsx! {
         div { class: "row actions",
@@ -288,6 +302,13 @@ fn QuizActions(
                 title: if playable { "Start a live game" } else { "Fix the quiz before playing it" },
                 onclick: start,
                 "▶ Start"
+            }
+            button {
+                class: "button",
+                disabled: !playable,
+                title: if playable { "Try the quiz with the big screen and two phones side by side" } else { "Fix the quiz before testing it" },
+                onclick: test,
+                "🧪 Test"
             }
             Link { class: "button", to: Route::Editor { id: id.clone() }, "Edit" }
             button { class: "button ghost", onclick: duplicate, "Duplicate" }
@@ -339,15 +360,24 @@ fn LiveGames(on_error: EventHandler<String>) -> Element {
                         div { class: "grow",
                             div { class: "strong", "{session.title}" }
                             div { class: "muted small",
+                                if session.test { "🧪 test · " }
                                 "{session.teams} teams"
                                 if session.finished { " · finished" }
                             }
                         }
                         div { class: "row actions",
-                            Link {
-                                class: "button primary",
-                                to: Route::Host { code: session.code.clone() },
-                                "Open big screen"
+                            if session.test {
+                                Link {
+                                    class: "button primary",
+                                    to: Route::Test { code: session.code.clone() },
+                                    "Open test"
+                                }
+                            } else {
+                                Link {
+                                    class: "button primary",
+                                    to: Route::Host { code: session.code.clone() },
+                                    "Open big screen"
+                                }
                             }
                             button {
                                 class: "button ghost",
