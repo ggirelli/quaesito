@@ -29,6 +29,9 @@ Then:
 3. Press **▶ Start**. The big screen shows a QR code and a 6-digit code.
 4. Team leaders scan the code (phones must be on the same Wi-Fi), choose a name and optionally a picture.
 5. Press **Start the quiz**, then use the button, `→`, `PageDown` or `N` (presentation clickers work) to move on.
+   `←`, `PageUp` or `B` go back: to the previous slide, results or podium step, or out of a question opened by mistake
+   (its answers are discarded and it is asked again later). **⏸ Pause** (`P`) freezes the clock, the music and the
+   automatic advance; **+10 s** gives everyone more time.
 
 **Teams** in the top bar of the big screen lets you rename a team or remove it (it loses its points and its phone goes
 back to the join page).

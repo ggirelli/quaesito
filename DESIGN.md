@@ -29,6 +29,14 @@ seconds. `Review` only exists when answers are revealed at the end. A question c
 out, when every connected team has answered, or when the host stops the clock. With automatic
 advance, a per-session timer task moves on after a short pause.
 
+The host can pause (`HostCommand::TogglePause`): the game keeps a `paused_at` instant, its clock
+reads that instant until resumed, and resuming shifts every phase timestamp by the pause length, so
+deadlines, auto-advance and answer times all exclude it. Answers sent while paused still count, timed
+at the pause. `AddTime` moves an open question's deadline. `Back` shows the previous item again
+(a slide, or a played question's results via `Closed`), steps the review and podium backwards, and
+withdraws a question that is still open (its answers are dropped). Each question remembers whether
+it has been closed, so going forward again shows its results instead of asking it twice.
+
 The host can rename or remove a team at any time before the podium (`HostCommand::RenameTeam`,
 `RemoveTeam`). A removed team's answers go with it; its phone's socket closes, the stored ticket no
 longer checks out, and the phone returns to the join form with a notice.
