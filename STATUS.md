@@ -40,6 +40,10 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 31 | Revealed pictures stay fully visible for a set number of seconds before the buzzer | ✅ done |
 | 32 | Admin test mode: big screen and auto-joined phones side by side | ✅ done |
 | 33 | Editor: move a question or slide to the top or bottom | ✅ done |
+| 34 | Points multiplier per question (×1–×5) | ✅ done |
+| 35 | True/false questions | ⏳ planned |
+| 36 | Questions with several typed parts (title + artist, five posters…), judged per part | ⏳ planned |
+| 37 | Pin on a picture (a map, a floor plan…), scored by distance | ⏳ planned |
 
 ## Notes
 
@@ -74,5 +78,4 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 
 - Test mode: start the test at a chosen question.
 
-- More question types: true/false shortcut, pin on a map.
 - Team captains passing the phone: several players per team answering in turn.

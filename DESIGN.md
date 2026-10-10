@@ -122,6 +122,9 @@ Order: each game shuffles an order question's items once (never leaving them as 
 answer with indexes into the shuffled list; the speed score is multiplied by the share of items
 put in their right place.
 
+Multiplier: a question may be worth ×1 to ×5 (`multiplier`); its points, bonus or malus included,
+are multiplied before any joker.
+
 Joker: with jokers on, a team may send `joker: true` with one answer in the whole game; that
 question's points (bonus or malus included) are doubled. Withdrawing the question by going back
 returns the joker. Phones get the joker's state in `PlayerView.joker`.

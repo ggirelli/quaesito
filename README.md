@@ -61,6 +61,8 @@ wrong (VPNs, several network cards), set `QUAESITO_PUBLIC_URL`, e.g. `http://192
 
 ### Question types
 
+Any question can be worth more than the others: **Points ×2** (up to ×5) multiplies everything it earns.
+
 - **Choices**: coloured buttons; one or several answers can be correct. Each answer can have a picture (flags, logos,
   baby photos…), with or without text.
 - **Typed answer**: teams type a short answer. It is right when it matches an accepted answer, ignoring case, accents,
