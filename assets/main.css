@@ -637,6 +637,72 @@ input.short {
   margin: 0;
 }
 
+.wide-panel {
+  width: min(70rem, 100%);
+}
+
+.results-scroll {
+  overflow-x: auto;
+}
+
+table.results {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.results th,
+.results td {
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.results th:nth-child(2),
+.results td:nth-child(2) {
+  text-align: left;
+}
+
+.results .total {
+  color: var(--accent);
+  font-weight: 800;
+}
+
+/* Printing the results: only the table, in black on white. */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .results-overlay,
+  .results-overlay * {
+    visibility: visible;
+  }
+
+  .results-overlay {
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    color: #000;
+  }
+
+  .results-overlay .card {
+    background: #fff;
+    border: 0;
+    max-height: none;
+  }
+
+  .results-overlay .total {
+    color: #000;
+  }
+
+  .results-overlay .row:not(.between),
+  .no-print {
+    display: none !important;
+  }
+}
+
 .team-row .avatar {
   width: 2.4rem;
   height: 2.4rem;

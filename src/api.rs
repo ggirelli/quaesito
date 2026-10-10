@@ -14,7 +14,9 @@ use dioxus::{
 
 use crate::{
     model::{Quiz, QuizSummary, ValidationIssue},
-    protocol::{HostCommand, HostView, JoinTicket, PlayerCommand, PlayerView, SessionSummary},
+    protocol::{
+        GameResults, HostCommand, HostView, JoinTicket, PlayerCommand, PlayerView, SessionSummary,
+    },
 };
 
 /// Exchanges the admin password for a session token.
@@ -156,6 +158,18 @@ pub async fn list_sessions(token: String) -> ServerFnResult<Vec<SessionSummary>>
     let state = crate::server::state();
     state.auth.require(&token)?;
     Ok(state.sessions.list())
+}
+
+/// Every team's points on every question of a live session.
+#[post("/api/admin/session/results")]
+pub async fn game_results(token: String, code: String) -> ServerFnResult<GameResults> {
+    let state = crate::server::state();
+    state.auth.require(&token)?;
+    let session = state
+        .sessions
+        .get(&code)
+        .ok_or_else(|| ServerFnError::new("This game is not running anymore."))?;
+    Ok(session.read(crate::server::engine::Game::results))
 }
 
 /// Ends a live session.

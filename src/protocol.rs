@@ -360,6 +360,64 @@ pub struct JoinTicket {
     pub token: String,
 }
 
+/// The full results of a game: every team's points on every question.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct GameResults {
+    pub title: String,
+    /// Question texts, in playing order (slides left out).
+    pub questions: Vec<String>,
+    /// Best first.
+    pub rows: Vec<ResultRow>,
+}
+
+/// One team's line in [`GameResults`].
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ResultRow {
+    pub rank: usize,
+    pub team: String,
+    pub score: i32,
+    /// Points per question, `None` where the team did not answer.
+    pub points: Vec<Option<i32>>,
+    /// Whether the team's joker was played on each question.
+    pub jokers: Vec<bool>,
+}
+
+impl GameResults {
+    /// The results as CSV: rank, team, total, then one column per question.
+    #[must_use]
+    pub fn to_csv(&self) -> String {
+        let field = |text: &str| {
+            if text.contains([',', '"', '\n', '\r']) {
+                format!("\"{}\"", text.replace('"', "\"\""))
+            } else {
+                text.to_owned()
+            }
+        };
+        let mut lines = vec![
+            ["Rank", "Team", "Total"]
+                .into_iter()
+                .map(str::to_owned)
+                .chain(self.questions.iter().map(|q| field(q)))
+                .collect::<Vec<_>>()
+                .join(","),
+        ];
+        for row in &self.rows {
+            let mut cells = vec![
+                row.rank.to_string(),
+                field(&row.team),
+                row.score.to_string(),
+            ];
+            cells.extend(
+                row.points
+                    .iter()
+                    .map(|p| p.map(|p| p.to_string()).unwrap_or_default()),
+            );
+            lines.push(cells.join(","));
+        }
+        lines.join("\r\n") + "\r\n"
+    }
+}
+
 /// Short description of a live session for the admin page.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct SessionSummary {

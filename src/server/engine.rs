@@ -22,9 +22,9 @@ use super::matching::normalize;
 use crate::{
     model::{AdvanceMode, MAX_TEXT_ANSWER_CHARS, Question, QuestionKind, Quiz, RevealMode},
     protocol::{
-        AnswerOutcome, Fastest, Grade, Guess, HostPhase, HostView, InputKind, JokerState,
-        Judgement, MAX_NAME_CHARS, PlayerPhase, PlayerView, QuestionInfo, Response, Reveal,
-        RoundResult, SlideInfo, StandingRow, TeamInfo, TextGroup, Upcoming,
+        AnswerOutcome, Fastest, GameResults, Grade, Guess, HostPhase, HostView, InputKind,
+        JokerState, Judgement, MAX_NAME_CHARS, PlayerPhase, PlayerView, QuestionInfo, Response,
+        ResultRow, Reveal, RoundResult, SlideInfo, StandingRow, TeamInfo, TextGroup, Upcoming,
     },
     scoring::{self, Tally},
 };
@@ -660,6 +660,42 @@ impl Game {
                     .map(|d| millis(d.saturating_duration_since(now))),
             },
             phase,
+        }
+    }
+
+    /// Every team's points on every question played so far.
+    #[must_use]
+    pub fn results(&self) -> GameResults {
+        let questions: Vec<usize> = (0..self.quiz.questions.len())
+            .filter(|&i| !self.quiz.questions[i].is_slide())
+            .collect();
+        let closed = self.closed_count();
+        GameResults {
+            title: self.quiz.title.clone(),
+            questions: questions
+                .iter()
+                .map(|&i| self.quiz.questions[i].text.trim().to_owned())
+                .collect(),
+            rows: self
+                .standings_at(closed)
+                .into_iter()
+                .filter_map(|row| {
+                    let team = self.teams.iter().find(|t| t.id == row.team.id)?;
+                    Some(ResultRow {
+                        rank: row.rank,
+                        team: team.name.clone(),
+                        score: row.score,
+                        points: questions
+                            .iter()
+                            .map(|&i| {
+                                (i < closed && team.submissions[i].is_some())
+                                    .then(|| self.outcome(i, team).points)
+                            })
+                            .collect(),
+                        jokers: questions.iter().map(|&i| team.joker == Some(i)).collect(),
+                    })
+                })
+                .collect(),
         }
     }
 
@@ -1602,6 +1638,33 @@ mod tests {
                 .score
         };
         assert_eq!((score(owls), score(cats), score(pigs)), (1000, 0, 333));
+    }
+
+    #[test]
+    fn results_list_every_teams_points_per_question() {
+        let t0 = Instant::now();
+        let mut g = game(QuizSettings {
+            joker: true,
+            ..QuizSettings::default()
+        });
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats, \"the\"");
+        g.next(t0).unwrap();
+        g.answer(owls, pick(&[0]), true, t0).unwrap();
+        g.answer(cats, pick(&[1]), false, t0).unwrap();
+        g.next(t0).unwrap();
+        g.answer(cats, pick(&[0]), false, t0).unwrap();
+        g.next(t0).unwrap(); // close question two; Owls did not answer
+        let results = g.results();
+        assert_eq!(results.questions, ["one", "two"]);
+        assert_eq!(results.rows[0].team, "Owls");
+        assert_eq!(results.rows[0].points, [Some(2000), None]);
+        assert_eq!(results.rows[0].jokers, [true, false]);
+        assert_eq!(results.rows[1].points, [Some(0), Some(1000)]);
+        assert_eq!(
+            results.to_csv(),
+            "Rank,Team,Total,one,two\r\n1,Owls,2000,2000,\r\n2,\"Cats, \"\"the\"\"\",1000,0,1000\r\n"
+        );
     }
 
     #[test]

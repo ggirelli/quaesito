@@ -8,10 +8,13 @@ use super::{
     client,
     live::{ConnectionBanner, Live, countdown_ms, remaining_ms, use_clock, use_live},
     sfx::{self, Cue, SFX_JS, Sfx},
-    widgets::{ANSWER_SHAPES, Brand, ClientOnly, Icon, IconKind, Spinner, TeamAvatar, media_url},
+    widgets::{
+        ANSWER_SHAPES, Brand, ClientOnly, ErrorBox, Icon, IconKind, Spinner, TeamAvatar, media_url,
+        message,
+    },
 };
 use crate::{
-    api::{host_socket, join_origin},
+    api::{game_results, host_socket, join_origin},
     protocol::{
         Fastest, Grade, Guess, HostCommand, HostPhase, HostView, InputKind, Judgement,
         MAX_NAME_CHARS, QuestionInfo, Reveal, SlideInfo, StandingRow, TeamInfo, TextGroup,
@@ -51,6 +54,7 @@ fn HostScreen(code: String) -> Element {
     use_context_provider(|| live);
     let now = use_clock(200);
     let mut show_teams = use_signal(|| false);
+    let mut show_results = use_signal(|| false);
     let mut muted = use_signal(sfx::is_muted);
     use_sound_effects(live.view, live.received_at, now);
 
@@ -213,8 +217,16 @@ fn HostScreen(code: String) -> Element {
                         "{label}"
                     }
                 } else {
+                    button {
+                        class: "button primary big",
+                        onclick: move |_| show_results.set(true),
+                        "📊 Results"
+                    }
                     Link { class: "button big", to: Route::Admin {}, "Back to admin" }
                 }
+            }
+            if show_results() {
+                ResultsPanel { code: code(), on_close: move |()| show_results.set(false) }
             }
             ConnectionBanner { connected: (live.connected)() }
         }
@@ -272,6 +284,122 @@ fn use_sound_effects(view: Signal<Option<HostView>>, received_at: Signal<f64>, n
             sfx::play(if secs == 1 { Sfx::LastTick } else { Sfx::Tick });
         }
     });
+}
+
+/// Every team's points on every question, with a CSV download.
+#[component]
+fn ResultsPanel(code: String, on_close: EventHandler<()>) -> Element {
+    let token: AdminToken = use_context();
+    let code = use_signal(|| code);
+    let results = use_resource(move || async move { game_results(token.get(), code()).await });
+    let body = match results() {
+        None => rsx! { Spinner {} },
+        Some(Err(err)) => rsx! { ErrorBox { error: Some(message(&err)) } },
+        Some(Ok(results)) => {
+            let csv = format!(
+                "data:text/csv;charset=utf-8,{}",
+                percent_encode(&results.to_csv())
+            );
+            let file = format!("{}.csv", file_stem(&results.title));
+            rsx! {
+                div { class: "results-scroll",
+                    table { class: "results",
+                        thead {
+                            tr {
+                                th { "#" }
+                                th { "Team" }
+                                th { "Total" }
+                                for (i, question) in results.questions.iter().enumerate() {
+                                    th { key: "{i}", title: "{question}", "Q{i + 1}" }
+                                }
+                            }
+                        }
+                        tbody {
+                            for row in results.rows.iter() {
+                                tr { key: "{row.rank}-{row.team}",
+                                    td { "{row.rank}" }
+                                    td { class: "strong", "{row.team}" }
+                                    td { class: "total", "{row.score}" }
+                                    for (i, points) in row.points.iter().enumerate() {
+                                        td { key: "{i}",
+                                            match points {
+                                                Some(p) => p.to_string(),
+                                                None => "–".to_owned(),
+                                            }
+                                            if row.jokers.get(i).copied().unwrap_or(false) {
+                                                " 🃏"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                div { class: "row",
+                    a { class: "button primary", href: csv, download: file, "Download CSV" }
+                    button {
+                        class: "button ghost",
+                        onclick: move |_| {
+                            document::eval("window.print()");
+                        },
+                        "Print"
+                    }
+                }
+            }
+        }
+    };
+    rsx! {
+        div {
+            class: "overlay results-overlay",
+            onclick: move |_| on_close.call(()),
+            onkeydown: move |e: KeyboardEvent| {
+                e.stop_propagation();
+                if e.key() == Key::Escape {
+                    on_close.call(());
+                }
+            },
+            section {
+                class: "card stack panel wide-panel",
+                role: "dialog",
+                aria_label: "Results",
+                onclick: move |e| e.stop_propagation(),
+                div { class: "row between",
+                    h2 { "Results" }
+                    button { class: "button ghost no-print", onclick: move |_| on_close.call(()), "Close" }
+                }
+                {body}
+            }
+        }
+    }
+}
+
+/// Encodes text for a `data:` URL.
+fn percent_encode(text: &str) -> String {
+    use std::fmt::Write;
+    let mut out = String::with_capacity(text.len());
+    for byte in text.bytes() {
+        if byte.is_ascii_alphanumeric() || b"-_.~".contains(&byte) {
+            out.push(char::from(byte));
+        } else {
+            let _ = write!(out, "%{byte:02X}");
+        }
+    }
+    out
+}
+
+/// A safe file name from a quiz title.
+fn file_stem(title: &str) -> String {
+    let stem: String = title
+        .chars()
+        .map(|c| if c.is_alphanumeric() { c } else { '-' })
+        .collect();
+    let stem = stem.trim_matches('-');
+    if stem.is_empty() {
+        "results".to_owned()
+    } else {
+        format!("{stem}-results")
+    }
 }
 
 /// The host's team manager: rename or remove teams.
