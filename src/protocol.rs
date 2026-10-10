@@ -149,8 +149,10 @@ pub struct HostView {
     pub title: String,
     pub code: String,
     pub teams: Vec<TeamInfo>,
-    /// Time until the quiz moves on by itself, when auto-advance is on.
+    /// Time until the quiz moves on by itself, when auto-advance is on (and not paused).
     pub auto_advance_ms: Option<u64>,
+    /// The host paused the clock.
+    pub paused: bool,
     pub phase: HostPhase,
 }
 
@@ -165,6 +167,8 @@ pub enum HostPhase {
     Question {
         question: QuestionInfo,
         remaining_ms: u64,
+        /// Clock time spent so far, pauses excluded (to seek the soundtrack).
+        elapsed_ms: u64,
         answered: usize,
     },
     /// Time is up for a question. Reveal and standings are present when revealing after each question.
@@ -203,6 +207,12 @@ pub enum HostCommand {
         key: String,
         judgement: Judgement,
     },
+    /// Go back to the previous slide, reveal or podium step.
+    Back,
+    /// Pause or resume the clock and auto-advance.
+    TogglePause,
+    /// Give the open question this many more seconds.
+    AddTime(u32),
     /// Rename a team.
     RenameTeam { team: u32, name: String },
     /// Remove a team from the game.
@@ -251,6 +261,9 @@ pub enum PlayerPhase {
         text: Option<(String, Vec<String>)>,
         multi: bool,
         remaining_ms: u64,
+        /// The host paused the clock.
+        paused: bool,
+        time_limit_ms: u64,
         submitted: Option<Response>,
     },
     Closed {

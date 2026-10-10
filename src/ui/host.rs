@@ -6,7 +6,7 @@ use super::{
     LOBBY_ART, Route,
     admin::{AdminGate, AdminToken},
     client,
-    live::{ConnectionBanner, Live, remaining_ms, use_clock, use_live},
+    live::{ConnectionBanner, Live, countdown_ms, remaining_ms, use_clock, use_live},
     widgets::{ANSWER_SHAPES, Brand, ClientOnly, Icon, IconKind, Spinner, TeamAvatar, media_url},
 };
 use crate::{
@@ -20,6 +20,8 @@ use crate::{
 
 /// The lobby illustration is shown while fewer teams than this have joined.
 const LOBBY_ART_MAX_TEAMS: usize = 5;
+/// Seconds the host's "+" button adds to an open question.
+const EXTRA_SECS: u32 = 10;
 /// How many teams the between-questions leaderboard shows.
 const STANDINGS_SHOWN: usize = 6;
 
@@ -42,8 +44,8 @@ fn HostScreen(code: String) -> Element {
     use_context_provider(|| live);
     let now = use_clock(200);
 
-    let next = move || async move {
-        let _ = live.socket.send(HostCommand::Next).await;
+    let send = move |command: HostCommand| async move {
+        let _ = live.socket.send(command).await;
     };
 
     let view = live.view.read();
@@ -63,7 +65,10 @@ fn HostScreen(code: String) -> Element {
     let auto_left = view
         .auto_advance_ms
         .map(|ms| (remaining_ms(ms, received_at, now()) / 1000.0).ceil());
-    let soundtrack = soundtrack(&view.phase, received_at);
+    let paused = view.paused;
+    let soundtrack = soundtrack(&view.phase, received_at, paused);
+    let can_pause = !matches!(view.phase, HostPhase::Lobby | HostPhase::Ready { .. });
+    let question_open = matches!(view.phase, HostPhase::Question { .. });
     let mut show_teams = use_signal(|| false);
 
     rsx! {
@@ -73,16 +78,19 @@ fn HostScreen(code: String) -> Element {
             onmounted: move |e| async move {
                 let _ = e.set_focus(true).await;
             },
-            // Presentation clickers send → or PageDown. Enter and Space are left alone because
-            // they also activate a focused button, which would advance twice.
+            // Presentation clickers send → / PageDown and ← / PageUp. Enter and Space are left
+            // alone because they also activate a focused button, which would act twice.
             onkeydown: move |e: KeyboardEvent| async move {
-                let key = e.key();
-                if matches!(key, Key::ArrowRight | Key::PageDown)
-                    || key == Key::Character("n".to_owned())
-                {
-                    e.prevent_default();
-                    next().await;
-                }
+                let command = match e.key() {
+                    Key::ArrowRight | Key::PageDown => HostCommand::Next,
+                    Key::ArrowLeft | Key::PageUp => HostCommand::Back,
+                    Key::Character(c) if c == "n" => HostCommand::Next,
+                    Key::Character(c) if c == "b" => HostCommand::Back,
+                    Key::Character(c) if c == "p" => HostCommand::TogglePause,
+                    _ => return,
+                };
+                e.prevent_default();
+                send(command).await;
             },
             header { class: "host-bar",
                 Brand {}
@@ -106,16 +114,19 @@ fn HostScreen(code: String) -> Element {
                     on_close: move |()| show_teams.set(false),
                 }
             }
+            if paused {
+                div { class: "paused-banner", role: "status", "⏸ Paused" }
+            }
             main { class: "host-main",
                 match &view.phase {
                     HostPhase::Lobby => rsx! { Lobby { code: view.code.clone(), teams: view.teams.clone() } },
                     HostPhase::Ready { question } => rsx! {
                         ReadySlide { question: question.clone(), teams: view.teams.len() }
                     },
-                    HostPhase::Question { question, remaining_ms: left, answered } => rsx! {
+                    HostPhase::Question { question, remaining_ms: left, answered, .. } => rsx! {
                         QuestionSlide {
                             question: question.clone(),
-                            left_ms: remaining_ms(*left, received_at, now()),
+                            left_ms: countdown_ms(*left, received_at, now(), paused),
                             answered: *answered,
                             teams: view.teams.len(),
                         }
@@ -141,8 +152,34 @@ fn HostScreen(code: String) -> Element {
                 }
             }
             footer { class: "host-controls",
+                div { class: "row host-tools",
+                    button {
+                        class: "button ghost",
+                        title: "Back (← or B)",
+                        disabled: matches!(view.phase, HostPhase::Lobby),
+                        onclick: move |_| send(HostCommand::Back),
+                        "◀ Back"
+                    }
+                    if can_pause {
+                        button {
+                            class: if paused { "button primary" } else { "button ghost" },
+                            title: "Pause or resume the clock (P)",
+                            onclick: move |_| send(HostCommand::TogglePause),
+                            if paused { "▶ Resume" } else { "⏸ Pause" }
+                        }
+                    }
+                    if question_open {
+                        button {
+                            class: "button ghost",
+                            title: "Give everyone more time",
+                            onclick: move |_| send(HostCommand::AddTime(EXTRA_SECS)),
+                            "+{EXTRA_SECS} s"
+                        }
+                    }
+                }
+                span { class: "grow" }
                 if let Some((index, name, started_at)) = soundtrack {
-                    Soundtrack { key: "{index}", name, started_at }
+                    Soundtrack { key: "{index}", name, started_at, paused }
                 }
                 if let Some(secs) = auto_left {
                     span { class: "auto-note", "Continuing in {secs}s" }
@@ -151,7 +188,7 @@ fn HostScreen(code: String) -> Element {
                     button {
                         class: "button primary big",
                         disabled: matches!(view.phase, HostPhase::Lobby) && view.teams.is_empty(),
-                        onclick: move |_| next(),
+                        onclick: move |_| send(HostCommand::Next),
                         "{label}"
                     }
                 } else {
@@ -296,17 +333,21 @@ fn next_label(view: &HostView) -> Option<String> {
 }
 
 /// The soundtrack to keep on screen: question index, media name, and the browser time its
-/// clock started, once it has.
-fn soundtrack(phase: &HostPhase, received_at: f64) -> Option<(usize, String, Option<f64>)> {
+/// clock started (pauses excluded), once it has.
+fn soundtrack(
+    phase: &HostPhase,
+    received_at: f64,
+    paused: bool,
+) -> Option<(usize, String, Option<f64>)> {
     let (question, started_at) = match phase {
         HostPhase::Question {
             question,
-            remaining_ms: left,
+            elapsed_ms,
             ..
         } => {
             #[allow(clippy::cast_precision_loss, reason = "time limits are small")]
-            let elapsed = question.time_limit_ms.saturating_sub(*left) as f64;
-            (question, Some(received_at - elapsed))
+            let elapsed = *elapsed_ms as f64;
+            (question, (!paused).then_some(received_at - elapsed))
         }
         // Ready preloads the music; Closed keeps it going while the answers are shown.
         HostPhase::Ready { question } | HostPhase::Closed { question, .. } => (question, None),
@@ -316,11 +357,21 @@ fn soundtrack(phase: &HostPhase, received_at: f64) -> Option<(usize, String, Opt
     Some((question.index, name, started_at))
 }
 
-/// Plays a question's soundtrack once its clock has started, from the matching position.
+/// Plays a question's soundtrack once its clock has started, from the matching position, and
+/// pauses it with the clock.
 #[component]
-fn Soundtrack(name: String, started_at: Option<f64>) -> Element {
+fn Soundtrack(name: String, started_at: Option<f64>, paused: bool) -> Element {
     let mut played = use_signal(|| false);
-    use_effect(use_reactive!(|started_at| {
+    use_effect(use_reactive!(|started_at, paused| {
+        if paused {
+            if *played.peek() {
+                played.set(false);
+                document::eval(
+                    "const a = document.getElementById('soundtrack'); if (a) { a.pause(); }",
+                );
+            }
+            return;
+        }
         let Some(started_at) = started_at else {
             return;
         };

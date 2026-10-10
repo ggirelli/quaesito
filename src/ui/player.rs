@@ -4,7 +4,7 @@ use dioxus::{fullstack::WebSocketOptions, prelude::*};
 
 use super::{
     Route, client,
-    live::{ConnectionBanner, Live, remaining_ms, use_clock, use_live},
+    live::{ConnectionBanner, Live, countdown_ms, use_clock, use_live},
     widgets::{ANSWER_SHAPES, Brand, ClientOnly, ErrorBox, Spinner, TeamAvatar, message},
 };
 use crate::{
@@ -262,6 +262,8 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
             input: input @ (InputKind::Text | InputKind::Number),
             text,
             remaining_ms: left,
+            paused,
+            time_limit_ms,
             submitted,
             ..
         } => rsx! {
@@ -271,8 +273,7 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
                 total,
                 number: input == InputKind::Number,
                 question: text.map(|(question, _)| question),
-                left_ms: left,
-                received_at: live_received,
+                clock: Clock { left_ms: left, limit_ms: time_limit_ms, paused, received_at: live_received },
                 submitted,
             }
         },
@@ -284,6 +285,8 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
             text,
             multi,
             remaining_ms: left,
+            paused,
+            time_limit_ms,
             submitted,
         } => rsx! {
             AnswerPad {
@@ -293,8 +296,7 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
                 answer_count,
                 text,
                 multi,
-                left_ms: left,
-                received_at: live_received,
+                clock: Clock { left_ms: left, limit_ms: time_limit_ms, paused, received_at: live_received },
                 submitted: match submitted {
                     Some(Response::Choice(selected)) => Some(selected),
                     _ => None,
@@ -416,6 +418,26 @@ fn LobbyView(code: String, token: String, team: TeamInfo, teams: usize) -> Eleme
     }
 }
 
+/// A question's countdown as last received from the server.
+#[derive(Clone, Copy, PartialEq)]
+struct Clock {
+    left_ms: u64,
+    limit_ms: u64,
+    paused: bool,
+    /// Browser time the view arrived.
+    received_at: f64,
+}
+
+impl Clock {
+    /// Milliseconds left at browser time `now`, and the timer bar's width in percent.
+    fn at(self, now: f64) -> (f64, f64) {
+        let left = countdown_ms(self.left_ms, self.received_at, now, self.paused);
+        #[allow(clippy::cast_precision_loss, reason = "time limits are small")]
+        let limit = self.limit_ms.max(1) as f64;
+        (left, (left / limit * 100.0).clamp(0.0, 100.0))
+    }
+}
+
 #[component]
 fn AnswerPad(
     index: usize,
@@ -423,18 +445,14 @@ fn AnswerPad(
     answer_count: usize,
     text: Option<(String, Vec<String>)>,
     multi: bool,
-    left_ms: u64,
-    received_at: f64,
+    clock: Clock,
     submitted: Option<Vec<usize>>,
     display: PhoneDisplay,
 ) -> Element {
     let live_socket: Live<PlayerCommand, PlayerView> = use_context();
     let mut selected = use_signal(Vec::<usize>::new);
     let now = use_clock(200);
-    let left = remaining_ms(left_ms, received_at, now());
-    #[allow(clippy::cast_precision_loss, reason = "time limits are small")]
-    let started_with = left_ms.max(1) as f64;
-    let width = (left / started_with * 100.0).clamp(0.0, 100.0);
+    let (left, width) = clock.at(now());
     let locked = submitted.is_some() || left <= 0.0;
     let chosen = submitted.clone().unwrap_or_else(|| selected.cloned());
 
@@ -457,7 +475,9 @@ fn AnswerPad(
             }
             div { class: "row between",
                 span { class: "muted", "Question {index + 1} of {total}" }
-                span { class: "muted", "{(left / 1000.0).ceil()}s" }
+                span { class: "muted",
+                    if clock.paused { "⏸ Paused" } else { "{(left / 1000.0).ceil()}s" }
+                }
             }
             if let Some(question) = question {
                 p { class: "phone-question", "{question}" }
@@ -529,18 +549,14 @@ fn OpenPad(
     total: usize,
     number: bool,
     question: Option<String>,
-    left_ms: u64,
-    received_at: f64,
+    clock: Clock,
     submitted: Option<Response>,
 ) -> Element {
     let live_socket: Live<PlayerCommand, PlayerView> = use_context();
     let mut draft = use_signal(String::new);
     let mut error = use_signal(|| None::<String>);
     let now = use_clock(200);
-    let left = remaining_ms(left_ms, received_at, now());
-    #[allow(clippy::cast_precision_loss, reason = "time limits are small")]
-    let started_with = left_ms.max(1) as f64;
-    let width = (left / started_with * 100.0).clamp(0.0, 100.0);
+    let (left, width) = clock.at(now());
     let locked = submitted.is_some() || left <= 0.0;
 
     let submit = move |evt: FormEvent| async move {
@@ -575,7 +591,9 @@ fn OpenPad(
             }
             div { class: "row between",
                 span { class: "muted", "Question {index + 1} of {total}" }
-                span { class: "muted", "{(left / 1000.0).ceil()}s" }
+                span { class: "muted",
+                    if clock.paused { "⏸ Paused" } else { "{(left / 1000.0).ceil()}s" }
+                }
             }
             if let Some(question) = question {
                 p { class: "phone-question", "{question}" }

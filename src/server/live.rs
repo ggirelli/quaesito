@@ -7,6 +7,9 @@ use dioxus::fullstack::TypedWebsocket;
 use super::{engine::Game, sessions::Session};
 use crate::protocol::{HostCommand, HostView, PlayerCommand, PlayerView};
 
+/// Most time the host can add in one go.
+const MAX_EXTRA_SECS: u32 = 60;
+
 /// Serves the host screen until it disconnects.
 pub async fn host(mut socket: TypedWebsocket<HostCommand, HostView>, session: Arc<Session>) {
     let mut updates = session.subscribe();
@@ -24,6 +27,23 @@ pub async fn host(mut socket: TypedWebsocket<HostCommand, HostView>, session: Ar
                 }
                 Ok(HostCommand::Judge { question, key, judgement }) => {
                     let _ = session.update(|g, now| g.judge(question, &key, judgement, now));
+                }
+                Ok(HostCommand::Back) => {
+                    let _ = session.update(Game::back);
+                }
+                Ok(HostCommand::TogglePause) => {
+                    let _ = session.update(|g, now| {
+                        if g.is_paused() {
+                            g.resume(now);
+                            Ok(())
+                        } else {
+                            g.pause(now)
+                        }
+                    });
+                }
+                Ok(HostCommand::AddTime(secs)) => {
+                    let extra = std::time::Duration::from_secs(u64::from(secs.min(MAX_EXTRA_SECS)));
+                    let _ = session.update(|g, _| g.add_time(extra));
                 }
                 Ok(HostCommand::RenameTeam { team, name }) => {
                     let _ = session.update(|g, _| g.rename_team(team, &name));

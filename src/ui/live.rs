@@ -90,6 +90,16 @@ pub fn remaining_ms(server_ms: u64, received_at: f64, now: f64) -> f64 {
     (server_ms - (now - received_at)).max(0.0)
 }
 
+/// Like [`remaining_ms`], but frozen while the host has paused the game.
+#[must_use]
+pub fn countdown_ms(server_ms: u64, received_at: f64, now: f64, paused: bool) -> f64 {
+    if paused {
+        remaining_ms(server_ms, received_at, received_at)
+    } else {
+        remaining_ms(server_ms, received_at, now)
+    }
+}
+
 /// A small "reconnecting" banner shown while the socket is down.
 #[component]
 pub fn ConnectionBanner(connected: bool) -> Element {

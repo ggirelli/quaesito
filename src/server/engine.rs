@@ -6,6 +6,9 @@
 //! Lobby → Question(0) → Closed(0) → … → Closed(n-1) → [Review(0) → … → Review(n-1)] → Podium
 //! ```
 //!
+//! The host can pause (freezing the clock and auto-advance), add time to an open question, and
+//! go back: to the previous slide or reveal, or out of a question opened by mistake.
+//!
 //! A question with a soundtrack first waits in `Ready` until the host starts the music, which
 //! also starts its clock. Slides sit between questions as `Slide(i)` and are skipped by the
 //! review.
@@ -47,6 +50,11 @@ pub struct Game {
     phase: Phase,
     /// Per question: the judge's amendments to typed answers, by normalised text.
     judgements: Vec<HashMap<String, Judgement>>,
+    /// Per question: whether it has been closed, so going forward again after going back shows
+    /// its results instead of asking it again.
+    played: Vec<bool>,
+    /// When the host paused the game, if it is paused.
+    paused_at: Option<Instant>,
 }
 
 struct Team {
@@ -121,6 +129,8 @@ impl Game {
             next_team_id: 1,
             phase: Phase::Lobby,
             judgements: vec![HashMap::new(); quiz_len],
+            played: vec![false; quiz_len],
+            paused_at: None,
         })
     }
 
@@ -198,7 +208,7 @@ impl Game {
             && !self.teams.is_empty()
             && self.everyone_answered(index)
         {
-            self.phase = Phase::Closed { index, since: now };
+            self.set_phase(Phase::Closed { index, since: now });
         }
         Ok(())
     }
@@ -259,7 +269,8 @@ impl Game {
     /// # Errors
     /// Refuses to start without teams, or to go past the end.
     pub fn next(&mut self, now: Instant) -> Result<(), Refusal> {
-        self.phase = match self.phase {
+        self.resume(now);
+        let phase = match self.phase {
             Phase::Lobby => {
                 if self.teams.is_empty() {
                     return Err(Refusal("Wait for at least one team to join."));
@@ -294,7 +305,136 @@ impl Game {
             },
             Phase::Podium { .. } => return Err(Refusal("The quiz is over.")),
         };
+        self.set_phase(phase);
         Ok(())
+    }
+
+    /// The host's "back" button: the previous slide, reveal or podium step. Leaving a question
+    /// that is still open withdraws it, so it is asked afresh later.
+    ///
+    /// # Errors
+    /// Refuses in the lobby.
+    pub fn back(&mut self, now: Instant) -> Result<(), Refusal> {
+        self.resume(now);
+        let last = self.quiz.questions.len() - 1;
+        self.phase = match self.phase {
+            Phase::Lobby => return Err(Refusal("This is the start.")),
+            Phase::Question { index, .. } => {
+                for team in &mut self.teams {
+                    team.submissions[index] = None;
+                }
+                self.judgements[index].clear();
+                self.revisit_before(index, now)
+            }
+            Phase::Ready { index } | Phase::Slide { index, .. } | Phase::Closed { index, .. } => {
+                self.revisit_before(index, now)
+            }
+            Phase::Review { index, .. } => {
+                match (0..index)
+                    .rev()
+                    .find(|&i| !self.quiz.questions[i].is_slide())
+                {
+                    Some(index) => Phase::Review { index, since: now },
+                    None => self.revisit(last, now),
+                }
+            }
+            Phase::Podium { revealed, .. } if revealed > 0 => Phase::Podium {
+                revealed: revealed - 1,
+                since: now,
+            },
+            Phase::Podium { .. } => match self.quiz.settings.reveal {
+                RevealMode::AtEnd => Phase::Review {
+                    index: (0..=last)
+                        .rev()
+                        .find(|&i| !self.quiz.questions[i].is_slide())
+                        .unwrap_or_default(),
+                    since: now,
+                },
+                RevealMode::AfterEachQuestion => self.revisit(last, now),
+            },
+        };
+        Ok(())
+    }
+
+    /// Freezes the clock and the auto-advance countdown.
+    ///
+    /// # Errors
+    /// Refuses when there is nothing to pause.
+    pub fn pause(&mut self, now: Instant) -> Result<(), Refusal> {
+        if matches!(self.phase, Phase::Lobby | Phase::Ready { .. }) || self.paused_at.is_some() {
+            return Err(Refusal("Nothing to pause."));
+        }
+        self.paused_at = Some(now);
+        Ok(())
+    }
+
+    /// Restarts the clock where it was paused; does nothing when not paused.
+    pub fn resume(&mut self, now: Instant) {
+        let Some(paused_at) = self.paused_at.take() else {
+            return;
+        };
+        let pause = now.saturating_duration_since(paused_at);
+        match &mut self.phase {
+            Phase::Question {
+                started, deadline, ..
+            } => {
+                *started += pause;
+                *deadline += pause;
+            }
+            Phase::Closed { since, .. }
+            | Phase::Slide { since, .. }
+            | Phase::Review { since, .. }
+            | Phase::Podium { since, .. } => *since += pause,
+            Phase::Lobby | Phase::Ready { .. } => {}
+        }
+    }
+
+    /// Gives an open question more time.
+    ///
+    /// # Errors
+    /// Refuses when no question is open.
+    pub fn add_time(&mut self, extra: Duration) -> Result<(), Refusal> {
+        let Phase::Question { deadline, .. } = &mut self.phase else {
+            return Err(Refusal("No question is open right now."));
+        };
+        *deadline += extra;
+        Ok(())
+    }
+
+    /// Whether the host has paused the game.
+    #[must_use]
+    pub fn is_paused(&self) -> bool {
+        self.paused_at.is_some()
+    }
+
+    /// The game's clock: frozen while paused.
+    fn clock(&self, now: Instant) -> Instant {
+        self.paused_at.unwrap_or(now)
+    }
+
+    /// Moves to `phase`, remembering which questions have been closed.
+    fn set_phase(&mut self, phase: Phase) {
+        if let Phase::Closed { index, .. } = phase {
+            self.played[index] = true;
+        }
+        self.phase = phase;
+    }
+
+    /// The phase showing item `index` again: a slide, or a played question's results.
+    fn revisit(&self, index: usize, now: Instant) -> Phase {
+        if self.quiz.questions[index].is_slide() {
+            Phase::Slide { index, since: now }
+        } else {
+            Phase::Closed { index, since: now }
+        }
+    }
+
+    /// The phase showing whatever came before item `index`.
+    fn revisit_before(&self, index: usize, now: Instant) -> Phase {
+        match index.checked_sub(1) {
+            Some(previous) => self.revisit(previous, now),
+            None => Phase::Lobby,
+        }
     }
 
     /// Submits a team's answer to the open question.
@@ -310,6 +450,7 @@ impl Game {
         else {
             return Err(Refusal("No question is open right now."));
         };
+        let now = self.clock(now);
         if now >= deadline {
             return Err(Refusal("Time is up."));
         }
@@ -328,7 +469,8 @@ impl Game {
         });
 
         if self.everyone_answered(index) {
-            self.phase = Phase::Closed { index, since: now };
+            self.resume(now);
+            self.set_phase(Phase::Closed { index, since: now });
         }
         Ok(())
     }
@@ -382,6 +524,9 @@ impl Game {
     /// When [`Game::tick`] next needs to run, if ever.
     #[must_use]
     pub fn next_deadline(&self) -> Option<Instant> {
+        if self.paused_at.is_some() {
+            return None;
+        }
         if let Phase::Question { deadline, .. } = self.phase {
             return Some(deadline);
         }
@@ -416,16 +561,20 @@ impl Game {
     /// What the big screen shows.
     #[must_use]
     pub fn host_view(&self, now: Instant) -> HostView {
+        let clock = self.clock(now);
         let phase = match self.phase {
             Phase::Lobby => HostPhase::Lobby,
             Phase::Ready { index } => HostPhase::Ready {
                 question: self.question_info(index),
             },
             Phase::Question {
-                index, deadline, ..
+                index,
+                started,
+                deadline,
             } => HostPhase::Question {
                 question: self.question_info(index),
-                remaining_ms: millis(deadline.saturating_duration_since(now)),
+                remaining_ms: millis(deadline.saturating_duration_since(clock)),
+                elapsed_ms: millis(clock.saturating_duration_since(started)),
                 answered: self.answered(index),
             },
             Phase::Closed { index, .. } => {
@@ -467,6 +616,7 @@ impl Game {
             title: self.quiz.title.clone(),
             code: self.code.clone(),
             teams: self.teams.iter().map(Team::info).collect(),
+            paused: self.paused_at.is_some(),
             auto_advance_ms: match self.phase {
                 Phase::Question { .. } => None,
                 _ => self
@@ -520,7 +670,9 @@ impl Game {
                         == crate::model::PhoneDisplay::FullText)
                         .then(|| (question.text.clone(), question_answers(question))),
                     multi: question.is_multi(),
-                    remaining_ms: millis(deadline.saturating_duration_since(now)),
+                    remaining_ms: millis(deadline.saturating_duration_since(self.clock(now))),
+                    paused: self.paused_at.is_some(),
+                    time_limit_ms: u64::from(question.time_limit_secs(&self.quiz.settings)) * 1000,
                     submitted: submitted(index),
                 }
             }
@@ -567,6 +719,8 @@ impl Game {
         let item = &self.quiz.questions[index];
         if item.is_slide() {
             Phase::Slide { index, since: now }
+        } else if self.played[index] {
+            Phase::Closed { index, since: now }
         } else if item.audio.is_some() {
             Phase::Ready { index }
         } else {
@@ -1018,6 +1172,93 @@ mod tests {
         g.next(t0).unwrap();
         g.next(t0).unwrap(); // podium
         assert!(g.remove_team(owls, t0).is_err());
+    }
+
+    #[test]
+    fn pausing_freezes_the_clock_and_extra_time_extends_it() {
+        let t0 = Instant::now();
+        let mut g = game(QuizSettings::default());
+        let owls = join(&mut g, "Owls");
+        let _cats = join(&mut g, "Cats");
+        assert!(g.pause(t0).is_err());
+        g.next(t0).unwrap();
+        g.pause(t0 + secs(2)).unwrap();
+        assert!(g.pause(t0 + secs(2)).is_err());
+        assert_eq!(g.next_deadline(), None);
+        let HostPhase::Question {
+            remaining_ms,
+            elapsed_ms,
+            ..
+        } = g.host_view(t0 + secs(30)).phase
+        else {
+            panic!("expected the question");
+        };
+        assert_eq!((remaining_ms, elapsed_ms), (8000, 2000));
+        assert!(g.host_view(t0).paused);
+
+        // Answers still count while paused, timed at the pause.
+        g.answer(owls, pick(&[0]), t0 + secs(30)).unwrap();
+        g.resume(t0 + secs(30));
+        assert_eq!(g.next_deadline(), Some(t0 + secs(38)));
+        g.add_time(secs(10)).unwrap();
+        assert_eq!(g.next_deadline(), Some(t0 + secs(48)));
+        assert!(!g.tick(t0 + secs(40)));
+        assert!(g.tick(t0 + secs(48)));
+        assert!(g.add_time(secs(10)).is_err());
+        assert_eq!(g.standings()[0].score, 900);
+    }
+
+    #[test]
+    fn going_back_revisits_without_replaying() {
+        let t0 = Instant::now();
+        let mut g = game(QuizSettings::default());
+        let owls = join(&mut g, "Owls");
+        assert!(g.back(t0).is_err());
+        g.next(t0).unwrap();
+        g.answer(owls, pick(&[0]), t0).unwrap(); // closes question one
+        g.next(t0).unwrap();
+        g.answer(owls, pick(&[1]), t0).unwrap(); // closes question two
+        g.back(t0).unwrap(); // back to question one's results
+        assert!(matches!(
+            g.host_view(t0).phase,
+            HostPhase::Closed { question, .. } if question.index == 0
+        ));
+        // Going forward shows question two's results again instead of asking it anew.
+        g.next(t0).unwrap();
+        assert!(matches!(
+            g.host_view(t0).phase,
+            HostPhase::Closed { question, .. } if question.index == 1
+        ));
+
+        // Leaving an open question withdraws it.
+        let mut g = game(QuizSettings::default());
+        let owls = join(&mut g, "Owls");
+        let _cats = join(&mut g, "Cats");
+        g.next(t0).unwrap();
+        g.answer(owls, pick(&[0]), t0).unwrap();
+        g.back(t0).unwrap();
+        assert!(matches!(g.host_view(t0).phase, HostPhase::Lobby));
+        g.next(t0).unwrap();
+        assert!(matches!(
+            g.host_view(t0).phase,
+            HostPhase::Question { answered: 0, .. }
+        ));
+
+        // Podium steps go back one at a time, then to the last results.
+        g.next(t0).unwrap();
+        g.next(t0).unwrap();
+        g.next(t0).unwrap();
+        g.next(t0).unwrap(); // podium, nothing revealed
+        g.next(t0).unwrap(); // 2nd place
+        g.back(t0).unwrap();
+        assert!(
+            matches!(g.host_view(t0).phase, HostPhase::Podium { ref standings, .. } if standings.is_empty())
+        );
+        g.back(t0).unwrap();
+        assert!(matches!(
+            g.host_view(t0).phase,
+            HostPhase::Closed { question, .. } if question.index == 1
+        ));
     }
 
     #[test]

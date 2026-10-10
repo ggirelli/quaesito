@@ -656,6 +656,30 @@ input.short {
   gap: 1rem;
 }
 
+.host-tools .button {
+  font-size: 0.8em;
+}
+
+.paused-banner {
+  position: fixed;
+  top: 1.5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  padding: 0.3em 1.2em;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.6;
+  }
+}
+
 .lobby {
   flex: 1;
   display: grid;
