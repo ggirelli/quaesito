@@ -46,6 +46,10 @@ audio files are needed. `src/ui/sfx.rs` reduces each host view to a `Cue` and pl
 the cue moves forward (a team joins, a question closes or is reviewed, a podium spot is revealed);
 going back is silent. An open question without a soundtrack ticks through its last five seconds.
 
+Once the podium is complete the host can open the results (`game_results`): the standings with
+each team's points per question (`None` where it did not answer) and where it played its joker. The
+browser turns them into a CSV download (`GameResults::to_csv`) or prints them.
+
 Screens hold a WebSocket each (`/api/ws/host`, `/api/ws/player`). On every change the server
 pushes a complete, role-specific view (`src/protocol.rs`), so clients never reconstruct state and
 a reconnecting phone simply receives the current view. Countdowns are sent as "milliseconds left"

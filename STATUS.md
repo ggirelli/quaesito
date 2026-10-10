@@ -33,7 +33,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 24 | "Put in order" questions | ✅ done |
 | 25 | Pictures that sharpen while the clock runs | ✅ done |
 | 26 | Sound effects on the big screen | ✅ done |
-| 27 | End-of-game results page and download | ⏳ planned |
+| 27 | End-of-game results page and download | ✅ done |
 | 28 | Live games survive a server restart | ⏳ planned |
 | 29 | Exports bundle media (zip); unused media is cleaned up | ⏳ planned |
 

@@ -13,7 +13,8 @@ Quizzes among friends: a self-hosted, live quiz web app written in Rust with [Di
 - **Big screen** shows the quiz as a slideshow on a TV or projector, with a QR code to join. Slides with a title, text
   or a picture can sit between questions, e.g. to announce rounds.
 - **Team leaders** join from their phones by scanning the QR code or typing the game code, pick a team name and a picture, and answer against the clock. Faster correct answers earn more points.
-- **Podium** at the end reveals 3rd, 2nd and finally 1st place.
+- **Podium** at the end reveals 3rd, 2nd and finally 1st place. **📊 Results** then shows every team's points on every
+  question, to print or download as CSV.
 
 It runs on your local network and needs no internet connection.
 
