@@ -23,7 +23,9 @@ Lobby → Question(0) → Closed(0) → … → Closed(n-1) → [Review(0) → �
 
 A question with a soundtrack is preceded by `Ready(i)`: the big screen shows it with a full clock
 and the host's next step plays the music and starts the countdown together (never automatic).
-`Review` only exists when answers are revealed at the end. A question closes when its time runs
+A slide in the list shows as `Slide(i)` in place of a question: there is nothing to answer, phones
+say to watch the big screen, and the review skips it. With automatic advance it stays up for 10
+seconds. `Review` only exists when answers are revealed at the end. A question closes when its time runs
 out, when every connected team has answered, or when the host stops the clock. With automatic
 advance, a per-session timer task moves on after a short pause.
 
@@ -35,13 +37,16 @@ and run locally from the moment the view arrived.
 ## Quiz model
 
 A quiz has an ordered list of questions. Each question has text, an optional picture, an optional soundtrack, a time limit
-(defaulting to the quiz-wide one) and a kind:
+(defaulting to the quiz-wide one) and a kind. The list also holds slides (`Slide { title }`, with
+the question text as body and the picture), which separate rounds or explain rules; they are
+numbered apart from questions and score nothing. A quiz needs at least one real question.
 
 | Kind | Teams answer with | Right answer |
 |---|---|---|
 | `Choice` (default) | coloured buttons | two or more answers, any of which may be marked correct |
 | `Text { accepted }` | a short typed text (≤ 60 characters) | equal to an accepted answer once normalised |
 | `Number { answer }` | a number | the closest guess (ties included) |
+| `Slide { title }` | nothing | none: a title, text and/or picture on the big screen |
 
 Typed answers are normalised before matching: Unicode NFKD, accents dropped, lowercase, and every
 run of non-alphanumeric characters turned into a single space. There is no typo tolerance; the
