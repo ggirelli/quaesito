@@ -1,6 +1,7 @@
 //! Server-only state and HTTP routes.
 
 pub mod auth;
+pub mod engine;
 pub mod media;
 pub mod store;
 

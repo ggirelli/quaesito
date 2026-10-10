@@ -11,8 +11,8 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 2 | Scoring and ranking | ✅ done |
 | 3 | Storage (quizzes on disk) and image handling | ✅ done |
 | 4 | Admin auth and quiz API | ✅ done |
-| 5 | Game engine (session state machine) | ⏳ next |
-| 6 | Live sessions over WebSockets, join API, QR code | ⬜ todo |
+| 5 | Game engine (session state machine) | ✅ done |
+| 6 | Live sessions over WebSockets, join API, QR code | ⏳ next |
 | 7 | UI: routing, home, admin quiz list | ⬜ todo |
 | 8 | UI: quiz editor | ⬜ todo |
 | 9 | UI: host slideshow and podium | ⬜ todo |
@@ -28,3 +28,5 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 - `src/server/mod.rs`: global state initialised from `QUAESITO_DATA_DIR` (default `./data`).
 - `src/server/auth.rs`: admin password from `QUAESITO_ADMIN_PASSWORD` (generated and logged if unset), in-memory bearer tokens.
 - `src/api.rs`: server functions for login, quiz CRUD, duplicate, JSON import and picture upload.
+- `src/protocol.rs`: host/player views and commands pushed over WebSockets (full view on every change).
+- `src/server/engine.rs`: pure session state machine (lobby → questions → optional review → podium 3→2→1), time passed in explicitly for testability. Auto-advance pauses: 8 s after a revealed question, 3 s when hidden, 4 s per podium step.
