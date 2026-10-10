@@ -866,7 +866,7 @@ input.short {
   align-items: flex-end;
   justify-content: center;
   gap: 2vw;
-  padding-top: 4vh;
+  padding-top: 2vh;
 }
 
 .podium-spot {
@@ -879,9 +879,9 @@ input.short {
 }
 
 .podium-spot .avatar {
-  width: 6em;
-  height: 6em;
-  font-size: 2.2em;
+  width: 14vh;
+  height: 14vh;
+  font-size: 6vh;
 }
 
 .podium-spot .team-name {
@@ -909,17 +909,17 @@ input.short {
 }
 
 .podium-spot.p1 .podium-block {
-  height: 34vh;
+  height: 26vh;
   background: linear-gradient(var(--accent), #e09f00);
 }
 
 .podium-spot.p2 .podium-block {
-  height: 24vh;
+  height: 18vh;
   background: linear-gradient(#d9d9e6, #a9a9bb);
 }
 
 .podium-spot.p3 .podium-block {
-  height: 16vh;
+  height: 12vh;
   background: linear-gradient(#e2a072, #b8764a);
 }
 
@@ -1141,6 +1141,16 @@ input.short {
   border: 1px solid var(--border);
   font-size: 0.875rem;
   z-index: 10;
+}
+
+/* Light answer colours need dark text, also on tiles and phone buttons. */
+.answer-tile.a2,
+.answer-tile.a3,
+.answer-tile.a5,
+.phone-answer.a2,
+.phone-answer.a3,
+.phone-answer.a5 {
+  color: var(--accent-ink);
 }
 
 /* ---------- Small screens ---------- */

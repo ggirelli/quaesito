@@ -2,7 +2,7 @@
 
 use dioxus::prelude::*;
 
-use super::{Route, widgets::Brand};
+use super::{Route, player::JoinCodeForm, widgets::Brand};
 
 #[component]
 pub fn Home() -> Element {
@@ -10,6 +10,7 @@ pub fn Home() -> Element {
         main { class: "page center narrow stack",
             Brand { large: true }
             p { class: "tagline", "Quizzes among friends." }
+            JoinCodeForm {}
             Link { class: "muted small", to: Route::Admin {}, "Admin" }
         }
     }

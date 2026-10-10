@@ -16,8 +16,8 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 7 | UI: routing, home, admin dashboard | ✅ done |
 | 8 | UI: quiz editor | ✅ done |
 | 9 | UI: host slideshow and podium | ✅ done |
-| 10 | UI: player (phone) view | ⏳ next |
-| 11 | README usage docs, end-to-end smoke test | ⬜ todo |
+| 10 | UI: player (phone) view | ✅ done |
+| 11 | README usage docs, end-to-end smoke test | ⏳ next |
 
 ## Notes
 
@@ -39,6 +39,8 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 - `src/ui/live.rs`: `use_live` hook keeping a WebSocket alive with reconnection; countdowns run on the client from the last server snapshot.
 - `src/ui/host.rs`: `/host/:code` big screen: lobby with client-side QR code, timed questions, reveals with pick counts, standings, podium 3→2→1. Advance with the button, →, PageDown or N (presentation clickers).
 - Admin dashboard: start a quiz, list live games, reopen or end them.
+- `src/ui/player.rs`: `/join` and `/join/:code` phone flow: team name, optional team picture (in the lobby), reconnect token per game in `localStorage`, tap-to-answer (single) or select-and-submit (multi), results, final rank.
+- End-to-end checked in headless Chrome (host + two phones) for both settings extremes: reveal after each/at end, manual/auto advance, all-or-nothing/partial, buttons-only/full text.
 
 ## Known gaps
 

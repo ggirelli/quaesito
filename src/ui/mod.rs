@@ -6,11 +6,18 @@ mod editor;
 mod home;
 mod host;
 mod live;
+mod player;
 mod widgets;
 
 use dioxus::prelude::*;
 
-use self::{admin::Admin, editor::Editor, home::Home, host::Host};
+use self::{
+    admin::Admin,
+    editor::Editor,
+    home::Home,
+    host::Host,
+    player::{Join, JoinBlank},
+};
 
 const FAVICON: Asset = asset!("/assets/brand/icon.svg");
 const MAIN_CSS: Asset = asset!("/assets/main.css");
@@ -23,6 +30,10 @@ pub const ICON: Asset = asset!("/assets/brand/icon.svg");
 pub enum Route {
     #[route("/")]
     Home {},
+    #[route("/join")]
+    JoinBlank {},
+    #[route("/join/:code")]
+    Join { code: String },
     #[route("/admin")]
     Admin {},
     #[route("/admin/quiz/:id")]

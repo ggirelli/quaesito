@@ -6,6 +6,9 @@ use serde::{Deserialize, Serialize};
 
 use crate::model::PhoneDisplay;
 
+/// Longest team name, in characters.
+pub const MAX_NAME_CHARS: usize = 24;
+
 /// A team as shown on screens.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct TeamInfo {

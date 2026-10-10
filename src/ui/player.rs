@@ -1,0 +1,474 @@
+//! The team leader's phone: join a game, answer questions, see results.
+
+use dioxus::{fullstack::WebSocketOptions, prelude::*};
+
+use super::{
+    Route, client,
+    live::{ConnectionBanner, Live, remaining_ms, use_clock, use_live},
+    widgets::{ANSWER_SHAPES, Brand, ClientOnly, ErrorBox, Spinner, TeamAvatar, message},
+};
+use crate::{
+    api::{check_ticket, game_info, join_game, player_socket, upload_avatar},
+    model::PhoneDisplay,
+    protocol::{AnswerOutcome, MAX_NAME_CHARS, PlayerCommand, PlayerPhase, PlayerView, TeamInfo},
+};
+
+fn ticket_key(code: &str) -> String {
+    format!("quaesito.ticket.{code}")
+}
+
+/// `/join`: asks for a game code.
+#[component]
+pub fn JoinBlank() -> Element {
+    rsx! {
+        main { class: "page center narrow stack",
+            Brand { large: true }
+            JoinCodeForm {}
+        }
+    }
+}
+
+/// A form to enter a game code.
+#[component]
+pub fn JoinCodeForm() -> Element {
+    let mut code = use_signal(String::new);
+    let nav = navigator();
+    rsx! {
+        form {
+            class: "card stack",
+            onsubmit: move |evt: FormEvent| {
+                evt.prevent_default();
+                let code = code().trim().to_owned();
+                if !code.is_empty() {
+                    nav.push(Route::Join { code });
+                }
+            },
+            label { class: "field",
+                span { "Game code" }
+                input {
+                    class: "code-input",
+                    inputmode: "numeric",
+                    autocomplete: "off",
+                    maxlength: 6,
+                    placeholder: "000000",
+                    value: code,
+                    oninput: move |e| code.set(e.value().chars().filter(char::is_ascii_digit).collect()),
+                }
+            }
+            button { r#type: "submit", class: "button primary big", "Join" }
+        }
+    }
+}
+
+/// `/join/:code`: join (or rejoin) a game and play it.
+#[component]
+pub fn Join(code: String) -> Element {
+    rsx! {
+        ClientOnly {
+            PlayerEntry { key: "{code}", code }
+        }
+    }
+}
+
+#[component]
+fn PlayerEntry(code: String) -> Element {
+    let code = use_signal(|| code);
+    let mut token = use_signal(|| client::storage_get(&ticket_key(&code())));
+    // A stored ticket is only good while its game is running.
+    let checked = use_resource(move || async move {
+        match token() {
+            Some(t) => check_ticket(code(), t).await.unwrap_or(false),
+            None => false,
+        }
+    });
+    use_effect(move || {
+        if checked() == Some(false) && token.peek().is_some() {
+            client::storage_remove(&ticket_key(&code.peek()));
+            token.set(None);
+        }
+    });
+    match (token(), checked()) {
+        (Some(t), Some(true)) => rsx! {
+            PlayerGame { code: code(), token: t }
+        },
+        (Some(_), _) => rsx! {
+            div { class: "page center", Spinner {} }
+        },
+        (None, _) => rsx! {
+            JoinForm { code: code(), on_joined: move |t: String| {
+                client::storage_set(&ticket_key(&code()), &t);
+                token.set(Some(t));
+            } }
+        },
+    }
+}
+
+#[component]
+fn JoinForm(code: String, on_joined: EventHandler<String>) -> Element {
+    let code = use_signal(|| code);
+    let info = use_resource(move || async move { game_info(code()).await });
+    let mut name = use_signal(String::new);
+    let mut error = use_signal(|| None::<String>);
+    let mut busy = use_signal(|| false);
+
+    let title = match info() {
+        None => {
+            return rsx! {
+                div { class: "page center", Spinner {} }
+            };
+        }
+        Some(Ok(Some(title))) => title,
+        Some(Ok(None)) => {
+            return rsx! {
+                main { class: "page center narrow stack",
+                    Brand { large: true }
+                    p { class: "error", "No game with code {code} is running. Check the code on the big screen." }
+                    JoinCodeForm {}
+                }
+            };
+        }
+        Some(Err(err)) => {
+            return rsx! {
+                main { class: "page center narrow stack",
+                    Brand { large: true }
+                    ErrorBox { error: Some(message(&err)) }
+                }
+            };
+        }
+    };
+
+    rsx! {
+        main { class: "page center narrow stack",
+            Brand { large: true }
+            p { class: "tagline", "Joining “{title}”" }
+            form {
+                class: "card stack",
+                onsubmit: move |evt: FormEvent| async move {
+                    evt.prevent_default();
+                    busy.set(true);
+                    match join_game(code(), name()).await {
+                        Ok(ticket) => on_joined.call(ticket.token),
+                        Err(err) => error.set(Some(message(&err))),
+                    }
+                    busy.set(false);
+                },
+                label { class: "field",
+                    span { "Team name" }
+                    input {
+                        autofocus: true,
+                        autocomplete: "off",
+                        maxlength: MAX_NAME_CHARS,
+                        placeholder: "The Quizzly Bears",
+                        value: name,
+                        oninput: move |e| name.set(e.value()),
+                    }
+                }
+                ErrorBox { error: error() }
+                button {
+                    r#type: "submit",
+                    class: "button primary big",
+                    disabled: busy() || name().trim().is_empty(),
+                    "Let's go"
+                }
+            }
+        }
+    }
+}
+
+#[component]
+fn PlayerGame(code: String, token: String) -> Element {
+    let code = use_signal(|| code);
+    let token = use_signal(|| token);
+    let live = use_live(move || player_socket(code(), token(), WebSocketOptions::new()));
+    use_context_provider(|| live);
+
+    let view = live.view.read();
+    let Some(view) = view.as_ref() else {
+        return rsx! {
+            div { class: "page center", Spinner {} }
+        };
+    };
+    rsx! {
+        div { class: "player",
+            header { class: "player-bar",
+                div { class: "team",
+                    TeamAvatar { team: view.team.clone() }
+                    span { "{view.team.name}" }
+                }
+                if let Some(score) = view.score {
+                    span { class: "player-score", "{score} pts" }
+                }
+            }
+            PhaseView { code: code(), token: token(), view: view.clone(), live_received: (live.received_at)() }
+            ConnectionBanner { connected: (live.connected)() }
+        }
+    }
+}
+
+#[component]
+fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) -> Element {
+    match view.phase {
+        PlayerPhase::Lobby { teams } => rsx! {
+            LobbyView { code, token, team: view.team.clone(), teams }
+        },
+        PlayerPhase::Question {
+            index,
+            total,
+            answer_count,
+            text,
+            multi,
+            remaining_ms: left,
+            submitted,
+        } => rsx! {
+            AnswerPad {
+                key: "{index}",
+                index,
+                total,
+                answer_count,
+                text,
+                multi,
+                left_ms: left,
+                received_at: live_received,
+                submitted,
+                display: view.display,
+            }
+        },
+        PlayerPhase::Closed {
+            index,
+            total,
+            submitted,
+            result,
+        } => match result {
+            Some((outcome, _)) => rsx! {
+                OutcomeView { index, total, outcome, answered: submitted.is_some() }
+            },
+            None => rsx! {
+                main { class: "player-main",
+                    span { class: "muted", "Question {index + 1} of {total}" }
+                    if submitted.is_some() {
+                        div { class: "big-icon", "🔒" }
+                        h1 { class: "status-title", "Answer locked in" }
+                        p { class: "muted", "Results are revealed at the end. Fingers crossed!" }
+                    } else {
+                        div { class: "big-icon", "⌛" }
+                        h1 { class: "status-title", "Time's up" }
+                        p { class: "muted", "No answer this time." }
+                    }
+                }
+            },
+        },
+        PlayerPhase::Review {
+            index,
+            total,
+            submitted,
+            outcome,
+            ..
+        } => rsx! {
+            OutcomeView { index, total, outcome, answered: submitted.is_some() }
+        },
+        PlayerPhase::Podium {
+            rank,
+            teams,
+            finished,
+        } => rsx! {
+            main { class: "player-main",
+                match rank {
+                    Some(rank) => rsx! {
+                        div { class: "big-icon",
+                            match rank {
+                                1 => "🏆",
+                                2 => "🥈",
+                                3 => "🥉",
+                                _ => "🎉",
+                            }
+                        }
+                        h1 { class: "status-title", "You finished #{rank} of {teams}" }
+                    },
+                    None => rsx! {
+                        div { class: "big-icon", "🥁" }
+                        h1 { class: "status-title", "Drumroll…" }
+                        p { class: "muted", "Watch the big screen!" }
+                    },
+                }
+                if finished {
+                    p { class: "muted", "Thanks for playing!" }
+                    Link { class: "button", to: Route::Home {}, "Done" }
+                }
+            }
+        },
+    }
+}
+
+#[component]
+fn LobbyView(code: String, token: String, team: TeamInfo, teams: usize) -> Element {
+    let code = use_signal(|| code);
+    let token = use_signal(|| token);
+    let mut uploading = use_signal(|| false);
+    let mut error = use_signal(|| None::<String>);
+    let upload = move |evt: FormEvent| async move {
+        let Some(file) = evt.files().into_iter().next() else {
+            return;
+        };
+        uploading.set(true);
+        error.set(None);
+        if let Err(err) = upload_avatar(code(), token(), file.into()).await {
+            error.set(Some(message(&err)));
+        }
+        uploading.set(false);
+    };
+    rsx! {
+        main { class: "player-main",
+            label { class: "avatar-picker",
+                TeamAvatar { team: team.clone(), class: "large" }
+                span { class: "button ghost",
+                    if uploading() {
+                        "Uploading…"
+                    } else if team.avatar.is_some() {
+                        "Change team picture"
+                    } else {
+                        "Add a team picture"
+                    }
+                }
+                input {
+                    r#type: "file",
+                    accept: "image/*",
+                    class: "visually-hidden",
+                    onchange: upload,
+                }
+            }
+            ErrorBox { error: error() }
+            h1 { class: "status-title", "You're in!" }
+            p { class: "muted",
+                if teams == 1 { "1 team has joined." } else { "{teams} teams have joined." }
+                br {}
+                "Watch the big screen, the quiz starts soon."
+            }
+        }
+    }
+}
+
+#[component]
+fn AnswerPad(
+    index: usize,
+    total: usize,
+    answer_count: usize,
+    text: Option<(String, Vec<String>)>,
+    multi: bool,
+    left_ms: u64,
+    received_at: f64,
+    submitted: Option<Vec<usize>>,
+    display: PhoneDisplay,
+) -> Element {
+    let live_socket: Live<PlayerCommand, PlayerView> = use_context();
+    let mut selected = use_signal(Vec::<usize>::new);
+    let now = use_clock(200);
+    let left = remaining_ms(left_ms, received_at, now());
+    #[allow(clippy::cast_precision_loss, reason = "time limits are small")]
+    let started_with = left_ms.max(1) as f64;
+    let width = (left / started_with * 100.0).clamp(0.0, 100.0);
+    let locked = submitted.is_some() || left <= 0.0;
+    let chosen = submitted.clone().unwrap_or_else(|| selected.cloned());
+
+    let send = move |answer: Vec<usize>| async move {
+        let _ = live_socket.socket.send(PlayerCommand::Answer(answer)).await;
+    };
+    let (question, labels) = match text {
+        Some((question, labels)) => (Some(question), Some(labels)),
+        None => (None, None),
+    };
+    let with_text = display == PhoneDisplay::FullText && labels.is_some();
+
+    rsx! {
+        main { class: "player-main top",
+            div { class: "phone-timer",
+                div { style: "width: {width}%" }
+            }
+            div { class: "row between",
+                span { class: "muted", "Question {index + 1} of {total}" }
+                span { class: "muted", "{(left / 1000.0).ceil()}s" }
+            }
+            if let Some(question) = question {
+                p { class: "phone-question", "{question}" }
+            }
+            if locked {
+                p { class: "strong",
+                    if submitted.is_some() { "🔒 Answer locked in" } else { "⌛ Time's up" }
+                }
+            } else if multi {
+                p { class: "muted", "Pick every correct answer, then submit." }
+            }
+            div { class: if with_text { "phone-answers with-text" } else { "phone-answers" },
+                for i in 0..answer_count {
+                    {
+                        let shape = ANSWER_SHAPES[i % ANSWER_SHAPES.len()];
+                        let mut class = format!("phone-answer a{}", i % ANSWER_SHAPES.len());
+                        if chosen.contains(&i) {
+                            class.push_str(" selected");
+                        } else if locked {
+                            class.push_str(" faded");
+                        }
+                        let label = labels.as_ref().and_then(|l| l.get(i).cloned());
+                        let aria_label = label.clone().unwrap_or_else(|| format!("Answer {}", i + 1));
+                        rsx! {
+                            button {
+                                key: "{i}",
+                                class,
+                                disabled: locked,
+                                aria_label,
+                                onclick: move |_| async move {
+                                    if multi {
+                                        selected.with_mut(|s| {
+                                            if let Some(pos) = s.iter().position(|&x| x == i) {
+                                                s.remove(pos);
+                                            } else {
+                                                s.push(i);
+                                            }
+                                        });
+                                    } else {
+                                        selected.set(vec![i]);
+                                        send(vec![i]).await;
+                                    }
+                                },
+                                span { class: "shape", "{shape}" }
+                                if let Some(label) = label {
+                                    span { "{label}" }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if multi && !locked {
+                button {
+                    class: "button primary big",
+                    disabled: selected().is_empty(),
+                    onclick: move |_| async move { send(selected()).await },
+                    "Submit"
+                }
+            }
+        }
+    }
+}
+
+#[component]
+fn OutcomeView(index: usize, total: usize, outcome: AnswerOutcome, answered: bool) -> Element {
+    let (class, icon, title) = if outcome.fully_correct {
+        ("result good", "🎉", "Correct!")
+    } else if outcome.points > 0 {
+        ("result good", "👍", "Partly right")
+    } else if answered {
+        ("result bad", "😬", "Not this time")
+    } else {
+        ("result bad", "⌛", "No answer")
+    };
+    rsx! {
+        main { class: "player-main",
+            span { class: "muted", "Question {index + 1} of {total}" }
+            div { class,
+                div { class: "big-icon", "{icon}" }
+                h1 { class: "status-title", "{title}" }
+                div { class: "points", "+{outcome.points}" }
+            }
+        }
+    }
+}

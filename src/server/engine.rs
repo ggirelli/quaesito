@@ -11,14 +11,12 @@ use std::time::{Duration, Instant};
 use crate::{
     model::{AdvanceMode, Question, Quiz, RevealMode},
     protocol::{
-        AnswerOutcome, HostPhase, HostView, PlayerPhase, PlayerView, QuestionInfo, Reveal,
-        StandingRow, TeamInfo,
+        AnswerOutcome, HostPhase, HostView, MAX_NAME_CHARS, PlayerPhase, PlayerView, QuestionInfo,
+        Reveal, StandingRow, TeamInfo,
     },
     scoring::{self, Tally},
 };
 
-/// Longest team name, in characters.
-pub const MAX_NAME_CHARS: usize = 24;
 /// Most teams in one session.
 pub const MAX_TEAMS: usize = 50;
 
