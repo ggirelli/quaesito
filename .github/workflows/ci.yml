@@ -20,7 +20,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt
-      - uses: extractions/setup-just@v3
+      - uses: taiki-e/install-action@just
       - run: just fmt-check
 
   clippy:
@@ -32,7 +32,7 @@ jobs:
           components: clippy
           targets: wasm32-unknown-unknown
       - uses: Swatinem/rust-cache@v2
-      - uses: extractions/setup-just@v3
+      - uses: taiki-e/install-action@just
       - run: just clippy
 
   test:
@@ -41,7 +41,7 @@ jobs:
       - uses: actions/checkout@v5
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
-      - uses: extractions/setup-just@v3
+      - uses: taiki-e/install-action@just
       - run: just test
 
   deny:
