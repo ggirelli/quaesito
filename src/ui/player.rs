@@ -214,6 +214,13 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
         PlayerPhase::Lobby { teams } => rsx! {
             LobbyView { code, token, team: view.team.clone(), teams }
         },
+        PlayerPhase::Slide => rsx! {
+            main { class: "player-main",
+                div { class: "big-icon", "👀" }
+                h1 { class: "status-title", "Eyes on the big screen" }
+                p { class: "muted", "Nothing to answer right now." }
+            }
+        },
         PlayerPhase::Ready { index, total } => rsx! {
             main { class: "player-main",
                 span { class: "muted", "Question {index + 1} of {total}" }

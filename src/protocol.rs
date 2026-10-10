@@ -58,7 +58,11 @@ pub struct Judgement {
 /// A question as shown on the big screen.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct QuestionInfo {
+    /// Position in the quiz, slides included; identifies the question in commands.
     pub index: usize,
+    /// Position among the questions, from 1, as shown to people.
+    pub number: usize,
+    /// Number of questions, slides left out.
     pub total: usize,
     pub text: String,
     pub image: Option<String>,
@@ -70,6 +74,24 @@ pub struct QuestionInfo {
     /// More than one answer is correct.
     pub multi: bool,
     pub time_limit_ms: u64,
+}
+
+/// A slide as shown on the big screen; any part may be empty.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct SlideInfo {
+    pub title: String,
+    pub text: String,
+    pub image: Option<String>,
+}
+
+/// What the host's "next" button leads to.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+pub enum Upcoming {
+    Question,
+    Slide,
+    /// The end-of-quiz walk through the answers.
+    Answers,
+    Podium,
 }
 
 /// The right answer to a question and what the teams answered.
@@ -151,13 +173,15 @@ pub enum HostPhase {
         answered: usize,
         reveal: Option<Reveal>,
         standings: Option<Vec<StandingRow>>,
-        last: bool,
+        then: Upcoming,
     },
+    /// A slide between questions.
+    Slide { slide: SlideInfo, then: Upcoming },
     /// End-of-quiz walk through the answers (reveal at end).
     Review {
         question: QuestionInfo,
         reveal: Reveal,
-        last: bool,
+        then: Upcoming,
     },
     /// Final ranking, revealed from 3rd to 1st. `standings` only holds rows revealed so far.
     Podium {
@@ -170,7 +194,7 @@ pub enum HostPhase {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub enum HostCommand {
     /// Move to the next step: start, play a soundtrack, close the question early, next
-    /// question, next podium spot.
+    /// question or slide, next podium spot.
     Next,
     /// Amend the verdict on a group of typed answers (identified by its normalised `key`)
     /// while that question's answers are shown.
@@ -200,12 +224,14 @@ pub struct PlayerView {
     pub phase: PlayerPhase,
 }
 
-/// The stage of the quiz, as seen by a team.
+/// The stage of the quiz, as seen by a team. Question indexes count questions only, from 0.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum PlayerPhase {
     Lobby {
         teams: usize,
     },
+    /// The big screen shows a slide.
+    Slide,
     /// The next question has a soundtrack and opens when the host starts it.
     Ready {
         index: usize,

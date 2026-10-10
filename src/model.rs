@@ -13,13 +13,14 @@ pub const MAX_TIME_LIMIT_SECS: u32 = 300;
 /// Longest typed answer, in characters.
 pub const MAX_TEXT_ANSWER_CHARS: usize = 60;
 
-/// A complete quiz: settings plus an ordered list of questions.
+/// A complete quiz: settings plus an ordered list of questions and slides.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Quiz {
     pub id: String,
     pub title: String,
     #[serde(default)]
     pub settings: QuizSettings,
+    /// Questions and slides, in playing order.
     #[serde(default)]
     pub questions: Vec<Question>,
 }
@@ -50,7 +51,7 @@ impl Quiz {
                 "The default time limit must be between {MIN_TIME_LIMIT_SECS} and {MAX_TIME_LIMIT_SECS} seconds."
             )));
         }
-        if self.questions.is_empty() {
+        if self.questions.iter().all(Question::is_slide) {
             issues.push(ValidationIssue::quiz(
                 "The quiz needs at least one question.",
             ));
@@ -62,11 +63,39 @@ impl Quiz {
                     .into_iter()
                     .map(|message| ValidationIssue {
                         question: Some(index),
+                        place: Some(self.label(index)),
                         message,
                     }),
             );
         }
         issues
+    }
+
+    /// Number of real questions, leaving slides out.
+    #[must_use]
+    pub fn question_count(&self) -> usize {
+        self.questions.iter().filter(|q| !q.is_slide()).count()
+    }
+
+    /// Position of item `index` among the items of its sort (questions or slides), from 0.
+    #[must_use]
+    pub fn ordinal(&self, index: usize) -> usize {
+        let slide = self.questions[index].is_slide();
+        self.questions[..index]
+            .iter()
+            .filter(|q| q.is_slide() == slide)
+            .count()
+    }
+
+    /// How item `index` is called in the editor: "Question 3" or "Slide 1".
+    #[must_use]
+    pub fn label(&self, index: usize) -> String {
+        let sort = if self.questions[index].is_slide() {
+            "Slide"
+        } else {
+            "Question"
+        };
+        format!("{sort} {}", self.ordinal(index) + 1)
     }
 
     /// Lightweight description used in quiz listings.
@@ -75,7 +104,7 @@ impl Quiz {
         QuizSummary {
             id: self.id.clone(),
             title: self.title.clone(),
-            question_count: self.questions.len(),
+            question_count: self.question_count(),
             issues: self.validate().iter().map(ToString::to_string).collect(),
         }
     }
@@ -145,9 +174,10 @@ pub enum PhoneDisplay {
     FullText,
 }
 
-/// A single question.
+/// A single question, or a slide between questions.
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 pub struct Question {
+    /// The question, or the body text of a slide.
     pub text: String,
     /// How teams answer. Older quizzes without it are multiple choice.
     #[serde(default)]
@@ -176,6 +206,9 @@ pub enum QuestionKind {
     Text { accepted: Vec<String> },
     /// Enter a number; the closest guess wins.
     Number { answer: Option<f64> },
+    /// Not a question: a title, text and/or picture shown on the big screen, with nothing to
+    /// answer.
+    Slide { title: String },
 }
 
 impl Question {
@@ -186,6 +219,23 @@ impl Question {
             answers: vec![Answer::default(), Answer::default()],
             ..Self::default()
         }
+    }
+
+    /// A fresh, empty slide.
+    #[must_use]
+    pub fn slide() -> Self {
+        Self {
+            kind: QuestionKind::Slide {
+                title: String::new(),
+            },
+            ..Self::default()
+        }
+    }
+
+    /// Whether this is a slide rather than a question.
+    #[must_use]
+    pub fn is_slide(&self) -> bool {
+        matches!(self.kind, QuestionKind::Slide { .. })
     }
 
     /// Effective time limit given the quiz settings.
@@ -215,6 +265,15 @@ impl Question {
     }
 
     fn problems(&self) -> Vec<String> {
+        if let QuestionKind::Slide { title } = &self.kind {
+            let empty =
+                title.trim().is_empty() && self.text.trim().is_empty() && self.image.is_none();
+            return if empty {
+                vec!["Give the slide a title, some text or a picture.".to_owned()]
+            } else {
+                Vec::new()
+            };
+        }
         let mut problems = Vec::new();
         if self.text.trim().is_empty() {
             problems.push("The question has no text.".to_owned());
@@ -243,6 +302,7 @@ impl Question {
                     problems.push("Enter the correct number.".to_owned());
                 }
             }
+            QuestionKind::Slide { .. } => {}
         }
         if let Some(limit) = self.time_limit_secs
             && !(MIN_TIME_LIMIT_SECS..=MAX_TIME_LIMIT_SECS).contains(&limit)
@@ -266,8 +326,10 @@ pub struct Answer {
 /// A problem found by [`Quiz::validate`].
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ValidationIssue {
-    /// Index of the offending question, or `None` for quiz-wide problems.
+    /// Index of the offending question or slide, or `None` for quiz-wide problems.
     pub question: Option<usize>,
+    /// What the offending item is called, e.g. "Slide 2".
+    pub place: Option<String>,
     pub message: String,
 }
 
@@ -275,6 +337,7 @@ impl ValidationIssue {
     fn quiz(message: impl Into<String>) -> Self {
         Self {
             question: None,
+            place: None,
             message: message.into(),
         }
     }
@@ -282,8 +345,8 @@ impl ValidationIssue {
 
 impl std::fmt::Display for ValidationIssue {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self.question {
-            Some(i) => write!(f, "Question {}: {}", i + 1, self.message),
+        match &self.place {
+            Some(place) => write!(f, "{place}: {}", self.message),
             None => f.write_str(&self.message),
         }
     }
@@ -294,6 +357,7 @@ impl std::fmt::Display for ValidationIssue {
 pub struct QuizSummary {
     pub id: String,
     pub title: String,
+    /// Questions, not counting slides.
     pub question_count: usize,
     /// What still keeps the quiz from being playable; empty when it is ready.
     pub issues: Vec<String>,
@@ -352,6 +416,26 @@ mod tests {
         assert_eq!(issues.len(), 5);
         assert!(issues.iter().all(|i| i.question == Some(1)));
         assert!(issues[0].to_string().starts_with("Question 2: "));
+    }
+
+    #[test]
+    fn slides_are_numbered_apart_and_need_content() {
+        let mut quiz = quiz();
+        quiz.questions.insert(0, Question::slide());
+        quiz.questions.push(question());
+        assert_eq!(quiz.question_count(), 2);
+        assert_eq!(quiz.label(0), "Slide 1");
+        assert_eq!(quiz.label(2), "Question 2");
+        let issues = quiz.validate();
+        assert_eq!(issues.len(), 1);
+        assert!(issues[0].to_string().starts_with("Slide 1: "));
+        quiz.questions[0].kind = QuestionKind::Slide {
+            title: "Round 2".to_owned(),
+        };
+        assert_eq!(quiz.validate(), Vec::new());
+        // Slides alone do not make a quiz.
+        quiz.questions.retain(Question::is_slide);
+        assert_eq!(quiz.validate().len(), 1);
     }
 
     #[test]

@@ -131,15 +131,24 @@ fn EditorForm(quiz: Quiz) -> Element {
                 QuestionCard {
                     key: "{index}",
                     index,
+                    label: quiz.label(index),
                     count: question_count,
                     question: quiz.questions[index].clone(),
                     default_limit: quiz.settings.default_time_limit_secs,
                 }
             }
-            button {
-                class: "button primary add",
-                onclick: move |_| draft.edit(|q| q.questions.push(Question::blank())),
-                "＋ Add question"
+            div { class: "row",
+                button {
+                    class: "button primary add",
+                    onclick: move |_| draft.edit(|q| q.questions.push(Question::blank())),
+                    "＋ Add question"
+                }
+                button {
+                    class: "button add-slide",
+                    title: "A title, text or picture shown between questions",
+                    onclick: move |_| draft.edit(|q| q.questions.push(Question::slide())),
+                    "＋ Add slide"
+                }
             }
         }
     }
@@ -292,7 +301,13 @@ fn Choice(
 }
 
 #[component]
-fn QuestionCard(index: usize, count: usize, question: Question, default_limit: u32) -> Element {
+fn QuestionCard(
+    index: usize,
+    label: String,
+    count: usize,
+    question: Question,
+    default_limit: u32,
+) -> Element {
     let draft: Draft = use_context();
     let token: AdminToken = use_context();
     let mut upload_error = use_signal(|| None::<String>);
@@ -300,6 +315,7 @@ fn QuestionCard(index: usize, count: usize, question: Question, default_limit: u
     let mut uploading_audio = use_signal(|| false);
     let answer_count = question.answers.len();
     let multi = question.is_multi();
+    let slide = question.is_slide();
     let limit = question
         .time_limit_secs
         .map(|s| s.to_string())
@@ -332,9 +348,9 @@ fn QuestionCard(index: usize, count: usize, question: Question, default_limit: u
     };
 
     rsx! {
-        section { class: "card stack question",
+        section { class: if slide { "card stack question slide-card" } else { "card stack question" },
             div { class: "row between",
-                h3 { "Question {index + 1}" }
+                h3 { "{label}" }
                 div { class: "row actions",
                     button {
                         class: "button ghost icon",
@@ -367,9 +383,20 @@ fn QuestionCard(index: usize, count: usize, question: Question, default_limit: u
                     }
                 }
             }
+            if let QuestionKind::Slide { title } = &question.kind {
+                input {
+                    class: "slide-title-input",
+                    placeholder: "Slide title, e.g. Round 2: Music",
+                    value: "{title}",
+                    oninput: move |e| {
+                        let title = e.value();
+                        draft.edit_question(index, |q| q.kind = QuestionKind::Slide { title });
+                    },
+                }
+            }
             textarea {
                 class: "question-text",
-                placeholder: "Type the question…",
+                placeholder: if slide { "Text (optional)…" } else { "Type the question…" },
                 rows: 2,
                 value: "{question.text}",
                 oninput: move |e| draft.edit_question(index, |q| q.text = e.value()),
@@ -393,104 +420,109 @@ fn QuestionCard(index: usize, count: usize, question: Question, default_limit: u
                         }
                     }
                 }
-                label { class: "field inline",
-                    span { "Seconds" }
-                    input {
-                        r#type: "number",
-                        class: "short",
-                        min: MIN_TIME_LIMIT_SECS,
-                        max: MAX_TIME_LIMIT_SECS,
-                        placeholder: "{default_limit}",
-                        value: "{limit}",
-                        oninput: move |e| {
-                            let value = e.value();
-                            draft.edit_question(index, |q| q.time_limit_secs = value.trim().parse().ok());
-                        },
-                    }
-                }
-            }
-            div { class: "question-media row",
-                if let Some(audio) = &question.audio {
-                    Icon { kind: IconKind::Music }
-                    audio {
-                        class: "audio-preview",
-                        src: media_url(audio),
-                        preload: "metadata",
-                        controls: true,
-                    }
-                    button {
-                        class: "button ghost",
-                        onclick: move |_| draft.edit_question(index, |q| q.audio = None),
-                        "Remove soundtrack"
-                    }
-                    span { class: "muted small",
-                        "The clock starts when you start the music on the big screen."
-                    }
-                } else {
-                    label { class: "button ghost",
-                        if uploading_audio() { "Uploading…" } else { "＋ Add soundtrack" }
+                if !slide {
+                    label { class: "field inline",
+                        span { "Seconds" }
                         input {
-                            r#type: "file",
-                            accept: "audio/*",
-                            class: "visually-hidden",
-                            onchange: upload_audio,
+                            r#type: "number",
+                            class: "short",
+                            min: MIN_TIME_LIMIT_SECS,
+                            max: MAX_TIME_LIMIT_SECS,
+                            placeholder: "{default_limit}",
+                            value: "{limit}",
+                            oninput: move |e| {
+                                let value = e.value();
+                                draft.edit_question(index, |q| q.time_limit_secs = value.trim().parse().ok());
+                            },
                         }
                     }
                 }
             }
             ErrorBox { error: upload_error() }
-            Choice {
-                label: "Answer type",
-                options: vec![
-                    ("Choices", "Teams pick from coloured answers."),
-                    ("Typed answer", "Teams type a short answer. You can amend the verdict on each answer when they are revealed."),
-                    ("Number", "Teams guess a number; the closest guess wins 1000 points."),
-                ],
-                selected: match question.kind {
-                    QuestionKind::Choice => 0,
-                    QuestionKind::Text { .. } => 1,
-                    QuestionKind::Number { .. } => 2,
-                },
-                on_select: move |i| draft.edit_question(index, |q| set_kind(q, i)),
-            }
-            match &question.kind {
-                QuestionKind::Choice => rsx! {
-                    ul { class: "answers-edit",
-                        for (i, answer) in question.answers.iter().enumerate() {
-                            AnswerRow {
-                                key: "{i}",
-                                question: index,
-                                index: i,
-                                answer: answer.clone(),
-                                removable: answer_count > MIN_ANSWERS,
-                            }
+            if !slide {
+                div { class: "question-media row",
+                    if let Some(audio) = &question.audio {
+                        Icon { kind: IconKind::Music }
+                        audio {
+                            class: "audio-preview",
+                            src: media_url(audio),
+                            preload: "metadata",
+                            controls: true,
                         }
-                    }
-                    div { class: "row between",
-                        if answer_count < MAX_ANSWERS {
-                            button {
-                                class: "button ghost",
-                                onclick: move |_| draft.edit_question(index, |q| q.answers.push(Answer::default())),
-                                "＋ Add answer"
-                            }
-                        } else {
-                            span {}
+                        button {
+                            class: "button ghost",
+                            onclick: move |_| draft.edit_question(index, |q| q.audio = None),
+                            "Remove soundtrack"
                         }
                         span { class: "muted small",
-                            if multi {
-                                "Several correct answers: teams may pick more than one."
-                            } else {
-                                "Tick the correct answer. Tick more than one to allow several."
+                            "The clock starts when you start the music on the big screen."
+                        }
+                    } else {
+                        label { class: "button ghost",
+                            if uploading_audio() { "Uploading…" } else { "＋ Add soundtrack" }
+                            input {
+                                r#type: "file",
+                                accept: "audio/*",
+                                class: "visually-hidden",
+                                onchange: upload_audio,
                             }
                         }
                     }
-                },
-                QuestionKind::Text { accepted } => rsx! {
-                    AcceptedAnswers { question: index, accepted: accepted.clone() }
-                },
-                QuestionKind::Number { answer } => rsx! {
-                    NumberAnswer { question: index, answer: *answer }
-                },
+                }
+                Choice {
+                    label: "Answer type",
+                    options: vec![
+                        ("Choices", "Teams pick from coloured answers."),
+                        ("Typed answer", "Teams type a short answer. You can amend the verdict on each answer when they are revealed."),
+                        ("Number", "Teams guess a number; the closest guess wins 1000 points."),
+                    ],
+                    selected: match question.kind {
+                        QuestionKind::Choice | QuestionKind::Slide { .. } => 0,
+                        QuestionKind::Text { .. } => 1,
+                        QuestionKind::Number { .. } => 2,
+                    },
+                    on_select: move |i| draft.edit_question(index, |q| set_kind(q, i)),
+                }
+                match &question.kind {
+                    QuestionKind::Choice => rsx! {
+                        ul { class: "answers-edit",
+                            for (i, answer) in question.answers.iter().enumerate() {
+                                AnswerRow {
+                                    key: "{i}",
+                                    question: index,
+                                    index: i,
+                                    answer: answer.clone(),
+                                    removable: answer_count > MIN_ANSWERS,
+                                }
+                            }
+                        }
+                        div { class: "row between",
+                            if answer_count < MAX_ANSWERS {
+                                button {
+                                    class: "button ghost",
+                                    onclick: move |_| draft.edit_question(index, |q| q.answers.push(Answer::default())),
+                                    "＋ Add answer"
+                                }
+                            } else {
+                                span {}
+                            }
+                            span { class: "muted small",
+                                if multi {
+                                    "Several correct answers: teams may pick more than one."
+                                } else {
+                                    "Tick the correct answer. Tick more than one to allow several."
+                                }
+                            }
+                        }
+                    },
+                    QuestionKind::Text { accepted } => rsx! {
+                        AcceptedAnswers { question: index, accepted: accepted.clone() }
+                    },
+                    QuestionKind::Number { answer } => rsx! {
+                        NumberAnswer { question: index, answer: *answer }
+                    },
+                    QuestionKind::Slide { .. } => rsx! {},
+                }
             }
         }
     }

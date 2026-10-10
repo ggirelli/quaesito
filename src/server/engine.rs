@@ -7,7 +7,8 @@
 //! ```
 //!
 //! A question with a soundtrack first waits in `Ready` until the host starts the music, which
-//! also starts its clock.
+//! also starts its clock. Slides sit between questions as `Slide(i)` and are skipped by the
+//! review.
 
 use std::{
     collections::HashMap,
@@ -19,7 +20,8 @@ use crate::{
     model::{AdvanceMode, MAX_TEXT_ANSWER_CHARS, Question, QuestionKind, Quiz, RevealMode},
     protocol::{
         AnswerOutcome, Grade, Guess, HostPhase, HostView, InputKind, Judgement, MAX_NAME_CHARS,
-        PlayerPhase, PlayerView, QuestionInfo, Response, Reveal, StandingRow, TeamInfo, TextGroup,
+        PlayerPhase, PlayerView, QuestionInfo, Response, Reveal, SlideInfo, StandingRow, TeamInfo,
+        TextGroup, Upcoming,
     },
     scoring::{self, Tally},
 };
@@ -31,6 +33,8 @@ pub const MAX_TEAMS: usize = 50;
 const AUTO_AFTER_REVEAL: Duration = Duration::from_secs(8);
 /// Auto-advance pause after a question when answers stay hidden until the end.
 const AUTO_AFTER_HIDDEN: Duration = Duration::from_secs(3);
+/// Auto-advance pause on a slide.
+const AUTO_SLIDE: Duration = Duration::from_secs(10);
 /// Auto-advance pause between podium spots.
 const AUTO_PODIUM_STEP: Duration = Duration::from_secs(4);
 
@@ -71,6 +75,10 @@ enum Phase {
         deadline: Instant,
     },
     Closed {
+        index: usize,
+        since: Instant,
+    },
+    Slide {
         index: usize,
         since: Instant,
     },
@@ -209,30 +217,29 @@ impl Game {
                 if self.teams.is_empty() {
                     return Err(Refusal("Wait for at least one team to join."));
                 }
-                self.question_phase(0, now)
+                self.item_phase(0, now)
             }
             Phase::Ready { index } => self.open_question(index, now),
             Phase::Question { index, .. } => Phase::Closed { index, since: now },
-            Phase::Closed { index, .. } if index + 1 < self.quiz.questions.len() => {
-                self.question_phase(index + 1, now)
+            Phase::Closed { index, .. } | Phase::Slide { index, .. } => {
+                match self.upcoming_after(index) {
+                    Upcoming::Question | Upcoming::Slide => self.item_phase(index + 1, now),
+                    Upcoming::Answers => Phase::Review {
+                        index: self.question_from(0).unwrap_or_default(),
+                        since: now,
+                    },
+                    Upcoming::Podium => Phase::Podium {
+                        revealed: 0,
+                        since: now,
+                    },
+                }
             }
-            Phase::Closed { .. } => match self.quiz.settings.reveal {
-                RevealMode::AtEnd => Phase::Review {
-                    index: 0,
-                    since: now,
-                },
-                RevealMode::AfterEachQuestion => Phase::Podium {
+            Phase::Review { index, .. } => match self.question_from(index + 1) {
+                Some(index) => Phase::Review { index, since: now },
+                None => Phase::Podium {
                     revealed: 0,
                     since: now,
                 },
-            },
-            Phase::Review { index, .. } if index + 1 < self.quiz.questions.len() => Phase::Review {
-                index: index + 1,
-                since: now,
-            },
-            Phase::Review { .. } => Phase::Podium {
-                revealed: 0,
-                since: now,
             },
             Phase::Podium { revealed, .. } if revealed < self.podium_steps() => Phase::Podium {
                 revealed: revealed + 1,
@@ -347,6 +354,7 @@ impl Game {
                         RevealMode::AtEnd => AUTO_AFTER_HIDDEN,
                     },
             ),
+            Phase::Slide { since, .. } => Some(since + AUTO_SLIDE),
             Phase::Review { since, .. } => Some(since + AUTO_AFTER_REVEAL),
             Phase::Podium { revealed, since } if revealed < self.podium_steps() => {
                 Some(since + AUTO_PODIUM_STEP)
@@ -385,13 +393,21 @@ impl Game {
                     answered: self.answered(index),
                     reveal: revealing.then(|| self.reveal(index)),
                     standings: revealing.then(|| self.standings()),
-                    last: index + 1 == self.quiz.questions.len(),
+                    then: self.upcoming_after(index),
                 }
             }
+            Phase::Slide { index, .. } => HostPhase::Slide {
+                slide: self.slide_info(index),
+                then: self.upcoming_after(index),
+            },
             Phase::Review { index, .. } => HostPhase::Review {
                 question: self.question_info(index),
                 reveal: self.reveal(index),
-                last: index + 1 == self.quiz.questions.len(),
+                then: if self.question_from(index + 1).is_some() {
+                    Upcoming::Question
+                } else {
+                    Upcoming::Podium
+                },
             },
             Phase::Podium { revealed, .. } => {
                 let threshold = self.podium_threshold(revealed);
@@ -423,7 +439,9 @@ impl Game {
     #[must_use]
     pub fn player_view(&self, team_id: u32, now: Instant) -> Option<PlayerView> {
         let team = self.teams.iter().find(|t| t.id == team_id)?;
-        let total = self.quiz.questions.len();
+        let total = self.quiz.question_count();
+        // Phones count questions only.
+        let number = |index: usize| self.quiz.ordinal(index);
         let submitted = |index: usize| team.submissions[index].as_ref().map(|s| s.response.clone());
         let outcome = |index: usize| self.outcome(index, team);
         let revealing = self.quiz.settings.reveal == RevealMode::AfterEachQuestion;
@@ -437,14 +455,18 @@ impl Game {
             Phase::Lobby => PlayerPhase::Lobby {
                 teams: self.teams.len(),
             },
-            Phase::Ready { index } => PlayerPhase::Ready { index, total },
+            Phase::Ready { index } => PlayerPhase::Ready {
+                index: number(index),
+                total,
+            },
+            Phase::Slide { .. } => PlayerPhase::Slide,
             Phase::Question {
                 index, deadline, ..
             } => {
                 let question = &self.quiz.questions[index];
                 let input = input_kind(question);
                 PlayerPhase::Question {
-                    index,
+                    index: number(index),
                     total,
                     input,
                     answer_count: if input == InputKind::Choice {
@@ -461,14 +483,14 @@ impl Game {
                 }
             }
             Phase::Closed { index, .. } => PlayerPhase::Closed {
-                index,
+                index: number(index),
                 total,
                 submitted: submitted(index),
                 result: revealing
                     .then(|| (outcome(index), self.quiz.questions[index].correct_indexes())),
             },
             Phase::Review { index, .. } => PlayerPhase::Review {
-                index,
+                index: number(index),
                 total,
                 submitted: submitted(index),
                 outcome: outcome(index),
@@ -497,9 +519,13 @@ impl Game {
         self.teams.iter_mut().find(|t| t.id == id)
     }
 
-    /// The phase that shows question `index`: waiting for its soundtrack, or open right away.
-    fn question_phase(&self, index: usize, now: Instant) -> Phase {
-        if self.quiz.questions[index].audio.is_some() {
+    /// The phase that shows item `index`: a slide, a question waiting for its soundtrack, or a
+    /// question open right away.
+    fn item_phase(&self, index: usize, now: Instant) -> Phase {
+        let item = &self.quiz.questions[index];
+        if item.is_slide() {
+            Phase::Slide { index, since: now }
+        } else if item.audio.is_some() {
             Phase::Ready { index }
         } else {
             self.open_question(index, now)
@@ -516,11 +542,39 @@ impl Game {
         }
     }
 
+    /// The first question at or after item `start`, skipping slides.
+    fn question_from(&self, start: usize) -> Option<usize> {
+        (start..self.quiz.questions.len()).find(|&i| !self.quiz.questions[i].is_slide())
+    }
+
+    /// Where "next" leads after question or slide `index` is done.
+    fn upcoming_after(&self, index: usize) -> Upcoming {
+        match self.quiz.questions.get(index + 1) {
+            Some(item) if item.is_slide() => Upcoming::Slide,
+            Some(_) => Upcoming::Question,
+            None if self.quiz.settings.reveal == RevealMode::AtEnd => Upcoming::Answers,
+            None => Upcoming::Podium,
+        }
+    }
+
+    fn slide_info(&self, index: usize) -> SlideInfo {
+        let item = &self.quiz.questions[index];
+        SlideInfo {
+            title: match &item.kind {
+                QuestionKind::Slide { title } => title.trim().to_owned(),
+                _ => String::new(),
+            },
+            text: item.text.trim().to_owned(),
+            image: item.image.clone(),
+        }
+    }
+
     fn question_info(&self, index: usize) -> QuestionInfo {
         let question: &Question = &self.quiz.questions[index];
         QuestionInfo {
             index,
-            total: self.quiz.questions.len(),
+            number: self.quiz.ordinal(index) + 1,
+            total: self.quiz.question_count(),
             text: question.text.clone(),
             image: question.image.clone(),
             audio: question.audio.clone(),
@@ -548,6 +602,10 @@ impl Game {
             })
         };
         match &question.kind {
+            QuestionKind::Slide { .. } => Reveal::Choice {
+                correct: Vec::new(),
+                picks: Vec::new(),
+            },
             QuestionKind::Choice => {
                 let mut picks = vec![0; question.answers.len()];
                 for (_, response) in responses() {
@@ -714,7 +772,7 @@ impl Game {
         match self.phase {
             Phase::Lobby => 0,
             Phase::Ready { index } | Phase::Question { index, .. } => index,
-            Phase::Closed { index, .. } => index + 1,
+            Phase::Closed { index, .. } | Phase::Slide { index, .. } => index + 1,
             Phase::Review { .. } | Phase::Podium { .. } => self.quiz.questions.len(),
         }
     }
@@ -809,7 +867,7 @@ fn check_response(question: &Question, response: Response) -> Result<Response, R
 
 fn input_kind(question: &Question) -> InputKind {
     match question.kind {
-        QuestionKind::Choice => InputKind::Choice,
+        QuestionKind::Choice | QuestionKind::Slide { .. } => InputKind::Choice,
         QuestionKind::Text { .. } => InputKind::Text,
         QuestionKind::Number { .. } => InputKind::Number,
     }
@@ -918,7 +976,7 @@ mod tests {
         let HostPhase::Closed {
             reveal: Some(reveal),
             standings: Some(standings),
-            last: false,
+            then: Upcoming::Question,
             ..
         } = g.host_view(t0).phase
         else {
@@ -958,7 +1016,10 @@ mod tests {
         assert!(g.tick(t0 + secs(12)));
         assert!(matches!(
             g.host_view(t0).phase,
-            HostPhase::Closed { last: true, .. }
+            HostPhase::Closed {
+                then: Upcoming::Podium,
+                ..
+            }
         ));
 
         // Podium: 2nd then 1st.
@@ -1040,10 +1101,92 @@ mod tests {
         g.next(t0).unwrap(); // review two
         assert!(matches!(
             g.host_view(t0).phase,
-            HostPhase::Review { last: true, .. }
+            HostPhase::Review {
+                then: Upcoming::Podium,
+                ..
+            }
         ));
         g.next(t0).unwrap(); // podium
         assert!(matches!(g.host_view(t0).phase, HostPhase::Podium { .. }));
+    }
+
+    #[test]
+    fn slides_show_between_questions_and_are_skipped_in_the_review() {
+        let t0 = Instant::now();
+        let mut quiz = quiz(QuizSettings {
+            reveal: RevealMode::AtEnd,
+            ..QuizSettings::default()
+        });
+        let slide = |title: &str| Question {
+            kind: QuestionKind::Slide {
+                title: title.to_owned(),
+            },
+            text: " Get ready ".to_owned(),
+            ..Question::default()
+        };
+        quiz.questions.insert(0, slide("Round 1"));
+        quiz.questions.insert(2, slide("Round 2"));
+        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let owls = join(&mut g, "Owls");
+
+        g.next(t0).unwrap();
+        let HostPhase::Slide { slide, then } = g.host_view(t0).phase else {
+            panic!("expected a slide");
+        };
+        assert_eq!(slide.title, "Round 1");
+        assert_eq!(slide.text, "Get ready");
+        assert_eq!(then, Upcoming::Question);
+        assert_eq!(g.player_view(owls, t0).unwrap().phase, PlayerPhase::Slide);
+        assert!(g.answer(owls, pick(&[0]), t0).is_err());
+        // Manual advance waits on slides.
+        assert_eq!(g.next_deadline(), None);
+
+        g.next(t0).unwrap();
+        let HostPhase::Question { question, .. } = g.host_view(t0).phase else {
+            panic!("expected a question");
+        };
+        assert_eq!((question.index, question.number, question.total), (1, 1, 2));
+        assert!(matches!(
+            g.player_view(owls, t0).unwrap().phase,
+            PlayerPhase::Question {
+                index: 0,
+                total: 2,
+                ..
+            }
+        ));
+        g.answer(owls, pick(&[0]), t0).unwrap();
+        assert!(matches!(
+            g.host_view(t0).phase,
+            HostPhase::Closed {
+                then: Upcoming::Slide,
+                ..
+            }
+        ));
+        g.next(t0).unwrap(); // Round 2
+        g.next(t0).unwrap(); // question two
+        g.answer(owls, pick(&[1]), t0).unwrap();
+        assert!(matches!(
+            g.host_view(t0).phase,
+            HostPhase::Closed {
+                then: Upcoming::Answers,
+                ..
+            }
+        ));
+
+        // The review only walks through questions.
+        g.next(t0).unwrap();
+        let HostPhase::Review { question, then, .. } = g.host_view(t0).phase else {
+            panic!("expected the review");
+        };
+        assert_eq!((question.index, then), (1, Upcoming::Question));
+        g.next(t0).unwrap();
+        let HostPhase::Review { question, then, .. } = g.host_view(t0).phase else {
+            panic!("expected the review");
+        };
+        assert_eq!((question.index, then), (3, Upcoming::Podium));
+        g.next(t0).unwrap();
+        assert!(matches!(g.host_view(t0).phase, HostPhase::Podium { .. }));
+        assert_eq!(g.standings()[0].score, 1000);
     }
 
     #[test]

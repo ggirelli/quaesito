@@ -13,7 +13,7 @@ use crate::{
     api::{host_socket, join_origin},
     protocol::{
         Grade, Guess, HostCommand, HostPhase, HostView, InputKind, Judgement, QuestionInfo, Reveal,
-        StandingRow, TeamInfo, TextGroup,
+        SlideInfo, StandingRow, TeamInfo, TextGroup, Upcoming,
     },
     scoring::MAX_BONUS,
 };
@@ -112,6 +112,9 @@ fn HostScreen(code: String) -> Element {
                             standings: standings.clone(),
                         }
                     },
+                    HostPhase::Slide { slide, .. } => rsx! {
+                        SlideView { slide: slide.clone() }
+                    },
                     HostPhase::Review { question, reveal, .. } => rsx! {
                         ReviewSlide { question: question.clone(), reveal: reveal.clone() }
                     },
@@ -149,16 +152,18 @@ fn next_label(view: &HostView) -> Option<String> {
         HostPhase::Lobby => "Start the quiz".to_owned(),
         HostPhase::Ready { .. } => "▶ Start the music".to_owned(),
         HostPhase::Question { .. } => "Stop the clock".to_owned(),
-        HostPhase::Closed { last: false, .. } => "Next question".to_owned(),
-        HostPhase::Closed {
-            last: true,
-            reveal: None,
-            ..
-        } => "Reveal the answers".to_owned(),
-        HostPhase::Closed { last: true, .. } | HostPhase::Review { last: true, .. } => {
-            "On to the podium".to_owned()
+        HostPhase::Closed { then, .. } | HostPhase::Slide { then, .. } => match then {
+            Upcoming::Question => "Next question",
+            Upcoming::Slide => "Continue",
+            Upcoming::Answers => "Reveal the answers",
+            Upcoming::Podium => "On to the podium",
         }
-        HostPhase::Review { last: false, .. } => "Next answer".to_owned(),
+        .to_owned(),
+        HostPhase::Review {
+            then: Upcoming::Podium,
+            ..
+        } => "On to the podium".to_owned(),
+        HostPhase::Review { .. } => "Next answer".to_owned(),
         HostPhase::Podium { finished: true, .. } => return None,
         HostPhase::Podium { standings, .. } => {
             let podium = view.teams.len().min(3);
@@ -303,7 +308,7 @@ fn qr_svg(url: &str) -> Option<String> {
 fn QuestionHeader(question: QuestionInfo, children: Element) -> Element {
     rsx! {
         div { class: "question-head",
-            span { class: "muted", "Question {question.index + 1} of {question.total}" }
+            span { class: "muted", "Question {question.number} of {question.total}" }
             {children}
         }
         h1 { class: "question-title", "{question.text}" }
@@ -336,6 +341,24 @@ fn QuestionSlide(question: QuestionInfo, left_ms: f64, answered: usize, teams: u
             }
         }
         AnswersOrPrompt { question: question.clone() }
+    }
+}
+
+/// A slide between questions: title, picture and text, each optional.
+#[component]
+fn SlideView(slide: SlideInfo) -> Element {
+    rsx! {
+        div { class: "slide",
+            if !slide.title.is_empty() {
+                h1 { class: "slide-title", "{slide.title}" }
+            }
+            if let Some(image) = &slide.image {
+                img { class: "slide-image", src: media_url(image), alt: "" }
+            }
+            if !slide.text.is_empty() {
+                p { class: "slide-text", "{slide.text}" }
+            }
+        }
     }
 }
 
