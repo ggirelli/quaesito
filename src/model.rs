@@ -248,9 +248,14 @@ pub struct Question {
     /// Name of an uploaded picture, if any.
     #[serde(default)]
     pub image: Option<String>,
-    /// Show the picture blurred at first, sharpening as the clock runs out.
-    #[serde(default)]
-    pub blur_image: bool,
+    /// How the picture is revealed while the clock runs. Reads the former `blur_image` flag
+    /// as [`ImageReveal::Zoom`].
+    #[serde(
+        default,
+        alias = "blur_image",
+        deserialize_with = "deserialize_image_reveal"
+    )]
+    pub image_reveal: ImageReveal,
     /// Name of an uploaded soundtrack, if any. The host starts it, and the clock with it.
     #[serde(default)]
     pub audio: Option<String>,
@@ -260,6 +265,35 @@ pub struct Question {
     /// The options of a multiple-choice question (kept, but unused, for other kinds).
     #[serde(default)]
     pub answers: Vec<Answer>,
+}
+
+/// How a question's picture is revealed on the big screen while the clock runs.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
+pub enum ImageReveal {
+    /// Shown as is.
+    #[default]
+    Shown,
+    /// Starts as a close-up of its centre and zooms out to the whole picture.
+    Zoom,
+    /// Starts covered by tiles that drop away one by one.
+    Tiles,
+}
+
+/// Accepts an [`ImageReveal`], or the former `blur_image` flag (`true` becomes a zoom).
+fn deserialize_image_reveal<'de, D: serde::Deserializer<'de>>(
+    deserializer: D,
+) -> Result<ImageReveal, D::Error> {
+    #[derive(Deserialize)]
+    #[serde(untagged)]
+    enum Stored {
+        Reveal(ImageReveal),
+        Blur(bool),
+    }
+    Ok(match Stored::deserialize(deserializer)? {
+        Stored::Reveal(reveal) => reveal,
+        Stored::Blur(true) => ImageReveal::Zoom,
+        Stored::Blur(false) => ImageReveal::Shown,
+    })
 }
 
 /// How a question is answered.
@@ -466,7 +500,7 @@ mod tests {
             text: "Which planet has the most moons?".to_owned(),
             kind: QuestionKind::Choice,
             image: None,
-            blur_image: false,
+            image_reveal: ImageReveal::Shown,
             audio: None,
             time_limit_secs: None,
             answers: vec![answer("Jupiter", false), answer("Saturn", true)],
@@ -612,6 +646,19 @@ mod tests {
         quiz.rename_media(|name| (name != "s.mp3").then(|| format!("new-{name}")));
         assert_eq!(quiz.media(), ["new-a.jpg", "new-q.jpg"]);
         assert_eq!(quiz.questions[0].audio, None);
+    }
+
+    #[test]
+    fn image_reveal_reads_the_former_blur_flag() {
+        let reveal = |json: &str| {
+            serde_json::from_str::<Question>(&format!(r#"{{"text":"Q",{json}}}"#))
+                .unwrap()
+                .image_reveal
+        };
+        assert_eq!(reveal(r#""blur_image":true"#), ImageReveal::Zoom);
+        assert_eq!(reveal(r#""blur_image":false"#), ImageReveal::Shown);
+        assert_eq!(reveal(r#""image_reveal":"Tiles""#), ImageReveal::Tiles);
+        assert_eq!(reveal(r#""answers":[]"#), ImageReveal::Shown);
     }
 
     #[test]

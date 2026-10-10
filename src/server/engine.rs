@@ -1020,7 +1020,11 @@ impl Game {
             total: self.quiz.question_count(),
             text: question.text.clone(),
             image: question.image.clone(),
-            blur_image: question.blur_image && question.image.is_some(),
+            image_reveal: if question.image.is_some() {
+                question.image_reveal
+            } else {
+                crate::model::ImageReveal::Shown
+            },
             audio: question.audio.clone(),
             input: input_kind(question),
             answers: self.shown_answers(index),
@@ -1474,7 +1478,7 @@ mod tests {
             text: text.to_owned(),
             kind: crate::model::QuestionKind::Choice,
             image: None,
-            blur_image: false,
+            image_reveal: crate::model::ImageReveal::Shown,
             audio: None,
             time_limit_secs: Some(10),
             answers: vec![

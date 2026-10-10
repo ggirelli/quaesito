@@ -6,7 +6,7 @@ use super::{
     LOBBY_ART, Route,
     admin::{AdminGate, AdminToken},
     client,
-    live::{ConnectionBanner, Live, countdown_ms, remaining_ms, use_clock, use_live},
+    live::{ConnectionBanner, Live, countdown_ms, elapsed_now, remaining_ms, use_clock, use_live},
     sfx::{self, Cue, SFX_JS, Sfx},
     widgets::{
         ANSWER_SHAPES, Brand, ClientOnly, ErrorBox, Icon, IconKind, Spinner, TeamAvatar, media_url,
@@ -15,6 +15,7 @@ use super::{
 };
 use crate::{
     api::{game_results, host_socket, join_origin},
+    model::ImageReveal,
     protocol::{
         Fastest, Grade, Guess, HostCommand, HostPhase, HostView, InputKind, Judgement,
         MAX_NAME_CHARS, QuestionInfo, Reveal, SlideInfo, StandingRow, TeamInfo, TextGroup,
@@ -25,8 +26,12 @@ use crate::{
 
 /// The lobby illustration is shown while fewer teams than this have joined.
 const LOBBY_ART_MAX_TEAMS: usize = 5;
-/// Blur of a gradually revealed picture when the clock starts, in CSS pixels.
-const MAX_BLUR_PX: f64 = 40.0;
+/// How close the zoomed picture starts: this many times its size.
+const MAX_ZOOM: f64 = 5.0;
+/// Columns and rows of tiles covering a picture uncovered tile by tile.
+const TILE_COLUMNS: usize = 6;
+const TILE_ROWS: usize = 4;
+const TILES: usize = TILE_COLUMNS * TILE_ROWS;
 /// The clock ticks audibly through an open question's last seconds.
 const TICK_FROM_SECS: u64 = 5;
 /// Seconds the host's "+" button adds to an open question.
@@ -147,10 +152,11 @@ fn HostScreen(code: String) -> Element {
                     HostPhase::Ready { question } => rsx! {
                         ReadySlide { question: question.clone(), teams: view.teams.len() }
                     },
-                    HostPhase::Question { question, remaining_ms: left, answered, .. } => rsx! {
+                    HostPhase::Question { question, remaining_ms: left, elapsed_ms, answered } => rsx! {
                         QuestionSlide {
                             question: question.clone(),
                             left_ms: countdown_ms(*left, received_at, now(), paused),
+                            elapsed_ms: elapsed_now(*elapsed_ms, received_at, now(), paused),
                             answered: *answered,
                             teams: view.teams.len(),
                         }
@@ -693,12 +699,22 @@ fn QuestionHeader(question: QuestionInfo, children: Element) -> Element {
 }
 
 #[component]
-fn QuestionSlide(question: QuestionInfo, left_ms: f64, answered: usize, teams: usize) -> Element {
+fn QuestionSlide(
+    question: QuestionInfo,
+    left_ms: f64,
+    elapsed_ms: f64,
+    answered: usize,
+    teams: usize,
+) -> Element {
     #[allow(clippy::cast_precision_loss, reason = "time limits are small")]
-    let fraction = if question.time_limit_ms == 0 {
+    let limit = question.time_limit_ms as f64;
+    let fraction = if limit == 0.0 { 0.0 } else { left_ms / limit };
+    // The picture's reveal follows the time spent, not the time left, so extra time from the
+    // host never runs it backwards: it simply completes at the original limit.
+    let reveal_left = if limit == 0.0 {
         0.0
     } else {
-        left_ms / question.time_limit_ms as f64
+        1.0 - elapsed_ms / limit
     };
     let seconds = (left_ms / 1000.0).ceil();
     rsx! {
@@ -707,7 +723,7 @@ fn QuestionSlide(question: QuestionInfo, left_ms: f64, answered: usize, teams: u
         }
         div { class: "question-body",
             if let Some(image) = &question.image {
-                QuestionImage { image: image.clone(), blur: question.blur_image.then_some(fraction) }
+                QuestionImage { image: image.clone(), reveal: question.image_reveal, left: reveal_left, seed: question.index }
             }
             div { class: "answered",
                 strong { "{answered}/{teams}" }
@@ -718,25 +734,83 @@ fn QuestionSlide(question: QuestionInfo, left_ms: f64, answered: usize, teams: u
     }
 }
 
-/// A question's picture; `blur` is the share of the clock left when it sharpens over time.
+/// A question's picture, revealed as the clock runs: `left` is the share of the clock left (1
+/// when it starts, 0 at the buzzer) and `seed` varies the order tiles drop away.
 #[component]
-fn QuestionImage(image: String, blur: Option<f64>) -> Element {
-    let Some(left) = blur else {
-        return rsx! {
+fn QuestionImage(image: String, reveal: ImageReveal, left: f64, seed: usize) -> Element {
+    let left = left.clamp(0.0, 1.0);
+    match reveal {
+        ImageReveal::Shown => rsx! {
             img { class: "question-image", src: media_url(&image), alt: "" }
-        };
-    };
-    let px = MAX_BLUR_PX * left.clamp(0.0, 1.0);
-    rsx! {
-        div { class: "blur-frame",
-            img {
-                class: "question-image blurred",
-                src: media_url(&image),
-                alt: "",
-                style: "filter: blur({px:.1}px)",
+        },
+        ImageReveal::Zoom => {
+            let scale = 1.0 + (MAX_ZOOM - 1.0) * left;
+            rsx! {
+                div { class: "reveal-frame",
+                    img {
+                        class: "question-image zoomed",
+                        src: media_url(&image),
+                        alt: "",
+                        style: "transform: scale({scale:.3})",
+                    }
+                }
+            }
+        }
+        ImageReveal::Tiles => {
+            let gone = tiles_gone(left);
+            let order = tile_order(seed);
+            rsx! {
+                div { class: "reveal-frame",
+                    img { class: "question-image", src: media_url(&image), alt: "" }
+                    div { class: "tiles", aria_hidden: "true",
+                        for (i, rank) in order.into_iter().enumerate() {
+                            div { key: "{i}", class: if rank < gone { "tile gone" } else { "tile" } }
+                        }
+                    }
+                }
             }
         }
     }
+}
+
+/// How many tiles have dropped away with `left` of the clock to go: an even pace, all gone at
+/// the buzzer.
+fn tiles_gone(left: f64) -> usize {
+    #[allow(
+        clippy::cast_possible_truncation,
+        clippy::cast_sign_loss,
+        clippy::cast_precision_loss,
+        reason = "a handful of tiles, `left` within [0, 1]"
+    )]
+    let gone = ((1.0 - left) * TILES as f64).floor() as usize;
+    gone.min(TILES)
+}
+
+/// A picture that was being revealed, shown whole once the question closes (it may close before
+/// the reveal completes, when every team has answered).
+#[component]
+fn FullPicture(question: QuestionInfo) -> Element {
+    match (&question.image, question.image_reveal) {
+        (Some(image), ImageReveal::Zoom | ImageReveal::Tiles) => rsx! {
+            img { class: "question-image revealed-picture", src: media_url(image), alt: "" }
+        },
+        _ => rsx! {},
+    }
+}
+
+/// For each tile, its turn to drop away: a shuffle of `0..TILES` that depends on `seed` only.
+fn tile_order(seed: usize) -> Vec<usize> {
+    let mut order: Vec<usize> = (0..TILES).collect();
+    // A small linear congruential generator is plenty to scatter a few tiles.
+    let mut state = (seed as u64).wrapping_mul(6_364_136_223_846_793_005) ^ 0x9E37_79B9_7F4A_7C15;
+    for i in (1..TILES).rev() {
+        state = state
+            .wrapping_mul(6_364_136_223_846_793_005)
+            .wrapping_add(1_442_695_040_888_963_407);
+        let j = usize::try_from((state >> 33) % (i as u64 + 1)).unwrap_or(0);
+        order.swap(i, j);
+    }
+    order
 }
 
 /// A slide between questions: title, picture and text, each optional.
@@ -768,7 +842,7 @@ fn ReadySlide(question: QuestionInfo, teams: usize) -> Element {
         }
         div { class: "question-body",
             if let Some(image) = &question.image {
-                QuestionImage { image: image.clone(), blur: question.blur_image.then_some(1.0) }
+                QuestionImage { image: image.clone(), reveal: question.image_reveal, left: 1.0, seed: question.index }
             }
             div { class: "answered",
                 strong { Icon { kind: IconKind::Music } }
@@ -1041,6 +1115,7 @@ fn ClosedSlide(
             }
             div { class: "closed-layout",
                 div { class: "stack",
+                    FullPicture { question: question.clone() }
                     RevealBody { question: question.clone(), reveal }
                     FastestNote { fastest }
                 }
@@ -1049,6 +1124,7 @@ fn ClosedSlide(
         },
         _ => rsx! {
             QuestionHeader { question: question.clone() }
+            FullPicture { question: question.clone() }
             p { class: "waiting-note",
                 "Time's up! {answered} of {teams} teams answered."
                 br {}
@@ -1202,5 +1278,29 @@ fn PodiumSpot(rank: usize, row: Option<StandingRow>) -> Element {
                 div { class: "podium-block" }
             }
         },
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn tiles_drop_away_at_an_even_pace() {
+        assert_eq!(tiles_gone(1.0), 0);
+        assert_eq!(tiles_gone(0.5), TILES / 2);
+        assert_eq!(tiles_gone(0.0), TILES);
+        assert_eq!(tiles_gone(-0.5), TILES);
+    }
+
+    #[test]
+    fn tile_order_is_a_stable_shuffle_per_question() {
+        let order = tile_order(3);
+        let mut sorted = order.clone();
+        sorted.sort_unstable();
+        assert_eq!(sorted, (0..TILES).collect::<Vec<_>>());
+        assert_eq!(order, tile_order(3));
+        assert_ne!(order, tile_order(4));
+        assert_ne!(order, (0..TILES).collect::<Vec<_>>());
     }
 }

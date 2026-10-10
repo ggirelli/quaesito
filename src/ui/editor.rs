@@ -10,9 +10,9 @@ use super::{
 use crate::{
     api::{get_quiz, save_quiz, upload_question_audio, upload_question_image},
     model::{
-        AdvanceMode, Answer, MAX_ANSWERS, MAX_TIME_LIMIT_SECS, MIN_ANSWERS, MIN_TIME_LIMIT_SECS,
-        MultiScoring, PhoneDisplay, PointsMode, Question, QuestionKind, Quiz, QuizSettings,
-        RevealMode, ValidationIssue,
+        AdvanceMode, Answer, ImageReveal, MAX_ANSWERS, MAX_TIME_LIMIT_SECS, MIN_ANSWERS,
+        MIN_TIME_LIMIT_SECS, MultiScoring, PhoneDisplay, PointsMode, Question, QuestionKind, Quiz,
+        QuizSettings, RevealMode, ValidationIssue,
     },
 };
 
@@ -465,14 +465,27 @@ fn QuestionCard(
                         "Remove picture"
                     }
                     if !slide {
-                        label { class: "correct-toggle",
-                            title: "The picture starts blurred and sharpens as the clock runs",
-                            input {
-                                r#type: "checkbox",
-                                checked: question.blur_image,
-                                onchange: move |e| draft.edit_question(index, |q| q.blur_image = e.checked()),
+                        label { class: "field inline",
+                            title: "How the picture appears while the clock runs",
+                            span { "Reveal" }
+                            select {
+                                value: match question.image_reveal {
+                                    ImageReveal::Shown => "shown",
+                                    ImageReveal::Zoom => "zoom",
+                                    ImageReveal::Tiles => "tiles",
+                                },
+                                onchange: move |e| {
+                                    let reveal = match e.value().as_str() {
+                                        "zoom" => ImageReveal::Zoom,
+                                        "tiles" => ImageReveal::Tiles,
+                                        _ => ImageReveal::Shown,
+                                    };
+                                    draft.edit_question(index, |q| q.image_reveal = reveal);
+                                },
+                                option { value: "shown", "Show it all" }
+                                option { value: "zoom", "Zoom out from a close-up" }
+                                option { value: "tiles", "Uncover tile by tile" }
                             }
-                            span { "Reveal gradually" }
                         }
                     }
                 } else {

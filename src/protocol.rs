@@ -4,7 +4,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use crate::model::PhoneDisplay;
+use crate::model::{ImageReveal, PhoneDisplay};
 
 /// Longest team name, in characters.
 pub const MAX_NAME_CHARS: usize = 24;
@@ -70,8 +70,8 @@ pub struct QuestionInfo {
     pub total: usize,
     pub text: String,
     pub image: Option<String>,
-    /// The picture starts blurred and sharpens as the clock runs.
-    pub blur_image: bool,
+    /// How the picture is revealed while the clock runs.
+    pub image_reveal: ImageReveal,
     /// Media name of the soundtrack, if any.
     pub audio: Option<String>,
     pub input: InputKind,

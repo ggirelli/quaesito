@@ -100,6 +100,22 @@ pub fn countdown_ms(server_ms: u64, received_at: f64, now: f64, paused: bool) ->
     }
 }
 
+/// Clock time spent on a question at browser time `now`, from the server's count when the view
+/// arrived; frozen while paused.
+#[must_use]
+pub fn elapsed_now(server_ms: u64, received_at: f64, now: f64, paused: bool) -> f64 {
+    #[allow(
+        clippy::cast_precision_loss,
+        reason = "countdowns are far below 2^52 ms"
+    )]
+    let server_ms = server_ms as f64;
+    if paused {
+        server_ms
+    } else {
+        server_ms + (now - received_at).max(0.0)
+    }
+}
+
 /// A small "reconnecting" banner shown while the socket is down.
 #[component]
 pub fn ConnectionBanner(connected: bool) -> Element {
