@@ -15,8 +15,8 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 6 | Live sessions over WebSockets, join API | ✅ done |
 | 7 | UI: routing, home, admin dashboard | ✅ done |
 | 8 | UI: quiz editor | ✅ done |
-| 9 | UI: host slideshow and podium | ⏳ next |
-| 10 | UI: player (phone) view | ⬜ todo |
+| 9 | UI: host slideshow and podium | ✅ done |
+| 10 | UI: player (phone) view | ⏳ next |
 | 11 | README usage docs, end-to-end smoke test | ⬜ todo |
 
 ## Notes
@@ -36,6 +36,9 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 - `src/ui/`: router (`/`, `/admin`, `/admin/quiz/:id`), `ClientOnly` wrapper so `localStorage`-dependent pages hydrate cleanly, admin gate with token check, dashboard (create/duplicate/export/import/delete), editor with ~1 s autosave and live validation.
 - `GET /export/{id}?token=…` downloads a quiz as JSON.
 - `assets/main.css`: single offline stylesheet (no web fonts/CDNs, the LAN may have no internet).
+- `src/ui/live.rs`: `use_live` hook keeping a WebSocket alive with reconnection; countdowns run on the client from the last server snapshot.
+- `src/ui/host.rs`: `/host/:code` big screen: lobby with client-side QR code, timed questions, reveals with pick counts, standings, podium 3→2→1. Advance with the button, →, PageDown or N (presentation clickers).
+- Admin dashboard: start a quiz, list live games, reopen or end them.
 
 ## Known gaps
 

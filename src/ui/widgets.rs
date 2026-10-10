@@ -81,3 +81,24 @@ pub fn AnswerBadge(index: usize) -> Element {
 pub fn media_url(name: &str) -> String {
     format!("/media/{name}")
 }
+
+/// A team's avatar, or its initial when it has none.
+#[component]
+pub fn TeamAvatar(team: crate::protocol::TeamInfo, #[props(default)] class: String) -> Element {
+    let class = format!("avatar {class}");
+    if let Some(avatar) = &team.avatar {
+        return rsx! {
+            img { class, src: media_url(avatar), alt: "" }
+        };
+    }
+    let initial: String = team
+        .name
+        .chars()
+        .next()
+        .into_iter()
+        .flat_map(char::to_uppercase)
+        .collect();
+    rsx! {
+        span { class, aria_hidden: "true", "{initial}" }
+    }
+}

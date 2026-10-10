@@ -4,11 +4,13 @@ mod admin;
 pub mod client;
 mod editor;
 mod home;
+mod host;
+mod live;
 mod widgets;
 
 use dioxus::prelude::*;
 
-use self::{admin::Admin, editor::Editor, home::Home};
+use self::{admin::Admin, editor::Editor, home::Home, host::Host};
 
 const FAVICON: Asset = asset!("/assets/brand/icon.svg");
 const MAIN_CSS: Asset = asset!("/assets/main.css");
@@ -25,6 +27,8 @@ pub enum Route {
     Admin {},
     #[route("/admin/quiz/:id")]
     Editor { id: String },
+    #[route("/host/:code")]
+    Host { code: String },
     #[route("/:..segments")]
     NotFound { segments: Vec<String> },
 }

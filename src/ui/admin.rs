@@ -7,7 +7,8 @@ use super::{
     widgets::{Brand, ClientOnly, ErrorBox, Spinner, message},
 };
 use crate::api::{
-    admin_check, admin_login, create_quiz, delete_quiz, duplicate_quiz, import_quiz, list_quizzes,
+    admin_check, admin_login, create_quiz, delete_quiz, duplicate_quiz, end_session, import_quiz,
+    list_quizzes, list_sessions, start_session,
 };
 
 const TOKEN_KEY: &str = "quaesito.admin";
@@ -156,6 +157,7 @@ fn Dashboard() -> Element {
         AdminHeader {}
         main { class: "page wide stack",
             ErrorBox { error: error() }
+            LiveGames { on_error: move |e| error.set(Some(e)) }
             section { class: "card stack",
                 div { class: "row between",
                     h2 { "Quizzes" }
@@ -245,9 +247,24 @@ fn QuizActions(id: String, on_change: EventHandler<()>, on_error: EventHandler<S
             }
         }
     };
+    let start = {
+        let id = id.clone();
+        move |_| {
+            let id = id.clone();
+            async move {
+                match start_session(token.get(), id).await {
+                    Ok(code) => {
+                        navigator().push(Route::Host { code });
+                    }
+                    Err(err) => on_error.call(message(&err)),
+                }
+            }
+        }
+    };
     let mut confirming = use_signal(|| false);
     rsx! {
         div { class: "row actions",
+            button { class: "button primary", onclick: start, "▶ Start" }
             Link { class: "button", to: Route::Editor { id: id.clone() }, "Edit" }
             button { class: "button ghost", onclick: duplicate, "Duplicate" }
             a { class: "button ghost", href: export_href, download: true, "Export" }
@@ -256,6 +273,59 @@ fn QuizActions(id: String, on_change: EventHandler<()>, on_error: EventHandler<S
                 button { class: "button ghost", onclick: move |_| confirming.set(false), "Keep" }
             } else {
                 button { class: "button ghost", onclick: move |_| confirming.set(true), "Delete" }
+            }
+        }
+    }
+}
+
+/// Sessions currently running, with links to their host screens.
+#[component]
+fn LiveGames(on_error: EventHandler<String>) -> Element {
+    let token: AdminToken = use_context();
+    let mut sessions = use_resource(move || async move { list_sessions(token.get()).await });
+    let list = match sessions() {
+        Some(Ok(list)) if !list.is_empty() => list,
+        _ => return rsx! {},
+    };
+    rsx! {
+        section { class: "card stack",
+            h2 { "Live games" }
+            ul { class: "list",
+                for session in list {
+                    li { key: "{session.code}", class: "list-row",
+                        span { class: "code", "{session.code}" }
+                        div { class: "grow",
+                            div { class: "strong", "{session.title}" }
+                            div { class: "muted small",
+                                "{session.teams} teams"
+                                if session.finished { " · finished" }
+                            }
+                        }
+                        div { class: "row actions",
+                            Link {
+                                class: "button primary",
+                                to: Route::Host { code: session.code.clone() },
+                                "Open big screen"
+                            }
+                            button {
+                                class: "button ghost",
+                                onclick: {
+                                    let code = session.code.clone();
+                                    move |_| {
+                                        let code = code.clone();
+                                        async move {
+                                            match end_session(token.get(), code).await {
+                                                Ok(()) => sessions.restart(),
+                                                Err(err) => on_error.call(message(&err)),
+                                            }
+                                        }
+                                    }
+                                },
+                                "End"
+                            }
+                        }
+                    }
+                }
             }
         }
     }
