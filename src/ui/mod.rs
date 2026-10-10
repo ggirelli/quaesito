@@ -7,6 +7,7 @@ mod home;
 mod host;
 mod live;
 mod player;
+mod sfx;
 mod widgets;
 
 use dioxus::prelude::*;

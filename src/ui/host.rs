@@ -7,6 +7,7 @@ use super::{
     admin::{AdminGate, AdminToken},
     client,
     live::{ConnectionBanner, Live, countdown_ms, remaining_ms, use_clock, use_live},
+    sfx::{self, Cue, SFX_JS, Sfx},
     widgets::{ANSWER_SHAPES, Brand, ClientOnly, Icon, IconKind, Spinner, TeamAvatar, media_url},
 };
 use crate::{
@@ -23,6 +24,8 @@ use crate::{
 const LOBBY_ART_MAX_TEAMS: usize = 5;
 /// Blur of a gradually revealed picture when the clock starts, in CSS pixels.
 const MAX_BLUR_PX: f64 = 40.0;
+/// The clock ticks audibly through an open question's last seconds.
+const TICK_FROM_SECS: u64 = 5;
 /// Seconds the host's "+" button adds to an open question.
 const EXTRA_SECS: u32 = 10;
 /// How many teams the between-questions leaderboard shows.
@@ -31,6 +34,7 @@ const STANDINGS_SHOWN: usize = 6;
 #[component]
 pub fn Host(code: String) -> Element {
     rsx! {
+        document::Script { src: SFX_JS }
         ClientOnly {
             AdminGate {
                 HostScreen { code }
@@ -46,6 +50,9 @@ fn HostScreen(code: String) -> Element {
     let live = use_live(move || host_socket(code(), token.get(), WebSocketOptions::new()));
     use_context_provider(|| live);
     let now = use_clock(200);
+    let mut show_teams = use_signal(|| false);
+    let mut muted = use_signal(sfx::is_muted);
+    use_sound_effects(live.view, live.received_at, now);
 
     let send = move |command: HostCommand| async move {
         let _ = live.socket.send(command).await;
@@ -72,7 +79,6 @@ fn HostScreen(code: String) -> Element {
     let soundtrack = soundtrack(&view.phase, received_at, paused);
     let can_pause = !matches!(view.phase, HostPhase::Lobby | HostPhase::Ready { .. });
     let question_open = matches!(view.phase, HostPhase::Question { .. });
-    let mut show_teams = use_signal(|| false);
 
     rsx! {
         div {
@@ -102,6 +108,17 @@ fn HostScreen(code: String) -> Element {
                     span {
                         "Code "
                         span { class: "code", "{view.code}" }
+                    }
+                    button {
+                        class: "button ghost",
+                        title: if muted() { "Turn sound effects on" } else { "Mute sound effects" },
+                        aria_pressed: muted(),
+                        onclick: move |_| {
+                            let mute = !muted();
+                            sfx::set_muted(mute);
+                            muted.set(mute);
+                        },
+                        if muted() { "🔇" } else { "🔊" }
                     }
                     button {
                         class: "button ghost",
@@ -202,6 +219,59 @@ fn HostScreen(code: String) -> Element {
             ConnectionBanner { connected: (live.connected)() }
         }
     }
+}
+
+/// Plays sound effects as the quiz moves on, and ticks through an open question's last seconds
+/// (unless its soundtrack is playing).
+fn use_sound_effects(view: Signal<Option<HostView>>, received_at: Signal<f64>, now: Signal<f64>) {
+    let mut last_cue = use_signal(|| None::<Cue>);
+    use_effect(move || {
+        let view = view.read();
+        let Some(view) = view.as_ref() else {
+            return;
+        };
+        let cue = Cue::of(view);
+        let previous = last_cue.peek().clone();
+        if previous.as_ref() == Some(&cue) {
+            return;
+        }
+        if let Some(sound) = previous.and_then(|p| cue.sound_after(&p)) {
+            sfx::play(sound);
+        }
+        last_cue.set(Some(cue));
+    });
+    let mut last_tick = use_signal(|| None::<(usize, u64)>);
+    use_effect(move || {
+        let now = now();
+        let view = view.read();
+        let Some(HostView {
+            phase:
+                HostPhase::Question {
+                    question,
+                    remaining_ms: left,
+                    ..
+                },
+            paused: false,
+            ..
+        }) = view.as_ref()
+        else {
+            return;
+        };
+        if question.audio.is_some() {
+            return;
+        }
+        #[allow(
+            clippy::cast_possible_truncation,
+            clippy::cast_sign_loss,
+            reason = "a few seconds, never negative"
+        )]
+        let secs = (countdown_ms(*left, *received_at.peek(), now, false) / 1000.0).ceil() as u64;
+        let tick = (question.index, secs);
+        if (1..=TICK_FROM_SECS).contains(&secs) && *last_tick.peek() != Some(tick) {
+            last_tick.set(Some(tick));
+            sfx::play(if secs == 1 { Sfx::LastTick } else { Sfx::Tick });
+        }
+    });
 }
 
 /// The host's team manager: rename or remove teams.
