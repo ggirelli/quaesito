@@ -30,6 +30,9 @@ Then:
 4. Team leaders scan the code (phones must be on the same Wi-Fi), choose a name and optionally a picture.
 5. Press **Start the quiz**, then use the button, `→`, `PageDown` or `N` (presentation clickers work) to move on.
 
+**Teams** in the top bar of the big screen lets you rename a team or remove it (it loses its points and its phone goes
+back to the join page).
+
 A question can have a soundtrack (MP3, M4A/AAC, Ogg/Opus, WebM, FLAC or WAV, up to 40 MB). It then
 waits on the big screen with a full clock until the host presses **▶ Start the music**: the music
 plays from the big screen's speakers and the countdown starts with it. This also holds with

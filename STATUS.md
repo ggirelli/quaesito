@@ -25,6 +25,17 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 16 | Slides between questions: title, text and/or picture | ✅ done |
 | 17 | Editor: shuffle questions within each run between slides, with undo | ✅ done |
 | 18 | Points setting: speed-weighted or a flat 1000 per correct answer | ✅ done |
+| 19 | Host renames and removes teams | ✅ done |
+| 20 | Host pauses the clock, adds time and goes back | ⏳ planned |
+| 21 | Reveal details: fastest team, answer times, rank changes | ⏳ planned |
+| 22 | Joker: each team doubles one question's points | ⏳ planned |
+| 23 | Picture answers for multiple choice | ⏳ planned |
+| 24 | "Put in order" questions | ⏳ planned |
+| 25 | Pictures that sharpen while the clock runs | ⏳ planned |
+| 26 | Sound effects on the big screen | ⏳ planned |
+| 27 | End-of-game results page and download | ⏳ planned |
+| 28 | Live games survive a server restart | ⏳ planned |
+| 29 | Exports bundle media (zip); unused media is cleaned up | ⏳ planned |
 
 ## Notes
 
@@ -57,7 +68,6 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 - No automated browser tests in CI; the end-to-end flow was checked manually with headless Chrome.
 - Admin tokens and live games live in memory: a server restart logs the admin out and ends games.
 - Quiz JSON export does not include pictures or soundtracks.
-- A team cannot be renamed or removed once joined.
 
 ## Ideas for later
 

@@ -29,6 +29,10 @@ seconds. `Review` only exists when answers are revealed at the end. A question c
 out, when every connected team has answered, or when the host stops the clock. With automatic
 advance, a per-session timer task moves on after a short pause.
 
+The host can rename or remove a team at any time before the podium (`HostCommand::RenameTeam`,
+`RemoveTeam`). A removed team's answers go with it; its phone's socket closes, the stored ticket no
+longer checks out, and the phone returns to the join form with a notice.
+
 Screens hold a WebSocket each (`/api/ws/host`, `/api/ws/player`). On every change the server
 pushes a complete, role-specific view (`src/protocol.rs`), so clients never reconstruct state and
 a reconnecting phone simply receives the current view. Countdowns are sent as "milliseconds left"
