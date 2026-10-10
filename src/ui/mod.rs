@@ -33,8 +33,9 @@ pub const LOBBY_ART: Asset = asset!("/assets/brand/lobby.webp");
 pub enum Route {
     #[route("/")]
     Home {},
-    #[route("/join")]
-    JoinBlank {},
+    // `?code=` is where the join form lands when submitted before the app has loaded.
+    #[route("/join?:code")]
+    JoinBlank { code: String },
     #[route("/join/:code")]
     Join { code: String },
     #[route("/admin")]

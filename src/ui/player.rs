@@ -18,13 +18,24 @@ use crate::{
     },
 };
 
+/// The digits of a typed game code (spaces and stray characters are dropped).
+fn digits(text: &str) -> String {
+    text.chars().filter(char::is_ascii_digit).collect()
+}
+
 fn ticket_key(code: &str) -> String {
     format!("quaesito.ticket.{code}")
 }
 
-/// `/join`: asks for a game code.
+/// `/join`: asks for a game code, or joins the game in `?code=`.
 #[component]
-pub fn JoinBlank() -> Element {
+pub fn JoinBlank(code: String) -> Element {
+    let code = digits(&code);
+    if !code.is_empty() {
+        return rsx! {
+            Join { code }
+        };
+    }
     rsx! {
         main { class: "page center narrow stack",
             Brand { large: true }
@@ -34,16 +45,24 @@ pub fn JoinBlank() -> Element {
 }
 
 /// A form to enter a game code.
+///
+/// It also works as a plain HTML form (`GET /join?code=…`), because phones on a slow network can
+/// show it, and get it submitted, before the app has loaded. For the same reason the field is not
+/// bound to app state: loading the app would otherwise clear what was already typed.
 #[component]
 pub fn JoinCodeForm() -> Element {
-    let mut code = use_signal(String::new);
     let nav = navigator();
     rsx! {
         form {
             class: "card stack",
+            action: "/join",
+            method: "get",
             onsubmit: move |evt: FormEvent| {
                 evt.prevent_default();
-                let code = code().trim().to_owned();
+                let code = match evt.get_first("code") {
+                    Some(FormValue::Text(text)) => digits(&text),
+                    _ => String::new(),
+                };
                 if !code.is_empty() {
                     nav.push(Route::Join { code });
                 }
@@ -51,13 +70,13 @@ pub fn JoinCodeForm() -> Element {
             label { class: "field",
                 span { "Game code" }
                 input {
+                    name: "code",
                     class: "code-input",
                     inputmode: "numeric",
+                    pattern: "[0-9 ]*",
                     autocomplete: "off",
-                    maxlength: 6,
+                    maxlength: 7,
                     placeholder: "000000",
-                    value: code,
-                    oninput: move |e| code.set(e.value().chars().filter(char::is_ascii_digit).collect()),
                 }
             }
             button { r#type: "submit", class: "button primary big", "Join" }
