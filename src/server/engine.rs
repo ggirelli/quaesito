@@ -682,6 +682,8 @@ impl Game {
             } => {
                 let question = &self.quiz.questions[index];
                 let input = input_kind(question);
+                let full_text =
+                    self.quiz.settings.phone_display == crate::model::PhoneDisplay::FullText;
                 PlayerPhase::Question {
                     index: number(index),
                     total,
@@ -691,9 +693,12 @@ impl Game {
                     } else {
                         0
                     },
-                    text: (self.quiz.settings.phone_display
-                        == crate::model::PhoneDisplay::FullText)
-                        .then(|| (question.text.clone(), question_answers(question))),
+                    text: full_text.then(|| (question.text.clone(), question_answers(question))),
+                    answer_images: if full_text {
+                        answer_images(question)
+                    } else {
+                        Vec::new()
+                    },
                     multi: question.is_multi(),
                     remaining_ms: millis(deadline.saturating_duration_since(self.clock(now))),
                     paused: self.paused_at.is_some(),
@@ -814,6 +819,7 @@ impl Game {
             audio: question.audio.clone(),
             input: input_kind(question),
             answers: question_answers(question),
+            answer_images: answer_images(question),
             multi: question.is_multi(),
             time_limit_ms: u64::from(question.time_limit_secs(&self.quiz.settings)) * 1000,
         }
@@ -1170,6 +1176,14 @@ fn input_kind(question: &Question) -> InputKind {
     }
 }
 
+/// Answer pictures of a multiple-choice question, parallel to [`question_answers`].
+fn answer_images(question: &Question) -> Vec<Option<String>> {
+    match question.kind {
+        QuestionKind::Choice => question.answers.iter().map(|a| a.image.clone()).collect(),
+        _ => Vec::new(),
+    }
+}
+
 /// Answer texts shown for a question: the options of a multiple-choice question, else none.
 fn question_answers(question: &Question) -> Vec<String> {
     match question.kind {
@@ -1198,10 +1212,12 @@ mod tests {
                 Answer {
                     text: "right".to_owned(),
                     correct: true,
+                    image: None,
                 },
                 Answer {
                     text: "wrong".to_owned(),
                     correct: false,
+                    image: None,
                 },
             ],
         };

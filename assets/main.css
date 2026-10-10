@@ -533,6 +533,13 @@ input.short {
   border: 1px solid transparent;
 }
 
+.answer-thumb {
+  height: 2.6rem;
+  width: 3.4rem;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
 .answer-edit.correct {
   border-color: var(--ok);
   background: color-mix(in srgb, var(--ok) 8%, transparent);
@@ -886,6 +893,14 @@ input.short {
 
 .answer-tile .text {
   flex: 1;
+}
+
+.tile-image {
+  height: 15vh;
+  max-width: 45%;
+  object-fit: contain;
+  border-radius: 10px;
+  background: rgb(0 0 0 / 0.15);
 }
 
 .answer-tile .picks {
@@ -1469,6 +1484,13 @@ button.joker {
   color: #fff;
   cursor: pointer;
   transition: transform 0.08s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+}
+
+.phone-answer-image {
+  height: 3.2rem;
+  max-width: 40%;
+  object-fit: contain;
+  border-radius: 8px;
 }
 
 .phone-answers.with-text .phone-answer {

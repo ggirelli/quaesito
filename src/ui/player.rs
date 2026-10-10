@@ -5,7 +5,9 @@ use dioxus::{fullstack::WebSocketOptions, prelude::*};
 use super::{
     Route, client,
     live::{ConnectionBanner, Live, countdown_ms, use_clock, use_live},
-    widgets::{ANSWER_SHAPES, Brand, ClientOnly, ErrorBox, Spinner, TeamAvatar, message},
+    widgets::{
+        ANSWER_SHAPES, Brand, ClientOnly, ErrorBox, Spinner, TeamAvatar, media_url, message,
+    },
 };
 use crate::{
     api::{check_ticket, game_info, join_game, player_socket, upload_avatar},
@@ -284,6 +286,7 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
             input: InputKind::Choice,
             answer_count,
             text,
+            answer_images,
             multi,
             remaining_ms: left,
             paused,
@@ -297,6 +300,7 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
                 total,
                 answer_count,
                 text,
+                images: answer_images,
                 multi,
                 clock: Clock { left_ms: left, limit_ms: time_limit_ms, paused, received_at: live_received },
                 submitted: match submitted {
@@ -446,6 +450,7 @@ fn AnswerPad(
     total: usize,
     answer_count: usize,
     text: Option<(String, Vec<String>)>,
+    images: Vec<Option<String>>,
     multi: bool,
     clock: Clock,
     submitted: Option<Vec<usize>>,
@@ -507,8 +512,12 @@ fn AnswerPad(
                         } else if locked {
                             class.push_str(" faded");
                         }
-                        let label = labels.as_ref().and_then(|l| l.get(i).cloned());
+                        let label = labels
+                            .as_ref()
+                            .and_then(|l| l.get(i).cloned())
+                            .filter(|l| !l.is_empty());
                         let aria_label = label.clone().unwrap_or_else(|| format!("Answer {}", i + 1));
+                        let image = images.get(i).cloned().flatten();
                         rsx! {
                             button {
                                 key: "{i}",
@@ -530,6 +539,9 @@ fn AnswerPad(
                                     }
                                 },
                                 span { class: "shape", "{shape}" }
+                                if let Some(image) = image {
+                                    img { class: "phone-answer-image", src: media_url(&image), alt: "" }
+                                }
                                 if let Some(label) = label {
                                     span { "{label}" }
                                 }

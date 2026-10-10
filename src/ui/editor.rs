@@ -669,12 +669,48 @@ fn NumberAnswer(question: usize, answer: Option<f64>) -> Element {
 #[component]
 fn AnswerRow(question: usize, index: usize, answer: Answer, removable: bool) -> Element {
     let draft: Draft = use_context();
+    let token: AdminToken = use_context();
+    let mut uploading = use_signal(|| false);
+    let mut upload_error = use_signal(|| None::<String>);
+    let upload = move |evt: FormEvent| async move {
+        let Some(file) = evt.files().into_iter().next() else {
+            return;
+        };
+        uploading.set(true);
+        upload_error.set(None);
+        match upload_question_image(token.get(), file.into()).await {
+            Ok(name) => draft.edit_question(question, |q| q.answers[index].image = Some(name)),
+            Err(err) => upload_error.set(Some(message(&err))),
+        }
+        uploading.set(false);
+    };
     rsx! {
         li { class: if answer.correct { "answer-edit correct" } else { "answer-edit" },
             AnswerBadge { index }
+            if let Some(image) = &answer.image {
+                img { class: "answer-thumb", src: media_url(image), alt: "Answer picture" }
+                button {
+                    class: "button ghost icon",
+                    title: "Remove picture",
+                    onclick: move |_| draft.edit_question(question, |q| q.answers[index].image = None),
+                    "✕🖼"
+                }
+            } else {
+                label {
+                    class: "button ghost icon",
+                    title: upload_error().unwrap_or_else(|| "Add a picture to this answer".to_owned()),
+                    if uploading() { "…" } else if upload_error().is_some() { "⚠" } else { "🖼" }
+                    input {
+                        r#type: "file",
+                        accept: "image/*",
+                        class: "visually-hidden",
+                        onchange: upload,
+                    }
+                }
+            }
             input {
                 class: "grow",
-                placeholder: "Answer {index + 1}",
+                placeholder: if answer.image.is_some() { "Caption (optional)" } else { "Answer {index + 1}" },
                 value: "{answer.text}",
                 oninput: move |e| draft.edit_question(question, |q| q.answers[index].text = e.value()),
             }

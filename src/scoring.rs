@@ -128,6 +128,7 @@ mod tests {
                 .map(|&correct| Answer {
                     text: "A".to_owned(),
                     correct,
+                    image: None,
                 })
                 .collect(),
             ..Question::default()

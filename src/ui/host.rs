@@ -581,7 +581,11 @@ fn Timer(fraction: f64, seconds: f64) -> Element {
 }
 
 #[component]
-fn AnswerGrid(answers: Vec<String>, reveal: Option<(Vec<usize>, Vec<u32>)>) -> Element {
+fn AnswerGrid(
+    answers: Vec<String>,
+    images: Vec<Option<String>>,
+    reveal: Option<(Vec<usize>, Vec<u32>)>,
+) -> Element {
     rsx! {
         div { class: "answer-grid",
             for (i, text) in answers.iter().enumerate() {
@@ -591,9 +595,16 @@ fn AnswerGrid(answers: Vec<String>, reveal: Option<(Vec<usize>, Vec<u32>)>) -> E
                         class.push_str(if correct.contains(&i) { " right" } else { " dim" });
                     }
                     let picks = reveal.as_ref().and_then(|(_, picks)| picks.get(i).copied());
+                    let image = images.get(i).cloned().flatten();
+                    if image.is_some() {
+                        class.push_str(" has-image");
+                    }
                     rsx! {
                         div { key: "{i}", class,
                             span { class: "shape", "{ANSWER_SHAPES[i % ANSWER_SHAPES.len()]}" }
+                            if let Some(image) = image {
+                                img { class: "tile-image", src: media_url(&image), alt: "{text}" }
+                            }
                             span { class: "text", "{text}" }
                             if let Some(picks) = picks {
                                 span { class: "picks", "{picks} 👥" }
@@ -612,7 +623,7 @@ fn AnswersOrPrompt(question: QuestionInfo) -> Element {
     let prompt = match question.input {
         InputKind::Choice => {
             return rsx! {
-                AnswerGrid { answers: question.answers.clone(), reveal: None }
+                AnswerGrid { answers: question.answers.clone(), images: question.answer_images.clone(), reveal: None }
             };
         }
         InputKind::Text => "✍️ Type your answer on your phone",
@@ -628,7 +639,11 @@ fn AnswersOrPrompt(question: QuestionInfo) -> Element {
 fn RevealBody(question: QuestionInfo, reveal: Reveal) -> Element {
     match reveal {
         Reveal::Choice { correct, picks } => rsx! {
-            AnswerGrid { answers: question.answers.clone(), reveal: Some((correct, picks)) }
+            AnswerGrid {
+                answers: question.answers.clone(),
+                images: question.answer_images.clone(),
+                reveal: Some((correct, picks)),
+            }
         },
         Reveal::Text { accepted, groups } => rsx! {
             TextReveal { question: question.index, accepted, groups }

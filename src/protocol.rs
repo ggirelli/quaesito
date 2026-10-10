@@ -71,6 +71,8 @@ pub struct QuestionInfo {
     pub input: InputKind,
     /// Answer texts of a multiple-choice question (empty for other kinds).
     pub answers: Vec<String>,
+    /// Answer pictures, parallel to `answers`.
+    pub answer_images: Vec<Option<String>>,
     /// More than one answer is correct.
     pub multi: bool,
     pub time_limit_ms: u64,
@@ -299,6 +301,8 @@ pub enum PlayerPhase {
         answer_count: usize,
         /// Question and answer texts, when the phone display shows full text.
         text: Option<(String, Vec<String>)>,
+        /// Answer pictures, parallel to the answer texts, when the phone display shows full text.
+        answer_images: Vec<Option<String>>,
         multi: bool,
         remaining_ms: u64,
         /// The host paused the clock.

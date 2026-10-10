@@ -319,8 +319,12 @@ impl Question {
                         "A question needs between {MIN_ANSWERS} and {MAX_ANSWERS} answers."
                     ));
                 }
-                if self.answers.iter().any(|a| a.text.trim().is_empty()) {
-                    problems.push("Every answer needs a text.".to_owned());
+                if self
+                    .answers
+                    .iter()
+                    .any(|a| a.text.trim().is_empty() && a.image.is_none())
+                {
+                    problems.push("Every answer needs a text or a picture.".to_owned());
                 }
                 if !self.answers.iter().any(|a| a.correct) {
                     problems.push("At least one answer must be marked correct.".to_owned());
@@ -352,9 +356,13 @@ impl Question {
 /// One answer option.
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Answer {
+    /// May be empty when the answer has a picture.
     pub text: String,
     #[serde(default)]
     pub correct: bool,
+    /// Name of an uploaded picture, if any.
+    #[serde(default)]
+    pub image: Option<String>,
 }
 
 /// A problem found by [`Quiz::validate`].
@@ -405,6 +413,7 @@ mod tests {
         Answer {
             text: text.to_owned(),
             correct,
+            image: None,
         }
     }
 
@@ -510,6 +519,15 @@ mod tests {
 
         quiz.questions = vec![named("a"), slide("Round 2"), named("b")];
         assert!(!quiz.can_shuffle());
+    }
+
+    #[test]
+    fn answers_need_a_text_or_a_picture() {
+        let mut q = question();
+        q.answers[0].text = " ".to_owned();
+        assert_eq!(q.problems(), vec!["Every answer needs a text or a picture."]);
+        q.answers[0].image = Some("flag.jpg".to_owned());
+        assert_eq!(q.problems(), Vec::<String>::new());
     }
 
     #[test]
