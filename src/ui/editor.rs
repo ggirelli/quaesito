@@ -105,9 +105,27 @@ fn EditorForm(quiz: Quiz) -> Element {
     };
     use_context_provider(|| draft);
     let save_state = use_autosave(token, draft, issues);
+    // The order before the last shuffle, and the revision the shuffle produced: undo is offered
+    // until anything else changes.
+    let mut before_shuffle = use_signal(|| None::<(u64, Vec<Question>)>);
+    let shuffle = move |_| {
+        let previous = draft.quiz.peek().questions.clone();
+        draft.edit(|q| q.shuffle_questions(client::random_below));
+        before_shuffle.set(Some((*draft.revision.peek(), previous)));
+    };
+    let undo_shuffle = move |_| {
+        if let Some((_, previous)) = before_shuffle.take() {
+            draft.edit(|q| q.questions = previous);
+        }
+    };
+    let can_undo = before_shuffle
+        .read()
+        .as_ref()
+        .is_some_and(|(revision, _)| *revision == (draft.revision)());
 
     let quiz = draft.quiz.read();
     let question_count = quiz.questions.len();
+    let can_shuffle = quiz.can_shuffle();
     rsx! {
         AdminHeader { back: true,
             span { class: "save-state",
@@ -148,6 +166,17 @@ fn EditorForm(quiz: Quiz) -> Element {
                     title: "A title, text or picture shown between questions",
                     onclick: move |_| draft.edit(|q| q.questions.push(Question::slide())),
                     "＋ Add slide"
+                }
+                span { class: "grow" }
+                if can_undo {
+                    button { class: "button ghost", onclick: undo_shuffle, "↶ Undo shuffle" }
+                }
+                button {
+                    class: "button ghost shuffle",
+                    disabled: !can_shuffle,
+                    title: "Shuffle the order of the questions. Slides stay in place and questions never move past a slide.",
+                    onclick: shuffle,
+                    "🔀 Shuffle questions"
                 }
             }
         }

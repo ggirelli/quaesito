@@ -98,6 +98,25 @@ impl Quiz {
         format!("{sort} {}", self.ordinal(index) + 1)
     }
 
+    /// Whether some questions could change places with [`Quiz::shuffle_questions`].
+    #[must_use]
+    pub fn can_shuffle(&self) -> bool {
+        self.questions
+            .windows(2)
+            .any(|pair| !pair[0].is_slide() && !pair[1].is_slide())
+    }
+
+    /// Shuffles each run of consecutive questions in place; slides stay where they are and
+    /// questions never move past a slide. `random_below(n)` must return a number in `0..n`.
+    pub fn shuffle_questions(&mut self, mut random_below: impl FnMut(usize) -> usize) {
+        for run in self.questions.split_mut(Question::is_slide) {
+            // Fisher–Yates.
+            for i in (1..run.len()).rev() {
+                run.swap(i, random_below(i + 1).min(i));
+            }
+        }
+    }
+
     /// Lightweight description used in quiz listings.
     #[must_use]
     pub fn summary(&self) -> QuizSummary {
@@ -436,6 +455,46 @@ mod tests {
         // Slides alone do not make a quiz.
         quiz.questions.retain(Question::is_slide);
         assert_eq!(quiz.validate().len(), 1);
+    }
+
+    #[test]
+    fn shuffling_keeps_questions_between_their_slides() {
+        let named = |text: &str| Question {
+            text: text.to_owned(),
+            ..question()
+        };
+        let slide = |title: &str| Question {
+            kind: QuestionKind::Slide {
+                title: title.to_owned(),
+            },
+            ..Question::default()
+        };
+        let mut quiz = quiz();
+        quiz.questions = vec![
+            named("a"),
+            named("b"),
+            named("c"),
+            slide("Round 2"),
+            named("d"),
+            slide("Round 3"),
+            named("e"),
+            named("f"),
+        ];
+        assert!(quiz.can_shuffle());
+        // Always picking 0 rotates each run.
+        quiz.shuffle_questions(|_| 0);
+        let order: Vec<&str> = quiz
+            .questions
+            .iter()
+            .map(|q| match &q.kind {
+                QuestionKind::Slide { title } => title.as_str(),
+                _ => q.text.as_str(),
+            })
+            .collect();
+        assert_eq!(order, ["b", "c", "a", "Round 2", "d", "Round 3", "f", "e"]);
+
+        quiz.questions = vec![named("a"), slide("Round 2"), named("b")];
+        assert!(!quiz.can_shuffle());
     }
 
     #[test]

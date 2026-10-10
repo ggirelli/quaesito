@@ -52,6 +52,27 @@ pub fn now_ms() -> f64 {
     }
 }
 
+/// A random number in `0..n` (always 0 on the server).
+#[must_use]
+pub fn random_below(n: usize) -> usize {
+    #[cfg(target_arch = "wasm32")]
+    {
+        #[allow(
+            clippy::cast_possible_truncation,
+            clippy::cast_sign_loss,
+            clippy::cast_precision_loss,
+            reason = "small counts; Math.random() is in [0, 1)"
+        )]
+        let pick = (js_sys::Math::random() * n as f64) as usize;
+        pick.min(n.saturating_sub(1))
+    }
+    #[cfg(not(target_arch = "wasm32"))]
+    {
+        let _ = n;
+        0
+    }
+}
+
 /// Waits for `ms` milliseconds (never resolves on the server).
 pub async fn sleep_ms(ms: u32) {
     #[cfg(target_arch = "wasm32")]
