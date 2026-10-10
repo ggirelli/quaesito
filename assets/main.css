@@ -243,6 +243,31 @@ textarea {
   text-decoration: none;
 }
 
+.icon-svg {
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+}
+
+.corner-link {
+  position: fixed;
+  top: max(0.75rem, env(safe-area-inset-top));
+  right: max(0.75rem, env(safe-area-inset-right));
+  display: inline-flex;
+  padding: 0.55rem;
+  border-radius: 50%;
+  color: var(--muted);
+  font-size: 1.1rem;
+  opacity: 0.7;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.corner-link:hover,
+.corner-link:focus-visible {
+  color: var(--fg);
+  opacity: 1;
+}
+
 /* ---------- Controls ---------- */
 
 .button {
