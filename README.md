@@ -70,6 +70,9 @@ Any question can be worth more than the others: **Points ×2** (up to ×5) multi
   punctuation and spacing (but not typos). On the reveal, identical answers are grouped and the host can judge each
   group: ✓ full, ½ half or ✗ no points, plus a bonus or malus in steps of 100. A malus can take a team below zero.
 - **Number**: teams enter a number; the closest guesses (ties included) earn 1000 points.
+- **Several answers**: teams type a few answers at once, e.g. the title and the artist of a song, or the titles of five
+  posters (each part can have its own picture). Each part is matched and judged like a typed answer, and the question's
+  points are shared evenly between the parts; make it worth more with the points multiplier.
 - **Order**: teams put 2–6 items in order (oldest first, biggest first…) by tapping them on their phones. Each item in
   its right place earns its share of the points.
 

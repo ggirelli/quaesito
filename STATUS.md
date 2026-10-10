@@ -42,7 +42,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 33 | Editor: move a question or slide to the top or bottom | ✅ done |
 | 34 | Points multiplier per question (×1–×5) | ✅ done |
 | 35 | True/false questions | ✅ done |
-| 36 | Questions with several typed parts (title + artist, five posters…), judged per part | ⏳ planned |
+| 36 | Questions with several typed parts (title + artist, five posters…), judged per part | ✅ done |
 | 37 | Pin on a picture (a map, a floor plan…), scored by distance | ⏳ planned |
 | 38 | Icon buttons for edit, duplicate, export, import and delete (labels on hover) | ✅ done |
 

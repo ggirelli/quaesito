@@ -82,6 +82,7 @@ numbered apart from questions and score nothing. A quiz needs at least one real 
 | `Text { accepted }` | a short typed text (≤ 60 characters) | equal to an accepted answer once normalised |
 | `Number { answer }` | a number | the closest guess (ties included) |
 | `TrueFalse { answer }` | two buttons, True and False (labelled on phones) | `answer` |
+| `Parts { parts }` | one short text per part (label, accepted answers, optional picture) | each part like `Text`; points split evenly |
 | `Order { items }` | the items, shown shuffled, tapped from first to last | `items` as listed |
 | `Slide { title }` | nothing | none: a title, text and/or picture on the big screen |
 
@@ -118,6 +119,10 @@ Typed answers: each group of identical (normalised) answers gets a `Judgement`, 
 end-of-quiz review. Scores are therefore signed.
 
 Closest number: the closest guesses earn 1000 points each, regardless of speed.
+
+Several answers: each part is matched, grouped and judged like a typed answer; judgement keys are
+the part's index and the normalised text (`2|the beatles`). Each part is worth an even share of
+the question's points, and the question is fully correct only when every part is.
 
 Order: each game shuffles an order question's items once (never leaving them as listed). Phones
 answer with indexes into the shuffled list; the speed score is multiplied by the share of items
