@@ -19,10 +19,10 @@ use self::{
     player::{Join, JoinBlank},
 };
 
-const FAVICON: Asset = asset!("/assets/brand/icon.svg");
+const FAVICON: Asset = asset!("/assets/brand/icon-192.png");
 const MAIN_CSS: Asset = asset!("/assets/main.css");
 /// The logo mark, used in page headers.
-pub const ICON: Asset = asset!("/assets/brand/icon.svg");
+pub const ICON: Asset = asset!("/assets/brand/icon-192.png");
 /// Illustration on the big screen while teams join.
 pub const LOBBY_ART: Asset = asset!("/assets/brand/lobby.webp");
 
@@ -51,7 +51,7 @@ pub enum Route {
 pub fn App() -> Element {
     rsx! {
         document::Title { "Quaesito" }
-        document::Link { rel: "icon", href: FAVICON, r#type: "image/svg+xml" }
+        document::Link { rel: "icon", href: FAVICON, r#type: "image/png" }
         document::Meta { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" }
         document::Meta { name: "theme-color", content: "#14121f" }
         document::Stylesheet { href: MAIN_CSS }

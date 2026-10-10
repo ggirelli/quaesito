@@ -12,7 +12,9 @@ _Nothing outstanding right now._
 
 ## Done
 
-- `assets/brand/icon.{png,svg}`, `assets/brand/logo-{dark,light}.{png,svg}`: logo and icon.
+- `assets/brand/icon.png`: the app icon (1254×1254 source). The app uses `icon-192.png`, a cropped
+  192×192 copy, as favicon and logo mark.
+- `assets/brand/logo-{dark,light}.{png,svg}`: logo with word mark (README header).
 - `assets/brand/lobby.webp`: lobby illustration on the big screen, shown until five teams have joined.
   Compressed from the 1448×1086 PNG original (kept locally as `lobby.png`, git-ignored).
 - `assets/brand/social-preview.jpg`: GitHub social preview, 1280×640. Not used by the app: upload it
