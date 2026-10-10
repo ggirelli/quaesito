@@ -30,6 +30,8 @@ Then:
 2. Create a quiz, or import one. The editor saves as you type and tells you when the quiz is ready to play.
    **Export** downloads a quiz as a `.zip` with its pictures and soundtracks, ready to import on another machine (plain
    `.json` exports from older versions import too).
+   **🧪 Test** (on the dashboard or in the editor) opens the big screen and two phones side by side, already joined,
+   to try a quiz on your own; add or remove phones, restart or end the test from its toolbar.
 3. Press **▶ Start**. The big screen shows a QR code and a 6-digit code.
 4. Team leaders scan the code (phones must be on the same Wi-Fi), choose a name and optionally a picture.
 5. Press **Start the quiz**, then use the button, `→`, `PageDown` or `N` (presentation clickers work) to move on.

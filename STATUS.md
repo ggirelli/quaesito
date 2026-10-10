@@ -38,6 +38,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 29 | Exports bundle media (zip); unused media is cleaned up | ✅ done |
 | 30 | Fix: joining by typed code before the app has loaded (plain-form fallback to `/join?code=`) | ✅ done |
 | 31 | Revealed pictures stay fully visible for a set number of seconds before the buzzer | ✅ done |
+| 32 | Admin test mode: big screen and auto-joined phones side by side | ✅ done |
 
 ## Notes
 
@@ -69,6 +70,8 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 - No automated browser tests in CI; the end-to-end flow was checked manually with headless Chrome.
 
 ## Ideas for later
+
+- Test mode: start the test at a chosen question.
 
 - More question types: true/false shortcut, pin on a map.
 - Team captains passing the phone: several players per team answering in turn.

@@ -50,6 +50,13 @@ Once the podium is complete the host can open the results (`game_results`): the 
 each team's points per question (`None` where it did not answer) and where it played its joker. The
 browser turns them into a CSV download (`GameResults::to_csv`) or prints them.
 
+The admin's test page (`/admin/test/<code>`) runs a test game: a normal session marked `test`,
+never saved to disk and labelled in Live games. It starts with two teams ("Phone 1", "Phone 2")
+joined by the server. The page shows the real `/host/<code>` page and one `/join/<code>?ticket=…`
+page per phone in frames, so each lays itself out at its own screen size. A `ticket` in the URL
+makes the phone play as that team without storing it, since frames on one page share storage.
+Restart ends the test game and starts a fresh one; the editor saves before starting a test.
+
 Screens hold a WebSocket each (`/api/ws/host`, `/api/ws/player`). On every change the server
 pushes a complete, role-specific view (`src/protocol.rs`), so clients never reconstruct state and
 a reconnecting phone simply receives the current view. Countdowns are sent as "milliseconds left"
