@@ -11,7 +11,8 @@ use crate::{
     api::{get_quiz, save_quiz, upload_question_audio, upload_question_image},
     model::{
         AdvanceMode, Answer, MAX_ANSWERS, MAX_TIME_LIMIT_SECS, MIN_ANSWERS, MIN_TIME_LIMIT_SECS,
-        MultiScoring, PhoneDisplay, Question, Quiz, QuizSettings, RevealMode, ValidationIssue,
+        MultiScoring, PhoneDisplay, Question, QuestionKind, Quiz, QuizSettings, RevealMode,
+        ValidationIssue,
     },
 };
 
@@ -70,6 +71,14 @@ impl Draft {
         self.edit(|quiz| {
             if let Some(question) = quiz.questions.get_mut(index) {
                 f(question);
+            }
+        });
+    }
+
+    fn edit_accepted(self, index: usize, f: impl FnOnce(&mut Vec<String>)) {
+        self.edit_question(index, |q| {
+            if let QuestionKind::Text { accepted } = &mut q.kind {
+                f(accepted);
             }
         });
     }
@@ -430,34 +439,149 @@ fn QuestionCard(index: usize, count: usize, question: Question, default_limit: u
                 }
             }
             ErrorBox { error: upload_error() }
-            ul { class: "answers-edit",
-                for (i, answer) in question.answers.iter().enumerate() {
-                    AnswerRow {
-                        key: "{i}",
-                        question: index,
-                        index: i,
-                        answer: answer.clone(),
-                        removable: answer_count > MIN_ANSWERS,
+            Choice {
+                label: "Answer type",
+                options: vec![
+                    ("Choices", "Teams pick from coloured answers."),
+                    ("Typed answer", "Teams type a short answer. You can amend the verdict on each answer when they are revealed."),
+                    ("Number", "Teams guess a number; the closest guess wins 1000 points."),
+                ],
+                selected: match question.kind {
+                    QuestionKind::Choice => 0,
+                    QuestionKind::Text { .. } => 1,
+                    QuestionKind::Number { .. } => 2,
+                },
+                on_select: move |i| draft.edit_question(index, |q| set_kind(q, i)),
+            }
+            match &question.kind {
+                QuestionKind::Choice => rsx! {
+                    ul { class: "answers-edit",
+                        for (i, answer) in question.answers.iter().enumerate() {
+                            AnswerRow {
+                                key: "{i}",
+                                question: index,
+                                index: i,
+                                answer: answer.clone(),
+                                removable: answer_count > MIN_ANSWERS,
+                            }
+                        }
+                    }
+                    div { class: "row between",
+                        if answer_count < MAX_ANSWERS {
+                            button {
+                                class: "button ghost",
+                                onclick: move |_| draft.edit_question(index, |q| q.answers.push(Answer::default())),
+                                "＋ Add answer"
+                            }
+                        } else {
+                            span {}
+                        }
+                        span { class: "muted small",
+                            if multi {
+                                "Several correct answers: teams may pick more than one."
+                            } else {
+                                "Tick the correct answer. Tick more than one to allow several."
+                            }
+                        }
+                    }
+                },
+                QuestionKind::Text { accepted } => rsx! {
+                    AcceptedAnswers { question: index, accepted: accepted.clone() }
+                },
+                QuestionKind::Number { answer } => rsx! {
+                    NumberAnswer { question: index, answer: *answer }
+                },
+            }
+        }
+    }
+}
+
+/// Switches a question to the answer type picked in the editor (0 choices, 1 text, 2 number).
+fn set_kind(question: &mut Question, choice: usize) {
+    question.kind = match (choice, &question.kind) {
+        (1, QuestionKind::Text { .. }) | (2, QuestionKind::Number { .. }) => return,
+        (1, _) => QuestionKind::Text {
+            accepted: vec![String::new()],
+        },
+        (2, _) => QuestionKind::Number { answer: None },
+        _ => {
+            if question.answers.len() < MIN_ANSWERS {
+                question.answers.resize_with(MIN_ANSWERS, Answer::default);
+            }
+            QuestionKind::Choice
+        }
+    };
+}
+
+/// The accepted answers of a typed-text question.
+#[component]
+fn AcceptedAnswers(question: usize, accepted: Vec<String>) -> Element {
+    let draft: Draft = use_context();
+    let count = accepted.len();
+    rsx! {
+        ul { class: "answers-edit",
+            for (i, text) in accepted.into_iter().enumerate() {
+                li { key: "{i}", class: "answer-edit",
+                    input {
+                        class: "grow",
+                        placeholder: if i == 0 { "Accepted answer" } else { "Another accepted spelling" },
+                        value: "{text}",
+                        oninput: move |e| {
+                            let value = e.value();
+                            draft.edit_accepted(question, |a| a[i] = value);
+                        },
+                    }
+                    button {
+                        class: "button ghost icon",
+                        title: "Remove",
+                        disabled: count <= 1,
+                        onclick: move |_| draft.edit_accepted(question, |a| {
+                            a.remove(i);
+                        }),
+                        "✕"
                     }
                 }
             }
-            div { class: "row between",
-                if answer_count < MAX_ANSWERS {
-                    button {
-                        class: "button ghost",
-                        onclick: move |_| draft.edit_question(index, |q| q.answers.push(Answer::default())),
-                        "＋ Add answer"
-                    }
-                } else {
-                    span {}
-                }
-                span { class: "muted small",
-                    if multi {
-                        "Several correct answers: teams may pick more than one."
-                    } else {
-                        "Tick the correct answer. Tick more than one to allow several."
-                    }
-                }
+        }
+        div { class: "row between",
+            button {
+                class: "button ghost",
+                onclick: move |_| draft.edit_accepted(question, |a| a.push(String::new())),
+                "＋ Add accepted answer"
+            }
+            span { class: "muted small",
+                "Case, accents, punctuation and spacing are ignored; spelling must match."
+            }
+        }
+    }
+}
+
+/// The correct number of a closest-number question.
+#[component]
+fn NumberAnswer(question: usize, answer: Option<f64>) -> Element {
+    let draft: Draft = use_context();
+    // Keep what is typed, so "3." or "-" survive until the number is complete.
+    let mut raw = use_signal(|| answer.map(|a| a.to_string()).unwrap_or_default());
+    rsx! {
+        label { class: "field inline",
+            span { "Correct number" }
+            input {
+                r#type: "text",
+                inputmode: "decimal",
+                class: "short",
+                placeholder: "330",
+                value: raw,
+                oninput: move |e| {
+                    let value = e.value();
+                    let parsed = value
+                        .trim()
+                        .replace(',', ".")
+                        .parse::<f64>()
+                        .ok()
+                        .filter(|v| v.is_finite());
+                    raw.set(value);
+                    draft.edit_question(question, |q| q.kind = QuestionKind::Number { answer: parsed });
+                },
             }
         }
     }
