@@ -321,6 +321,8 @@ pub enum QuestionKind {
     Number { answer: Option<f64> },
     /// Put items in order; `items` are listed in the right order and shown shuffled.
     Order { items: Vec<String> },
+    /// Is the statement true or false? Played like a two-answer multiple choice.
+    TrueFalse { answer: bool },
     /// Not a question: a title, text and/or picture shown on the big screen, with nothing to
     /// answer.
     Slide { title: String },
@@ -372,17 +374,29 @@ impl Question {
             .unwrap_or(settings.default_time_limit_secs)
     }
 
-    /// Indexes of the correct answers of a multiple-choice question.
+    /// Indexes of the correct answers of a multiple-choice (or true/false) question.
     #[must_use]
     pub fn correct_indexes(&self) -> Vec<usize> {
-        if self.kind != QuestionKind::Choice {
-            return Vec::new();
+        match self.kind {
+            QuestionKind::Choice => self
+                .answers
+                .iter()
+                .enumerate()
+                .filter_map(|(i, a)| a.correct.then_some(i))
+                .collect(),
+            QuestionKind::TrueFalse { answer } => vec![usize::from(!answer)],
+            _ => Vec::new(),
         }
-        self.answers
-            .iter()
-            .enumerate()
-            .filter_map(|(i, a)| a.correct.then_some(i))
-            .collect()
+    }
+
+    /// The answers teams pick from: a multiple-choice question's options, or True and False.
+    #[must_use]
+    pub fn choices(&self) -> Vec<String> {
+        match self.kind {
+            QuestionKind::Choice => self.answers.iter().map(|a| a.text.clone()).collect(),
+            QuestionKind::TrueFalse { .. } => vec!["True".to_owned(), "False".to_owned()],
+            _ => Vec::new(),
+        }
     }
 
     /// Whether this is a multiple-choice question with more than one correct answer.
@@ -443,7 +457,7 @@ impl Question {
                     problems.push("Every item needs a text.".to_owned());
                 }
             }
-            QuestionKind::Slide { .. } => {}
+            QuestionKind::Slide { .. } | QuestionKind::TrueFalse { .. } => {}
         }
         if !(1..=MAX_MULTIPLIER).contains(&self.multiplier()) {
             problems.push(format!(
@@ -706,6 +720,21 @@ mod tests {
         assert_eq!(reveal(r#""blur_image":false"#), ImageReveal::Shown);
         assert_eq!(reveal(r#""image_reveal":"Tiles""#), ImageReveal::Tiles);
         assert_eq!(reveal(r#""answers":[]"#), ImageReveal::Shown);
+    }
+
+    #[test]
+    fn true_false_picks_one_of_two() {
+        let mut q = Question {
+            text: "The Moon is a planet.".to_owned(),
+            kind: QuestionKind::TrueFalse { answer: false },
+            ..Question::default()
+        };
+        assert_eq!(q.problems(), Vec::<String>::new());
+        assert_eq!(q.choices(), ["True", "False"]);
+        assert_eq!(q.correct_indexes(), [1]);
+        q.kind = QuestionKind::TrueFalse { answer: true };
+        assert_eq!(q.correct_indexes(), [0]);
+        assert!(!q.is_multi());
     }
 
     #[test]

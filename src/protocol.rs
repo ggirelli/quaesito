@@ -315,7 +315,8 @@ pub enum PlayerPhase {
         input: InputKind,
         /// Number of answer buttons (multiple choice only).
         answer_count: usize,
-        /// The shuffled items of an order question (always sent: they cannot be guessed).
+        /// The shuffled items of an order question, or True and False (always sent: they cannot
+        /// be told apart by colour alone).
         items: Vec<String>,
         /// Question and answer texts, when the phone display shows full text.
         text: Option<(String, Vec<String>)>,

@@ -348,7 +348,7 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
             total,
             input: InputKind::Choice,
             answer_count,
-            items: _,
+            items,
             text,
             answer_images,
             multi,
@@ -364,6 +364,7 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
                 total,
                 answer_count,
                 text,
+                labels: items,
                 images: answer_images,
                 multi,
                 clock: Clock { left_ms: left, limit_ms: time_limit_ms, paused, received_at: live_received },
@@ -514,6 +515,8 @@ fn AnswerPad(
     total: usize,
     answer_count: usize,
     text: Option<(String, Vec<String>)>,
+    /// Answer labels shown whatever the phone display (True/False).
+    labels: Vec<String>,
     images: Vec<Option<String>>,
     multi: bool,
     clock: Clock,
@@ -539,10 +542,10 @@ fn AnswerPad(
             .await;
     };
     let (question, labels) = match text {
-        Some((question, labels)) => (Some(question), Some(labels)),
-        None => (None, None),
+        Some((question, texts)) => (Some(question), Some(texts)),
+        None => (None, (!labels.is_empty()).then_some(labels)),
     };
-    let with_text = display == PhoneDisplay::FullText && labels.is_some();
+    let with_text = labels.is_some() && (display == PhoneDisplay::FullText || question.is_none());
 
     rsx! {
         main { class: "player-main top",

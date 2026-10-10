@@ -903,14 +903,16 @@ impl Game {
                     total,
                     input,
                     answer_count: match input {
-                        InputKind::Choice => question.answers.len(),
+                        InputKind::Choice => question.choices().len(),
                         InputKind::Order => self.shown[index].len(),
                         InputKind::Text | InputKind::Number => 0,
                     },
-                    items: if input == InputKind::Order {
-                        self.shown_answers(index)
-                    } else {
-                        Vec::new()
+                    // Order items and True/False cannot be told apart by colour alone: always sent.
+                    items: match question.kind {
+                        QuestionKind::Order { .. } | QuestionKind::TrueFalse { .. } => {
+                            self.shown_answers(index)
+                        }
+                        _ => Vec::new(),
                     },
                     text: full_text.then(|| (question.text.clone(), self.shown_answers(index))),
                     answer_images: if full_text {
@@ -1088,8 +1090,8 @@ impl Game {
                     placed,
                 }
             }
-            QuestionKind::Choice => {
-                let mut picks = vec![0; question.answers.len()];
+            QuestionKind::Choice | QuestionKind::TrueFalse { .. } => {
+                let mut picks = vec![0; question.choices().len()];
                 for (_, response) in responses() {
                     if let Response::Choice(selected) = response {
                         for &i in selected {
@@ -1163,7 +1165,7 @@ impl Game {
     fn shown_answers(&self, index: usize) -> Vec<String> {
         let question = &self.quiz.questions[index];
         match &question.kind {
-            QuestionKind::Choice => question.answers.iter().map(|a| a.text.clone()).collect(),
+            QuestionKind::Choice | QuestionKind::TrueFalse { .. } => question.choices(),
             QuestionKind::Order { items } => self.shown[index]
                 .iter()
                 .map(|&i| items[i].clone())
@@ -1249,7 +1251,7 @@ impl Game {
         let limit = Duration::from_secs(u64::from(question.time_limit_secs(&self.quiz.settings)));
         let full = scoring::full_points(self.quiz.settings.points, submission.elapsed, limit);
         match (&question.kind, &submission.response) {
-            (QuestionKind::Choice, Response::Choice(selected)) => {
+            (QuestionKind::Choice | QuestionKind::TrueFalse { .. }, Response::Choice(selected)) => {
                 let mode = self.quiz.settings.multi_scoring;
                 let points = scoring::score(question, selected, full, mode);
                 AnswerOutcome {
@@ -1413,10 +1415,10 @@ impl Team {
 /// Checks an answer against the question and tidies it up.
 fn check_response(question: &Question, response: Response) -> Result<Response, Refusal> {
     match (&question.kind, response) {
-        (QuestionKind::Choice, Response::Choice(mut selected)) => {
+        (QuestionKind::Choice | QuestionKind::TrueFalse { .. }, Response::Choice(mut selected)) => {
             selected.sort_unstable();
             selected.dedup();
-            if selected.is_empty() || selected.iter().any(|&i| i >= question.answers.len()) {
+            if selected.is_empty() || selected.iter().any(|&i| i >= question.choices().len()) {
                 return Err(Refusal("Please pick an answer."));
             }
             if !question.is_multi() && selected.len() > 1 {
@@ -1454,7 +1456,9 @@ fn check_response(question: &Question, response: Response) -> Result<Response, R
 
 fn input_kind(question: &Question) -> InputKind {
     match question.kind {
-        QuestionKind::Choice | QuestionKind::Slide { .. } => InputKind::Choice,
+        QuestionKind::Choice | QuestionKind::TrueFalse { .. } | QuestionKind::Slide { .. } => {
+            InputKind::Choice
+        }
         QuestionKind::Text { .. } => InputKind::Text,
         QuestionKind::Number { .. } => InputKind::Number,
         QuestionKind::Order { .. } => InputKind::Order,
@@ -1465,6 +1469,7 @@ fn input_kind(question: &Question) -> InputKind {
 fn answer_images(question: &Question) -> Vec<Option<String>> {
     match question.kind {
         QuestionKind::Choice => question.answers.iter().map(|a| a.image.clone()).collect(),
+        QuestionKind::TrueFalse { .. } => vec![None, None],
         _ => Vec::new(),
     }
 }
@@ -1900,6 +1905,42 @@ mod tests {
             panic!("expected results");
         };
         assert_eq!(question.multiplier, 3);
+    }
+
+    #[test]
+    fn true_false_plays_like_two_choices() {
+        let t0 = Instant::now();
+        let mut quiz = quiz(QuizSettings::default());
+        quiz.questions[0].kind = QuestionKind::TrueFalse { answer: false };
+        quiz.questions[0].answers.clear();
+        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        g.next(t0).unwrap();
+        assert!(matches!(
+            g.player_view(owls, t0).unwrap().phase,
+            PlayerPhase::Question { answer_count: 2, ref items, .. } if items == &["True", "False"]
+        ));
+        assert!(g.answer(owls, pick(&[2]), false, t0).is_err());
+        g.answer(owls, pick(&[1]), false, t0).unwrap();
+        g.answer(cats, pick(&[0]), false, t0).unwrap();
+        let HostPhase::Closed {
+            question,
+            reveal: Some(reveal),
+            ..
+        } = g.host_view(t0).phase
+        else {
+            panic!("expected results");
+        };
+        assert_eq!(question.answers, ["True", "False"]);
+        assert_eq!(
+            reveal,
+            Reveal::Choice {
+                correct: vec![1],
+                picks: vec![1, 1]
+            }
+        );
+        assert_eq!(g.standings()[0].team.id, owls);
     }
 
     #[test]

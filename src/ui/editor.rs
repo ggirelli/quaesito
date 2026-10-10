@@ -641,15 +641,17 @@ fn QuestionCard(
                     label: "Answer type",
                     options: vec![
                         ("Choices", "Teams pick from coloured answers."),
+                        ("True/false", "Teams say whether the statement is true or false."),
                         ("Typed answer", "Teams type a short answer. You can amend the verdict on each answer when they are revealed."),
                         ("Number", "Teams guess a number; the closest guess wins 1000 points."),
                         ("Order", "Teams put the items in order; each item in its right place earns its share of the points."),
                     ],
                     selected: match question.kind {
                         QuestionKind::Choice | QuestionKind::Slide { .. } => 0,
-                        QuestionKind::Text { .. } => 1,
-                        QuestionKind::Number { .. } => 2,
-                        QuestionKind::Order { .. } => 3,
+                        QuestionKind::TrueFalse { .. } => 1,
+                        QuestionKind::Text { .. } => 2,
+                        QuestionKind::Number { .. } => 3,
+                        QuestionKind::Order { .. } => 4,
                     },
                     on_select: move |i| draft.edit_question(index, |q| set_kind(q, i)),
                 }
@@ -694,6 +696,17 @@ fn QuestionCard(
                     QuestionKind::Order { items } => rsx! {
                         OrderItems { question: index, items: items.clone() }
                     },
+                    QuestionKind::TrueFalse { answer } => rsx! {
+                        Choice {
+                            label: "The statement is",
+                            options: vec![
+                                ("True", "Teams answering True are right."),
+                                ("False", "Teams answering False are right."),
+                            ],
+                            selected: usize::from(!answer),
+                            on_select: move |i| draft.edit_question(index, |q| q.kind = QuestionKind::TrueFalse { answer: i == 0 }),
+                        }
+                    },
                     QuestionKind::Slide { .. } => rsx! {},
                 }
             }
@@ -701,15 +714,17 @@ fn QuestionCard(
     }
 }
 
-/// Switches a question to the answer type picked in the editor (0 choices, 1 text, 2 number,
-/// 3 order).
+/// Switches a question to the answer type picked in the editor (0 choices, 1 true/false, 2 text,
+/// 3 number, 4 order).
 fn set_kind(question: &mut Question, choice: usize) {
     question.kind = match (choice, &question.kind) {
-        (1, QuestionKind::Text { .. })
-        | (2, QuestionKind::Number { .. })
-        | (3, QuestionKind::Order { .. }) => return,
+        (1, QuestionKind::TrueFalse { .. })
+        | (2, QuestionKind::Text { .. })
+        | (3, QuestionKind::Number { .. })
+        | (4, QuestionKind::Order { .. }) => return,
+        (1, _) => QuestionKind::TrueFalse { answer: true },
         // Start from the choices' texts, if any were typed.
-        (3, _) => {
+        (4, _) => {
             let mut items: Vec<String> = question
                 .answers
                 .iter()
@@ -721,10 +736,10 @@ fn set_kind(question: &mut Question, choice: usize) {
             }
             QuestionKind::Order { items }
         }
-        (1, _) => QuestionKind::Text {
+        (2, _) => QuestionKind::Text {
             accepted: vec![String::new()],
         },
-        (2, _) => QuestionKind::Number { answer: None },
+        (3, _) => QuestionKind::Number { answer: None },
         _ => {
             if question.answers.len() < MIN_ANSWERS {
                 question.answers.resize_with(MIN_ANSWERS, Answer::default);
