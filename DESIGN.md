@@ -21,6 +21,8 @@ machine (`src/server/engine.rs`) that takes the current time as an input, so it 
 Lobby → Question(0) → Closed(0) → … → Closed(n-1) → [Review(0) → … → Review(n-1)] → Podium(0..=3)
 ```
 
+A question with a soundtrack is preceded by `Ready(i)`: the big screen shows it with a full clock
+and the host's next step plays the music and starts the countdown together (never automatic).
 `Review` only exists when answers are revealed at the end. A question closes when its time runs
 out, when every connected team has answered, or when the host stops the clock. With automatic
 advance, a per-session timer task moves on after a short pause.
@@ -32,7 +34,7 @@ and run locally from the moment the view arrived.
 
 ## Quiz model
 
-A quiz has an ordered list of questions. Each question has text, an optional picture, a time limit
+A quiz has an ordered list of questions. Each question has text, an optional picture, an optional soundtrack, a time limit
 (defaulting to the quiz-wide one) and two or more answers, any of which may be marked correct.
 
 Per-quiz settings chosen by the admin:
@@ -60,9 +62,11 @@ Everything lives under a data directory (`QUAESITO_DATA_DIR`, default `./data`):
 
 - `quizzes/<id>.json`: one JSON document per quiz. A quiz is always edited and saved as a whole,
   so plain files written atomically (temp file + rename) are simpler than a database.
-- `media/<random>.{jpg,png}`: uploaded pictures. Question pictures are downscaled to fit
+- `media/<random>.{jpg,png,mp3,…}`: uploaded pictures and soundtracks. Question pictures are downscaled to fit
   1600×1200 and re-encoded as JPEG; avatars are cropped square, resized to 256×256 and stored as
-  PNG. Re-encoding strips metadata and anything that is not plain pixels.
+  PNG. Re-encoding strips metadata and anything that is not plain pixels. Soundtracks are stored
+  as uploaded once their format is recognised from their first bytes; `/media` answers byte-range
+  requests so the big screen can seek (a reloaded host page resumes the music where the clock is).
 - Running sessions take a snapshot of the quiz at start, so editing never affects a live game.
   Sessions are kept in memory only.
 - JSON export/import of quizzes for backup and sharing (pictures are not included).

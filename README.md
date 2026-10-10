@@ -7,7 +7,7 @@
 
 Quizzes among friends: a self-hosted, live quiz web app written in Rust with [Dioxus](https://dioxuslabs.com).
 
-- **Admin** builds quizzes in the browser: questions, optional pictures, 2–6 answers (one or several correct) and time limits.
+- **Admin** builds quizzes in the browser: questions, optional pictures and soundtracks, 2–6 answers (one or several correct) and time limits.
 - **Big screen** shows the quiz as a slideshow on a TV or projector, with a QR code to join.
 - **Team leaders** join from their phones by scanning the QR code or typing the game code, pick a team name and a picture, and answer against the clock. Faster correct answers earn more points.
 - **Podium** at the end reveals 3rd, 2nd and finally 1st place.
@@ -22,11 +22,16 @@ QUAESITO_ADMIN_PASSWORD=pick-something just play
 
 Then:
 
-1. Open `http://localhost:8080/admin` on the laptop driving the TV and log in.
+1. Open `http://localhost:8080` on the laptop driving the TV, click the ⚙ icon in the top right corner and log in.
 2. Create a quiz, or import one (JSON). The editor saves as you type and tells you when the quiz is ready to play.
 3. Press **▶ Start**. The big screen shows a QR code and a 6-digit code.
 4. Team leaders scan the code (phones must be on the same Wi-Fi), choose a name and optionally a picture.
 5. Press **Start the quiz**, then use the button, `→`, `PageDown` or `N` (presentation clickers work) to move on.
+
+A question can have a soundtrack (MP3, M4A/AAC, Ogg/Opus, WebM, FLAC or WAV, up to 40 MB). It then
+waits on the big screen with a full clock until the host presses **▶ Start the music**: the music
+plays from the big screen's speakers and the countdown starts with it. This also holds with
+automatic advance. Phones show "Listen up!" until then.
 
 If phones cannot connect, allow incoming connections on the port in the laptop's firewall. If the detected address is
 wrong (VPNs, several network cards), set `QUAESITO_PUBLIC_URL`, e.g. `http://192.168.1.20:8080`.
