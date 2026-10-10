@@ -43,8 +43,9 @@ The big screen plays sound effects (a ticking last five seconds, reveal chimes, 
 **Teams** in the top bar of the big screen lets you rename a team or remove it (it loses its points and its phone goes
 back to the join page).
 
-A question's picture can be **revealed gradually**: it starts heavily blurred and sharpens as the clock runs out, so
-early guesses are harder but, with speed points, worth more.
+A question's picture can be **revealed gradually** while the clock runs: **zoom out** starts on a 5× close-up of its
+centre and widens steadily to the whole picture; **uncover tile by tile** hides it under a 6×4 grid whose tiles drop
+away at an even pace in a shuffled order. Early guesses are harder but, with speed points, worth more.
 
 A question can have a soundtrack (MP3, M4A/AAC, Ogg/Opus, WebM, FLAC or WAV, up to 40 MB). It then
 waits on the big screen with a full clock until the host presses **▶ Start the music**: the music

@@ -31,7 +31,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 22 | Joker: each team doubles one question's points | ✅ done |
 | 23 | Picture answers for multiple choice | ✅ done |
 | 24 | "Put in order" questions | ✅ done |
-| 25 | Pictures that sharpen while the clock runs | ✅ done |
+| 25 | Pictures revealed while the clock runs (zoom out or tile by tile; blur dropped: too hard to read until the end) | ✅ done |
 | 26 | Sound effects on the big screen | ✅ done |
 | 27 | End-of-game results page and download | ✅ done |
 | 28 | Live games survive a server restart | ✅ done |
