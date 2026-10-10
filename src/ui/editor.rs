@@ -38,11 +38,11 @@ fn EditorLoader(id: String) -> Element {
     let loaded = quiz.read().clone();
     match loaded {
         None => rsx! {
-            AdminHeader {}
+            AdminHeader { back: true }
             div { class: "page center", Spinner {} }
         },
         Some(Err(err)) => rsx! {
-            AdminHeader {}
+            AdminHeader { back: true }
             main { class: "page narrow",
                 ErrorBox { error: Some(message(&err)) }
             }
@@ -100,7 +100,7 @@ fn EditorForm(quiz: Quiz) -> Element {
     let quiz = draft.quiz.read();
     let question_count = quiz.questions.len();
     rsx! {
-        AdminHeader {
+        AdminHeader { back: true,
             span { class: "save-state",
                 match save_state() {
                     SaveState::Saved => "All changes saved",

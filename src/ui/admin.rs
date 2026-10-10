@@ -4,7 +4,7 @@ use dioxus::prelude::*;
 
 use super::{
     Route, client,
-    widgets::{Brand, ClientOnly, ErrorBox, Spinner, message},
+    widgets::{Brand, ClientOnly, ErrorBox, Icon, IconKind, Spinner, message},
 };
 use crate::api::{
     admin_check, admin_login, create_quiz, delete_quiz, duplicate_quiz, end_session, import_quiz,
@@ -101,15 +101,29 @@ fn LoginForm() -> Element {
     }
 }
 
-/// Top bar of admin pages.
+/// Top bar of admin pages. With `back`, it links back to the quiz list.
 #[component]
-pub fn AdminHeader(children: Element) -> Element {
+pub fn AdminHeader(#[props(default)] back: bool, children: Element) -> Element {
     let token: AdminToken = use_context();
     rsx! {
         header { class: "topbar",
-            Link { to: Route::Admin {}, Brand {} }
+            div { class: "row",
+                if back {
+                    Link { class: "button ghost", to: Route::Admin {},
+                        Icon { kind: IconKind::Back }
+                        "Quizzes"
+                    }
+                }
+                Link { to: Route::Admin {}, Brand {} }
+            }
             div { class: "row", {children} }
-            button { class: "button ghost", onclick: move |_| token.clear(), "Log out" }
+            div { class: "row",
+                Link { class: "button ghost", to: Route::Home {}, title: "Home page",
+                    Icon { kind: IconKind::Home }
+                    "Home"
+                }
+                button { class: "button ghost", onclick: move |_| token.clear(), "Log out" }
+            }
         }
     }
 }
