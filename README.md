@@ -34,6 +34,9 @@ Then:
    (its answers are discarded and it is asked again later). **⏸ Pause** (`P`) freezes the clock, the music and the
    automatic advance; **+10 s** gives everyone more time.
 
+The big screen plays sound effects (a ticking last five seconds, reveal chimes, a drumroll and fanfare on the podium);
+🔊 in its top bar mutes them. Browsers only allow sound after a first click or key press on the page.
+
 **Teams** in the top bar of the big screen lets you rename a team or remove it (it loses its points and its phone goes
 back to the join page).
 

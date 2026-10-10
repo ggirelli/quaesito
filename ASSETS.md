@@ -8,7 +8,25 @@ Brand colours for every prompt: amber `#FFB703`, deep indigo `#14121F`, off-whit
 
 ## Wanted
 
-_Nothing outstanding right now._
+### Recorded sound effects (optional)
+
+The big screen synthesises its sound effects in the browser (`assets/js/sfx.js`), so nothing is
+missing. Recorded effects would sound richer; if you add them I will play them instead.
+
+- **Files:** `assets/sfx/{tick,last-tick,time-up,reveal,join,drumroll,fanfare}.mp3`, mono, 44.1 kHz,
+  normalised to about −14 LUFS, no silence before the sound
+- **Used by:** the big screen (`src/ui/sfx.rs`)
+- **Prompts** (for a sound-effect generator such as ElevenLabs Sound Effects, one per file):
+
+  ```
+  tick:      a single short, crisp clock tick, dry, 0.1 seconds
+  last-tick: a single short, higher-pitched game-show clock beep, 0.15 seconds
+  time-up:   a friendly game-show "time's up" buzzer, low, 0.7 seconds, not harsh
+  reveal:    a bright, cheerful 4-note ascending chime for revealing a quiz answer, 0.6 seconds
+  join:      a soft, playful "pop" for a player joining a party game, 0.2 seconds
+  drumroll:  a snare drumroll building up for 1.3 seconds, ending with a cymbal hit
+  fanfare:   a short triumphant brass fanfare for announcing the winner, 1.5 seconds
+  ```
 
 ## Done
 

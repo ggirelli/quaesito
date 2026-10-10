@@ -41,6 +41,11 @@ The host can rename or remove a team at any time before the podium (`HostCommand
 `RemoveTeam`). A removed team's answers go with it; its phone's socket closes, the stored ticket no
 longer checks out, and the phone returns to the join form with a notice.
 
+Sound effects are synthesised on the big screen with the Web Audio API (`assets/js/sfx.js`), so no
+audio files are needed. `src/ui/sfx.rs` reduces each host view to a `Cue` and plays an effect when
+the cue moves forward (a team joins, a question closes or is reviewed, a podium spot is revealed);
+going back is silent. An open question without a soundtrack ticks through its last five seconds.
+
 Screens hold a WebSocket each (`/api/ws/host`, `/api/ws/player`). On every change the server
 pushes a complete, role-specific view (`src/protocol.rs`), so clients never reconstruct state and
 a reconnecting phone simply receives the current view. Countdowns are sent as "milliseconds left"

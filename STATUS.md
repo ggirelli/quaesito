@@ -32,7 +32,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 23 | Picture answers for multiple choice | ✅ done |
 | 24 | "Put in order" questions | ✅ done |
 | 25 | Pictures that sharpen while the clock runs | ✅ done |
-| 26 | Sound effects on the big screen | ⏳ planned |
+| 26 | Sound effects on the big screen | ✅ done |
 | 27 | End-of-game results page and download | ⏳ planned |
 | 28 | Live games survive a server restart | ⏳ planned |
 | 29 | Exports bundle media (zip); unused media is cleaned up | ⏳ planned |
@@ -71,5 +71,4 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 
 ## Ideas for later
 
-- Sound effects (countdown, reveal, fanfare).
 - Garbage-collect unused pictures; bundle pictures in exports.
