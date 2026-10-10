@@ -73,6 +73,7 @@ Per-quiz settings chosen by the admin:
 | Reveal | `AfterEachQuestion` / `AtEnd` |
 | Multi-correct scoring | `AllOrNothing` / `Partial` |
 | Points | `Speed` (faster is worth more) / `Flat` (every correct answer is worth the same) |
+| Jokers | off / on (`joker: bool`) |
 | Advance | `Manual` (host clicks) / `Auto` (when time runs out or all teams answered) |
 | Phone display | `ButtonsOnly` (read on the projector) / `FullText` |
 
@@ -92,6 +93,10 @@ Typed answers: each group of identical (normalised) answers gets a `Judgement`, 
 end-of-quiz review. Scores are therefore signed.
 
 Closest number: the closest guesses earn 1000 points each, regardless of speed.
+
+Joker: with jokers on, a team may send `joker: true` with one answer in the whole game; that
+question's points (bonus or malus included) are doubled. Withdrawing the question by going back
+returns the joker. Phones get the joker's state in `PlayerView.joker`.
 
 Points are computed from the stored responses and judgements when needed, so amendments update the
 standings immediately. Only closed questions count, so standings never give away a result early.

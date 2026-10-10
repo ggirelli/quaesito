@@ -67,6 +67,7 @@ Each quiz chooses:
 | Reveal answers | after each question (with standings: points gained, answer times, places moved) · at the end (walk through the answers before the podium) |
 | Several correct answers | all or nothing · partial credit (correct picks minus wrong picks) |
 | Points | speed (faster correct answers earn more) · correct answers only (1000 each) |
+| Jokers | off · on: each team may play a joker once, while answering, to double that question's points |
 | Moving on | host clicks · automatic after a short pause |
 | On team phones | coloured buttons only (read on the big screen) · full question and answer text |
 
