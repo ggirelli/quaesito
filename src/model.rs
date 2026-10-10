@@ -57,16 +57,20 @@ impl Quiz {
             ));
         }
         for (index, question) in self.questions.iter().enumerate() {
-            issues.extend(
-                question
-                    .problems()
-                    .into_iter()
-                    .map(|message| ValidationIssue {
-                        question: Some(index),
-                        place: Some(self.label(index)),
-                        message,
-                    }),
-            );
+            let mut problems = question.problems();
+            if question.reveals_image()
+                && question.image_hold_secs >= question.time_limit_secs(&self.settings)
+            {
+                problems.push(
+                    "The picture must stay fully visible for less time than the question lasts."
+                        .to_owned(),
+                );
+            }
+            issues.extend(problems.into_iter().map(|message| ValidationIssue {
+                question: Some(index),
+                place: Some(self.label(index)),
+                message,
+            }));
         }
         issues
     }
@@ -256,6 +260,10 @@ pub struct Question {
         deserialize_with = "deserialize_image_reveal"
     )]
     pub image_reveal: ImageReveal,
+    /// With a gradual reveal, how many seconds before the buzzer the picture is fully shown: the
+    /// reveal takes the rest of the time.
+    #[serde(default)]
+    pub image_hold_secs: u32,
     /// Name of an uploaded soundtrack, if any. The host starts it, and the clock with it.
     #[serde(default)]
     pub audio: Option<String>,
@@ -332,6 +340,12 @@ impl Question {
             },
             ..Self::default()
         }
+    }
+
+    /// Whether the question's picture is revealed gradually while the clock runs.
+    #[must_use]
+    pub fn reveals_image(&self) -> bool {
+        self.image.is_some() && self.image_reveal != ImageReveal::Shown
     }
 
     /// Whether this is a slide rather than a question.
@@ -501,6 +515,7 @@ mod tests {
             kind: QuestionKind::Choice,
             image: None,
             image_reveal: ImageReveal::Shown,
+            image_hold_secs: 0,
             audio: None,
             time_limit_secs: None,
             answers: vec![answer("Jupiter", false), answer("Saturn", true)],
@@ -646,6 +661,21 @@ mod tests {
         quiz.rename_media(|name| (name != "s.mp3").then(|| format!("new-{name}")));
         assert_eq!(quiz.media(), ["new-a.jpg", "new-q.jpg"]);
         assert_eq!(quiz.questions[0].audio, None);
+    }
+
+    #[test]
+    fn the_picture_hold_must_leave_time_for_the_reveal() {
+        let mut quiz = quiz();
+        quiz.questions[0].image = Some("p.jpg".to_owned());
+        quiz.questions[0].image_reveal = ImageReveal::Tiles;
+        quiz.questions[0].image_hold_secs = 20; // the default limit
+        assert_eq!(quiz.validate().len(), 1);
+        quiz.questions[0].image_hold_secs = 5;
+        assert_eq!(quiz.validate(), Vec::new());
+        // Without a gradual reveal the hold is ignored.
+        quiz.questions[0].image_hold_secs = 60;
+        quiz.questions[0].image_reveal = ImageReveal::Shown;
+        assert_eq!(quiz.validate(), Vec::new());
     }
 
     #[test]

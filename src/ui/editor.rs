@@ -16,6 +16,8 @@ use crate::{
     },
 };
 
+/// Seconds a gradually revealed picture stays fully visible, suggested when picking a reveal.
+const DEFAULT_HOLD_SECS: u32 = 5;
 /// How long the editor waits after the last change before saving.
 const AUTOSAVE_DELAY_MS: u32 = 800;
 
@@ -480,11 +482,36 @@ fn QuestionCard(
                                         "tiles" => ImageReveal::Tiles,
                                         _ => ImageReveal::Shown,
                                     };
-                                    draft.edit_question(index, |q| q.image_reveal = reveal);
+                                    draft.edit_question(index, |q| {
+                                        // Suggest a few seconds to look at the whole picture.
+                                        if q.image_reveal == ImageReveal::Shown && q.image_hold_secs == 0 {
+                                            q.image_hold_secs = DEFAULT_HOLD_SECS;
+                                        }
+                                        q.image_reveal = reveal;
+                                    });
                                 },
                                 option { value: "shown", "Show it all" }
                                 option { value: "zoom", "Zoom out from a close-up" }
                                 option { value: "tiles", "Uncover tile by tile" }
+                            }
+                        }
+                        if question.image_reveal != ImageReveal::Shown {
+                            label { class: "field inline",
+                                title: "The reveal takes the rest of the question's time",
+                                span { "then fully visible for" }
+                                input {
+                                    r#type: "number",
+                                    class: "short",
+                                    min: 0,
+                                    max: MAX_TIME_LIMIT_SECS,
+                                    value: "{question.image_hold_secs}",
+                                    oninput: move |e| {
+                                        if let Ok(secs) = e.value().trim().parse() {
+                                            draft.edit_question(index, |q| q.image_hold_secs = secs);
+                                        }
+                                    },
+                                }
+                                span { "s" }
                             }
                         }
                     }

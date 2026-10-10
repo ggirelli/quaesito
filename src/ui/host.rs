@@ -710,11 +710,13 @@ fn QuestionSlide(
     let limit = question.time_limit_ms as f64;
     let fraction = if limit == 0.0 { 0.0 } else { left_ms / limit };
     // The picture's reveal follows the time spent, not the time left, so extra time from the
-    // host never runs it backwards: it simply completes at the original limit.
-    let reveal_left = if limit == 0.0 {
+    // host never runs it backwards. It completes `image_hold_ms` before the original limit.
+    #[allow(clippy::cast_precision_loss, reason = "time limits are small")]
+    let reveal_span = limit - question.image_hold_ms as f64;
+    let reveal_left = if reveal_span <= 0.0 {
         0.0
     } else {
-        1.0 - elapsed_ms / limit
+        1.0 - elapsed_ms / reveal_span
     };
     let seconds = (left_ms / 1000.0).ceil();
     rsx! {
