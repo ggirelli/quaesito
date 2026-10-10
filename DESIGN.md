@@ -35,7 +35,19 @@ and run locally from the moment the view arrived.
 ## Quiz model
 
 A quiz has an ordered list of questions. Each question has text, an optional picture, an optional soundtrack, a time limit
-(defaulting to the quiz-wide one) and two or more answers, any of which may be marked correct.
+(defaulting to the quiz-wide one) and a kind:
+
+| Kind | Teams answer with | Right answer |
+|---|---|---|
+| `Choice` (default) | coloured buttons | two or more answers, any of which may be marked correct |
+| `Text { accepted }` | a short typed text (≤ 60 characters) | equal to an accepted answer once normalised |
+| `Number { answer }` | a number | the closest guess (ties included) |
+
+Typed answers are normalised before matching: Unicode NFKD, accents dropped, lowercase, and every
+run of non-alphanumeric characters turned into a single space. There is no typo tolerance; the
+judge amends instead. Answers travel as a `Response` (`Choice(indexes)`, `Text`, `Number`), and the
+reveal is per kind: pick counts, typed answers grouped by normalised text, or guesses sorted by
+distance.
 
 Per-quiz settings chosen by the admin:
 
@@ -53,6 +65,17 @@ A correct answer submitted after `t` seconds on a question with limit `T` earns
 
 With `Partial` scoring on multi-correct questions, the fraction
 `max(0, (correct picked - wrong picked) / total correct)` multiplies the speed score.
+
+Typed answers: each group of identical (normalised) answers gets a `Judgement`, a grade
+(`Full` ×1, `Half` ×0.5, `Wrong` ×0) applied to the speed score, plus a bonus or malus of at most
+±1000 points. It starts as `Full` or `Wrong` from the accepted answers; the host can amend it
+(`HostCommand::Judge`) whenever that question's answers are shown, after the question or in the
+end-of-quiz review. Scores are therefore signed.
+
+Closest number: the closest guesses earn 1000 points each, regardless of speed.
+
+Points are computed from the stored responses and judgements when needed, so amendments update the
+standings immediately. Only closed questions count, so standings never give away a result early.
 
 Ties in the final ranking are broken by lower total response time on correct answers.
 

@@ -20,40 +20,13 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 11 | README usage docs, end-to-end smoke test | ✅ done |
 | 12 | Navigation: admin corner icon on home, Home and back-to-quizzes buttons | ✅ done |
 | 13 | Question soundtracks: the host starts the music and the clock together | ✅ done |
-| 14 | Open-ended questions: typed text and closest number (plan below) | 🚧 in progress |
-
-## Plan: open-ended questions (step 14)
-
-Two new question kinds next to today's multiple choice:
-
-- **Typed text**: teams type a short answer (≤ 60 characters). It is right when it matches one of
-  the accepted answers after normalising (case, accents, punctuation and spacing are ignored; no
-  typo tolerance). On the reveal screen the answers are grouped by normalised text and the judge
-  (host) can amend any group: ✓ full, ½ half or ✗ no points, plus a bonus or malus in steps of
-  100 points (±1000 max). Points are the usual speed points × grade, plus the bonus, so a malus
-  can push a team below zero (scores become signed).
-- **Closest number**: teams enter a number; the closest guess (ties included) earns 1000 points,
-  regardless of speed.
-
-How it fits in:
-
-- Model: `Question.kind` = `Choice` (default, so existing quizzes load unchanged) / `Text { accepted }`
-  / `Number { answer }`; validation per kind.
-- Protocol: `QuestionInfo.input` tells screens what to show; answers travel as a `Response`
-  (choice indexes, text or number); `Reveal` becomes per kind (pick counts / text groups with
-  judgements / guesses sorted by distance); `HostCommand::Judge` amends a text group.
-- Engine: points are computed from stored responses and judgements when needed, so amendments
-  update standings immediately; judging is possible whenever that question's answers are shown
-  (after the question, or in the end-of-quiz review), and restarts the auto-advance pause.
-- Phone: a text box or number field with Submit instead of coloured buttons.
-- Big screen: "answer on your phone" while open; grouped answers with judge buttons, or the
-  guesses around the true value, when revealed.
-- Editor: kind picker per question; accepted answers list or the correct number.
+| 14 | Open-ended questions: typed text (judged) and closest number | ✅ done |
 
 ## Notes
 
 - `src/model.rs`: quizzes, questions, answers, settings and validation.
-- `src/scoring.rs`: speed-weighted points, all-or-nothing/partial correctness, ranking.
+- `src/scoring.rs`: speed-weighted points, all-or-nothing/partial correctness, judged typed answers, ranking.
+- `src/server/matching.rs`: normalisation of typed answers (case, accents, punctuation, spacing).
 - `src/server/store.rs`: one JSON file per quiz, atomic writes, path-safe ids.
 - `src/server/media.rs`: picture re-encoding (questions → JPEG ≤1600×1200, avatars → 256² PNG), `GET /media/{name}`.
 - `src/server/mod.rs`: global state initialised from `QUAESITO_DATA_DIR` (default `./data`).
