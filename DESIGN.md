@@ -55,7 +55,7 @@ numbered apart from questions and score nothing. A quiz needs at least one real 
 
 | Kind | Teams answer with | Right answer |
 |---|---|---|
-| `Choice` (default) | coloured buttons | two or more answers, any of which may be marked correct |
+| `Choice` (default) | coloured buttons | two or more answers (text and/or picture), any of which may be marked correct |
 | `Text { accepted }` | a short typed text (≤ 60 characters) | equal to an accepted answer once normalised |
 | `Number { answer }` | a number | the closest guess (ties included) |
 | `Slide { title }` | nothing | none: a title, text and/or picture on the big screen |

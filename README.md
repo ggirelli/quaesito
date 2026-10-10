@@ -46,7 +46,8 @@ wrong (VPNs, several network cards), set `QUAESITO_PUBLIC_URL`, e.g. `http://192
 
 ### Question types
 
-- **Choices**: coloured buttons; one or several answers can be correct.
+- **Choices**: coloured buttons; one or several answers can be correct. Each answer can have a picture (flags, logos,
+  baby photos…), with or without text.
 - **Typed answer**: teams type a short answer. It is right when it matches an accepted answer, ignoring case, accents,
   punctuation and spacing (but not typos). On the reveal, identical answers are grouped and the host can judge each
   group: ✓ full, ½ half or ✗ no points, plus a bonus or malus in steps of 100. A malus can take a team below zero.
