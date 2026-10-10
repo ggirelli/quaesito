@@ -172,8 +172,11 @@ fn Dashboard() -> Element {
             section { class: "card stack",
                 div { class: "row between",
                     h2 { "Quizzes" }
-                    label { class: "button ghost",
-                        "Import…"
+                    label {
+                        class: "button ghost icon",
+                        title: "Import a quiz (.zip or .json)",
+                        aria_label: "Import a quiz",
+                        Icon { kind: IconKind::Import }
                         input {
                             r#type: "file",
                             accept: ".zip,.json,application/zip,application/json",
@@ -310,14 +313,39 @@ fn QuizActions(
                 onclick: test,
                 "🧪 Test"
             }
-            Link { class: "button", to: Route::Editor { id: id.clone() }, "Edit" }
-            button { class: "button ghost", onclick: duplicate, "Duplicate" }
-            a { class: "button ghost", href: export_href, download: true, "Export" }
+            Link {
+                class: "button icon",
+                to: Route::Editor { id: id.clone() },
+                title: "Edit",
+                aria_label: "Edit",
+                Icon { kind: IconKind::Edit }
+            }
+            button {
+                class: "button ghost icon",
+                title: "Duplicate",
+                aria_label: "Duplicate",
+                onclick: duplicate,
+                Icon { kind: IconKind::Copy }
+            }
+            a {
+                class: "button ghost icon",
+                href: export_href,
+                download: true,
+                title: "Export (.zip with pictures and soundtracks)",
+                aria_label: "Export",
+                Icon { kind: IconKind::Export }
+            }
             if confirming() {
                 button { class: "button danger", onclick: delete, "Really delete?" }
                 button { class: "button ghost", onclick: move |_| confirming.set(false), "Keep" }
             } else {
-                button { class: "button ghost", onclick: move |_| confirming.set(true), "Delete" }
+                button {
+                    class: "button ghost icon danger-icon",
+                    title: "Delete",
+                    aria_label: "Delete",
+                    onclick: move |_| confirming.set(true),
+                    Icon { kind: IconKind::Trash }
+                }
             }
         }
     }

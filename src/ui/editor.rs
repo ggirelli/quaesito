@@ -472,19 +472,23 @@ fn QuestionCard(
                         "⤓"
                     }
                     button {
-                        class: "button ghost",
+                        class: "button ghost icon",
+                        title: "Duplicate",
+                        aria_label: "Duplicate",
                         onclick: move |_| draft.edit(|q| {
                             let copy = q.questions[index].clone();
                             q.questions.insert(index + 1, copy);
                         }),
-                        "Duplicate"
+                        Icon { kind: IconKind::Copy }
                     }
                     button {
-                        class: "button ghost",
+                        class: "button ghost icon danger-icon",
+                        title: "Delete",
+                        aria_label: "Delete",
                         onclick: move |_| draft.edit(|q| {
                             q.questions.remove(index);
                         }),
-                        "Delete"
+                        Icon { kind: IconKind::Trash }
                     }
                 }
             }

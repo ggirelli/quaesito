@@ -28,7 +28,7 @@ Then:
 
 1. Open `http://localhost:8080` on the laptop driving the TV, click the ⚙ icon in the top right corner and log in.
 2. Create a quiz, or import one. The editor saves as you type and tells you when the quiz is ready to play.
-   **Export** downloads a quiz as a `.zip` with its pictures and soundtracks, ready to import on another machine (plain
+   Export (download icon) saves a quiz as a `.zip` with its pictures and soundtracks, ready to import on another machine (plain
    `.json` exports from older versions import too).
    **🧪 Test** (on the dashboard or in the editor) opens the big screen and two phones side by side, already joined,
    to try a quiz on your own; add or remove phones, restart or end the test from its toolbar.

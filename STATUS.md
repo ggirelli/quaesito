@@ -44,6 +44,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 35 | True/false questions | ✅ done |
 | 36 | Questions with several typed parts (title + artist, five posters…), judged per part | ⏳ planned |
 | 37 | Pin on a picture (a map, a floor plan…), scored by distance | ⏳ planned |
+| 38 | Icon buttons for edit, duplicate, export, import and delete (labels on hover) | ✅ done |
 
 ## TODO (next session)
 

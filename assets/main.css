@@ -329,6 +329,16 @@ textarea {
   padding: 0.5rem 0.7rem;
 }
 
+.button.icon .icon-svg {
+  width: 1.15em;
+  height: 1.15em;
+  vertical-align: -0.2em;
+}
+
+.button.danger-icon {
+  color: var(--danger);
+}
+
 .button.big {
   padding: 1rem 1.5rem;
   font-size: 1.2rem;
