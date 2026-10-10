@@ -52,10 +52,10 @@ pub async fn init() -> anyhow::Result<()> {
     let data_dir =
         std::env::var_os("QUAESITO_DATA_DIR").map_or_else(|| PathBuf::from("data"), PathBuf::from);
     let state = AppState {
-        auth: Auth::from_env(),
+        auth: Auth::from_env(data_dir.join("admin-tokens.json")),
         quizzes: QuizStore::open(data_dir.join("quizzes")).await?,
         media: MediaStore::open(data_dir.join("media")).await?,
-        sessions: Sessions::default(),
+        sessions: Sessions::open(data_dir.join("games")).await?,
     };
     dioxus::logger::tracing::info!("data directory: {}", data_dir.display());
     // A concurrent initialisation may have won the race; either state is equivalent.

@@ -18,6 +18,8 @@ use std::{
     time::{Duration, Instant},
 };
 
+use serde::{Deserialize, Serialize};
+
 use super::matching::normalize;
 use crate::{
     model::{AdvanceMode, MAX_TEXT_ANSWER_CHARS, Question, QuestionKind, Quiz, RevealMode},
@@ -41,6 +43,53 @@ const AUTO_SLIDE: Duration = Duration::from_secs(10);
 /// Auto-advance pause between podium spots.
 const AUTO_PODIUM_STEP: Duration = Duration::from_secs(4);
 
+/// A saved [`Game`], with times relative to when it was saved (`Instant`s do not survive a
+/// restart).
+#[derive(Serialize, Deserialize)]
+pub struct Snapshot {
+    code: String,
+    quiz: Quiz,
+    teams: Vec<Team>,
+    next_team_id: u32,
+    phase: SavedPhase,
+    judgements: Vec<HashMap<String, Judgement>>,
+    played: Vec<bool>,
+    shown: Vec<Vec<usize>>,
+}
+
+impl Snapshot {
+    /// The join code of the saved game.
+    #[must_use]
+    pub fn code(&self) -> &str {
+        &self.code
+    }
+}
+
+#[derive(Serialize, Deserialize)]
+enum SavedPhase {
+    Lobby,
+    Ready {
+        index: usize,
+    },
+    Question {
+        index: usize,
+        elapsed: Duration,
+        left: Duration,
+    },
+    Closed {
+        index: usize,
+    },
+    Slide {
+        index: usize,
+    },
+    Review {
+        index: usize,
+    },
+    Podium {
+        revealed: usize,
+    },
+}
+
 /// One running quiz.
 pub struct Game {
     code: String,
@@ -59,17 +108,21 @@ pub struct Game {
     shown: Vec<Vec<usize>>,
 }
 
+#[derive(Serialize, Deserialize)]
 struct Team {
     id: u32,
     name: String,
     avatar: Option<String>,
     token: String,
+    /// Live phone connections; phones reconnect after a restart.
+    #[serde(skip)]
     connections: u32,
     submissions: Vec<Option<Submission>>,
     /// The question the team played its joker on, if it has.
     joker: Option<usize>,
 }
 
+#[derive(Serialize, Deserialize)]
 struct Submission {
     response: Response,
     elapsed: Duration,
@@ -145,6 +198,97 @@ impl Game {
             paused_at: None,
             shown,
         })
+    }
+
+    /// Everything needed to bring the game back after a restart.
+    #[must_use]
+    pub fn snapshot(&self, now: Instant) -> Snapshot {
+        let clock = self.clock(now);
+        Snapshot {
+            code: self.code.clone(),
+            quiz: self.quiz.clone(),
+            teams: self
+                .teams
+                .iter()
+                .map(|t| Team {
+                    id: t.id,
+                    name: t.name.clone(),
+                    avatar: t.avatar.clone(),
+                    token: t.token.clone(),
+                    connections: 0,
+                    submissions: t
+                        .submissions
+                        .iter()
+                        .map(|s| {
+                            s.as_ref().map(|s| Submission {
+                                response: s.response.clone(),
+                                elapsed: s.elapsed,
+                            })
+                        })
+                        .collect(),
+                    joker: t.joker,
+                })
+                .collect(),
+            next_team_id: self.next_team_id,
+            phase: match self.phase {
+                Phase::Lobby => SavedPhase::Lobby,
+                Phase::Ready { index } => SavedPhase::Ready { index },
+                Phase::Question {
+                    index,
+                    started,
+                    deadline,
+                } => SavedPhase::Question {
+                    index,
+                    elapsed: clock.saturating_duration_since(started),
+                    left: deadline.saturating_duration_since(clock),
+                },
+                Phase::Closed { index, .. } => SavedPhase::Closed { index },
+                Phase::Slide { index, .. } => SavedPhase::Slide { index },
+                Phase::Review { index, .. } => SavedPhase::Review { index },
+                Phase::Podium { revealed, .. } => SavedPhase::Podium { revealed },
+            },
+            judgements: self.judgements.clone(),
+            played: self.played.clone(),
+            shown: self.shown.clone(),
+        }
+    }
+
+    /// Brings a game back from a [`Snapshot`], paused so the host decides when to go on.
+    #[must_use]
+    pub fn restore(snapshot: Snapshot, now: Instant) -> Self {
+        let phase = match snapshot.phase {
+            SavedPhase::Lobby => Phase::Lobby,
+            SavedPhase::Ready { index } => Phase::Ready { index },
+            SavedPhase::Question {
+                index,
+                elapsed,
+                left,
+            } => Phase::Question {
+                index,
+                started: now.checked_sub(elapsed).unwrap_or(now),
+                deadline: now + left,
+            },
+            SavedPhase::Closed { index } => Phase::Closed { index, since: now },
+            SavedPhase::Slide { index } => Phase::Slide { index, since: now },
+            SavedPhase::Review { index } => Phase::Review { index, since: now },
+            SavedPhase::Podium { revealed } => Phase::Podium {
+                revealed,
+                since: now,
+            },
+        };
+        let mut game = Self {
+            code: snapshot.code,
+            quiz: snapshot.quiz,
+            teams: snapshot.teams,
+            next_team_id: snapshot.next_team_id,
+            phase,
+            judgements: snapshot.judgements,
+            played: snapshot.played,
+            paused_at: None,
+            shown: snapshot.shown,
+        };
+        let _ = game.pause(now);
+        game
     }
 
     #[must_use]
@@ -1665,6 +1809,42 @@ mod tests {
             results.to_csv(),
             "Rank,Team,Total,one,two\r\n1,Owls,2000,2000,\r\n2,\"Cats, \"\"the\"\"\",1000,0,1000\r\n"
         );
+    }
+
+    #[test]
+    fn a_restored_game_resumes_where_it_was_paused() {
+        let t0 = Instant::now();
+        let mut g = game(QuizSettings::default());
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        g.next(t0).unwrap();
+        g.answer(owls, pick(&[0]), false, t0 + secs(2)).unwrap();
+        let json = serde_json::to_string(&g.snapshot(t0 + secs(4))).unwrap();
+
+        let later = t0 + secs(600);
+        let mut g = Game::restore(serde_json::from_str(&json).unwrap(), later);
+        assert_eq!(g.code(), "123456");
+        assert_eq!(g.team_for_token("token-Owls"), Some(owls));
+        assert!(g.is_paused());
+        let HostPhase::Question {
+            remaining_ms,
+            answered,
+            ..
+        } = g.host_view(later + secs(30)).phase
+        else {
+            panic!("expected the open question");
+        };
+        assert_eq!((remaining_ms, answered), (6000, 1));
+        // Phones reconnect; nobody counts as connected until then.
+        assert!(g.host_view(later).teams.iter().all(|t| !t.connected));
+        g.set_connected(cats, true);
+        g.resume(later);
+        g.answer(cats, pick(&[0]), false, later + secs(1)).unwrap();
+        // Cats answered 5 s into the question, pauses excluded.
+        assert!(matches!(g.host_view(later).phase, HostPhase::Closed { .. }));
+        let rows = g.standings();
+        assert_eq!(rows[0].score, 900);
+        assert_eq!(rows[1].score, 750);
     }
 
     #[test]
