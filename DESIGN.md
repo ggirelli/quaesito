@@ -140,7 +140,13 @@ Everything lives under a data directory (`QUAESITO_DATA_DIR`, default `./data`):
   reconnect by themselves. Ending a game deletes its file.
 - `admin-tokens.json`: issued admin tokens (the latest 50, readable by the owner only), so the
   admin and the host screen stay logged in across restarts.
-- JSON export/import of quizzes for backup and sharing (pictures are not included).
+- Export bundles a quiz as a zip: `quiz.json` plus `media/<name>` for every picture and soundtrack
+  it uses (stored uncompressed, they are compressed already). Import accepts a bundle or plain
+  JSON; bundled media go through the same checks and re-encoding as uploads, get new names, and
+  references to missing or rejected media are dropped. Sizes are capped before and after
+  decompression.
+- Uploads no quiz or live game uses (pictures, soundtracks, team avatars) are deleted at startup
+  and daily, once they are a day old, so files uploaded into an unsaved editor survive.
 
 ## Networking
 

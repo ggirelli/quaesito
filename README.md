@@ -27,7 +27,9 @@ QUAESITO_ADMIN_PASSWORD=pick-something just play
 Then:
 
 1. Open `http://localhost:8080` on the laptop driving the TV, click the ⚙ icon in the top right corner and log in.
-2. Create a quiz, or import one (JSON). The editor saves as you type and tells you when the quiz is ready to play.
+2. Create a quiz, or import one. The editor saves as you type and tells you when the quiz is ready to play.
+   **Export** downloads a quiz as a `.zip` with its pictures and soundtracks, ready to import on another machine (plain
+   `.json` exports from older versions import too).
 3. Press **▶ Start**. The big screen shows a QR code and a 6-digit code.
 4. Team leaders scan the code (phones must be on the same Wi-Fi), choose a name and optionally a picture.
 5. Press **Start the quiz**, then use the button, `→`, `PageDown` or `N` (presentation clickers work) to move on.
@@ -90,7 +92,7 @@ only, it always earns 1000. Either way, ties are broken by the time spent on cor
 | Variable | Default | Meaning |
 |---|---|---|
 | `QUAESITO_ADMIN_PASSWORD` | generated and printed at startup | Admin password |
-| `QUAESITO_DATA_DIR` | `./data` | Where quizzes (JSON) and pictures are stored |
+| `QUAESITO_DATA_DIR` | `./data` | Where quizzes, pictures, soundtracks and live games are stored |
 | `QUAESITO_PUBLIC_URL` | LAN address + port | Base URL used in join links and QR codes |
 | `IP` / `PORT` | `127.0.0.1` / `8080` | Listening address of the server binary |
 

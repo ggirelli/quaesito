@@ -35,7 +35,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 26 | Sound effects on the big screen | ✅ done |
 | 27 | End-of-game results page and download | ✅ done |
 | 28 | Live games survive a server restart | ✅ done |
-| 29 | Exports bundle media (zip); unused media is cleaned up | ⏳ planned |
+| 29 | Exports bundle media (zip); unused media is cleaned up | ✅ done |
 
 ## Notes
 
@@ -64,10 +64,9 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 
 ## Known gaps
 
-- Pictures and soundtracks removed from a quiz stay on disk (no garbage collection yet).
 - No automated browser tests in CI; the end-to-end flow was checked manually with headless Chrome.
-- Quiz JSON export does not include pictures or soundtracks.
 
 ## Ideas for later
 
-- Garbage-collect unused pictures; bundle pictures in exports.
+- More question types: true/false shortcut, pin on a map.
+- Team captains passing the phone: several players per team answering in turn.
