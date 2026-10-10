@@ -8,8 +8,8 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 |---|---|---|
 | 0 | Repo, CI, `just` recipes, cargo-deny, logo | ✅ done |
 | 1 | Quiz model, per-quiz settings, validation | ✅ done |
-| 2 | Scoring and ranking | ⏳ next |
-| 3 | Storage (quizzes on disk) and image handling | ⬜ todo |
+| 2 | Scoring and ranking | ✅ done |
+| 3 | Storage (quizzes on disk) and image handling | ⏳ next |
 | 4 | Admin auth and quiz API | ⬜ todo |
 | 5 | Game engine (session state machine) | ⬜ todo |
 | 6 | Live sessions over WebSockets, join API, QR code | ⬜ todo |
@@ -22,3 +22,4 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 ## Notes
 
 - `src/model.rs`: quizzes, questions, answers, settings and validation.
+- `src/scoring.rs`: speed-weighted points, all-or-nothing/partial correctness, ranking.
