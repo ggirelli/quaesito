@@ -286,7 +286,7 @@ mod tests {
 
     #[test]
     fn valid_quiz_has_no_issues() {
-        assert!(quiz().validate().is_empty());
+        assert_eq!(quiz().validate(), Vec::new());
     }
 
     #[test]
