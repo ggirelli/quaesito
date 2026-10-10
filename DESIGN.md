@@ -56,6 +56,9 @@ joined by the server. The page shows the real `/host/<code>` page and one `/join
 page per phone in frames, so each lays itself out at its own screen size. A `ticket` in the URL
 makes the phone play as that team without storing it, since frames on one page share storage.
 Restart ends the test game and starts a fresh one; the editor saves before starting a test.
+Frames load one after another, each once the previous one's app runs: when several frames fetch
+the same large app at once, Firefox can leave one of them loading forever. A frame still loading
+after 15 s is reloaded.
 
 Screens hold a WebSocket each (`/api/ws/host`, `/api/ws/player`). On every change the server
 pushes a complete, role-specific view (`src/protocol.rs`), so clients never reconstruct state and

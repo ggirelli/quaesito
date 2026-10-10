@@ -1828,7 +1828,8 @@ button.joker {
   gap: 0.3rem;
 }
 
-.test-phone iframe {
+.test-phone iframe,
+.test-phone-waiting {
   width: 330px;
   height: 640px;
   border: 8px solid #000;
@@ -1844,4 +1845,9 @@ button.joker {
   .test-phones {
     max-width: none;
   }
+}
+
+.test-phone-waiting {
+  display: grid;
+  place-items: center;
 }

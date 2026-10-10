@@ -8,6 +8,7 @@ use dioxus::prelude::*;
 use super::{
     Route,
     admin::{AdminGate, AdminHeader, AdminToken},
+    client,
     widgets::{ClientOnly, ErrorBox, Spinner, message},
 };
 use crate::api::{add_test_phone, end_session, remove_test_phone, start_test, test_info};
@@ -18,19 +19,29 @@ pub fn Test(code: String) -> Element {
     rsx! {
         ClientOnly {
             AdminGate {
-                TestPage { key: "{code}", code }
+                TestPage { code }
             }
         }
     }
 }
 
+/// The page follows `code`: Restart navigates to a new test game, and the router keeps this
+/// component, so everything below reads the current code rather than the first one.
 #[component]
 fn TestPage(code: String) -> Element {
     let token: AdminToken = use_context();
-    let code = use_signal(|| code);
+    let mut current = use_signal(|| code.clone());
     let mut error = use_signal(|| None::<String>);
-    let mut info = use_resource(move || async move { test_info(token.get(), code()).await });
+    let mut info = use_resource(move || async move { test_info(token.get(), current()).await });
     let nav = navigator();
+    let ready = use_ready_frames();
+    use_effect(use_reactive!(|code| {
+        if *current.peek() != code {
+            current.set(code);
+            error.set(None);
+        }
+    }));
+    let code = current;
 
     let loaded = info.read().clone();
     let info_now = match loaded {
@@ -108,9 +119,11 @@ fn TestPage(code: String) -> Element {
                     }
                 }
                 section { class: "test-phones",
-                    for phone in info_now.phones.iter() {
+                    for (i, phone) in info_now.phones.iter().enumerate() {
                         TestPhoneFrame {
                             key: "{phone.ticket}",
+                            // Frame i + 1 waits for the frames before it (the big screen first).
+                            load: ready() > i,
                             code: code(),
                             name: phone.name.clone(),
                             ticket: phone.ticket.clone(),
@@ -127,9 +140,56 @@ fn TestPage(code: String) -> Element {
     }
 }
 
+/// Re-checks the frames this often.
+const FRAME_CHECK_MS: u32 = 500;
+
+/// Finds how many frames, in page order, have their app running, and reloads a frame still
+/// loading after 15 s.
+///
+/// Frames are loaded one after another because browsers can stall (Firefox never finishes one of
+/// them) when several frames fetch the same large app at once; the reload is a safety net.
+const FRAME_CHECK_JS: &str = r"
+const frames = [...document.querySelectorAll('.test-layout iframe')];
+let ready = 0;
+let counting = true;
+for (const frame of frames) {
+  let running = false;
+  try {
+    const doc = frame.contentDocument;
+    running = !!doc && !!doc.querySelector('.host, .player, form.card');
+  } catch (e) {}
+  if (!frame.dataset.since) frame.dataset.since = String(Date.now());
+  if (running) {
+    frame.dataset.since = '';
+  } else if (Date.now() - Number(frame.dataset.since) > 15000) {
+    frame.dataset.since = String(Date.now());
+    frame.src = frame.src;
+  }
+  if (counting && running) ready += 1; else counting = false;
+}
+return ready;
+";
+
+/// How many frames in a row, from the big screen, have their app running.
+fn use_ready_frames() -> Signal<usize> {
+    let mut ready = use_signal(|| 0usize);
+    use_future(move || async move {
+        loop {
+            client::sleep_ms(FRAME_CHECK_MS).await;
+            if let Ok(count) = document::eval(FRAME_CHECK_JS).join::<usize>().await
+                && count != *ready.peek()
+            {
+                ready.set(count);
+            }
+        }
+    });
+    ready
+}
+
 /// One test phone: a phone-sized frame playing as its team.
 #[component]
 fn TestPhoneFrame(
+    load: bool,
     code: String,
     name: String,
     ticket: String,
@@ -162,9 +222,15 @@ fn TestPhoneFrame(
                     "✕"
                 }
             }
-            iframe {
-                src: "/join/{code}?ticket={ticket}",
-                title: "{name}",
+            if load {
+                iframe {
+                    src: "/join/{code}?ticket={ticket}",
+                    title: "{name}",
+                }
+            } else {
+                div { class: "test-phone-waiting",
+                    Spinner {}
+                }
             }
         }
     }
