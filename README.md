@@ -94,7 +94,8 @@ only, it always earns 1000. Either way, ties are broken by the time spent on cor
 | `QUAESITO_PUBLIC_URL` | LAN address + port | Base URL used in join links and QR codes |
 | `IP` / `PORT` | `127.0.0.1` / `8080` | Listening address of the server binary |
 
-Live games are kept in memory, so restarting the server ends them. Quizzes are plain files you can back up.
+Live games are saved as they go: if the server restarts (or the laptop crashes), games come back paused where they were,
+and phones reconnect by themselves. Quizzes are plain files you can back up.
 
 ## Development
 

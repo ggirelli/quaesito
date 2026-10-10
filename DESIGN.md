@@ -134,7 +134,12 @@ Everything lives under a data directory (`QUAESITO_DATA_DIR`, default `./data`):
   as uploaded once their format is recognised from their first bytes; `/media` answers byte-range
   requests so the big screen can seek (a reloaded host page resumes the music where the clock is).
 - Running sessions take a snapshot of the quiz at start, so editing never affects a live game.
-  Sessions are kept in memory only.
+- `games/<code>.json`: each live game, saved shortly after every change (`engine::Snapshot`, with
+  times relative to the save since `Instant`s do not survive a restart). On startup the saved games
+  come back paused, with the same time left, so downtime costs nobody; phones and the host screen
+  reconnect by themselves. Ending a game deletes its file.
+- `admin-tokens.json`: issued admin tokens (the latest 50, readable by the owner only), so the
+  admin and the host screen stay logged in across restarts.
 - JSON export/import of quizzes for backup and sharing (pictures are not included).
 
 ## Networking

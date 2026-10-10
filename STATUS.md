@@ -34,7 +34,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 25 | Pictures that sharpen while the clock runs | ✅ done |
 | 26 | Sound effects on the big screen | ✅ done |
 | 27 | End-of-game results page and download | ✅ done |
-| 28 | Live games survive a server restart | ⏳ planned |
+| 28 | Live games survive a server restart | ✅ done |
 | 29 | Exports bundle media (zip); unused media is cleaned up | ⏳ planned |
 
 ## Notes
@@ -66,7 +66,6 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 
 - Pictures and soundtracks removed from a quiz stay on disk (no garbage collection yet).
 - No automated browser tests in CI; the end-to-end flow was checked manually with headless Chrome.
-- Admin tokens and live games live in memory: a server restart logs the admin out and ends games.
 - Quiz JSON export does not include pictures or soundtracks.
 
 ## Ideas for later
