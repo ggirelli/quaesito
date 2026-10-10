@@ -45,6 +45,15 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 36 | Questions with several typed parts (title + artist, five posters…), judged per part | ⏳ planned |
 | 37 | Pin on a picture (a map, a floor plan…), scored by distance | ⏳ planned |
 
+## TODO (next session)
+
+- [ ] Documentation site on GitHub Pages, with screenshots of the big screen, phones and editor.
+- [ ] Project boilerplate: `CONTRIBUTING.md`, MIT `LICENSE` (and `license` in `Cargo.toml`), code of
+      conduct, security policy, issue and pull request templates, changelog.
+- [ ] Ready-to-run downloads for macOS, Linux and Windows (one archive per platform with the
+      server and its web files; nothing else to install), built by CI on tagged releases.
+- [ ] Demo video: setting up a quiz, the big screen and phones during a game, the podium.
+
 ## Notes
 
 - `src/model.rs`: quizzes, questions, answers, settings and validation.
