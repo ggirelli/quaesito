@@ -64,7 +64,7 @@ Each quiz chooses:
 
 | Setting | Options |
 |---|---|
-| Reveal answers | after each question (with standings) · at the end (walk through the answers before the podium) |
+| Reveal answers | after each question (with standings: points gained, answer times, places moved) · at the end (walk through the answers before the podium) |
 | Several correct answers | all or nothing · partial credit (correct picks minus wrong picks) |
 | Points | speed (faster correct answers earn more) · correct answers only (1000 each) |
 | Moving on | host clicks · automatic after a short pause |

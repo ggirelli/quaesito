@@ -27,7 +27,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 18 | Points setting: speed-weighted or a flat 1000 per correct answer | ✅ done |
 | 19 | Host renames and removes teams | ✅ done |
 | 20 | Host pauses the clock, adds time and goes back | ✅ done |
-| 21 | Reveal details: fastest team, answer times, rank changes | ⏳ planned |
+| 21 | Reveal details: fastest team, answer times, rank changes | ✅ done |
 | 22 | Joker: each team doubles one question's points | ⏳ planned |
 | 23 | Picture answers for multiple choice | ⏳ planned |
 | 24 | "Put in order" questions | ⏳ planned |
@@ -73,4 +73,3 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 
 - Sound effects (countdown, reveal, fanfare).
 - Garbage-collect unused pictures; bundle pictures in exports.
-- Show each team's answer time on the reveal screen.

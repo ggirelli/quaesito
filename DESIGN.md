@@ -98,6 +98,10 @@ standings immediately. Only closed questions count, so standings never give away
 
 Ties in the final ranking are broken by lower total response time on correct answers.
 
+Reveals name the fastest fully correct team (not for number questions, where speed does not
+count). The standings shown after a question carry each team's `RoundResult`: points gained, answer
+time and its rank before that question, computed from the standings one item earlier.
+
 ## Storage
 
 Everything lives under a data directory (`QUAESITO_DATA_DIR`, default `./data`):
