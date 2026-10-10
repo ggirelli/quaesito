@@ -23,6 +23,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 14 | Open-ended questions: typed text (judged) and closest number | ✅ done |
 | 15 | Quiz list flags quizzes that are not ready to play and disables their Start button | ✅ done |
 | 16 | Slides between questions: title, text and/or picture | ✅ done |
+| 17 | Editor: shuffle questions within each run between slides, with undo | ✅ done |
 
 ## Notes
 

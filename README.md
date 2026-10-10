@@ -49,6 +49,9 @@ wrong (VPNs, several network cards), set `QUAESITO_PUBLIC_URL`, e.g. `http://192
 Between questions you can add **slides** (title, text and/or picture) to introduce rounds or explain rules. Phones show
 "Eyes on the big screen" meanwhile, and with automatic advance a slide stays up for 10 seconds.
 
+**🔀 Shuffle questions** in the editor reorders the questions at random, round by round: slides stay in place and
+questions never move past a slide. The last shuffle can be undone until you make another change.
+
 ### Quiz settings
 
 Each quiz chooses:
