@@ -45,7 +45,9 @@ back to the join page).
 
 A question's picture can be **revealed gradually** while the clock runs: **zoom out** starts on a 5× close-up of its
 centre and widens steadily to the whole picture; **uncover tile by tile** hides it under a 6×4 grid whose tiles drop
-away at an even pace in a shuffled order. Early guesses are harder but, with speed points, worth more.
+away at an even pace in a shuffled order. Choose how many seconds the whole picture then stays visible before the buzzer
+(5 by default): with a 25-second question and 5 seconds, the reveal takes 20. Early guesses are harder but, with speed
+points, worth more.
 
 A question can have a soundtrack (MP3, M4A/AAC, Ogg/Opus, WebM, FLAC or WAV, up to 40 MB). It then
 waits on the big screen with a full clock until the host presses **▶ Start the music**: the music
@@ -105,7 +107,8 @@ and phones reconnect by themselves. Quizzes are plain files you can back up.
 Requires Rust (stable), the `wasm32-unknown-unknown` target, [`dx`](https://dioxuslabs.com/learn/0.7/getting_started) (Dioxus CLI 0.7), [`just`](https://github.com/casey/just) and [`cargo-deny`](https://github.com/EmbarkStudios/cargo-deny).
 
 ```sh
-just serve   # hot-reloading dev server on the LAN (admin password defaults to "quaesito")
+just serve   # hot-reloading dev server on the LAN (admin password defaults to "quaesito"); its debug build is
+             # large (~90 MB of WebAssembly), so phones load it slowly: use `just play` for real games
 just check   # fmt + clippy (server and wasm) + tests + cargo-deny, same as CI
 just play    # release build served on the LAN
 ```

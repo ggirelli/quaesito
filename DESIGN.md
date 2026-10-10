@@ -59,8 +59,9 @@ and run locally from the moment the view arrived.
 
 A quiz has an ordered list of questions. Each question has text, an optional picture (optionally
 revealed gradually by `image_reveal`: `Zoom` scales it from 5× down to 1× and `Tiles` drops a 6×4 grid of covers
-in a per-question shuffled order, both linearly with the clock left; the former `blur_image` flag
-reads as `Zoom`), an optional soundtrack, a time limit
+in a per-question shuffled order, both linearly with the time spent so extra time never runs them
+backwards; the reveal completes `image_hold_secs` before the buzzer so the whole picture stays up
+for a moment, and it is shown whole on the results; the former `blur_image` flag reads as `Zoom`), an optional soundtrack, a time limit
 (defaulting to the quiz-wide one) and a kind. The list also holds slides (`Slide { title }`, with
 the question text as body and the picture), which separate rounds or explain rules; they are
 numbered apart from questions and score nothing. A quiz needs at least one real question.

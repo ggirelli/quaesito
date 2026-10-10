@@ -36,6 +36,8 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 27 | End-of-game results page and download | ✅ done |
 | 28 | Live games survive a server restart | ✅ done |
 | 29 | Exports bundle media (zip); unused media is cleaned up | ✅ done |
+| 30 | Fix: joining by typed code before the app has loaded (plain-form fallback to `/join?code=`) | ✅ done |
+| 31 | Revealed pictures stay fully visible for a set number of seconds before the buzzer | ✅ done |
 
 ## Notes
 
