@@ -39,6 +39,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 30 | Fix: joining by typed code before the app has loaded (plain-form fallback to `/join?code=`) | ✅ done |
 | 31 | Revealed pictures stay fully visible for a set number of seconds before the buzzer | ✅ done |
 | 32 | Admin test mode: big screen and auto-joined phones side by side | ✅ done |
+| 33 | Editor: move a question or slide to the top or bottom | ✅ done |
 
 ## Notes
 

@@ -439,6 +439,16 @@ fn QuestionCard(
                 div { class: "row actions",
                     button {
                         class: "button ghost icon",
+                        title: "Move to the top",
+                        disabled: index == 0,
+                        onclick: move |_| draft.edit(|q| {
+                            let item = q.questions.remove(index);
+                            q.questions.insert(0, item);
+                        }),
+                        "⤒"
+                    }
+                    button {
+                        class: "button ghost icon",
                         title: "Move up",
                         disabled: index == 0,
                         onclick: move |_| draft.edit(|q| q.questions.swap(index, index - 1)),
@@ -450,6 +460,16 @@ fn QuestionCard(
                         disabled: index + 1 == count,
                         onclick: move |_| draft.edit(|q| q.questions.swap(index, index + 1)),
                         "↓"
+                    }
+                    button {
+                        class: "button ghost icon",
+                        title: "Move to the bottom",
+                        disabled: index + 1 == count,
+                        onclick: move |_| draft.edit(|q| {
+                            let item = q.questions.remove(index);
+                            q.questions.push(item);
+                        }),
+                        "⤓"
                     }
                     button {
                         class: "button ghost",
