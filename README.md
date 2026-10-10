@@ -5,7 +5,7 @@
   </picture>
 </h1>
 
-Quizzes among friends: a self-hosted, Kahoot-style quiz web app written in Rust with [Dioxus](https://dioxuslabs.com).
+Quizzes among friends: a self-hosted, live quiz web app written in Rust with [Dioxus](https://dioxuslabs.com).
 
 - **Admin** builds quizzes in the browser: questions, optional pictures, 2–6 answers (one or several correct) and time limits.
 - **Big screen** shows the quiz as a slideshow on a TV or projector, with a QR code to join.
