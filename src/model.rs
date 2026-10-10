@@ -149,6 +149,9 @@ pub struct Question {
     /// Name of an uploaded picture, if any.
     #[serde(default)]
     pub image: Option<String>,
+    /// Name of an uploaded soundtrack, if any. The host starts it, and the clock with it.
+    #[serde(default)]
+    pub audio: Option<String>,
     /// Overrides the quiz-wide time limit when set.
     #[serde(default)]
     pub time_limit_secs: Option<u32>,
@@ -272,6 +275,7 @@ mod tests {
         Question {
             text: "Which planet has the most moons?".to_owned(),
             image: None,
+            audio: None,
             time_limit_secs: None,
             answers: vec![answer("Jupiter", false), answer("Saturn", true)],
         }

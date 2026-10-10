@@ -116,11 +116,22 @@ pub async fn import_quiz(token: String, json: String) -> ServerFnResult<String> 
 pub async fn upload_question_image(token: String, file: FileStream) -> ServerFnResult<String> {
     let state = crate::server::state();
     state.auth.require(&token)?;
-    let bytes = crate::server::media::read_upload(file).await?;
+    let bytes =
+        crate::server::media::read_upload(file, crate::server::media::MAX_IMAGE_BYTES).await?;
     Ok(state
         .media
         .store(bytes, crate::server::media::ImageKind::Question)
         .await?)
+}
+
+/// Uploads a question soundtrack and returns its media name.
+#[post("/api/admin/audio?token")]
+pub async fn upload_question_audio(token: String, file: FileStream) -> ServerFnResult<String> {
+    let state = crate::server::state();
+    state.auth.require(&token)?;
+    let bytes =
+        crate::server::media::read_upload(file, crate::server::media::MAX_AUDIO_BYTES).await?;
+    Ok(state.media.store_audio(bytes).await?)
 }
 
 /// Starts a live session for a quiz and returns its join code.
@@ -210,7 +221,8 @@ pub async fn upload_avatar(
     let team = session
         .read(|g| g.team_for_token(&token))
         .ok_or_else(|| ServerFnError::new("Unknown team."))?;
-    let bytes = crate::server::media::read_upload(file).await?;
+    let bytes =
+        crate::server::media::read_upload(file, crate::server::media::MAX_IMAGE_BYTES).await?;
     let name = state
         .media
         .store(bytes, crate::server::media::ImageKind::Avatar)

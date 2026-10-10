@@ -580,6 +580,7 @@ mod tests {
         let question = |text: &str| Question {
             text: text.to_owned(),
             image: None,
+            audio: None,
             time_limit_secs: Some(10),
             answers: vec![
                 Answer {

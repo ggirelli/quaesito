@@ -1,4 +1,4 @@
-//! Uploaded pictures: validation, re-encoding and serving.
+//! Uploaded pictures and soundtracks: validation, processing and serving.
 
 use std::{io::Cursor, path::PathBuf};
 
@@ -6,15 +6,17 @@ use anyhow::Context;
 use dioxus::fullstack::{
     axum::{
         extract::Path,
-        http::{StatusCode, header},
+        http::{HeaderMap, StatusCode, header},
         response::{IntoResponse, Response},
     },
     body::Body,
 };
 use image::{DynamicImage, ImageFormat, ImageReader, Limits, imageops::FilterType};
 
-/// Largest accepted upload, in bytes.
-pub const MAX_UPLOAD_BYTES: usize = 15 * 1024 * 1024;
+/// Largest accepted picture upload, in bytes.
+pub const MAX_IMAGE_BYTES: usize = 15 * 1024 * 1024;
+/// Largest accepted soundtrack upload, in bytes.
+pub const MAX_AUDIO_BYTES: usize = 40 * 1024 * 1024;
 
 const QUESTION_MAX_WIDTH: u32 = 1600;
 const QUESTION_MAX_HEIGHT: u32 = 1200;
@@ -30,7 +32,7 @@ pub enum ImageKind {
     Avatar,
 }
 
-/// Directory of processed pictures.
+/// Directory of processed pictures and soundtracks.
 pub struct MediaStore {
     dir: PathBuf,
 }
@@ -59,7 +61,19 @@ impl MediaStore {
         Ok(name)
     }
 
-    /// Reads a stored picture by file name.
+    /// Stores an uploaded soundtrack as-is, returning its file name.
+    ///
+    /// # Errors
+    /// Fails if the data is not a supported audio format or cannot be written.
+    pub async fn store_audio(&self, bytes: Vec<u8>) -> anyhow::Result<String> {
+        let ext = audio_extension(&bytes)
+            .context("Unsupported soundtrack. Use MP3, M4A/AAC, Ogg, Opus, WebM, FLAC or WAV.")?;
+        let name = format!("{}.{ext}", uuid::Uuid::new_v4().simple());
+        tokio::fs::write(self.dir.join(&name), bytes).await?;
+        Ok(name)
+    }
+
+    /// Reads a stored file by name.
     async fn read(&self, name: &str) -> Option<(Vec<u8>, &'static str)> {
         let content_type = content_type(name)?;
         let data = tokio::fs::read(self.dir.join(name)).await.ok()?;
@@ -106,20 +120,53 @@ pub fn process(bytes: &[u8], kind: ImageKind) -> anyhow::Result<(Vec<u8>, &'stat
     }
 }
 
-/// Reads an upload into memory, enforcing [`MAX_UPLOAD_BYTES`].
+/// Recognises an audio file by its first bytes and returns the extension to store it under.
+#[must_use]
+pub fn audio_extension(bytes: &[u8]) -> Option<&'static str> {
+    match bytes {
+        [b'I', b'D', b'3', ..] => Some("mp3"),
+        [0xFF, second, ..] if second & 0xE0 == 0xE0 && second & 0x06 != 0 => Some("mp3"),
+        [0xFF, second, ..] if second & 0xF6 == 0xF0 => Some("aac"),
+        [b'O', b'g', b'g', b'S', ..] => Some("ogg"),
+        [b'f', b'L', b'a', b'C', ..] => Some("flac"),
+        [
+            b'R',
+            b'I',
+            b'F',
+            b'F',
+            _,
+            _,
+            _,
+            _,
+            b'W',
+            b'A',
+            b'V',
+            b'E',
+            ..,
+        ] => Some("wav"),
+        [_, _, _, _, b'f', b't', b'y', b'p', ..] => Some("m4a"),
+        [0x1A, 0x45, 0xDF, 0xA3, ..] => Some("webm"),
+        _ => None,
+    }
+}
+
+/// Reads an upload into memory, refusing more than `max_bytes`.
 ///
 /// # Errors
 /// Fails if the upload is too large or the stream breaks.
-pub async fn read_upload(mut file: dioxus::fullstack::FileStream) -> anyhow::Result<Vec<u8>> {
+pub async fn read_upload(
+    mut file: dioxus::fullstack::FileStream,
+    max_bytes: usize,
+) -> anyhow::Result<Vec<u8>> {
     use futures_util::StreamExt;
 
     let mut bytes = Vec::new();
     while let Some(chunk) = file.next().await {
         let chunk = chunk.map_err(|err| anyhow::anyhow!("upload interrupted: {err}"))?;
-        if bytes.len() + chunk.len() > MAX_UPLOAD_BYTES {
+        if bytes.len() + chunk.len() > max_bytes {
             anyhow::bail!(
-                "The picture is too large (max {} MB).",
-                MAX_UPLOAD_BYTES / 1024 / 1024
+                "The file is too large (max {} MB).",
+                max_bytes / 1024 / 1024
             );
         }
         bytes.extend_from_slice(&chunk);
@@ -137,23 +184,77 @@ fn content_type(name: &str) -> Option<&'static str> {
     match ext {
         "jpg" => Some("image/jpeg"),
         "png" => Some("image/png"),
+        "mp3" => Some("audio/mpeg"),
+        "aac" => Some("audio/aac"),
+        "m4a" => Some("audio/mp4"),
+        "ogg" => Some("audio/ogg"),
+        "flac" => Some("audio/flac"),
+        "wav" => Some("audio/wav"),
+        "webm" => Some("audio/webm"),
         _ => None,
     }
 }
 
 /// Axum handler for `GET /media/{name}`.
-pub async fn serve(Path(name): Path<String>) -> Response {
-    match super::state().media.read(&name).await {
-        Some((data, content_type)) => (
-            [
-                (header::CONTENT_TYPE, content_type),
-                (header::CACHE_CONTROL, "public, max-age=31536000, immutable"),
-            ],
-            Body::from(data),
+///
+/// Honours single byte ranges so browsers can seek in soundtracks.
+pub async fn serve(Path(name): Path<String>, headers: HeaderMap) -> Response {
+    let Some((data, content_type)) = super::state().media.read(&name).await else {
+        return StatusCode::NOT_FOUND.into_response();
+    };
+    let common = [
+        (header::CONTENT_TYPE, content_type.to_owned()),
+        (
+            header::CACHE_CONTROL,
+            "public, max-age=31536000, immutable".to_owned(),
+        ),
+        (header::ACCEPT_RANGES, "bytes".to_owned()),
+    ];
+    let range = headers
+        .get(header::RANGE)
+        .and_then(|value| value.to_str().ok());
+    match range.map(|r| byte_range(r, data.len())) {
+        None => (common, Body::from(data)).into_response(),
+        Some(Some((start, end))) => (
+            StatusCode::PARTIAL_CONTENT,
+            common,
+            [(
+                header::CONTENT_RANGE,
+                format!("bytes {start}-{end}/{}", data.len()),
+            )],
+            Body::from(data[start..=end].to_vec()),
         )
             .into_response(),
-        None => StatusCode::NOT_FOUND.into_response(),
+        Some(None) => (
+            StatusCode::RANGE_NOT_SATISFIABLE,
+            [(header::CONTENT_RANGE, format!("bytes */{}", data.len()))],
+        )
+            .into_response(),
     }
+}
+
+/// Parses a single `bytes=` range into inclusive bounds within a body of `len` bytes.
+fn byte_range(header: &str, len: usize) -> Option<(usize, usize)> {
+    let spec = header.strip_prefix("bytes=")?.trim();
+    let (start, end) = spec.split_once('-')?;
+    let last = len.checked_sub(1)?;
+    let (start, end) = if start.is_empty() {
+        // `bytes=-N`: the final N bytes.
+        let suffix: usize = end.parse().ok()?;
+        if suffix == 0 {
+            return None;
+        }
+        (len.saturating_sub(suffix), last)
+    } else {
+        let start: usize = start.parse().ok()?;
+        let end = if end.is_empty() {
+            last
+        } else {
+            end.parse::<usize>().ok()?.min(last)
+        };
+        (start, end)
+    };
+    (start <= end).then_some((start, end))
 }
 
 #[cfg(test)]
@@ -197,10 +298,43 @@ mod tests {
     }
 
     #[test]
+    fn audio_is_recognised_by_its_magic_bytes() {
+        assert_eq!(audio_extension(b"ID3\x04rest"), Some("mp3"));
+        assert_eq!(audio_extension(&[0xFF, 0xFB, 0x90, 0x00]), Some("mp3"));
+        assert_eq!(audio_extension(&[0xFF, 0xF1, 0x50, 0x80]), Some("aac"));
+        assert_eq!(audio_extension(b"OggS\0\x02"), Some("ogg"));
+        assert_eq!(audio_extension(b"fLaC\0\0"), Some("flac"));
+        assert_eq!(audio_extension(b"RIFF\x24\0\0\0WAVEfmt "), Some("wav"));
+        assert_eq!(audio_extension(b"\0\0\0\x20ftypM4A "), Some("m4a"));
+        assert_eq!(
+            audio_extension(&[0x1A, 0x45, 0xDF, 0xA3, 0x01]),
+            Some("webm")
+        );
+        assert_eq!(audio_extension(b"<html>"), None);
+        assert_eq!(audio_extension(b""), None);
+    }
+
+    #[test]
+    fn byte_ranges_are_clamped_to_the_body() {
+        assert_eq!(byte_range("bytes=0-", 10), Some((0, 9)));
+        assert_eq!(byte_range("bytes=2-4", 10), Some((2, 4)));
+        assert_eq!(byte_range("bytes=5-100", 10), Some((5, 9)));
+        assert_eq!(byte_range("bytes=-3", 10), Some((7, 9)));
+        assert_eq!(byte_range("bytes=10-", 10), None);
+        assert_eq!(byte_range("bytes=4-2", 10), None);
+        assert_eq!(byte_range("bytes=0-", 0), None);
+        assert_eq!(byte_range("items=0-1", 10), None);
+    }
+
+    #[test]
     fn only_generated_names_are_served() {
         assert_eq!(
             content_type("0123456789abcdef0123456789abcdef.jpg"),
             Some("image/jpeg")
+        );
+        assert_eq!(
+            content_type("0123456789abcdef0123456789abcdef.mp3"),
+            Some("audio/mpeg")
         );
         assert_eq!(content_type("../secret.jpg"), None);
         assert_eq!(content_type("0123456789abcdef0123456789abcdef.svg"), None);
