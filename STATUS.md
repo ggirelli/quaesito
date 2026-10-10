@@ -17,7 +17,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 8 | UI: quiz editor | ✅ done |
 | 9 | UI: host slideshow and podium | ✅ done |
 | 10 | UI: player (phone) view | ✅ done |
-| 11 | README usage docs, end-to-end smoke test | ⏳ next |
+| 11 | README usage docs, end-to-end smoke test | ✅ done |
 
 ## Notes
 
@@ -45,3 +45,13 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 ## Known gaps
 
 - Pictures removed from a quiz stay on disk (no garbage collection yet).
+- No automated browser tests in CI; the end-to-end flow was checked manually with headless Chrome.
+- Admin tokens and live games live in memory: a server restart logs the admin out and ends games.
+- Quiz JSON export does not include pictures.
+- A team cannot be renamed or removed once joined.
+
+## Ideas for later
+
+- Sound effects (countdown, reveal, fanfare).
+- Garbage-collect unused pictures; bundle pictures in exports.
+- Show each team's answer time on the reveal screen.

@@ -11,12 +11,24 @@ It serves three views:
 | Host | `/host/<session>` | projector/TV | Slideshow: join QR code, lobby, questions, reveal, podium |
 | Player | `/join/<code>` | phone | Team leader picks name + avatar, answers questions |
 
-The server is authoritative for game state and timing. Clients receive state updates over
-WebSockets; each running session is an in-memory state machine:
+The admin password guards `/admin` and `/host/<code>`; the host screen is opened from the admin
+dashboard when a quiz is started. Phones join at `/join/<code>`.
+
+The server is authoritative for game state and timing. Each running session is an in-memory state
+machine (`src/server/engine.rs`) that takes the current time as an input, so it is fully unit tested:
 
 ```
-Lobby → Question(n) → Locked(n) → [Reveal(n)] → … → FinalReveal → Podium
+Lobby → Question(0) → Closed(0) → … → Closed(n-1) → [Review(0) → … → Review(n-1)] → Podium(0..=3)
 ```
+
+`Review` only exists when answers are revealed at the end. A question closes when its time runs
+out, when every connected team has answered, or when the host stops the clock. With automatic
+advance, a per-session timer task moves on after a short pause.
+
+Screens hold a WebSocket each (`/api/ws/host`, `/api/ws/player`). On every change the server
+pushes a complete, role-specific view (`src/protocol.rs`), so clients never reconstruct state and
+a reconnecting phone simply receives the current view. Countdowns are sent as "milliseconds left"
+and run locally from the moment the view arrived.
 
 ## Quiz model
 
@@ -57,6 +69,7 @@ Everything lives under a data directory (`QUAESITO_DATA_DIR`, default `./data`):
 
 ## Networking
 
-Plain HTTP on the LAN. The join QR code points to the machine's LAN address, overridable via an
-environment variable. Team leaders get a reconnect token stored in `localStorage`, so a sleeping
-phone can rejoin without losing its score.
+Plain HTTP on the LAN, no internet required (no CDNs or web fonts). The join link uses
+`QUAESITO_PUBLIC_URL` if set, otherwise the machine's outbound LAN address plus the port the host
+page was opened on; the QR code is drawn in the browser. Team leaders get a reconnect token stored
+in `localStorage`, so a sleeping phone can rejoin without losing its score.
