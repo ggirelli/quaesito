@@ -6,15 +6,18 @@ use super::{
     Route,
     admin::{AdminGate, AdminHeader, AdminToken},
     client,
-    widgets::{AnswerBadge, ClientOnly, ErrorBox, Icon, IconKind, Spinner, media_url, message},
+    widgets::{
+        AnswerBadge, ClientOnly, ErrorBox, Icon, IconKind, MapPin, PinMap, Spinner, media_url,
+        message,
+    },
 };
 use crate::{
     api::{get_quiz, save_quiz, start_test, upload_question_audio, upload_question_image},
     model::{
         AdvanceMode, Answer, ImageReveal, MAX_ANSWERS, MAX_MULTIPLIER, MAX_PARTS,
         MAX_TIME_LIMIT_SECS, MIN_ANSWERS, MIN_PARTS, MIN_TIME_LIMIT_SECS, MultiScoring, Part,
-        PhoneDisplay, PointsMode, Question, QuestionKind, Quiz, QuizSettings, RevealMode,
-        ValidationIssue,
+        PhoneDisplay, PinTolerance, Point, PointsMode, Question, QuestionKind, Quiz, QuizSettings,
+        RevealMode, ValidationIssue,
     },
 };
 
@@ -665,6 +668,7 @@ fn QuestionCard(
                         ("Number", "Teams guess a number; the closest guess wins 1000 points."),
                         ("Order", "Teams put the items in order; each item in its right place earns its share of the points."),
                         ("Several answers", "Teams type a few answers at once (title and artist, five posters…); each is judged on its own and the points are shared between them."),
+                        ("Pin", "Teams drop a pin on the picture (a map, a floor plan…); the closer, the more points."),
                     ],
                     selected: match question.kind {
                         QuestionKind::Choice | QuestionKind::Slide { .. } => 0,
@@ -673,6 +677,7 @@ fn QuestionCard(
                         QuestionKind::Number { .. } => 3,
                         QuestionKind::Order { .. } => 4,
                         QuestionKind::Parts { .. } => 5,
+                        QuestionKind::Pin { .. } => 6,
                     },
                     on_select: move |i| draft.edit_question(index, |q| set_kind(q, i)),
                 }
@@ -720,6 +725,9 @@ fn QuestionCard(
                     QuestionKind::Parts { parts } => rsx! {
                         PartsEditor { question: index, parts: parts.clone() }
                     },
+                    QuestionKind::Pin { answer, tolerance, .. } => rsx! {
+                        PinEditor { question: index, image: question.image.clone(), answer: *answer, tolerance: *tolerance }
+                    },
                     QuestionKind::TrueFalse { answer } => rsx! {
                         Choice {
                             label: "The statement is",
@@ -746,7 +754,13 @@ fn set_kind(question: &mut Question, choice: usize) {
         | (2, QuestionKind::Text { .. })
         | (3, QuestionKind::Number { .. })
         | (4, QuestionKind::Order { .. })
-        | (5, QuestionKind::Parts { .. }) => return,
+        | (5, QuestionKind::Parts { .. })
+        | (6, QuestionKind::Pin { .. }) => return,
+        (6, _) => QuestionKind::Pin {
+            answer: None,
+            aspect: 0.0,
+            tolerance: PinTolerance::default(),
+        },
         (5, _) => QuestionKind::Parts {
             parts: vec![blank_part(), blank_part()],
         },
@@ -820,6 +834,74 @@ fn AcceptedAnswers(
             span { class: "muted small",
                 "Case, accents, punctuation and spacing are ignored; spelling must match."
             }
+        }
+    }
+}
+
+/// The right spot of a pin question, clicked on its picture, and how close pins must be.
+#[component]
+fn PinEditor(
+    question: usize,
+    image: Option<String>,
+    answer: Option<Point>,
+    tolerance: PinTolerance,
+) -> Element {
+    let draft: Draft = use_context();
+    let Some(image) = image else {
+        return rsx! {
+            p { class: "muted", "Add the picture above (a map, a floor plan…), then click the right spot on it." }
+        };
+    };
+    let set_tolerance = move |tolerance: PinTolerance| {
+        draft.edit_question(question, |q| {
+            if let QuestionKind::Pin { tolerance: t, .. } = &mut q.kind {
+                *t = tolerance;
+            }
+        });
+    };
+    rsx! {
+        p { class: "muted small",
+            if answer.is_some() { "Click to move the right spot." } else { "Click the right spot on the picture." }
+        }
+        div { class: "pin-edit",
+            PinMap {
+                image,
+                pins: answer
+                    .map(|at| MapPin {
+                        at,
+                        label: "★".to_owned(),
+                        title: "The right spot".to_owned(),
+                        class: "answer",
+                    })
+                    .into_iter()
+                    .collect::<Vec<_>>(),
+                on_pick: EventHandler::new(move |(at, aspect): (Point, f64)| {
+                    draft.edit_question(question, |q| {
+                        if let QuestionKind::Pin { answer, aspect: a, .. } = &mut q.kind {
+                            *answer = Some(at);
+                            *a = aspect;
+                        }
+                    });
+                }),
+            }
+        }
+        Choice {
+            label: "How close",
+            options: vec![
+                ("Tight", "Full points within 2% of the picture's width, none beyond 15%."),
+                ("Normal", "Full points within 4% of the picture's width, none beyond 30%."),
+                ("Loose", "Full points within 8% of the picture's width, none beyond 50%."),
+            ],
+            selected: match tolerance {
+                PinTolerance::Tight => 0,
+                PinTolerance::Normal => 1,
+                PinTolerance::Loose => 2,
+            },
+            on_select: move |i| set_tolerance(match i {
+                0 => PinTolerance::Tight,
+                2 => PinTolerance::Loose,
+                _ => PinTolerance::Normal,
+            }),
         }
     }
 }

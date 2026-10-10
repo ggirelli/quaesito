@@ -178,3 +178,66 @@ pub fn Icon(kind: IconKind) -> Element {
         }
     }
 }
+
+/// A pin drawn on a [`PinMap`].
+#[derive(Debug, Clone, PartialEq)]
+pub struct MapPin {
+    pub at: crate::model::Point,
+    /// A few characters drawn in the pin (a team's initial, ★ for the right spot).
+    pub label: String,
+    /// Shown on hover.
+    pub title: String,
+    /// Extra CSS class: `answer`, `own`, or empty for other teams.
+    pub class: &'static str,
+}
+
+/// A picture with pins on it. With `on_pick`, tapping it reports the spot and the picture's
+/// height-to-width ratio.
+#[component]
+pub fn PinMap(
+    image: String,
+    pins: Vec<MapPin>,
+    #[props(default)] on_pick: Option<EventHandler<(crate::model::Point, f64)>>,
+) -> Element {
+    let mut mounted = use_signal(|| None::<std::rc::Rc<MountedData>>);
+    rsx! {
+        div { class: if on_pick.is_some() { "pin-map pickable" } else { "pin-map" },
+            img {
+                src: media_url(&image),
+                alt: "",
+                draggable: false,
+                onmounted: move |e| mounted.set(Some(e.data())),
+                onclick: move |e: MouseEvent| async move {
+                    let (Some(handler), Some(element)) = (on_pick, mounted()) else {
+                        return;
+                    };
+                    let Ok(rect) = element.get_client_rect().await else {
+                        return;
+                    };
+                    let (width, height) = (rect.width(), rect.height());
+                    if width <= 0.0 || height <= 0.0 {
+                        return;
+                    }
+                    // Pins ignore the pointer, so the click lands on the picture itself.
+                    let point = e.element_coordinates();
+                    handler.call((
+                        crate::model::Point {
+                            x: (point.x / width).clamp(0.0, 1.0),
+                            y: (point.y / height).clamp(0.0, 1.0),
+                        },
+                        height / width,
+                    ));
+                },
+            }
+            for (i, pin) in pins.into_iter().enumerate() {
+                span {
+                    key: "{i}",
+                    class: "map-pin {pin.class}",
+                    style: "left: {pin.at.x * 100.0:.3}%; top: {pin.at.y * 100.0:.3}%",
+                    title: "{pin.title}",
+                    "{pin.label}"
+                }
+            }
+        }
+    }
+}

@@ -25,9 +25,9 @@ use crate::{
     model::{AdvanceMode, MAX_TEXT_ANSWER_CHARS, Question, QuestionKind, Quiz, RevealMode},
     protocol::{
         AnswerOutcome, Fastest, GameResults, Grade, Guess, HostPhase, HostView, InputKind,
-        JokerState, Judgement, MAX_NAME_CHARS, PartReveal, PlayerPhase, PlayerView, QuestionInfo,
-        Response, ResultRow, Reveal, RoundResult, SlideInfo, StandingRow, TeamInfo, TextGroup,
-        Upcoming,
+        JokerState, Judgement, MAX_NAME_CHARS, PartReveal, PinGuess, PlayerPhase, PlayerView,
+        QuestionInfo, Response, ResultRow, Reveal, RoundResult, SlideInfo, StandingRow, TeamInfo,
+        TextGroup, Upcoming,
     },
     scoring::{self, Tally},
 };
@@ -960,7 +960,7 @@ impl Game {
                 InputKind::Choice => question.choices().len(),
                 InputKind::Order => self.shown[index].len(),
                 InputKind::Parts => question_parts(question),
-                InputKind::Text | InputKind::Number => 0,
+                InputKind::Text | InputKind::Number | InputKind::Pin => 0,
             },
             // Order items, True/False and part labels cannot be told apart by colour alone:
             // always sent.
@@ -975,6 +975,10 @@ impl Game {
                 answer_images(question)
             } else {
                 Vec::new()
+            },
+            map: match question.kind {
+                QuestionKind::Pin { .. } => question.image.clone(),
+                _ => None,
             },
             multi: question.is_multi(),
             remaining_ms: millis(deadline.saturating_duration_since(self.clock(now))),
@@ -1119,6 +1123,9 @@ impl Game {
                 accepted: tidy(accepted),
                 groups: self.text_groups(index, None),
             },
+            QuestionKind::Pin { answer, aspect, .. } => {
+                self.pin_reveal(index, answer.unwrap_or_default(), *aspect)
+            }
             QuestionKind::Parts { parts } => Reveal::Parts {
                 parts: parts
                     .iter()
@@ -1188,6 +1195,29 @@ impl Game {
         match self.judgements[index].get(key) {
             Some(&judgement) => (judgement, true),
             None => (self.automatic_judgement(index, key), false),
+        }
+    }
+
+    /// Every pin on question `index`, closest to `answer` first.
+    fn pin_reveal(&self, index: usize, answer: crate::model::Point, aspect: f64) -> Reveal {
+        let mut pins: Vec<PinGuess> = self
+            .teams
+            .iter()
+            .filter_map(|team| match team.submissions[index].as_ref()?.response {
+                Response::Pin(at) => Some(PinGuess {
+                    team: team.name.clone(),
+                    at,
+                    distance: at.distance(answer, aspect),
+                    points: self.outcome(index, team).points,
+                }),
+                _ => None,
+            })
+            .collect();
+        pins.sort_by(|a, b| a.distance.total_cmp(&b.distance));
+        Reveal::Pin {
+            answer,
+            aspect,
+            pins,
         }
     }
 
@@ -1341,6 +1371,22 @@ impl Game {
                 AnswerOutcome {
                     points,
                     fully_correct: all_right,
+                    joker: false,
+                }
+            }
+            (
+                QuestionKind::Pin {
+                    answer: Some(answer),
+                    aspect,
+                    tolerance,
+                },
+                Response::Pin(at),
+            ) => {
+                let distance = at.distance(*answer, *aspect);
+                AnswerOutcome {
+                    points: i32::try_from(scoring::pin_points(full, distance, *tolerance))
+                        .unwrap_or(i32::MAX),
+                    fully_correct: distance <= tolerance.distances().0,
                     joker: false,
                 }
             }
@@ -1519,6 +1565,12 @@ fn check_response(question: &Question, response: Response) -> Result<Response, R
             }
             Ok(Response::Parts(texts))
         }
+        (QuestionKind::Pin { .. }, Response::Pin(at)) if at.is_on_picture() => {
+            Ok(Response::Pin(at))
+        }
+        (QuestionKind::Pin { .. }, Response::Pin(_)) => {
+            Err(Refusal("Drop your pin on the picture."))
+        }
         (QuestionKind::Order { items }, Response::Order(order)) => {
             let mut sorted = order.clone();
             sorted.sort_unstable();
@@ -1540,6 +1592,7 @@ fn input_kind(question: &Question) -> InputKind {
         QuestionKind::Number { .. } => InputKind::Number,
         QuestionKind::Order { .. } => InputKind::Order,
         QuestionKind::Parts { .. } => InputKind::Parts,
+        QuestionKind::Pin { .. } => InputKind::Pin,
     }
 }
 
@@ -2135,6 +2188,48 @@ mod tests {
         };
         g.judge(0, &key, half, t0).unwrap();
         assert_eq!(score(&g, cats), 750);
+    }
+
+    #[test]
+    fn pins_score_by_distance() {
+        use crate::model::{PinTolerance, Point};
+        let t0 = Instant::now();
+        let mut quiz = quiz(QuizSettings {
+            points: crate::model::PointsMode::Flat,
+            ..QuizSettings::default()
+        });
+        quiz.questions[0].image = Some("map.jpg".to_owned());
+        quiz.questions[0].kind = QuestionKind::Pin {
+            answer: Some(Point { x: 0.5, y: 0.5 }),
+            aspect: 0.5,
+            tolerance: PinTolerance::Normal,
+        };
+        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        let pigs = join(&mut g, "Pigs");
+        g.next(t0).unwrap();
+        assert!(matches!(
+            g.player_view(owls, t0).unwrap().phase,
+            PlayerPhase::Question { map: Some(ref m), input: InputKind::Pin, .. } if m == "map.jpg"
+        ));
+        let pin = |x, y| Response::Pin(Point { x, y });
+        assert!(g.answer(owls, pin(1.5, 0.5), false, t0).is_err());
+        g.answer(owls, pin(0.52, 0.5), false, t0).unwrap();
+        // 0.34 of the height of a picture half as high as wide is 0.17 of its width.
+        g.answer(cats, pin(0.5, 0.84), false, t0).unwrap();
+        g.answer(pigs, pin(0.0, 0.0), false, t0).unwrap();
+        let HostPhase::Closed {
+            reveal: Some(Reveal::Pin { pins, .. }),
+            fastest,
+            ..
+        } = g.host_view(t0).phase
+        else {
+            panic!("expected a pin reveal");
+        };
+        let points: Vec<(&str, i32)> = pins.iter().map(|p| (p.team.as_str(), p.points)).collect();
+        assert_eq!(points, [("Owls", 1000), ("Cats", 500), ("Pigs", 0)]);
+        assert_eq!(fastest.map(|f| f.team), Some("Owls".to_owned()));
     }
 
     #[test]

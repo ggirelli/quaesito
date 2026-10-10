@@ -9,17 +9,17 @@ use super::{
     live::{ConnectionBanner, Live, countdown_ms, elapsed_now, remaining_ms, use_clock, use_live},
     sfx::{self, Cue, SFX_JS, Sfx},
     widgets::{
-        ANSWER_SHAPES, Brand, ClientOnly, ErrorBox, Icon, IconKind, Spinner, TeamAvatar, media_url,
-        message,
+        ANSWER_SHAPES, Brand, ClientOnly, ErrorBox, Icon, IconKind, MapPin, PinMap, Spinner,
+        TeamAvatar, media_url, message,
     },
 };
 use crate::{
     api::{game_results, host_socket, join_origin},
-    model::ImageReveal,
+    model::{ImageReveal, Point},
     protocol::{
         Fastest, Grade, Guess, HostCommand, HostPhase, HostView, InputKind, Judgement,
-        MAX_NAME_CHARS, QuestionInfo, Reveal, SlideInfo, StandingRow, TeamInfo, TextGroup,
-        Upcoming,
+        MAX_NAME_CHARS, PinGuess, QuestionInfo, Reveal, SlideInfo, StandingRow, TeamInfo,
+        TextGroup, Upcoming,
     },
     scoring::MAX_BONUS,
 };
@@ -34,6 +34,8 @@ const TILE_ROWS: usize = 4;
 const TILES: usize = TILE_COLUMNS * TILE_ROWS;
 /// The clock ticks audibly through an open question's last seconds.
 const TICK_FROM_SECS: u64 = 5;
+/// How many of the closest pins the reveal lists.
+const PINS_LISTED: usize = 6;
 /// Seconds the host's "+" button adds to an open question.
 const EXTRA_SECS: u32 = 10;
 /// How many teams the between-questions leaderboard shows.
@@ -948,6 +950,7 @@ fn AnswersOrPrompt(question: QuestionInfo) -> Element {
                 }
             };
         }
+        InputKind::Pin => "📍 Drop a pin on your phone",
         InputKind::Text => "✍️ Type your answer on your phone",
         InputKind::Number => "🔢 Enter a number on your phone: closest wins",
     };
@@ -969,6 +972,9 @@ fn RevealBody(question: QuestionInfo, reveal: Reveal) -> Element {
         },
         Reveal::Text { accepted, groups } => rsx! {
             TextReveal { question: question.index, accepted, groups }
+        },
+        Reveal::Pin { answer, pins, .. } => rsx! {
+            PinReveal { image: question.image.clone().unwrap_or_default(), answer, pins }
         },
         Reveal::Parts { parts } => rsx! {
             div { class: "parts-reveal",
@@ -1004,6 +1010,48 @@ fn RevealBody(question: QuestionInfo, reveal: Reveal) -> Element {
         Reveal::Number { answer, guesses } => rsx! {
             NumberReveal { answer, guesses }
         },
+    }
+}
+
+/// Every team's pin and the right spot, with the closest pins listed.
+#[component]
+fn PinReveal(image: String, answer: Point, pins: Vec<PinGuess>) -> Element {
+    let mut marks: Vec<MapPin> = pins
+        .iter()
+        .map(|pin| MapPin {
+            at: pin.at,
+            label: pin
+                .team
+                .chars()
+                .next()
+                .map(|c| c.to_uppercase().to_string())
+                .unwrap_or_default(),
+            title: pin.team.clone(),
+            class: "",
+        })
+        .collect();
+    marks.push(MapPin {
+        at: answer,
+        label: "★".to_owned(),
+        title: "The right spot".to_owned(),
+        class: "answer",
+    });
+    rsx! {
+        div { class: "pin-reveal",
+            PinMap { image, pins: marks }
+            if pins.is_empty() {
+                p { class: "muted", "Nobody dropped a pin." }
+            }
+            ol { class: "guesses",
+                for (i, pin) in pins.into_iter().take(PINS_LISTED).enumerate() {
+                    li { key: "{i}", class: if pin.points > 0 { "guess closest" } else { "guess" },
+                        span { class: "strong", "{pin.team}" }
+                        span { class: "muted small", title: "Distance, as a share of the picture's width", "{pin.distance * 100.0:.0}% away" }
+                        span { "+{pin.points}" }
+                    }
+                }
+            }
+        }
     }
 }
 

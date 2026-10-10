@@ -4,7 +4,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use crate::model::{ImageReveal, PhoneDisplay};
+use crate::model::{ImageReveal, PhoneDisplay, Point};
 
 /// Longest team name, in characters.
 pub const MAX_NAME_CHARS: usize = 24;
@@ -33,6 +33,8 @@ pub enum InputKind {
     Order,
     /// Several short typed answers, one per part.
     Parts,
+    /// A pin dropped on the question's picture.
+    Pin,
 }
 
 /// A team's answer to a question.
@@ -46,6 +48,8 @@ pub enum Response {
     Order(Vec<usize>),
     /// One typed answer per part (empty for parts left blank).
     Parts(Vec<String>),
+    /// Where the team dropped its pin on the picture.
+    Pin(Point),
 }
 
 /// The judge's verdict on a typed answer.
@@ -134,6 +138,23 @@ pub enum Reveal {
     /// For each part, its accepted answers and the typed ones, grouped and judged as for a
     /// typed-answer question. Group keys start with the part's index.
     Parts { parts: Vec<PartReveal> },
+    /// The right spot and every pin, closest first.
+    Pin {
+        answer: Point,
+        /// The picture's height divided by its width.
+        aspect: f64,
+        pins: Vec<PinGuess>,
+    },
+}
+
+/// One team's pin on a picture.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct PinGuess {
+    pub team: String,
+    pub at: Point,
+    /// Distance from the right spot, in picture widths.
+    pub distance: f64,
+    pub points: i32,
 }
 
 /// One part of a several-answers reveal.
@@ -337,6 +358,8 @@ pub enum PlayerPhase {
         text: Option<(String, Vec<String>)>,
         /// Answer pictures, parallel to the answer texts, when the phone display shows full text.
         answer_images: Vec<Option<String>>,
+        /// The picture to drop a pin on (pin questions only).
+        map: Option<String>,
         multi: bool,
         remaining_ms: u64,
         /// The host paused the clock.

@@ -317,6 +317,49 @@ fn deserialize_image_reveal<'de, D: serde::Deserializer<'de>>(
     })
 }
 
+/// A spot on a picture, as fractions of its width (`x`) and height (`y`) from the top left.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Serialize, Deserialize)]
+pub struct Point {
+    pub x: f64,
+    pub y: f64,
+}
+
+impl Point {
+    /// Whether both coordinates are within the picture.
+    #[must_use]
+    pub fn is_on_picture(self) -> bool {
+        (0.0..=1.0).contains(&self.x) && (0.0..=1.0).contains(&self.y)
+    }
+
+    /// Distance to `other` on a picture `aspect` times as high as wide, in picture widths.
+    #[must_use]
+    pub fn distance(self, other: Self, aspect: f64) -> f64 {
+        (self.x - other.x).hypot((self.y - other.y) * aspect)
+    }
+}
+
+/// How close a pin must be: within the first distance it earns full points, beyond the second
+/// none, and in between a share falling evenly. Distances are in picture widths.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
+pub enum PinTolerance {
+    Tight,
+    #[default]
+    Normal,
+    Loose,
+}
+
+impl PinTolerance {
+    /// Distances (in picture widths) up to which a pin earns all, then some, of the points.
+    #[must_use]
+    pub fn distances(self) -> (f64, f64) {
+        match self {
+            Self::Tight => (0.02, 0.15),
+            Self::Normal => (0.04, 0.3),
+            Self::Loose => (0.08, 0.5),
+        }
+    }
+}
+
 /// One answer of a [`QuestionKind::Parts`] question.
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Part {
@@ -353,6 +396,15 @@ pub enum QuestionKind {
     /// Several typed answers at once (title and artist, five posters…), each judged on its own;
     /// the question's points are split evenly between the parts.
     Parts { parts: Vec<Part> },
+    /// Drop a pin on the question's picture (a map, a floor plan…); closer pins earn more.
+    Pin {
+        /// The right spot, as fractions of the picture's width and height.
+        answer: Option<Point>,
+        /// The picture's height divided by its width, so distances are measured evenly.
+        aspect: f64,
+        #[serde(default)]
+        tolerance: PinTolerance,
+    },
     /// Not a question: a title, text and/or picture shown on the big screen, with nothing to
     /// answer.
     Slide { title: String },
@@ -385,10 +437,13 @@ impl Question {
         self.multiplier.unwrap_or(1)
     }
 
-    /// Whether the question's picture is revealed gradually while the clock runs.
+    /// Whether the question's picture is revealed gradually while the clock runs (never for a
+    /// pin question: the picture is the map).
     #[must_use]
     pub fn reveals_image(&self) -> bool {
-        self.image.is_some() && self.image_reveal != ImageReveal::Shown
+        self.image.is_some()
+            && self.image_reveal != ImageReveal::Shown
+            && !matches!(self.kind, QuestionKind::Pin { .. })
     }
 
     /// Whether this is a slide rather than a question.
@@ -498,6 +553,16 @@ impl Question {
                     .any(|p| p.accepted.iter().all(|a| a.trim().is_empty()))
                 {
                     problems.push("Every answer needs at least one accepted spelling.".to_owned());
+                }
+            }
+            QuestionKind::Pin { answer, aspect, .. } => {
+                if self.image.is_none() {
+                    problems.push("Add the picture to drop pins on.".to_owned());
+                }
+                let placed =
+                    answer.is_some_and(Point::is_on_picture) && aspect.is_finite() && *aspect > 0.0;
+                if !placed {
+                    problems.push("Click the right spot on the picture.".to_owned());
                 }
             }
             QuestionKind::Slide { .. } | QuestionKind::TrueFalse { .. } => {}
@@ -805,6 +870,34 @@ mod tests {
         assert_eq!(quiz.media(), ["poster.jpg"]);
         quiz.rename_media(|_| Some("new.jpg".to_owned()));
         assert_eq!(quiz.media(), ["new.jpg"]);
+    }
+
+    #[test]
+    fn pins_need_a_picture_and_a_spot() {
+        let mut q = Question {
+            text: "Where is Rome?".to_owned(),
+            kind: QuestionKind::Pin {
+                answer: None,
+                aspect: 0.75,
+                tolerance: PinTolerance::Normal,
+            },
+            ..Question::default()
+        };
+        assert_eq!(q.problems().len(), 2);
+        q.image = Some("italy.jpg".to_owned());
+        q.kind = QuestionKind::Pin {
+            answer: Some(Point { x: 0.45, y: 0.5 }),
+            aspect: 0.75,
+            tolerance: PinTolerance::Normal,
+        };
+        assert_eq!(q.problems(), Vec::<String>::new());
+        q.image_reveal = ImageReveal::Tiles;
+        assert!(!q.reveals_image());
+        // Distances count the picture's shape: a quarter of the height of a 4:3 picture is
+        // 0.1875 of its width.
+        let a = Point { x: 0.5, y: 0.25 };
+        let b = Point { x: 0.5, y: 0.5 };
+        assert!((a.distance(b, 0.75) - 0.1875).abs() < 1e-9);
     }
 
     #[test]

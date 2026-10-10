@@ -6,12 +6,13 @@ use super::{
     Route, client,
     live::{ConnectionBanner, Live, countdown_ms, use_clock, use_live},
     widgets::{
-        ANSWER_SHAPES, Brand, ClientOnly, ErrorBox, Spinner, TeamAvatar, media_url, message,
+        ANSWER_SHAPES, Brand, ClientOnly, ErrorBox, MapPin, PinMap, Spinner, TeamAvatar, media_url,
+        message,
     },
 };
 use crate::{
     api::{check_ticket, game_info, join_game, player_socket, upload_avatar},
-    model::{MAX_TEXT_ANSWER_CHARS, PhoneDisplay},
+    model::{MAX_TEXT_ANSWER_CHARS, PhoneDisplay, Point},
     protocol::{
         AnswerOutcome, InputKind, JokerState, MAX_NAME_CHARS, PlayerCommand, PlayerPhase,
         PlayerView, Response, TeamInfo,
@@ -320,6 +321,32 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
         PlayerPhase::Question {
             index,
             total,
+            input: InputKind::Pin,
+            map,
+            text,
+            remaining_ms: left,
+            paused,
+            time_limit_ms,
+            submitted,
+            ..
+        } => rsx! {
+            PinPad {
+                key: "{index}",
+                joker: view.joker,
+                index,
+                total,
+                map: map.unwrap_or_default(),
+                question: text.map(|(question, _)| question),
+                clock: Clock { left_ms: left, limit_ms: time_limit_ms, paused, received_at: live_received },
+                submitted: match submitted {
+                    Some(Response::Pin(at)) => Some(at),
+                    _ => None,
+                },
+            }
+        },
+        PlayerPhase::Question {
+            index,
+            total,
             input: InputKind::Parts,
             items,
             text,
@@ -377,6 +404,7 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
             items,
             text,
             answer_images,
+            map: _,
             multi,
             remaining_ms: left,
             paused,
@@ -724,9 +752,10 @@ fn OpenPad(
                         match answer {
                             Response::Text(text) => text.clone(),
                             Response::Number(value) => value.to_string(),
-                            Response::Choice(_) | Response::Order(_) | Response::Parts(_) => {
-                                String::new()
-                            }
+                            Response::Choice(_)
+                            | Response::Order(_)
+                            | Response::Parts(_)
+                            | Response::Pin(_) => String::new(),
                         }
                     }
                 },
@@ -774,6 +803,84 @@ fn OpenPad(
 }
 
 #[component]
+/// A pin question: tap the picture to drop (or move) the pin, then submit.
+#[component]
+fn PinPad(
+    index: usize,
+    total: usize,
+    map: String,
+    question: Option<String>,
+    clock: Clock,
+    submitted: Option<Point>,
+    joker: JokerState,
+) -> Element {
+    let live_socket: Live<PlayerCommand, PlayerView> = use_context();
+    let mut pin = use_signal(|| None::<Point>);
+    let armed = use_signal(|| false);
+    let now = use_clock(200);
+    let (left, width) = clock.at(now());
+    let locked = submitted.is_some() || left <= 0.0;
+    let shown = submitted.or(pin());
+    let send = move |_| async move {
+        if let Some(at) = pin() {
+            let _ = live_socket
+                .socket
+                .send(PlayerCommand::Answer {
+                    response: Response::Pin(at),
+                    joker: armed(),
+                })
+                .await;
+        }
+    };
+    rsx! {
+        main { class: "player-main top",
+            div { class: "phone-timer",
+                div { style: "width: {width}%" }
+            }
+            div { class: "row between",
+                span { class: "muted", "Question {index + 1} of {total}" }
+                span { class: "muted",
+                    if clock.paused { "⏸ Paused" } else { "{(left / 1000.0).ceil()}s" }
+                }
+            }
+            if let Some(question) = question {
+                p { class: "phone-question", "{question}" }
+            }
+            if locked {
+                p { class: "strong",
+                    if submitted.is_some() { "🔒 Pin locked in" } else { "⌛ Time's up" }
+                }
+            } else {
+                p { class: "muted",
+                    if pin().is_some() { "Tap again to move your pin, then submit." } else { "Tap the picture to drop your pin." }
+                }
+            }
+            JokerToggle { state: joker, armed, locked }
+            PinMap {
+                image: map,
+                pins: shown
+                    .map(|at| MapPin {
+                        at,
+                        label: "📍".to_owned(),
+                        title: "Your pin".to_owned(),
+                        class: "own",
+                    })
+                    .into_iter()
+                    .collect::<Vec<_>>(),
+                on_pick: (!locked).then_some(EventHandler::new(move |(at, _): (Point, f64)| pin.set(Some(at)))),
+            }
+            if !locked {
+                button {
+                    class: "button primary big",
+                    disabled: pin().is_none(),
+                    onclick: send,
+                    "Submit"
+                }
+            }
+        }
+    }
+}
+
 /// A several-answers question: one field per part, submitted together.
 #[component]
 fn PartsPad(

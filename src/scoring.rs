@@ -84,6 +84,22 @@ pub fn order_points(full: u32, in_place: usize, items: usize) -> u32 {
     to_points(f64::from(full) * share)
 }
 
+/// Points for a pin `distance` (in picture widths) from the right spot: `full` (see
+/// [`full_points`]) up to the tolerance's first distance, nothing beyond its second, and a share
+/// falling evenly in between.
+#[must_use]
+pub fn pin_points(full: u32, distance: f64, tolerance: crate::model::PinTolerance) -> u32 {
+    let (near, far) = tolerance.distances();
+    let share = if distance <= near {
+        1.0
+    } else if distance >= far {
+        0.0
+    } else {
+        (far - distance) / (far - near)
+    };
+    to_points(f64::from(full) * share)
+}
+
 /// Points for a typed answer: `full` (see [`full_points`]) scaled by the judge's grade, plus the
 /// bonus (or minus the malus).
 #[must_use]
@@ -220,6 +236,16 @@ mod tests {
         assert_eq!(order_points(1000, 2, 4), 500);
         assert_eq!(order_points(800, 1, 3), 267);
         assert_eq!(order_points(1000, 0, 4), 0);
+    }
+
+    #[test]
+    fn pin_points_fall_with_distance() {
+        use crate::model::PinTolerance::Normal;
+        assert_eq!(pin_points(1000, 0.0, Normal), 1000);
+        assert_eq!(pin_points(1000, 0.04, Normal), 1000);
+        assert_eq!(pin_points(1000, 0.17, Normal), 500);
+        assert_eq!(pin_points(1000, 0.3, Normal), 0);
+        assert_eq!(pin_points(1000, 2.0, Normal), 0);
     }
 
     #[test]
