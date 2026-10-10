@@ -616,6 +616,7 @@ mod tests {
     fn quiz(settings: QuizSettings) -> Quiz {
         let question = |text: &str| Question {
             text: text.to_owned(),
+            kind: crate::model::QuestionKind::Choice,
             image: None,
             audio: None,
             time_limit_secs: Some(10),

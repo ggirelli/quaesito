@@ -10,9 +10,11 @@ pub const MAX_ANSWERS: usize = 6;
 pub const MIN_TIME_LIMIT_SECS: u32 = 5;
 /// Longest allowed time limit, in seconds.
 pub const MAX_TIME_LIMIT_SECS: u32 = 300;
+/// Longest typed answer, in characters.
+pub const MAX_TEXT_ANSWER_CHARS: usize = 60;
 
 /// A complete quiz: settings plus an ordered list of questions.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Quiz {
     pub id: String,
     pub title: String,
@@ -143,9 +145,12 @@ pub enum PhoneDisplay {
 }
 
 /// A single question.
-#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 pub struct Question {
     pub text: String,
+    /// How teams answer. Older quizzes without it are multiple choice.
+    #[serde(default)]
+    pub kind: QuestionKind,
     /// Name of an uploaded picture, if any.
     #[serde(default)]
     pub image: Option<String>,
@@ -155,7 +160,21 @@ pub struct Question {
     /// Overrides the quiz-wide time limit when set.
     #[serde(default)]
     pub time_limit_secs: Option<u32>,
+    /// The options of a multiple-choice question (kept, but unused, for other kinds).
+    #[serde(default)]
     pub answers: Vec<Answer>,
+}
+
+/// How a question is answered.
+#[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
+pub enum QuestionKind {
+    /// Pick one or more of the listed answers.
+    #[default]
+    Choice,
+    /// Type a short answer, right when it matches an accepted one (the judge may amend).
+    Text { accepted: Vec<String> },
+    /// Enter a number; the closest guess wins.
+    Number { answer: Option<f64> },
 }
 
 impl Question {
@@ -175,9 +194,12 @@ impl Question {
             .unwrap_or(settings.default_time_limit_secs)
     }
 
-    /// Indexes of the correct answers.
+    /// Indexes of the correct answers of a multiple-choice question.
     #[must_use]
     pub fn correct_indexes(&self) -> Vec<usize> {
+        if self.kind != QuestionKind::Choice {
+            return Vec::new();
+        }
         self.answers
             .iter()
             .enumerate()
@@ -185,10 +207,10 @@ impl Question {
             .collect()
     }
 
-    /// Whether more than one answer is correct.
+    /// Whether this is a multiple-choice question with more than one correct answer.
     #[must_use]
     pub fn is_multi(&self) -> bool {
-        self.answers.iter().filter(|a| a.correct).count() > 1
+        self.correct_indexes().len() > 1
     }
 
     fn problems(&self) -> Vec<String> {
@@ -196,16 +218,30 @@ impl Question {
         if self.text.trim().is_empty() {
             problems.push("The question has no text.".to_owned());
         }
-        if !(MIN_ANSWERS..=MAX_ANSWERS).contains(&self.answers.len()) {
-            problems.push(format!(
-                "A question needs between {MIN_ANSWERS} and {MAX_ANSWERS} answers."
-            ));
-        }
-        if self.answers.iter().any(|a| a.text.trim().is_empty()) {
-            problems.push("Every answer needs a text.".to_owned());
-        }
-        if !self.answers.iter().any(|a| a.correct) {
-            problems.push("At least one answer must be marked correct.".to_owned());
+        match &self.kind {
+            QuestionKind::Choice => {
+                if !(MIN_ANSWERS..=MAX_ANSWERS).contains(&self.answers.len()) {
+                    problems.push(format!(
+                        "A question needs between {MIN_ANSWERS} and {MAX_ANSWERS} answers."
+                    ));
+                }
+                if self.answers.iter().any(|a| a.text.trim().is_empty()) {
+                    problems.push("Every answer needs a text.".to_owned());
+                }
+                if !self.answers.iter().any(|a| a.correct) {
+                    problems.push("At least one answer must be marked correct.".to_owned());
+                }
+            }
+            QuestionKind::Text { accepted } => {
+                if accepted.iter().all(|a| a.trim().is_empty()) {
+                    problems.push("Add at least one accepted answer.".to_owned());
+                }
+            }
+            QuestionKind::Number { answer } => {
+                if !answer.is_some_and(f64::is_finite) {
+                    problems.push("Enter the correct number.".to_owned());
+                }
+            }
         }
         if let Some(limit) = self.time_limit_secs
             && !(MIN_TIME_LIMIT_SECS..=MAX_TIME_LIMIT_SECS).contains(&limit)
@@ -274,6 +310,7 @@ mod tests {
     fn question() -> Question {
         Question {
             text: "Which planet has the most moons?".to_owned(),
+            kind: QuestionKind::Choice,
             image: None,
             audio: None,
             time_limit_secs: None,
@@ -334,12 +371,39 @@ mod tests {
     }
 
     #[test]
+    fn text_and_number_questions_need_their_answer() {
+        let mut q = Question {
+            text: "Who painted the Mona Lisa?".to_owned(),
+            kind: QuestionKind::Text {
+                accepted: vec![" ".to_owned()],
+            },
+            ..Question::default()
+        };
+        assert_eq!(q.problems(), vec!["Add at least one accepted answer."]);
+        q.kind = QuestionKind::Text {
+            accepted: vec!["Leonardo".to_owned()],
+        };
+        assert_eq!(q.problems(), Vec::<String>::new());
+        q.kind = QuestionKind::Number { answer: None };
+        assert_eq!(q.problems(), vec!["Enter the correct number."]);
+        q.kind = QuestionKind::Number {
+            answer: Some(330.0),
+        };
+        assert_eq!(q.problems(), Vec::<String>::new());
+        // Leftover choices of a converted question do not count.
+        q.answers = vec![answer("a", true), answer("b", true)];
+        assert!(!q.is_multi());
+        assert_eq!(q.correct_indexes(), Vec::<usize>::new());
+    }
+
+    #[test]
     fn missing_fields_deserialize_to_defaults() {
         let quiz: Quiz = serde_json::from_str(
             r#"{"id":"x","title":"T","questions":[{"text":"Q","answers":[{"text":"A"}]}]}"#,
         )
         .unwrap();
         assert_eq!(quiz.settings, QuizSettings::default());
+        assert_eq!(quiz.questions[0].kind, QuestionKind::Choice);
         assert!(!quiz.questions[0].answers[0].correct);
     }
 }
