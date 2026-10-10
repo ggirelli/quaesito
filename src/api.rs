@@ -7,9 +7,15 @@
     reason = "server functions must be async even when the server side does not await"
 )]
 
-use dioxus::{fullstack::FileStream, prelude::*};
+use dioxus::{
+    fullstack::{FileStream, WebSocketOptions, Websocket},
+    prelude::*,
+};
 
-use crate::model::{Quiz, QuizSummary, ValidationIssue};
+use crate::{
+    model::{Quiz, QuizSummary, ValidationIssue},
+    protocol::{HostCommand, HostView, JoinTicket, PlayerCommand, PlayerView, SessionSummary},
+};
 
 /// Exchanges the admin password for a session token.
 #[post("/api/admin/login")]
@@ -115,4 +121,133 @@ pub async fn upload_question_image(token: String, file: FileStream) -> ServerFnR
         .media
         .store(bytes, crate::server::media::ImageKind::Question)
         .await?)
+}
+
+/// Starts a live session for a quiz and returns its join code.
+#[post("/api/admin/session/start")]
+pub async fn start_session(token: String, quiz_id: String) -> ServerFnResult<String> {
+    let state = crate::server::state();
+    state.auth.require(&token)?;
+    let quiz = state
+        .quizzes
+        .get(&quiz_id)
+        .await?
+        .ok_or_else(|| ServerFnError::new("This quiz does not exist."))?;
+    state
+        .sessions
+        .create(quiz)
+        .map_err(|refusal| ServerFnError::new(refusal.0))
+}
+
+/// Live sessions.
+#[post("/api/admin/sessions")]
+pub async fn list_sessions(token: String) -> ServerFnResult<Vec<SessionSummary>> {
+    let state = crate::server::state();
+    state.auth.require(&token)?;
+    Ok(state.sessions.list())
+}
+
+/// Ends a live session.
+#[post("/api/admin/session/end")]
+pub async fn end_session(token: String, code: String) -> ServerFnResult<()> {
+    let state = crate::server::state();
+    state.auth.require(&token)?;
+    state.sessions.remove(&code);
+    Ok(())
+}
+
+/// Base URL phones should use to join, given the port the host page was opened on.
+#[post("/api/admin/join-origin")]
+pub async fn join_origin(token: String, page_port: String) -> ServerFnResult<String> {
+    crate::server::state().auth.require(&token)?;
+    Ok(crate::server::net::join_origin(&page_port))
+}
+
+/// Title of the quiz behind a join code, or `None` if no such session is live.
+#[post("/api/game/info")]
+pub async fn game_info(code: String) -> ServerFnResult<Option<String>> {
+    Ok(crate::server::state()
+        .sessions
+        .get(&code)
+        .map(|s| s.read(|g| g.title().to_owned())))
+}
+
+/// Registers a team in a session.
+#[post("/api/game/join")]
+pub async fn join_game(code: String, name: String) -> ServerFnResult<JoinTicket> {
+    let session = crate::server::state()
+        .sessions
+        .get(&code)
+        .ok_or_else(|| ServerFnError::new("No game with this code is running."))?;
+    let token = uuid::Uuid::new_v4().simple().to_string();
+    let team_id = session
+        .update(|g, _| g.join(&name, token.clone()))
+        .map_err(|refusal| ServerFnError::new(refusal.0))?;
+    Ok(JoinTicket { team_id, token })
+}
+
+/// Whether a stored ticket still belongs to a team in the session.
+#[post("/api/game/check-ticket")]
+pub async fn check_ticket(code: String, token: String) -> ServerFnResult<bool> {
+    Ok(crate::server::state()
+        .sessions
+        .get(&code)
+        .is_some_and(|s| s.read(|g| g.team_for_token(&token).is_some())))
+}
+
+/// Uploads a team avatar and returns its media name.
+#[post("/api/game/avatar?code&token")]
+pub async fn upload_avatar(
+    code: String,
+    token: String,
+    file: FileStream,
+) -> ServerFnResult<String> {
+    let state = crate::server::state();
+    let session = state
+        .sessions
+        .get(&code)
+        .ok_or_else(|| ServerFnError::new("No game with this code is running."))?;
+    let team = session
+        .read(|g| g.team_for_token(&token))
+        .ok_or_else(|| ServerFnError::new("Unknown team."))?;
+    let bytes = crate::server::media::read_upload(file).await?;
+    let name = state
+        .media
+        .store(bytes, crate::server::media::ImageKind::Avatar)
+        .await?;
+    session.update(|g, _| g.set_avatar(team, name.clone()));
+    Ok(name)
+}
+
+/// Live updates for the host screen.
+#[get("/api/ws/host?code&token")]
+pub async fn host_socket(
+    code: String,
+    token: String,
+    options: WebSocketOptions,
+) -> ServerFnResult<Websocket<HostCommand, HostView>> {
+    let state = crate::server::state();
+    state.auth.require(&token)?;
+    let session = state
+        .sessions
+        .get(&code)
+        .ok_or_else(|| ServerFnError::new("This game is not running anymore."))?;
+    Ok(options.on_upgrade(move |socket| crate::server::live::host(socket, session)))
+}
+
+/// Live updates for a team leader's phone.
+#[get("/api/ws/player?code&token")]
+pub async fn player_socket(
+    code: String,
+    token: String,
+    options: WebSocketOptions,
+) -> ServerFnResult<Websocket<PlayerCommand, PlayerView>> {
+    let session = crate::server::state()
+        .sessions
+        .get(&code)
+        .ok_or_else(|| ServerFnError::new("This game is not running anymore."))?;
+    let team = session
+        .read(|g| g.team_for_token(&token))
+        .ok_or_else(|| ServerFnError::new("Unknown team."))?;
+    Ok(options.on_upgrade(move |socket| crate::server::live::player(socket, session, team)))
 }

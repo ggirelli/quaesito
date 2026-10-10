@@ -2,20 +2,24 @@
 
 pub mod auth;
 pub mod engine;
+pub mod live;
 pub mod media;
+pub mod net;
+pub mod sessions;
 pub mod store;
 
 use std::{path::PathBuf, sync::OnceLock};
 
 use dioxus::fullstack::{axum::Router, routing::get};
 
-use self::{auth::Auth, media::MediaStore, store::QuizStore};
+use self::{auth::Auth, media::MediaStore, sessions::Sessions, store::QuizStore};
 
 /// Everything the server keeps for its lifetime.
 pub struct AppState {
     pub auth: Auth,
     pub quizzes: QuizStore,
     pub media: MediaStore,
+    pub sessions: Sessions,
 }
 
 static STATE: OnceLock<AppState> = OnceLock::new();
@@ -42,6 +46,7 @@ pub async fn init() -> anyhow::Result<()> {
         auth: Auth::from_env(),
         quizzes: QuizStore::open(data_dir.join("quizzes")).await?,
         media: MediaStore::open(data_dir.join("media")).await?,
+        sessions: Sessions::default(),
     };
     dioxus::logger::tracing::info!("data directory: {}", data_dir.display());
     // A concurrent initialisation may have won the race; either state is equivalent.

@@ -61,7 +61,7 @@ pub struct HostView {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub enum HostPhase {
     /// Waiting for teams to join.
-    Lobby { join_url: String, qr_svg: String },
+    Lobby,
     /// A question is open for answers.
     Question {
         question: QuestionInfo,
@@ -164,4 +164,13 @@ pub enum PlayerCommand {
 pub struct JoinTicket {
     pub team_id: u32,
     pub token: String,
+}
+
+/// Short description of a live session for the admin page.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct SessionSummary {
+    pub code: String,
+    pub title: String,
+    pub teams: usize,
+    pub finished: bool,
 }

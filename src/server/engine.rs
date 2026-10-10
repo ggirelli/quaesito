@@ -33,8 +33,6 @@ const AUTO_PODIUM_STEP: Duration = Duration::from_secs(4);
 pub struct Game {
     code: String,
     quiz: Quiz,
-    join_url: String,
-    qr_svg: String,
     teams: Vec<Team>,
     next_team_id: u32,
     phase: Phase,
@@ -95,20 +93,13 @@ impl Game {
     ///
     /// # Errors
     /// Refuses quizzes that are not playable.
-    pub fn new(
-        code: String,
-        quiz: Quiz,
-        join_url: String,
-        qr_svg: String,
-    ) -> Result<Self, Refusal> {
+    pub fn new(code: String, quiz: Quiz) -> Result<Self, Refusal> {
         if !quiz.validate().is_empty() {
             return Err(Refusal("This quiz is not ready to be played yet."));
         }
         Ok(Self {
             code,
             quiz,
-            join_url,
-            qr_svg,
             teams: Vec::new(),
             next_team_id: 1,
             phase: Phase::Lobby,
@@ -123,6 +114,11 @@ impl Game {
     #[must_use]
     pub fn title(&self) -> &str {
         &self.quiz.title
+    }
+
+    #[must_use]
+    pub fn team_count(&self) -> usize {
+        self.teams.len()
     }
 
     /// Whether the game has reached the end of the podium.
@@ -331,10 +327,7 @@ impl Game {
     #[must_use]
     pub fn host_view(&self, now: Instant) -> HostView {
         let phase = match self.phase {
-            Phase::Lobby => HostPhase::Lobby {
-                join_url: self.join_url.clone(),
-                qr_svg: self.qr_svg.clone(),
-            },
+            Phase::Lobby => HostPhase::Lobby,
             Phase::Question {
                 index, deadline, ..
             } => HostPhase::Question {
@@ -609,13 +602,7 @@ mod tests {
     }
 
     fn game(settings: QuizSettings) -> Game {
-        Game::new(
-            "123456".to_owned(),
-            quiz(settings),
-            "http://x/join/123456".to_owned(),
-            String::new(),
-        )
-        .unwrap()
+        Game::new("123456".to_owned(), quiz(settings)).unwrap()
     }
 
     fn join(game: &mut Game, name: &str) -> u32 {
@@ -631,7 +618,7 @@ mod tests {
     #[test]
     fn invalid_quizzes_cannot_start_a_game() {
         let empty = Quiz::new("id".to_owned(), "Empty".to_owned());
-        assert!(Game::new("1".to_owned(), empty, String::new(), String::new()).is_err());
+        assert!(Game::new("1".to_owned(), empty).is_err());
     }
 
     #[test]
