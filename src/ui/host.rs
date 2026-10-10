@@ -207,14 +207,26 @@ fn Soundtrack(name: String, started_at: Option<f64>) -> Element {
              if (a) {{ a.currentTime = {offset:.3}; a.play().catch(() => {{}}); }}"
         ));
     }));
+    // No player controls: the host starts the music with the "next" step only, which also
+    // starts the clock.
+    let mut playing = use_signal(|| false);
     rsx! {
-        div { class: "soundtrack",
+        div {
+            class: if playing() { "soundtrack playing" } else { "soundtrack" },
+            title: if playing() { "Music playing" } else { "Soundtrack ready" },
             Icon { kind: IconKind::Music }
+            span { class: "equalizer", aria_hidden: "true",
+                span {}
+                span {}
+                span {}
+            }
             audio {
                 id: "soundtrack",
                 src: media_url(&name),
                 preload: "auto",
-                controls: true,
+                onplay: move |_| playing.set(true),
+                onpause: move |_| playing.set(false),
+                onended: move |_| playing.set(false),
             }
         }
     }
