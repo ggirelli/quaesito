@@ -83,6 +83,14 @@ impl Draft {
         });
     }
 
+    fn edit_items(self, index: usize, f: impl FnOnce(&mut Vec<String>)) {
+        self.edit_question(index, |q| {
+            if let QuestionKind::Order { items } = &mut q.kind {
+                f(items);
+            }
+        });
+    }
+
     fn edit_settings(self, f: impl FnOnce(&mut QuizSettings)) {
         self.edit(|quiz| f(&mut quiz.settings));
     }
@@ -522,11 +530,13 @@ fn QuestionCard(
                         ("Choices", "Teams pick from coloured answers."),
                         ("Typed answer", "Teams type a short answer. You can amend the verdict on each answer when they are revealed."),
                         ("Number", "Teams guess a number; the closest guess wins 1000 points."),
+                        ("Order", "Teams put the items in order; each item in its right place earns its share of the points."),
                     ],
                     selected: match question.kind {
                         QuestionKind::Choice | QuestionKind::Slide { .. } => 0,
                         QuestionKind::Text { .. } => 1,
                         QuestionKind::Number { .. } => 2,
+                        QuestionKind::Order { .. } => 3,
                     },
                     on_select: move |i| draft.edit_question(index, |q| set_kind(q, i)),
                 }
@@ -568,6 +578,9 @@ fn QuestionCard(
                     QuestionKind::Number { answer } => rsx! {
                         NumberAnswer { question: index, answer: *answer }
                     },
+                    QuestionKind::Order { items } => rsx! {
+                        OrderItems { question: index, items: items.clone() }
+                    },
                     QuestionKind::Slide { .. } => rsx! {},
                 }
             }
@@ -575,10 +588,26 @@ fn QuestionCard(
     }
 }
 
-/// Switches a question to the answer type picked in the editor (0 choices, 1 text, 2 number).
+/// Switches a question to the answer type picked in the editor (0 choices, 1 text, 2 number,
+/// 3 order).
 fn set_kind(question: &mut Question, choice: usize) {
     question.kind = match (choice, &question.kind) {
-        (1, QuestionKind::Text { .. }) | (2, QuestionKind::Number { .. }) => return,
+        (1, QuestionKind::Text { .. })
+        | (2, QuestionKind::Number { .. })
+        | (3, QuestionKind::Order { .. }) => return,
+        // Start from the choices' texts, if any were typed.
+        (3, _) => {
+            let mut items: Vec<String> = question
+                .answers
+                .iter()
+                .map(|a| a.text.trim().to_owned())
+                .filter(|t| !t.is_empty())
+                .collect();
+            if items.len() < MIN_ANSWERS {
+                items.resize(MIN_ANSWERS.max(3), String::new());
+            }
+            QuestionKind::Order { items }
+        }
         (1, _) => QuestionKind::Text {
             accepted: vec![String::new()],
         },
@@ -631,6 +660,66 @@ fn AcceptedAnswers(question: usize, accepted: Vec<String>) -> Element {
             span { class: "muted small",
                 "Case, accents, punctuation and spacing are ignored; spelling must match."
             }
+        }
+    }
+}
+
+/// The items of an order question, in the right order.
+#[component]
+fn OrderItems(question: usize, items: Vec<String>) -> Element {
+    let draft: Draft = use_context();
+    let count = items.len();
+    rsx! {
+        ol { class: "answers-edit",
+            for (i, text) in items.into_iter().enumerate() {
+                li { key: "{i}", class: "answer-edit",
+                    span { class: "order-rank", "{i + 1}" }
+                    input {
+                        class: "grow",
+                        placeholder: if i == 0 { "First item" } else { "Next item" },
+                        value: "{text}",
+                        oninput: move |e| {
+                            let value = e.value();
+                            draft.edit_items(question, |items| items[i] = value);
+                        },
+                    }
+                    button {
+                        class: "button ghost icon",
+                        title: "Move up",
+                        disabled: i == 0,
+                        onclick: move |_| draft.edit_items(question, |items| items.swap(i, i - 1)),
+                        "↑"
+                    }
+                    button {
+                        class: "button ghost icon",
+                        title: "Move down",
+                        disabled: i + 1 == count,
+                        onclick: move |_| draft.edit_items(question, |items| items.swap(i, i + 1)),
+                        "↓"
+                    }
+                    button {
+                        class: "button ghost icon",
+                        title: "Remove",
+                        disabled: count <= MIN_ANSWERS,
+                        onclick: move |_| draft.edit_items(question, |items| {
+                            items.remove(i);
+                        }),
+                        "✕"
+                    }
+                }
+            }
+        }
+        div { class: "row between",
+            if count < MAX_ANSWERS {
+                button {
+                    class: "button ghost",
+                    onclick: move |_| draft.edit_items(question, |items| items.push(String::new())),
+                    "＋ Add item"
+                }
+            } else {
+                span {}
+            }
+            span { class: "muted small", "List the items in the right order; phones show them shuffled." }
         }
     }
 }

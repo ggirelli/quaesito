@@ -240,6 +240,8 @@ pub enum QuestionKind {
     Text { accepted: Vec<String> },
     /// Enter a number; the closest guess wins.
     Number { answer: Option<f64> },
+    /// Put items in order; `items` are listed in the right order and shown shuffled.
+    Order { items: Vec<String> },
     /// Not a question: a title, text and/or picture shown on the big screen, with nothing to
     /// answer.
     Slide { title: String },
@@ -338,6 +340,16 @@ impl Question {
             QuestionKind::Number { answer } => {
                 if !answer.is_some_and(f64::is_finite) {
                     problems.push("Enter the correct number.".to_owned());
+                }
+            }
+            QuestionKind::Order { items } => {
+                if !(MIN_ANSWERS..=MAX_ANSWERS).contains(&items.len()) {
+                    problems.push(format!(
+                        "Put between {MIN_ANSWERS} and {MAX_ANSWERS} items in order."
+                    ));
+                }
+                if items.iter().any(|item| item.trim().is_empty()) {
+                    problems.push("Every item needs a text.".to_owned());
                 }
             }
             QuestionKind::Slide { .. } => {}
@@ -525,8 +537,31 @@ mod tests {
     fn answers_need_a_text_or_a_picture() {
         let mut q = question();
         q.answers[0].text = " ".to_owned();
-        assert_eq!(q.problems(), vec!["Every answer needs a text or a picture."]);
+        assert_eq!(
+            q.problems(),
+            vec!["Every answer needs a text or a picture."]
+        );
         q.answers[0].image = Some("flag.jpg".to_owned());
+        assert_eq!(q.problems(), Vec::<String>::new());
+    }
+
+    #[test]
+    fn order_questions_need_two_to_six_items() {
+        let mut q = Question {
+            text: "Oldest first".to_owned(),
+            kind: QuestionKind::Order {
+                items: vec!["Rome".to_owned()],
+            },
+            ..Question::default()
+        };
+        assert_eq!(q.problems().len(), 1);
+        q.kind = QuestionKind::Order {
+            items: vec!["Rome".to_owned(), String::new()],
+        };
+        assert_eq!(q.problems(), vec!["Every item needs a text."]);
+        q.kind = QuestionKind::Order {
+            items: vec!["Rome".to_owned(), "Paris".to_owned()],
+        };
         assert_eq!(q.problems(), Vec::<String>::new());
     }
 

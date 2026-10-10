@@ -55,6 +55,8 @@ pub struct Game {
     played: Vec<bool>,
     /// When the host paused the game, if it is paused.
     paused_at: Option<Instant>,
+    /// Per order question: the items as shown, by index in the right order (empty otherwise).
+    shown: Vec<Vec<usize>>,
 }
 
 struct Team {
@@ -124,6 +126,14 @@ impl Game {
             return Err(Refusal("This quiz is not ready to be played yet."));
         }
         let quiz_len = quiz.questions.len();
+        let shown = quiz
+            .questions
+            .iter()
+            .map(|q| match &q.kind {
+                QuestionKind::Order { items } => shuffled(items.len()),
+                _ => Vec::new(),
+            })
+            .collect();
         Ok(Self {
             code,
             quiz,
@@ -133,6 +143,7 @@ impl Game {
             judgements: vec![HashMap::new(); quiz_len],
             played: vec![false; quiz_len],
             paused_at: None,
+            shown,
         })
     }
 
@@ -688,12 +699,17 @@ impl Game {
                     index: number(index),
                     total,
                     input,
-                    answer_count: if input == InputKind::Choice {
-                        question.answers.len()
-                    } else {
-                        0
+                    answer_count: match input {
+                        InputKind::Choice => question.answers.len(),
+                        InputKind::Order => self.shown[index].len(),
+                        InputKind::Text | InputKind::Number => 0,
                     },
-                    text: full_text.then(|| (question.text.clone(), question_answers(question))),
+                    items: if input == InputKind::Order {
+                        self.shown_answers(index)
+                    } else {
+                        Vec::new()
+                    },
+                    text: full_text.then(|| (question.text.clone(), self.shown_answers(index))),
                     answer_images: if full_text {
                         answer_images(question)
                     } else {
@@ -818,7 +834,7 @@ impl Game {
             image: question.image.clone(),
             audio: question.audio.clone(),
             input: input_kind(question),
-            answers: question_answers(question),
+            answers: self.shown_answers(index),
             answer_images: answer_images(question),
             multi: question.is_multi(),
             time_limit_ms: u64::from(question.time_limit_secs(&self.quiz.settings)) * 1000,
@@ -846,6 +862,22 @@ impl Game {
                 correct: Vec::new(),
                 picks: Vec::new(),
             },
+            QuestionKind::Order { items } => {
+                let mut placed = vec![0; items.len()];
+                for (_, response) in responses() {
+                    if let Response::Order(order) = response {
+                        for (position, &shown) in order.iter().enumerate() {
+                            if self.shown[index].get(shown) == Some(&position) {
+                                placed[position] += 1;
+                            }
+                        }
+                    }
+                }
+                Reveal::Order {
+                    items: items.clone(),
+                    placed,
+                }
+            }
             QuestionKind::Choice => {
                 let mut picks = vec![0; question.answers.len()];
                 for (_, response) in responses() {
@@ -914,6 +946,29 @@ impl Game {
                 }
             }
         }
+    }
+
+    /// Answer texts as shown for question `index`: the options of a multiple-choice question,
+    /// the shuffled items of an order question, else none.
+    fn shown_answers(&self, index: usize) -> Vec<String> {
+        let question = &self.quiz.questions[index];
+        match &question.kind {
+            QuestionKind::Choice => question.answers.iter().map(|a| a.text.clone()).collect(),
+            QuestionKind::Order { items } => self.shown[index]
+                .iter()
+                .map(|&i| items[i].clone())
+                .collect(),
+            _ => Vec::new(),
+        }
+    }
+
+    /// How many items of an order answer (indexes into the shown list) are in their place.
+    fn in_place(&self, index: usize, order: &[usize]) -> usize {
+        order
+            .iter()
+            .enumerate()
+            .filter(|&(position, &shown)| self.shown[index].get(shown) == Some(&position))
+            .count()
     }
 
     /// The verdict on typed answers normalising to `key`, and whether the judge amended it.
@@ -1011,6 +1066,15 @@ impl Game {
                 AnswerOutcome {
                     points: if closest { scoring::CLOSEST_POINTS } else { 0 },
                     fully_correct: closest,
+                    joker: false,
+                }
+            }
+            (QuestionKind::Order { items }, Response::Order(order)) => {
+                let in_place = self.in_place(index, order);
+                AnswerOutcome {
+                    points: i32::try_from(scoring::order_points(full, in_place, items.len()))
+                        .unwrap_or(i32::MAX),
+                    fully_correct: in_place == items.len(),
                     joker: false,
                 }
             }
@@ -1164,6 +1228,14 @@ fn check_response(question: &Question, response: Response) -> Result<Response, R
         (QuestionKind::Number { .. }, Response::Number(_)) => {
             Err(Refusal("Please enter a number."))
         }
+        (QuestionKind::Order { items }, Response::Order(order)) => {
+            let mut sorted = order.clone();
+            sorted.sort_unstable();
+            if sorted != (0..items.len()).collect::<Vec<_>>() {
+                return Err(Refusal("Put every item in order."));
+            }
+            Ok(Response::Order(order))
+        }
         _ => Err(Refusal("That answer does not fit this question.")),
     }
 }
@@ -1173,10 +1245,11 @@ fn input_kind(question: &Question) -> InputKind {
         QuestionKind::Choice | QuestionKind::Slide { .. } => InputKind::Choice,
         QuestionKind::Text { .. } => InputKind::Text,
         QuestionKind::Number { .. } => InputKind::Number,
+        QuestionKind::Order { .. } => InputKind::Order,
     }
 }
 
-/// Answer pictures of a multiple-choice question, parallel to [`question_answers`].
+/// Answer pictures of a multiple-choice question, parallel to its answer texts.
 fn answer_images(question: &Question) -> Vec<Option<String>> {
     match question.kind {
         QuestionKind::Choice => question.answers.iter().map(|a| a.image.clone()).collect(),
@@ -1184,12 +1257,18 @@ fn answer_images(question: &Question) -> Vec<Option<String>> {
     }
 }
 
-/// Answer texts shown for a question: the options of a multiple-choice question, else none.
-fn question_answers(question: &Question) -> Vec<String> {
-    match question.kind {
-        QuestionKind::Choice => question.answers.iter().map(|a| a.text.clone()).collect(),
-        _ => Vec::new(),
+/// A random order of `0..n` that differs from the original one when it can.
+fn shuffled(n: usize) -> Vec<usize> {
+    let mut order: Vec<usize> = (0..n).collect();
+    for i in (1..n).rev() {
+        let random = uuid::Uuid::new_v4().as_u128();
+        let j = usize::try_from(random % (i as u128 + 1)).unwrap_or(0);
+        order.swap(i, j);
     }
+    if n > 1 && order.iter().enumerate().all(|(i, &v)| i == v) {
+        order.rotate_left(1);
+    }
+    order
 }
 
 fn millis(duration: Duration) -> u64 {
@@ -1464,6 +1543,63 @@ mod tests {
         g.answer(cats, pick(&[0]), true, t0).unwrap();
         g.back(t0).unwrap();
         assert_eq!(g.player_view(cats, t0).unwrap().joker, JokerState::Ready);
+    }
+
+    #[test]
+    fn order_answers_score_each_item_in_place() {
+        let t0 = Instant::now();
+        let mut quiz = quiz(QuizSettings::default());
+        quiz.questions[0].kind = QuestionKind::Order {
+            items: vec!["A".to_owned(), "B".to_owned(), "C".to_owned()],
+        };
+        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        assert_ne!(g.shown[0], vec![0, 1, 2]);
+        // Shown as C, A, B.
+        g.shown[0] = vec![2, 0, 1];
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        let pigs = join(&mut g, "Pigs");
+        g.next(t0).unwrap();
+        let HostPhase::Question { question, .. } = g.host_view(t0).phase else {
+            panic!("expected the question");
+        };
+        assert_eq!(question.answers, ["C", "A", "B"]);
+        assert!(matches!(
+            g.player_view(owls, t0).unwrap().phase,
+            PlayerPhase::Question { ref items, .. } if items == &["C", "A", "B"]
+        ));
+        assert!(
+            g.answer(owls, Response::Order(vec![0, 0, 1]), false, t0)
+                .is_err()
+        );
+        g.answer(owls, Response::Order(vec![1, 2, 0]), false, t0)
+            .unwrap();
+        g.answer(cats, Response::Order(vec![0, 1, 2]), false, t0)
+            .unwrap();
+        g.answer(pigs, Response::Order(vec![1, 0, 2]), false, t0)
+            .unwrap();
+        let HostPhase::Closed {
+            reveal: Some(reveal),
+            ..
+        } = g.host_view(t0).phase
+        else {
+            panic!("expected results");
+        };
+        assert_eq!(
+            reveal,
+            Reveal::Order {
+                items: vec!["A".to_owned(), "B".to_owned(), "C".to_owned()],
+                placed: vec![2, 1, 1],
+            }
+        );
+        let score = |team| {
+            g.standings()
+                .into_iter()
+                .find(|r| r.team.id == team)
+                .unwrap()
+                .score
+        };
+        assert_eq!((score(owls), score(cats), score(pigs)), (1000, 0, 333));
     }
 
     #[test]

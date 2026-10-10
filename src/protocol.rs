@@ -29,6 +29,8 @@ pub enum InputKind {
     Text,
     /// A number; the closest guess wins.
     Number,
+    /// Items to put in order.
+    Order,
 }
 
 /// A team's answer to a question.
@@ -38,6 +40,8 @@ pub enum Response {
     Choice(Vec<usize>),
     Text(String),
     Number(f64),
+    /// Items as shown (by index in the shuffled list), from first to last.
+    Order(Vec<usize>),
 }
 
 /// The judge's verdict on a typed answer.
@@ -69,7 +73,8 @@ pub struct QuestionInfo {
     /// Media name of the soundtrack, if any.
     pub audio: Option<String>,
     pub input: InputKind,
-    /// Answer texts of a multiple-choice question (empty for other kinds).
+    /// Answer texts of a multiple-choice question, or the shuffled items of an order question
+    /// (empty for other kinds).
     pub answers: Vec<String>,
     /// Answer pictures, parallel to `answers`.
     pub answer_images: Vec<Option<String>>,
@@ -111,6 +116,11 @@ pub enum Reveal {
     },
     /// The right number and every guess, closest first.
     Number { answer: f64, guesses: Vec<Guess> },
+    /// The items in the right order, and how many teams put each one in its place.
+    Order {
+        items: Vec<String>,
+        placed: Vec<u32>,
+    },
 }
 
 /// Typed answers that are the same once normalised.
@@ -299,6 +309,8 @@ pub enum PlayerPhase {
         input: InputKind,
         /// Number of answer buttons (multiple choice only).
         answer_count: usize,
+        /// The shuffled items of an order question (always sent: they cannot be guessed).
+        items: Vec<String>,
         /// Question and answer texts, when the phone display shows full text.
         text: Option<(String, Vec<String>)>,
         /// Answer pictures, parallel to the answer texts, when the phone display shows full text.

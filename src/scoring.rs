@@ -72,6 +72,18 @@ pub fn score(question: &Question, selected: &[usize], full: u32, mode: MultiScor
     to_points(f64::from(full) * fraction)
 }
 
+/// Points for an order question: `full` (see [`full_points`]) times the share of items put in
+/// their right place.
+#[must_use]
+pub fn order_points(full: u32, in_place: usize, items: usize) -> u32 {
+    if items == 0 {
+        return 0;
+    }
+    let share = f64::from(u32::try_from(in_place).unwrap_or(u32::MAX))
+        / f64::from(u32::try_from(items).unwrap_or(u32::MAX));
+    to_points(f64::from(full) * share)
+}
+
 /// Points for a typed answer: `full` (see [`full_points`]) scaled by the judge's grade, plus the
 /// bonus (or minus the malus).
 #[must_use]
@@ -200,6 +212,14 @@ mod tests {
         assert_eq!(text_points(j(Grade::Wrong, -300), 750), -300);
         assert_eq!(text_points(j(Grade::Wrong, -5000), 750), -1000);
         assert_eq!(text_points(j(Grade::Half, 0), 1000), 500);
+    }
+
+    #[test]
+    fn order_points_count_items_in_place() {
+        assert_eq!(order_points(1000, 4, 4), 1000);
+        assert_eq!(order_points(1000, 2, 4), 500);
+        assert_eq!(order_points(800, 1, 3), 267);
+        assert_eq!(order_points(1000, 0, 4), 0);
     }
 
     #[test]

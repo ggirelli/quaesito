@@ -626,6 +626,18 @@ fn AnswersOrPrompt(question: QuestionInfo) -> Element {
                 AnswerGrid { answers: question.answers.clone(), images: question.answer_images.clone(), reveal: None }
             };
         }
+        InputKind::Order => {
+            return rsx! {
+                div { class: "open-reveal",
+                    p { class: "open-prompt", "🔀 Put them in order on your phone" }
+                    ul { class: "order-items",
+                        for (i, item) in question.answers.iter().enumerate() {
+                            li { key: "{i}", class: "order-item", "{item}" }
+                        }
+                    }
+                }
+            };
+        }
         InputKind::Text => "✍️ Type your answer on your phone",
         InputKind::Number => "🔢 Enter a number on your phone: closest wins",
     };
@@ -647,6 +659,24 @@ fn RevealBody(question: QuestionInfo, reveal: Reveal) -> Element {
         },
         Reveal::Text { accepted, groups } => rsx! {
             TextReveal { question: question.index, accepted, groups }
+        },
+        Reveal::Order { items, placed } => rsx! {
+            div { class: "open-reveal",
+                ol { class: "order-items",
+                    for (i, item) in items.into_iter().enumerate() {
+                        li { key: "{i}", class: "order-item revealed",
+                            span { class: "order-rank", "{i + 1}" }
+                            span { class: "strong", "{item}" }
+                            span { class: "muted small",
+                                {
+                                    let n = placed.get(i).copied().unwrap_or(0);
+                                    if n == 1 { "1 team got it".to_owned() } else { format!("{n} teams got it") }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         },
         Reveal::Number { answer, guesses } => rsx! {
             NumberReveal { answer, guesses }

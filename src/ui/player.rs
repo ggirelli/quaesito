@@ -283,8 +283,35 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
         PlayerPhase::Question {
             index,
             total,
+            input: InputKind::Order,
+            items,
+            text,
+            remaining_ms: left,
+            paused,
+            time_limit_ms,
+            submitted,
+            ..
+        } => rsx! {
+            OrderPad {
+                key: "{index}",
+                joker: view.joker,
+                index,
+                total,
+                items,
+                question: text.map(|(question, _)| question),
+                clock: Clock { left_ms: left, limit_ms: time_limit_ms, paused, received_at: live_received },
+                submitted: match submitted {
+                    Some(Response::Order(order)) => Some(order),
+                    _ => None,
+                },
+            }
+        },
+        PlayerPhase::Question {
+            index,
+            total,
             input: InputKind::Choice,
             answer_count,
+            items: _,
             text,
             answer_images,
             multi,
@@ -631,7 +658,7 @@ fn OpenPad(
                         match answer {
                             Response::Text(text) => text.clone(),
                             Response::Number(value) => value.to_string(),
-                            Response::Choice(_) => String::new(),
+                            Response::Choice(_) | Response::Order(_) => String::new(),
                         }
                     }
                 },
@@ -679,6 +706,102 @@ fn OpenPad(
 }
 
 #[component]
+/// An order question: tap the items from first to last, then submit.
+#[component]
+fn OrderPad(
+    index: usize,
+    total: usize,
+    items: Vec<String>,
+    question: Option<String>,
+    clock: Clock,
+    submitted: Option<Vec<usize>>,
+    joker: JokerState,
+) -> Element {
+    let live_socket: Live<PlayerCommand, PlayerView> = use_context();
+    let mut picked = use_signal(Vec::<usize>::new);
+    let armed = use_signal(|| false);
+    let now = use_clock(200);
+    let (left, width) = clock.at(now());
+    let locked = submitted.is_some() || left <= 0.0;
+    let order = submitted.clone().unwrap_or_else(|| picked.cloned());
+    let complete = picked.read().len() == items.len();
+    let send = move |_| async move {
+        let _ = live_socket
+            .socket
+            .send(PlayerCommand::Answer {
+                response: Response::Order(picked()),
+                joker: armed(),
+            })
+            .await;
+    };
+    rsx! {
+        main { class: "player-main top",
+            div { class: "phone-timer",
+                div { style: "width: {width}%" }
+            }
+            div { class: "row between",
+                span { class: "muted", "Question {index + 1} of {total}" }
+                span { class: "muted",
+                    if clock.paused { "⏸ Paused" } else { "{(left / 1000.0).ceil()}s" }
+                }
+            }
+            if let Some(question) = question {
+                p { class: "phone-question", "{question}" }
+            }
+            if locked {
+                p { class: "strong",
+                    if submitted.is_some() { "🔒 Answer locked in" } else { "⌛ Time's up" }
+                }
+            } else {
+                p { class: "muted", "Tap the items from first to last. Tap again to take one back." }
+            }
+            JokerToggle { state: joker, armed, locked }
+            ul { class: "order-pad",
+                for (i, item) in items.iter().enumerate() {
+                    {
+                        let position = order.iter().position(|&p| p == i);
+                        rsx! {
+                            li { key: "{i}",
+                                button {
+                                    class: if position.is_some() { "order-choice picked" } else { "order-choice" },
+                                    disabled: locked,
+                                    onclick: move |_| picked.with_mut(|p| {
+                                        if let Some(at) = p.iter().position(|&x| x == i) {
+                                            p.remove(at);
+                                        } else {
+                                            p.push(i);
+                                        }
+                                    }),
+                                    span { class: "order-rank",
+                                        if let Some(position) = position { "{position + 1}" } else { "·" }
+                                    }
+                                    span { "{item}" }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if !locked {
+                div { class: "row",
+                    button {
+                        class: "button ghost",
+                        disabled: picked.read().is_empty(),
+                        onclick: move |_| picked.set(Vec::new()),
+                        "Start over"
+                    }
+                    button {
+                        class: "button primary big grow",
+                        disabled: !complete,
+                        onclick: send,
+                        "Submit"
+                    }
+                }
+            }
+        }
+    }
+}
+
 /// Arms the team's joker before answering, or shows that it was played on this question.
 #[component]
 fn JokerToggle(state: JokerState, armed: Signal<bool>, locked: bool) -> Element {
