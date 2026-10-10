@@ -25,6 +25,12 @@ pub async fn host(mut socket: TypedWebsocket<HostCommand, HostView>, session: Ar
                 Ok(HostCommand::Judge { question, key, judgement }) => {
                     let _ = session.update(|g, now| g.judge(question, &key, judgement, now));
                 }
+                Ok(HostCommand::RenameTeam { team, name }) => {
+                    let _ = session.update(|g, _| g.rename_team(team, &name));
+                }
+                Ok(HostCommand::RemoveTeam { team }) => {
+                    let _ = session.update(|g, now| g.remove_team(team, now));
+                }
                 Err(_) => return,
             },
         }

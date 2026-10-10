@@ -203,6 +203,10 @@ pub enum HostCommand {
         key: String,
         judgement: Judgement,
     },
+    /// Rename a team.
+    RenameTeam { team: u32, name: String },
+    /// Remove a team from the game.
+    RemoveTeam { team: u32 },
 }
 
 /// How a team did on one question.

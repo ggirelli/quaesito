@@ -77,6 +77,7 @@ pub fn Join(code: String) -> Element {
 fn PlayerEntry(code: String) -> Element {
     let code = use_signal(|| code);
     let mut token = use_signal(|| client::storage_get(&ticket_key(&code())));
+    let mut notice = use_signal(|| None::<&'static str>);
     // A stored ticket is only good while its game is running.
     let checked = use_resource(move || async move {
         match token() {
@@ -92,14 +93,23 @@ fn PlayerEntry(code: String) -> Element {
     });
     match (token(), checked()) {
         (Some(t), Some(true)) => rsx! {
-            PlayerGame { code: code(), token: t }
+            PlayerGame {
+                code: code(),
+                token: t,
+                on_gone: move |()| {
+                    client::storage_remove(&ticket_key(&code.peek()));
+                    notice.set(Some("Your team was removed from the game. You can join again."));
+                    token.set(None);
+                },
+            }
         },
         (Some(_), _) => rsx! {
             div { class: "page center", Spinner {} }
         },
         (None, _) => rsx! {
-            JoinForm { code: code(), on_joined: move |t: String| {
+            JoinForm { code: code(), notice: notice(), on_joined: move |t: String| {
                 client::storage_set(&ticket_key(&code()), &t);
+                notice.set(None);
                 token.set(Some(t));
             } }
         },
@@ -107,7 +117,11 @@ fn PlayerEntry(code: String) -> Element {
 }
 
 #[component]
-fn JoinForm(code: String, on_joined: EventHandler<String>) -> Element {
+fn JoinForm(
+    code: String,
+    notice: Option<&'static str>,
+    on_joined: EventHandler<String>,
+) -> Element {
     let code = use_signal(|| code);
     let info = use_resource(move || async move { game_info(code()).await });
     let mut name = use_signal(String::new);
@@ -143,6 +157,9 @@ fn JoinForm(code: String, on_joined: EventHandler<String>) -> Element {
     rsx! {
         main { class: "page center narrow stack",
             Brand { large: true }
+            if let Some(notice) = notice {
+                p { class: "issues", "{notice}" }
+            }
             p { class: "tagline", "Joining “{title}”" }
             form {
                 class: "card stack",
@@ -179,11 +196,21 @@ fn JoinForm(code: String, on_joined: EventHandler<String>) -> Element {
 }
 
 #[component]
-fn PlayerGame(code: String, token: String) -> Element {
+fn PlayerGame(code: String, token: String, on_gone: EventHandler<()>) -> Element {
     let code = use_signal(|| code);
     let token = use_signal(|| token);
     let live = use_live(move || player_socket(code(), token(), WebSocketOptions::new()));
     use_context_provider(|| live);
+    // A dropped connection may mean the host removed the team, or ended the game.
+    use_effect(move || {
+        if !(live.connected)() {
+            spawn(async move {
+                if matches!(check_ticket(code(), token()).await, Ok(false)) {
+                    on_gone.call(());
+                }
+            });
+        }
+    });
 
     let view = live.view.read();
     let Some(view) = view.as_ref() else {

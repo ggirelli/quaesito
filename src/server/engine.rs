@@ -150,20 +150,7 @@ impl Game {
     /// # Errors
     /// Refuses empty, overlong or duplicate names, and joining a full or finished game.
     pub fn join(&mut self, name: &str, token: String) -> Result<u32, Refusal> {
-        let name = name.trim();
-        if name.is_empty() {
-            return Err(Refusal("Please pick a team name."));
-        }
-        if name.chars().count() > MAX_NAME_CHARS {
-            return Err(Refusal("That team name is too long."));
-        }
-        if self
-            .teams
-            .iter()
-            .any(|t| t.name.to_lowercase() == name.to_lowercase())
-        {
-            return Err(Refusal("Another team already has that name."));
-        }
+        let name = self.check_name(name, None)?;
         if self.teams.len() >= MAX_TEAMS {
             return Err(Refusal("This game is full."));
         }
@@ -174,13 +161,73 @@ impl Game {
         self.next_team_id += 1;
         self.teams.push(Team {
             id,
-            name: name.to_owned(),
+            name,
             avatar: None,
             token,
             connections: 0,
             submissions: (0..self.quiz.questions.len()).map(|_| None).collect(),
         });
         Ok(id)
+    }
+
+    /// Renames a team (the host fixing a typo or an unwelcome name).
+    ///
+    /// # Errors
+    /// Refuses unknown teams and names [`Game::join`] would refuse.
+    pub fn rename_team(&mut self, team: u32, name: &str) -> Result<(), Refusal> {
+        let name = self.check_name(name, Some(team))?;
+        self.team_mut(team).ok_or(Refusal("Unknown team."))?.name = name;
+        Ok(())
+    }
+
+    /// Removes a team and its answers; its phone is sent back to the join form.
+    ///
+    /// # Errors
+    /// Refuses unknown teams, and removals once the podium is being revealed.
+    pub fn remove_team(&mut self, team: u32, now: Instant) -> Result<(), Refusal> {
+        if matches!(self.phase, Phase::Podium { .. }) {
+            return Err(Refusal("The podium is already being revealed."));
+        }
+        let before = self.teams.len();
+        self.teams.retain(|t| t.id != team);
+        if self.teams.len() == before {
+            return Err(Refusal("Unknown team."));
+        }
+        // The removed team may have been the last one the question was waiting for.
+        if let Phase::Question { index, .. } = self.phase
+            && !self.teams.is_empty()
+            && self.everyone_answered(index)
+        {
+            self.phase = Phase::Closed { index, since: now };
+        }
+        Ok(())
+    }
+
+    /// A trimmed, valid team name not used by another team than `except`.
+    fn check_name(&self, name: &str, except: Option<u32>) -> Result<String, Refusal> {
+        let name = name.trim();
+        if name.is_empty() {
+            return Err(Refusal("Please pick a team name."));
+        }
+        if name.chars().count() > MAX_NAME_CHARS {
+            return Err(Refusal("That team name is too long."));
+        }
+        if self
+            .teams
+            .iter()
+            .any(|t| Some(t.id) != except && t.name.to_lowercase() == name.to_lowercase())
+        {
+            return Err(Refusal("Another team already has that name."));
+        }
+        Ok(name.to_owned())
+    }
+
+    /// Whether every connected team has answered question `index`.
+    fn everyone_answered(&self, index: usize) -> bool {
+        self.teams
+            .iter()
+            .filter(|t| t.connections > 0)
+            .all(|t| t.submissions[index].is_some())
     }
 
     /// The team owning a reconnect token.
@@ -280,12 +327,7 @@ impl Game {
             elapsed: now.duration_since(started),
         });
 
-        let everyone_answered = self
-            .teams
-            .iter()
-            .filter(|t| t.connections > 0)
-            .all(|t| t.submissions[index].is_some());
-        if everyone_answered {
+        if self.everyone_answered(index) {
             self.phase = Phase::Closed { index, since: now };
         }
         Ok(())
@@ -949,6 +991,33 @@ mod tests {
         assert!(g.join("owls", "t2".to_owned()).is_err());
         assert_eq!(g.team_for_token("t1"), Some(id));
         assert_eq!(g.team_for_token("nope"), None);
+    }
+
+    #[test]
+    fn the_host_renames_and_removes_teams() {
+        let t0 = Instant::now();
+        let mut g = game(QuizSettings::default());
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        assert!(g.rename_team(owls, "cats").is_err());
+        assert!(g.rename_team(owls, " ").is_err());
+        g.rename_team(owls, " Night Owls ").unwrap();
+        g.rename_team(cats, "CATS").unwrap();
+        assert_eq!(g.host_view(t0).teams[0].name, "Night Owls");
+
+        // Removing the only team still to answer closes the question.
+        g.next(t0).unwrap();
+        g.answer(owls, pick(&[0]), t0).unwrap();
+        g.remove_team(cats, t0).unwrap();
+        assert!(g.remove_team(cats, t0).is_err());
+        assert!(g.player_view(cats, t0).is_none());
+        assert_eq!(g.team_for_token("token-Cats"), None);
+        assert!(matches!(g.host_view(t0).phase, HostPhase::Closed { .. }));
+
+        g.next(t0).unwrap();
+        g.next(t0).unwrap();
+        g.next(t0).unwrap(); // podium
+        assert!(g.remove_team(owls, t0).is_err());
     }
 
     #[test]

@@ -12,8 +12,8 @@ use super::{
 use crate::{
     api::{host_socket, join_origin},
     protocol::{
-        Grade, Guess, HostCommand, HostPhase, HostView, InputKind, Judgement, QuestionInfo, Reveal,
-        SlideInfo, StandingRow, TeamInfo, TextGroup, Upcoming,
+        Grade, Guess, HostCommand, HostPhase, HostView, InputKind, Judgement, MAX_NAME_CHARS,
+        QuestionInfo, Reveal, SlideInfo, StandingRow, TeamInfo, TextGroup, Upcoming,
     },
     scoring::MAX_BONUS,
 };
@@ -62,6 +62,7 @@ fn HostScreen(code: String) -> Element {
         .auto_advance_ms
         .map(|ms| (remaining_ms(ms, received_at, now()) / 1000.0).ceil());
     let soundtrack = soundtrack(&view.phase, received_at);
+    let mut show_teams = use_signal(|| false);
 
     rsx! {
         div {
@@ -84,9 +85,23 @@ fn HostScreen(code: String) -> Element {
             header { class: "host-bar",
                 Brand {}
                 span { class: "strong", "{view.title}" }
-                span {
-                    "Code "
-                    span { class: "code", "{view.code}" }
+                div { class: "row",
+                    span {
+                        "Code "
+                        span { class: "code", "{view.code}" }
+                    }
+                    button {
+                        class: "button ghost",
+                        title: "Rename or remove teams",
+                        onclick: move |_| show_teams.set(true),
+                        "Teams ({view.teams.len()})"
+                    }
+                }
+            }
+            if show_teams() {
+                TeamsPanel {
+                    teams: view.teams.clone(),
+                    on_close: move |()| show_teams.set(false),
                 }
             }
             main { class: "host-main",
@@ -142,6 +157,106 @@ fn HostScreen(code: String) -> Element {
                 }
             }
             ConnectionBanner { connected: (live.connected)() }
+        }
+    }
+}
+
+/// The host's team manager: rename or remove teams.
+#[component]
+fn TeamsPanel(teams: Vec<TeamInfo>, on_close: EventHandler<()>) -> Element {
+    rsx! {
+        div {
+            class: "overlay",
+            onclick: move |_| on_close.call(()),
+            // Typing a name must not advance the quiz.
+            onkeydown: move |e: KeyboardEvent| {
+                e.stop_propagation();
+                if e.key() == Key::Escape {
+                    on_close.call(());
+                }
+            },
+            section {
+                class: "card stack panel",
+                role: "dialog",
+                aria_label: "Teams",
+                onclick: move |e| e.stop_propagation(),
+                div { class: "row between",
+                    h2 { "Teams" }
+                    button { class: "button ghost", onclick: move |_| on_close.call(()), "Close" }
+                }
+                if teams.is_empty() {
+                    p { class: "muted", "No team has joined yet." }
+                }
+                ul { class: "list",
+                    for team in teams.iter() {
+                        TeamRow {
+                            key: "{team.id}",
+                            team: team.clone(),
+                            taken: teams
+                                .iter()
+                                .filter(|t| t.id != team.id)
+                                .map(|t| t.name.to_lowercase())
+                                .collect::<Vec<_>>(),
+                        }
+                    }
+                }
+                p { class: "muted small",
+                    "A removed team loses its points and its phone goes back to the join page."
+                }
+            }
+        }
+    }
+}
+
+#[component]
+fn TeamRow(team: TeamInfo, taken: Vec<String>) -> Element {
+    let live: Live<HostCommand, HostView> = use_context();
+    let mut error = use_signal(|| None::<&'static str>);
+    let mut confirming = use_signal(|| false);
+    let id = team.id;
+    let rename = move |e: FormEvent| {
+        let name = e.value().trim().to_owned();
+        let taken = taken.clone();
+        async move {
+            if name.is_empty() {
+                error.set(Some("A team needs a name."));
+            } else if taken.contains(&name.to_lowercase()) {
+                error.set(Some("Another team already has that name."));
+            } else {
+                error.set(None);
+                let _ = live
+                    .socket
+                    .send(HostCommand::RenameTeam { team: id, name })
+                    .await;
+            }
+        }
+    };
+    let remove = move |_| async move {
+        let _ = live.socket.send(HostCommand::RemoveTeam { team: id }).await;
+    };
+    rsx! {
+        li { class: "list-row team-row",
+            TeamAvatar { team: team.clone() }
+            div { class: "grow stack-tight",
+                input {
+                    value: "{team.name}",
+                    maxlength: MAX_NAME_CHARS,
+                    aria_label: "Team name",
+                    onchange: rename,
+                }
+                if let Some(error) = error() {
+                    span { class: "error small", "{error}" }
+                }
+            }
+            span { class: "muted small",
+                if team.connected { "online" } else { "offline" }
+            }
+            if confirming() {
+                button { class: "button danger", onclick: remove, "Really remove?" }
+                button { class: "button ghost", onclick: move |_| confirming.set(false), "Keep" }
+            } else {
+                button { class: "button ghost", onclick: move |_| confirming.set(true), "Remove" }
+            }
         }
     }
 }
