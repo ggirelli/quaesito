@@ -940,6 +940,14 @@ fn AnswersOrPrompt(question: QuestionInfo) -> Element {
                 }
             };
         }
+        InputKind::Parts => {
+            return rsx! {
+                div { class: "open-reveal",
+                    p { class: "open-prompt", "✍️ Type the answers on your phone" }
+                    PartCards { labels: question.answers.clone(), images: question.answer_images.clone() }
+                }
+            };
+        }
         InputKind::Text => "✍️ Type your answer on your phone",
         InputKind::Number => "🔢 Enter a number on your phone: closest wins",
     };
@@ -962,6 +970,19 @@ fn RevealBody(question: QuestionInfo, reveal: Reveal) -> Element {
         Reveal::Text { accepted, groups } => rsx! {
             TextReveal { question: question.index, accepted, groups }
         },
+        Reveal::Parts { parts } => rsx! {
+            div { class: "parts-reveal",
+                for (i, part) in parts.into_iter().enumerate() {
+                    section { key: "{i}", class: "part-reveal",
+                        h3 {
+                            span { class: "order-rank", "{i + 1}" }
+                            "{part.label}"
+                        }
+                        TextReveal { question: question.index, accepted: part.accepted, groups: part.groups }
+                    }
+                }
+            }
+        },
         Reveal::Order { items, placed } => rsx! {
             div { class: "open-reveal",
                 ol { class: "order-items",
@@ -983,6 +1004,27 @@ fn RevealBody(question: QuestionInfo, reveal: Reveal) -> Element {
         Reveal::Number { answer, guesses } => rsx! {
             NumberReveal { answer, guesses }
         },
+    }
+}
+
+/// The parts of a several-answers question while teams answer: numbered labels, with each
+/// part's picture when it has one.
+#[component]
+fn PartCards(labels: Vec<String>, images: Vec<Option<String>>) -> Element {
+    rsx! {
+        ol { class: "part-cards",
+            for (i, label) in labels.into_iter().enumerate() {
+                li { key: "{i}", class: "part-card",
+                    if let Some(Some(image)) = images.get(i) {
+                        img { src: media_url(image), alt: "" }
+                    }
+                    span {
+                        span { class: "order-rank", "{i + 1}" }
+                        "{label}"
+                    }
+                }
+            }
+        }
     }
 }
 

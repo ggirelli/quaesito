@@ -31,6 +31,8 @@ pub enum InputKind {
     Number,
     /// Items to put in order.
     Order,
+    /// Several short typed answers, one per part.
+    Parts,
 }
 
 /// A team's answer to a question.
@@ -42,6 +44,8 @@ pub enum Response {
     Number(f64),
     /// Items as shown (by index in the shuffled list), from first to last.
     Order(Vec<usize>),
+    /// One typed answer per part (empty for parts left blank).
+    Parts(Vec<String>),
 }
 
 /// The judge's verdict on a typed answer.
@@ -127,6 +131,17 @@ pub enum Reveal {
         items: Vec<String>,
         placed: Vec<u32>,
     },
+    /// For each part, its accepted answers and the typed ones, grouped and judged as for a
+    /// typed-answer question. Group keys start with the part's index.
+    Parts { parts: Vec<PartReveal> },
+}
+
+/// One part of a several-answers reveal.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PartReveal {
+    pub label: String,
+    pub accepted: Vec<String>,
+    pub groups: Vec<TextGroup>,
 }
 
 /// Typed answers that are the same once normalised.

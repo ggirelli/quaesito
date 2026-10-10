@@ -132,6 +132,9 @@ impl Quiz {
             names.extend(question.image.iter().cloned());
             names.extend(question.audio.iter().cloned());
             names.extend(question.answers.iter().filter_map(|a| a.image.clone()));
+            if let QuestionKind::Parts { parts } = &question.kind {
+                names.extend(parts.iter().filter_map(|p| p.image.clone()));
+            }
         }
         names.sort();
         names.dedup();
@@ -148,6 +151,11 @@ impl Quiz {
             apply(&mut question.audio);
             for answer in &mut question.answers {
                 apply(&mut answer.image);
+            }
+            if let QuestionKind::Parts { parts } = &mut question.kind {
+                for part in parts {
+                    apply(&mut part.image);
+                }
             }
         }
     }
@@ -309,6 +317,25 @@ fn deserialize_image_reveal<'de, D: serde::Deserializer<'de>>(
     })
 }
 
+/// One answer of a [`QuestionKind::Parts`] question.
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
+pub struct Part {
+    /// What to type, e.g. "Title" or "Poster 3".
+    #[serde(default)]
+    pub label: String,
+    /// Accepted spellings, matched like a typed answer.
+    #[serde(default)]
+    pub accepted: Vec<String>,
+    /// A picture just for this part (a poster, a face…).
+    #[serde(default)]
+    pub image: Option<String>,
+}
+
+/// Fewest parts a several-answers question has.
+pub const MIN_PARTS: usize = 2;
+/// Most parts a several-answers question has.
+pub const MAX_PARTS: usize = 8;
+
 /// How a question is answered.
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 pub enum QuestionKind {
@@ -323,6 +350,9 @@ pub enum QuestionKind {
     Order { items: Vec<String> },
     /// Is the statement true or false? Played like a two-answer multiple choice.
     TrueFalse { answer: bool },
+    /// Several typed answers at once (title and artist, five posters…), each judged on its own;
+    /// the question's points are split evenly between the parts.
+    Parts { parts: Vec<Part> },
     /// Not a question: a title, text and/or picture shown on the big screen, with nothing to
     /// answer.
     Slide { title: String },
@@ -455,6 +485,19 @@ impl Question {
                 }
                 if items.iter().any(|item| item.trim().is_empty()) {
                     problems.push("Every item needs a text.".to_owned());
+                }
+            }
+            QuestionKind::Parts { parts } => {
+                if !(MIN_PARTS..=MAX_PARTS).contains(&parts.len()) {
+                    problems.push(format!(
+                        "Ask for between {MIN_PARTS} and {MAX_PARTS} answers."
+                    ));
+                }
+                if parts
+                    .iter()
+                    .any(|p| p.accepted.iter().all(|a| a.trim().is_empty()))
+                {
+                    problems.push("Every answer needs at least one accepted spelling.".to_owned());
                 }
             }
             QuestionKind::Slide { .. } | QuestionKind::TrueFalse { .. } => {}
@@ -735,6 +778,33 @@ mod tests {
         q.kind = QuestionKind::TrueFalse { answer: true };
         assert_eq!(q.correct_indexes(), [0]);
         assert!(!q.is_multi());
+    }
+
+    #[test]
+    fn parts_need_accepted_answers_and_count_their_pictures() {
+        let part = |label: &str, accepted: &str| Part {
+            label: label.to_owned(),
+            accepted: vec![accepted.to_owned()],
+            image: None,
+        };
+        let mut quiz = quiz();
+        quiz.questions[0].kind = QuestionKind::Parts {
+            parts: vec![part("Title", "Yesterday")],
+        };
+        assert_eq!(quiz.validate().len(), 1);
+        quiz.questions[0].kind = QuestionKind::Parts {
+            parts: vec![
+                part("Title", "Yesterday"),
+                Part {
+                    image: Some("poster.jpg".to_owned()),
+                    ..part("Artist", " ")
+                },
+            ],
+        };
+        assert_eq!(quiz.validate().len(), 1);
+        assert_eq!(quiz.media(), ["poster.jpg"]);
+        quiz.rename_media(|_| Some("new.jpg".to_owned()));
+        assert_eq!(quiz.media(), ["new.jpg"]);
     }
 
     #[test]

@@ -11,9 +11,10 @@ use super::{
 use crate::{
     api::{get_quiz, save_quiz, start_test, upload_question_audio, upload_question_image},
     model::{
-        AdvanceMode, Answer, ImageReveal, MAX_ANSWERS, MAX_MULTIPLIER, MAX_TIME_LIMIT_SECS,
-        MIN_ANSWERS, MIN_TIME_LIMIT_SECS, MultiScoring, PhoneDisplay, PointsMode, Question,
-        QuestionKind, Quiz, QuizSettings, RevealMode, ValidationIssue,
+        AdvanceMode, Answer, ImageReveal, MAX_ANSWERS, MAX_MULTIPLIER, MAX_PARTS,
+        MAX_TIME_LIMIT_SECS, MIN_ANSWERS, MIN_PARTS, MIN_TIME_LIMIT_SECS, MultiScoring, Part,
+        PhoneDisplay, PointsMode, Question, QuestionKind, Quiz, QuizSettings, RevealMode,
+        ValidationIssue,
     },
 };
 
@@ -78,10 +79,24 @@ impl Draft {
         });
     }
 
-    fn edit_accepted(self, index: usize, f: impl FnOnce(&mut Vec<String>)) {
+    /// Edits the accepted answers of a typed-answer question, or of one `part` of a
+    /// several-answers question.
+    fn edit_accepted(self, index: usize, part: Option<usize>, f: impl FnOnce(&mut Vec<String>)) {
+        self.edit_question(index, |q| match (&mut q.kind, part) {
+            (QuestionKind::Text { accepted }, None) => f(accepted),
+            (QuestionKind::Parts { parts }, Some(p)) => {
+                if let Some(part) = parts.get_mut(p) {
+                    f(&mut part.accepted);
+                }
+            }
+            _ => {}
+        });
+    }
+
+    fn edit_parts(self, index: usize, f: impl FnOnce(&mut Vec<Part>)) {
         self.edit_question(index, |q| {
-            if let QuestionKind::Text { accepted } = &mut q.kind {
-                f(accepted);
+            if let QuestionKind::Parts { parts } = &mut q.kind {
+                f(parts);
             }
         });
     }
@@ -649,6 +664,7 @@ fn QuestionCard(
                         ("Typed answer", "Teams type a short answer. You can amend the verdict on each answer when they are revealed."),
                         ("Number", "Teams guess a number; the closest guess wins 1000 points."),
                         ("Order", "Teams put the items in order; each item in its right place earns its share of the points."),
+                        ("Several answers", "Teams type a few answers at once (title and artist, five posters…); each is judged on its own and the points are shared between them."),
                     ],
                     selected: match question.kind {
                         QuestionKind::Choice | QuestionKind::Slide { .. } => 0,
@@ -656,6 +672,7 @@ fn QuestionCard(
                         QuestionKind::Text { .. } => 2,
                         QuestionKind::Number { .. } => 3,
                         QuestionKind::Order { .. } => 4,
+                        QuestionKind::Parts { .. } => 5,
                     },
                     on_select: move |i| draft.edit_question(index, |q| set_kind(q, i)),
                 }
@@ -700,6 +717,9 @@ fn QuestionCard(
                     QuestionKind::Order { items } => rsx! {
                         OrderItems { question: index, items: items.clone() }
                     },
+                    QuestionKind::Parts { parts } => rsx! {
+                        PartsEditor { question: index, parts: parts.clone() }
+                    },
                     QuestionKind::TrueFalse { answer } => rsx! {
                         Choice {
                             label: "The statement is",
@@ -725,7 +745,11 @@ fn set_kind(question: &mut Question, choice: usize) {
         (1, QuestionKind::TrueFalse { .. })
         | (2, QuestionKind::Text { .. })
         | (3, QuestionKind::Number { .. })
-        | (4, QuestionKind::Order { .. }) => return,
+        | (4, QuestionKind::Order { .. })
+        | (5, QuestionKind::Parts { .. }) => return,
+        (5, _) => QuestionKind::Parts {
+            parts: vec![blank_part(), blank_part()],
+        },
         (1, _) => QuestionKind::TrueFalse { answer: true },
         // Start from the choices' texts, if any were typed.
         (4, _) => {
@@ -755,7 +779,11 @@ fn set_kind(question: &mut Question, choice: usize) {
 
 /// The accepted answers of a typed-text question.
 #[component]
-fn AcceptedAnswers(question: usize, accepted: Vec<String>) -> Element {
+fn AcceptedAnswers(
+    question: usize,
+    #[props(default)] part: Option<usize>,
+    accepted: Vec<String>,
+) -> Element {
     let draft: Draft = use_context();
     let count = accepted.len();
     rsx! {
@@ -768,14 +796,14 @@ fn AcceptedAnswers(question: usize, accepted: Vec<String>) -> Element {
                         value: "{text}",
                         oninput: move |e| {
                             let value = e.value();
-                            draft.edit_accepted(question, |a| a[i] = value);
+                            draft.edit_accepted(question, part, |a| a[i] = value);
                         },
                     }
                     button {
                         class: "button ghost icon",
                         title: "Remove",
                         disabled: count <= 1,
-                        onclick: move |_| draft.edit_accepted(question, |a| {
+                        onclick: move |_| draft.edit_accepted(question, part, |a| {
                             a.remove(i);
                         }),
                         "✕"
@@ -786,13 +814,118 @@ fn AcceptedAnswers(question: usize, accepted: Vec<String>) -> Element {
         div { class: "row between",
             button {
                 class: "button ghost",
-                onclick: move |_| draft.edit_accepted(question, |a| a.push(String::new())),
+                onclick: move |_| draft.edit_accepted(question, part, |a| a.push(String::new())),
                 "＋ Add accepted answer"
             }
             span { class: "muted small",
                 "Case, accents, punctuation and spacing are ignored; spelling must match."
             }
         }
+    }
+}
+
+/// A new, empty part of a several-answers question.
+fn blank_part() -> Part {
+    Part {
+        accepted: vec![String::new()],
+        ..Part::default()
+    }
+}
+
+/// The parts of a several-answers question: a label, an optional picture and accepted answers
+/// each.
+#[component]
+fn PartsEditor(question: usize, parts: Vec<Part>) -> Element {
+    let draft: Draft = use_context();
+    let count = parts.len();
+    rsx! {
+        div { class: "parts-edit",
+            for (i, part) in parts.into_iter().enumerate() {
+                div { key: "{i}", class: "part-edit stack",
+                    div { class: "row",
+                        span { class: "order-rank", "{i + 1}" }
+                        input {
+                            class: "grow",
+                            placeholder: "What to type, e.g. Title, Artist, Poster {i + 1}",
+                            value: "{part.label}",
+                            oninput: move |e| {
+                                let value = e.value();
+                                draft.edit_parts(question, |parts| parts[i].label = value);
+                            },
+                        }
+                        PartImage { question, part: i, image: part.image.clone() }
+                        button {
+                            class: "button ghost icon danger-icon",
+                            title: "Remove this answer",
+                            aria_label: "Remove this answer",
+                            disabled: count <= MIN_PARTS,
+                            onclick: move |_| draft.edit_parts(question, |parts| {
+                                parts.remove(i);
+                            }),
+                            Icon { kind: IconKind::Trash }
+                        }
+                    }
+                    AcceptedAnswers { question, part: Some(i), accepted: part.accepted.clone() }
+                }
+            }
+        }
+        div { class: "row between",
+            if count < MAX_PARTS {
+                button {
+                    class: "button ghost",
+                    onclick: move |_| draft.edit_parts(question, |parts| parts.push(blank_part())),
+                    "＋ Add answer"
+                }
+            } else {
+                span {}
+            }
+            span { class: "muted small", "The question's points are shared evenly between its answers." }
+        }
+    }
+}
+
+/// A part's own picture: upload, thumbnail and removal.
+#[component]
+fn PartImage(question: usize, part: usize, image: Option<String>) -> Element {
+    let draft: Draft = use_context();
+    let token: AdminToken = use_context();
+    let mut uploading = use_signal(|| false);
+    let mut upload_error = use_signal(|| None::<String>);
+    let upload = move |evt: FormEvent| async move {
+        let Some(file) = evt.files().into_iter().next() else {
+            return;
+        };
+        uploading.set(true);
+        upload_error.set(None);
+        match upload_question_image(token.get(), file.into()).await {
+            Ok(name) => draft.edit_parts(question, |parts| parts[part].image = Some(name)),
+            Err(err) => upload_error.set(Some(message(&err))),
+        }
+        uploading.set(false);
+    };
+    match image {
+        Some(image) => rsx! {
+            img { class: "answer-thumb", src: media_url(&image), alt: "Picture for this answer" }
+            button {
+                class: "button ghost icon",
+                title: "Remove picture",
+                onclick: move |_| draft.edit_parts(question, |parts| parts[part].image = None),
+                "✕🖼"
+            }
+        },
+        None => rsx! {
+            label {
+                class: "button ghost icon",
+                title: upload_error().unwrap_or_else(|| "Add a picture for this answer".to_owned()),
+                if uploading() { "…" } else if upload_error().is_some() { "⚠" } else { "🖼" }
+                input {
+                    r#type: "file",
+                    accept: "image/*",
+                    class: "visually-hidden",
+                    onchange: upload,
+                }
+            }
+        },
     }
 }
 

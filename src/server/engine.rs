@@ -25,8 +25,9 @@ use crate::{
     model::{AdvanceMode, MAX_TEXT_ANSWER_CHARS, Question, QuestionKind, Quiz, RevealMode},
     protocol::{
         AnswerOutcome, Fastest, GameResults, Grade, Guess, HostPhase, HostView, InputKind,
-        JokerState, Judgement, MAX_NAME_CHARS, PlayerPhase, PlayerView, QuestionInfo, Response,
-        ResultRow, Reveal, RoundResult, SlideInfo, StandingRow, TeamInfo, TextGroup, Upcoming,
+        JokerState, Judgement, MAX_NAME_CHARS, PartReveal, PlayerPhase, PlayerView, QuestionInfo,
+        Response, ResultRow, Reveal, RoundResult, SlideInfo, StandingRow, TeamInfo, TextGroup,
+        Upcoming,
     },
     scoring::{self, Tally},
 };
@@ -700,7 +701,7 @@ impl Game {
         }
         if !matches!(
             self.quiz.questions[question].kind,
-            QuestionKind::Text { .. }
+            QuestionKind::Text { .. } | QuestionKind::Parts { .. }
         ) {
             return Err(Refusal("Only typed answers can be judged."));
         }
@@ -893,40 +894,7 @@ impl Game {
             Phase::Slide { .. } => PlayerPhase::Slide,
             Phase::Question {
                 index, deadline, ..
-            } => {
-                let question = &self.quiz.questions[index];
-                let input = input_kind(question);
-                let full_text =
-                    self.quiz.settings.phone_display == crate::model::PhoneDisplay::FullText;
-                PlayerPhase::Question {
-                    index: number(index),
-                    total,
-                    input,
-                    answer_count: match input {
-                        InputKind::Choice => question.choices().len(),
-                        InputKind::Order => self.shown[index].len(),
-                        InputKind::Text | InputKind::Number => 0,
-                    },
-                    // Order items and True/False cannot be told apart by colour alone: always sent.
-                    items: match question.kind {
-                        QuestionKind::Order { .. } | QuestionKind::TrueFalse { .. } => {
-                            self.shown_answers(index)
-                        }
-                        _ => Vec::new(),
-                    },
-                    text: full_text.then(|| (question.text.clone(), self.shown_answers(index))),
-                    answer_images: if full_text {
-                        answer_images(question)
-                    } else {
-                        Vec::new()
-                    },
-                    multi: question.is_multi(),
-                    remaining_ms: millis(deadline.saturating_duration_since(self.clock(now))),
-                    paused: self.paused_at.is_some(),
-                    time_limit_ms: u64::from(question.time_limit_secs(&self.quiz.settings)) * 1000,
-                    submitted: submitted(index),
-                }
-            }
+            } => self.open_question_view(index, deadline, team, now),
             Phase::Closed { index, .. } => PlayerPhase::Closed {
                 index: number(index),
                 total,
@@ -971,6 +939,49 @@ impl Game {
             score: score_visible.then(|| self.team_score(team, self.closed_count())),
             phase,
         })
+    }
+
+    /// What a phone shows while question `index` is open.
+    fn open_question_view(
+        &self,
+        index: usize,
+        deadline: Instant,
+        team: &Team,
+        now: Instant,
+    ) -> PlayerPhase {
+        let question = &self.quiz.questions[index];
+        let input = input_kind(question);
+        let full_text = self.quiz.settings.phone_display == crate::model::PhoneDisplay::FullText;
+        PlayerPhase::Question {
+            index: self.quiz.ordinal(index),
+            total: self.quiz.question_count(),
+            input,
+            answer_count: match input {
+                InputKind::Choice => question.choices().len(),
+                InputKind::Order => self.shown[index].len(),
+                InputKind::Parts => question_parts(question),
+                InputKind::Text | InputKind::Number => 0,
+            },
+            // Order items, True/False and part labels cannot be told apart by colour alone:
+            // always sent.
+            items: match question.kind {
+                QuestionKind::Order { .. }
+                | QuestionKind::TrueFalse { .. }
+                | QuestionKind::Parts { .. } => self.shown_answers(index),
+                _ => Vec::new(),
+            },
+            text: full_text.then(|| (question.text.clone(), self.shown_answers(index))),
+            answer_images: if full_text {
+                answer_images(question)
+            } else {
+                Vec::new()
+            },
+            multi: question.is_multi(),
+            remaining_ms: millis(deadline.saturating_duration_since(self.clock(now))),
+            paused: self.paused_at.is_some(),
+            time_limit_ms: u64::from(question.time_limit_secs(&self.quiz.settings)) * 1000,
+            submitted: team.submissions[index].as_ref().map(|s| s.response.clone()),
+        }
     }
 
     fn team_mut(&mut self, id: u32) -> Option<&mut Team> {
@@ -1104,37 +1115,21 @@ impl Game {
                     picks,
                 }
             }
-            QuestionKind::Text { accepted } => {
-                let mut groups: Vec<TextGroup> = Vec::new();
-                for (team, response) in responses() {
-                    let Response::Text(text) = response else {
-                        continue;
-                    };
-                    let key = normalize(text);
-                    if let Some(group) = groups.iter_mut().find(|g| g.key == key) {
-                        group.teams.push(team.to_owned());
-                    } else {
-                        let (judgement, amended) = self.judgement(index, &key);
-                        groups.push(TextGroup {
-                            key,
-                            text: text.clone(),
-                            teams: vec![team.to_owned()],
-                            judgement,
-                            amended,
-                        });
-                    }
-                }
-                // Most common answers first; the sort is stable, so ties keep answer order.
-                groups.sort_by_key(|g| std::cmp::Reverse(g.teams.len()));
-                Reveal::Text {
-                    accepted: accepted
-                        .iter()
-                        .map(|a| a.trim().to_owned())
-                        .filter(|a| !a.is_empty())
-                        .collect(),
-                    groups,
-                }
-            }
+            QuestionKind::Text { accepted } => Reveal::Text {
+                accepted: tidy(accepted),
+                groups: self.text_groups(index, None),
+            },
+            QuestionKind::Parts { parts } => Reveal::Parts {
+                parts: parts
+                    .iter()
+                    .enumerate()
+                    .map(|(p, part)| PartReveal {
+                        label: part_label(part, p),
+                        accepted: tidy(&part.accepted),
+                        groups: self.text_groups(index, Some(p)),
+                    })
+                    .collect(),
+            },
             QuestionKind::Number { answer } => {
                 let answer = answer.unwrap_or_default();
                 let closest = self.closest_distance(index);
@@ -1170,6 +1165,11 @@ impl Game {
                 .iter()
                 .map(|&i| items[i].clone())
                 .collect(),
+            QuestionKind::Parts { parts } => parts
+                .iter()
+                .enumerate()
+                .map(|(p, part)| part_label(part, p))
+                .collect(),
             _ => Vec::new(),
         }
     }
@@ -1191,12 +1191,52 @@ impl Game {
         }
     }
 
+    /// Typed answers to question `index` grouped by normalised text, most common first; `part`
+    /// picks one part of a several-answers question (blank answers are left out).
+    fn text_groups(&self, index: usize, part: Option<usize>) -> Vec<TextGroup> {
+        let mut groups: Vec<TextGroup> = Vec::new();
+        for team in &self.teams {
+            let Some(submission) = &team.submissions[index] else {
+                continue;
+            };
+            let text = match (&submission.response, part) {
+                (Response::Text(text), None) => text,
+                (Response::Parts(texts), Some(p)) => match texts.get(p) {
+                    Some(text) if !text.trim().is_empty() => text,
+                    _ => continue,
+                },
+                _ => continue,
+            };
+            let key = text_key(part, text);
+            if let Some(group) = groups.iter_mut().find(|g| g.key == key) {
+                group.teams.push(team.name.clone());
+            } else {
+                let (judgement, amended) = self.judgement(index, &key);
+                groups.push(TextGroup {
+                    key,
+                    text: text.clone(),
+                    teams: vec![team.name.clone()],
+                    judgement,
+                    amended,
+                });
+            }
+        }
+        // The sort is stable, so ties keep answer order.
+        groups.sort_by_key(|g| std::cmp::Reverse(g.teams.len()));
+        groups
+    }
+
     /// Full points when `key` matches an accepted answer, none otherwise.
     fn automatic_judgement(&self, index: usize, key: &str) -> Judgement {
+        let accepts = |accepted: &[String], norm: &str| {
+            !norm.is_empty() && accepted.iter().any(|a| normalize(a) == norm)
+        };
         let matches = match &self.quiz.questions[index].kind {
-            QuestionKind::Text { accepted } => {
-                !key.is_empty() && accepted.iter().any(|a| normalize(a) == key)
-            }
+            QuestionKind::Text { accepted } => accepts(accepted, key),
+            QuestionKind::Parts { parts } => key
+                .split_once(PART_KEY_SEPARATOR)
+                .and_then(|(p, norm)| Some((parts.get(p.parse::<usize>().ok()?)?, norm)))
+                .is_some_and(|(part, norm)| accepts(&part.accepted, norm)),
             _ => false,
         };
         Judgement {
@@ -1261,7 +1301,7 @@ impl Game {
                 }
             }
             (QuestionKind::Text { .. }, Response::Text(text)) => {
-                let (judgement, _) = self.judgement(index, &normalize(text));
+                let (judgement, _) = self.judgement(index, &text_key(None, text));
                 AnswerOutcome {
                     points: scoring::text_points(judgement, full),
                     fully_correct: judgement.grade == Grade::Full,
@@ -1280,6 +1320,27 @@ impl Game {
                 AnswerOutcome {
                     points: if closest { scoring::CLOSEST_POINTS } else { 0 },
                     fully_correct: closest,
+                    joker: false,
+                }
+            }
+            (QuestionKind::Parts { parts }, Response::Parts(texts)) => {
+                // The question's points are split evenly between its parts.
+                let count = u32::try_from(parts.len().max(1)).unwrap_or(u32::MAX);
+                let share = (full + count / 2) / count;
+                let mut points = 0;
+                let mut all_right = texts.len() == parts.len();
+                for (p, text) in texts.iter().enumerate() {
+                    if text.trim().is_empty() {
+                        all_right = false;
+                        continue;
+                    }
+                    let (judgement, _) = self.judgement(index, &text_key(Some(p), text));
+                    points += scoring::text_points(judgement, share);
+                    all_right &= judgement.grade == Grade::Full;
+                }
+                AnswerOutcome {
+                    points,
+                    fully_correct: all_right,
                     joker: false,
                 }
             }
@@ -1442,6 +1503,22 @@ fn check_response(question: &Question, response: Response) -> Result<Response, R
         (QuestionKind::Number { .. }, Response::Number(_)) => {
             Err(Refusal("Please enter a number."))
         }
+        (QuestionKind::Parts { parts }, Response::Parts(texts)) => {
+            if texts.len() != parts.len() {
+                return Err(Refusal("That answer does not fit this question."));
+            }
+            let texts: Vec<String> = texts.iter().map(|t| t.trim().to_owned()).collect();
+            if texts.iter().all(|t| normalize(t).is_empty()) {
+                return Err(Refusal("Please type at least one answer."));
+            }
+            if texts
+                .iter()
+                .any(|t| t.chars().count() > MAX_TEXT_ANSWER_CHARS)
+            {
+                return Err(Refusal("One of the answers is too long."));
+            }
+            Ok(Response::Parts(texts))
+        }
         (QuestionKind::Order { items }, Response::Order(order)) => {
             let mut sorted = order.clone();
             sorted.sort_unstable();
@@ -1462,16 +1539,58 @@ fn input_kind(question: &Question) -> InputKind {
         QuestionKind::Text { .. } => InputKind::Text,
         QuestionKind::Number { .. } => InputKind::Number,
         QuestionKind::Order { .. } => InputKind::Order,
+        QuestionKind::Parts { .. } => InputKind::Parts,
     }
 }
 
 /// Answer pictures of a multiple-choice question, parallel to its answer texts.
 fn answer_images(question: &Question) -> Vec<Option<String>> {
-    match question.kind {
+    match &question.kind {
         QuestionKind::Choice => question.answers.iter().map(|a| a.image.clone()).collect(),
         QuestionKind::TrueFalse { .. } => vec![None, None],
+        QuestionKind::Parts { parts } => parts.iter().map(|p| p.image.clone()).collect(),
         _ => Vec::new(),
     }
+}
+
+/// Separates a part's index from the normalised text in judgement keys of several-answers
+/// questions (normalised text has letters, digits and spaces only).
+const PART_KEY_SEPARATOR: char = '|';
+
+/// The judgement key of a typed answer: its normalised text, prefixed by the part's index for a
+/// several-answers question.
+fn text_key(part: Option<usize>, text: &str) -> String {
+    match part {
+        Some(p) => format!("{p}{PART_KEY_SEPARATOR}{}", normalize(text)),
+        None => normalize(text),
+    }
+}
+
+/// A part's label, or "Answer N" when it has none.
+fn part_label(part: &crate::model::Part, index: usize) -> String {
+    let label = part.label.trim();
+    if label.is_empty() {
+        format!("Answer {}", index + 1)
+    } else {
+        label.to_owned()
+    }
+}
+
+/// How many parts a several-answers question has (0 for other kinds).
+fn question_parts(question: &Question) -> usize {
+    match &question.kind {
+        QuestionKind::Parts { parts } => parts.len(),
+        _ => 0,
+    }
+}
+
+/// Accepted answers as shown: trimmed, blanks left out.
+fn tidy(accepted: &[String]) -> Vec<String> {
+    accepted
+        .iter()
+        .map(|a| a.trim().to_owned())
+        .filter(|a| !a.is_empty())
+        .collect()
 }
 
 /// A random order of `0..n` that differs from the original one when it can.
@@ -1941,6 +2060,81 @@ mod tests {
             }
         );
         assert_eq!(g.standings()[0].team.id, owls);
+    }
+
+    #[test]
+    fn parts_are_judged_one_by_one_and_share_the_points() {
+        use crate::model::Part;
+        let t0 = Instant::now();
+        let part = |label: &str, accepted: &[&str]| Part {
+            label: label.to_owned(),
+            accepted: accepted.iter().map(|a| (*a).to_owned()).collect(),
+            image: None,
+        };
+        let mut quiz = quiz(QuizSettings {
+            points: crate::model::PointsMode::Flat,
+            ..QuizSettings::default()
+        });
+        quiz.questions[0].kind = QuestionKind::Parts {
+            parts: vec![
+                part("Title", &["Yesterday"]),
+                part(" ", &["The Beatles", "Beatles"]),
+            ],
+        };
+        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        let pigs = join(&mut g, "Pigs");
+        g.next(t0).unwrap();
+        let texts = |a: &str, b: &str| Response::Parts(vec![a.to_owned(), b.to_owned()]);
+        assert!(
+            g.answer(owls, Response::Parts(vec!["x".to_owned()]), false, t0)
+                .is_err()
+        );
+        assert!(g.answer(owls, texts(" ", ""), false, t0).is_err());
+        g.answer(owls, texts("yesterday", "beatles"), false, t0)
+            .unwrap();
+        g.answer(cats, texts("Yesterday", "Paul McCartney"), false, t0)
+            .unwrap();
+        g.answer(pigs, texts("Let it be", ""), false, t0).unwrap();
+
+        let HostPhase::Closed {
+            reveal: Some(Reveal::Parts { parts }),
+            ..
+        } = g.host_view(t0).phase
+        else {
+            panic!("expected a parts reveal");
+        };
+        assert_eq!(parts[1].label, "Answer 2");
+        assert_eq!(parts[0].groups.len(), 2);
+        // The blank artist is left out of the groups.
+        assert_eq!(parts[1].groups.len(), 2);
+        let score = |g: &Game, team| {
+            g.standings()
+                .into_iter()
+                .find(|r| r.team.id == team)
+                .unwrap()
+                .score
+        };
+        assert_eq!(
+            (score(&g, owls), score(&g, cats), score(&g, pigs)),
+            (1000, 500, 0)
+        );
+
+        // The judge gives Paul McCartney half the artist's points.
+        let key = parts[1]
+            .groups
+            .iter()
+            .find(|g| g.text == "Paul McCartney")
+            .unwrap()
+            .key
+            .clone();
+        let half = Judgement {
+            grade: Grade::Half,
+            bonus: 0,
+        };
+        g.judge(0, &key, half, t0).unwrap();
+        assert_eq!(score(&g, cats), 750);
     }
 
     #[test]

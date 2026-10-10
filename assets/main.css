@@ -552,6 +552,18 @@ input.short {
   border: 1px solid transparent;
 }
 
+.parts-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.part-edit {
+  padding: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
 .answer-thumb {
   height: 2.6rem;
   width: 3.4rem;
@@ -1253,6 +1265,77 @@ ol.order-items {
   min-width: 1.5em;
 }
 
+.part-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1vw;
+}
+
+.part-card > span {
+  display: flex;
+  gap: 0.4em;
+}
+
+.part-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.5em 0.8em;
+  border-radius: 12px;
+  background: var(--surface);
+  font-weight: 700;
+}
+
+.part-card img {
+  height: 22vh;
+  max-width: 18vw;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.parts-reveal {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
+  gap: 1vh 1.5vw;
+  align-items: start;
+}
+
+/* Each part's column is narrow: answers take the full width, the judge's buttons go below. */
+.part-reveal .text-groups {
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.part-reveal .text-group {
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  font-size: 0.95em;
+}
+
+.part-reveal .group-text {
+  flex-basis: 100%;
+}
+
+.part-reveal .judge {
+  flex-wrap: wrap;
+}
+
+.part-reveal .accepted {
+  font-size: 0.9em;
+}
+
+.part-reveal h3 {
+  margin: 0 0 0.4em;
+  display: flex;
+  gap: 0.5em;
+}
+
 .guesses {
   list-style: none;
   margin: 0;
@@ -1631,6 +1714,23 @@ button.joker {
 
 .order-choice.picked {
   border-color: var(--accent);
+}
+
+.locked-parts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.locked-parts li {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0.8rem;
+  border-radius: 10px;
+  background: var(--surface);
 }
 
 .locked-answer {
