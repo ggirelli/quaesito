@@ -106,6 +106,27 @@ pub fn process(bytes: &[u8], kind: ImageKind) -> anyhow::Result<(Vec<u8>, &'stat
     }
 }
 
+/// Reads an upload into memory, enforcing [`MAX_UPLOAD_BYTES`].
+///
+/// # Errors
+/// Fails if the upload is too large or the stream breaks.
+pub async fn read_upload(mut file: dioxus::fullstack::FileStream) -> anyhow::Result<Vec<u8>> {
+    use futures_util::StreamExt;
+
+    let mut bytes = Vec::new();
+    while let Some(chunk) = file.next().await {
+        let chunk = chunk.map_err(|err| anyhow::anyhow!("upload interrupted: {err}"))?;
+        if bytes.len() + chunk.len() > MAX_UPLOAD_BYTES {
+            anyhow::bail!(
+                "The picture is too large (max {} MB).",
+                MAX_UPLOAD_BYTES / 1024 / 1024
+            );
+        }
+        bytes.extend_from_slice(&chunk);
+    }
+    Ok(bytes)
+}
+
 /// Content type for a stored file name, or `None` if the name is not one we generate.
 fn content_type(name: &str) -> Option<&'static str> {
     let (stem, ext) = name.split_once('.')?;

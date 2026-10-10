@@ -12,6 +12,7 @@ serde = { version = "1", features = ["derive"] }
 
 # Server only
 anyhow = { version = "1", optional = true }
+futures-util = { version = "0.3", optional = true }
 image = { version = "0.25", default-features = false, features = ["gif", "jpeg", "png", "webp"], optional = true }
 serde_json = { version = "1", optional = true }
 tokio = { version = "1", features = ["fs", "macros", "rt", "sync", "time"], optional = true }
@@ -27,6 +28,7 @@ web = ["dioxus/web"]
 server = [
     "dioxus/server",
     "dep:anyhow",
+    "dep:futures-util",
     "dep:image",
     "dep:serde_json",
     "dep:tokio",

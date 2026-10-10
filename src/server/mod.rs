@@ -1,5 +1,6 @@
 //! Server-only state and HTTP routes.
 
+pub mod auth;
 pub mod media;
 pub mod store;
 
@@ -7,10 +8,11 @@ use std::{path::PathBuf, sync::OnceLock};
 
 use dioxus::fullstack::{axum::Router, routing::get};
 
-use self::{media::MediaStore, store::QuizStore};
+use self::{auth::Auth, media::MediaStore, store::QuizStore};
 
 /// Everything the server keeps for its lifetime.
 pub struct AppState {
+    pub auth: Auth,
     pub quizzes: QuizStore,
     pub media: MediaStore,
 }
@@ -36,6 +38,7 @@ pub async fn init() -> anyhow::Result<()> {
     let data_dir =
         std::env::var_os("QUAESITO_DATA_DIR").map_or_else(|| PathBuf::from("data"), PathBuf::from);
     let state = AppState {
+        auth: Auth::from_env(),
         quizzes: QuizStore::open(data_dir.join("quizzes")).await?,
         media: MediaStore::open(data_dir.join("media")).await?,
     };
