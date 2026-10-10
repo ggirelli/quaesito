@@ -992,6 +992,11 @@ input.short {
   color: var(--muted);
 }
 
+.audio-preview {
+  height: 2.4rem;
+  max-width: 100%;
+}
+
 .soundtrack audio {
   height: 2.4rem;
   width: min(26rem, 40vw);

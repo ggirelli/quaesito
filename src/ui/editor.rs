@@ -5,10 +5,10 @@ use dioxus::prelude::*;
 use super::{
     admin::{AdminGate, AdminHeader, AdminToken},
     client,
-    widgets::{AnswerBadge, ClientOnly, ErrorBox, Spinner, media_url, message},
+    widgets::{AnswerBadge, ClientOnly, ErrorBox, Icon, IconKind, Spinner, media_url, message},
 };
 use crate::{
-    api::{get_quiz, save_quiz, upload_question_image},
+    api::{get_quiz, save_quiz, upload_question_audio, upload_question_image},
     model::{
         AdvanceMode, Answer, MAX_ANSWERS, MAX_TIME_LIMIT_SECS, MIN_ANSWERS, MIN_TIME_LIMIT_SECS,
         MultiScoring, PhoneDisplay, Question, Quiz, QuizSettings, RevealMode, ValidationIssue,
@@ -288,6 +288,7 @@ fn QuestionCard(index: usize, count: usize, question: Question, default_limit: u
     let token: AdminToken = use_context();
     let mut upload_error = use_signal(|| None::<String>);
     let mut uploading = use_signal(|| false);
+    let mut uploading_audio = use_signal(|| false);
     let answer_count = question.answers.len();
     let multi = question.is_multi();
     let limit = question
@@ -306,6 +307,19 @@ fn QuestionCard(index: usize, count: usize, question: Question, default_limit: u
             Err(err) => upload_error.set(Some(message(&err))),
         }
         uploading.set(false);
+    };
+
+    let upload_audio = move |evt: FormEvent| async move {
+        let Some(file) = evt.files().into_iter().next() else {
+            return;
+        };
+        uploading_audio.set(true);
+        upload_error.set(None);
+        match upload_question_audio(token.get(), file.into()).await {
+            Ok(name) => draft.edit_question(index, |q| q.audio = Some(name)),
+            Err(err) => upload_error.set(Some(message(&err))),
+        }
+        uploading_audio.set(false);
     };
 
     rsx! {
@@ -383,6 +397,35 @@ fn QuestionCard(index: usize, count: usize, question: Question, default_limit: u
                             let value = e.value();
                             draft.edit_question(index, |q| q.time_limit_secs = value.trim().parse().ok());
                         },
+                    }
+                }
+            }
+            div { class: "question-media row",
+                if let Some(audio) = &question.audio {
+                    Icon { kind: IconKind::Music }
+                    audio {
+                        class: "audio-preview",
+                        src: media_url(audio),
+                        preload: "metadata",
+                        controls: true,
+                    }
+                    button {
+                        class: "button ghost",
+                        onclick: move |_| draft.edit_question(index, |q| q.audio = None),
+                        "Remove soundtrack"
+                    }
+                    span { class: "muted small",
+                        "The clock starts when you start the music on the big screen."
+                    }
+                } else {
+                    label { class: "button ghost",
+                        if uploading_audio() { "Uploading…" } else { "＋ Add soundtrack" }
+                        input {
+                            r#type: "file",
+                            accept: "audio/*",
+                            class: "visually-hidden",
+                            onchange: upload_audio,
+                        }
                     }
                 }
             }
