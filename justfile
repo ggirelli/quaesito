@@ -2,13 +2,17 @@
 default:
     @just --list
 
-# Run the app locally with hot reload
-serve:
-    dx serve --platform web
+# Run the app with hot reload, reachable from phones on the LAN
+serve port="8080":
+    QUAESITO_ADMIN_PASSWORD="${QUAESITO_ADMIN_PASSWORD:-quaesito}" dx serve --platform web --addr 0.0.0.0 --port {{port}}
 
-# Build an optimized release bundle
+# Build an optimized release bundle into ./dist
 bundle:
-    dx bundle --platform web --release
+    dx bundle --platform web --release --out-dir dist
+
+# Build and run the release bundle on the LAN; quizzes and pictures live in ./data
+play port="8080": bundle
+    cd dist && IP=0.0.0.0 PORT={{port}} QUAESITO_DATA_DIR="{{justfile_directory()}}/data" ./server
 
 # Format all code
 fmt:
