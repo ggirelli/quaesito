@@ -134,6 +134,15 @@ impl Sessions {
         }
     }
 
+    /// Uploaded files shown by any live game.
+    #[must_use]
+    pub fn media(&self) -> Vec<String> {
+        self.lock()
+            .values()
+            .flat_map(|s| s.read(Game::media))
+            .collect()
+    }
+
     #[must_use]
     pub fn list(&self) -> Vec<SessionSummary> {
         let mut list: Vec<_> = self

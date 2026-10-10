@@ -301,6 +301,14 @@ impl Game {
         &self.quiz.title
     }
 
+    /// Uploaded files the game shows: its quiz's media and the team pictures.
+    #[must_use]
+    pub fn media(&self) -> Vec<String> {
+        let mut names = self.quiz.media();
+        names.extend(self.teams.iter().filter_map(|t| t.avatar.clone()));
+        names
+    }
+
     #[must_use]
     pub fn team_count(&self) -> usize {
         self.teams.len()

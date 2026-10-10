@@ -117,6 +117,35 @@ impl Quiz {
         }
     }
 
+    /// Names of every uploaded file the quiz uses: pictures (questions, slides, answers) and
+    /// soundtracks.
+    #[must_use]
+    pub fn media(&self) -> Vec<String> {
+        let mut names = Vec::new();
+        for question in &self.questions {
+            names.extend(question.image.iter().cloned());
+            names.extend(question.audio.iter().cloned());
+            names.extend(question.answers.iter().filter_map(|a| a.image.clone()));
+        }
+        names.sort();
+        names.dedup();
+        names
+    }
+
+    /// Replaces every media name with `rename(name)`; `None` drops the reference.
+    pub fn rename_media(&mut self, mut rename: impl FnMut(&str) -> Option<String>) {
+        let mut apply = |slot: &mut Option<String>| {
+            *slot = slot.as_deref().and_then(&mut rename);
+        };
+        for question in &mut self.questions {
+            apply(&mut question.image);
+            apply(&mut question.audio);
+            for answer in &mut question.answers {
+                apply(&mut answer.image);
+            }
+        }
+    }
+
     /// Lightweight description used in quiz listings.
     #[must_use]
     pub fn summary(&self) -> QuizSummary {
@@ -567,6 +596,22 @@ mod tests {
             items: vec!["Rome".to_owned(), "Paris".to_owned()],
         };
         assert_eq!(q.problems(), Vec::<String>::new());
+    }
+
+    #[test]
+    fn media_lists_and_renames_every_upload() {
+        let mut quiz = quiz();
+        quiz.questions[0].image = Some("q.jpg".to_owned());
+        quiz.questions[0].audio = Some("s.mp3".to_owned());
+        quiz.questions[0].answers[1].image = Some("a.jpg".to_owned());
+        quiz.questions.push(Question {
+            image: Some("q.jpg".to_owned()),
+            ..Question::slide()
+        });
+        assert_eq!(quiz.media(), ["a.jpg", "q.jpg", "s.mp3"]);
+        quiz.rename_media(|name| (name != "s.mp3").then(|| format!("new-{name}")));
+        assert_eq!(quiz.media(), ["new-a.jpg", "new-q.jpg"]);
+        assert_eq!(quiz.questions[0].audio, None);
     }
 
     #[test]

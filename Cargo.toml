@@ -19,6 +19,7 @@ serde_json = { version = "1", optional = true }
 tokio = { version = "1", features = ["fs", "macros", "rt", "sync", "time"], optional = true }
 unicode-normalization = { version = "0.1", optional = true }
 uuid = { version = "1", features = ["v4"], optional = true }
+zip = { version = "9", default-features = false, features = ["deflate"], optional = true }
 
 # Browser only
 [target.'cfg(target_arch = "wasm32")'.dependencies]
@@ -42,6 +43,7 @@ server = [
     "dep:tokio",
     "dep:unicode-normalization",
     "dep:uuid",
+    "dep:zip",
 ]
 
 [lints.rust]

@@ -155,12 +155,9 @@ fn Dashboard() -> Element {
         let Some(file) = evt.files().into_iter().next() else {
             return;
         };
-        let result = match file.read_string().await {
-            Ok(json) => import_quiz(token.get(), json)
-                .await
-                .map_err(|e| message(&e)),
-            Err(err) => Err(err.to_string()),
-        };
+        let result = import_quiz(token.get(), file.into())
+            .await
+            .map_err(|e| message(&e));
         match result {
             Ok(_) => quizzes.restart(),
             Err(err) => error.set(Some(err)),
@@ -176,10 +173,10 @@ fn Dashboard() -> Element {
                 div { class: "row between",
                     h2 { "Quizzes" }
                     label { class: "button ghost",
-                        "Import JSON…"
+                        "Import…"
                         input {
                             r#type: "file",
-                            accept: "application/json,.json",
+                            accept: ".zip,.json,application/zip,application/json",
                             class: "visually-hidden",
                             onchange: import,
                         }

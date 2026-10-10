@@ -101,13 +101,17 @@ pub async fn duplicate_quiz(token: String, id: String) -> ServerFnResult<String>
     Ok(quiz.id)
 }
 
-/// Imports a quiz exported as JSON, under a new id, and returns that id.
-#[post("/api/admin/quiz/import")]
-pub async fn import_quiz(token: String, json: String) -> ServerFnResult<String> {
+/// Imports an exported quiz (zip bundle with media, or plain JSON) under a new id, and returns
+/// that id.
+#[post("/api/admin/quiz/import?token")]
+pub async fn import_quiz(token: String, file: FileStream) -> ServerFnResult<String> {
     let state = crate::server::state();
     state.auth.require(&token)?;
-    let mut quiz: Quiz = serde_json::from_str(&json)
-        .map_err(|err| ServerFnError::new(format!("Not a valid quiz file: {err}")))?;
+    let bytes =
+        crate::server::media::read_upload(file, crate::server::bundle::MAX_BUNDLE_BYTES).await?;
+    let mut quiz = crate::server::bundle::import(bytes, &state.media)
+        .await
+        .map_err(|err| ServerFnError::new(format!("{err:#}")))?;
     quiz.id = crate::server::store::new_id();
     state.quizzes.save(&quiz).await?;
     Ok(quiz.id)

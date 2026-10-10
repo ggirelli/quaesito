@@ -1,6 +1,7 @@
 //! Server-only state and HTTP routes.
 
 pub mod auth;
+pub mod bundle;
 pub mod engine;
 pub mod live;
 pub mod matching;
@@ -9,7 +10,7 @@ pub mod net;
 pub mod sessions;
 pub mod store;
 
-use std::{path::PathBuf, sync::OnceLock};
+use std::{collections::HashSet, path::PathBuf, sync::OnceLock, time::Duration};
 
 use dioxus::fullstack::{
     axum::{
@@ -22,6 +23,7 @@ use dioxus::fullstack::{
 };
 
 use self::{auth::Auth, media::MediaStore, sessions::Sessions, store::QuizStore};
+use crate::model::Quiz;
 
 /// Everything the server keeps for its lifetime.
 pub struct AppState {
@@ -59,8 +61,39 @@ pub async fn init() -> anyhow::Result<()> {
     };
     dioxus::logger::tracing::info!("data directory: {}", data_dir.display());
     // A concurrent initialisation may have won the race; either state is equivalent.
-    let _ = STATE.set(state);
+    if STATE.set(state).is_ok() {
+        tokio::spawn(clean_up_media());
+    }
     Ok(())
+}
+
+/// How long an upload may stay unused before it is deleted (it may belong to an editor that has
+/// not saved yet).
+const MEDIA_GRACE: Duration = Duration::from_hours(24);
+/// How often unused uploads are looked for.
+const MEDIA_CLEANUP_EVERY: Duration = Duration::from_hours(24);
+
+/// Deletes uploads no quiz or live game uses, now and then daily.
+async fn clean_up_media() {
+    loop {
+        let state = state();
+        match state.quizzes.all().await {
+            Ok(quizzes) => {
+                let used: HashSet<String> = quizzes
+                    .iter()
+                    .flat_map(Quiz::media)
+                    .chain(state.sessions.media())
+                    .collect();
+                match state.media.collect_garbage(&used, MEDIA_GRACE).await {
+                    Ok(0) => {}
+                    Ok(n) => dioxus::logger::tracing::info!("deleted {n} unused uploads"),
+                    Err(err) => dioxus::logger::tracing::warn!("cleaning up uploads: {err:#}"),
+                }
+            }
+            Err(err) => dioxus::logger::tracing::warn!("cleaning up uploads: {err:#}"),
+        }
+        tokio::time::sleep(MEDIA_CLEANUP_EVERY).await;
+    }
 }
 
 /// Routes served next to the Dioxus application.
@@ -75,7 +108,7 @@ struct ExportQuery {
     token: String,
 }
 
-/// `GET /export/{id}?token=…`: downloads a quiz as JSON.
+/// `GET /export/{id}?token=…`: downloads a quiz with its media as a zip bundle.
 async fn export(Path(id): Path<String>, Query(query): Query<ExportQuery>) -> Response {
     let state = state();
     if !state.auth.is_valid(&query.token) {
@@ -84,7 +117,7 @@ async fn export(Path(id): Path<String>, Query(query): Query<ExportQuery>) -> Res
     let Ok(Some(quiz)) = state.quizzes.get(&id).await else {
         return StatusCode::NOT_FOUND.into_response();
     };
-    let Ok(json) = serde_json::to_string_pretty(&quiz) else {
+    let Ok(bundle) = bundle::export(&quiz, &state.media).await else {
         return StatusCode::INTERNAL_SERVER_ERROR.into_response();
     };
     let file_name: String = quiz
@@ -106,13 +139,13 @@ async fn export(Path(id): Path<String>, Query(query): Query<ExportQuery>) -> Res
     };
     (
         [
-            (header::CONTENT_TYPE, "application/json".to_owned()),
+            (header::CONTENT_TYPE, "application/zip".to_owned()),
             (
                 header::CONTENT_DISPOSITION,
-                format!("attachment; filename=\"{file_name}.json\""),
+                format!("attachment; filename=\"{file_name}.zip\""),
             ),
         ],
-        json,
+        bundle,
     )
         .into_response()
 }

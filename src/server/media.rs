@@ -73,6 +73,42 @@ impl MediaStore {
         Ok(name)
     }
 
+    /// A stored file's bytes, or `None` for unknown or invalid names.
+    pub async fn read_bytes(&self, name: &str) -> Option<Vec<u8>> {
+        self.read(name).await.map(|(data, _)| data)
+    }
+
+    /// Deletes stored files that are not in `used` and were last written more than `grace`
+    /// ago (so uploads not saved into a quiz yet survive). Returns how many were deleted.
+    ///
+    /// # Errors
+    /// Fails if the directory cannot be listed.
+    pub async fn collect_garbage(
+        &self,
+        used: &std::collections::HashSet<String>,
+        grace: std::time::Duration,
+    ) -> anyhow::Result<usize> {
+        let mut entries = tokio::fs::read_dir(&self.dir).await?;
+        let mut deleted = 0;
+        while let Some(entry) = entries.next_entry().await? {
+            let name = entry.file_name().to_string_lossy().into_owned();
+            if content_type(&name).is_none() || used.contains(&name) {
+                continue;
+            }
+            let old_enough = entry
+                .metadata()
+                .await
+                .and_then(|m| m.modified())
+                .ok()
+                .and_then(|modified| modified.elapsed().ok())
+                .is_some_and(|age| age > grace);
+            if old_enough && tokio::fs::remove_file(entry.path()).await.is_ok() {
+                deleted += 1;
+            }
+        }
+        Ok(deleted)
+    }
+
     /// Reads a stored file by name.
     async fn read(&self, name: &str) -> Option<(Vec<u8>, &'static str)> {
         let content_type = content_type(name)?;
@@ -267,6 +303,29 @@ mod tests {
             .write_to(&mut out, ImageFormat::Png)
             .unwrap();
         out.into_inner()
+    }
+
+    #[tokio::test]
+    async fn unused_uploads_are_collected_after_the_grace_period() {
+        let dir = std::env::temp_dir().join(format!("quaesito-media-{}", uuid::Uuid::new_v4()));
+        let store = MediaStore::open(&dir).await.unwrap();
+        let kept = store.store(png(8, 8), ImageKind::Question).await.unwrap();
+        let unused = store.store(png(8, 8), ImageKind::Question).await.unwrap();
+        tokio::fs::write(dir.join("notes.txt"), b"not ours")
+            .await
+            .unwrap();
+        let used = std::iter::once(kept.clone()).collect();
+
+        // Fresh uploads may still be on their way into a quiz.
+        let hour = std::time::Duration::from_hours(1);
+        assert_eq!(store.collect_garbage(&used, hour).await.unwrap(), 0);
+        let none = std::time::Duration::ZERO;
+        tokio::time::sleep(std::time::Duration::from_millis(20)).await;
+        assert_eq!(store.collect_garbage(&used, none).await.unwrap(), 1);
+        assert!(store.read_bytes(&kept).await.is_some());
+        assert!(store.read_bytes(&unused).await.is_none());
+        assert!(dir.join("notes.txt").exists());
+        let _ = tokio::fs::remove_dir_all(dir).await;
     }
 
     #[test]

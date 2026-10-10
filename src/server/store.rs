@@ -45,6 +45,24 @@ impl QuizStore {
         Ok(summaries)
     }
 
+    /// Every stored quiz. Unreadable files are skipped.
+    ///
+    /// # Errors
+    /// Fails if the directory cannot be listed.
+    pub async fn all(&self) -> anyhow::Result<Vec<Quiz>> {
+        let mut entries = tokio::fs::read_dir(&self.dir).await?;
+        let mut quizzes = Vec::new();
+        while let Some(entry) = entries.next_entry().await? {
+            let path = entry.path();
+            if path.extension().is_some_and(|ext| ext == "json")
+                && let Ok(quiz) = read(&path).await
+            {
+                quizzes.push(quiz);
+            }
+        }
+        Ok(quizzes)
+    }
+
     /// Loads one quiz, or `None` if it does not exist.
     ///
     /// # Errors
