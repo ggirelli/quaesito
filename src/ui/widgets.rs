@@ -109,6 +109,7 @@ pub enum IconKind {
     Settings,
     Home,
     Back,
+    Music,
 }
 
 /// A small inline icon.
@@ -126,6 +127,11 @@ pub fn Icon(kind: IconKind) -> Element {
         IconKind::Back => rsx! {
             line { x1: 19, y1: 12, x2: 5, y2: 12 }
             polyline { points: "12 19 5 12 12 5" }
+        },
+        IconKind::Music => rsx! {
+            path { d: "M9 18V5l12-2v13" }
+            circle { cx: 6, cy: 18, r: 3 }
+            circle { cx: 18, cy: 16, r: 3 }
         },
     };
     rsx! {

@@ -7,7 +7,7 @@ use super::{
     admin::{AdminGate, AdminToken},
     client,
     live::{ConnectionBanner, remaining_ms, use_clock, use_live},
-    widgets::{ANSWER_SHAPES, Brand, ClientOnly, Spinner, TeamAvatar, media_url},
+    widgets::{ANSWER_SHAPES, Brand, ClientOnly, Icon, IconKind, Spinner, TeamAvatar, media_url},
 };
 use crate::{
     api::{host_socket, join_origin},
@@ -56,6 +56,7 @@ fn HostScreen(code: String) -> Element {
     let auto_left = view
         .auto_advance_ms
         .map(|ms| (remaining_ms(ms, received_at, now()) / 1000.0).ceil());
+    let soundtrack = soundtrack(&view.phase, received_at);
 
     rsx! {
         div {
@@ -86,6 +87,9 @@ fn HostScreen(code: String) -> Element {
             main { class: "host-main",
                 match &view.phase {
                     HostPhase::Lobby => rsx! { Lobby { code: view.code.clone(), teams: view.teams.clone() } },
+                    HostPhase::Ready { question } => rsx! {
+                        ReadySlide { question: question.clone(), teams: view.teams.len() }
+                    },
                     HostPhase::Question { question, remaining_ms: left, answered } => rsx! {
                         QuestionSlide {
                             question: question.clone(),
@@ -112,6 +116,9 @@ fn HostScreen(code: String) -> Element {
                 }
             }
             footer { class: "host-controls",
+                if let Some((index, name, started_at)) = soundtrack {
+                    Soundtrack { key: "{index}", name, started_at }
+                }
                 if let Some(secs) = auto_left {
                     span { class: "auto-note", "Continuing in {secs}s" }
                 }
@@ -135,6 +142,7 @@ fn HostScreen(code: String) -> Element {
 fn next_label(view: &HostView) -> Option<String> {
     Some(match &view.phase {
         HostPhase::Lobby => "Start the quiz".to_owned(),
+        HostPhase::Ready { .. } => "▶ Start the music".to_owned(),
         HostPhase::Question { .. } => "Stop the clock".to_owned(),
         HostPhase::Closed { last: false, .. } => "Next question".to_owned(),
         HostPhase::Closed {
@@ -158,6 +166,58 @@ fn next_label(view: &HostView) -> Option<String> {
             .to_owned()
         }
     })
+}
+
+/// The soundtrack to keep on screen: question index, media name, and the browser time its
+/// clock started, once it has.
+fn soundtrack(phase: &HostPhase, received_at: f64) -> Option<(usize, String, Option<f64>)> {
+    let (question, started_at) = match phase {
+        HostPhase::Question {
+            question,
+            remaining_ms: left,
+            ..
+        } => {
+            #[allow(clippy::cast_precision_loss, reason = "time limits are small")]
+            let elapsed = question.time_limit_ms.saturating_sub(*left) as f64;
+            (question, Some(received_at - elapsed))
+        }
+        // Ready preloads the music; Closed keeps it going while the answers are shown.
+        HostPhase::Ready { question } | HostPhase::Closed { question, .. } => (question, None),
+        _ => return None,
+    };
+    let name = question.audio.clone()?;
+    Some((question.index, name, started_at))
+}
+
+/// Plays a question's soundtrack once its clock has started, from the matching position.
+#[component]
+fn Soundtrack(name: String, started_at: Option<f64>) -> Element {
+    let mut played = use_signal(|| false);
+    use_effect(use_reactive!(|started_at| {
+        let Some(started_at) = started_at else {
+            return;
+        };
+        if *played.peek() {
+            return;
+        }
+        played.set(true);
+        let offset = ((client::now_ms() - started_at) / 1000.0).max(0.0);
+        document::eval(&format!(
+            "const a = document.getElementById('soundtrack');\n\
+             if (a) {{ a.currentTime = {offset:.3}; a.play().catch(() => {{}}); }}"
+        ));
+    }));
+    rsx! {
+        div { class: "soundtrack",
+            Icon { kind: IconKind::Music }
+            audio {
+                id: "soundtrack",
+                src: media_url(&name),
+                preload: "auto",
+                controls: true,
+            }
+        }
+    }
 }
 
 #[component]
@@ -256,6 +316,28 @@ fn QuestionSlide(question: QuestionInfo, left_ms: f64, answered: usize, teams: u
             div { class: "answered",
                 strong { "{answered}/{teams}" }
                 span { class: "muted", "answered" }
+            }
+        }
+        AnswerGrid { answers: question.answers.clone(), reveal: None }
+    }
+}
+
+/// A soundtrack question before the music starts: everything is shown, the clock is full.
+#[component]
+fn ReadySlide(question: QuestionInfo, teams: usize) -> Element {
+    #[allow(clippy::cast_precision_loss, reason = "time limits are small")]
+    let seconds = (question.time_limit_ms as f64 / 1000.0).ceil();
+    rsx! {
+        QuestionHeader { question: question.clone(),
+            Timer { fraction: 1.0, seconds }
+        }
+        div { class: "question-body",
+            if let Some(image) = &question.image {
+                img { class: "question-image", src: media_url(image), alt: "" }
+            }
+            div { class: "answered",
+                strong { Icon { kind: IconKind::Music } }
+                span { class: "muted", "The clock starts with the music" }
             }
         }
         AnswerGrid { answers: question.answers.clone(), reveal: None }

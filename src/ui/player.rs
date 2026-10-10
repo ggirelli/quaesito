@@ -211,6 +211,14 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
         PlayerPhase::Lobby { teams } => rsx! {
             LobbyView { code, token, team: view.team.clone(), teams }
         },
+        PlayerPhase::Ready { index, total } => rsx! {
+            main { class: "player-main",
+                span { class: "muted", "Question {index + 1} of {total}" }
+                div { class: "big-icon", "🎵" }
+                h1 { class: "status-title", "Listen up!" }
+                p { class: "muted", "Answers open when the music starts." }
+            }
+        },
         PlayerPhase::Question {
             index,
             total,

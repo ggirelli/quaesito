@@ -27,6 +27,8 @@ pub struct QuestionInfo {
     pub total: usize,
     pub text: String,
     pub image: Option<String>,
+    /// Media name of the soundtrack, if any.
+    pub audio: Option<String>,
     pub answers: Vec<String>,
     /// More than one answer is correct.
     pub multi: bool,
@@ -65,6 +67,8 @@ pub struct HostView {
 pub enum HostPhase {
     /// Waiting for teams to join.
     Lobby,
+    /// A question with a soundtrack, waiting for the host to start the music and the clock.
+    Ready { question: QuestionInfo },
     /// A question is open for answers.
     Question {
         question: QuestionInfo,
@@ -95,7 +99,8 @@ pub enum HostPhase {
 /// Commands the host screen can send.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub enum HostCommand {
-    /// Move to the next step: start, close the question early, next question, next podium spot.
+    /// Move to the next step: start, play a soundtrack, close the question early, next
+    /// question, next podium spot.
     Next,
 }
 
@@ -122,6 +127,11 @@ pub struct PlayerView {
 pub enum PlayerPhase {
     Lobby {
         teams: usize,
+    },
+    /// The next question has a soundtrack and opens when the host starts it.
+    Ready {
+        index: usize,
+        total: usize,
     },
     Question {
         index: usize,

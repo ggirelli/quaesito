@@ -984,6 +984,20 @@ input.short {
   font-size: 0.85em;
 }
 
+.soundtrack {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-right: auto;
+  color: var(--muted);
+}
+
+.soundtrack audio {
+  height: 2.4rem;
+  width: min(26rem, 40vw);
+  color-scheme: dark;
+}
+
 /* ---------- Player (phone) ---------- */
 
 .player {

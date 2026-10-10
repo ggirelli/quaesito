@@ -5,6 +5,9 @@
 //! ```text
 //! Lobby → Question(0) → Closed(0) → … → Closed(n-1) → [Review(0) → … → Review(n-1)] → Podium
 //! ```
+//!
+//! A question with a soundtrack first waits in `Ready` until the host starts the music, which
+//! also starts its clock.
 
 use std::time::{Duration, Instant};
 
@@ -55,6 +58,9 @@ struct Submission {
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum Phase {
     Lobby,
+    Ready {
+        index: usize,
+    },
     Question {
         index: usize,
         started: Instant,
@@ -199,6 +205,7 @@ impl Game {
                 }
                 self.question_phase(0, now)
             }
+            Phase::Ready { index } => self.open_question(index, now),
             Phase::Question { index, .. } => Phase::Closed { index, since: now },
             Phase::Closed { index, .. } if index + 1 < self.quiz.questions.len() => {
                 self.question_phase(index + 1, now)
@@ -326,6 +333,9 @@ impl Game {
     pub fn host_view(&self, now: Instant) -> HostView {
         let phase = match self.phase {
             Phase::Lobby => HostPhase::Lobby,
+            Phase::Ready { index } => HostPhase::Ready {
+                question: self.question_info(index),
+            },
             Phase::Question {
                 index, deadline, ..
             } => HostPhase::Question {
@@ -403,6 +413,7 @@ impl Game {
             Phase::Lobby => PlayerPhase::Lobby {
                 teams: self.teams.len(),
             },
+            Phase::Ready { index } => PlayerPhase::Ready { index, total },
             Phase::Question {
                 index, deadline, ..
             } => {
@@ -461,7 +472,17 @@ impl Game {
         self.teams.iter_mut().find(|t| t.id == id)
     }
 
+    /// The phase that shows question `index`: waiting for its soundtrack, or open right away.
     fn question_phase(&self, index: usize, now: Instant) -> Phase {
+        if self.quiz.questions[index].audio.is_some() {
+            Phase::Ready { index }
+        } else {
+            self.open_question(index, now)
+        }
+    }
+
+    /// Opens question `index` for answers, starting its clock.
+    fn open_question(&self, index: usize, now: Instant) -> Phase {
         let secs = self.quiz.questions[index].time_limit_secs(&self.quiz.settings);
         Phase::Question {
             index,
@@ -477,6 +498,7 @@ impl Game {
             total: self.quiz.questions.len(),
             text: question.text.clone(),
             image: question.image.clone(),
+            audio: question.audio.clone(),
             answers: question.answers.iter().map(|a| a.text.clone()).collect(),
             multi: question.is_multi(),
             time_limit_ms: u64::from(question.time_limit_secs(&self.quiz.settings)) * 1000,
@@ -825,6 +847,41 @@ mod tests {
         assert!(g.answer(owls, &[0, 1], t0).is_err());
         assert!(g.answer(owls, &[0], t0 + secs(10)).is_err());
         assert!(g.answer(99, &[0], t0).is_err());
+    }
+
+    #[test]
+    fn soundtrack_questions_wait_for_the_host() {
+        let t0 = Instant::now();
+        let mut settings = quiz(QuizSettings {
+            advance: AdvanceMode::Auto,
+            ..QuizSettings::default()
+        });
+        settings.questions[1].audio = Some("song.mp3".to_owned());
+        let mut g = Game::new("123456".to_owned(), settings).unwrap();
+        let owls = join(&mut g, "Owls");
+        g.next(t0).unwrap();
+        g.answer(owls, &[0], t0).unwrap();
+        assert!(g.tick(t0 + AUTO_AFTER_REVEAL));
+
+        // Question two waits, even with auto-advance, and takes no answers yet.
+        let HostPhase::Ready { question } = g.host_view(t0).phase else {
+            panic!("expected the soundtrack to wait for the host");
+        };
+        assert_eq!(question.audio.as_deref(), Some("song.mp3"));
+        assert_eq!(g.next_deadline(), None);
+        assert_eq!(g.host_view(t0).auto_advance_ms, None);
+        assert!(g.answer(owls, &[0], t0 + secs(20)).is_err());
+        assert_eq!(
+            g.player_view(owls, t0).unwrap().phase,
+            PlayerPhase::Ready { index: 1, total: 2 }
+        );
+
+        // The clock starts with the music.
+        let t1 = t0 + secs(30);
+        g.next(t1).unwrap();
+        assert_eq!(g.next_deadline(), Some(t1 + secs(10)));
+        g.answer(owls, &[0], t1).unwrap();
+        assert_eq!(g.player_view(owls, t1).unwrap().score, Some(2000));
     }
 
     #[test]
