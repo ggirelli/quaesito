@@ -1,0 +1,26 @@
+:root {
+  --bg: #14121f;
+  --fg: #f4f1ff;
+  --accent: #ffb703;
+  color-scheme: dark;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.splash {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+
+.splash h1 {
+  font-size: clamp(3rem, 10vw, 7rem);
+  margin: 0;
+  color: var(--accent);
+}

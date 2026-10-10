@@ -1,0 +1,32 @@
+[package]
+name = "quaesito"
+version = "0.1.0"
+edition = "2024"
+description = "Quizzes among friends: a self-hosted, Kahoot-style quiz web app"
+repository = "https://github.com/ggirelli/quaesito"
+publish = false
+
+[dependencies]
+dioxus = { version = "0.7", features = ["router", "fullstack"] }
+
+[features]
+default = ["web"]
+web = ["dioxus/web"]
+server = ["dioxus/server"]
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+all = { level = "deny", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+
+[profile.wasm-dev]
+inherits = "dev"
+opt-level = 1
+
+[profile.server-dev]
+inherits = "dev"
+
+[profile.android-dev]
+inherits = "dev"

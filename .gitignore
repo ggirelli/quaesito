@@ -1,0 +1,6 @@
+/target
+/dist
+/.dioxus
+/data
+*.db
+*.db-*
