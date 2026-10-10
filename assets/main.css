@@ -1393,6 +1393,28 @@ input.short {
   text-align: center;
 }
 
+.joker {
+  padding: 0.7rem 1rem;
+  border-radius: 12px;
+  border: 2px dashed var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+}
+
+button.joker {
+  cursor: pointer;
+}
+
+.joker.armed {
+  border-style: solid;
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
 .locked-answer {
   margin: 0;
   padding: 0.8rem 1rem;

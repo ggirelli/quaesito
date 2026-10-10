@@ -289,6 +289,15 @@ fn SettingsCard(settings: QuizSettings) -> Element {
                     on_select: move |i| draft.edit_settings(|s| s.points = if i == 0 { PointsMode::Speed } else { PointsMode::Flat }),
                 }
                 Choice {
+                    label: "Jokers",
+                    options: vec![
+                        ("Off", "Every question counts the same."),
+                        ("On", "Each team may play a joker once, while answering, to double that question's points."),
+                    ],
+                    selected: usize::from(settings.joker),
+                    on_select: move |i| draft.edit_settings(|s| s.joker = i == 1),
+                }
+                Choice {
                     label: "Moving on",
                     options: vec![
                         ("Host clicks", "The host decides when to show the next question."),

@@ -22,9 +22,9 @@ use super::matching::normalize;
 use crate::{
     model::{AdvanceMode, MAX_TEXT_ANSWER_CHARS, Question, QuestionKind, Quiz, RevealMode},
     protocol::{
-        AnswerOutcome, Fastest, Grade, Guess, HostPhase, HostView, InputKind, Judgement,
-        MAX_NAME_CHARS, PlayerPhase, PlayerView, QuestionInfo, Response, Reveal, RoundResult,
-        SlideInfo, StandingRow, TeamInfo, TextGroup, Upcoming,
+        AnswerOutcome, Fastest, Grade, Guess, HostPhase, HostView, InputKind, JokerState,
+        Judgement, MAX_NAME_CHARS, PlayerPhase, PlayerView, QuestionInfo, Response, Reveal,
+        RoundResult, SlideInfo, StandingRow, TeamInfo, TextGroup, Upcoming,
     },
     scoring::{self, Tally},
 };
@@ -64,6 +64,8 @@ struct Team {
     token: String,
     connections: u32,
     submissions: Vec<Option<Submission>>,
+    /// The question the team played its joker on, if it has.
+    joker: Option<usize>,
 }
 
 struct Submission {
@@ -176,6 +178,7 @@ impl Game {
             token,
             connections: 0,
             submissions: (0..self.quiz.questions.len()).map(|_| None).collect(),
+            joker: None,
         });
         Ok(id)
     }
@@ -322,6 +325,9 @@ impl Game {
             Phase::Question { index, .. } => {
                 for team in &mut self.teams {
                     team.submissions[index] = None;
+                    if team.joker == Some(index) {
+                        team.joker = None;
+                    }
                 }
                 self.judgements[index].clear();
                 self.revisit_before(index, now)
@@ -437,11 +443,19 @@ impl Game {
         }
     }
 
-    /// Submits a team's answer to the open question.
+    /// Submits a team's answer to the open question, optionally playing its joker on it.
     ///
     /// # Errors
-    /// Refuses when no question is open, the team already answered, or the answer is invalid.
-    pub fn answer(&mut self, team: u32, response: Response, now: Instant) -> Result<(), Refusal> {
+    /// Refuses when no question is open, the team already answered, the answer is invalid, or
+    /// the joker is not available.
+    pub fn answer(
+        &mut self,
+        team: u32,
+        response: Response,
+        joker: bool,
+        now: Instant,
+    ) -> Result<(), Refusal> {
+        let jokers = self.quiz.settings.joker;
         let Phase::Question {
             index,
             started,
@@ -462,6 +476,15 @@ impl Game {
             .ok_or(Refusal("Unknown team."))?;
         if team.submissions[index].is_some() {
             return Err(Refusal("Your answer is already in."));
+        }
+        if joker {
+            if !jokers {
+                return Err(Refusal("This quiz has no jokers."));
+            }
+            if team.joker.is_some() {
+                return Err(Refusal("Your joker is already used."));
+            }
+            team.joker = Some(index);
         }
         team.submissions[index] = Some(Submission {
             response,
@@ -702,9 +725,22 @@ impl Game {
                 }
             }
         };
+        let current = match self.phase {
+            Phase::Question { index, .. }
+            | Phase::Closed { index, .. }
+            | Phase::Review { index, .. } => Some(index),
+            _ => None,
+        };
+        let joker = match team.joker {
+            _ if !self.quiz.settings.joker => JokerState::Unavailable,
+            None => JokerState::Ready,
+            Some(index) if Some(index) == current => JokerState::PlayedHere,
+            Some(_) => JokerState::Spent,
+        };
         Some(PlayerView {
             title: self.quiz.title.clone(),
             team: team.info(),
+            joker,
             display: self.quiz.settings.phone_display,
             score: score_visible.then(|| self.team_score(team, self.closed_count())),
             phase,
@@ -913,12 +949,27 @@ impl Game {
             .min_by(f64::total_cmp)
     }
 
-    /// How `team` did on question `index`.
+    /// How `team` did on question `index`, its joker included.
     fn outcome(&self, index: usize, team: &Team) -> AnswerOutcome {
+        let outcome = self.base_outcome(index, team);
+        if team.joker == Some(index) {
+            AnswerOutcome {
+                points: outcome.points.saturating_mul(2),
+                joker: true,
+                ..outcome
+            }
+        } else {
+            outcome
+        }
+    }
+
+    /// How `team` did on question `index`, before any joker.
+    fn base_outcome(&self, index: usize, team: &Team) -> AnswerOutcome {
         let Some(submission) = &team.submissions[index] else {
             return AnswerOutcome {
                 points: 0,
                 fully_correct: false,
+                joker: false,
             };
         };
         let question = &self.quiz.questions[index];
@@ -931,6 +982,7 @@ impl Game {
                 AnswerOutcome {
                     points: i32::try_from(points).unwrap_or(i32::MAX),
                     fully_correct: scoring::correctness(question, selected, mode) >= 1.0,
+                    joker: false,
                 }
             }
             (QuestionKind::Text { .. }, Response::Text(text)) => {
@@ -938,6 +990,7 @@ impl Game {
                 AnswerOutcome {
                     points: scoring::text_points(judgement, full),
                     fully_correct: judgement.grade == Grade::Full,
+                    joker: false,
                 }
             }
             (
@@ -952,11 +1005,13 @@ impl Game {
                 AnswerOutcome {
                     points: if closest { scoring::CLOSEST_POINTS } else { 0 },
                     fully_correct: closest,
+                    joker: false,
                 }
             }
             _ => AnswerOutcome {
                 points: 0,
                 fully_correct: false,
+                joker: false,
             },
         }
     }
@@ -988,8 +1043,10 @@ impl Game {
             let Some(team) = self.teams.iter().find(|t| t.id == row.team.id) else {
                 continue;
             };
+            let outcome = self.outcome(index, team);
             row.round = Some(RoundResult {
-                points: self.outcome(index, team).points,
+                points: outcome.points,
+                joker: outcome.joker,
                 answer_ms: team.submissions[index].as_ref().map(|s| millis(s.elapsed)),
                 previous_rank: before
                     .as_ref()
@@ -1204,7 +1261,7 @@ mod tests {
 
         // Removing the only team still to answer closes the question.
         g.next(t0).unwrap();
-        g.answer(owls, pick(&[0]), t0).unwrap();
+        g.answer(owls, pick(&[0]), false, t0).unwrap();
         g.remove_team(cats, t0).unwrap();
         assert!(g.remove_team(cats, t0).is_err());
         assert!(g.player_view(cats, t0).is_none());
@@ -1240,7 +1297,7 @@ mod tests {
         assert!(g.host_view(t0).paused);
 
         // Answers still count while paused, timed at the pause.
-        g.answer(owls, pick(&[0]), t0 + secs(30)).unwrap();
+        g.answer(owls, pick(&[0]), false, t0 + secs(30)).unwrap();
         g.resume(t0 + secs(30));
         assert_eq!(g.next_deadline(), Some(t0 + secs(38)));
         g.add_time(secs(10)).unwrap();
@@ -1258,9 +1315,9 @@ mod tests {
         let owls = join(&mut g, "Owls");
         assert!(g.back(t0).is_err());
         g.next(t0).unwrap();
-        g.answer(owls, pick(&[0]), t0).unwrap(); // closes question one
+        g.answer(owls, pick(&[0]), false, t0).unwrap(); // closes question one
         g.next(t0).unwrap();
-        g.answer(owls, pick(&[1]), t0).unwrap(); // closes question two
+        g.answer(owls, pick(&[1]), false, t0).unwrap(); // closes question two
         g.back(t0).unwrap(); // back to question one's results
         assert!(matches!(
             g.host_view(t0).phase,
@@ -1278,7 +1335,7 @@ mod tests {
         let owls = join(&mut g, "Owls");
         let _cats = join(&mut g, "Cats");
         g.next(t0).unwrap();
-        g.answer(owls, pick(&[0]), t0).unwrap();
+        g.answer(owls, pick(&[0]), false, t0).unwrap();
         g.back(t0).unwrap();
         assert!(matches!(g.host_view(t0).phase, HostPhase::Lobby));
         g.next(t0).unwrap();
@@ -1311,8 +1368,8 @@ mod tests {
         let owls = join(&mut g, "Owls");
         let cats = join(&mut g, "Cats");
         g.next(t0).unwrap();
-        g.answer(cats, pick(&[1]), t0 + secs(1)).unwrap();
-        g.answer(owls, pick(&[0]), t0 + secs(4)).unwrap();
+        g.answer(cats, pick(&[1]), false, t0 + secs(1)).unwrap();
+        g.answer(owls, pick(&[0]), false, t0 + secs(4)).unwrap();
         let HostPhase::Closed {
             fastest, standings, ..
         } = g.host_view(t0).phase
@@ -1330,6 +1387,7 @@ mod tests {
         assert_eq!(
             rows[0].round,
             Some(RoundResult {
+                joker: false,
                 points: 800,
                 answer_ms: Some(4000),
                 previous_rank: None
@@ -1338,8 +1396,8 @@ mod tests {
 
         // Cats overtake Owls on question two.
         g.next(t0).unwrap();
-        g.answer(cats, pick(&[0]), t0).unwrap();
-        g.answer(owls, pick(&[1]), t0).unwrap();
+        g.answer(cats, pick(&[0]), false, t0).unwrap();
+        g.answer(owls, pick(&[1]), false, t0).unwrap();
         let HostPhase::Closed {
             standings: Some(rows),
             ..
@@ -1350,6 +1408,46 @@ mod tests {
         assert_eq!(rows[0].team.id, cats);
         assert_eq!(rows[0].round.unwrap().previous_rank, Some(2));
         assert_eq!(rows[1].round.unwrap().previous_rank, Some(1));
+    }
+
+    #[test]
+    fn a_joker_doubles_one_question_once() {
+        let t0 = Instant::now();
+        let mut g = game(QuizSettings::default());
+        let owls = join(&mut g, "Owls");
+        g.next(t0).unwrap();
+        // Jokers are off by default.
+        assert!(g.answer(owls, pick(&[0]), true, t0).is_err());
+        assert_eq!(
+            g.player_view(owls, t0).unwrap().joker,
+            JokerState::Unavailable
+        );
+
+        let mut g = game(QuizSettings {
+            joker: true,
+            ..QuizSettings::default()
+        });
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        g.next(t0).unwrap();
+        assert_eq!(g.player_view(owls, t0).unwrap().joker, JokerState::Ready);
+        g.answer(owls, pick(&[0]), true, t0).unwrap();
+        g.answer(cats, pick(&[0]), false, t0).unwrap();
+        assert_eq!(
+            g.player_view(owls, t0).unwrap().joker,
+            JokerState::PlayedHere
+        );
+        let rows = g.standings();
+        assert_eq!((rows[0].team.id, rows[0].score), (owls, 2000));
+        assert_eq!(rows[1].score, 1000);
+
+        g.next(t0).unwrap();
+        assert_eq!(g.player_view(owls, t0).unwrap().joker, JokerState::Spent);
+        assert!(g.answer(owls, pick(&[0]), true, t0).is_err());
+        // Withdrawing a question gives the joker back.
+        g.answer(cats, pick(&[0]), true, t0).unwrap();
+        g.back(t0).unwrap();
+        assert_eq!(g.player_view(cats, t0).unwrap().joker, JokerState::Ready);
     }
 
     #[test]
@@ -1368,13 +1466,13 @@ mod tests {
         assert_eq!(g.next_deadline(), Some(t0 + secs(10)));
 
         // Owls answer right instantly, Cats wrong; everyone answered closes the question.
-        g.answer(owls, pick(&[0]), t0).unwrap();
-        assert!(g.answer(owls, pick(&[0]), t0).is_err());
+        g.answer(owls, pick(&[0]), false, t0).unwrap();
+        assert!(g.answer(owls, pick(&[0]), false, t0).is_err());
         assert!(matches!(
             g.host_view(t0).phase,
             HostPhase::Question { answered: 1, .. }
         ));
-        g.answer(cats, pick(&[1]), t0 + secs(1)).unwrap();
+        g.answer(cats, pick(&[1]), false, t0 + secs(1)).unwrap();
         let HostPhase::Closed {
             reveal: Some(reveal),
             standings: Some(standings),
@@ -1401,7 +1499,8 @@ mod tests {
                 result: Some((
                     AnswerOutcome {
                         points: 0,
-                        fully_correct: false
+                        fully_correct: false,
+                        joker: false
                     },
                     _
                 )),
@@ -1470,7 +1569,7 @@ mod tests {
         });
         let owls = join(&mut g, "Owls");
         g.next(t0).unwrap();
-        g.answer(owls, pick(&[0]), t0 + secs(5)).unwrap();
+        g.answer(owls, pick(&[0]), false, t0 + secs(5)).unwrap();
         assert!(matches!(
             g.host_view(t0).phase,
             HostPhase::Closed {
@@ -1495,7 +1594,8 @@ mod tests {
                 index: 0,
                 outcome: AnswerOutcome {
                     points: 750,
-                    fully_correct: true
+                    fully_correct: true,
+                    joker: false
                 },
                 ..
             }
@@ -1539,7 +1639,7 @@ mod tests {
         assert_eq!(slide.text, "Get ready");
         assert_eq!(then, Upcoming::Question);
         assert_eq!(g.player_view(owls, t0).unwrap().phase, PlayerPhase::Slide);
-        assert!(g.answer(owls, pick(&[0]), t0).is_err());
+        assert!(g.answer(owls, pick(&[0]), false, t0).is_err());
         // Manual advance waits on slides.
         assert_eq!(g.next_deadline(), None);
 
@@ -1556,7 +1656,7 @@ mod tests {
                 ..
             }
         ));
-        g.answer(owls, pick(&[0]), t0).unwrap();
+        g.answer(owls, pick(&[0]), false, t0).unwrap();
         assert!(matches!(
             g.host_view(t0).phase,
             HostPhase::Closed {
@@ -1566,7 +1666,7 @@ mod tests {
         ));
         g.next(t0).unwrap(); // Round 2
         g.next(t0).unwrap(); // question two
-        g.answer(owls, pick(&[1]), t0).unwrap();
+        g.answer(owls, pick(&[1]), false, t0).unwrap();
         assert!(matches!(
             g.host_view(t0).phase,
             HostPhase::Closed {
@@ -1601,8 +1701,8 @@ mod tests {
         let owls = join(&mut g, "Owls");
         let cats = join(&mut g, "Cats");
         g.next(t0).unwrap();
-        g.answer(owls, pick(&[0]), t0 + secs(9)).unwrap();
-        g.answer(cats, pick(&[0]), t0 + secs(1)).unwrap();
+        g.answer(owls, pick(&[0]), false, t0 + secs(9)).unwrap();
+        g.answer(cats, pick(&[0]), false, t0 + secs(1)).unwrap();
         let standings = g.standings();
         assert_eq!(
             standings.iter().map(|r| r.score).collect::<Vec<_>>(),
@@ -1621,7 +1721,7 @@ mod tests {
         });
         let owls = join(&mut g, "Owls");
         g.next(t0).unwrap();
-        g.answer(owls, pick(&[0]), t0).unwrap();
+        g.answer(owls, pick(&[0]), false, t0).unwrap();
         assert_eq!(g.next_deadline(), Some(t0 + AUTO_AFTER_REVEAL));
         assert_eq!(g.host_view(t0).auto_advance_ms, Some(8000));
         assert!(g.tick(t0 + AUTO_AFTER_REVEAL));
@@ -1642,7 +1742,7 @@ mod tests {
         let cats = join(&mut g, "Cats");
         g.set_connected(cats, false);
         g.next(t0).unwrap();
-        g.answer(owls, pick(&[0]), t0).unwrap();
+        g.answer(owls, pick(&[0]), false, t0).unwrap();
         assert!(matches!(g.host_view(t0).phase, HostPhase::Closed { .. }));
     }
 
@@ -1651,13 +1751,13 @@ mod tests {
         let t0 = Instant::now();
         let mut g = game(QuizSettings::default());
         let owls = join(&mut g, "Owls");
-        assert!(g.answer(owls, pick(&[0]), t0).is_err());
+        assert!(g.answer(owls, pick(&[0]), false, t0).is_err());
         g.next(t0).unwrap();
-        assert!(g.answer(owls, pick(&[]), t0).is_err());
-        assert!(g.answer(owls, pick(&[7]), t0).is_err());
-        assert!(g.answer(owls, pick(&[0, 1]), t0).is_err());
-        assert!(g.answer(owls, pick(&[0]), t0 + secs(10)).is_err());
-        assert!(g.answer(99, pick(&[0]), t0).is_err());
+        assert!(g.answer(owls, pick(&[]), false, t0).is_err());
+        assert!(g.answer(owls, pick(&[7]), false, t0).is_err());
+        assert!(g.answer(owls, pick(&[0, 1]), false, t0).is_err());
+        assert!(g.answer(owls, pick(&[0]), false, t0 + secs(10)).is_err());
+        assert!(g.answer(99, pick(&[0]), false, t0).is_err());
     }
 
     #[test]
@@ -1667,7 +1767,7 @@ mod tests {
         let owls = join(&mut g, "Owls");
         join(&mut g, "Cats");
         g.next(t0).unwrap();
-        g.answer(owls, pick(&[0]), t0).unwrap();
+        g.answer(owls, pick(&[0]), false, t0).unwrap();
         assert_eq!(g.player_view(owls, t0).unwrap().score, Some(0));
         g.next(t0).unwrap();
         assert_eq!(g.player_view(owls, t0).unwrap().score, Some(1000));
@@ -1684,7 +1784,7 @@ mod tests {
         let mut g = Game::new("123456".to_owned(), settings).unwrap();
         let owls = join(&mut g, "Owls");
         g.next(t0).unwrap();
-        g.answer(owls, pick(&[0]), t0).unwrap();
+        g.answer(owls, pick(&[0]), false, t0).unwrap();
         assert!(g.tick(t0 + AUTO_AFTER_REVEAL));
 
         // Question two waits, even with auto-advance, and takes no answers yet.
@@ -1694,7 +1794,7 @@ mod tests {
         assert_eq!(question.audio.as_deref(), Some("song.mp3"));
         assert_eq!(g.next_deadline(), None);
         assert_eq!(g.host_view(t0).auto_advance_ms, None);
-        assert!(g.answer(owls, pick(&[0]), t0 + secs(20)).is_err());
+        assert!(g.answer(owls, pick(&[0]), false, t0 + secs(20)).is_err());
         assert_eq!(
             g.player_view(owls, t0).unwrap().phase,
             PlayerPhase::Ready { index: 1, total: 2 }
@@ -1704,7 +1804,7 @@ mod tests {
         let t1 = t0 + secs(30);
         g.next(t1).unwrap();
         assert_eq!(g.next_deadline(), Some(t1 + secs(10)));
-        g.answer(owls, pick(&[0]), t1).unwrap();
+        g.answer(owls, pick(&[0]), false, t1).unwrap();
         assert_eq!(g.player_view(owls, t1).unwrap().score, Some(2000));
     }
 
@@ -1749,13 +1849,16 @@ mod tests {
         let bats = join(&mut g, "Bats");
         let pigs = join(&mut g, "Pigs");
         g.next(t0).unwrap();
-        assert!(g.answer(owls, pick(&[0]), t0).is_err());
-        assert!(g.answer(owls, text(" ?! "), t0).is_err());
-        assert!(g.answer(owls, text(&"x".repeat(61)), t0).is_err());
-        g.answer(owls, text("  léonardo DA vinci! "), t0).unwrap();
-        g.answer(cats, text("Leonardo da Vinchi"), t0).unwrap();
-        g.answer(bats, text("leonardo da vinchi"), t0).unwrap();
-        g.answer(pigs, text("Raphael"), t0).unwrap();
+        assert!(g.answer(owls, pick(&[0]), false, t0).is_err());
+        assert!(g.answer(owls, text(" ?! "), false, t0).is_err());
+        assert!(g.answer(owls, text(&"x".repeat(61)), false, t0).is_err());
+        g.answer(owls, text("  léonardo DA vinci! "), false, t0)
+            .unwrap();
+        g.answer(cats, text("Leonardo da Vinchi"), false, t0)
+            .unwrap();
+        g.answer(bats, text("leonardo da vinchi"), false, t0)
+            .unwrap();
+        g.answer(pigs, text("Raphael"), false, t0).unwrap();
 
         let full = Judgement {
             grade: Grade::Full,
@@ -1842,7 +1945,7 @@ mod tests {
         );
         let owls = join(&mut g, "Owls");
         g.next(t0).unwrap();
-        g.answer(owls, text("no"), t0).unwrap();
+        g.answer(owls, text("no"), false, t0).unwrap();
         let full = Judgement {
             grade: Grade::Full,
             bonus: 0,
@@ -1864,12 +1967,15 @@ mod tests {
         let cats = join(&mut g, "Cats");
         let bats = join(&mut g, "Bats");
         g.next(t0).unwrap();
-        assert!(g.answer(owls, text("330"), t0).is_err());
-        assert!(g.answer(owls, Response::Number(f64::NAN), t0).is_err());
-        g.answer(owls, Response::Number(300.0), t0).unwrap();
-        g.answer(cats, Response::Number(360.0), t0 + secs(9))
+        assert!(g.answer(owls, text("330"), false, t0).is_err());
+        assert!(
+            g.answer(owls, Response::Number(f64::NAN), false, t0)
+                .is_err()
+        );
+        g.answer(owls, Response::Number(300.0), false, t0).unwrap();
+        g.answer(cats, Response::Number(360.0), false, t0 + secs(9))
             .unwrap();
-        g.answer(bats, Response::Number(1000.0), t0).unwrap();
+        g.answer(bats, Response::Number(1000.0), false, t0).unwrap();
         let HostPhase::Closed {
             reveal: Some(Reveal::Number { answer, guesses }),
             ..

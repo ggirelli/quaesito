@@ -11,8 +11,8 @@ use crate::{
     api::{check_ticket, game_info, join_game, player_socket, upload_avatar},
     model::{MAX_TEXT_ANSWER_CHARS, PhoneDisplay},
     protocol::{
-        AnswerOutcome, InputKind, MAX_NAME_CHARS, PlayerCommand, PlayerPhase, PlayerView, Response,
-        TeamInfo,
+        AnswerOutcome, InputKind, JokerState, MAX_NAME_CHARS, PlayerCommand, PlayerPhase,
+        PlayerView, Response, TeamInfo,
     },
 };
 
@@ -269,6 +269,7 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
         } => rsx! {
             OpenPad {
                 key: "{index}",
+                joker: view.joker,
                 index,
                 total,
                 number: input == InputKind::Number,
@@ -291,6 +292,7 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
         } => rsx! {
             AnswerPad {
                 key: "{index}",
+                joker: view.joker,
                 index,
                 total,
                 answer_count,
@@ -448,9 +450,11 @@ fn AnswerPad(
     clock: Clock,
     submitted: Option<Vec<usize>>,
     display: PhoneDisplay,
+    joker: JokerState,
 ) -> Element {
     let live_socket: Live<PlayerCommand, PlayerView> = use_context();
     let mut selected = use_signal(Vec::<usize>::new);
+    let armed = use_signal(|| false);
     let now = use_clock(200);
     let (left, width) = clock.at(now());
     let locked = submitted.is_some() || left <= 0.0;
@@ -459,7 +463,10 @@ fn AnswerPad(
     let send = move |answer: Vec<usize>| async move {
         let _ = live_socket
             .socket
-            .send(PlayerCommand::Answer(Response::Choice(answer)))
+            .send(PlayerCommand::Answer {
+                response: Response::Choice(answer),
+                joker: armed(),
+            })
             .await;
     };
     let (question, labels) = match text {
@@ -489,6 +496,7 @@ fn AnswerPad(
             } else if multi {
                 p { class: "muted", "Pick every correct answer, then submit." }
             }
+            JokerToggle { state: joker, armed, locked }
             div { class: if with_text { "phone-answers with-text" } else { "phone-answers" },
                 for i in 0..answer_count {
                     {
@@ -551,9 +559,11 @@ fn OpenPad(
     question: Option<String>,
     clock: Clock,
     submitted: Option<Response>,
+    joker: JokerState,
 ) -> Element {
     let live_socket: Live<PlayerCommand, PlayerView> = use_context();
     let mut draft = use_signal(String::new);
+    let armed = use_signal(|| false);
     let mut error = use_signal(|| None::<String>);
     let now = use_clock(200);
     let (left, width) = clock.at(now());
@@ -580,7 +590,10 @@ fn OpenPad(
         error.set(None);
         let _ = live_socket
             .socket
-            .send(PlayerCommand::Answer(response))
+            .send(PlayerCommand::Answer {
+                response,
+                joker: armed(),
+            })
             .await;
     };
 
@@ -601,6 +614,7 @@ fn OpenPad(
             match (&submitted, locked) {
                 (Some(answer), _) => rsx! {
                     p { class: "strong", "🔒 Answer locked in" }
+                    JokerToggle { state: joker, armed, locked }
                     p { class: "locked-answer",
                         match answer {
                             Response::Text(text) => text.clone(),
@@ -638,6 +652,7 @@ fn OpenPad(
                             }
                         }
                         ErrorBox { error: error() }
+                        JokerToggle { state: joker, armed, locked }
                         button {
                             r#type: "submit",
                             class: "button primary big",
@@ -648,6 +663,27 @@ fn OpenPad(
                 },
             }
         }
+    }
+}
+
+#[component]
+/// Arms the team's joker before answering, or shows that it was played on this question.
+#[component]
+fn JokerToggle(state: JokerState, armed: Signal<bool>, locked: bool) -> Element {
+    match state {
+        JokerState::Ready if !locked => rsx! {
+            button {
+                r#type: "button",
+                class: if armed() { "joker armed" } else { "joker" },
+                aria_pressed: armed(),
+                onclick: move |_| armed.toggle(),
+                if armed() { "🃏 Joker on: this answer counts double" } else { "🃏 Play my joker (double points)" }
+            }
+        },
+        JokerState::PlayedHere => rsx! {
+            p { class: "joker armed", "🃏 Joker played: points count double" }
+        },
+        _ => rsx! {},
     }
 }
 
@@ -672,6 +708,9 @@ fn OutcomeView(index: usize, total: usize, outcome: AnswerOutcome, answered: boo
                 h1 { class: "status-title", "{title}" }
                 div { class: "points",
                     if outcome.points < 0 { "{outcome.points}" } else { "+{outcome.points}" }
+                }
+                if outcome.joker {
+                    p { class: "strong", "🃏 Joker: points doubled" }
                 }
             }
         }

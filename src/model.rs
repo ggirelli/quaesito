@@ -138,6 +138,8 @@ pub struct QuizSettings {
     pub reveal: RevealMode,
     pub multi_scoring: MultiScoring,
     pub points: PointsMode,
+    /// Each team may double one question's points.
+    pub joker: bool,
     pub advance: AdvanceMode,
     pub phone_display: PhoneDisplay,
 }
@@ -149,6 +151,7 @@ impl Default for QuizSettings {
             reveal: RevealMode::default(),
             multi_scoring: MultiScoring::default(),
             points: PointsMode::default(),
+            joker: false,
             advance: AdvanceMode::default(),
             phone_display: PhoneDisplay::default(),
         }

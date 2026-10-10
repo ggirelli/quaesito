@@ -149,6 +149,8 @@ pub struct StandingRow {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub struct RoundResult {
     pub points: i32,
+    /// The team played its joker on this question.
+    pub joker: bool,
     /// How long the team took to answer, if it did.
     pub answer_ms: Option<u64>,
     /// Position before this question, if an earlier question was played.
@@ -244,9 +246,11 @@ pub enum HostCommand {
 /// How a team did on one question.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub struct AnswerOutcome {
-    /// Negative when the judge gave a malus.
+    /// Negative when the judge gave a malus. Doubled by a joker.
     pub points: i32,
     pub fully_correct: bool,
+    /// The team played its joker on this question.
+    pub joker: bool,
 }
 
 /// Everything a team leader's phone shows.
@@ -255,9 +259,23 @@ pub struct PlayerView {
     pub title: String,
     pub team: TeamInfo,
     pub display: PhoneDisplay,
+    pub joker: JokerState,
     /// Total score, when the quiz settings allow showing it.
     pub score: Option<i32>,
     pub phase: PlayerPhase,
+}
+
+/// A team's joker, which doubles one question's points.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+pub enum JokerState {
+    /// The quiz has no jokers.
+    Unavailable,
+    /// Not played yet.
+    Ready,
+    /// Played on the current question.
+    PlayedHere,
+    /// Played on another question.
+    Spent,
 }
 
 /// The stage of the quiz, as seen by a team. Question indexes count questions only, from 0.
@@ -313,8 +331,8 @@ pub enum PlayerPhase {
 /// Commands a team leader's phone can send.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum PlayerCommand {
-    /// Submit an answer to the open question.
-    Answer(Response),
+    /// Submit an answer to the open question, optionally playing the team's joker on it.
+    Answer { response: Response, joker: bool },
 }
 
 /// Credentials a team gets when joining; kept on the phone to reconnect.

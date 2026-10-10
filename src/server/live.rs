@@ -72,9 +72,9 @@ pub async fn player(
         tokio::select! {
             changed = updates.changed() => if changed.is_err() { break },
             command = socket.recv() => match command {
-                Ok(PlayerCommand::Answer(response)) => {
+                Ok(PlayerCommand::Answer { response, joker }) => {
                     // Refusals (late or duplicate answers) are reflected by the next view.
-                    let _ = session.update(|g, now| g.answer(team, response, now));
+                    let _ = session.update(|g, now| g.answer(team, response, joker, now));
                 }
                 Err(_) => break,
             },

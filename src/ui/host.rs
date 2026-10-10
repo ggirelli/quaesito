@@ -847,6 +847,9 @@ fn Standings(rows: Vec<StandingRow>) -> Element {
                     span { class: "name", "{row.team.name}" }
                     if let Some(round) = row.round {
                         span { class: "round",
+                            if round.joker {
+                                span { title: "Joker: points doubled", "🃏 " }
+                            }
                             match round.points {
                                 0 => String::new(),
                                 p if p > 0 => format!("+{p}"),
