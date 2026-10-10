@@ -60,11 +60,12 @@ Each quiz chooses:
 |---|---|
 | Reveal answers | after each question (with standings) · at the end (walk through the answers before the podium) |
 | Several correct answers | all or nothing · partial credit (correct picks minus wrong picks) |
+| Points | speed (faster correct answers earn more) · correct answers only (1000 each) |
 | Moving on | host clicks · automatic after a short pause |
 | On team phones | coloured buttons only (read on the big screen) · full question and answer text |
 
-A correct answer earns 1000 points when instant, down to 500 at the buzzer. Ties are broken by the time spent on
-correct answers.
+With speed points, a correct answer earns 1000 points when instant, down to 500 at the buzzer. With correct answers
+only, it always earns 1000. Either way, ties are broken by the time spent on correct answers.
 
 ### Configuration
 

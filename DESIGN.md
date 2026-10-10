@@ -60,13 +60,15 @@ Per-quiz settings chosen by the admin:
 |---|---|
 | Reveal | `AfterEachQuestion` / `AtEnd` |
 | Multi-correct scoring | `AllOrNothing` / `Partial` |
+| Points | `Speed` (faster is worth more) / `Flat` (every correct answer is worth the same) |
 | Advance | `Manual` (host clicks) / `Auto` (when time runs out or all teams answered) |
 | Phone display | `ButtonsOnly` (read on the projector) / `FullText` |
 
 ## Scoring
 
-A correct answer submitted after `t` seconds on a question with limit `T` earns
-`round(1000 * (1 - 0.5 * t / T))` points: 1000 when instant, 500 at the buzzer.
+With `Speed` points, a correct answer submitted after `t` seconds on a question with limit `T`
+earns `round(1000 * (1 - 0.5 * t / T))` points: 1000 when instant, 500 at the buzzer. With `Flat`
+points it always earns 1000. Partial credit and the judge's grades scale this amount.
 
 With `Partial` scoring on multi-correct questions, the fraction
 `max(0, (correct picked - wrong picked) / total correct)` multiplies the speed score.

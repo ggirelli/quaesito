@@ -24,6 +24,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 15 | Quiz list flags quizzes that are not ready to play and disables their Start button | ✅ done |
 | 16 | Slides between questions: title, text and/or picture | ✅ done |
 | 17 | Editor: shuffle questions within each run between slides, with undo | ✅ done |
+| 18 | Points setting: speed-weighted or a flat 1000 per correct answer | ✅ done |
 
 ## Notes
 
