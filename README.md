@@ -1,4 +1,9 @@
-# Quaesito
+<h1 align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/brand/logo-dark.png">
+    <img src="assets/brand/logo-light.png" alt="quaesito" width="480">
+  </picture>
+</h1>
 
 Quizzes among friends: a self-hosted, Kahoot-style quiz web app written in Rust with [Dioxus](https://dioxuslabs.com).
 
