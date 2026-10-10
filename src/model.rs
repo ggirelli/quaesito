@@ -10,6 +10,8 @@ pub const MAX_ANSWERS: usize = 6;
 pub const MIN_TIME_LIMIT_SECS: u32 = 5;
 /// Longest allowed time limit, in seconds.
 pub const MAX_TIME_LIMIT_SECS: u32 = 300;
+/// Most a question's points can be multiplied by.
+pub const MAX_MULTIPLIER: u32 = 5;
 /// Longest typed answer, in characters.
 pub const MAX_TEXT_ANSWER_CHARS: usize = 60;
 
@@ -270,6 +272,9 @@ pub struct Question {
     /// Overrides the quiz-wide time limit when set.
     #[serde(default)]
     pub time_limit_secs: Option<u32>,
+    /// The question is worth this many times a usual one (`None` counts once).
+    #[serde(default)]
+    pub multiplier: Option<u32>,
     /// The options of a multiple-choice question (kept, but unused, for other kinds).
     #[serde(default)]
     pub answers: Vec<Answer>,
@@ -340,6 +345,12 @@ impl Question {
             },
             ..Self::default()
         }
+    }
+
+    /// How many times a usual question's points this one is worth.
+    #[must_use]
+    pub fn multiplier(&self) -> u32 {
+        self.multiplier.unwrap_or(1)
     }
 
     /// Whether the question's picture is revealed gradually while the clock runs.
@@ -434,6 +445,11 @@ impl Question {
             }
             QuestionKind::Slide { .. } => {}
         }
+        if !(1..=MAX_MULTIPLIER).contains(&self.multiplier()) {
+            problems.push(format!(
+                "A question can be worth 1 to {MAX_MULTIPLIER} times the usual points."
+            ));
+        }
         if let Some(limit) = self.time_limit_secs
             && !(MIN_TIME_LIMIT_SECS..=MAX_TIME_LIMIT_SECS).contains(&limit)
         {
@@ -518,6 +534,7 @@ mod tests {
             image_hold_secs: 0,
             audio: None,
             time_limit_secs: None,
+            multiplier: None,
             answers: vec![answer("Jupiter", false), answer("Saturn", true)],
         }
     }

@@ -74,6 +74,8 @@ pub struct QuestionInfo {
     pub image_reveal: ImageReveal,
     /// With a gradual reveal, how long before the buzzer the picture is fully shown.
     pub image_hold_ms: u64,
+    /// The question is worth this many times the usual points.
+    pub multiplier: u32,
     /// Media name of the soundtrack, if any.
     pub audio: Option<String>,
     pub input: InputKind,

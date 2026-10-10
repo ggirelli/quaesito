@@ -11,9 +11,9 @@ use super::{
 use crate::{
     api::{get_quiz, save_quiz, start_test, upload_question_audio, upload_question_image},
     model::{
-        AdvanceMode, Answer, ImageReveal, MAX_ANSWERS, MAX_TIME_LIMIT_SECS, MIN_ANSWERS,
-        MIN_TIME_LIMIT_SECS, MultiScoring, PhoneDisplay, PointsMode, Question, QuestionKind, Quiz,
-        QuizSettings, RevealMode, ValidationIssue,
+        AdvanceMode, Answer, ImageReveal, MAX_ANSWERS, MAX_MULTIPLIER, MAX_TIME_LIMIT_SECS,
+        MIN_ANSWERS, MIN_TIME_LIMIT_SECS, MultiScoring, PhoneDisplay, PointsMode, Question,
+        QuestionKind, Quiz, QuizSettings, RevealMode, ValidationIssue,
     },
 };
 
@@ -588,6 +588,20 @@ fn QuestionCard(
                                 let value = e.value();
                                 draft.edit_question(index, |q| q.time_limit_secs = value.trim().parse().ok());
                             },
+                        }
+                    }
+                    label { class: "field inline",
+                        title: "How many times a usual question's points this one is worth",
+                        span { "Points" }
+                        select {
+                            value: "{question.multiplier()}",
+                            onchange: move |e| {
+                                let multiplier = e.value().parse().ok().filter(|&m| m > 1);
+                                draft.edit_question(index, |q| q.multiplier = multiplier);
+                            },
+                            for m in 1..=MAX_MULTIPLIER {
+                                option { value: "{m}", "×{m}" }
+                            }
                         }
                     }
                 }

@@ -862,6 +862,15 @@ table.results {
   }
 }
 
+.multiplier {
+  margin-left: 0.8em;
+  padding: 0.1em 0.6em;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 800;
+}
+
 .question-head {
   display: flex;
   align-items: center;

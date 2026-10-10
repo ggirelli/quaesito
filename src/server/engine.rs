@@ -1041,6 +1041,7 @@ impl Game {
                 crate::model::ImageReveal::Shown
             },
             image_hold_ms: u64::from(question.image_hold_secs) * 1000,
+            multiplier: question.multiplier(),
             audio: question.audio.clone(),
             input: input_kind(question),
             answers: self.shown_answers(index),
@@ -1221,7 +1222,9 @@ impl Game {
 
     /// How `team` did on question `index`, its joker included.
     fn outcome(&self, index: usize, team: &Team) -> AnswerOutcome {
-        let outcome = self.base_outcome(index, team);
+        let mut outcome = self.base_outcome(index, team);
+        let multiplier = i32::try_from(self.quiz.questions[index].multiplier()).unwrap_or(1);
+        outcome.points = outcome.points.saturating_mul(multiplier);
         if team.joker == Some(index) {
             AnswerOutcome {
                 points: outcome.points.saturating_mul(2),
@@ -1233,7 +1236,7 @@ impl Game {
         }
     }
 
-    /// How `team` did on question `index`, before any joker.
+    /// How `team` did on question `index`, before the question's multiplier and any joker.
     fn base_outcome(&self, index: usize, team: &Team) -> AnswerOutcome {
         let Some(submission) = &team.submissions[index] else {
             return AnswerOutcome {
@@ -1498,6 +1501,7 @@ mod tests {
             image_hold_secs: 0,
             audio: None,
             time_limit_secs: Some(10),
+            multiplier: None,
             answers: vec![
                 Answer {
                     text: "right".to_owned(),
@@ -1874,6 +1878,28 @@ mod tests {
         let rows = g.standings();
         assert_eq!(rows[0].score, 900);
         assert_eq!(rows[1].score, 750);
+    }
+
+    #[test]
+    fn a_multiplier_scales_points_before_the_joker() {
+        let t0 = Instant::now();
+        let mut quiz = quiz(QuizSettings {
+            joker: true,
+            ..QuizSettings::default()
+        });
+        quiz.questions[0].multiplier = Some(3);
+        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        g.next(t0).unwrap();
+        g.answer(owls, pick(&[0]), true, t0).unwrap();
+        g.answer(cats, pick(&[0]), false, t0).unwrap();
+        let scores: Vec<i32> = g.standings().iter().map(|r| r.score).collect();
+        assert_eq!(scores, [6000, 3000]);
+        let HostPhase::Closed { question, .. } = g.host_view(t0).phase else {
+            panic!("expected results");
+        };
+        assert_eq!(question.multiplier, 3);
     }
 
     #[test]

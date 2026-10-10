@@ -688,7 +688,12 @@ fn qr_svg(url: &str) -> Option<String> {
 fn QuestionHeader(question: QuestionInfo, children: Element) -> Element {
     rsx! {
         div { class: "question-head",
-            span { class: "muted", "Question {question.number} of {question.total}" }
+            span { class: "muted",
+                "Question {question.number} of {question.total}"
+                if question.multiplier > 1 {
+                    span { class: "multiplier", "×{question.multiplier} points" }
+                }
+            }
             {children}
         }
         h1 { class: "question-title", "{question.text}" }
