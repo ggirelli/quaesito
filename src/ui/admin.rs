@@ -217,9 +217,11 @@ fn Dashboard() -> Element {
                                                 "{quiz.question_count} questions"
                                             }
                                         }
+                                        NotPlayable { issues: quiz.issues.clone() }
                                     }
                                     QuizActions {
                                         id: quiz.id.clone(),
+                                        playable: quiz.issues.is_empty(),
                                         on_change: move |()| quizzes.restart(),
                                         on_error: move |e| error.set(Some(e)),
                                     }
@@ -234,7 +236,12 @@ fn Dashboard() -> Element {
 }
 
 #[component]
-fn QuizActions(id: String, on_change: EventHandler<()>, on_error: EventHandler<String>) -> Element {
+fn QuizActions(
+    id: String,
+    playable: bool,
+    on_change: EventHandler<()>,
+    on_error: EventHandler<String>,
+) -> Element {
     let token: AdminToken = use_context();
     let export_href = format!("/export/{id}?token={}", token.get());
     let duplicate = {
@@ -278,7 +285,13 @@ fn QuizActions(id: String, on_change: EventHandler<()>, on_error: EventHandler<S
     let mut confirming = use_signal(|| false);
     rsx! {
         div { class: "row actions",
-            button { class: "button primary", onclick: start, "▶ Start" }
+            button {
+                class: "button primary",
+                disabled: !playable,
+                title: if playable { "Start a live game" } else { "Fix the quiz before playing it" },
+                onclick: start,
+                "▶ Start"
+            }
             Link { class: "button", to: Route::Editor { id: id.clone() }, "Edit" }
             button { class: "button ghost", onclick: duplicate, "Duplicate" }
             a { class: "button ghost", href: export_href, download: true, "Export" }
@@ -288,6 +301,24 @@ fn QuizActions(id: String, on_change: EventHandler<()>, on_error: EventHandler<S
             } else {
                 button { class: "button ghost", onclick: move |_| confirming.set(true), "Delete" }
             }
+        }
+    }
+}
+
+/// Warning under a quiz that cannot be played yet, listing what to fix.
+#[component]
+fn NotPlayable(issues: Vec<String>) -> Element {
+    let Some(first) = issues.first() else {
+        return rsx! {};
+    };
+    let more = match issues.len() - 1 {
+        0 => String::new(),
+        1 => " (and 1 more)".to_owned(),
+        n => format!(" (and {n} more)"),
+    };
+    rsx! {
+        div { class: "not-playable small", title: issues.join("\n"),
+            "⚠ Not ready to play: {first}{more}"
         }
     }
 }

@@ -76,6 +76,7 @@ impl Quiz {
             id: self.id.clone(),
             title: self.title.clone(),
             question_count: self.questions.len(),
+            issues: self.validate().iter().map(ToString::to_string).collect(),
         }
     }
 }
@@ -294,6 +295,8 @@ pub struct QuizSummary {
     pub id: String,
     pub title: String,
     pub question_count: usize,
+    /// What still keeps the quiz from being playable; empty when it is ready.
+    pub issues: Vec<String>,
 }
 
 #[cfg(test)]

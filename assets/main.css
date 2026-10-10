@@ -428,6 +428,11 @@ input.short {
   font-weight: 600;
 }
 
+.not-playable {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 .issues {
   padding: 0.8rem 1rem;
   border-radius: 10px;

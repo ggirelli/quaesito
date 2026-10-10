@@ -21,6 +21,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 12 | Navigation: admin corner icon on home, Home and back-to-quizzes buttons | ✅ done |
 | 13 | Question soundtracks: the host starts the music and the clock together | ✅ done |
 | 14 | Open-ended questions: typed text (judged) and closest number | ✅ done |
+| 15 | Quiz list flags quizzes that are not ready to play and disables their Start button | ✅ done |
 
 ## Notes
 
