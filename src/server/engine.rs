@@ -9,13 +9,17 @@
 //! A question with a soundtrack first waits in `Ready` until the host starts the music, which
 //! also starts its clock.
 
-use std::time::{Duration, Instant};
+use std::{
+    collections::HashMap,
+    time::{Duration, Instant},
+};
 
+use super::matching::normalize;
 use crate::{
-    model::{AdvanceMode, Question, Quiz, RevealMode},
+    model::{AdvanceMode, MAX_TEXT_ANSWER_CHARS, Question, QuestionKind, Quiz, RevealMode},
     protocol::{
-        AnswerOutcome, HostPhase, HostView, MAX_NAME_CHARS, PlayerPhase, PlayerView, QuestionInfo,
-        Reveal, StandingRow, TeamInfo,
+        AnswerOutcome, Grade, Guess, HostPhase, HostView, InputKind, Judgement, MAX_NAME_CHARS,
+        PlayerPhase, PlayerView, QuestionInfo, Response, Reveal, StandingRow, TeamInfo, TextGroup,
     },
     scoring::{self, Tally},
 };
@@ -37,6 +41,8 @@ pub struct Game {
     teams: Vec<Team>,
     next_team_id: u32,
     phase: Phase,
+    /// Per question: the judge's amendments to typed answers, by normalised text.
+    judgements: Vec<HashMap<String, Judgement>>,
 }
 
 struct Team {
@@ -49,10 +55,8 @@ struct Team {
 }
 
 struct Submission {
-    selected: Vec<usize>,
+    response: Response,
     elapsed: Duration,
-    points: u32,
-    fully_correct: bool,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -101,12 +105,14 @@ impl Game {
         if !quiz.validate().is_empty() {
             return Err(Refusal("This quiz is not ready to be played yet."));
         }
+        let quiz_len = quiz.questions.len();
         Ok(Self {
             code,
             quiz,
             teams: Vec::new(),
             next_team_id: 1,
             phase: Phase::Lobby,
+            judgements: vec![HashMap::new(); quiz_len],
         })
     }
 
@@ -240,8 +246,8 @@ impl Game {
     /// Submits a team's answer to the open question.
     ///
     /// # Errors
-    /// Refuses when no question is open, the team already answered, or the selection is invalid.
-    pub fn answer(&mut self, team: u32, selected: &[usize], now: Instant) -> Result<(), Refusal> {
+    /// Refuses when no question is open, the team already answered, or the answer is invalid.
+    pub fn answer(&mut self, team: u32, response: Response, now: Instant) -> Result<(), Refusal> {
         let Phase::Question {
             index,
             started,
@@ -253,22 +259,7 @@ impl Game {
         if now >= deadline {
             return Err(Refusal("Time is up."));
         }
-        let question = &self.quiz.questions[index];
-        let mut selected = selected.to_vec();
-        selected.sort_unstable();
-        selected.dedup();
-        if selected.is_empty() || selected.iter().any(|&i| i >= question.answers.len()) {
-            return Err(Refusal("Please pick an answer."));
-        }
-        if !question.is_multi() && selected.len() > 1 {
-            return Err(Refusal("Only one answer can be picked."));
-        }
-        let limit = Duration::from_secs(u64::from(question.time_limit_secs(&self.quiz.settings)));
-        let elapsed = now.duration_since(started);
-        let mode = self.quiz.settings.multi_scoring;
-        let points = scoring::score(question, &selected, elapsed, limit, mode);
-        let fully_correct = scoring::correctness(question, &selected, mode) >= 1.0;
-
+        let response = check_response(&self.quiz.questions[index], response)?;
         let team = self
             .teams
             .iter_mut()
@@ -278,10 +269,8 @@ impl Game {
             return Err(Refusal("Your answer is already in."));
         }
         team.submissions[index] = Some(Submission {
-            selected,
-            elapsed,
-            points,
-            fully_correct,
+            response,
+            elapsed: now.duration_since(started),
         });
 
         let everyone_answered = self
@@ -291,6 +280,52 @@ impl Game {
             .all(|t| t.submissions[index].is_some());
         if everyone_answered {
             self.phase = Phase::Closed { index, since: now };
+        }
+        Ok(())
+    }
+
+    /// The judge amends the verdict on the typed answers that normalise to `key`.
+    ///
+    /// Possible while that question's answers are shown; restarts the auto-advance pause.
+    ///
+    /// # Errors
+    /// Refuses when the question is not a typed-text question whose answers are on screen.
+    pub fn judge(
+        &mut self,
+        question: usize,
+        key: &str,
+        judgement: Judgement,
+        now: Instant,
+    ) -> Result<(), Refusal> {
+        let revealing = self.quiz.settings.reveal == RevealMode::AfterEachQuestion;
+        let shown = match self.phase {
+            Phase::Closed { index, .. } => revealing && index == question,
+            Phase::Review { index, .. } => index == question,
+            _ => false,
+        };
+        if !shown {
+            return Err(Refusal("These answers are not on screen."));
+        }
+        if !matches!(
+            self.quiz.questions[question].kind,
+            QuestionKind::Text { .. }
+        ) {
+            return Err(Refusal("Only typed answers can be judged."));
+        }
+        let judgement = Judgement {
+            grade: judgement.grade,
+            bonus: judgement
+                .bonus
+                .clamp(-scoring::MAX_BONUS, scoring::MAX_BONUS),
+        };
+        if judgement == self.automatic_judgement(question, key) {
+            self.judgements[question].remove(key);
+        } else {
+            self.judgements[question].insert(key.to_owned(), judgement);
+        }
+        match &mut self.phase {
+            Phase::Closed { since, .. } | Phase::Review { since, .. } => *since = now,
+            _ => {}
         }
         Ok(())
     }
@@ -389,19 +424,8 @@ impl Game {
     pub fn player_view(&self, team_id: u32, now: Instant) -> Option<PlayerView> {
         let team = self.teams.iter().find(|t| t.id == team_id)?;
         let total = self.quiz.questions.len();
-        let submitted = |index: usize| team.submissions[index].as_ref().map(|s| s.selected.clone());
-        let outcome = |index: usize| {
-            team.submissions[index].as_ref().map_or(
-                AnswerOutcome {
-                    points: 0,
-                    fully_correct: false,
-                },
-                |s| AnswerOutcome {
-                    points: s.points,
-                    fully_correct: s.fully_correct,
-                },
-            )
-        };
+        let submitted = |index: usize| team.submissions[index].as_ref().map(|s| s.response.clone());
+        let outcome = |index: usize| self.outcome(index, team);
         let revealing = self.quiz.settings.reveal == RevealMode::AfterEachQuestion;
         let rank = self
             .standings()
@@ -418,18 +442,19 @@ impl Game {
                 index, deadline, ..
             } => {
                 let question = &self.quiz.questions[index];
+                let input = input_kind(question);
                 PlayerPhase::Question {
                     index,
                     total,
-                    answer_count: question.answers.len(),
+                    input,
+                    answer_count: if input == InputKind::Choice {
+                        question.answers.len()
+                    } else {
+                        0
+                    },
                     text: (self.quiz.settings.phone_display
                         == crate::model::PhoneDisplay::FullText)
-                        .then(|| {
-                            (
-                                question.text.clone(),
-                                question.answers.iter().map(|a| a.text.clone()).collect(),
-                            )
-                        }),
+                        .then(|| (question.text.clone(), question_answers(question))),
                     multi: question.is_multi(),
                     remaining_ms: millis(deadline.saturating_duration_since(now)),
                     submitted: submitted(index),
@@ -463,7 +488,7 @@ impl Game {
             title: self.quiz.title.clone(),
             team: team.info(),
             display: self.quiz.settings.phone_display,
-            score: score_visible.then(|| team.score(self.closed_count())),
+            score: score_visible.then(|| self.team_score(team, self.closed_count())),
             phase,
         })
     }
@@ -499,7 +524,8 @@ impl Game {
             text: question.text.clone(),
             image: question.image.clone(),
             audio: question.audio.clone(),
-            answers: question.answers.iter().map(|a| a.text.clone()).collect(),
+            input: input_kind(question),
+            answers: question_answers(question),
             multi: question.is_multi(),
             time_limit_ms: u64::from(question.time_limit_secs(&self.quiz.settings)) * 1000,
         }
@@ -514,20 +540,173 @@ impl Game {
 
     fn reveal(&self, index: usize) -> Reveal {
         let question = &self.quiz.questions[index];
-        let mut picks = vec![0; question.answers.len()];
-        for submission in self
-            .teams
-            .iter()
-            .filter_map(|t| t.submissions[index].as_ref())
-        {
-            for &i in &submission.selected {
-                picks[i] += 1;
+        let responses = || {
+            self.teams.iter().filter_map(move |t| {
+                t.submissions[index]
+                    .as_ref()
+                    .map(|s| (t.name.as_str(), &s.response))
+            })
+        };
+        match &question.kind {
+            QuestionKind::Choice => {
+                let mut picks = vec![0; question.answers.len()];
+                for (_, response) in responses() {
+                    if let Response::Choice(selected) = response {
+                        for &i in selected {
+                            picks[i] += 1;
+                        }
+                    }
+                }
+                Reveal::Choice {
+                    correct: question.correct_indexes(),
+                    picks,
+                }
+            }
+            QuestionKind::Text { accepted } => {
+                let mut groups: Vec<TextGroup> = Vec::new();
+                for (team, response) in responses() {
+                    let Response::Text(text) = response else {
+                        continue;
+                    };
+                    let key = normalize(text);
+                    if let Some(group) = groups.iter_mut().find(|g| g.key == key) {
+                        group.teams.push(team.to_owned());
+                    } else {
+                        let (judgement, amended) = self.judgement(index, &key);
+                        groups.push(TextGroup {
+                            key,
+                            text: text.clone(),
+                            teams: vec![team.to_owned()],
+                            judgement,
+                            amended,
+                        });
+                    }
+                }
+                // Most common answers first; the sort is stable, so ties keep answer order.
+                groups.sort_by_key(|g| std::cmp::Reverse(g.teams.len()));
+                Reveal::Text {
+                    accepted: accepted
+                        .iter()
+                        .map(|a| a.trim().to_owned())
+                        .filter(|a| !a.is_empty())
+                        .collect(),
+                    groups,
+                }
+            }
+            QuestionKind::Number { answer } => {
+                let answer = answer.unwrap_or_default();
+                let closest = self.closest_distance(index);
+                let mut guesses: Vec<(f64, Guess)> = responses()
+                    .filter_map(|(team, response)| match response {
+                        Response::Number(value) => Some((
+                            (value - answer).abs(),
+                            Guess {
+                                team: team.to_owned(),
+                                value: *value,
+                                closest: closest.is_some_and(|c| (value - answer).abs() <= c),
+                            },
+                        )),
+                        _ => None,
+                    })
+                    .collect();
+                guesses.sort_by(|a, b| a.0.total_cmp(&b.0));
+                Reveal::Number {
+                    answer,
+                    guesses: guesses.into_iter().map(|(_, g)| g).collect(),
+                }
             }
         }
-        Reveal {
-            correct: question.correct_indexes(),
-            picks,
+    }
+
+    /// The verdict on typed answers normalising to `key`, and whether the judge amended it.
+    fn judgement(&self, index: usize, key: &str) -> (Judgement, bool) {
+        match self.judgements[index].get(key) {
+            Some(&judgement) => (judgement, true),
+            None => (self.automatic_judgement(index, key), false),
         }
+    }
+
+    /// Full points when `key` matches an accepted answer, none otherwise.
+    fn automatic_judgement(&self, index: usize, key: &str) -> Judgement {
+        let matches = match &self.quiz.questions[index].kind {
+            QuestionKind::Text { accepted } => {
+                !key.is_empty() && accepted.iter().any(|a| normalize(a) == key)
+            }
+            _ => false,
+        };
+        Judgement {
+            grade: if matches { Grade::Full } else { Grade::Wrong },
+            bonus: 0,
+        }
+    }
+
+    /// Distance of the closest guess on number question `index`, if anyone guessed.
+    fn closest_distance(&self, index: usize) -> Option<f64> {
+        let QuestionKind::Number {
+            answer: Some(answer),
+        } = self.quiz.questions[index].kind
+        else {
+            return None;
+        };
+        self.teams
+            .iter()
+            .filter_map(|t| match t.submissions[index].as_ref()?.response {
+                Response::Number(value) => Some((value - answer).abs()),
+                _ => None,
+            })
+            .min_by(f64::total_cmp)
+    }
+
+    /// How `team` did on question `index`.
+    fn outcome(&self, index: usize, team: &Team) -> AnswerOutcome {
+        let Some(submission) = &team.submissions[index] else {
+            return AnswerOutcome {
+                points: 0,
+                fully_correct: false,
+            };
+        };
+        let question = &self.quiz.questions[index];
+        let limit = Duration::from_secs(u64::from(question.time_limit_secs(&self.quiz.settings)));
+        match (&question.kind, &submission.response) {
+            (QuestionKind::Choice, Response::Choice(selected)) => {
+                let mode = self.quiz.settings.multi_scoring;
+                let points = scoring::score(question, selected, submission.elapsed, limit, mode);
+                AnswerOutcome {
+                    points: i32::try_from(points).unwrap_or(i32::MAX),
+                    fully_correct: scoring::correctness(question, selected, mode) >= 1.0,
+                }
+            }
+            (QuestionKind::Text { .. }, Response::Text(text)) => {
+                let (judgement, _) = self.judgement(index, &normalize(text));
+                AnswerOutcome {
+                    points: scoring::text_points(judgement, submission.elapsed, limit),
+                    fully_correct: judgement.grade == Grade::Full,
+                }
+            }
+            (
+                QuestionKind::Number {
+                    answer: Some(answer),
+                },
+                Response::Number(value),
+            ) => {
+                let closest = self
+                    .closest_distance(index)
+                    .is_some_and(|c| (value - answer).abs() <= c);
+                AnswerOutcome {
+                    points: if closest { scoring::CLOSEST_POINTS } else { 0 },
+                    fully_correct: closest,
+                }
+            }
+            _ => AnswerOutcome {
+                points: 0,
+                fully_correct: false,
+            },
+        }
+    }
+
+    /// Points from the first `closed` questions; open questions do not count yet.
+    fn team_score(&self, team: &Team, closed: usize) -> i32 {
+        (0..closed).map(|i| self.outcome(i, team).points).sum()
     }
 
     /// How many questions, from the start, have closed and therefore count towards scores.
@@ -548,11 +727,10 @@ impl Game {
             .enumerate()
             .map(|(joined, t)| Tally {
                 team: t.id,
-                score: t.score(closed),
-                scoring_time: t.submissions[..closed]
-                    .iter()
-                    .flatten()
-                    .filter(|s| s.points > 0)
+                score: self.team_score(t, closed),
+                scoring_time: (0..closed)
+                    .filter(|&i| self.outcome(i, t).points > 0)
+                    .filter_map(|i| t.submissions[i].as_ref())
                     .map(|s| s.elapsed)
                     .sum(),
                 joined,
@@ -593,14 +771,55 @@ impl Team {
             connected: self.connections > 0,
         }
     }
+}
 
-    /// Points from the first `closed` questions; open questions do not count yet.
-    fn score(&self, closed: usize) -> u32 {
-        self.submissions[..closed]
-            .iter()
-            .flatten()
-            .map(|s| s.points)
-            .sum()
+/// Checks an answer against the question and tidies it up.
+fn check_response(question: &Question, response: Response) -> Result<Response, Refusal> {
+    match (&question.kind, response) {
+        (QuestionKind::Choice, Response::Choice(mut selected)) => {
+            selected.sort_unstable();
+            selected.dedup();
+            if selected.is_empty() || selected.iter().any(|&i| i >= question.answers.len()) {
+                return Err(Refusal("Please pick an answer."));
+            }
+            if !question.is_multi() && selected.len() > 1 {
+                return Err(Refusal("Only one answer can be picked."));
+            }
+            Ok(Response::Choice(selected))
+        }
+        (QuestionKind::Text { .. }, Response::Text(text)) => {
+            let text = text.trim();
+            if normalize(text).is_empty() {
+                return Err(Refusal("Please type an answer."));
+            }
+            if text.chars().count() > MAX_TEXT_ANSWER_CHARS {
+                return Err(Refusal("That answer is too long."));
+            }
+            Ok(Response::Text(text.to_owned()))
+        }
+        (QuestionKind::Number { .. }, Response::Number(value)) if value.is_finite() => {
+            Ok(Response::Number(value))
+        }
+        (QuestionKind::Number { .. }, Response::Number(_)) => {
+            Err(Refusal("Please enter a number."))
+        }
+        _ => Err(Refusal("That answer does not fit this question.")),
+    }
+}
+
+fn input_kind(question: &Question) -> InputKind {
+    match question.kind {
+        QuestionKind::Choice => InputKind::Choice,
+        QuestionKind::Text { .. } => InputKind::Text,
+        QuestionKind::Number { .. } => InputKind::Number,
+    }
+}
+
+/// Answer texts shown for a question: the options of a multiple-choice question, else none.
+fn question_answers(question: &Question) -> Vec<String> {
+    match question.kind {
+        QuestionKind::Choice => question.answers.iter().map(|a| a.text.clone()).collect(),
+        _ => Vec::new(),
     }
 }
 
@@ -652,6 +871,10 @@ mod tests {
         Duration::from_secs(s)
     }
 
+    fn pick(selected: &[usize]) -> Response {
+        Response::Choice(selected.to_vec())
+    }
+
     #[test]
     fn invalid_quizzes_cannot_start_a_game() {
         let empty = Quiz::new("id".to_owned(), "Empty".to_owned());
@@ -685,13 +908,13 @@ mod tests {
         assert_eq!(g.next_deadline(), Some(t0 + secs(10)));
 
         // Owls answer right instantly, Cats wrong; everyone answered closes the question.
-        g.answer(owls, &[0], t0).unwrap();
-        assert!(g.answer(owls, &[0], t0).is_err());
+        g.answer(owls, pick(&[0]), t0).unwrap();
+        assert!(g.answer(owls, pick(&[0]), t0).is_err());
         assert!(matches!(
             g.host_view(t0).phase,
             HostPhase::Question { answered: 1, .. }
         ));
-        g.answer(cats, &[1], t0 + secs(1)).unwrap();
+        g.answer(cats, pick(&[1]), t0 + secs(1)).unwrap();
         let HostPhase::Closed {
             reveal: Some(reveal),
             standings: Some(standings),
@@ -701,7 +924,13 @@ mod tests {
         else {
             panic!("expected a revealed closed question");
         };
-        assert_eq!(reveal.picks, vec![1, 1]);
+        assert_eq!(
+            reveal,
+            Reveal::Choice {
+                correct: vec![0],
+                picks: vec![1, 1]
+            }
+        );
         assert_eq!(standings[0].team.id, owls);
         assert_eq!(standings[0].score, 1000);
         let cats_view = g.player_view(cats, t0).unwrap();
@@ -778,7 +1007,7 @@ mod tests {
         });
         let owls = join(&mut g, "Owls");
         g.next(t0).unwrap();
-        g.answer(owls, &[0], t0 + secs(5)).unwrap();
+        g.answer(owls, pick(&[0]), t0 + secs(5)).unwrap();
         assert!(matches!(
             g.host_view(t0).phase,
             HostPhase::Closed {
@@ -826,7 +1055,7 @@ mod tests {
         });
         let owls = join(&mut g, "Owls");
         g.next(t0).unwrap();
-        g.answer(owls, &[0], t0).unwrap();
+        g.answer(owls, pick(&[0]), t0).unwrap();
         assert_eq!(g.next_deadline(), Some(t0 + AUTO_AFTER_REVEAL));
         assert_eq!(g.host_view(t0).auto_advance_ms, Some(8000));
         assert!(g.tick(t0 + AUTO_AFTER_REVEAL));
@@ -847,7 +1076,7 @@ mod tests {
         let cats = join(&mut g, "Cats");
         g.set_connected(cats, false);
         g.next(t0).unwrap();
-        g.answer(owls, &[0], t0).unwrap();
+        g.answer(owls, pick(&[0]), t0).unwrap();
         assert!(matches!(g.host_view(t0).phase, HostPhase::Closed { .. }));
     }
 
@@ -856,13 +1085,13 @@ mod tests {
         let t0 = Instant::now();
         let mut g = game(QuizSettings::default());
         let owls = join(&mut g, "Owls");
-        assert!(g.answer(owls, &[0], t0).is_err());
+        assert!(g.answer(owls, pick(&[0]), t0).is_err());
         g.next(t0).unwrap();
-        assert!(g.answer(owls, &[], t0).is_err());
-        assert!(g.answer(owls, &[7], t0).is_err());
-        assert!(g.answer(owls, &[0, 1], t0).is_err());
-        assert!(g.answer(owls, &[0], t0 + secs(10)).is_err());
-        assert!(g.answer(99, &[0], t0).is_err());
+        assert!(g.answer(owls, pick(&[]), t0).is_err());
+        assert!(g.answer(owls, pick(&[7]), t0).is_err());
+        assert!(g.answer(owls, pick(&[0, 1]), t0).is_err());
+        assert!(g.answer(owls, pick(&[0]), t0 + secs(10)).is_err());
+        assert!(g.answer(99, pick(&[0]), t0).is_err());
     }
 
     #[test]
@@ -872,7 +1101,7 @@ mod tests {
         let owls = join(&mut g, "Owls");
         join(&mut g, "Cats");
         g.next(t0).unwrap();
-        g.answer(owls, &[0], t0).unwrap();
+        g.answer(owls, pick(&[0]), t0).unwrap();
         assert_eq!(g.player_view(owls, t0).unwrap().score, Some(0));
         g.next(t0).unwrap();
         assert_eq!(g.player_view(owls, t0).unwrap().score, Some(1000));
@@ -889,7 +1118,7 @@ mod tests {
         let mut g = Game::new("123456".to_owned(), settings).unwrap();
         let owls = join(&mut g, "Owls");
         g.next(t0).unwrap();
-        g.answer(owls, &[0], t0).unwrap();
+        g.answer(owls, pick(&[0]), t0).unwrap();
         assert!(g.tick(t0 + AUTO_AFTER_REVEAL));
 
         // Question two waits, even with auto-advance, and takes no answers yet.
@@ -899,7 +1128,7 @@ mod tests {
         assert_eq!(question.audio.as_deref(), Some("song.mp3"));
         assert_eq!(g.next_deadline(), None);
         assert_eq!(g.host_view(t0).auto_advance_ms, None);
-        assert!(g.answer(owls, &[0], t0 + secs(20)).is_err());
+        assert!(g.answer(owls, pick(&[0]), t0 + secs(20)).is_err());
         assert_eq!(
             g.player_view(owls, t0).unwrap().phase,
             PlayerPhase::Ready { index: 1, total: 2 }
@@ -909,8 +1138,190 @@ mod tests {
         let t1 = t0 + secs(30);
         g.next(t1).unwrap();
         assert_eq!(g.next_deadline(), Some(t1 + secs(10)));
-        g.answer(owls, &[0], t1).unwrap();
+        g.answer(owls, pick(&[0]), t1).unwrap();
         assert_eq!(g.player_view(owls, t1).unwrap().score, Some(2000));
+    }
+
+    fn open_game(kind: QuestionKind, settings: QuizSettings) -> Game {
+        let mut quiz = quiz(settings);
+        quiz.questions.truncate(1);
+        quiz.questions[0].kind = kind;
+        Game::new("123456".to_owned(), quiz).unwrap()
+    }
+
+    fn text(answer: &str) -> Response {
+        Response::Text(answer.to_owned())
+    }
+
+    fn text_groups(g: &Game) -> Vec<(String, Vec<String>, Judgement, bool)> {
+        let (HostPhase::Closed {
+            reveal: Some(Reveal::Text { groups, .. }),
+            ..
+        }
+        | HostPhase::Review {
+            reveal: Reveal::Text { groups, .. },
+            ..
+        }) = g.host_view(Instant::now()).phase
+        else {
+            panic!("expected typed answers on screen");
+        };
+        groups
+            .into_iter()
+            .map(|g| (g.text, g.teams, g.judgement, g.amended))
+            .collect()
+    }
+
+    #[test]
+    fn typed_answers_match_strictly_and_the_judge_amends() {
+        let t0 = Instant::now();
+        let kind = QuestionKind::Text {
+            accepted: vec!["Leonardo da Vinci".to_owned(), "Leonardo".to_owned()],
+        };
+        let mut g = open_game(kind, QuizSettings::default());
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        let bats = join(&mut g, "Bats");
+        let pigs = join(&mut g, "Pigs");
+        g.next(t0).unwrap();
+        assert!(g.answer(owls, pick(&[0]), t0).is_err());
+        assert!(g.answer(owls, text(" ?! "), t0).is_err());
+        assert!(g.answer(owls, text(&"x".repeat(61)), t0).is_err());
+        g.answer(owls, text("  léonardo DA vinci! "), t0).unwrap();
+        g.answer(cats, text("Leonardo da Vinchi"), t0).unwrap();
+        g.answer(bats, text("leonardo da vinchi"), t0).unwrap();
+        g.answer(pigs, text("Raphael"), t0).unwrap();
+
+        let full = Judgement {
+            grade: Grade::Full,
+            bonus: 0,
+        };
+        let wrong = Judgement {
+            grade: Grade::Wrong,
+            bonus: 0,
+        };
+        let groups = text_groups(&g);
+        assert_eq!(
+            groups,
+            vec![
+                (
+                    "Leonardo da Vinchi".to_owned(),
+                    vec!["Cats".to_owned(), "Bats".to_owned()],
+                    wrong,
+                    false
+                ),
+                (
+                    "léonardo DA vinci!".to_owned(),
+                    vec!["Owls".to_owned()],
+                    full,
+                    false
+                ),
+                ("Raphael".to_owned(), vec!["Pigs".to_owned()], wrong, false),
+            ]
+        );
+        assert_eq!(g.player_view(owls, t0).unwrap().score, Some(1000));
+        assert_eq!(g.player_view(cats, t0).unwrap().score, Some(0));
+
+        // Half points plus a bonus for the typo, a malus for Raphael.
+        let half_bonus = Judgement {
+            grade: Grade::Half,
+            bonus: 100,
+        };
+        g.judge(0, "leonardo da vinchi", half_bonus, t0).unwrap();
+        g.judge(
+            0,
+            "raphael",
+            Judgement {
+                grade: Grade::Wrong,
+                bonus: -200,
+            },
+            t0,
+        )
+        .unwrap();
+        assert_eq!(g.player_view(cats, t0).unwrap().score, Some(600));
+        assert_eq!(g.player_view(bats, t0).unwrap().score, Some(600));
+        assert_eq!(g.player_view(pigs, t0).unwrap().score, Some(-200));
+        assert_eq!(text_groups(&g)[0].2, half_bonus);
+        assert!(text_groups(&g)[0].3);
+
+        // Setting the automatic verdict again clears the amendment.
+        g.judge(0, "leonardo da vinchi", wrong, t0).unwrap();
+        assert!(!text_groups(&g)[0].3);
+        // Bonuses are capped; other questions cannot be judged.
+        g.judge(
+            0,
+            "raphael",
+            Judgement {
+                grade: Grade::Wrong,
+                bonus: -9000,
+            },
+            t0,
+        )
+        .unwrap();
+        assert_eq!(g.player_view(pigs, t0).unwrap().score, Some(-1000));
+        assert!(g.judge(1, "raphael", wrong, t0).is_err());
+    }
+
+    #[test]
+    fn judging_waits_for_the_review_when_answers_are_hidden() {
+        let t0 = Instant::now();
+        let kind = QuestionKind::Text {
+            accepted: vec!["yes".to_owned()],
+        };
+        let mut g = open_game(
+            kind,
+            QuizSettings {
+                reveal: RevealMode::AtEnd,
+                ..QuizSettings::default()
+            },
+        );
+        let owls = join(&mut g, "Owls");
+        g.next(t0).unwrap();
+        g.answer(owls, text("no"), t0).unwrap();
+        let full = Judgement {
+            grade: Grade::Full,
+            bonus: 0,
+        };
+        assert!(g.judge(0, "no", full, t0).is_err());
+        g.next(t0).unwrap(); // review
+        g.judge(0, "no", full, t0).unwrap();
+        assert_eq!(text_groups(&g)[0].2, full);
+    }
+
+    #[test]
+    fn the_closest_number_wins_and_ties_share() {
+        let t0 = Instant::now();
+        let kind = QuestionKind::Number {
+            answer: Some(330.0),
+        };
+        let mut g = open_game(kind, QuizSettings::default());
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        let bats = join(&mut g, "Bats");
+        g.next(t0).unwrap();
+        assert!(g.answer(owls, text("330"), t0).is_err());
+        assert!(g.answer(owls, Response::Number(f64::NAN), t0).is_err());
+        g.answer(owls, Response::Number(300.0), t0).unwrap();
+        g.answer(cats, Response::Number(360.0), t0 + secs(9))
+            .unwrap();
+        g.answer(bats, Response::Number(1000.0), t0).unwrap();
+        let HostPhase::Closed {
+            reveal: Some(Reveal::Number { answer, guesses }),
+            ..
+        } = g.host_view(t0).phase
+        else {
+            panic!("expected guesses on screen");
+        };
+        assert!((answer - 330.0).abs() < f64::EPSILON);
+        let summary: Vec<(&str, bool)> = guesses
+            .iter()
+            .map(|g| (g.team.as_str(), g.closest))
+            .collect();
+        assert_eq!(
+            summary,
+            vec![("Owls", true), ("Cats", true), ("Bats", false)]
+        );
+        assert_eq!(g.player_view(cats, t0).unwrap().score, Some(1000));
+        assert_eq!(g.player_view(bats, t0).unwrap().score, Some(0));
     }
 
     #[test]

@@ -6,12 +6,16 @@ use super::{
     Route,
     admin::{AdminGate, AdminToken},
     client,
-    live::{ConnectionBanner, remaining_ms, use_clock, use_live},
+    live::{ConnectionBanner, Live, remaining_ms, use_clock, use_live},
     widgets::{ANSWER_SHAPES, Brand, ClientOnly, Icon, IconKind, Spinner, TeamAvatar, media_url},
 };
 use crate::{
     api::{host_socket, join_origin},
-    protocol::{HostCommand, HostPhase, HostView, QuestionInfo, Reveal, StandingRow, TeamInfo},
+    protocol::{
+        Grade, Guess, HostCommand, HostPhase, HostView, InputKind, Judgement, QuestionInfo, Reveal,
+        StandingRow, TeamInfo, TextGroup,
+    },
+    scoring::MAX_BONUS,
 };
 
 /// How many teams the between-questions leaderboard shows.
@@ -33,6 +37,7 @@ fn HostScreen(code: String) -> Element {
     let token: AdminToken = use_context();
     let code = use_signal(|| code);
     let live = use_live(move || host_socket(code(), token.get(), WebSocketOptions::new()));
+    use_context_provider(|| live);
     let now = use_clock(200);
 
     let next = move || async move {
@@ -330,7 +335,7 @@ fn QuestionSlide(question: QuestionInfo, left_ms: f64, answered: usize, teams: u
                 span { class: "muted", "answered" }
             }
         }
-        AnswerGrid { answers: question.answers.clone(), reveal: None }
+        AnswersOrPrompt { question: question.clone() }
     }
 }
 
@@ -352,7 +357,7 @@ fn ReadySlide(question: QuestionInfo, teams: usize) -> Element {
                 span { class: "muted", "The clock starts with the music" }
             }
         }
-        AnswerGrid { answers: question.answers.clone(), reveal: None }
+        AnswersOrPrompt { question: question.clone() }
     }
 }
 
@@ -379,16 +384,16 @@ fn Timer(fraction: f64, seconds: f64) -> Element {
 }
 
 #[component]
-fn AnswerGrid(answers: Vec<String>, reveal: Option<Reveal>) -> Element {
+fn AnswerGrid(answers: Vec<String>, reveal: Option<(Vec<usize>, Vec<u32>)>) -> Element {
     rsx! {
         div { class: "answer-grid",
             for (i, text) in answers.iter().enumerate() {
                 {
                     let mut class = format!("answer-tile a{}", i % ANSWER_SHAPES.len());
-                    if let Some(reveal) = &reveal {
-                        class.push_str(if reveal.correct.contains(&i) { " right" } else { " dim" });
+                    if let Some((correct, _)) = &reveal {
+                        class.push_str(if correct.contains(&i) { " right" } else { " dim" });
                     }
-                    let picks = reveal.as_ref().and_then(|r| r.picks.get(i).copied());
+                    let picks = reveal.as_ref().and_then(|(_, picks)| picks.get(i).copied());
                     rsx! {
                         div { key: "{i}", class,
                             span { class: "shape", "{ANSWER_SHAPES[i % ANSWER_SHAPES.len()]}" }
@@ -401,6 +406,159 @@ fn AnswerGrid(answers: Vec<String>, reveal: Option<Reveal>) -> Element {
                 }
             }
         }
+    }
+}
+
+/// The answer buttons of a multiple-choice question, or what to do for other kinds.
+#[component]
+fn AnswersOrPrompt(question: QuestionInfo) -> Element {
+    let prompt = match question.input {
+        InputKind::Choice => {
+            return rsx! {
+                AnswerGrid { answers: question.answers.clone(), reveal: None }
+            };
+        }
+        InputKind::Text => "✍️ Type your answer on your phone",
+        InputKind::Number => "🔢 Enter a number on your phone: closest wins",
+    };
+    rsx! {
+        p { class: "open-prompt", "{prompt}" }
+    }
+}
+
+/// The right answer and what teams answered, per question kind.
+#[component]
+fn RevealBody(question: QuestionInfo, reveal: Reveal) -> Element {
+    match reveal {
+        Reveal::Choice { correct, picks } => rsx! {
+            AnswerGrid { answers: question.answers.clone(), reveal: Some((correct, picks)) }
+        },
+        Reveal::Text { accepted, groups } => rsx! {
+            TextReveal { question: question.index, accepted, groups }
+        },
+        Reveal::Number { answer, guesses } => rsx! {
+            NumberReveal { answer, guesses }
+        },
+    }
+}
+
+/// Typed answers grouped by normalised text, with the judge's controls.
+#[component]
+fn TextReveal(question: usize, accepted: Vec<String>, groups: Vec<TextGroup>) -> Element {
+    let live: Live<HostCommand, HostView> = use_context();
+    let judge = move |key: String, judgement: Judgement| async move {
+        let _ = live
+            .socket
+            .send(HostCommand::Judge {
+                question,
+                key,
+                judgement,
+            })
+            .await;
+    };
+    rsx! {
+        div { class: "open-reveal",
+            p { class: "accepted",
+                span { class: "muted", "Answer: " }
+                strong { {accepted.join(" · ")} }
+            }
+            if groups.is_empty() {
+                p { class: "muted", "Nobody answered." }
+            }
+            ul { class: "text-groups",
+                for group in groups {
+                    {
+                        let j = group.judgement;
+                        let class = match j.grade {
+                            Grade::Full => "text-group full",
+                            Grade::Half => "text-group half",
+                            Grade::Wrong => "text-group wrong",
+                        };
+                        let bonus = match j.bonus {
+                            0 => String::new(),
+                            b if b > 0 => format!("+{b}"),
+                            b => b.to_string(),
+                        };
+                        let grade_button = |grade: Grade, label: &'static str, title: &'static str| {
+                            let key = group.key.clone();
+                            rsx! {
+                                button {
+                                    class: if j.grade == grade { "judge-button selected" } else { "judge-button" },
+                                    title,
+                                    onclick: move |_| judge(key.clone(), Judgement { grade, ..j }),
+                                    "{label}"
+                                }
+                            }
+                        };
+                        let bonus_button = |delta: i32, label: &'static str, title: &'static str| {
+                            let key = group.key.clone();
+                            let bonus = j.bonus + delta;
+                            rsx! {
+                                button {
+                                    class: "judge-button",
+                                    title,
+                                    disabled: bonus.abs() > MAX_BONUS,
+                                    onclick: move |_| judge(key.clone(), Judgement { bonus, ..j }),
+                                    "{label}"
+                                }
+                            }
+                        };
+                        rsx! {
+                            li { key: "{group.key}", class,
+                                div { class: "group-text",
+                                    span { class: "strong", "{group.text}" }
+                                    span { class: "muted small", {group.teams.join(", ")} }
+                                }
+                                div { class: "judge",
+                                    {grade_button(Grade::Full, "✓", "Full points")}
+                                    {grade_button(Grade::Half, "½", "Half points")}
+                                    {grade_button(Grade::Wrong, "✗", "No points")}
+                                    {bonus_button(-BONUS_STEP, "−", "Malus")}
+                                    span { class: "bonus", "{bonus}" }
+                                    {bonus_button(BONUS_STEP, "+", "Bonus")}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/// Points added or removed per click on the bonus buttons.
+const BONUS_STEP: i32 = 100;
+
+/// The right number and the guesses, closest first.
+#[component]
+fn NumberReveal(answer: f64, guesses: Vec<Guess>) -> Element {
+    rsx! {
+        div { class: "open-reveal",
+            p { class: "number-answer", {format_number(answer)} }
+            if guesses.is_empty() {
+                p { class: "muted", "Nobody answered." }
+            }
+            ol { class: "guesses",
+                for (i, guess) in guesses.into_iter().enumerate() {
+                    li { key: "{i}", class: if guess.closest { "guess closest" } else { "guess" },
+                        span { class: "strong", "{guess.team}" }
+                        span { {format_number(guess.value)} }
+                        span { class: "muted small", "off by {format_number((guess.value - answer).abs())}" }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/// A number without float noise: at most three decimals, no trailing zeros.
+fn format_number(value: f64) -> String {
+    let text = format!("{value:.3}");
+    let text = text.trim_end_matches('0').trim_end_matches('.');
+    if text == "-0" {
+        "0".to_owned()
+    } else {
+        text.to_owned()
     }
 }
 
@@ -418,7 +576,7 @@ fn ClosedSlide(
                 span { class: "muted", "{answered}/{teams} answered" }
             }
             div { class: "closed-layout",
-                AnswerGrid { answers: question.answers.clone(), reveal: Some(reveal) }
+                RevealBody { question: question.clone(), reveal }
                 Standings { rows: standings.into_iter().take(STANDINGS_SHOWN).collect::<Vec<_>>() }
             }
         },
@@ -444,7 +602,7 @@ fn ReviewSlide(question: QuestionInfo, reveal: Reveal) -> Element {
                 img { class: "question-image", src: media_url(image), alt: "" }
             }
         }
-        AnswerGrid { answers: question.answers.clone(), reveal: Some(reveal) }
+        RevealBody { question: question.clone(), reveal }
     }
 }
 

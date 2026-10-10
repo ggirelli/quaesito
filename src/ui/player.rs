@@ -9,8 +9,11 @@ use super::{
 };
 use crate::{
     api::{check_ticket, game_info, join_game, player_socket, upload_avatar},
-    model::PhoneDisplay,
-    protocol::{AnswerOutcome, MAX_NAME_CHARS, PlayerCommand, PlayerPhase, PlayerView, TeamInfo},
+    model::{MAX_TEXT_ANSWER_CHARS, PhoneDisplay},
+    protocol::{
+        AnswerOutcome, InputKind, MAX_NAME_CHARS, PlayerCommand, PlayerPhase, PlayerView, Response,
+        TeamInfo,
+    },
 };
 
 fn ticket_key(code: &str) -> String {
@@ -222,6 +225,27 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
         PlayerPhase::Question {
             index,
             total,
+            input: input @ (InputKind::Text | InputKind::Number),
+            text,
+            remaining_ms: left,
+            submitted,
+            ..
+        } => rsx! {
+            OpenPad {
+                key: "{index}",
+                index,
+                total,
+                number: input == InputKind::Number,
+                question: text.map(|(question, _)| question),
+                left_ms: left,
+                received_at: live_received,
+                submitted,
+            }
+        },
+        PlayerPhase::Question {
+            index,
+            total,
+            input: InputKind::Choice,
             answer_count,
             text,
             multi,
@@ -237,7 +261,10 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
                 multi,
                 left_ms: left,
                 received_at: live_received,
-                submitted,
+                submitted: match submitted {
+                    Some(Response::Choice(selected)) => Some(selected),
+                    _ => None,
+                },
                 display: view.display,
             }
         },
@@ -378,7 +405,10 @@ fn AnswerPad(
     let chosen = submitted.clone().unwrap_or_else(|| selected.cloned());
 
     let send = move |answer: Vec<usize>| async move {
-        let _ = live_socket.socket.send(PlayerCommand::Answer(answer)).await;
+        let _ = live_socket
+            .socket
+            .send(PlayerCommand::Answer(Response::Choice(answer)))
+            .await;
     };
     let (question, labels) = match text {
         Some((question, labels)) => (Some(question), Some(labels)),
@@ -458,12 +488,125 @@ fn AnswerPad(
     }
 }
 
+/// A typed or numeric answer: a field and a submit button.
+#[component]
+fn OpenPad(
+    index: usize,
+    total: usize,
+    number: bool,
+    question: Option<String>,
+    left_ms: u64,
+    received_at: f64,
+    submitted: Option<Response>,
+) -> Element {
+    let live_socket: Live<PlayerCommand, PlayerView> = use_context();
+    let mut draft = use_signal(String::new);
+    let mut error = use_signal(|| None::<String>);
+    let now = use_clock(200);
+    let left = remaining_ms(left_ms, received_at, now());
+    #[allow(clippy::cast_precision_loss, reason = "time limits are small")]
+    let started_with = left_ms.max(1) as f64;
+    let width = (left / started_with * 100.0).clamp(0.0, 100.0);
+    let locked = submitted.is_some() || left <= 0.0;
+
+    let submit = move |evt: FormEvent| async move {
+        evt.prevent_default();
+        let text = draft().trim().to_owned();
+        let response = if number {
+            // Phones with a comma as decimal separator may still send one.
+            match text.replace(',', ".").parse::<f64>() {
+                Ok(value) if value.is_finite() => Response::Number(value),
+                _ => {
+                    error.set(Some("Please enter a number.".to_owned()));
+                    return;
+                }
+            }
+        } else if text.is_empty() {
+            error.set(Some("Please type an answer.".to_owned()));
+            return;
+        } else {
+            Response::Text(text)
+        };
+        error.set(None);
+        let _ = live_socket
+            .socket
+            .send(PlayerCommand::Answer(response))
+            .await;
+    };
+
+    rsx! {
+        main { class: "player-main top",
+            div { class: "phone-timer",
+                div { style: "width: {width}%" }
+            }
+            div { class: "row between",
+                span { class: "muted", "Question {index + 1} of {total}" }
+                span { class: "muted", "{(left / 1000.0).ceil()}s" }
+            }
+            if let Some(question) = question {
+                p { class: "phone-question", "{question}" }
+            }
+            match (&submitted, locked) {
+                (Some(answer), _) => rsx! {
+                    p { class: "strong", "🔒 Answer locked in" }
+                    p { class: "locked-answer",
+                        match answer {
+                            Response::Text(text) => text.clone(),
+                            Response::Number(value) => value.to_string(),
+                            Response::Choice(_) => String::new(),
+                        }
+                    }
+                },
+                (None, true) => rsx! {
+                    p { class: "strong", "⌛ Time's up" }
+                },
+                (None, false) => rsx! {
+                    form { class: "stack open-form", onsubmit: submit,
+                        if number {
+                            input {
+                                r#type: "text",
+                                inputmode: "decimal",
+                                autocomplete: "off",
+                                placeholder: "Your guess",
+                                aria_label: "Your guess",
+                                value: draft,
+                                oninput: move |e| draft.set(e.value()),
+                            }
+                        } else {
+                            input {
+                                r#type: "text",
+                                autocomplete: "off",
+                                autocapitalize: "off",
+                                spellcheck: false,
+                                maxlength: MAX_TEXT_ANSWER_CHARS,
+                                placeholder: "Your answer",
+                                aria_label: "Your answer",
+                                value: draft,
+                                oninput: move |e| draft.set(e.value()),
+                            }
+                        }
+                        ErrorBox { error: error() }
+                        button {
+                            r#type: "submit",
+                            class: "button primary big",
+                            disabled: draft().trim().is_empty(),
+                            "Submit"
+                        }
+                    }
+                },
+            }
+        }
+    }
+}
+
 #[component]
 fn OutcomeView(index: usize, total: usize, outcome: AnswerOutcome, answered: bool) -> Element {
     let (class, icon, title) = if outcome.fully_correct {
         ("result good", "🎉", "Correct!")
     } else if outcome.points > 0 {
         ("result good", "👍", "Partly right")
+    } else if outcome.points < 0 {
+        ("result bad", "😬", "Malus!")
     } else if answered {
         ("result bad", "😬", "Not this time")
     } else {
@@ -475,7 +618,9 @@ fn OutcomeView(index: usize, total: usize, outcome: AnswerOutcome, answered: boo
             div { class,
                 div { class: "big-icon", "{icon}" }
                 h1 { class: "status-title", "{title}" }
-                div { class: "points", "+{outcome.points}" }
+                div { class: "points",
+                    if outcome.points < 0 { "{outcome.points}" } else { "+{outcome.points}" }
+                }
             }
         }
     }

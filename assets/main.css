@@ -885,6 +885,140 @@ input.short {
   margin: auto;
 }
 
+/* Typed and number questions on the big screen. */
+
+.open-prompt {
+  margin: auto 0 0;
+  padding: 1.2em;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+  font-size: 1.6em;
+  color: var(--muted);
+}
+
+.open-reveal {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2vh;
+  min-width: 0;
+}
+
+.open-reveal .accepted {
+  margin: 0;
+  font-size: 1.4em;
+}
+
+.open-reveal .accepted strong {
+  color: var(--ok);
+}
+
+.text-groups,
+.guesses {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8vh;
+}
+
+.text-group,
+.guess {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6em 0.9em;
+  border-radius: 12px;
+  background: var(--surface);
+  border-left: 6px solid var(--border);
+  font-size: 1.15em;
+}
+
+.text-group.full,
+.guess.closest {
+  border-left-color: var(--ok);
+}
+
+.text-group.half {
+  border-left-color: var(--accent);
+}
+
+.text-group.wrong {
+  border-left-color: var(--danger);
+}
+
+.group-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-wrap: anywhere;
+}
+
+.judge {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.judge-button {
+  min-width: 2.2em;
+  height: 2.2em;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--muted);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.judge-button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.judge-button.selected {
+  color: var(--accent-ink);
+  background: var(--fg);
+}
+
+.text-group.full .judge-button.selected {
+  background: var(--ok);
+}
+
+.text-group.half .judge-button.selected {
+  background: var(--accent);
+}
+
+.text-group.wrong .judge-button.selected {
+  background: var(--danger);
+}
+
+.bonus {
+  min-width: 3.2em;
+  text-align: center;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.number-answer {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 3.2em;
+  font-weight: 700;
+  color: var(--ok);
+}
+
+.guess .strong {
+  flex: 1;
+}
+
+.guess.closest::after {
+  content: "🏆";
+}
+
 .podium {
   flex: 1;
   display: flex;
@@ -1101,6 +1235,22 @@ input.short {
   font-family: var(--serif);
   font-size: 1.8rem;
   margin: 0;
+}
+
+.open-form input {
+  font-size: 1.4rem;
+  padding: 0.8rem 1rem;
+  text-align: center;
+}
+
+.locked-answer {
+  margin: 0;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  background: var(--surface);
+  font-size: 1.4rem;
+  text-align: center;
+  overflow-wrap: anywhere;
 }
 
 .phone-question {

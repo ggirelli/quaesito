@@ -3,6 +3,7 @@
 pub mod auth;
 pub mod engine;
 pub mod live;
+pub mod matching;
 pub mod media;
 pub mod net;
 pub mod sessions;

@@ -22,6 +22,9 @@ pub async fn host(mut socket: TypedWebsocket<HostCommand, HostView>, session: Ar
                     // A refused "next" (e.g. no teams yet) leaves the view unchanged.
                     let _ = session.update(Game::next);
                 }
+                Ok(HostCommand::Judge { question, key, judgement }) => {
+                    let _ = session.update(|g, now| g.judge(question, &key, judgement, now));
+                }
                 Err(_) => return,
             },
         }
@@ -43,9 +46,9 @@ pub async fn player(
         tokio::select! {
             changed = updates.changed() => if changed.is_err() { break },
             command = socket.recv() => match command {
-                Ok(PlayerCommand::Answer(selected)) => {
+                Ok(PlayerCommand::Answer(response)) => {
                     // Refusals (late or duplicate answers) are reflected by the next view.
-                    let _ = session.update(|g, now| g.answer(team, &selected, now));
+                    let _ = session.update(|g, now| g.answer(team, response, now));
                 }
                 Err(_) => break,
             },

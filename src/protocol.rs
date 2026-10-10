@@ -20,6 +20,41 @@ pub struct TeamInfo {
     pub connected: bool,
 }
 
+/// How a question is answered, as screens need to know it.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+pub enum InputKind {
+    /// Coloured answer buttons.
+    Choice,
+    /// A short typed answer.
+    Text,
+    /// A number; the closest guess wins.
+    Number,
+}
+
+/// A team's answer to a question.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub enum Response {
+    /// Indexes of the picked answers.
+    Choice(Vec<usize>),
+    Text(String),
+    Number(f64),
+}
+
+/// The judge's verdict on a typed answer.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+pub enum Grade {
+    Full,
+    Half,
+    Wrong,
+}
+
+/// How a group of identical typed answers is scored: a grade plus a bonus (or malus) in points.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+pub struct Judgement {
+    pub grade: Grade,
+    pub bonus: i32,
+}
+
 /// A question as shown on the big screen.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct QuestionInfo {
@@ -29,17 +64,52 @@ pub struct QuestionInfo {
     pub image: Option<String>,
     /// Media name of the soundtrack, if any.
     pub audio: Option<String>,
+    pub input: InputKind,
+    /// Answer texts of a multiple-choice question (empty for other kinds).
     pub answers: Vec<String>,
     /// More than one answer is correct.
     pub multi: bool,
     pub time_limit_ms: u64,
 }
 
-/// Correct answers and how many teams picked each answer.
+/// The right answer to a question and what the teams answered.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub enum Reveal {
+    /// Correct answers and how many teams picked each answer.
+    Choice {
+        correct: Vec<usize>,
+        picks: Vec<u32>,
+    },
+    /// Accepted answers and the typed answers, grouped by normalised text.
+    Text {
+        accepted: Vec<String>,
+        groups: Vec<TextGroup>,
+    },
+    /// The right number and every guess, closest first.
+    Number { answer: f64, guesses: Vec<Guess> },
+}
+
+/// Typed answers that are the same once normalised.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-pub struct Reveal {
-    pub correct: Vec<usize>,
-    pub picks: Vec<u32>,
+pub struct TextGroup {
+    /// Normalised text, used to judge the group.
+    pub key: String,
+    /// The answer as the first team typed it.
+    pub text: String,
+    /// Names of the teams that gave this answer.
+    pub teams: Vec<String>,
+    pub judgement: Judgement,
+    /// Whether the judge changed the automatic verdict.
+    pub amended: bool,
+}
+
+/// One team's guess on a number question.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Guess {
+    pub team: String,
+    pub value: f64,
+    /// Whether this is (one of) the closest guesses.
+    pub closest: bool,
 }
 
 /// One line of the leaderboard.
@@ -48,11 +118,11 @@ pub struct StandingRow {
     /// 1-based position.
     pub rank: usize,
     pub team: TeamInfo,
-    pub score: u32,
+    pub score: i32,
 }
 
 /// Everything the host screen shows.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct HostView {
     pub title: String,
     pub code: String,
@@ -63,7 +133,7 @@ pub struct HostView {
 }
 
 /// The stage of the quiz, as seen by the host.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum HostPhase {
     /// Waiting for teams to join.
     Lobby,
@@ -97,33 +167,41 @@ pub enum HostPhase {
 }
 
 /// Commands the host screen can send.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub enum HostCommand {
     /// Move to the next step: start, play a soundtrack, close the question early, next
     /// question, next podium spot.
     Next,
+    /// Amend the verdict on a group of typed answers (identified by its normalised `key`)
+    /// while that question's answers are shown.
+    Judge {
+        question: usize,
+        key: String,
+        judgement: Judgement,
+    },
 }
 
 /// How a team did on one question.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub struct AnswerOutcome {
-    pub points: u32,
+    /// Negative when the judge gave a malus.
+    pub points: i32,
     pub fully_correct: bool,
 }
 
 /// Everything a team leader's phone shows.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PlayerView {
     pub title: String,
     pub team: TeamInfo,
     pub display: PhoneDisplay,
     /// Total score, when the quiz settings allow showing it.
-    pub score: Option<u32>,
+    pub score: Option<i32>,
     pub phase: PlayerPhase,
 }
 
 /// The stage of the quiz, as seen by a team.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum PlayerPhase {
     Lobby {
         teams: usize,
@@ -136,24 +214,26 @@ pub enum PlayerPhase {
     Question {
         index: usize,
         total: usize,
+        input: InputKind,
+        /// Number of answer buttons (multiple choice only).
         answer_count: usize,
         /// Question and answer texts, when the phone display shows full text.
         text: Option<(String, Vec<String>)>,
         multi: bool,
         remaining_ms: u64,
-        submitted: Option<Vec<usize>>,
+        submitted: Option<Response>,
     },
     Closed {
         index: usize,
         total: usize,
-        submitted: Option<Vec<usize>>,
+        submitted: Option<Response>,
         /// Present when revealing after each question.
         result: Option<(AnswerOutcome, Vec<usize>)>,
     },
     Review {
         index: usize,
         total: usize,
-        submitted: Option<Vec<usize>>,
+        submitted: Option<Response>,
         outcome: AnswerOutcome,
         correct: Vec<usize>,
     },
@@ -166,10 +246,10 @@ pub enum PlayerPhase {
 }
 
 /// Commands a team leader's phone can send.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum PlayerCommand {
-    /// Submit the selected answer indexes for the open question.
-    Answer(Vec<usize>),
+    /// Submit an answer to the open question.
+    Answer(Response),
 }
 
 /// Credentials a team gets when joining; kept on the phone to reconnect.

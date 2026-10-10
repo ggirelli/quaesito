@@ -2,10 +2,17 @@
 
 use std::time::Duration;
 
-use crate::model::{MultiScoring, Question};
+use crate::{
+    model::{MultiScoring, Question},
+    protocol::{Grade, Judgement},
+};
 
 /// Points for an instant, fully correct answer. Answering at the buzzer earns half.
 pub const MAX_POINTS: u32 = 1000;
+/// Largest bonus or malus the judge can give a typed answer.
+pub const MAX_BONUS: i32 = 1000;
+/// Points for the closest guess on a number question, however long it took.
+pub const CLOSEST_POINTS: i32 = 1000;
 
 /// Speed component: [`MAX_POINTS`] when instant, half of it at the time limit.
 #[must_use]
@@ -61,6 +68,19 @@ pub fn score(
     to_points(f64::from(speed_points(elapsed, limit)) * fraction)
 }
 
+/// Points for a typed answer: speed points scaled by the judge's grade, plus the bonus (or
+/// minus the malus).
+#[must_use]
+pub fn text_points(judgement: Judgement, elapsed: Duration, limit: Duration) -> i32 {
+    let fraction = match judgement.grade {
+        Grade::Full => 1.0,
+        Grade::Half => 0.5,
+        Grade::Wrong => 0.0,
+    };
+    let base = to_points(f64::from(speed_points(elapsed, limit)) * fraction);
+    i32::try_from(base).unwrap_or(i32::MAX) + judgement.bonus.clamp(-MAX_BONUS, MAX_BONUS)
+}
+
 #[allow(
     clippy::cast_possible_truncation,
     clippy::cast_sign_loss,
@@ -74,7 +94,7 @@ fn to_points(value: f64) -> u32 {
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Tally {
     pub team: u32,
-    pub score: u32,
+    pub score: i32,
     /// Total time spent on answers that earned points; lower wins ties.
     pub scoring_time: Duration,
     /// Join order; earlier wins exact ties.
@@ -157,6 +177,18 @@ mod tests {
             ),
             375
         );
+    }
+
+    #[test]
+    fn typed_answers_follow_the_judgement() {
+        let j = |grade, bonus| Judgement { grade, bonus };
+        let half_time = Duration::from_secs(10);
+        assert_eq!(text_points(j(Grade::Full, 0), half_time, LIMIT), 750);
+        assert_eq!(text_points(j(Grade::Half, 0), half_time, LIMIT), 375);
+        assert_eq!(text_points(j(Grade::Wrong, 0), half_time, LIMIT), 0);
+        assert_eq!(text_points(j(Grade::Half, 200), half_time, LIMIT), 575);
+        assert_eq!(text_points(j(Grade::Wrong, -300), half_time, LIMIT), -300);
+        assert_eq!(text_points(j(Grade::Wrong, -5000), half_time, LIMIT), -1000);
     }
 
     #[test]
