@@ -67,7 +67,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 58  | Getting started: easier to follow, per platform                                                                                    | 📋 todo |
 | 59  | Closest number: optional range, with a slider next to the typed number on phones                                                   | 📋 todo |
 | 60  | Stopping the clock by hand stops the soundtrack                                                                                    | ✅ done |
-| 61  | Reveals say so when no team answered                                                                                               | 📋 todo |
+| 61  | Reveals say so when no team answered                                                                                               | ✅ done |
 | 62  | Admin quiz list: create button by Import (title in a pop-up), search box, sort by name, created, edited or questions               | 📋 todo |
 
 ## Notes

@@ -200,9 +200,11 @@ fn HostScreen(code: String) -> Element {
                             Standings { rows: standings.iter().take(RESULTS_SHOWN).cloned().collect::<Vec<_>>() }
                         }
                     },
-                    HostPhase::Review { question, reveal, fastest, bonus, .. } => rsx! {
+                    HostPhase::Review { question, answered, reveal, fastest, bonus, .. } => rsx! {
                         ReviewSlide {
                             question: question.clone(),
+                            answered: *answered,
+                            teams: view.teams.len(),
                             reveal: reveal.clone(),
                             fastest: fastest.clone(),
                             bonus: bonus.clone(),
@@ -1266,6 +1268,9 @@ fn ClosedSlide(
             QuestionHeader { question: question.clone(),
                 span { class: "muted", "{answered}/{teams} answered" }
             }
+            if answered == 0 {
+                p { class: "waiting-note", "Nobody answered this one." }
+            }
             div { class: "closed-layout",
                 div { class: "stack",
                     FullPicture { question: question.clone() }
@@ -1291,13 +1296,18 @@ fn ClosedSlide(
 #[component]
 fn ReviewSlide(
     question: QuestionInfo,
+    answered: usize,
+    teams: usize,
     reveal: Reveal,
     fastest: Option<Fastest>,
     bonus: Option<PartReveal>,
 ) -> Element {
     rsx! {
         QuestionHeader { question: question.clone(),
-            span { class: "muted", "The answers" }
+            span { class: "muted", "The answers · {answered}/{teams} answered" }
+        }
+        if answered == 0 {
+            p { class: "waiting-note", "Nobody answered this one." }
         }
         div { class: "question-body",
             if let Some(image) = &question.image {
