@@ -430,6 +430,22 @@ fn Choice(
     }
 }
 
+/// Keeps a moved question or slide in view: once the cards are redrawn, scrolls so the card at `to`
+/// sits where the one at `from` was on screen, and focuses the same move button on it (or its
+/// first enabled one, when that button is now disabled at the top or bottom).
+fn follow_move(from: usize, to: usize, button: &str) {
+    document::eval(&format!(
+        r#"const top = document.getElementById("question-{from}")?.getBoundingClientRect().top ?? 0;
+        requestAnimationFrame(() => requestAnimationFrame(() => {{
+            const card = document.getElementById("question-{to}");
+            if (!card) return;
+            window.scrollBy({{ top: card.getBoundingClientRect().top - top, behavior: "instant" }});
+            const buttons = [...card.querySelectorAll(".actions button")].filter((b) => !b.disabled);
+            (buttons.find((b) => b.title === "{button}") ?? buttons[0])?.focus({{ preventScroll: true }});
+        }}));"#
+    ));
+}
+
 #[component]
 fn QuestionCard(
     index: usize,
@@ -493,7 +509,9 @@ fn QuestionCard(
     };
 
     rsx! {
-        section { class: if slide { "card stack question slide-card" } else { "card stack question" },
+        section {
+            id: "question-{index}",
+            class: if slide { "card stack question slide-card" } else { "card stack question" },
             div { class: "row between",
                 h3 { "{label}" }
                 div { class: "row actions",
@@ -501,34 +519,46 @@ fn QuestionCard(
                         class: "button ghost icon",
                         title: "Move to the top",
                         disabled: index == 0,
-                        onclick: move |_| draft.edit(|q| {
-                            let item = q.questions.remove(index);
-                            q.questions.insert(0, item);
-                        }),
+                        onclick: move |_| {
+                            follow_move(index, 0, "Move to the top");
+                            draft.edit(|q| {
+                                let item = q.questions.remove(index);
+                                q.questions.insert(0, item);
+                            });
+                        },
                         "⤒"
                     }
                     button {
                         class: "button ghost icon",
                         title: "Move up",
                         disabled: index == 0,
-                        onclick: move |_| draft.edit(|q| q.questions.swap(index, index - 1)),
+                        onclick: move |_| {
+                            follow_move(index, index - 1, "Move up");
+                            draft.edit(|q| q.questions.swap(index, index - 1));
+                        },
                         "↑"
                     }
                     button {
                         class: "button ghost icon",
                         title: "Move down",
                         disabled: index + 1 == count,
-                        onclick: move |_| draft.edit(|q| q.questions.swap(index, index + 1)),
+                        onclick: move |_| {
+                            follow_move(index, index + 1, "Move down");
+                            draft.edit(|q| q.questions.swap(index, index + 1));
+                        },
                         "↓"
                     }
                     button {
                         class: "button ghost icon",
                         title: "Move to the bottom",
                         disabled: index + 1 == count,
-                        onclick: move |_| draft.edit(|q| {
-                            let item = q.questions.remove(index);
-                            q.questions.push(item);
-                        }),
+                        onclick: move |_| {
+                            follow_move(index, count - 1, "Move to the bottom");
+                            draft.edit(|q| {
+                                let item = q.questions.remove(index);
+                                q.questions.push(item);
+                            });
+                        },
                         "⤓"
                     }
                     button {
