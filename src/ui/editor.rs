@@ -239,29 +239,21 @@ fn EditorForm(quiz: Quiz) -> Element {
                 "🧪 Test"
             }
         }
-        main { class: "page wide stack editor",
-            input {
-                class: "title-input",
-                placeholder: "Quiz title",
-                value: "{quiz.title}",
-                oninput: move |e| draft.edit(|q| q.title = e.value()),
-            }
-            Issues { issues: issues() }
-            ErrorBox { error: test_error() }
-            SettingsCard { settings: quiz.settings }
-            for index in 0..question_count {
-                QuestionCard {
-                    key: "{index}",
-                    index,
-                    label: quiz.label(index),
-                    count: question_count,
-                    question: quiz.questions[index].clone(),
-                    default_limit: quiz.settings.default_time_limit_secs,
+        main { class: "page editor",
+            div { class: "editor-top stack",
+                input {
+                    class: "title-input",
+                    placeholder: "Quiz title",
+                    value: "{quiz.title}",
+                    oninput: move |e| draft.edit(|q| q.title = e.value()),
                 }
+                Issues { issues: issues() }
+                ErrorBox { error: test_error() }
+                SettingsCard { settings: quiz.settings }
             }
-            div { class: "row",
+            aside { class: "editor-side editor-add",
                 button {
-                    class: "button primary add",
+                    class: "button primary",
                     onclick: move |_| draft.edit(|q| q.questions.push(Question::blank())),
                     "＋ Add question"
                 }
@@ -279,10 +271,20 @@ fn EditorForm(quiz: Quiz) -> Element {
                         "＋ Add results slide"
                     }
                 }
-                span { class: "grow" }
-                if can_undo {
-                    button { class: "button ghost", onclick: undo_shuffle, "↶ Undo shuffle" }
+            }
+            div { class: "editor-list stack",
+                for index in 0..question_count {
+                    QuestionCard {
+                        key: "{index}",
+                        index,
+                        label: quiz.label(index),
+                        count: question_count,
+                        question: quiz.questions[index].clone(),
+                        default_limit: quiz.settings.default_time_limit_secs,
+                    }
                 }
+            }
+            aside { class: "editor-side editor-shuffle",
                 button {
                     class: "button ghost shuffle",
                     disabled: !can_shuffle,
@@ -296,6 +298,9 @@ fn EditorForm(quiz: Quiz) -> Element {
                     title: "Shuffle the answers of every multiple-choice question. The right answers stay right.",
                     onclick: shuffle_answers,
                     "🔀 Shuffle answers"
+                }
+                if can_undo {
+                    button { class: "button ghost", onclick: undo_shuffle, "↶ Undo shuffle" }
                 }
             }
         }
