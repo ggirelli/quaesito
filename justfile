@@ -58,12 +58,25 @@ screenshots:
     rm -rf target/e2e/data
     tools/browser/run.sh screenshots.js
 
-# Record the demo video with its Kokoro voice-over, captions and transcript (needs ffmpeg)
-demo-video:
-    cd tools/browser && npm install --no-audit --no-fund >/dev/null
-    mkdir -p target/kokoro
-    test -f target/kokoro/kokoro-v1.0.onnx || curl -sSL -o target/kokoro/kokoro-v1.0.onnx https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx
-    test -f target/kokoro/voices-v1.0.bin || curl -sSL -o target/kokoro/voices-v1.0.bin https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
-    uvx --python 3.12 --with kokoro-onnx --with soundfile python tools/browser/voice.py
+# Record the demo video with its voice-over, captions and transcript (needs ffmpeg). The voice is
+# chatterbox (expressive, best with an NVIDIA GPU) or kokoro (quick on any computer).
+demo-video voice="chatterbox":
+    #!/usr/bin/env bash
+    set -euo pipefail
+    (cd tools/browser && npm install --no-audit --no-fund >/dev/null)
+    case "{{voice}}" in
+      chatterbox)
+        # perth, its watermarker, still imports pkg_resources, gone from setuptools 81.
+        uvx --python 3.11 --with chatterbox-tts --with faster-whisper --with soundfile --with 'setuptools<81' \
+          python tools/browser/voice.py chatterbox ;;
+      kokoro)
+        mkdir -p target/kokoro
+        for f in kokoro-v1.0.onnx voices-v1.0.bin; do
+          test -f "target/kokoro/$f" || curl -sSL -o "target/kokoro/$f" \
+            "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/$f"
+        done
+        uvx --python 3.12 --with kokoro-onnx --with soundfile python tools/browser/voice.py kokoro ;;
+      *) echo "voice must be chatterbox or kokoro" >&2; exit 1 ;;
+    esac
     rm -rf target/e2e/data
     tools/browser/run.sh demo-video.js

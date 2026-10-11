@@ -7,10 +7,10 @@ A quiz played on the test page: the big screen on the left, two teams' phones on
   <track kind="captions" src="../media/demo.vtt" srclang="en" label="English" default>
 </video>
 
-The voice is generated with [Kokoro](https://huggingface.co/hexgrad/Kokoro-82M), an open-weight
-text-to-speech model, and the video is recorded by `just demo-video`, which plays a sample quiz in
+The voice is generated with [Chatterbox](https://github.com/resemble-ai/chatterbox), an
+open-weight text-to-speech model that can sound excited, and the video is recorded by `just demo-video`, which plays a sample quiz in
 a headless browser. Each line starts when its caption appears on screen; recordings placed in
-`assets/voice/` replace Kokoro's voice (see `planning/ASSETS.md`).
+`assets/voice/` replace the generated voice (see `planning/ASSETS.md`).
 
 ## Transcript
 

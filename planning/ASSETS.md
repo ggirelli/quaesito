@@ -10,13 +10,13 @@ Brand colours for every prompt: amber `#FFB703`, deep indigo `#14121F`, off-whit
 
 ### Demo video voice-over (optional)
 
-The demo video is narrated by [Kokoro](https://huggingface.co/hexgrad/Kokoro-82M), which runs
-locally but cannot act: even with its liveliest voices (Nova and Kore, picked by measuring pitch
-variation) it sounds fairly flat. A voice model with emotion control, or a person, would sound
-truly gleeful.
+The demo video is narrated by [Chatterbox](https://github.com/resemble-ai/chatterbox), which runs
+locally and has an emotion setting, with each take checked by Whisper and redone if it misses
+words. It is still a model: a person, or a voice model directed line by line, would sound more
+natural.
 
 - **Files:** `assets/voice/<id>.mp3` (or `.wav`, `.m4a`, `.ogg`, `.flac`), one per line below.
-  Any line without a file keeps Kokoro's voice.
+  Any line without a file keeps the generated voice.
 - **Used by:** `just demo-video`, which stretches each step of the video to fit its line, mixes the
   voice in, and writes the captions and transcript.
 - **Tool:** a voice model with emotion or audio tags, such as ElevenLabs (Eleven v3, whose audio
@@ -27,7 +27,7 @@ truly gleeful.
   Voice: a warm, upbeat young presenter hosting a quiz night with friends. Gleeful and playful,
   smiling while speaking, lively pitch, energetic but not shouting, natural pace with small
   pauses at commas. American or British English. Each line is a separate clip with no silence
-  before or after it. Say "quaesito" as "kwai-SEE-toh".
+  before or after it. Say "quaesito" as one word, "kuh-eh-zee-toh" run together (kweh-ZEE-toh).
   ```
 
   | File | Line |
@@ -43,7 +43,7 @@ truly gleeful.
   | `parts` | Several answers in one question, and this one is worth double points! |
   | `pin` | Drop a pin on the picture. The closer you get, the more you win! |
   | `podium` | And the winner is… drumroll, please! |
-  | `outro` | Quaesito is free and open source. Grab it, and host your own quiz night! |
+  | `outro` | Best of all, quaesito is free and open source. Grab it, and host your own quiz night! |
 
   With Eleven v3, add a tag at the start of a line to steer it, for example
   `[excited] Welcome to quaesito! …` or `[playful] Easy peasy!`.
