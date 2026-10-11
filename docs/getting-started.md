@@ -25,6 +25,13 @@ their phones over the same Wi-Fi; no internet connection is needed.
     `start.command`, choose **Open**, then **Open** again. Windows asks whether to let quaesito
     through the firewall: allow it on private networks so phones can connect.
 
+The first time, your quiz list holds a **Demo quiz** with one question of each kind: press
+**Test** to play it with pretend phones, or open it to see how it is made. Delete it when you no
+longer need it; it does not come back.
+
+This guide comes with the app too: the :material-help-circle-outline: icon on the home page and
+**Help** in the admin pages open it, even without an internet connection.
+
 Your quizzes, pictures and games are kept in the `data` folder next to the start script. Copy it
 to back up or move everything to another computer.
 

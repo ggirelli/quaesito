@@ -180,8 +180,15 @@ Everything lives under a data directory (`QUAESITO_DATA_DIR`, default `./data`):
   JSON; bundled media go through the same checks and re-encoding as uploads, get new names, and
   references to missing or rejected media are dropped. Sizes are capped before and after
   decompression.
+- `demo-quiz-added`: written once the built-in demo quiz (`server/demo-quiz.json` and its
+  picture, compiled into the server) has been offered. It is added only when there are no quizzes,
+  so a new install has an example and deleting it is final.
 - Uploads no quiz or live game uses (pictures, soundtracks, team avatars) are deleted at startup
   and daily, once they are a day old, so files uploaded into an unsaved editor survive.
+
+The user guide (the MkDocs site in `docs/`) ships in the downloads as a built `docs` folder, served
+at `/docs/` by `server::docs`, so help works on a quiz night without internet. Without a local
+copy (`QUAESITO_DOCS_DIR`, `docs` or `site`), `/docs/…` redirects to the hosted guide.
 
 ## Networking
 

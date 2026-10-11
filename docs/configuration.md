@@ -13,6 +13,7 @@ QUAESITO_ADMIN_PASSWORD=pick-something ./start.sh
 | `QUAESITO_DATA_DIR` | `data` next to the start script | where quizzes, pictures, soundtracks and games are kept |
 | `QUAESITO_PUBLIC_URL` | this computer's LAN address | the address used in join links and the QR code |
 | `IP` / `PORT` | `0.0.0.0` / `8080` | where the server listens (`0.0.0.0` accepts phones on the network) |
+| `QUAESITO_DOCS_DIR` | `docs` next to the start script | the user guide served at `/docs/`; without one, `/docs/` leads to the online guide |
 | `QUAESITO_MAX_PICTURE_MB` | `15` | largest picture upload |
 | `QUAESITO_MAX_AUDIO_MB` | `40` | largest soundtrack upload |
 | `QUAESITO_MAX_VIDEO_MB` | `200` | largest video upload |

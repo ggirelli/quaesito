@@ -23,12 +23,18 @@ starting, for example on macOS or Linux:
 
 Play
 ----
-Create a quiz (or import one), press Test to try it, then Start. Show the big screen on a TV or
+Try the Demo quiz first: press Test to play it with pretend phones. Then create a quiz (or import
+one), press Test to try it, then Start. Show the big screen on a TV or
 projector; teams scan its QR code with their phones, which must be on the same Wi-Fi.
 
 If phones cannot connect, allow quaesito through the computer's firewall (Windows asks the first
 time it starts). Your quizzes, pictures and games are kept in the "data" folder next to these
 files: back it up, or copy it to move to another computer.
+
+Help
+----
+The user guide is in the "docs" folder and opens from the app: click the question mark on the
+home page, or Help in the admin pages. Online: https://ggirelli.github.io/quaesito/
 
 More: https://github.com/ggirelli/quaesito
 Licence: MIT (see LICENSE)

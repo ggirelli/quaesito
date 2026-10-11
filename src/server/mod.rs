@@ -2,6 +2,8 @@
 
 pub mod auth;
 pub mod bundle;
+pub mod demo;
+pub mod docs;
 pub mod engine;
 pub mod live;
 pub mod matching;
@@ -62,6 +64,9 @@ pub async fn init() -> anyhow::Result<()> {
         sessions: Sessions::open(data_dir.join("games")).await?,
         limits: media::limits_from_env(),
     };
+    if let Err(err) = demo::add_once(&data_dir, &state.quizzes, &state.media).await {
+        dioxus::logger::tracing::warn!("adding the demo quiz: {err:#}");
+    }
     dioxus::logger::tracing::info!("data directory: {}", data_dir.display());
     // A concurrent initialisation may have won the race; either state is equivalent.
     if STATE.set(state).is_ok() {
@@ -127,6 +132,7 @@ pub fn routes() -> Router {
     Router::new()
         .route("/media/{name}", get(media::serve))
         .route("/export/{id}", get(export))
+        .merge(docs::routes())
 }
 
 #[derive(serde::Deserialize)]

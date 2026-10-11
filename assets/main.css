@@ -258,10 +258,15 @@ textarea {
   flex: none;
 }
 
-.corner-link {
+.corner-links {
   position: fixed;
   top: max(0.75rem, env(safe-area-inset-top));
   right: max(0.75rem, env(safe-area-inset-right));
+  display: flex;
+  gap: 0.25rem;
+}
+
+.corner-link {
   display: inline-flex;
   padding: 0.55rem;
   border-radius: 50%;

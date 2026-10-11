@@ -2596,6 +2596,7 @@ dependencies = [
  "serde",
  "serde_json",
  "tokio",
+ "tower-http",
  "unicode-normalization",
  "uuid",
  "web-sys",

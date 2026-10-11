@@ -13,6 +13,8 @@ target="$root/target/e2e"
 cd "$root"
 CARGO_TARGET_DIR="$target" dx build --platform web >"$target.build.log" 2>&1 || { tail -20 "$target.build.log"; exit 1; }
 mkdir -p "$target/data"
+# Scripts set up their own quizzes: skip the demo quiz a fresh server adds, unless DEMO_QUIZ=1.
+[ -n "${DEMO_QUIZ:-}" ] || : >"$target/data/demo-quiz-added"
 QUAESITO_DATA_DIR="$target/data" QUAESITO_ADMIN_PASSWORD=test IP=127.0.0.1 PORT="$port" \
   "$target/dx/quaesito/debug/web/server" >"$target.server.log" 2>&1 &
 server=$!

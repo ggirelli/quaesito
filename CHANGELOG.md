@@ -6,6 +6,16 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- A demo quiz with one question of each kind, added the first time quaesito starts.
+- A help button on the home page and in the admin pages, opening the user guide.
+- The downloads include the user guide, served by quaesito at `/docs/`, so it works offline.
+
+### Changed
+
+- The demo video is narrated with Chatterbox, which sounds livelier than Kokoro.
+
 ## [0.1.0] - 2026-10-11
 
 The first release: everything needed for a quiz night with friends.

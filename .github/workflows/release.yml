@@ -40,6 +40,10 @@ jobs:
           tool: dioxus-cli@${{ env.DIOXUS_CLI_VERSION }}
       - name: Bundle
         run: dx bundle --platform web --release --out-dir dist
+      - uses: astral-sh/setup-uv@v6
+      # The user guide ships with the app and is served at /docs/, so it works without internet.
+      - name: User guide
+        run: uvx --with-requirements docs/requirements.txt mkdocs build --strict --site-dir guide
       - name: Package
         shell: bash
         run: |
@@ -49,6 +53,7 @@ jobs:
           mkdir -p "out/$name"
           cp -R dist/. "out/$name/"
           cp "packaging/${{ matrix.start }}" packaging/README.txt LICENSE "out/$name/"
+          cp -R guide "out/$name/docs"
           cd out
           if [ "${{ matrix.archive }}" = zip ]; then
             7z a "$name.zip" "$name" >/dev/null

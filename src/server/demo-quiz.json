@@ -1,0 +1,57 @@
+{
+  "id": "",
+  "title": "Demo quiz",
+  "questions": [
+    {
+      "kind": { "Slide": { "title": "Welcome to the demo quiz!" } },
+      "text": "One question of each kind. Press Test to play it with pretend phones, or open it in the editor to see how it is made.",
+      "image": "lobby.jpg"
+    },
+    {
+      "text": "Which planet has the most known moons?",
+      "answers": [
+        { "text": "Jupiter", "correct": false },
+        { "text": "Saturn", "correct": true },
+        { "text": "Uranus", "correct": false },
+        { "text": "Neptune", "correct": false }
+      ]
+    },
+    {
+      "kind": { "TrueFalse": { "answer": true } },
+      "text": "Honey found in ancient Egyptian tombs was still edible."
+    },
+    {
+      "kind": { "Text": { "accepted": ["Canberra"] } },
+      "text": "What is the capital of Australia?"
+    },
+    {
+      "kind": { "Number": { "answer": 88 } },
+      "text": "How many keys does a standard piano have?"
+    },
+    {
+      "kind": { "Order": { "items": ["Pyramids of Giza", "Colosseum", "Eiffel Tower", "Burj Khalifa"] } },
+      "text": "Oldest first!"
+    },
+    {
+      "kind": {
+        "Parts": {
+          "parts": [
+            { "label": "Painter", "accepted": ["Leonardo da Vinci", "Leonardo", "da Vinci"] },
+            { "label": "City", "accepted": ["Paris"] }
+          ]
+        }
+      },
+      "text": "The Mona Lisa: who painted it, and in which city can you see it?",
+      "multiplier": 2
+    },
+    {
+      "kind": { "Pin": { "answer": { "x": 0.5, "y": 0.68 }, "aspect": 0.75, "tolerance": "Normal" } },
+      "text": "Where is the popcorn?",
+      "image": "lobby.jpg"
+    },
+    {
+      "kind": { "Slide": { "title": "Your turn!" } },
+      "text": "Make your own quiz with Create quiz, or change this one. Help, at the top, opens the user guide."
+    }
+  ]
+}

@@ -50,8 +50,10 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 41 | Project boilerplate: MIT licence, contributing guide, code of conduct, security policy, templates, changelog | ✅ done |
 | 42 | Documentation site (MkDocs, `just docs`) on GitHub Pages, with screenshots from `just screenshots` | ✅ done |
 | 43 | Ready-to-run downloads for Linux, macOS (Apple silicon) and Windows, built by CI on version tags | ✅ done |
-| 44 | Demo video with a Kokoro voice-over, captions and transcript (`just demo-video`) | ✅ done |
+| 44 | Demo video with a Chatterbox voice-over (Whisper-checked takes, Kokoro as a fallback), captions and transcript (`just demo-video`) | ✅ done |
 | 45 | Disclaimer: the app is fully vibe coded | ✅ done |
+| 46 | Demo quiz added on first start | ✅ done |
+| 47 | Help button and user guide bundled in the downloads (`/docs/`) | ✅ done |
 
 ## Notes
 
