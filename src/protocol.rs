@@ -393,6 +393,8 @@ pub enum PlayerPhase {
         paused: bool,
         time_limit_ms: u64,
         submitted: Option<Response>,
+        /// The numbers a closest-number question accepts, if limited.
+        range: Option<crate::model::NumberRange>,
         /// The bonus question and its worth in percent, to answer together with the question.
         bonus: Option<(String, u32)>,
     },

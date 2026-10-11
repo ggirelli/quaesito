@@ -5,7 +5,7 @@
 | Choices | pick one or several of 2–6 answers (text and/or picture) | all or nothing, or partial credit |
 | True/false | say whether a statement is true | like choices |
 | Typed answer | type a short answer | right when it matches an accepted spelling; you can amend |
-| Number | guess a number | the closest guesses (ties included) win 1000 points |
+| Number | guess a number, with a slider when you set a range | the closest guesses (ties included) win 1000 points |
 | Order | tap 2–6 items from first to last | each item in its place earns its share |
 | Several answers | type 2–8 answers at once | each part judged like a typed answer; points shared between parts |
 | Pin | drop a pin on the question's picture | full points close to the spot, fewer further away |
@@ -16,6 +16,12 @@ Teams' answers are compared with the accepted spellings ignoring case, accents, 
 spacing, but not typos: list the spellings you accept, and amend on the reveal. Identical answers
 are grouped, and for each group you choose ✓ full, ½ half or ✗ no points, plus a bonus or malus in
 steps of 100. A malus can take a team below zero.
+
+## Number
+
+Type the correct number; the closest guesses win, ties included. Optionally give a **range**
+(say 0 to 200): phones then show a slider for a quick guess next to the field for an exact one,
+and guesses outside the range are refused. Whole-number ends make the slider move in whole steps.
 
 ## Several answers
 

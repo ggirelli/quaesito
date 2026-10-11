@@ -12,7 +12,7 @@ use super::{
 };
 use crate::{
     api::{check_ticket, game_info, join_game, player_socket, upload_avatar},
-    model::{MAX_TEXT_ANSWER_CHARS, PhoneDisplay, Point},
+    model::{MAX_TEXT_ANSWER_CHARS, NumberRange, PhoneDisplay, Point},
     protocol::{
         AnswerOutcome, InputKind, JokerState, MAX_NAME_CHARS, PlayerCommand, PlayerPhase,
         PlayerView, Response, TeamInfo,
@@ -306,9 +306,11 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
             time_limit_ms,
             submitted,
             bonus,
+            range,
             ..
         } => rsx! {
             OpenPad {
+                range,
                 bonus,
                 key: "{index}",
                 joker: view.joker,
@@ -417,6 +419,7 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
             time_limit_ms,
             submitted,
             bonus,
+            range: _,
         } => rsx! {
             AnswerPad {
                 bonus,
@@ -721,6 +724,7 @@ fn OpenPad(
     submitted: Option<Response>,
     joker: JokerState,
     bonus: Option<(String, u32)>,
+    range: Option<NumberRange>,
 ) -> Element {
     let live_socket: Live<PlayerCommand, PlayerView> = use_context();
     let mut draft = use_signal(String::new);
@@ -796,11 +800,32 @@ fn OpenPad(
                 (None, false) => rsx! {
                     form { class: "stack open-form", onsubmit: submit,
                         if number {
+                            if let Some(range) = range {
+                                // The slider for a quick guess, the field for an exact one.
+                                div { class: "number-slider",
+                                    input {
+                                        r#type: "range",
+                                        min: "{range.min}",
+                                        max: "{range.max}",
+                                        step: if range.whole() { "1" } else { "any" },
+                                        aria_label: "Your guess",
+                                        value: draft().trim().replace(',', ".").parse::<f64>().unwrap_or(f64::midpoint(range.min, range.max)),
+                                        oninput: move |e| draft.set(e.value()),
+                                    }
+                                    div { class: "row between muted small",
+                                        span { "{range.min}" }
+                                        span { "{range.max}" }
+                                    }
+                                }
+                            }
                             input {
                                 r#type: "text",
                                 inputmode: "decimal",
                                 autocomplete: "off",
-                                placeholder: "Your guess",
+                                placeholder: match range {
+                                    Some(range) => format!("{} to {}", range.min, range.max),
+                                    None => "Your guess".to_owned(),
+                                },
                                 aria_label: "Your guess",
                                 value: draft,
                                 oninput: move |e| draft.set(e.value()),

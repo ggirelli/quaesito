@@ -1127,6 +1127,10 @@ impl Game {
             paused: self.paused_at.is_some(),
             time_limit_ms: u64::from(question.time_limit_secs(&self.quiz.settings)) * 1000,
             submitted: team.submissions[index].as_ref().map(|s| s.response.clone()),
+            range: match question.kind {
+                QuestionKind::Number { range, .. } => range,
+                _ => None,
+            },
             bonus: self
                 .active_bonus(index)
                 .map(|b| (b.text.trim().to_owned(), b.percent)),
@@ -1361,7 +1365,7 @@ impl Game {
                     })
                     .collect(),
             },
-            QuestionKind::Number { answer } => {
+            QuestionKind::Number { answer, .. } => {
                 let answer = answer.unwrap_or_default();
                 let closest = self.closest_distance(index);
                 let mut guesses: Vec<(f64, Guess)> = responses()
@@ -1509,6 +1513,7 @@ impl Game {
     fn closest_distance(&self, index: usize) -> Option<f64> {
         let QuestionKind::Number {
             answer: Some(answer),
+            ..
         } = self.quiz.questions[index].kind
         else {
             return None;
@@ -1597,6 +1602,7 @@ impl Game {
             (
                 QuestionKind::Number {
                     answer: Some(answer),
+                    ..
                 },
                 Response::Number(value),
             ) => {
@@ -1816,8 +1822,13 @@ fn check_response(question: &Question, response: Response) -> Result<Response, R
             }
             Ok(Response::Text(text.to_owned()))
         }
-        (QuestionKind::Number { .. }, Response::Number(value)) if value.is_finite() => {
-            Ok(Response::Number(value))
+        (QuestionKind::Number { range, .. }, Response::Number(value)) if value.is_finite() => {
+            match range {
+                Some(range) if !range.contains(value) => {
+                    Err(Refusal("Your guess is outside the range."))
+                }
+                _ => Ok(Response::Number(value)),
+            }
         }
         (QuestionKind::Number { .. }, Response::Number(_)) => {
             Err(Refusal("Please enter a number."))
@@ -3282,7 +3293,10 @@ mod tests {
         let t0 = Instant::now();
         let mut quiz = quiz(QuizSettings::default());
         quiz.questions.truncate(1);
-        quiz.questions[0].kind = QuestionKind::Number { answer: Some(88.0) };
+        quiz.questions[0].kind = QuestionKind::Number {
+            answer: Some(88.0),
+            range: None,
+        };
         quiz.questions[0].bonus = Some(Bonus {
             text: "Who invented it?".to_owned(),
             accepted: vec!["Cristofori".to_owned()],
@@ -3308,10 +3322,34 @@ mod tests {
     }
 
     #[test]
+    fn a_number_range_reaches_phones_and_bounds_guesses() {
+        let t0 = Instant::now();
+        let range = crate::model::NumberRange {
+            min: 0.0,
+            max: 100.0,
+        };
+        let kind = QuestionKind::Number {
+            answer: Some(42.0),
+            range: Some(range),
+        };
+        let mut g = open_game(kind, QuizSettings::default());
+        let owls = join(&mut g, "Owls");
+        g.next(t0).unwrap();
+        let PlayerPhase::Question { range: shown, .. } = g.player_view(owls, t0).unwrap().phase
+        else {
+            panic!("expected a question");
+        };
+        assert_eq!(shown, Some(range));
+        assert!(g.answer(owls, Response::Number(101.0), false, t0).is_err());
+        g.answer(owls, Response::Number(100.0), false, t0).unwrap();
+    }
+
+    #[test]
     fn the_closest_number_wins_and_ties_share() {
         let t0 = Instant::now();
         let kind = QuestionKind::Number {
             answer: Some(330.0),
+            range: None,
         };
         let mut g = open_game(kind, QuizSettings::default());
         let owls = join(&mut g, "Owls");

@@ -8,6 +8,7 @@ All notable changes to quaesito are listed here. The format follows
 
 ### Added
 
+- Number questions can have a range: phones then show a slider next to the field for an exact guess.
 - Text shown with a question, line breaks kept: lyrics, a quote, a riddle.
 - Starting a game asks how many teams may join: 50 by default, from 1 up to 10,000. The lobby shows the limit.
 - A demo quiz with one question of each kind, added the first time quaesito starts.
