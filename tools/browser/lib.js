@@ -53,7 +53,9 @@ async function setup(quizBody, settings = {}) {
   const watch = (p, name) => {
     p.on('pageerror', (e) => errors.push(`${name} pageerror ${e.message}`));
     p.on('console', (m) => {
-      if (m.type() === 'error' && !m.text().includes('_dioxus') && !m.text().includes('WebSocket')) {
+      // Debug builds: the font dx's rebuild notice asks for is blocked by the content security policy.
+      const devFont = m.text().includes('Content Security Policy') && m.text().includes('fonts.googleapis.com');
+      if (m.type() === 'error' && !devFont && !m.text().includes('_dioxus') && !m.text().includes('WebSocket')) {
         errors.push(`${name} ${m.text()}`);
       }
     });
