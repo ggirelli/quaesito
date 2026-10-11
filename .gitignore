@@ -15,3 +15,6 @@
 
 # Built documentation site.
 /site
+
+# MkDocs plugin caches (fonts downloaded by the privacy plugin).
+/.cache
