@@ -4,7 +4,10 @@ use dioxus::prelude::*;
 
 use super::{
     Route, client,
-    widgets::{Brand, ClientOnly, Dialog, ErrorBox, HelpLink, Icon, IconKind, Spinner, message},
+    widgets::{
+        Brand, ClientOnly, Dialog, ErrorBox, HelpLink, Icon, IconKind, Spinner, ThemeToggle,
+        message,
+    },
 };
 use crate::api::{
     admin_check, admin_login, create_quiz, delete_quiz, duplicate_quiz, end_session, import_quiz,
@@ -120,6 +123,7 @@ pub fn AdminHeader(#[props(default)] back: bool, children: Element) -> Element {
             }
             div { class: "row", {children} }
             div { class: "row",
+                ThemeToggle { class: "button ghost icon" }
                 HelpLink { class: "button ghost", label: true }
                 Link { class: "button ghost", to: Route::Home {}, title: "Home page",
                     Icon { kind: IconKind::Home }

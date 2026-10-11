@@ -175,6 +175,51 @@ pub enum IconKind {
     Import,
     NewFile,
     Search,
+    Sun,
+    Moon,
+}
+
+/// Where this device remembers the chosen colour theme ("light"; dark when unset).
+pub const THEME_KEY: &str = "quaesito.theme";
+
+/// Applies the remembered theme before the page is drawn, so a light page never flashes dark,
+/// and follows a change made in another tab or in the test page's frames.
+pub const THEME_SCRIPT: &str = "(function(){var k='quaesito.theme';\
+function apply(){var t=null;try{t=localStorage.getItem(k)}catch(e){}\
+if(t==='light'){document.documentElement.dataset.theme='light'}\
+else{delete document.documentElement.dataset.theme}}\
+apply();window.addEventListener('storage',function(e){if(e.key===k)apply()})})();";
+
+/// Switches between the dark and light themes, like the user guide's toggle. The choice is kept
+/// on this device and reaches its other open pages.
+#[component]
+pub fn ThemeToggle(#[props(default)] class: String) -> Element {
+    let mut light = use_signal(|| false);
+    use_effect(move || {
+        light.set(super::client::storage_get(THEME_KEY).as_deref() == Some("light"));
+    });
+    let label = if light() { "Dark mode" } else { "Light mode" };
+    rsx! {
+        button {
+            class,
+            title: label,
+            aria_label: label,
+            onclick: move |_| {
+                let now_light = !light();
+                light.set(now_light);
+                if now_light {
+                    super::client::storage_set(THEME_KEY, "light");
+                } else {
+                    super::client::storage_remove(THEME_KEY);
+                }
+                document::eval(&format!(
+                    "if ({now_light}) {{ document.documentElement.dataset.theme = 'light'; }} \
+                     else {{ delete document.documentElement.dataset.theme; }}"
+                ));
+            },
+            Icon { kind: if light() { IconKind::Moon } else { IconKind::Sun } }
+        }
+    }
 }
 
 /// Opens the user guide, at its getting-started page, in a new tab.
@@ -255,6 +300,20 @@ pub fn Icon(kind: IconKind) -> Element {
         IconKind::Search => rsx! {
             circle { cx: 11, cy: 11, r: 8 }
             line { x1: 21, y1: 21, x2: 16.65, y2: 16.65 }
+        },
+        IconKind::Sun => rsx! {
+            circle { cx: 12, cy: 12, r: 5 }
+            line { x1: 12, y1: 1, x2: 12, y2: 3 }
+            line { x1: 12, y1: 21, x2: 12, y2: 23 }
+            line { x1: 4.22, y1: 4.22, x2: 5.64, y2: 5.64 }
+            line { x1: 18.36, y1: 18.36, x2: 19.78, y2: 19.78 }
+            line { x1: 1, y1: 12, x2: 3, y2: 12 }
+            line { x1: 21, y1: 12, x2: 23, y2: 12 }
+            line { x1: 4.22, y1: 19.78, x2: 5.64, y2: 18.36 }
+            line { x1: 18.36, y1: 5.64, x2: 19.78, y2: 4.22 }
+        },
+        IconKind::Moon => rsx! {
+            path { d: "M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" }
         },
     };
     rsx! {

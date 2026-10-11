@@ -20,6 +20,7 @@ the game code, then pick a name and a picture.
 | give more time | **+10 s** while a question is open |
 | rename or remove a team | **Teams** in the top bar |
 | mute sound effects | :material-volume-high: in the top bar |
+| switch to a light or dark screen | :material-weather-sunny: / :material-weather-night: in the top bar (also on the home and admin pages; each device remembers its choice) |
 
 ## Judging
 

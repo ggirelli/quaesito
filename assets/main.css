@@ -11,6 +11,10 @@
   --accent-ink: #14121f;
   --danger: #ff5d73;
   --ok: #3ddc97;
+  /* Text in those colours: the same on dark, darker on light so it stays readable. */
+  --accent-text: var(--accent);
+  --danger-text: var(--danger);
+  --ok-text: var(--ok);
   --radius: 14px;
   --serif: Georgia, "Times New Roman", serif;
   --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -25,6 +29,23 @@
 
   color-scheme: dark;
   font-family: var(--sans);
+}
+
+/* The light theme, chosen with the sun button (kept per device, see THEME_SCRIPT). */
+:root[data-theme="light"] {
+  --bg: #f4f1ff;
+  --surface: #ffffff;
+  --surface-2: #ebe7f7;
+  --border: #d4cde8;
+  --fg: #14121f;
+  --muted: #5f5880;
+  --danger: #e5304f;
+  --ok: #1fae73;
+  --accent-text: #8a5a00;
+  --danger-text: #c0213d;
+  --ok-text: #0b7a4b;
+
+  color-scheme: light;
 }
 
 * {
@@ -45,7 +66,7 @@ body {
 }
 
 a {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 h1,
@@ -217,7 +238,7 @@ textarea {
   font-weight: 700;
   font-size: 1.4rem;
   letter-spacing: -0.02em;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .brand.large img {
@@ -274,6 +295,14 @@ textarea {
   font-size: 1.1rem;
   opacity: 0.7;
   transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+/* The theme toggle is a button among the links: no button frame. */
+button.corner-link {
+  border: none;
+  background: none;
+  font: inherit;
+  cursor: pointer;
 }
 
 .corner-link:hover,
@@ -341,7 +370,7 @@ textarea {
 }
 
 .button.danger-icon {
-  color: var(--danger);
+  color: var(--danger-text);
 }
 
 .button.big {
@@ -404,7 +433,7 @@ textarea {
 /* A problem shown right under the field it is about. */
 .field-error {
   margin: 0;
-  color: var(--danger);
+  color: var(--danger-text);
   font-size: 0.875rem;
 }
 
@@ -462,7 +491,7 @@ input.short {
   font-family: ui-monospace, monospace;
   font-weight: 700;
   letter-spacing: 0.12em;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 /* ---------- Editor ---------- */
@@ -489,12 +518,12 @@ input.short {
 
 .ready {
   margin: 0;
-  color: var(--ok);
+  color: var(--ok-text);
   font-weight: 600;
 }
 
 .not-playable {
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: 600;
 }
 
@@ -758,7 +787,7 @@ table.results {
 }
 
 .results .total {
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: 800;
 }
 
@@ -893,7 +922,7 @@ table.results {
   font-size: 3.2em;
   font-weight: 800;
   letter-spacing: 0.15em;
-  color: var(--accent);
+  color: var(--accent-text);
   line-height: 1;
 }
 
@@ -1001,16 +1030,16 @@ table.results {
 }
 
 .bonus-line strong {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .bonus-reveal h3 {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 /* The bonus question's field on phones, and its editor. */
 .bonus-field strong {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .bonus-edit {
@@ -1022,7 +1051,7 @@ table.results {
 }
 
 .bonus-edit legend {
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: 700;
 }
 
@@ -1238,7 +1267,7 @@ table.results {
 .standing .round {
   font-size: 0.75em;
   font-variant-numeric: tabular-nums;
-  color: var(--ok);
+  color: var(--ok-text);
 }
 
 .rank-change {
@@ -1249,11 +1278,11 @@ table.results {
 }
 
 .rank-change.up {
-  color: var(--ok);
+  color: var(--ok-text);
 }
 
 .rank-change.down {
-  color: var(--danger);
+  color: var(--danger-text);
 }
 
 .rank-change.same {
@@ -1267,7 +1296,7 @@ table.results {
 }
 
 .fastest strong {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 /* A results slide: the standings under the slide's title. */
@@ -1280,7 +1309,7 @@ table.results {
 .standing .score {
   font-variant-numeric: tabular-nums;
   font-weight: 800;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 @keyframes slide-in {
@@ -1364,7 +1393,7 @@ table.results {
 }
 
 .open-reveal .accepted strong {
-  color: var(--ok);
+  color: var(--ok-text);
 }
 
 .text-groups,
@@ -1403,7 +1432,7 @@ ol.order-items {
 }
 
 .order-rank {
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: 800;
   min-width: 1.5em;
 }
@@ -1566,7 +1595,7 @@ ol.order-items {
   min-width: 3.2em;
   text-align: center;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .number-answer {
@@ -1574,7 +1603,7 @@ ol.order-items {
   font-family: var(--serif);
   font-size: 3.2em;
   font-weight: 700;
-  color: var(--ok);
+  color: var(--ok-text);
 }
 
 .guess .strong {
@@ -1626,7 +1655,7 @@ ol.order-items {
 }
 
 .podium-spot .points {
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: 800;
 }
 
@@ -1709,7 +1738,7 @@ ol.order-items {
 }
 
 .soundtrack.playing {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .equalizer {
@@ -1785,7 +1814,7 @@ ol.order-items {
 
 .player-score {
   font-weight: 800;
-  color: var(--accent);
+  color: var(--accent-text);
   white-space: nowrap;
 }
 
@@ -1824,7 +1853,7 @@ ol.order-items {
   border-radius: 12px;
   border: 2px dashed var(--accent);
   background: transparent;
-  color: var(--accent);
+  color: var(--accent-text);
   font: inherit;
   font-weight: 700;
   text-align: center;

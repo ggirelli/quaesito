@@ -6,6 +6,11 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- A light theme, next to the dark one: the sun and moon button on the home page, the admin pages and the big screen
+  switches it, and every page open on that device follows.
+
 ## [0.2.0] - 2026-10-11
 
 More ways to ask questions, results at half time, and a quiz night that needs no internet at all.

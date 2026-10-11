@@ -10,7 +10,7 @@ use super::{
     sfx::{self, Cue, SFX_JS, Sfx},
     widgets::{
         ANSWER_STYLES, AnswerShape, Brand, ClientOnly, ErrorBox, Icon, IconKind, MapPin, PinMap,
-        QuestionMedia, STAR, Spinner, TeamAvatar, media_url, message,
+        QuestionMedia, STAR, Spinner, TeamAvatar, ThemeToggle, media_url, message,
     },
 };
 use crate::{
@@ -134,6 +134,7 @@ fn HostScreen(code: String) -> Element {
                         "Code "
                         span { class: "code", "{view.code}" }
                     }
+                    ThemeToggle { class: "button ghost icon" }
                     button {
                         class: "button ghost",
                         title: if muted() { "Turn sound effects on" } else { "Mute sound effects" },
