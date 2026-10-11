@@ -87,4 +87,4 @@ function quiz() {
   };
 }
 
-module.exports = { quiz, avatars };
+module.exports = { quiz, avatars, tune };

@@ -44,7 +44,8 @@ The upload limits can be changed; see [configuration](configuration.md).
 
 A question can have a soundtrack (MP3, M4A/AAC, Ogg/Opus, WebM, FLAC or WAV, up to 40 MB). The
 question then waits on the big screen with a full clock until you press **▶ Start the music**:
-the music plays from the big screen and the countdown starts with it.
+the music plays from the big screen and the countdown starts with it. **Stop the clock** stops the
+music too; when time runs out instead, it plays on while the answers are shown.
 
 <div class="screen-and-phone" markdown>
 <figure markdown>
