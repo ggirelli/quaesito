@@ -10,12 +10,48 @@ const L = require('./lib.js');
 const sample = require('./sample.js');
 
 const OUT = path.resolve(__dirname, '../../docs/media');
-const RAW = path.join(__dirname, 'out/demo.webm');
+const FRAMES = path.join(__dirname, 'out/frames');
 const VOICE = path.join(__dirname, 'out/voice');
 const LINES = JSON.parse(fs.readFileSync(path.join(__dirname, 'narration.json'), 'utf8'));
 const DURATIONS = JSON.parse(fs.readFileSync(path.join(VOICE, 'manifest.json'), 'utf8'));
 /** Pause after each spoken line. */
 const BREATH_MS = 600;
+
+/**
+ * Records the page with Chrome's screencast: every frame keeps the time it was painted, and the
+ * video shows each one for exactly as long as it was on screen, so it runs on the same clock as
+ * the narration. (Puppeteer's recorder stretched the video and dropped its end.)
+ * `stop()` returns the first frame's time (ms since the epoch) and an ffmpeg concat list.
+ */
+async function record(page) {
+  fs.rmSync(FRAMES, { recursive: true, force: true });
+  fs.mkdirSync(FRAMES, { recursive: true });
+  const cdp = await page.createCDPSession();
+  const frames = [];
+  cdp.on('Page.screencastFrame', ({ data, metadata, sessionId }) => {
+    const file = path.join(FRAMES, `${String(frames.length).padStart(6, '0')}.jpg`);
+    fs.writeFileSync(file, Buffer.from(data, 'base64'));
+    frames.push({ file, at: metadata.timestamp * 1000 });
+    cdp.send('Page.screencastFrameAck', { sessionId }).catch(() => {});
+  });
+  await cdp.send('Page.startScreencast', { format: 'jpeg', quality: 90, everyNthFrame: 1 });
+  return {
+    async stop() {
+      const end = Date.now();
+      await cdp.send('Page.stopScreencast');
+      const lines = [];
+      frames.forEach((frame, i) => {
+        const until = i + 1 < frames.length ? frames[i + 1].at : end;
+        lines.push(`file '${frame.file}'`, `duration ${((until - frame.at) / 1000).toFixed(4)}`);
+      });
+      // The concat demuxer needs the last file listed again for its duration to count.
+      lines.push(`file '${frames[frames.length - 1].file}'`);
+      const list = path.join(FRAMES, 'list.txt');
+      fs.writeFileSync(list, lines.join('\n') + '\n');
+      return { origin: frames[0].at, list };
+    },
+  };
+}
 
 (async () => {
   fs.mkdirSync(OUT, { recursive: true });
@@ -68,7 +104,7 @@ const BREATH_MS = 600;
     await L.sleep(700);
   };
 
-  const recorder = await page.screencast({ path: RAW });
+  const recorder = await record(page);
   const started = Date.now();
   const cues = [];
   /** Shows a line's caption, runs `actions`, and lasts at least as long as the line is spoken. */
@@ -123,10 +159,12 @@ const BREATH_MS = 600;
     }
   }, 1500);
   await step('outro', () => {}, 1500);
-  await recorder.stop();
+  const { origin, list } = await recorder.stop();
+  // Cues relative to the first frame, which is where the video starts.
+  for (const cue of cues) cue.at += started - origin;
 
   // The voice-over: each line placed where its step started, mixed into one track.
-  const inputs = ['-i', RAW];
+  const inputs = ['-f', 'concat', '-safe', '0', '-i', list];
   const filters = [];
   cues.forEach((cue, k) => {
     inputs.push('-i', path.join(VOICE, `${cue.id}.wav`));
@@ -135,7 +173,7 @@ const BREATH_MS = 600;
   const mix = `${filters.join(';')};${cues.map((_, k) => `[v${k}]`).join('')}amix=inputs=${cues.length}:normalize=0[voice]`;
   // H.264 and AAC in MP4: plays everywhere and stays small.
   execFileSync('ffmpeg', ['-loglevel', 'error', '-y', ...inputs, '-filter_complex', mix,
-    '-map', '0:v', '-map', '[voice]', '-vf', 'scale=1280:-2', '-c:v', 'libx264', '-preset', 'slow', '-crf', '30',
+    '-map', '0:v', '-map', '[voice]', '-vf', 'fps=30,scale=1280:-2', '-c:v', 'libx264', '-preset', 'slow', '-crf', '30',
     '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '96k', '-movflags', '+faststart', path.join(OUT, 'demo.mp4')]);
   execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-ss', '9', '-i', path.join(OUT, 'demo.mp4'), '-frames:v', '1',
     '-q:v', '80', path.join(OUT, 'demo-poster.webp')]);
