@@ -78,3 +78,12 @@ validation:
   omitted_files: warn
   absolute_links: warn
   unrecognized_links: warn
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ggirelli/quaesito
+      name: Source code
+    - icon: simple/kofi
+      link: https://ko-fi.com/ggirelli
+      name: Support quaesito on Ko-fi

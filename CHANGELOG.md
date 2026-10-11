@@ -11,6 +11,8 @@ All notable changes to quaesito are listed here. The format follows
 - A demo quiz with one question of each kind, added the first time quaesito starts.
 - A help button on the home page and in the admin pages, opening the user guide.
 - The downloads include the user guide, served by quaesito at `/docs/`, so it works offline.
+- The README, the user guide and the downloads say up front that quaesito is free, MIT-licensed, without
+  warranty and fully vibe coded, and that donations are welcome on Ko-fi.
 
 ### Changed
 

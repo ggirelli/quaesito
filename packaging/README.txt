@@ -37,4 +37,6 @@ The user guide is in the "docs" folder and opens from the app: click the questio
 home page, or Help in the admin pages. Online: https://ggirelli.github.io/quaesito/
 
 More: https://github.com/ggirelli/quaesito
-Licence: MIT (see LICENSE)
+Licence: MIT (see LICENSE). Free and open source, provided as is, without warranty.
+Fully vibe coded: an AI assistant wrote all of it.
+Donations are welcome: https://ko-fi.com/ggirelli

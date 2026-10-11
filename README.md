@@ -10,9 +10,11 @@
 **Quizzes among friends.** Put the questions on the TV and let every team answer from a phone. Quaesito runs on
 your laptop over the local Wi-Fi: no internet, no accounts, no app to install.
 
-> [!NOTE]
-> Quaesito is **fully vibe coded**: an AI assistant (Claude) wrote all of its code, tests and docs. Read the
-> [disclaimer](DISCLAIMER.md) before relying on it.
+> [!IMPORTANT]
+> - **Free and open source** under the [MIT licence](LICENSE), provided as is, **without warranty**.
+> - **Fully vibe coded:** an AI assistant (Claude) wrote all of its code, tests and docs. Read the
+>   [disclaimer](DISCLAIMER.md) before relying on it.
+> - **Donations are welcome** on [Ko-fi](https://ko-fi.com/ggirelli); GitHub Sponsors is coming soon.
 
 ## How it works
 
