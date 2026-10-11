@@ -26,6 +26,8 @@ All notable changes to quaesito are listed here. The format follows
 
 ### Fixed
 
+- The Windows build starts on computers without the Visual C++ Redistributable installed, such as a fresh Windows
+  or a virtual machine, instead of stopping with "VCRUNTIME140.dll was not found".
 - Leaving a test returns to the quiz list: "Back to admin" on the test's big screen ends the test instead of opening
   the admin pages inside it, and "End test" no longer stays on the test page.
 - The admin login page has the home page's corner links: theme, user guide and home.
