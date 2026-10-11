@@ -40,6 +40,8 @@ const PINS_LISTED: usize = 6;
 const EXTRA_SECS: u32 = 10;
 /// How many teams the between-questions leaderboard shows.
 const STANDINGS_SHOWN: usize = 6;
+/// Teams listed on a results slide.
+const RESULTS_SHOWN: usize = 10;
 
 #[component]
 pub fn Host(code: String) -> Element {
@@ -176,6 +178,14 @@ fn HostScreen(code: String) -> Element {
                     },
                     HostPhase::Slide { slide, .. } => rsx! {
                         SlideView { slide: slide.clone() }
+                    },
+                    HostPhase::Standings { title, standings, .. } => rsx! {
+                        div { class: "slide results-slide",
+                            if !title.is_empty() {
+                                h1 { class: "slide-title", "{title}" }
+                            }
+                            Standings { rows: standings.iter().take(RESULTS_SHOWN).cloned().collect::<Vec<_>>() }
+                        }
                     },
                     HostPhase::Review { question, reveal, fastest, .. } => rsx! {
                         ReviewSlide { question: question.clone(), reveal: reveal.clone(), fastest: fastest.clone() }
@@ -517,9 +527,12 @@ fn next_label(view: &HostView) -> Option<String> {
         HostPhase::Lobby => "Start the quiz".to_owned(),
         HostPhase::Ready { .. } => "▶ Start the music".to_owned(),
         HostPhase::Question { .. } => "Stop the clock".to_owned(),
-        HostPhase::Closed { then, .. } | HostPhase::Slide { then, .. } => match then {
+        HostPhase::Closed { then, .. }
+        | HostPhase::Slide { then, .. }
+        | HostPhase::Standings { then, .. } => match then {
             Upcoming::Question => "Next question",
             Upcoming::Slide => "Continue",
+            Upcoming::Results => "Reveal the answers so far",
             Upcoming::Answers => "Reveal the answers",
             Upcoming::Podium => "On to the podium",
         }
@@ -528,6 +541,10 @@ fn next_label(view: &HostView) -> Option<String> {
             then: Upcoming::Podium,
             ..
         } => "On to the podium".to_owned(),
+        HostPhase::Review {
+            then: Upcoming::Results,
+            ..
+        } => "Show the standings".to_owned(),
         HostPhase::Review { .. } => "Next answer".to_owned(),
         HostPhase::Podium { finished: true, .. } => return None,
         HostPhase::Podium { standings, .. } => {

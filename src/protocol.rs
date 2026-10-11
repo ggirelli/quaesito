@@ -110,6 +110,8 @@ pub struct SlideInfo {
 pub enum Upcoming {
     Question,
     Slide,
+    /// A results slide: the answers since the previous one, then the standings.
+    Results,
     /// The end-of-quiz walk through the answers.
     Answers,
     Podium,
@@ -258,7 +260,14 @@ pub enum HostPhase {
     },
     /// A slide between questions.
     Slide { slide: SlideInfo, then: Upcoming },
-    /// End-of-quiz walk through the answers (reveal at end).
+    /// The standings at a results slide, with the points each team gained and the places it
+    /// moved since the previous results slide.
+    Standings {
+        title: String,
+        standings: Vec<StandingRow>,
+        then: Upcoming,
+    },
+    /// Walk through the answers (reveal at end), at a results slide or at the end of the quiz.
     Review {
         question: QuestionInfo,
         reveal: Reveal,
@@ -380,6 +389,11 @@ pub enum PlayerPhase {
         submitted: Option<Response>,
         outcome: AnswerOutcome,
         correct: Vec<usize>,
+    },
+    /// The big screen shows the standings at a results slide.
+    Standings {
+        rank: usize,
+        teams: usize,
     },
     Podium {
         /// Own position, once revealed.

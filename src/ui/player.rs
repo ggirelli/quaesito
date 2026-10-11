@@ -462,6 +462,13 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
         } => rsx! {
             OutcomeView { index, total, outcome, answered: submitted.is_some() }
         },
+        PlayerPhase::Standings { rank, teams } => rsx! {
+            main { class: "player-main",
+                div { class: "big-icon", "📊" }
+                h1 { class: "status-title", "You're #{rank} of {teams} so far" }
+                p { class: "muted", "The standings are on the big screen." }
+            }
+        },
         PlayerPhase::Podium {
             rank,
             teams,

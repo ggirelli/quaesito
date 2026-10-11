@@ -90,7 +90,9 @@ impl Cue {
                 shown: standings.len(),
                 finished: *finished,
             },
-            HostPhase::Ready { .. } | HostPhase::Slide { .. } => Self::Other,
+            HostPhase::Ready { .. } | HostPhase::Slide { .. } | HostPhase::Standings { .. } => {
+                Self::Other
+            }
         }
     }
 

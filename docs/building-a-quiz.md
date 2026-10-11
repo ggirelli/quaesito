@@ -10,6 +10,10 @@ ready yet.
 
 - **Add** questions with **＋ Add question**, and slides with **＋ Add slide**: a title, some text
   and a picture to introduce a round or explain the rules.
+- **Results slides** (with **＋ Add results slide**, when answers are revealed at the end) give
+  the results halfway, at an intermission say: they walk through the answers to the questions
+  since the previous results slide, then show the standings with the points each team gained.
+  The review at the end then only covers the questions after the last results slide.
 - **Move** an item with ↑ ↓, or straight to the top or bottom with ⤒ ⤓. Duplicate it or delete
   it with the icons next to them.
 - **Shuffle** with :material-shuffle: **Shuffle questions**: questions are shuffled within each
