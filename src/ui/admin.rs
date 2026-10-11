@@ -4,12 +4,13 @@ use dioxus::prelude::*;
 
 use super::{
     Route, client,
-    widgets::{Brand, ClientOnly, ErrorBox, HelpLink, Icon, IconKind, Spinner, message},
+    widgets::{Brand, ClientOnly, Dialog, ErrorBox, HelpLink, Icon, IconKind, Spinner, message},
 };
 use crate::api::{
     admin_check, admin_login, create_quiz, delete_quiz, duplicate_quiz, end_session, import_quiz,
     list_quizzes, list_sessions, start_session, start_test,
 };
+use crate::protocol::{DEFAULT_MAX_TEAMS, MAX_TEAMS_CEILING};
 
 const TOKEN_KEY: &str = "quaesito.admin";
 
@@ -236,6 +237,55 @@ fn Dashboard() -> Element {
     }
 }
 
+/// Starts a live game, after asking how many teams may join.
+#[component]
+fn StartDialog(id: String, on_close: EventHandler<()>) -> Element {
+    let token: AdminToken = use_context();
+    let mut max_teams = use_signal(|| DEFAULT_MAX_TEAMS.to_string());
+    let mut error = use_signal(|| None::<String>);
+    let start = move |evt: FormEvent| {
+        evt.prevent_default();
+        let id = id.clone();
+        async move {
+            let Ok(limit) = max_teams().trim().parse::<usize>() else {
+                error.set(Some(format!(
+                    "Enter a number from 1 to {MAX_TEAMS_CEILING}."
+                )));
+                return;
+            };
+            match start_session(token.get(), id, Some(limit)).await {
+                Ok(code) => {
+                    navigator().push(Route::Host { code });
+                }
+                Err(err) => error.set(Some(message(&err))),
+            }
+        }
+    };
+    rsx! {
+        Dialog { title: "Start a live game", on_close,
+            form { class: "stack", onsubmit: start,
+                label { class: "field",
+                    span { "Most teams" }
+                    input {
+                        r#type: "number",
+                        min: 1,
+                        max: MAX_TEAMS_CEILING,
+                        value: max_teams,
+                        oninput: move |e| max_teams.set(e.value()),
+                    }
+                }
+                p { class: "muted small",
+                    "Each team plays from one phone, with as many players around it as you like. "
+                    "{DEFAULT_MAX_TEAMS} suits most game nights; raise it for a big event, up to 10,000. "
+                    "Your Wi-Fi may hold fewer phones than that."
+                }
+                ErrorBox { error: error() }
+                button { r#type: "submit", class: "button primary big", "▶ Start" }
+            }
+        }
+    }
+}
+
 #[component]
 fn QuizActions(
     id: String,
@@ -269,20 +319,7 @@ fn QuizActions(
             }
         }
     };
-    let start = {
-        let id = id.clone();
-        move |_| {
-            let id = id.clone();
-            async move {
-                match start_session(token.get(), id).await {
-                    Ok(code) => {
-                        navigator().push(Route::Host { code });
-                    }
-                    Err(err) => on_error.call(message(&err)),
-                }
-            }
-        }
-    };
+    let mut starting = use_signal(|| false);
     let test = {
         let id = id.clone();
         move |_| {
@@ -304,8 +341,11 @@ fn QuizActions(
                 class: "button primary",
                 disabled: !playable,
                 title: if playable { "Start a live game" } else { "Fix the quiz before playing it" },
-                onclick: start,
+                onclick: move |_| starting.set(true),
                 "▶ Start"
+            }
+            if starting() {
+                StartDialog { id: id.clone(), on_close: move |()| starting.set(false) }
             }
             button {
                 class: "button",

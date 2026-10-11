@@ -9,6 +9,12 @@ use crate::model::{ImageReveal, PhoneDisplay, Point};
 /// Longest team name, in characters.
 pub const MAX_NAME_CHARS: usize = 24;
 
+/// How many teams a game takes unless the host says otherwise.
+pub const DEFAULT_MAX_TEAMS: usize = 50;
+/// The most teams a host can let in. There is always a limit, so a misbehaving phone or script
+/// cannot flood a game, but this one is far beyond what a Wi-Fi network holds.
+pub const MAX_TEAMS_CEILING: usize = 10_000;
+
 /// A team as shown on screens.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct TeamInfo {
@@ -228,6 +234,8 @@ pub struct HostView {
     pub title: String,
     pub code: String,
     pub teams: Vec<TeamInfo>,
+    /// The most teams that can join.
+    pub max_teams: usize,
     /// Time until the quiz moves on by itself, when auto-advance is on (and not paused).
     pub auto_advance_ms: Option<u64>,
     /// The host paused the clock.

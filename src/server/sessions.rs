@@ -119,8 +119,8 @@ impl Sessions {
     ///
     /// # Errors
     /// Refuses quizzes that are not playable.
-    pub fn create(&self, quiz: Quiz) -> Result<String, Refusal> {
-        self.create_with(quiz, false)
+    pub fn create(&self, quiz: Quiz, max_teams: usize) -> Result<String, Refusal> {
+        self.create_with(quiz, false, max_teams)
     }
 
     /// Starts an admin's test game: like [`Sessions::create`], but never saved.
@@ -128,10 +128,10 @@ impl Sessions {
     /// # Errors
     /// Refuses quizzes that are not playable.
     pub fn create_test(&self, quiz: Quiz) -> Result<String, Refusal> {
-        self.create_with(quiz, true)
+        self.create_with(quiz, true, crate::protocol::DEFAULT_MAX_TEAMS)
     }
 
-    fn create_with(&self, quiz: Quiz, test: bool) -> Result<String, Refusal> {
+    fn create_with(&self, quiz: Quiz, test: bool, max_teams: usize) -> Result<String, Refusal> {
         let mut map = self.lock();
         let code = loop {
             let candidate = format!("{:06}", uuid::Uuid::new_v4().as_u128() % 1_000_000);
@@ -139,7 +139,8 @@ impl Sessions {
                 break candidate;
             }
         };
-        let game = Game::new(code.clone(), quiz)?;
+        let mut game = Game::new(code.clone(), quiz)?;
+        game.set_max_teams(max_teams)?;
         self.start(&mut map, code.clone(), game, test);
         Ok(code)
     }
@@ -298,7 +299,9 @@ mod tests {
     async fn games_are_saved_and_brought_back() {
         let dir = std::env::temp_dir().join(format!("quaesito-games-{}", uuid::Uuid::new_v4()));
         let sessions = Sessions::open(&dir).await.unwrap();
-        let code = sessions.create(quiz()).unwrap();
+        let code = sessions
+            .create(quiz(), crate::protocol::DEFAULT_MAX_TEAMS)
+            .unwrap();
         let session = sessions.get(&code).unwrap();
         let team = session.update(|g, _| g.join("Owls", "ticket".to_owned()).unwrap());
 

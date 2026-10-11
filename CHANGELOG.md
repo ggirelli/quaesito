@@ -8,6 +8,7 @@ All notable changes to quaesito are listed here. The format follows
 
 ### Added
 
+- Starting a game asks how many teams may join: 50 by default, from 1 up to 10,000. The lobby shows the limit.
 - A demo quiz with one question of each kind, added the first time quaesito starts.
 - A help button on the home page and in the admin pages, opening the user guide.
 - The downloads include the user guide, served by quaesito at `/docs/`, so it works offline.

@@ -164,7 +164,9 @@ fn HostScreen(code: String) -> Element {
             }
             main { class: "host-main",
                 match &view.phase {
-                    HostPhase::Lobby => rsx! { Lobby { code: view.code.clone(), teams: view.teams.clone() } },
+                    HostPhase::Lobby => rsx! {
+                        Lobby { code: view.code.clone(), teams: view.teams.clone(), max_teams: view.max_teams }
+                    },
                     HostPhase::Ready { question } => rsx! {
                         ReadySlide { question: question.clone(), teams: view.teams.len() }
                     },
@@ -659,7 +661,7 @@ fn Soundtrack(name: String, started_at: Option<f64>, paused: bool) -> Element {
 }
 
 #[component]
-fn Lobby(code: String, teams: Vec<TeamInfo>) -> Element {
+fn Lobby(code: String, teams: Vec<TeamInfo>, max_teams: usize) -> Element {
     let token: AdminToken = use_context();
     let origin = use_resource(move || async move {
         join_origin(token.get(), client::page_port())
@@ -691,6 +693,13 @@ fn Lobby(code: String, teams: Vec<TeamInfo>) -> Element {
                         "1 team is in"
                     } else {
                         "{teams.len()} teams are in"
+                    }
+                }
+                p { class: "muted lobby-limit",
+                    if teams.len() >= max_teams {
+                        "The game is full ({max_teams} teams)."
+                    } else {
+                        "Up to {max_teams} teams"
                     }
                 }
                 // The illustration fills the room until enough teams have joined to take its place.

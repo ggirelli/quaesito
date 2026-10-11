@@ -61,14 +61,15 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 52  | Results slides: show the standings mid-quiz (e.g. at an intermission) when revealing at the end                                    | ✅ done |
 | 53  | Bonus: an open-ended follow-up on any closed question, worth a small extra (e.g. +50%)                                             | ✅ done |
 | 54  | Text on question slides (lyrics, quotes…)                                                                                          | 📋 todo |
-| 55  | Document the team limit: 50 by default, any number of players per team; always capped for safety, but as high as you like          | 📋 todo |
-| 56  | Team limit set when starting a game: 50 by default, the host can lower or raise it                                                 | 📋 todo |
+| 55  | Document the team limit: 50 by default, any number of players per team; always capped for safety, but as high as you like          | ✅ done |
+| 56  | Team limit set when starting a game: 50 by default, the host can lower or raise it                                                 | ✅ done |
 | 57  | New colour palette and symbols in the assets (ASSETS.md prompts), docs and demo video                                              | 📋 todo |
 | 58  | Getting started: easier to follow, per platform                                                                                    | 📋 todo |
 | 59  | Closest number: optional range, with a slider next to the typed number on phones                                                   | 📋 todo |
 | 60  | Stopping the clock by hand stops the soundtrack                                                                                    | ✅ done |
 | 61  | Reveals say so when no team answered                                                                                               | ✅ done |
 | 62  | Admin quiz list: create button by Import (title in a pop-up), search box, sort by name, created, edited or questions               | 📋 todo |
+| 63  | Test mode: start the test from a chosen question or slide                                                                          | 📋 todo |
 
 ## Notes
 
@@ -110,7 +111,5 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
   passing. Nobody bypasses it: every change, the maintainer's too, goes through a pull request.
 
 ## Ideas for later
-
-- Test mode: start the test at a chosen question.
 
 - Team captains passing the phone: several players per team answering in turn.

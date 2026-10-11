@@ -4,6 +4,34 @@ use dioxus::prelude::*;
 
 use super::ICON;
 
+/// A pop-up box over the page, closed with its Close button, Escape or a click outside it.
+#[component]
+pub fn Dialog(title: String, on_close: EventHandler<()>, children: Element) -> Element {
+    rsx! {
+        div {
+            class: "overlay",
+            onclick: move |_| on_close.call(()),
+            onkeydown: move |e: KeyboardEvent| {
+                e.stop_propagation();
+                if e.key() == Key::Escape {
+                    on_close.call(());
+                }
+            },
+            section {
+                class: "card stack panel dialog",
+                role: "dialog",
+                aria_label: "{title}",
+                onclick: move |e| e.stop_propagation(),
+                div { class: "row between",
+                    h2 { "{title}" }
+                    button { class: "button ghost", onclick: move |_| on_close.call(()), "Close" }
+                }
+                {children}
+            }
+        }
+    }
+}
+
 /// Renders its children only in the browser, after hydration.
 ///
 /// Pages that depend on `localStorage` or live sockets use this so the server-rendered HTML
