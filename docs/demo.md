@@ -9,7 +9,8 @@ A quiz played on the test page: the big screen on the left, two teams' phones on
 
 The voice is generated with [Kokoro](https://huggingface.co/hexgrad/Kokoro-82M), an open-weight
 text-to-speech model, and the video is recorded by `just demo-video`, which plays a sample quiz in
-a headless browser.
+a headless browser. Each line starts when its caption appears on screen; recordings placed in
+`assets/voice/` replace Kokoro's voice (see `ASSETS.md`).
 
 ## Transcript
 

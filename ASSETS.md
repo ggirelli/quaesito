@@ -8,6 +8,46 @@ Brand colours for every prompt: amber `#FFB703`, deep indigo `#14121F`, off-whit
 
 ## Wanted
 
+### Demo video voice-over (optional)
+
+The demo video is narrated by [Kokoro](https://huggingface.co/hexgrad/Kokoro-82M), which runs
+locally but cannot act: even with its liveliest voices (Nova and Kore, picked by measuring pitch
+variation) it sounds fairly flat. A voice model with emotion control, or a person, would sound
+truly gleeful.
+
+- **Files:** `assets/voice/<id>.mp3` (or `.wav`, `.m4a`, `.ogg`, `.flac`), one per line below.
+  Any line without a file keeps Kokoro's voice.
+- **Used by:** `just demo-video`, which stretches each step of the video to fit its line, mixes the
+  voice in, and writes the captions and transcript.
+- **Tool:** a voice model with emotion or audio tags, such as ElevenLabs (Eleven v3, whose audio
+  tags like `[excited]` and `[laughs]` steer the delivery), or record yourself with your phone.
+- **Prompt** (paste the lines one at a time, so each becomes its own file):
+
+  ```
+  Voice: a warm, upbeat young presenter hosting a quiz night with friends. Gleeful and playful,
+  smiling while speaking, lively pitch, energetic but not shouting, natural pace with small
+  pauses at commas. American or British English. Each line is a separate clip with no silence
+  before or after it. Say "quaesito" as "kwai-SEE-toh".
+  ```
+
+  | File | Line |
+  |---|---|
+  | `intro` | Welcome to quaesito! The questions go up on the TV, and every team answers right from their phone. |
+  | `join` | Teams join by scanning the QR code, then pick a name and a picture. Easy peasy! |
+  | `slide` | Slides kick off each round. Let's go! |
+  | `choice` | First up, multiple choice! The faster you answer correctly, the more points you score. |
+  | `truefalse` | True or false? Quick and snappy! |
+  | `typed` | Typed answers are grouped on the big screen, so the host can judge them in a flash, even with half points! |
+  | `number` | How many keys on a piano? The closest guess wins! |
+  | `order` | Put them in order, oldest first! Every item in the right place scores. |
+  | `parts` | Several answers in one question, and this one is worth double points! |
+  | `pin` | Drop a pin on the picture. The closer you get, the more you win! |
+  | `podium` | And the winner is… drumroll, please! |
+  | `outro` | Quaesito is free and open source. Grab it, and host your own quiz night! |
+
+  With Eleven v3, add a tag at the start of a line to steer it, for example
+  `[excited] Welcome to quaesito! …` or `[playful] Easy peasy!`.
+
 ### Recorded sound effects (optional)
 
 The big screen synthesises its sound effects in the browser (`assets/js/sfx.js`), so nothing is
