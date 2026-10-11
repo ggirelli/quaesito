@@ -629,9 +629,10 @@ svg.shape {
 
 /* ---------- Host (big screen) ---------- */
 
+/* Exactly one screen tall: the main area scrolls when it must, so the controls stay in view. */
 .host {
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   padding: 2vh 3vw;
@@ -766,6 +767,7 @@ table.results {
   flex-direction: column;
   gap: 2vh;
   min-height: 0;
+  overflow-y: auto;
 }
 
 .host-controls {
@@ -931,8 +933,10 @@ table.results {
   min-height: 0;
 }
 
+/* A plain picture takes the height the question leaves (up to 38vh); revealed pictures, framed,
+   keep the cap alone. */
 .question-image {
-  max-height: 38vh;
+  max-height: min(38vh, 100%);
   max-width: 60vw;
   border-radius: var(--radius);
   object-fit: contain;
