@@ -8,3 +8,7 @@
 # Full-size originals of the generated artwork; the committed copies are compressed.
 /assets/brand/lobby.png
 /assets/brand/social-preview.png
+
+# Browser tools: dependencies and output.
+/tools/browser/node_modules
+/tools/browser/out

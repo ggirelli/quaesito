@@ -1,0 +1,9 @@
+{
+  "name": "quaesito-browser-tools",
+  "private": true,
+  "description": "Browser checks, documentation screenshots and the demo video for quaesito",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer-core": "^24"
+  }
+}
