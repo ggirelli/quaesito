@@ -118,13 +118,13 @@ pub enum IconKind {
     Import,
 }
 
-/// Opens the user guide in a new tab.
+/// Opens the user guide, at its getting-started page, in a new tab.
 #[component]
 pub fn HelpLink(#[props(default)] class: String, #[props(default)] label: bool) -> Element {
     rsx! {
         a {
             class,
-            href: "/docs/",
+            href: "/docs/getting-started/",
             target: "_blank",
             title: "User guide",
             aria_label: "User guide",
