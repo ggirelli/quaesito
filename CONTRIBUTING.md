@@ -47,6 +47,8 @@ with the big screen and two phones side by side.
 5. Update the docs that describe what you changed: [README.md](README.md) for players and hosts,
    [DESIGN.md](planning/DESIGN.md) for how it works, [STATUS.md](planning/STATUS.md) for progress, and an entry in
    [CHANGELOG.md](CHANGELOG.md) under "Unreleased".
+6. Open a pull request against `main`. `main` is protected: changes land through pull requests
+   (squash or rebase, so history stays linear) once the CI and docs checks pass.
 
 ## Style
 

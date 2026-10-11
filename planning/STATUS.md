@@ -84,6 +84,9 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 - The repository is private: release downloads and private vulnerability reporting are only
   available to collaborators until it is made public (the documentation site is public).
 - No download for Intel Macs yet (build from source there).
+- `main` is protected by the "Protect main" ruleset: no deletion or force pushes, linear history,
+  and pull requests with the CI (`test`, `clippy`, `fmt`, `deny`) and docs (`build`) checks
+  passing. Repository admins can bypass it, so the maintainer can still push directly.
 
 ## Ideas for later
 
