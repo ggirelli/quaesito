@@ -18,11 +18,13 @@ use dioxus::fullstack::{
     axum::{
         Router,
         extract::{Path, Query},
-        http::{StatusCode, header},
+        http::{HeaderValue, StatusCode, header},
         response::{IntoResponse, Response},
     },
     routing::get,
 };
+
+use tower_http::set_header::SetResponseHeaderLayer;
 
 use self::{auth::Auth, media::MediaStore, sessions::Sessions, store::QuizStore};
 use crate::model::Quiz;
@@ -125,6 +127,23 @@ async fn clean_up_media() {
         }
         tokio::time::sleep(MEDIA_CLEANUP_EVERY).await;
     }
+}
+
+/// Only quaesito itself may serve what its pages load (scripts, styles, fonts, pictures, sounds,
+/// connections): the app works without internet and sends nothing to third parties. Inline code
+/// and `eval` stay allowed for Dioxus and the user guide.
+const CONTENT_SECURITY_POLICY: &str = "default-src 'self' 'unsafe-inline' 'unsafe-eval' \
+    'wasm-unsafe-eval' data: blob:; connect-src 'self' ws: wss:";
+
+/// Adds the content security policy to every response, so a browser refuses third-party requests
+/// even from code quaesito does not control (such as the font dx's rebuild notice loads in debug
+/// builds).
+#[must_use]
+pub fn offline_policy() -> SetResponseHeaderLayer<HeaderValue> {
+    SetResponseHeaderLayer::if_not_present(
+        header::CONTENT_SECURITY_POLICY,
+        HeaderValue::from_static(CONTENT_SECURITY_POLICY),
+    )
 }
 
 /// Routes served next to the Dioxus application.

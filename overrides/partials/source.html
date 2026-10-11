@@ -1,0 +1,13 @@
+{#-
+  The repository link without the facts (stars, forks, latest release) that Material fetches from
+  api.github.com: the user guide ships with the app and makes no third-party requests.
+-#}
+<a href="{{ config.repo_url }}" title="{{ lang.t('source') }}" class="md-source">
+  <div class="md-source__icon md-icon">
+    {% set icon = config.theme.icon.repo or "fontawesome/brands/git-alt" %}
+    {% include ".icons/" ~ icon ~ ".svg" %}
+  </div>
+  <div class="md-source__repository">
+    {{ config.repo_name }}
+  </div>
+</a>

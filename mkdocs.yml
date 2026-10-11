@@ -8,6 +8,8 @@ copyright: Free software under the MIT licence.
 
 theme:
   name: material
+  # Only the repository link, without facts fetched from GitHub (see overrides/partials).
+  custom_dir: overrides
   logo: assets/icon-192.png
   favicon: assets/icon-192.png
   palette:
@@ -33,6 +35,12 @@ theme:
     - search.highlight
   icon:
     repo: fontawesome/brands/github
+
+# The guide ships with the app and must work offline, without third-party requests: the privacy
+# plugin downloads the fonts (and any other external asset) at build time and serves them locally.
+plugins:
+  - search
+  - privacy
 
 exclude_docs: |
   requirements.txt
