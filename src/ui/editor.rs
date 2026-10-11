@@ -1328,7 +1328,7 @@ fn NumberAnswer(question: usize, answer: Option<f64>, range: Option<NumberRange>
         });
     };
     rsx! {
-        div { class: "row number-answer",
+        div { class: "row number-edit",
             label { class: "field inline",
                 span { "Correct number" }
                 input {
@@ -1379,6 +1379,21 @@ fn NumberAnswer(question: usize, answer: Option<f64>, range: Option<NumberRange>
                 }
             }
         }
+        if let Some(problem) = range_problem(answer, range) {
+            p { class: "field-error", "{problem}" }
+        }
+    }
+}
+
+/// What is wrong with a number question's range, to show right under it.
+fn range_problem(answer: Option<f64>, range: Option<NumberRange>) -> Option<&'static str> {
+    let range = range?;
+    if !range.is_valid() {
+        Some("The range must go from a smaller to a larger number.")
+    } else if answer.is_some_and(|a| !range.contains(a)) {
+        Some("The correct number must be within the range.")
+    } else {
+        None
     }
 }
 
