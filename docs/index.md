@@ -6,15 +6,6 @@ hide:
 
 # Quizzes among friends
 
-!!! info "Free, open source and vibe coded"
-    - **Free and open source** under the
-      [MIT licence](https://github.com/ggirelli/quaesito/blob/main/LICENSE), provided as is,
-      **without warranty**.
-    - **Fully vibe coded:** an AI assistant (Claude) wrote all of its code, tests and docs; see
-      [how it was made](how-it-was-made.md).
-    - **Donations are welcome** on [Ko-fi](https://ko-fi.com/ggirelli); GitHub Sponsors is coming
-      soon.
-
 <div class="hero" markdown>
 
 <div markdown>
@@ -32,6 +23,15 @@ Windows, macOS and Linux. Free and open source (MIT).
 ![Friends on a sofa answering a quiz on their phones in front of a TV](assets/lobby.webp)
 
 </div>
+
+!!! info "Free, open source and vibe coded"
+    - **Free and open source** under the
+      [MIT licence](https://github.com/ggirelli/quaesito/blob/main/LICENSE), provided as is,
+      **without warranty**.
+    - **Fully vibe coded:** an AI assistant (Claude) wrote all of its code, tests and docs; see
+      [how it was made](how-it-was-made.md).
+    - **Donations are welcome** on [Ko-fi](https://ko-fi.com/ggirelli); GitHub Sponsors is coming
+      soon.
 
 ## See it in action { .section }
 
