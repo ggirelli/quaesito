@@ -4,10 +4,11 @@ QUAESITO - quizzes among friends
 Start it
 --------
   Windows: double-click start.bat
+           (if "Windows protected your PC" appears, click More info, then Run anyway)
   macOS:   double-click start.command
-           (the first time, macOS may refuse to open it: right-click it, choose Open, then Open
-           again. If it is still blocked, open System Settings > Privacy & Security and click
-           "Open Anyway".)
+           (the first time, macOS says it cannot verify it: click Done, open System Settings >
+           Privacy & Security, click "Open Anyway" next to start.command, then double-click it
+           again. On macOS 14 and earlier, right-click it, choose Open, then Open again.)
   Linux:   run ./start.sh in a terminal
 
 A window opens with the server's log, and your browser opens quaesito. Leave the window open
