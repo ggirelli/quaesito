@@ -31,7 +31,11 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           key: ${{ matrix.name }}
-      - uses: taiki-e/install-action@v2
+      # The prebuilt dx needs a newer glibc than Ubuntu 22.04's: build it there instead.
+      - if: runner.os == 'Linux'
+        run: cargo install dioxus-cli --version "$DIOXUS_CLI_VERSION" --locked
+      - if: runner.os != 'Linux'
+        uses: taiki-e/install-action@v2
         with:
           tool: dioxus-cli@${{ env.DIOXUS_CLI_VERSION }}
       - name: Bundle
