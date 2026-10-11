@@ -31,7 +31,10 @@ use serde::{Deserialize, Serialize};
 
 use super::matching::normalize;
 use crate::{
-    model::{AdvanceMode, Bonus, MAX_TEXT_ANSWER_CHARS, Question, QuestionKind, Quiz, RevealMode},
+    model::{
+        AdvanceMode, Bonus, MAX_TEXT_ANSWER_CHARS, PointsMode, Question, QuestionKind, Quiz,
+        RevealMode,
+    },
     protocol::{
         AnswerOutcome, DEFAULT_MAX_TEAMS, Fastest, GameResults, Grade, Guess, HostPhase, HostView,
         InputKind, JokerState, Judgement, MAX_NAME_CHARS, MAX_TEAMS_CEILING, PartReveal, PinGuess,
@@ -945,6 +948,7 @@ impl Game {
             teams: self.teams.iter().map(Team::info).collect(),
             max_teams: self.max_teams,
             paused: self.paused_at.is_some(),
+            speed_points: self.quiz.settings.points == PointsMode::Speed,
             auto_advance_ms: match self.phase {
                 Phase::Question { .. } => None,
                 _ => self
@@ -3042,6 +3046,9 @@ mod tests {
         );
         // Same score: the faster team ranks first.
         assert_eq!(standings[0].team.id, cats);
+        // Answer times only matter to the millisecond when points depend on speed.
+        assert!(!g.host_view(t0).speed_points);
+        assert!(game(QuizSettings::default()).host_view(t0).speed_points);
     }
 
     #[test]

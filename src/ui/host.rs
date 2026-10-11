@@ -1375,6 +1375,7 @@ fn BonusReveal(question: usize, bonus: Option<PartReveal>) -> Element {
 /// "⚡ Fastest: Owls in 2.3 s".
 #[component]
 fn FastestNote(fastest: Option<Fastest>) -> Element {
+    let precise = use_precise_times();
     let Some(fastest) = fastest else {
         return rsx! {};
     };
@@ -1382,20 +1383,34 @@ fn FastestNote(fastest: Option<Fastest>) -> Element {
         p { class: "fastest",
             "⚡ Fastest: "
             strong { "{fastest.team}" }
-            " in {seconds(fastest.answer_ms)}"
+            " in {seconds(fastest.answer_ms, precise)}"
         }
     }
 }
 
-/// Milliseconds as "2.3 s".
-fn seconds(ms: u64) -> String {
+/// Whether answer times are shown to the millisecond: when faster answers earn more points.
+fn use_precise_times() -> bool {
+    let live: Live<HostCommand, HostView> = use_context();
+    live.view
+        .read()
+        .as_ref()
+        .is_some_and(|view| view.speed_points)
+}
+
+/// Milliseconds as "2.3 s", or "2.347 s" when `precise`.
+fn seconds(ms: u64, precise: bool) -> String {
     #[allow(clippy::cast_precision_loss, reason = "answer times are small")]
     let secs = ms as f64 / 1000.0;
-    format!("{secs:.1} s")
+    if precise {
+        format!("{secs:.3} s")
+    } else {
+        format!("{secs:.1} s")
+    }
 }
 
 #[component]
 fn Standings(rows: Vec<StandingRow>) -> Element {
+    let precise = use_precise_times();
     rsx! {
         ol { class: "standings",
             for (i, row) in rows.into_iter().enumerate() {
@@ -1420,7 +1435,7 @@ fn Standings(rows: Vec<StandingRow>) -> Element {
                                 p => p.to_string(),
                             }
                             if let Some(ms) = round.answer_ms {
-                                span { class: "muted", " {seconds(ms)}" }
+                                span { class: "muted", " {seconds(ms, precise)}" }
                             }
                         }
                     }
