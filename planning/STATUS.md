@@ -4,56 +4,67 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 
 ## Plan
 
-| # | Step | Status |
-|---|---|---|
-| 0 | Repo, CI, `just` recipes, cargo-deny, logo | ✅ done |
-| 1 | Quiz model, per-quiz settings, validation | ✅ done |
-| 2 | Scoring and ranking | ✅ done |
-| 3 | Storage (quizzes on disk) and image handling | ✅ done |
-| 4 | Admin auth and quiz API | ✅ done |
-| 5 | Game engine (session state machine) | ✅ done |
-| 6 | Live sessions over WebSockets, join API | ✅ done |
-| 7 | UI: routing, home, admin dashboard | ✅ done |
-| 8 | UI: quiz editor | ✅ done |
-| 9 | UI: host slideshow and podium | ✅ done |
-| 10 | UI: player (phone) view | ✅ done |
-| 11 | README usage docs, end-to-end smoke test | ✅ done |
-| 12 | Navigation: admin corner icon on home, Home and back-to-quizzes buttons | ✅ done |
-| 13 | Question soundtracks: the host starts the music and the clock together | ✅ done |
-| 14 | Open-ended questions: typed text (judged) and closest number | ✅ done |
-| 15 | Quiz list flags quizzes that are not ready to play and disables their Start button | ✅ done |
-| 16 | Slides between questions: title, text and/or picture | ✅ done |
-| 17 | Editor: shuffle questions within each run between slides, with undo | ✅ done |
-| 18 | Points setting: speed-weighted or a flat 1000 per correct answer | ✅ done |
-| 19 | Host renames and removes teams | ✅ done |
-| 20 | Host pauses the clock, adds time and goes back | ✅ done |
-| 21 | Reveal details: fastest team, answer times, rank changes | ✅ done |
-| 22 | Joker: each team doubles one question's points | ✅ done |
-| 23 | Picture answers for multiple choice | ✅ done |
-| 24 | "Put in order" questions | ✅ done |
-| 25 | Pictures revealed while the clock runs (zoom out or tile by tile; blur dropped: too hard to read until the end) | ✅ done |
-| 26 | Sound effects on the big screen | ✅ done |
-| 27 | End-of-game results page and download | ✅ done |
-| 28 | Live games survive a server restart | ✅ done |
-| 29 | Exports bundle media (zip); unused media is cleaned up | ✅ done |
-| 30 | Fix: joining by typed code before the app has loaded (plain-form fallback to `/join?code=`) | ✅ done |
-| 31 | Revealed pictures stay fully visible for a set number of seconds before the buzzer | ✅ done |
-| 32 | Admin test mode: big screen and auto-joined phones side by side | ✅ done |
-| 33 | Editor: move a question or slide to the top or bottom | ✅ done |
-| 34 | Points multiplier per question (×1–×5) | ✅ done |
-| 35 | True/false questions | ✅ done |
-| 36 | Questions with several typed parts (title + artist, five posters…), judged per part | ✅ done |
-| 37 | Pin on a picture (a map, a floor plan…), scored by distance | ✅ done |
-| 38 | Icon buttons for edit, duplicate, export, import and delete (labels on hover) | ✅ done |
-| 39 | Videos in place of question and slide pictures | ✅ done |
-| 40 | Configurable upload limits, checked before uploading | ✅ done |
-| 41 | Project boilerplate: MIT licence, contributing guide, code of conduct, security policy, templates, changelog | ✅ done |
-| 42 | Documentation site (MkDocs, `just docs`) on GitHub Pages, with screenshots from `just screenshots` | ✅ done |
-| 43 | Ready-to-run downloads for Linux, macOS (Apple silicon) and Windows, built by CI on version tags | ✅ done |
-| 44 | Demo video with a Chatterbox voice-over (Whisper-checked takes, Kokoro as a fallback), captions and transcript (`just demo-video`) | ✅ done |
-| 45 | Disclaimer: the app is fully vibe coded | ✅ done |
-| 46 | Demo quiz added on first start | ✅ done |
-| 47 | Help button and user guide bundled in the downloads (`/docs/`) | ✅ done |
+| #   | Step                                                                                                                               | Status  |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| 0   | Repo, CI, `just` recipes, cargo-deny, logo                                                                                         | ✅ done |
+| 1   | Quiz model, per-quiz settings, validation                                                                                          | ✅ done |
+| 2   | Scoring and ranking                                                                                                                | ✅ done |
+| 3   | Storage (quizzes on disk) and image handling                                                                                       | ✅ done |
+| 4   | Admin auth and quiz API                                                                                                            | ✅ done |
+| 5   | Game engine (session state machine)                                                                                                | ✅ done |
+| 6   | Live sessions over WebSockets, join API                                                                                            | ✅ done |
+| 7   | UI: routing, home, admin dashboard                                                                                                 | ✅ done |
+| 8   | UI: quiz editor                                                                                                                    | ✅ done |
+| 9   | UI: host slideshow and podium                                                                                                      | ✅ done |
+| 10  | UI: player (phone) view                                                                                                            | ✅ done |
+| 11  | README usage docs, end-to-end smoke test                                                                                           | ✅ done |
+| 12  | Navigation: admin corner icon on home, Home and back-to-quizzes buttons                                                            | ✅ done |
+| 13  | Question soundtracks: the host starts the music and the clock together                                                             | ✅ done |
+| 14  | Open-ended questions: typed text (judged) and closest number                                                                       | ✅ done |
+| 15  | Quiz list flags quizzes that are not ready to play and disables their Start button                                                 | ✅ done |
+| 16  | Slides between questions: title, text and/or picture                                                                               | ✅ done |
+| 17  | Editor: shuffle questions within each run between slides, with undo                                                                | ✅ done |
+| 18  | Points setting: speed-weighted or a flat 1000 per correct answer                                                                   | ✅ done |
+| 19  | Host renames and removes teams                                                                                                     | ✅ done |
+| 20  | Host pauses the clock, adds time and goes back                                                                                     | ✅ done |
+| 21  | Reveal details: fastest team, answer times, rank changes                                                                           | ✅ done |
+| 22  | Joker: each team doubles one question's points                                                                                     | ✅ done |
+| 23  | Picture answers for multiple choice                                                                                                | ✅ done |
+| 24  | "Put in order" questions                                                                                                           | ✅ done |
+| 25  | Pictures revealed while the clock runs (zoom out or tile by tile; blur dropped: too hard to read until the end)                    | ✅ done |
+| 26  | Sound effects on the big screen                                                                                                    | ✅ done |
+| 27  | End-of-game results page and download                                                                                              | ✅ done |
+| 28  | Live games survive a server restart                                                                                                | ✅ done |
+| 29  | Exports bundle media (zip); unused media is cleaned up                                                                             | ✅ done |
+| 30  | Fix: joining by typed code before the app has loaded (plain-form fallback to `/join?code=`)                                        | ✅ done |
+| 31  | Revealed pictures stay fully visible for a set number of seconds before the buzzer                                                 | ✅ done |
+| 32  | Admin test mode: big screen and auto-joined phones side by side                                                                    | ✅ done |
+| 33  | Editor: move a question or slide to the top or bottom                                                                              | ✅ done |
+| 34  | Points multiplier per question (×1–×5)                                                                                             | ✅ done |
+| 35  | True/false questions                                                                                                               | ✅ done |
+| 36  | Questions with several typed parts (title + artist, five posters…), judged per part                                                | ✅ done |
+| 37  | Pin on a picture (a map, a floor plan…), scored by distance                                                                        | ✅ done |
+| 38  | Icon buttons for edit, duplicate, export, import and delete (labels on hover)                                                      | ✅ done |
+| 39  | Videos in place of question and slide pictures                                                                                     | ✅ done |
+| 40  | Configurable upload limits, checked before uploading                                                                               | ✅ done |
+| 41  | Project boilerplate: MIT licence, contributing guide, code of conduct, security policy, templates, changelog                       | ✅ done |
+| 42  | Documentation site (MkDocs, `just docs`) on GitHub Pages, with screenshots from `just screenshots`                                 | ✅ done |
+| 43  | Ready-to-run downloads for Linux, macOS (Apple silicon) and Windows, built by CI on version tags                                   | ✅ done |
+| 44  | Demo video with a Chatterbox voice-over (Whisper-checked takes, Kokoro as a fallback), captions and transcript (`just demo-video`) | ✅ done |
+| 45  | Disclaimer: the app is fully vibe coded                                                                                            | ✅ done |
+| 46  | Demo quiz added on first start                                                                                                     | ✅ done |
+| 47  | Help button and user guide bundled in the downloads (`/docs/`)                                                                     | ✅ done |
+| 48  | Security review of the recent dependency changes (npm, cargo, docs, CI)                                                            | ✅ done |
+| 49  | Docs home: "Made for game nights" right after the disclaimer, the podium screenshot stays at the bottom                            | 📋 todo |
+| 50  | Fully offline: no third-party requests from the app or the bundled guide (no Google Fonts, no GitHub API)                          | 📋 todo |
+| 51  | Editor: moving a question or slide keeps it in view and focused                                                                    | 📋 todo |
+| 52  | Results slides: show the standings mid-quiz (e.g. at an intermission) when revealing at the end                                    | 📋 todo |
+| 53  | Bonus: an open-ended follow-up on any closed question, worth a small extra (e.g. +50%)                                             | 📋 todo |
+| 54  | Text on question slides (lyrics, quotes…)                                                                                          | 📋 todo |
+| 55  | How many players can join: find the limits and document them                                                                       | 📋 todo |
+| 56  | Optional cap on the number of teams when starting a game                                                                           | 📋 todo |
+| 57  | New colour palette and symbols in the assets (ASSETS.md prompts), docs and demo video                                              | 📋 todo |
+| 58  | Getting started: easier to follow, per platform                                                                                    | 📋 todo |
 
 ## Notes
 
@@ -88,7 +99,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 - No download for Intel Macs yet (build from source there).
 - `main` is protected by the "Protect main" ruleset: no deletion or force pushes, linear history,
   and pull requests with the CI (`test`, `clippy`, `fmt`, `deny`) and docs (`build`) checks
-  passing. Repository admins can bypass it, so the maintainer can still push directly.
+  passing. Nobody bypasses it: every change, the maintainer's too, goes through a pull request.
 
 ## Ideas for later
 
