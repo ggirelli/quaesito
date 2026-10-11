@@ -6,6 +6,10 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-11
+
+A light theme, answers shuffled on every phone, and a Windows download that runs on a fresh computer.
+
 ### Added
 
 - A light theme, next to the dark one: the sun and moon button on the home page, the admin pages and the big screen
@@ -110,6 +114,7 @@ The first release: everything needed for a quiz night with friends.
 - **Downloads** for Linux, macOS (Apple silicon) and Windows with a start script, a documentation
   site with screenshots and a narrated demo video.
 
-[Unreleased]: https://github.com/ggirelli/quaesito/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/ggirelli/quaesito/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/ggirelli/quaesito/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/ggirelli/quaesito/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/ggirelli/quaesito/releases/tag/v0.1.0
