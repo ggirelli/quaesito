@@ -1096,7 +1096,16 @@ table.results {
 
 .standing .name {
   flex: 1;
+  min-width: 0;
   font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.standing .round,
+.guess .small {
+  white-space: nowrap;
 }
 
 .standing .round {
@@ -1435,6 +1444,16 @@ ol.order-items {
 
 .guess .strong {
   flex: 1;
+}
+
+/* The pin list is narrow: the team's name gets its own line. */
+.pin-reveal .guess {
+  flex-wrap: wrap;
+  row-gap: 0.2rem;
+}
+
+.pin-reveal .guess .strong {
+  flex-basis: 100%;
 }
 
 .guess.closest::after {
@@ -1928,7 +1947,8 @@ button.joker {
 
 .test-screen iframe {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  /* Tall enough for the big screen's lobby and controls. */
+  height: max(30rem, calc(100vh - 10rem));
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--bg);

@@ -1048,7 +1048,8 @@ fn PinReveal(image: String, answer: Point, aspect: f64, pins: Vec<PinGuess>) -> 
             }
             ol { class: "guesses",
                 for (i, pin) in pins.into_iter().take(PINS_LISTED).enumerate() {
-                    li { key: "{i}", class: if pin.points > 0 { "guess closest" } else { "guess" },
+                    // The trophy goes to the closest pin only.
+                    li { key: "{i}", class: if i == 0 && pin.points > 0 { "guess closest" } else { "guess" },
                         span { class: "strong", "{pin.team}" }
                         span { class: "muted small", title: "Distance, as a share of the picture's width", "{pin.distance * 100.0:.0}% away" }
                         span { "+{pin.points}" }
