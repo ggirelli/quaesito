@@ -141,6 +141,28 @@ impl Quiz {
         }
     }
 
+    /// Whether some answers could change places with [`Quiz::shuffle_answers`].
+    #[must_use]
+    pub fn can_shuffle_answers(&self) -> bool {
+        self.questions
+            .iter()
+            .any(|q| q.kind == QuestionKind::Choice && q.answers.len() > 1)
+    }
+
+    /// Shuffles the answers of each multiple-choice question; the right ones stay right.
+    /// `random_below(n)` must return a number in `0..n`.
+    pub fn shuffle_answers(&mut self, mut random_below: impl FnMut(usize) -> usize) {
+        for question in &mut self.questions {
+            if question.kind != QuestionKind::Choice {
+                continue;
+            }
+            // Fisher–Yates.
+            for i in (1..question.answers.len()).rev() {
+                question.answers.swap(i, random_below(i + 1).min(i));
+            }
+        }
+    }
+
     /// Names of every uploaded file the quiz uses: pictures (questions, slides, answers) and
     /// soundtracks.
     #[must_use]
@@ -1000,6 +1022,34 @@ mod tests {
 
         quiz.questions = vec![named("a"), slide("Round 2"), named("b")];
         assert!(!quiz.can_shuffle());
+    }
+
+    #[test]
+    fn shuffles_multiple_choice_answers_only() {
+        let mut choice = question();
+        choice.answers.push(answer("Mars", false));
+        let mut text = question();
+        text.kind = QuestionKind::Text {
+            accepted: vec!["Saturn".to_owned()],
+        };
+        let mut quiz = quiz();
+        quiz.questions = vec![choice, text.clone()];
+        assert!(quiz.can_shuffle_answers());
+        // Always picking 0 rotates the answers.
+        quiz.shuffle_answers(|_| 0);
+        let answers: Vec<(&str, bool)> = quiz.questions[0]
+            .answers
+            .iter()
+            .map(|a| (a.text.as_str(), a.correct))
+            .collect();
+        assert_eq!(
+            answers,
+            [("Saturn", true), ("Mars", false), ("Jupiter", false)]
+        );
+        assert_eq!(quiz.questions[1], text);
+
+        quiz.questions = vec![text];
+        assert!(!quiz.can_shuffle_answers());
     }
 
     #[test]

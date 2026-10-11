@@ -172,11 +172,13 @@ fn EditorForm(quiz: Quiz) -> Element {
     // The order before the last shuffle, and the revision the shuffle produced: undo is offered
     // until anything else changes.
     let mut before_shuffle = use_signal(|| None::<(u64, Vec<Question>)>);
-    let shuffle = move |_| {
+    let mut shuffle_with = move |shuffle: fn(&mut Quiz)| {
         let previous = draft.quiz.peek().questions.clone();
-        draft.edit(|q| q.shuffle_questions(client::random_below));
+        draft.edit(shuffle);
         before_shuffle.set(Some((*draft.revision.peek(), previous)));
     };
+    let shuffle = move |_| shuffle_with(|q| q.shuffle_questions(client::random_below));
+    let shuffle_answers = move |_| shuffle_with(|q| q.shuffle_answers(client::random_below));
     let undo_shuffle = move |_| {
         if let Some((_, previous)) = before_shuffle.take() {
             draft.edit(|q| q.questions = previous);
@@ -219,6 +221,7 @@ fn EditorForm(quiz: Quiz) -> Element {
     let quiz = draft.quiz.read();
     let question_count = quiz.questions.len();
     let can_shuffle = quiz.can_shuffle();
+    let can_shuffle_answers = quiz.can_shuffle_answers();
     rsx! {
         AdminHeader { back: true,
             span { class: "save-state",
@@ -286,6 +289,13 @@ fn EditorForm(quiz: Quiz) -> Element {
                     title: "Shuffle the order of the questions. Slides stay in place and questions never move past a slide.",
                     onclick: shuffle,
                     "🔀 Shuffle questions"
+                }
+                button {
+                    class: "button ghost shuffle",
+                    disabled: !can_shuffle_answers,
+                    title: "Shuffle the answers of every multiple-choice question. The right answers stay right.",
+                    onclick: shuffle_answers,
+                    "🔀 Shuffle answers"
                 }
             }
         }

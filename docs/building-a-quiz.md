@@ -19,6 +19,8 @@ by last edit, newest, name or number of questions.
   it with the icons next to them.
 - **Shuffle** with :material-shuffle: **Shuffle questions**: questions are shuffled within each
   round, slides stay where they are, and you can undo it until you change something else.
+  :material-shuffle: **Shuffle answers** does the same for the answers of every multiple-choice
+  question; the right answers stay right.
 
 Each question has an **answer type** (see [question types](question-types.md)), a time limit
 (the quiz's default unless you set one) and a **points** multiplier: a ×2 question earns twice
