@@ -300,6 +300,43 @@ pub struct Question {
     /// The options of a multiple-choice question (kept, but unused, for other kinds).
     #[serde(default)]
     pub answers: Vec<Answer>,
+    /// A typed bonus question asked together with this one (see [`Question::takes_bonus`]).
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub bonus: Option<Bonus>,
+}
+
+/// A bonus question: teams type its answer together with the main answer, and the judge can
+/// amend the verdict as for typed answers. A right answer adds a share of the question's points.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct Bonus {
+    /// The bonus question, e.g. "Who sings it?".
+    #[serde(default)]
+    pub text: String,
+    /// Accepted spellings, matched like a typed answer.
+    #[serde(default)]
+    pub accepted: Vec<String>,
+    /// What a right answer adds, in percent of the points the main answer can earn.
+    #[serde(default = "default_bonus_percent")]
+    pub percent: u32,
+}
+
+/// What a bonus is worth unless the quiz says otherwise, in percent.
+pub const DEFAULT_BONUS_PERCENT: u32 = 50;
+/// Bonus values the editor offers, in percent.
+pub const BONUS_PERCENTS: [u32; 3] = [25, 50, 100];
+
+fn default_bonus_percent() -> u32 {
+    DEFAULT_BONUS_PERCENT
+}
+
+impl Default for Bonus {
+    fn default() -> Self {
+        Self {
+            text: String::new(),
+            accepted: Vec::new(),
+            percent: DEFAULT_BONUS_PERCENT,
+        }
+    }
 }
 
 /// How a question's picture is revealed on the big screen while the clock runs.
@@ -492,6 +529,20 @@ impl Question {
             && !matches!(self.kind, QuestionKind::Pin { .. })
     }
 
+    /// Whether the question can carry a [`Bonus`]: those answered without typing words
+    /// (multiple choice, true/false, closest number, put in order, pin on a picture).
+    #[must_use]
+    pub fn takes_bonus(&self) -> bool {
+        matches!(
+            self.kind,
+            QuestionKind::Choice
+                | QuestionKind::TrueFalse { .. }
+                | QuestionKind::Number { .. }
+                | QuestionKind::Order { .. }
+                | QuestionKind::Pin { .. }
+        )
+    }
+
     /// Whether this is a slide rather than a question.
     #[must_use]
     pub fn is_slide(&self) -> bool {
@@ -540,6 +591,25 @@ impl Question {
     #[must_use]
     pub fn is_multi(&self) -> bool {
         self.correct_indexes().len() > 1
+    }
+
+    /// What is missing from the question's bonus question, if it has one it can carry.
+    fn bonus_problems(&self) -> Vec<String> {
+        let mut problems = Vec::new();
+        if let Some(bonus) = &self.bonus
+            && self.takes_bonus()
+        {
+            if bonus.text.trim().is_empty() {
+                problems.push("The bonus question has no text.".to_owned());
+            }
+            if bonus.accepted.iter().all(|a| a.trim().is_empty()) {
+                problems.push("The bonus question needs at least one accepted answer.".to_owned());
+            }
+            if !(1..=100).contains(&bonus.percent) {
+                problems.push("A bonus is worth 1 to 100% of the question's points.".to_owned());
+            }
+        }
+        problems
     }
 
     fn problems(&self) -> Vec<String> {
@@ -626,6 +696,7 @@ impl Question {
             }
             QuestionKind::Slide { .. } | QuestionKind::TrueFalse { .. } => {}
         }
+        problems.extend(self.bonus_problems());
         if !(1..=MAX_MULTIPLIER).contains(&self.multiplier()) {
             problems.push(format!(
                 "A question can be worth 1 to {MAX_MULTIPLIER} times the usual points."
@@ -717,6 +788,7 @@ mod tests {
             time_limit_secs: None,
             multiplier: None,
             answers: vec![answer("Jupiter", false), answer("Saturn", true)],
+            bonus: None,
         }
     }
 
@@ -751,6 +823,31 @@ mod tests {
         assert_eq!(issues.len(), 5);
         assert!(issues.iter().all(|i| i.question == Some(1)));
         assert!(issues[0].to_string().starts_with("Question 2: "));
+    }
+
+    #[test]
+    fn bonus_questions_need_text_and_an_answer_on_closed_questions_only() {
+        let mut question = Question {
+            text: "Q".to_owned(),
+            kind: QuestionKind::TrueFalse { answer: true },
+            bonus: Some(Bonus::default()),
+            ..Question::default()
+        };
+        assert_eq!(question.problems().len(), 2);
+        question.bonus = Some(Bonus {
+            text: "Why?".to_owned(),
+            accepted: vec!["Because".to_owned()],
+            percent: 50,
+        });
+        assert_eq!(question.problems(), Vec::<String>::new());
+        // Typed questions cannot carry one: it is ignored there.
+        question.kind = QuestionKind::Text {
+            accepted: vec!["A".to_owned()],
+        };
+        assert!(!question.takes_bonus());
+        // Saved quizzes without a bonus stay as they were.
+        question.bonus = None;
+        assert!(!serde_json::to_string(&question).unwrap().contains("bonus"));
     }
 
     #[test]

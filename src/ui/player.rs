@@ -305,9 +305,11 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
             paused,
             time_limit_ms,
             submitted,
+            bonus,
             ..
         } => rsx! {
             OpenPad {
+                bonus,
                 key: "{index}",
                 joker: view.joker,
                 index,
@@ -328,9 +330,11 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
             paused,
             time_limit_ms,
             submitted,
+            bonus,
             ..
         } => rsx! {
             PinPad {
+                bonus,
                 key: "{index}",
                 joker: view.joker,
                 index,
@@ -380,9 +384,11 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
             paused,
             time_limit_ms,
             submitted,
+            bonus,
             ..
         } => rsx! {
             OrderPad {
+                bonus,
                 key: "{index}",
                 joker: view.joker,
                 index,
@@ -410,8 +416,10 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
             paused,
             time_limit_ms,
             submitted,
+            bonus,
         } => rsx! {
             AnswerPad {
+                bonus,
                 key: "{index}",
                 joker: view.joker,
                 index,
@@ -584,9 +592,14 @@ fn AnswerPad(
     submitted: Option<Vec<usize>>,
     display: PhoneDisplay,
     joker: JokerState,
+    bonus: Option<(String, u32)>,
 ) -> Element {
     let live_socket: Live<PlayerCommand, PlayerView> = use_context();
     let mut selected = use_signal(Vec::<usize>::new);
+    let bonus_text = use_signal(String::new);
+    let has_bonus = bonus.is_some();
+    // With a bonus to type, a single answer is picked and then submitted, as several are.
+    let pick_then_submit = multi || has_bonus;
     let armed = use_signal(|| false);
     let now = use_clock(200);
     let (left, width) = clock.at(now());
@@ -599,6 +612,7 @@ fn AnswerPad(
             .send(PlayerCommand::Answer {
                 response: Response::Choice(answer),
                 joker: armed(),
+                bonus: has_bonus.then(|| bonus_text.cloned()),
             })
             .await;
     };
@@ -628,8 +642,13 @@ fn AnswerPad(
                 }
             } else if multi {
                 p { class: "muted", "Pick every correct answer, then submit." }
+            } else if has_bonus {
+                p { class: "muted", "Pick an answer, type the bonus, then submit." }
             }
             JokerToggle { state: joker, armed, locked }
+            if let Some(bonus) = bonus.clone() {
+                BonusField { bonus, value: bonus_text, locked }
+            }
             div { class: if with_text { "phone-answers with-text" } else { "phone-answers" },
                 for i in 0..answer_count {
                     {
@@ -660,6 +679,8 @@ fn AnswerPad(
                                                 s.push(i);
                                             }
                                         });
+                                    } else if has_bonus {
+                                        selected.set(vec![i]);
                                     } else {
                                         selected.set(vec![i]);
                                         send(vec![i]).await;
@@ -677,7 +698,7 @@ fn AnswerPad(
                     }
                 }
             }
-            if multi && !locked {
+            if pick_then_submit && !locked {
                 button {
                     class: "button primary big",
                     disabled: selected().is_empty(),
@@ -699,9 +720,12 @@ fn OpenPad(
     clock: Clock,
     submitted: Option<Response>,
     joker: JokerState,
+    bonus: Option<(String, u32)>,
 ) -> Element {
     let live_socket: Live<PlayerCommand, PlayerView> = use_context();
     let mut draft = use_signal(String::new);
+    let bonus_text = use_signal(String::new);
+    let has_bonus = bonus.is_some();
     let armed = use_signal(|| false);
     let mut error = use_signal(|| None::<String>);
     let now = use_clock(200);
@@ -732,6 +756,7 @@ fn OpenPad(
             .send(PlayerCommand::Answer {
                 response,
                 joker: armed(),
+                bonus: has_bonus.then(|| bonus_text.cloned()),
             })
             .await;
     };
@@ -793,6 +818,9 @@ fn OpenPad(
                                 oninput: move |e| draft.set(e.value()),
                             }
                         }
+                        if let Some(bonus) = bonus.clone() {
+                            BonusField { bonus, value: bonus_text, locked }
+                        }
                         ErrorBox { error: error() }
                         JokerToggle { state: joker, armed, locked }
                         button {
@@ -809,6 +837,31 @@ fn OpenPad(
 }
 
 #[component]
+/// The bonus question's field, sent together with the answer.
+#[component]
+fn BonusField(bonus: (String, u32), value: Signal<String>, locked: bool) -> Element {
+    let (text, percent) = bonus;
+    rsx! {
+        label { class: "field bonus-field",
+            span {
+                strong { "Bonus +{percent}%" }
+                " {text}"
+            }
+            input {
+                r#type: "text",
+                autocomplete: "off",
+                autocapitalize: "off",
+                spellcheck: false,
+                maxlength: MAX_TEXT_ANSWER_CHARS,
+                disabled: locked,
+                placeholder: if locked { "" } else { "Optional" },
+                value: "{value}",
+                oninput: move |e| value.set(e.value()),
+            }
+        }
+    }
+}
+
 /// A pin question: tap the picture to drop (or move) the pin, then submit.
 #[component]
 fn PinPad(
@@ -819,9 +872,12 @@ fn PinPad(
     clock: Clock,
     submitted: Option<Point>,
     joker: JokerState,
+    bonus: Option<(String, u32)>,
 ) -> Element {
     let live_socket: Live<PlayerCommand, PlayerView> = use_context();
     let mut pin = use_signal(|| None::<Point>);
+    let bonus_text = use_signal(String::new);
+    let has_bonus = bonus.is_some();
     let armed = use_signal(|| false);
     let now = use_clock(200);
     let (left, width) = clock.at(now());
@@ -834,6 +890,7 @@ fn PinPad(
                 .send(PlayerCommand::Answer {
                     response: Response::Pin(at),
                     joker: armed(),
+                    bonus: has_bonus.then(|| bonus_text.cloned()),
                 })
                 .await;
         }
@@ -862,6 +919,9 @@ fn PinPad(
                 }
             }
             JokerToggle { state: joker, armed, locked }
+            if let Some(bonus) = bonus.clone() {
+                BonusField { bonus, value: bonus_text, locked }
+            }
             PinMap {
                 image: map.0,
                 aspect: map.1,
@@ -915,6 +975,7 @@ fn PartsPad(
             .send(PlayerCommand::Answer {
                 response: Response::Parts(drafts()),
                 joker: armed(),
+                bonus: None,
             })
             .await;
     };
@@ -993,9 +1054,12 @@ fn OrderPad(
     clock: Clock,
     submitted: Option<Vec<usize>>,
     joker: JokerState,
+    bonus: Option<(String, u32)>,
 ) -> Element {
     let live_socket: Live<PlayerCommand, PlayerView> = use_context();
     let mut picked = use_signal(Vec::<usize>::new);
+    let bonus_text = use_signal(String::new);
+    let has_bonus = bonus.is_some();
     let armed = use_signal(|| false);
     let now = use_clock(200);
     let (left, width) = clock.at(now());
@@ -1008,6 +1072,7 @@ fn OrderPad(
             .send(PlayerCommand::Answer {
                 response: Response::Order(picked()),
                 joker: armed(),
+                bonus: has_bonus.then(|| bonus_text.cloned()),
             })
             .await;
     };
@@ -1033,6 +1098,9 @@ fn OrderPad(
                 p { class: "muted", "Tap the items from first to last. Tap again to take one back." }
             }
             JokerToggle { state: joker, armed, locked }
+            if let Some(bonus) = bonus.clone() {
+                BonusField { bonus, value: bonus_text, locked }
+            }
             ul { class: "order-pad",
                 for (i, item) in items.iter().enumerate() {
                     {

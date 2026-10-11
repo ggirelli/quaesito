@@ -11,6 +11,8 @@ All notable changes to quaesito are listed here. The format follows
 - A demo quiz with one question of each kind, added the first time quaesito starts.
 - A help button on the home page and in the admin pages, opening the user guide.
 - The downloads include the user guide, served by quaesito at `/docs/`, so it works offline.
+- Bonus questions on choices, true/false, number, order and pin questions: a typed question answered together with the main
+  one, worth +25%, +50% or +100% of its points and judged like typed answers on the reveal.
 - Results slides, for quizzes that reveal the answers at the end: placed anywhere (at an intermission, say), they walk
   through the answers since the previous results slide, then show the standings with the points each team gained and
   the places it moved.

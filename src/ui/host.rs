@@ -18,8 +18,8 @@ use crate::{
     model::{ImageReveal, Point},
     protocol::{
         Fastest, Grade, Guess, HostCommand, HostPhase, HostView, InputKind, Judgement,
-        MAX_NAME_CHARS, PinGuess, QuestionInfo, Reveal, SlideInfo, StandingRow, TeamInfo,
-        TextGroup, Upcoming,
+        MAX_NAME_CHARS, PartReveal, PinGuess, QuestionInfo, Reveal, SlideInfo, StandingRow,
+        TeamInfo, TextGroup, Upcoming,
     },
     scoring::MAX_BONUS,
 };
@@ -178,7 +178,7 @@ fn HostScreen(code: String) -> Element {
                             paused,
                         }
                     },
-                    HostPhase::Closed { question, answered, reveal, fastest, standings, .. } => rsx! {
+                    HostPhase::Closed { question, answered, reveal, fastest, standings, bonus, .. } => rsx! {
                         ClosedSlide {
                             question: question.clone(),
                             answered: *answered,
@@ -186,6 +186,7 @@ fn HostScreen(code: String) -> Element {
                             reveal: reveal.clone(),
                             fastest: fastest.clone(),
                             standings: standings.clone(),
+                            bonus: bonus.clone(),
                         }
                     },
                     HostPhase::Slide { slide, .. } => rsx! {
@@ -199,8 +200,13 @@ fn HostScreen(code: String) -> Element {
                             Standings { rows: standings.iter().take(RESULTS_SHOWN).cloned().collect::<Vec<_>>() }
                         }
                     },
-                    HostPhase::Review { question, reveal, fastest, .. } => rsx! {
-                        ReviewSlide { question: question.clone(), reveal: reveal.clone(), fastest: fastest.clone() }
+                    HostPhase::Review { question, reveal, fastest, bonus, .. } => rsx! {
+                        ReviewSlide {
+                            question: question.clone(),
+                            reveal: reveal.clone(),
+                            fastest: fastest.clone(),
+                            bonus: bonus.clone(),
+                        }
                     },
                     HostPhase::Podium { standings, finished } => rsx! {
                         Podium { standings: standings.clone(), finished: *finished, teams: view.teams.len() }
@@ -729,6 +735,12 @@ fn QuestionHeader(question: QuestionInfo, children: Element) -> Element {
             {children}
         }
         h1 { class: "question-title", "{question.text}" }
+        if let Some((text, percent)) = &question.bonus {
+            p { class: "bonus-line",
+                strong { "Bonus +{percent}%: " }
+                "{text}"
+            }
+        }
         if question.multi {
             p { class: "muted", style: "text-align:center;margin:0", "Several answers are correct" }
         }
@@ -1247,6 +1259,7 @@ fn ClosedSlide(
     reveal: Option<Reveal>,
     fastest: Option<Fastest>,
     standings: Option<Vec<StandingRow>>,
+    bonus: Option<PartReveal>,
 ) -> Element {
     match (reveal, standings) {
         (Some(reveal), Some(standings)) => rsx! {
@@ -1257,6 +1270,7 @@ fn ClosedSlide(
                 div { class: "stack",
                     FullPicture { question: question.clone() }
                     RevealBody { question: question.clone(), reveal }
+                    BonusReveal { question: question.index, bonus }
                     FastestNote { fastest }
                 }
                 Standings { rows: standings.into_iter().take(STANDINGS_SHOWN).collect::<Vec<_>>() }
@@ -1275,7 +1289,12 @@ fn ClosedSlide(
 }
 
 #[component]
-fn ReviewSlide(question: QuestionInfo, reveal: Reveal, fastest: Option<Fastest>) -> Element {
+fn ReviewSlide(
+    question: QuestionInfo,
+    reveal: Reveal,
+    fastest: Option<Fastest>,
+    bonus: Option<PartReveal>,
+) -> Element {
     rsx! {
         QuestionHeader { question: question.clone(),
             span { class: "muted", "The answers" }
@@ -1286,7 +1305,22 @@ fn ReviewSlide(question: QuestionInfo, reveal: Reveal, fastest: Option<Fastest>)
             }
         }
         RevealBody { question: question.clone(), reveal }
+        BonusReveal { question: question.index, bonus }
         FastestNote { fastest }
+    }
+}
+
+/// The bonus question's right answer and the teams' typed answers, to judge like typed answers.
+#[component]
+fn BonusReveal(question: usize, bonus: Option<PartReveal>) -> Element {
+    let Some(bonus) = bonus else {
+        return rsx! {};
+    };
+    rsx! {
+        section { class: "part-reveal bonus-reveal",
+            h3 { "{bonus.label}" }
+            TextReveal { question, accepted: bonus.accepted, groups: bonus.groups }
+        }
     }
 }
 

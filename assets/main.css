@@ -924,6 +924,40 @@ table.results {
   margin: 0;
 }
 
+/* The bonus question under the question, on the big screen. */
+.bonus-line {
+  text-align: center;
+  margin: 0;
+  font-size: 1.2em;
+  color: var(--muted);
+}
+
+.bonus-line strong {
+  color: var(--accent);
+}
+
+.bonus-reveal h3 {
+  color: var(--accent);
+}
+
+/* The bonus question's field on phones, and its editor. */
+.bonus-field strong {
+  color: var(--accent);
+}
+
+.bonus-edit {
+  border: 1px dashed var(--accent);
+  border-radius: 10px;
+  padding: 0.75rem;
+  margin: 0;
+  min-width: 0;
+}
+
+.bonus-edit legend {
+  color: var(--accent);
+  font-weight: 700;
+}
+
 .question-body {
   flex: 1;
   display: flex;
