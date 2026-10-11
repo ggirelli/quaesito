@@ -53,7 +53,7 @@ function tune(name) {
 /** Team pictures: crops of the lobby illustration. */
 function avatars(dir) {
   fs.mkdirSync(dir, { recursive: true });
-  const crops = { bears: '170x170+60+345', newton: '170x170+770+385', popcorn: '170x170+395+400' };
+  const crops = { bears: '160x160+50+350', newton: '165x165+770+345', popcorn: '150x150+405+400' };
   return Object.fromEntries(Object.entries(crops).map(([team, crop]) => {
     const out = path.join(dir, `${team}.png`);
     execFileSync('magick', [ART, '-background', '#14121f', '-flatten', '-crop', crop, '+repage', out]);
