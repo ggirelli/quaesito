@@ -27,9 +27,8 @@ identity and orientation.
 
 ## Enforcement
 
-Report unacceptable behaviour privately to the maintainer through a
-[private security advisory](https://github.com/ggirelli/quaesito/security/advisories/new) or by
-contacting them on GitHub. All reports will be reviewed promptly and handled confidentially.
+Report unacceptable behaviour privately to the maintainer,
+[@ggirelli](https://github.com/ggirelli), on GitHub. All reports will be reviewed promptly and handled confidentially.
 Maintainers may remove, edit or reject contributions, and temporarily or permanently ban
 contributors, for behaviour they deem harmful.
 

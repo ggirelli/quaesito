@@ -6,9 +6,14 @@ Quaesito is developed on the `main` branch; security fixes go into the latest re
 
 ## Reporting a vulnerability
 
-Please **do not open a public issue**. Report it privately through GitHub's
-[private vulnerability reporting](https://github.com/ggirelli/quaesito/security/advisories/new),
-with the steps to reproduce it and the impact you expect. You will get an answer within a few
+Please **do not open a public issue**. Report it privately:
+
+- through GitHub's private vulnerability reporting: the repository's **Security** tab →
+  **Report a vulnerability** (available while the repository is public), or
+- by contacting the maintainer, [@ggirelli](https://github.com/ggirelli), on GitHub and asking for
+  a private channel, without details in public.
+
+Include the steps to reproduce it and the impact you expect. You will get an answer within a few
 days, and credit in the release notes if you would like it.
 
 ## What to expect from quaesito
