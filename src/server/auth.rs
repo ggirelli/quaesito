@@ -16,6 +16,8 @@ pub struct Auth {
     tokens: Mutex<Vec<String>>,
     /// Where tokens are saved, if anywhere.
     file: Option<PathBuf>,
+    /// The password was generated at startup (no `QUAESITO_ADMIN_PASSWORD`).
+    generated: bool,
 }
 
 impl Auth {
@@ -23,16 +25,17 @@ impl Auth {
     /// `file`, and the ones saved there before are still valid.
     #[must_use]
     pub fn from_env(file: PathBuf) -> Self {
-        let password = std::env::var("QUAESITO_ADMIN_PASSWORD")
+        let chosen = std::env::var("QUAESITO_ADMIN_PASSWORD")
             .ok()
-            .filter(|p| !p.is_empty())
-            .unwrap_or_else(|| {
-                let generated = uuid::Uuid::new_v4().simple().to_string()[..12].to_owned();
-                dioxus::logger::tracing::warn!(
-                    "QUAESITO_ADMIN_PASSWORD is not set; generated admin password: {generated}"
-                );
-                generated
-            });
+            .filter(|p| !p.is_empty());
+        let generated = chosen.is_none();
+        let password = chosen.unwrap_or_else(|| {
+            let generated = uuid::Uuid::new_v4().simple().to_string()[..12].to_owned();
+            dioxus::logger::tracing::warn!(
+                "QUAESITO_ADMIN_PASSWORD is not set; generated admin password: {generated}"
+            );
+            generated
+        });
         let tokens = std::fs::read(&file)
             .ok()
             .and_then(|bytes| serde_json::from_slice(&bytes).ok())
@@ -41,6 +44,7 @@ impl Auth {
             password,
             tokens: Mutex::new(tokens),
             file: Some(file),
+            generated,
         }
     }
 
@@ -51,7 +55,14 @@ impl Auth {
             password,
             tokens: Mutex::new(Vec::new()),
             file: None,
+            generated: false,
         }
+    }
+
+    /// The password, when it was generated at startup and has to be shown to the admin.
+    #[must_use]
+    pub fn generated_password(&self) -> Option<&str> {
+        self.generated.then_some(self.password.as_str())
     }
 
     /// Issues a token if the password matches.

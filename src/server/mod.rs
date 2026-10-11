@@ -63,8 +63,31 @@ pub async fn init() -> anyhow::Result<()> {
     // A concurrent initialisation may have won the race; either state is equivalent.
     if STATE.set(state).is_ok() {
         tokio::spawn(clean_up_media());
+        #[cfg(not(debug_assertions))]
+        print_banner(&self::state().auth);
     }
     Ok(())
+}
+
+/// Tells whoever started a release build where to go and how to log in, above the log lines.
+#[cfg(not(debug_assertions))]
+fn print_banner(auth: &Auth) {
+    let port = std::env::var("PORT").unwrap_or_else(|_| "8080".to_owned());
+    let ip = std::env::var("IP").unwrap_or_else(|_| "127.0.0.1".to_owned());
+    let phones = if ip.starts_with("127.") || ip == "localhost" {
+        format!("not reachable: listening on {ip} only (set IP=0.0.0.0)")
+    } else {
+        net::join_origin(&port)
+    };
+    let password = auth.generated_password().map_or_else(
+        || "the one in QUAESITO_ADMIN_PASSWORD".to_owned(),
+        |p| format!("{p}   (set QUAESITO_ADMIN_PASSWORD to choose your own)"),
+    );
+    let line = "─".repeat(72);
+    println!(
+        "\n{line}\n  quaesito is running\n\n  On this computer:  http://localhost:{port}\n  \
+         Phones join at:    {phones}\n  Admin password:    {password}\n{line}\n"
+    );
 }
 
 /// How long an upload may stay unused before it is deleted (it may belong to an editor that has
