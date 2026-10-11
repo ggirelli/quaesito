@@ -866,6 +866,7 @@ impl Game {
             },
             Phase::Review { index, .. } => HostPhase::Review {
                 question: self.question_info(index),
+                answered: self.answered(index),
                 reveal: self.reveal(index),
                 fastest: self.fastest(index),
                 bonus: self.bonus_reveal(index),
@@ -2620,10 +2621,11 @@ mod tests {
                 ..
             }
         ));
-        g.next(t0).unwrap(); // review two
+        g.next(t0).unwrap(); // review two, which nobody answered
         assert!(matches!(
             g.host_view(t0).phase,
             HostPhase::Review {
+                answered: 0,
                 then: Upcoming::Podium,
                 ..
             }

@@ -274,6 +274,8 @@ pub enum HostPhase {
     /// Walk through the answers (reveal at end), at a results slide or at the end of the quiz.
     Review {
         question: QuestionInfo,
+        /// How many teams answered.
+        answered: usize,
         reveal: Reveal,
         fastest: Option<Fastest>,
         /// The bonus question's answers, if the question has one.
