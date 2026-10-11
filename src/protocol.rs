@@ -95,6 +95,8 @@ pub struct QuestionInfo {
     /// More than one answer is correct.
     pub multi: bool,
     pub time_limit_ms: u64,
+    /// The bonus question and what it is worth, in percent of the question's points.
+    pub bonus: Option<(String, u32)>,
 }
 
 /// A slide as shown on the big screen; any part may be empty.
@@ -256,6 +258,8 @@ pub enum HostPhase {
         /// The quickest right answer, when revealing (not for number questions).
         fastest: Option<Fastest>,
         standings: Option<Vec<StandingRow>>,
+        /// The bonus question's answers, when revealing and the question has one.
+        bonus: Option<PartReveal>,
         then: Upcoming,
     },
     /// A slide between questions.
@@ -272,6 +276,8 @@ pub enum HostPhase {
         question: QuestionInfo,
         reveal: Reveal,
         fastest: Option<Fastest>,
+        /// The bonus question's answers, if the question has one.
+        bonus: Option<PartReveal>,
         then: Upcoming,
     },
     /// Final ranking, revealed from 3rd to 1st. `standings` only holds rows revealed so far.
@@ -375,6 +381,8 @@ pub enum PlayerPhase {
         paused: bool,
         time_limit_ms: u64,
         submitted: Option<Response>,
+        /// The bonus question and its worth in percent, to answer together with the question.
+        bonus: Option<(String, u32)>,
     },
     Closed {
         index: usize,
@@ -406,8 +414,14 @@ pub enum PlayerPhase {
 /// Commands a team leader's phone can send.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum PlayerCommand {
-    /// Submit an answer to the open question, optionally playing the team's joker on it.
-    Answer { response: Response, joker: bool },
+    /// Submit an answer to the open question, optionally playing the team's joker on it, with
+    /// the typed answer to its bonus question if it has one.
+    Answer {
+        response: Response,
+        joker: bool,
+        #[serde(default)]
+        bonus: Option<String>,
+    },
 }
 
 /// Credentials a team gets when joining; kept on the phone to reconnect.

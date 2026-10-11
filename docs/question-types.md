@@ -49,6 +49,18 @@ spot.
 List the items in the right order; phones show them shuffled. Teams tap them from first to last
 (tap again to take one back), and each item in its right place earns its share of the points.
 
+## Bonus questions
+
+Choices, true/false, number, order and pin questions can carry a **bonus question**: **＋ Add a bonus
+question** in the editor, type it (say, "Who sings it?" under "Which band is this?") with its
+accepted answers, and choose what it is worth: +25%, +50% or +100% of the points the question can
+earn. The big screen shows it under the question, and phones get a bonus field next to the
+answers; teams submit both together (with a bonus, a single answer is picked, then submitted).
+
+A right bonus earns its share whether or not the main answer is right. On the reveal, the bonus
+answers are grouped and judged like [typed answers](#typed-answers), half points and bonus or
+malus included. The question's multiplier and a joker apply to the bonus too.
+
 ## Slides
 
 Not questions: a title, text and a picture between questions. Phones show "Eyes on the big

@@ -31,7 +31,7 @@ use serde::{Deserialize, Serialize};
 
 use super::matching::normalize;
 use crate::{
-    model::{AdvanceMode, MAX_TEXT_ANSWER_CHARS, Question, QuestionKind, Quiz, RevealMode},
+    model::{AdvanceMode, Bonus, MAX_TEXT_ANSWER_CHARS, Question, QuestionKind, Quiz, RevealMode},
     protocol::{
         AnswerOutcome, Fastest, GameResults, Grade, Guess, HostPhase, HostView, InputKind,
         JokerState, Judgement, MAX_NAME_CHARS, PartReveal, PinGuess, PlayerPhase, PlayerView,
@@ -139,6 +139,9 @@ struct Team {
 struct Submission {
     response: Response,
     elapsed: Duration,
+    /// The typed answer to the question's bonus question, if any.
+    #[serde(default)]
+    bonus: Option<String>,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -241,6 +244,7 @@ impl Game {
                             s.as_ref().map(|s| Submission {
                                 response: s.response.clone(),
                                 elapsed: s.elapsed,
+                                bonus: s.bonus.clone(),
                             })
                         })
                         .collect(),
@@ -672,6 +676,22 @@ impl Game {
         joker: bool,
         now: Instant,
     ) -> Result<(), Refusal> {
+        self.answer_with_bonus(team, response, joker, None, now)
+    }
+
+    /// [`Game::answer`], with the typed answer to the question's bonus question. A bonus answer
+    /// to a question without one is ignored.
+    ///
+    /// # Errors
+    /// As [`Game::answer`], and refuses an overlong bonus answer.
+    pub fn answer_with_bonus(
+        &mut self,
+        team: u32,
+        response: Response,
+        joker: bool,
+        bonus: Option<String>,
+        now: Instant,
+    ) -> Result<(), Refusal> {
         let jokers = self.quiz.settings.joker;
         let Phase::Question {
             index,
@@ -686,6 +706,14 @@ impl Game {
             return Err(Refusal("Time is up."));
         }
         let response = check_response(&self.quiz.questions[index], response)?;
+        let bonus =
+            bonus.filter(|text| self.active_bonus(index).is_some() && !normalize(text).is_empty());
+        if bonus
+            .as_ref()
+            .is_some_and(|text| text.chars().count() > MAX_TEXT_ANSWER_CHARS)
+        {
+            return Err(Refusal("That bonus answer is too long."));
+        }
         let team = self
             .teams
             .iter_mut()
@@ -706,6 +734,7 @@ impl Game {
         team.submissions[index] = Some(Submission {
             response,
             elapsed: now.duration_since(started),
+            bonus,
         });
 
         if self.everyone_answered(index) {
@@ -737,10 +766,12 @@ impl Game {
         if !shown {
             return Err(Refusal("These answers are not on screen."));
         }
-        if !matches!(
+        let typed = matches!(
             self.quiz.questions[question].kind,
             QuestionKind::Text { .. } | QuestionKind::Parts { .. }
-        ) {
+        );
+        let bonus = key.starts_with(BONUS_KEY_PREFIX) && self.active_bonus(question).is_some();
+        if !typed && !bonus {
             return Err(Refusal("Only typed answers can be judged."));
         }
         let judgement = Judgement {
@@ -825,6 +856,7 @@ impl Game {
                     reveal: revealing.then(|| self.reveal(index)),
                     fastest: revealing.then(|| self.fastest(index)).flatten(),
                     standings: revealing.then(|| self.standings_after(index)),
+                    bonus: revealing.then(|| self.bonus_reveal(index)).flatten(),
                     then: self.upcoming_after(index),
                 }
             }
@@ -836,6 +868,7 @@ impl Game {
                 question: self.question_info(index),
                 reveal: self.reveal(index),
                 fastest: self.fastest(index),
+                bonus: self.bonus_reveal(index),
                 then: if self
                     .first_question_in(index + 1, self.part_end(index))
                     .is_some()
@@ -1042,6 +1075,9 @@ impl Game {
             paused: self.paused_at.is_some(),
             time_limit_ms: u64::from(question.time_limit_secs(&self.quiz.settings)) * 1000,
             submitted: team.submissions[index].as_ref().map(|s| s.response.clone()),
+            bonus: self
+                .active_bonus(index)
+                .map(|b| (b.text.trim().to_owned(), b.percent)),
         }
     }
 
@@ -1158,7 +1194,49 @@ impl Game {
             answer_images: answer_images(question),
             multi: question.is_multi(),
             time_limit_ms: u64::from(question.time_limit_secs(&self.quiz.settings)) * 1000,
+            bonus: self
+                .active_bonus(index)
+                .map(|b| (b.text.trim().to_owned(), b.percent)),
         }
+    }
+
+    /// Question `index`'s bonus question, if it has one it can carry.
+    fn active_bonus(&self, index: usize) -> Option<&Bonus> {
+        let question = &self.quiz.questions[index];
+        question.bonus.as_ref().filter(|_| question.takes_bonus())
+    }
+
+    /// The bonus question's typed answers to question `index`, grouped, if it has one.
+    fn bonus_reveal(&self, index: usize) -> Option<PartReveal> {
+        let bonus = self.active_bonus(index)?;
+        let mut groups: Vec<TextGroup> = Vec::new();
+        for team in &self.teams {
+            let Some(text) = team.submissions[index]
+                .as_ref()
+                .and_then(|s| s.bonus.as_ref())
+            else {
+                continue;
+            };
+            let key = bonus_key(text);
+            if let Some(group) = groups.iter_mut().find(|g| g.key == key) {
+                group.teams.push(team.name.clone());
+            } else {
+                let (judgement, amended) = self.judgement(index, &key);
+                groups.push(TextGroup {
+                    key,
+                    text: text.clone(),
+                    teams: vec![team.name.clone()],
+                    judgement,
+                    amended,
+                });
+            }
+        }
+        groups.sort_by_key(|g| std::cmp::Reverse(g.teams.len()));
+        Some(PartReveal {
+            label: "Bonus answers".to_owned(),
+            accepted: bonus.accepted.clone(),
+            groups,
+        })
     }
 
     fn answered(&self, index: usize) -> usize {
@@ -1354,7 +1432,13 @@ impl Game {
         let accepts = |accepted: &[String], norm: &str| {
             !norm.is_empty() && accepted.iter().any(|a| normalize(a) == norm)
         };
+        let bonus = key
+            .strip_prefix(BONUS_KEY_PREFIX)
+            .zip(self.active_bonus(index));
         let matches = match &self.quiz.questions[index].kind {
+            _ if key.starts_with(BONUS_KEY_PREFIX) => {
+                bonus.is_some_and(|(norm, bonus)| accepts(&bonus.accepted, norm))
+            }
             QuestionKind::Text { accepted } => accepts(accepted, key),
             QuestionKind::Parts { parts } => key
                 .split_once(PART_KEY_SEPARATOR)
@@ -1401,8 +1485,34 @@ impl Game {
         }
     }
 
-    /// How `team` did on question `index`, before the question's multiplier and any joker.
+    /// How `team` did on question `index`, its bonus question included, before the question's
+    /// multiplier and any joker.
     fn base_outcome(&self, index: usize, team: &Team) -> AnswerOutcome {
+        let mut outcome = self.main_outcome(index, team);
+        if let (Some(bonus), Some(submission)) =
+            (self.active_bonus(index), team.submissions[index].as_ref())
+            && let Some(text) = &submission.bonus
+        {
+            let question = &self.quiz.questions[index];
+            let limit =
+                Duration::from_secs(u64::from(question.time_limit_secs(&self.quiz.settings)));
+            // Speed means nothing for numbers: the closest guesses earn a set amount.
+            let full = match question.kind {
+                QuestionKind::Number { .. } => {
+                    u32::try_from(scoring::CLOSEST_POINTS).unwrap_or(scoring::MAX_POINTS)
+                }
+                _ => scoring::full_points(self.quiz.settings.points, submission.elapsed, limit),
+            };
+            let (judgement, _) = self.judgement(index, &bonus_key(text));
+            outcome.points = outcome
+                .points
+                .saturating_add(scoring::text_points(judgement, full * bonus.percent / 100));
+        }
+        outcome
+    }
+
+    /// How `team` did on question `index` itself, before the question's multiplier and any joker.
+    fn main_outcome(&self, index: usize, team: &Team) -> AnswerOutcome {
         let Some(submission) = &team.submissions[index] else {
             return AnswerOutcome {
                 points: 0,
@@ -1729,6 +1839,13 @@ fn answer_images(question: &Question) -> Vec<Option<String>> {
 /// Separates a part's index from the normalised text in judgement keys of several-answers
 /// questions (normalised text has letters, digits and spaces only).
 const PART_KEY_SEPARATOR: char = '|';
+/// Prefix of the judgement keys of bonus answers (parts use their index instead).
+const BONUS_KEY_PREFIX: &str = "bonus|";
+
+/// The judgement key of a typed bonus answer.
+fn bonus_key(text: &str) -> String {
+    format!("{BONUS_KEY_PREFIX}{}", normalize(text))
+}
 
 /// The judgement key of a typed answer: its normalised text, prefixed by the part's index for a
 /// several-answers question.
@@ -1811,6 +1928,7 @@ mod tests {
                     image: None,
                 },
             ],
+            bonus: None,
         };
         Quiz {
             settings,
@@ -2734,6 +2852,66 @@ mod tests {
     }
 
     #[test]
+    fn a_bonus_question_adds_its_share_and_is_judged() {
+        let t0 = Instant::now();
+        let mut quiz = quiz(QuizSettings {
+            points: crate::model::PointsMode::Flat,
+            ..QuizSettings::default()
+        });
+        quiz.questions[0].bonus = Some(Bonus {
+            text: "Who sings it?".to_owned(),
+            accepted: vec!["Freddie Mercury".to_owned()],
+            percent: 50,
+        });
+        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        let bats = join(&mut g, "Bats");
+        let rats = join(&mut g, "Rats");
+        g.next(t0).unwrap();
+        let PlayerPhase::Question { bonus, .. } = g.player_view(owls, t0).unwrap().phase else {
+            panic!("expected a question");
+        };
+        assert_eq!(bonus, Some(("Who sings it?".to_owned(), 50)));
+        let bonus = |text: &str| Some(text.to_owned());
+        g.answer_with_bonus(owls, pick(&[0]), false, bonus("freddie mercury"), t0)
+            .unwrap();
+        g.answer_with_bonus(cats, pick(&[1]), false, bonus("Freddie Mercury!"), t0)
+            .unwrap();
+        g.answer_with_bonus(bats, pick(&[0]), false, bonus("Freddy"), t0)
+            .unwrap();
+        g.answer(rats, pick(&[0]), false, t0).unwrap();
+        let score = |g: &Game, team: u32| {
+            g.standings()
+                .into_iter()
+                .find(|r| r.team.id == team)
+                .unwrap()
+                .score
+        };
+        assert_eq!(
+            [owls, cats, bats, rats].map(|t| score(&g, t)),
+            [1500, 500, 1000, 1000]
+        );
+        let HostPhase::Closed {
+            bonus: Some(reveal),
+            ..
+        } = g.host_view(t0).phase
+        else {
+            panic!("expected the bonus answers");
+        };
+        assert_eq!(reveal.label, "Bonus answers");
+        assert_eq!(reveal.groups.len(), 2);
+        // The judge gives Freddy half the bonus; the main answers cannot be judged.
+        let half = Judgement {
+            grade: Grade::Half,
+            bonus: 0,
+        };
+        g.judge(0, "bonus|freddy", half, t0).unwrap();
+        assert_eq!(score(&g, bats), 1250);
+        assert!(g.judge(0, "freddy", half, t0).is_err());
+    }
+
+    #[test]
     fn flat_points_ignore_speed() {
         let t0 = Instant::now();
         let mut g = game(QuizSettings {
@@ -2996,6 +3174,36 @@ mod tests {
         g.next(t0).unwrap(); // review
         g.judge(0, "no", full, t0).unwrap();
         assert_eq!(text_groups(&g)[0].2, full);
+    }
+
+    #[test]
+    fn a_bonus_on_a_number_question_is_a_share_of_the_closest_points() {
+        let t0 = Instant::now();
+        let mut quiz = quiz(QuizSettings::default());
+        quiz.questions.truncate(1);
+        quiz.questions[0].kind = QuestionKind::Number { answer: Some(88.0) };
+        quiz.questions[0].bonus = Some(Bonus {
+            text: "Who invented it?".to_owned(),
+            accepted: vec!["Cristofori".to_owned()],
+            percent: 25,
+        });
+        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        g.next(t0).unwrap();
+        let bonus = Some("cristofori".to_owned());
+        g.answer_with_bonus(
+            owls,
+            Response::Number(85.0),
+            false,
+            bonus.clone(),
+            t0 + secs(9),
+        )
+        .unwrap();
+        g.answer_with_bonus(cats, Response::Number(50.0), false, bonus, t0)
+            .unwrap();
+        let scores: Vec<(u32, i32)> = g.standings().iter().map(|r| (r.team.id, r.score)).collect();
+        assert_eq!(scores, [(owls, 1250), (cats, 250)]);
     }
 
     #[test]
