@@ -11,7 +11,7 @@ use dioxus::fullstack::{
         Router,
         body::Body,
         extract::Request,
-        http::{StatusCode, Uri},
+        http::{HeaderValue, StatusCode, Uri, header},
         response::{IntoResponse, Redirect, Response},
     },
     routing::get,
@@ -106,7 +106,15 @@ async fn serve(dir: Option<PathBuf>, request: Request) -> Response {
         .try_call(Request::from_parts(parts, body))
         .await
     {
-        Ok(response) => response.map(Body::new),
+        Ok(response) => {
+            let mut response = response.map(Body::new);
+            // Browsers check back every time (a cheap 304 when nothing changed), so a rebuilt
+            // guide shows at once instead of a copy they guessed was still fresh.
+            response
+                .headers_mut()
+                .insert(header::CACHE_CONTROL, HeaderValue::from_static("no-cache"));
+            response
+        }
         Err(_) => StatusCode::INTERNAL_SERVER_ERROR.into_response(),
     }
 }

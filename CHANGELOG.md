@@ -41,6 +41,7 @@ All notable changes to quaesito are listed here. The format follows
 
 ### Fixed
 
+- The user guide at `/docs/` is never shown from a stale browser copy after it is rebuilt or the app is updated.
 - A question's picture no longer pushes the big screen's controls off the bottom of a 16:9 screen: the
   big screen is exactly one screen tall and the picture takes the room the question leaves.
 - Nothing is loaded from the internet any more: the user guide bundles its fonts and no longer asks GitHub for the
