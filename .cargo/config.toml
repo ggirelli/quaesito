@@ -1,0 +1,4 @@
+# Bundle the MSVC C runtime into the Windows build, so it runs without the
+# Visual C++ Redistributable installed (fresh installs, VMs).
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]
