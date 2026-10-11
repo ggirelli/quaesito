@@ -717,6 +717,15 @@ fn QuestionCard(
                     value: "{question.text}",
                     oninput: move |e| draft.edit_question(index, |q| q.text = e.value()),
                 }
+                if !slide {
+                    textarea {
+                        class: "question-passage-input",
+                        placeholder: "Text shown with the question (optional): lyrics, a quote, a riddle…",
+                        rows: if question.passage.is_empty() { 1 } else { 4 },
+                        value: "{question.passage}",
+                        oninput: move |e| draft.edit_question(index, |q| q.passage = e.value()),
+                    }
+                }
                 div { class: "question-media row",
                     if let Some(image) = &question.image {
                         if is_video(image) {

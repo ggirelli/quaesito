@@ -60,7 +60,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 51  | Editor: moving a question or slide keeps it in view and focused                                                                    | ✅ done |
 | 52  | Results slides: show the standings mid-quiz (e.g. at an intermission) when revealing at the end                                    | ✅ done |
 | 53  | Bonus: an open-ended follow-up on any closed question, worth a small extra (e.g. +50%)                                             | ✅ done |
-| 54  | Text on question slides (lyrics, quotes…)                                                                                          | 📋 todo |
+| 54  | Text on question slides (lyrics, quotes…)                                                                                          | ✅ done |
 | 55  | Document the team limit: 50 by default, any number of players per team; always capped for safety, but as high as you like          | ✅ done |
 | 56  | Team limit set when starting a game: 50 by default, the host can lower or raise it                                                 | ✅ done |
 | 57  | New colour palette and symbols in the assets (ASSETS.md prompts), docs and demo video                                              | 📋 todo |

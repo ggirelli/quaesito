@@ -959,6 +959,23 @@ table.results {
   margin: 0;
 }
 
+/* Text shown with a question (lyrics, a quote…), on the big screen and phones. */
+.question-passage {
+  margin: 0 auto;
+  max-width: 60rem;
+  max-height: 40vh;
+  overflow-y: auto;
+  white-space: pre-line;
+  text-align: center;
+  font-family: var(--serif);
+  font-size: 1.5em;
+  line-height: 1.4;
+}
+
+.phone-question {
+  white-space: pre-line;
+}
+
 /* The bonus question under the question, on the big screen. */
 .bonus-line {
   text-align: center;

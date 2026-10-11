@@ -276,6 +276,9 @@ pub enum PhoneDisplay {
 pub struct Question {
     /// The question, or the body text of a slide.
     pub text: String,
+    /// Text shown with the question, line breaks kept: lyrics, a quote, a riddle…
+    #[serde(default, skip_serializing_if = "String::is_empty")]
+    pub passage: String,
     /// How teams answer. Older quizzes without it are multiple choice.
     #[serde(default)]
     pub kind: QuestionKind,
@@ -798,6 +801,7 @@ mod tests {
             multiplier: None,
             answers: vec![answer("Jupiter", false), answer("Saturn", true)],
             bonus: None,
+            passage: String::new(),
         }
     }
 

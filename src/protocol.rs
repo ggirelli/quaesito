@@ -103,6 +103,8 @@ pub struct QuestionInfo {
     pub time_limit_ms: u64,
     /// The bonus question and what it is worth, in percent of the question's points.
     pub bonus: Option<(String, u32)>,
+    /// Text shown with the question (lyrics, a quote…), line breaks kept; empty when none.
+    pub passage: String,
 }
 
 /// A slide as shown on the big screen; any part may be empty.
