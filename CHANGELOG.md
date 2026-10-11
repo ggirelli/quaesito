@@ -27,6 +27,8 @@ All notable changes to quaesito are listed here. The format follows
 
 ### Changed
 
+- The lobby illustration and the social preview show the new answer colours and shapes; the screenshots and the demo
+  video are retaken.
 - Getting started walks through each system step by step, with the current macOS 15 "Open Anyway" advice and the
   Windows SmartScreen and firewall prompts.
 - Reveals say "Nobody answered this one." when no team answered, also in the walk through the answers at the end.

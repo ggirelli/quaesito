@@ -11,59 +11,6 @@ drop. Shapes are drawn in off-white on violet and magenta, in deep indigo on the
 
 ## Wanted
 
-### Lobby illustration, new answer colours and shapes
-
-The current one shows the old answer colours and shapes (pink triangle, blue diamond, green square,
-pink circle) on the phones.
-
-- **Files:** `assets/brand/lobby.png` (the full-size original, git-ignored), about 1448×1086,
-  transparent background. I compress it to `assets/brand/lobby.webp` and copy it to
-  `docs/assets/lobby.webp`.
-- **Used by:** the big-screen lobby until five teams have joined, and the top of the documentation
-  home page (in dark and light mode).
-- **Prompt** (attach the current `lobby.png` so the scene stays the same):
-
-  ```
-  Redraw this flat vector illustration with the same scene, composition, characters and style:
-  friends on a dark sofa seen from behind, holding phones up towards a TV that shows a big amber
-  (#FFB703) question mark, a plant, a bowl of popcorn, amber spark lines. Change only the colours
-  and symbols:
-  - Each phone screen is filled with one answer colour and shows one white or dark symbol, centred:
-    a violet (#8B5CF6) screen with an off-white four-pointed sparkle; a teal (#14B8A6) screen with
-    a deep indigo crescent moon; a magenta (#E0479E) screen with an off-white heart; an orange
-    (#FB923C) screen with a deep indigo lightning bolt.
-  - Clothes, hair and cushions use the same accents (violet, teal, magenta, orange, sky blue
-    #38BDF8, lime #A3E635) instead of the old pink, blue and green.
-  Palette limited to amber #FFB703, deep indigo #14121F, off-white #F4F1FF and those accents.
-  Transparent background, no text, no gradients, no photorealism. It must read well on a dark
-  #14121F background and on a white one.
-  ```
-
-### GitHub social preview, new answer colours and shapes
-
-The current one shows the old answer tiles (pink triangle, blue diamond, yellow circle, green
-square) on the TV and the phones.
-
-- **Files:** `assets/brand/social-preview.png` (original, git-ignored) and
-  `assets/brand/social-preview.jpg`, 1280×640.
-- **Used by:** GitHub repository settings → Social preview (uploaded by hand).
-- **Prompt** (attach the current `social-preview.jpg`):
-
-  ```
-  Redraw this 1280×640 banner with the same layout and style: on the left the amber (#FFB703)
-  logo, a rounded question mark whose top loops like a "q", with the word "quaesito" and the
-  tagline "Quizzes among friends." in off-white #F4F1FF; on the right a TV and three phones held
-  up by hands, on a deep indigo #14121F background. Change only the answers:
-  - The TV shows a question bar and six answer tiles in two rows of three, each a colour with a
-    centred symbol: violet #8B5CF6 with an off-white four-pointed sparkle, teal #14B8A6 with a deep
-    indigo crescent moon, magenta #E0479E with an off-white heart, orange #FB923C with a deep
-    indigo lightning bolt, sky blue #38BDF8 with a deep indigo leaf, lime #A3E635 with a deep
-    indigo drop.
-  - The three phones show the violet sparkle, the teal moon and the magenta heart.
-  - Sleeves use the same accents instead of the old pink, blue and yellow.
-  Flat vector, no gradients, no photorealism, no text besides "quaesito" and the tagline.
-  ```
-
 ### Demo video voice-over (optional)
 
 The demo video is narrated by [Chatterbox](https://github.com/resemble-ai/chatterbox), which runs
@@ -129,7 +76,10 @@ missing. Recorded effects would sound richer; if you add them I will play them i
 - `assets/brand/icon.png`: the app icon (1254×1254 source). The app uses `icon-192.png`, a cropped
   192×192 copy, as favicon and logo mark.
 - `assets/brand/logo-{dark,light}.{png,svg}`: logo with word mark (README header).
-- `assets/brand/lobby.webp`: lobby illustration on the big screen, shown until five teams have joined.
-  Compressed from the 1448×1086 PNG original (kept locally as `lobby.png`, git-ignored).
-- `assets/brand/social-preview.jpg`: GitHub social preview, 1280×640. Not used by the app: upload it
+- `assets/brand/lobby.webp`: lobby illustration on the big screen, shown until five teams have joined,
+  and at the top of the documentation home page (`docs/assets/lobby.webp`), with the answer colours
+  and shapes on the phones. Compressed to 960×720 from the 1447×1087 PNG original (kept locally as
+  `lobby.png`, git-ignored).
+- `assets/brand/social-preview.jpg`: GitHub social preview, 1280×640, flattened onto deep indigo from
+  the transparent 1774×887 PNG original (kept locally as `social-preview.png`, git-ignored). Not used by the app: upload it
   by hand under the repository's Settings → General → Social preview (GitHub has no API for it).
