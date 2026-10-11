@@ -17,7 +17,13 @@ All notable changes to quaesito are listed here. The format follows
 - Answers have new colours (violet, teal, magenta, orange, sky, lime) and shapes (sparkle, moon, heart, bolt, leaf,
   drop), drawn so they look the same on every phone. The right answer is ringed in white.
 - The README is shorter and points to the user guide for details.
+- The demo video and the screenshots show a question with a picture and one with a soundtrack.
 - The demo video is narrated with Chatterbox, which sounds livelier than Kokoro.
+
+### Fixed
+
+- A question's picture no longer pushes the big screen's controls off the bottom of a 16:9 screen: the
+  big screen is exactly one screen tall and the picture takes the room the question leaves.
 
 ## [0.1.0] - 2026-10-11
 

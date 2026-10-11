@@ -8,5 +8,7 @@
 - **00:33** Put them in order, oldest first! Every item in the right place scores.
 - **00:39** Several answers in one question, and this one is worth double points!
 - **00:45** Drop a pin on the picture. The closer you get, the more you win!
-- **00:50** And the winner is… drumroll, please!
-- **00:57** Best of all, quaesito is free and open source. Grab it, and host your own quiz night!
+- **00:50** Any question can show a picture, as a clue or just for fun!
+- **00:55** Or add a soundtrack: the clock starts with the music. Which way does this tune go?
+- **01:04** And the winner is… drumroll, please!
+- **01:11** Best of all, quaesito is free and open source. Grab it, and host your own quiz night!

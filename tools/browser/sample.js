@@ -13,9 +13,40 @@ function media(name, crop) {
   fs.mkdirSync(MEDIA, { recursive: true });
   const file = `${name.padEnd(32, '0').slice(0, 32)}.jpg`;
   const args = [ART, '-background', '#14121f', '-flatten'];
-  if (crop) args.push('-crop', crop, '+repage', '-resize', '400x400');
+  if (crop) args.push('-crop', crop, '+repage');
   args.push('-quality', '88', path.join(MEDIA, file));
   execFileSync('magick', args);
+  return file;
+}
+
+/**
+ * A soundtrack made here, so it is free to use: a little tune going up the scale twice, as a WAV
+ * file in the media folder. Returns its name.
+ */
+function tune(name) {
+  fs.mkdirSync(MEDIA, { recursive: true });
+  const rate = 22050;
+  const note = 0.3;
+  const scale = [0, 2, 4, 5, 7, 9, 11, 12];
+  const notes = [...scale, ...scale];
+  const samples = new Int16Array(Math.round(rate * note * notes.length));
+  notes.forEach((step, n) => {
+    const freq = 523.25 * 2 ** (step / 12);
+    for (let i = 0; i < rate * note; i++) {
+      const t = i / rate;
+      const envelope = Math.min(1, t / 0.01) * Math.exp(-4 * t);
+      const tone = Math.sin(2 * Math.PI * freq * t) + 0.3 * Math.sin(4 * Math.PI * freq * t) + 0.15 * Math.sin(6 * Math.PI * freq * t);
+      samples[Math.round(n * rate * note) + i] = Math.round(9000 * envelope * tone);
+    }
+  });
+  const data = Buffer.from(samples.buffer);
+  const header = Buffer.alloc(44);
+  header.write('RIFF', 0); header.writeUInt32LE(36 + data.length, 4); header.write('WAVE', 8);
+  header.write('fmt ', 12); header.writeUInt32LE(16, 16); header.writeUInt16LE(1, 20); header.writeUInt16LE(1, 22);
+  header.writeUInt32LE(rate, 24); header.writeUInt32LE(rate * 2, 28); header.writeUInt16LE(2, 32); header.writeUInt16LE(16, 34);
+  header.write('data', 36); header.writeUInt32LE(data.length, 40);
+  const file = `${name.padEnd(32, '0').slice(0, 32)}.wav`;
+  fs.writeFileSync(path.join(MEDIA, file), Buffer.concat([header, data]));
   return file;
 }
 
@@ -32,6 +63,7 @@ function avatars(dir) {
 
 function quiz() {
   const art = media('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1');
+  const snack = media('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2', '480x360+240+300');
   const choice = (text, answers, right) => ({
     text, answers: answers.map((a, i) => ({ text: a, correct: i === right })),
   });
@@ -49,6 +81,8 @@ function quiz() {
         { label: 'City', accepted: ['Paris'] },
       ] } }, multiplier: 2, answers: [] },
       { text: 'Where is the popcorn?', image: art, kind: { Pin: { answer: { x: 0.5, y: 0.68 }, aspect: 0.75, tolerance: 'Normal' } }, answers: [] },
+      { ...choice('What are the friends snacking on?', ['Popcorn', 'Nachos', 'Pretzels', 'Grapes'], 0), image: snack },
+      { ...choice('Which way does this tune go?', ['Up the scale', 'Down the scale', 'Up and down', 'Same note'], 0), audio: tune('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa3') },
     ],
   };
 }

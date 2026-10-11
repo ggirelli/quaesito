@@ -30,6 +30,8 @@ Add a picture to any question. For a guessing game, choose how it appears while 
 With a gradual reveal, set how many seconds the whole picture stays visible before the buzzer.
 Pictures are resized and re-encoded when uploaded, up to 15 MB.
 
+![A multiple-choice question with a picture on the big screen](screenshots/host-picture.webp)
+
 ## Videos
 
 Instead of a picture, a question or a slide can show a video (MP4 with H.264, WebM or MOV, up to
@@ -43,6 +45,17 @@ The upload limits can be changed; see [configuration](configuration.md).
 A question can have a soundtrack (MP3, M4A/AAC, Ogg/Opus, WebM, FLAC or WAV, up to 40 MB). The
 question then waits on the big screen with a full clock until you press **▶ Start the music**:
 the music plays from the big screen and the countdown starts with it.
+
+<div class="screen-and-phone" markdown>
+<figure markdown>
+![A soundtrack question waiting for the host to start the music](screenshots/host-music.webp)
+<figcaption>The question waits, with a full clock, for the music.</figcaption>
+</figure>
+<figure markdown>
+![A phone saying "Listen up!" until the music starts](screenshots/phone-music.webp)
+<figcaption>Phones listen until the music starts.</figcaption>
+</figure>
+</div>
 
 ## Import and export
 

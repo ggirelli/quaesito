@@ -138,6 +138,18 @@ async function answer(phone, how) {
   await L.sleep(1200);
   await shot(host, 'host-pin');
 
+  await next(host); // picture
+  await shot(host, 'host-picture');
+  for (const [i, pick] of [0, 2, 0].entries()) await answer(phones[i], { pick });
+  await L.sleep(1200);
+
+  await next(host); // soundtrack: waits for the host to start the music
+  await shot(host, 'host-music');
+  await shot(phones[0], 'phone-music');
+  await next(host);
+  for (const [i, pick] of [0, 1, 0].entries()) await answer(phones[i], { pick });
+  await L.sleep(1200);
+
   for (let i = 0; i < 5; i++) {
     if (await host.$('.host-controls a.button')) break;
     await next(host, 1500);
