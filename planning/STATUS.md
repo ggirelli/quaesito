@@ -70,6 +70,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 61  | Reveals say so when no team answered                                                                                               | ✅ done |
 | 62  | Admin quiz list: create button by Import (title in a pop-up), search box, sort by name, created, edited or questions               | ✅ done |
 | 63  | Test mode: start the test from a chosen question or slide                                                                          | ✅ done |
+| 64  | Release 0.2.0 (`v0.2.0` tag: downloads built by CI)                                                                                | ✅ done |
 
 ## Notes
 
