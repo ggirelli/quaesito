@@ -1,7 +1,10 @@
 //! The user guide at `/docs/`: the documentation site shipped next to the server, or the hosted one
 //! when there is no local copy (as when developing).
 
-use std::path::PathBuf;
+use std::{
+    path::{Path, PathBuf},
+    time::SystemTime,
+};
 
 use dioxus::fullstack::{
     axum::{
@@ -29,6 +32,11 @@ pub fn routes() -> Router {
         .as_ref()
         .map_or_else(|| HOSTED.to_owned(), |dir| dir.display().to_string());
     dioxus::logger::tracing::info!("user guide: {shown}");
+    if dir.as_deref().is_some_and(is_stale) {
+        dioxus::logger::tracing::warn!(
+            "the user guide in {shown} is older than its sources: run `just docs-build`"
+        );
+    }
     let serve = move |request: Request| serve(dir.clone(), request);
     Router::new()
         .route("/docs", get(|| async { Redirect::permanent("/docs/") }))
@@ -45,6 +53,35 @@ fn local_dir() -> Option<PathBuf> {
     candidates
         .into_iter()
         .find(|dir| dir.join("index.html").is_file())
+}
+
+/// Whether a guide built from this repository (`site`, next to the `docs` sources and
+/// `mkdocs.yml`) is older than the newest of its sources. A shipped guide has no sources.
+fn is_stale(dir: &Path) -> bool {
+    let sources = [PathBuf::from("docs"), PathBuf::from("mkdocs.yml")];
+    if dir != Path::new(LOCAL[1]) || !sources.iter().all(|s| s.exists()) {
+        return false;
+    }
+    let built = modified(&dir.join("index.html"));
+    sources.iter().filter_map(|s| newest(s)).max() > built
+}
+
+/// When `path` was last changed, if it can be told.
+fn modified(path: &Path) -> Option<SystemTime> {
+    std::fs::metadata(path).and_then(|m| m.modified()).ok()
+}
+
+/// The latest change to `path` or, for a folder, to anything inside it.
+fn newest(path: &Path) -> Option<SystemTime> {
+    let own = modified(path);
+    let Ok(entries) = std::fs::read_dir(path) else {
+        return own;
+    };
+    entries
+        .flatten()
+        .filter_map(|entry| newest(&entry.path()))
+        .chain(own)
+        .max()
 }
 
 async fn serve(dir: Option<PathBuf>, request: Request) -> Response {
@@ -71,5 +108,29 @@ async fn serve(dir: Option<PathBuf>, request: Request) -> Response {
     {
         Ok(response) => response.map(Body::new),
         Err(_) => StatusCode::INTERNAL_SERVER_ERROR.into_response(),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn a_guide_is_stale_once_its_sources_change() {
+        let root = std::env::temp_dir().join(format!("quaesito-docs-{}", uuid::Uuid::new_v4()));
+        let sources = root.join("docs");
+        std::fs::create_dir_all(sources.join("deep")).unwrap();
+        std::fs::write(root.join("mkdocs.yml"), "site_name: x").unwrap();
+        std::fs::write(sources.join("deep/page.md"), "old").unwrap();
+        let site = root.join("site");
+        std::fs::create_dir_all(&site).unwrap();
+        std::thread::sleep(std::time::Duration::from_millis(20));
+        std::fs::write(site.join("index.html"), "built").unwrap();
+        let newest_source = newest(&root.join("docs")).unwrap();
+        assert!(newest_source <= modified(&site.join("index.html")).unwrap());
+        std::thread::sleep(std::time::Duration::from_millis(20));
+        std::fs::write(sources.join("deep/page.md"), "new").unwrap();
+        assert!(newest(&root.join("docs")).unwrap() > modified(&site.join("index.html")).unwrap());
+        std::fs::remove_dir_all(root).unwrap();
     }
 }

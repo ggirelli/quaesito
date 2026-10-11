@@ -17,6 +17,12 @@ just play    # release build served on the LAN
 just docs    # this site, live at http://127.0.0.1:8000
 ```
 
+The app serves this guide at `/docs/`: `just serve` and `just play` build it first, from the same
+checkout as the app, so it always describes the code you run (the server warns if `site/` falls
+behind its sources, say after editing the docs while `dx serve` runs: `just docs-build` refreshes
+it). The downloads ship the guide built from their release. This site follows `main`, so it can
+describe features that are not released yet.
+
 See [CONTRIBUTING.md](https://github.com/ggirelli/quaesito/blob/main/CONTRIBUTING.md) for how to
 contribute, and
 [DESIGN.md](https://github.com/ggirelli/quaesito/blob/main/planning/DESIGN.md) for how it works inside.
