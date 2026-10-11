@@ -6,17 +6,6 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
-### Added
-
-- Videos in place of a question's or slide's picture: they play on the big screen when the question
-  opens, pause with the game, and can be played again with a click.
-- Configurable upload limits (`QUAESITO_MAX_PICTURE_MB`, `QUAESITO_MAX_AUDIO_MB`,
-  `QUAESITO_MAX_VIDEO_MB`, `QUAESITO_MAX_IMPORT_MB`), checked by the editor before uploading.
-
-### Changed
-
-- Media are streamed from disk in slices instead of being read whole for every request.
-
 ## [0.1.0] - 2026-10-11
 
 The first release: everything needed for a quiz night with friends.
@@ -41,6 +30,9 @@ The first release: everything needed for a quiz night with friends.
 - **Settings per quiz:** reveal after each question or at the end, all-or-nothing or partial
   credit, speed or flat points, jokers, per-question points multiplier, and what phones show.
 - **Test mode:** the big screen and phones side by side to try a quiz on your own.
+- **Videos** in place of a question's or slide's picture, and configurable upload limits.
+- **Downloads** for Linux, macOS (Apple silicon) and Windows with a start script, a documentation
+  site with screenshots and a narrated demo video.
 
 [Unreleased]: https://github.com/ggirelli/quaesito/compare/v0.1.0...HEAD
 [0.1.0]: https://github.com/ggirelli/quaesito/releases/tag/v0.1.0

@@ -47,15 +47,11 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 38 | Icon buttons for edit, duplicate, export, import and delete (labels on hover) | ✅ done |
 | 39 | Videos in place of question and slide pictures | ✅ done |
 | 40 | Configurable upload limits, checked before uploading | ✅ done |
-
-## TODO (next session)
-
-- [ ] Documentation site on GitHub Pages, with screenshots of the big screen, phones and editor.
-- [x] Project boilerplate: `CONTRIBUTING.md`, MIT `LICENSE` (and `license` in `Cargo.toml`), code of
-      conduct, security policy, issue and pull request templates, changelog, `.editorconfig`.
-- [ ] Ready-to-run downloads for macOS, Linux and Windows (one archive per platform with the
-      server and its web files; nothing else to install), built by CI on tagged releases.
-- [ ] Demo video: setting up a quiz, the big screen and phones during a game, the podium.
+| 41 | Project boilerplate: MIT licence, contributing guide, code of conduct, security policy, templates, changelog | ✅ done |
+| 42 | Documentation site (MkDocs, `just docs`) on GitHub Pages, with screenshots from `just screenshots` | ✅ done |
+| 43 | Ready-to-run downloads for Linux, macOS (Apple silicon) and Windows, built by CI on version tags | ✅ done |
+| 44 | Demo video with a Kokoro voice-over, captions and transcript (`just demo-video`) | ✅ done |
+| 45 | Disclaimer: the app is fully vibe coded | ✅ done |
 
 ## Notes
 
@@ -84,7 +80,10 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 
 ## Known gaps
 
-- No automated browser tests in CI; the end-to-end flow was checked manually with headless Chrome.
+- No automated browser tests in CI; `tools/browser` has headless-Chrome checks to run by hand.
+- The repository is private: release downloads and private vulnerability reporting are only
+  available to collaborators until it is made public (the documentation site is public).
+- No download for Intel Macs yet (build from source there).
 
 ## Ideas for later
 
