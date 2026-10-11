@@ -145,7 +145,7 @@ just check   # fmt + clippy (server and wasm) + tests + cargo-deny, same as CI
 just play    # release build served on the LAN
 ```
 
-See [DESIGN.md](DESIGN.md) for how it works and [STATUS.md](STATUS.md) for progress.
+See [DESIGN.md](planning/DESIGN.md) for how it works and [STATUS.md](planning/STATUS.md) for progress.
 
 ## Contributing
 

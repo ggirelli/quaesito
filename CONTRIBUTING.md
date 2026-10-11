@@ -45,7 +45,7 @@ with the big screen and two phones side by side.
    ```
 
 5. Update the docs that describe what you changed: [README.md](README.md) for players and hosts,
-   [DESIGN.md](DESIGN.md) for how it works, [STATUS.md](STATUS.md) for progress, and an entry in
+   [DESIGN.md](planning/DESIGN.md) for how it works, [STATUS.md](planning/STATUS.md) for progress, and an entry in
    [CHANGELOG.md](CHANGELOG.md) under "Unreleased".
 
 ## Style
@@ -58,7 +58,7 @@ with the big screen and two phones side by side.
 
 ## Assets
 
-Pictures and sounds the project needs but cannot make itself are listed in [ASSETS.md](ASSETS.md),
+Pictures and sounds the project needs but cannot make itself are listed in [ASSETS.md](planning/ASSETS.md),
 with prompts for generating them. Only contribute assets you have the right to share under the
 project's licence.
 

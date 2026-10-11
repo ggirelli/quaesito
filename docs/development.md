@@ -19,7 +19,7 @@ just docs    # this site, live at http://127.0.0.1:8000
 
 See [CONTRIBUTING.md](https://github.com/ggirelli/quaesito/blob/main/CONTRIBUTING.md) for how to
 contribute, and
-[DESIGN.md](https://github.com/ggirelli/quaesito/blob/main/DESIGN.md) for how it works inside.
+[DESIGN.md](https://github.com/ggirelli/quaesito/blob/main/planning/DESIGN.md) for how it works inside.
 
 The screenshots on this site come from `tools/browser/run.sh screenshots.js`, which plays a sample
 quiz in a headless browser.

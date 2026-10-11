@@ -1,7 +1,7 @@
 """Speaks the demo video's narration with Kokoro, as cheerfully as it can.
 
 Writes out/voice/<id>.wav and out/voice/manifest.json (each line's duration in milliseconds).
-A recording in assets/voice/<id>.{wav,mp3,m4a,ogg,flac} (see ASSETS.md) replaces Kokoro for that
+A recording in assets/voice/<id>.{wav,mp3,m4a,ogg,flac} (see planning/ASSETS.md) replaces Kokoro for that
 line. Run with uv; the model files are downloaded into target/kokoro by `just demo-video`:
 
     uvx --python 3.12 --with kokoro-onnx --with soundfile python tools/browser/voice.py
