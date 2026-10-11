@@ -6,6 +6,13 @@ use anyhow::Context;
 
 use crate::model::{Quiz, QuizSummary};
 
+/// A time as seconds since 1970.
+fn seconds(time: std::time::SystemTime) -> Option<u64> {
+    time.duration_since(std::time::UNIX_EPOCH)
+        .ok()
+        .map(|d| d.as_secs())
+}
+
 /// Directory of `<id>.json` quiz documents.
 pub struct QuizStore {
     dir: PathBuf,
@@ -37,7 +44,18 @@ impl QuizStore {
                 continue;
             }
             match read(&path).await {
-                Ok(quiz) => summaries.push(quiz.summary()),
+                Ok(quiz) => {
+                    let mut summary = quiz.summary();
+                    let meta = tokio::fs::metadata(&path).await.ok();
+                    summary.edited = meta.as_ref().and_then(|m| seconds(m.modified().ok()?));
+                    // Quizzes saved before creation times were kept: the file's own, if known.
+                    summary.created = summary.created.or_else(|| {
+                        meta.as_ref()
+                            .and_then(|m| seconds(m.created().ok()?))
+                            .or(summary.edited)
+                    });
+                    summaries.push(summary);
+                }
                 Err(err) => dioxus::logger::tracing::warn!("skipping {}: {err:#}", path.display()),
             }
         }
@@ -77,14 +95,21 @@ impl QuizStore {
         read(&path).await.map(Some)
     }
 
-    /// Writes a quiz atomically, replacing any previous version.
+    /// Writes a quiz atomically, replacing any previous version. A quiz saved without a creation
+    /// time keeps the stored one, or gets the current time when it is new.
     ///
     /// # Errors
     /// Fails on an invalid id or an I/O error.
     pub async fn save(&self, quiz: &Quiz) -> anyhow::Result<()> {
         let path = self.path(&quiz.id).context("invalid quiz id")?;
+        let mut quiz = quiz.clone();
+        if quiz.created.is_none() {
+            // A new quiz has no file yet, so nothing to keep.
+            let stored = read(&path).await.ok().and_then(|q| q.created);
+            quiz.created = stored.or_else(|| seconds(std::time::SystemTime::now()));
+        }
         let tmp = path.with_extension("json.tmp");
-        tokio::fs::write(&tmp, serde_json::to_vec_pretty(quiz)?).await?;
+        tokio::fs::write(&tmp, serde_json::to_vec_pretty(&quiz)?).await?;
         tokio::fs::rename(&tmp, &path).await?;
         Ok(())
     }
@@ -142,7 +167,25 @@ mod tests {
         store.save(&quiz).await.unwrap();
         store.save(&other).await.unwrap();
 
-        assert_eq!(store.get(&quiz.id).await.unwrap(), Some(quiz.clone()));
+        // The first save stamps the creation time; later saves without one keep it.
+        let stored = store.get(&quiz.id).await.unwrap().unwrap();
+        let created = stored.created.expect("a creation time");
+        assert_eq!(
+            Quiz {
+                created: None,
+                ..stored
+            },
+            quiz
+        );
+        store.save(&quiz).await.unwrap();
+        let again = store.get(&quiz.id).await.unwrap().unwrap();
+        assert_eq!(again.created, Some(created));
+        let summary = store.list().await.unwrap();
+        assert!(
+            summary
+                .iter()
+                .all(|s| s.created.is_some() && s.edited.is_some())
+        );
         let titles: Vec<_> = store
             .list()
             .await

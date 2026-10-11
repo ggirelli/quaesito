@@ -10,6 +10,7 @@ use crate::api::{
     admin_check, admin_login, create_quiz, delete_quiz, duplicate_quiz, end_session, import_quiz,
     list_quizzes, list_sessions, start_session, start_test,
 };
+use crate::model::QuizSummary;
 use crate::protocol::{DEFAULT_MAX_TEAMS, MAX_TEAMS_CEILING};
 
 const TOKEN_KEY: &str = "quaesito.admin";
@@ -135,23 +136,9 @@ fn Dashboard() -> Element {
     let token: AdminToken = use_context();
     let mut error = use_signal(|| None::<String>);
     let mut quizzes = use_resource(move || async move { list_quizzes(token.get()).await });
-    let mut new_title = use_signal(String::new);
-    let nav = navigator();
-
-    let create = move |evt: FormEvent| async move {
-        evt.prevent_default();
-        let title = new_title();
-        if title.trim().is_empty() {
-            error.set(Some("Give the new quiz a title.".to_owned()));
-            return;
-        }
-        match create_quiz(token.get(), title).await {
-            Ok(id) => {
-                nav.push(Route::Editor { id });
-            }
-            Err(err) => error.set(Some(message(&err))),
-        }
-    };
+    let mut creating = use_signal(|| false);
+    let mut search = use_signal(String::new);
+    let mut sort = use_signal(|| QuizSort::Edited);
 
     let import = move |evt: FormEvent| async move {
         let Some(file) = evt.files().into_iter().next() else {
@@ -174,70 +161,252 @@ fn Dashboard() -> Element {
             section { class: "card stack",
                 div { class: "row between",
                     h2 { "Quizzes" }
-                    label {
-                        class: "button ghost icon",
-                        title: "Import a quiz (.zip or .json)",
-                        aria_label: "Import a quiz",
-                        Icon { kind: IconKind::Import }
-                        input {
-                            r#type: "file",
-                            accept: ".zip,.json,application/zip,application/json",
-                            class: "visually-hidden",
-                            onchange: import,
+                    div { class: "row",
+                        button {
+                            class: "button primary",
+                            title: "Create a quiz",
+                            onclick: move |_| creating.set(true),
+                            Icon { kind: IconKind::NewFile }
+                            "New quiz"
+                        }
+                        label {
+                            class: "button ghost icon",
+                            title: "Import a quiz (.zip or .json)",
+                            aria_label: "Import a quiz",
+                            Icon { kind: IconKind::Import }
+                            input {
+                                r#type: "file",
+                                accept: ".zip,.json,application/zip,application/json",
+                                class: "visually-hidden",
+                                onchange: import,
+                            }
                         }
                     }
                 }
-                form { class: "row", onsubmit: create,
-                    input {
-                        class: "grow",
-                        placeholder: "Title of a new quiz",
-                        value: new_title,
-                        oninput: move |e| new_title.set(e.value()),
+                if creating() {
+                    CreateDialog { on_close: move |()| creating.set(false) }
+                }
+                div { class: "row quiz-filters",
+                    label { class: "search grow",
+                        Icon { kind: IconKind::Search }
+                        input {
+                            r#type: "search",
+                            placeholder: "Search quizzes",
+                            aria_label: "Search quizzes",
+                            value: search,
+                            oninput: move |e| search.set(e.value()),
+                        }
                     }
-                    button { r#type: "submit", class: "button primary", "Create quiz" }
+                    label { class: "field inline",
+                        span { "Sort by" }
+                        select {
+                            value: sort().key(),
+                            onchange: move |e| sort.set(QuizSort::from_key(&e.value())),
+                            for option in QuizSort::ALL {
+                                option { value: option.key(), "{option.label()}" }
+                            }
+                        }
+                    }
                 }
                 match quizzes() {
                     None => rsx! { Spinner {} },
                     Some(Err(err)) => rsx! { ErrorBox { error: Some(message(&err)) } },
                     Some(Ok(list)) if list.is_empty() => rsx! {
-                        p { class: "muted", "No quizzes yet. Create your first one above." }
+                        p { class: "muted", "No quizzes yet. Create your first one with New quiz." }
                     },
-                    Some(Ok(list)) => rsx! {
-                        ul { class: "list",
-                            for quiz in list {
-                                li { key: "{quiz.id}", class: "list-row",
-                                    div { class: "grow",
-                                        Link {
-                                            class: "strong",
-                                            to: Route::Editor { id: quiz.id.clone() },
-                                            "{quiz.title}"
-                                        }
-                                        div { class: "muted small",
-                                            if quiz.question_count == 1 {
-                                                "1 question"
-                                            } else {
-                                                "{quiz.question_count} questions"
+                    Some(Ok(list)) => {
+                        let shown = sorted_matches(&list, &search(), sort());
+                        let now = client::now_ms() / 1000.0;
+                        rsx! {
+                            if shown.is_empty() {
+                                p { class: "muted", "No quiz matches “{search}”." }
+                            }
+                            ul { class: "list",
+                                for quiz in shown {
+                                    li { key: "{quiz.id}", class: "list-row",
+                                        div { class: "grow",
+                                            Link {
+                                                class: "strong",
+                                                to: Route::Editor { id: quiz.id.clone() },
+                                                "{quiz.title}"
                                             }
+                                            div { class: "muted small",
+                                                if quiz.question_count == 1 {
+                                                    "1 question"
+                                                } else {
+                                                    "{quiz.question_count} questions"
+                                                }
+                                                if let Some(edited) = quiz.edited {
+                                                    " · edited {ago(now, edited)}"
+                                                }
+                                            }
+                                            NotPlayable { issues: quiz.issues.clone() }
                                         }
-                                        NotPlayable { issues: quiz.issues.clone() }
-                                    }
-                                    QuizActions {
-                                        id: quiz.id.clone(),
-                                        playable: quiz.issues.is_empty(),
-                                        on_change: move |()| quizzes.restart(),
-                                        on_error: move |e| error.set(Some(e)),
+                                        QuizActions {
+                                            id: quiz.id.clone(),
+                                            playable: quiz.issues.is_empty(),
+                                            on_change: move |()| quizzes.restart(),
+                                            on_error: move |e| error.set(Some(e)),
+                                        }
                                     }
                                 }
                             }
                         }
-                    },
+                    }
                 }
             }
         }
     }
 }
 
-/// Starts a live game, after asking how many teams may join.
+/// How the quiz list is ordered.
+#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+enum QuizSort {
+    Name,
+    Edited,
+    Created,
+    Questions,
+}
+
+impl QuizSort {
+    const ALL: [Self; 4] = [Self::Edited, Self::Created, Self::Name, Self::Questions];
+
+    fn key(self) -> &'static str {
+        match self {
+            Self::Name => "name",
+            Self::Edited => "edited",
+            Self::Created => "created",
+            Self::Questions => "questions",
+        }
+    }
+
+    fn label(self) -> &'static str {
+        match self {
+            Self::Name => "Name",
+            Self::Edited => "Last edited",
+            Self::Created => "Newest",
+            Self::Questions => "Most questions",
+        }
+    }
+
+    fn from_key(key: &str) -> Self {
+        Self::ALL
+            .into_iter()
+            .find(|s| s.key() == key)
+            .unwrap_or(Self::Edited)
+    }
+}
+
+/// The quizzes whose title contains every word of `search` (ignoring case and accents), in
+/// `sort` order; ties go by name.
+fn sorted_matches(list: &[QuizSummary], search: &str, sort: QuizSort) -> Vec<QuizSummary> {
+    let words: Vec<String> = search.split_whitespace().map(fold).collect();
+    let mut shown: Vec<QuizSummary> = list
+        .iter()
+        .filter(|q| {
+            let title = fold(&q.title);
+            words.iter().all(|w| title.contains(w.as_str()))
+        })
+        .cloned()
+        .collect();
+    shown.sort_by(|a, b| {
+        let by_name = fold(&a.title).cmp(&fold(&b.title));
+        match sort {
+            QuizSort::Name => by_name,
+            QuizSort::Edited => b.edited.cmp(&a.edited).then(by_name),
+            QuizSort::Created => b.created.cmp(&a.created).then(by_name),
+            QuizSort::Questions => b.question_count.cmp(&a.question_count).then(by_name),
+        }
+    });
+    shown
+}
+
+/// Lower case without accents, for searching and sorting by name.
+fn fold(text: &str) -> String {
+    text.chars()
+        .flat_map(char::to_lowercase)
+        .map(|c| match c {
+            'à' | 'á' | 'â' | 'ã' | 'ä' | 'å' => 'a',
+            'è' | 'é' | 'ê' | 'ë' => 'e',
+            'ì' | 'í' | 'î' | 'ï' => 'i',
+            'ò' | 'ó' | 'ô' | 'õ' | 'ö' => 'o',
+            'ù' | 'ú' | 'û' | 'ü' => 'u',
+            'ç' => 'c',
+            'ñ' => 'n',
+            other => other,
+        })
+        .collect()
+}
+
+/// How long ago `then` was, from `now` (both in seconds since 1970): "just now", "5 min ago"…
+fn ago(now: f64, then: u64) -> String {
+    #[allow(
+        clippy::cast_precision_loss,
+        reason = "times are far below 2^52 seconds"
+    )]
+    let secs = (now - then as f64).max(0.0);
+    #[allow(
+        clippy::cast_possible_truncation,
+        clippy::cast_sign_loss,
+        reason = "rounded, non-negative"
+    )]
+    let (minutes, hours, days) = (
+        (secs / 60.0) as u64,
+        (secs / 3600.0) as u64,
+        (secs / 86400.0) as u64,
+    );
+    match (minutes, hours, days) {
+        (0, ..) => "just now".to_owned(),
+        (m, 0, _) => format!("{m} min ago"),
+        (_, 1, 0) => "an hour ago".to_owned(),
+        (_, h, 0) => format!("{h} hours ago"),
+        (.., 1) => "yesterday".to_owned(),
+        (.., d) if d < 60 => format!("{d} days ago"),
+        (.., d) => format!("{} months ago", d / 30),
+    }
+}
+
+/// Asks for the new quiz's title, creates it and opens it in the editor.
+#[component]
+fn CreateDialog(on_close: EventHandler<()>) -> Element {
+    let token: AdminToken = use_context();
+    let mut title = use_signal(String::new);
+    let mut error = use_signal(|| None::<String>);
+    let create = move |evt: FormEvent| async move {
+        evt.prevent_default();
+        if title().trim().is_empty() {
+            error.set(Some("Give the new quiz a title.".to_owned()));
+            return;
+        }
+        match create_quiz(token.get(), title()).await {
+            Ok(id) => {
+                navigator().push(Route::Editor { id });
+            }
+            Err(err) => error.set(Some(message(&err))),
+        }
+    };
+    rsx! {
+        Dialog { title: "New quiz", on_close,
+            form { class: "stack", onsubmit: create,
+                label { class: "field",
+                    span { "Title" }
+                    input {
+                        placeholder: "e.g. Movie night",
+                        autofocus: true,
+                        value: title,
+                        oninput: move |e| title.set(e.value()),
+                        onmounted: move |e| async move {
+                            let _ = e.set_focus(true).await;
+                        },
+                    }
+                }
+                ErrorBox { error: error() }
+                button { r#type: "submit", class: "button primary big", "Create quiz" }
+            }
+        }
+    }
+}
+
 #[component]
 fn StartDialog(id: String, on_close: EventHandler<()>) -> Element {
     let token: AdminToken = use_context();

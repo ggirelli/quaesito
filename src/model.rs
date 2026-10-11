@@ -33,6 +33,9 @@ pub struct Quiz {
     /// Questions and slides, in playing order.
     #[serde(default)]
     pub questions: Vec<Question>,
+    /// When the quiz was created, in seconds since 1970; set when it is first saved.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub created: Option<u64>,
 }
 
 impl Quiz {
@@ -44,6 +47,7 @@ impl Quiz {
             title,
             settings: QuizSettings::default(),
             questions: Vec::new(),
+            created: None,
         }
     }
 
@@ -182,6 +186,8 @@ impl Quiz {
             title: self.title.clone(),
             question_count: self.question_count(),
             issues: self.validate().iter().map(ToString::to_string).collect(),
+            created: self.created,
+            edited: None,
         }
     }
 }
@@ -763,6 +769,9 @@ pub struct QuizSummary {
     pub question_count: usize,
     /// What still keeps the quiz from being playable; empty when it is ready.
     pub issues: Vec<String>,
+    /// When it was created and last changed, in seconds since 1970, when known.
+    pub created: Option<u64>,
+    pub edited: Option<u64>,
 }
 
 #[cfg(test)]
