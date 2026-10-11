@@ -72,6 +72,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 63  | Test mode: start the test from a chosen question or slide                                                                          | ✅ done |
 | 64  | Release 0.2.0 (`v0.2.0` tag: downloads built by CI)                                                                                | ✅ done |
 | 65  | Light theme, switched like the guide's (sun and moon button), kept per device                                                      | ✅ done |
+| 66  | Release 0.3.0 (`v0.3.0` tag: downloads built by CI)                                                                                | ✅ done |
 
 ## Notes
 
