@@ -65,7 +65,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 56  | Team limit set when starting a game: 50 by default, the host can lower or raise it                                                 | ✅ done |
 | 57  | New colour palette and symbols in the assets (ASSETS.md prompts), docs and demo video                                              | 📋 todo |
 | 58  | Getting started: easier to follow, per platform                                                                                    | 📋 todo |
-| 59  | Closest number: optional range, with a slider next to the typed number on phones                                                   | 📋 todo |
+| 59  | Closest number: optional range, with a slider next to the typed number on phones                                                   | ✅ done |
 | 60  | Stopping the clock by hand stops the soundtrack                                                                                    | ✅ done |
 | 61  | Reveals say so when no team answered                                                                                               | ✅ done |
 | 62  | Admin quiz list: create button by Import (title in a pop-up), search box, sort by name, created, edited or questions               | ✅ done |

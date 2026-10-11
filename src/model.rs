@@ -434,6 +434,48 @@ pub struct Part {
     pub image: Option<String>,
 }
 
+/// What is missing from a closest-number question: its answer, and a sensible range around it.
+fn number_problems(answer: Option<f64>, range: Option<NumberRange>) -> Vec<String> {
+    let mut problems = Vec::new();
+    if !answer.is_some_and(f64::is_finite) {
+        problems.push("Enter the correct number.".to_owned());
+    }
+    if let Some(range) = range {
+        if !range.is_valid() {
+            problems.push("The range must go from a smaller to a larger number.".to_owned());
+        } else if answer.is_some_and(|a| !range.contains(a)) {
+            problems.push("The correct number must be within the range.".to_owned());
+        }
+    }
+    problems
+}
+
+/// The numbers a closest-number question accepts, both ends included.
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
+pub struct NumberRange {
+    pub min: f64,
+    pub max: f64,
+}
+
+impl NumberRange {
+    /// Whether the range goes from a smaller to a larger finite number.
+    #[must_use]
+    pub fn is_valid(self) -> bool {
+        self.min.is_finite() && self.max.is_finite() && self.min < self.max
+    }
+
+    #[must_use]
+    pub fn contains(self, value: f64) -> bool {
+        (self.min..=self.max).contains(&value)
+    }
+
+    /// The slider's step: whole numbers when both ends are, any number otherwise.
+    #[must_use]
+    pub fn whole(self) -> bool {
+        self.min.fract() == 0.0 && self.max.fract() == 0.0
+    }
+}
+
 /// Fewest parts a several-answers question has.
 pub const MIN_PARTS: usize = 2;
 /// Most parts a several-answers question has.
@@ -448,7 +490,12 @@ pub enum QuestionKind {
     /// Type a short answer, right when it matches an accepted one (the judge may amend).
     Text { accepted: Vec<String> },
     /// Enter a number; the closest guess wins.
-    Number { answer: Option<f64> },
+    Number {
+        answer: Option<f64>,
+        /// The numbers teams can give, if limited: phones then also show a slider.
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        range: Option<NumberRange>,
+    },
     /// Put items in order; `items` are listed in the right order and shown shuffled.
     Order { items: Vec<String> },
     /// Is the statement true or false? Played like a two-answer multiple choice.
@@ -661,10 +708,8 @@ impl Question {
                     problems.push("Add at least one accepted answer.".to_owned());
                 }
             }
-            QuestionKind::Number { answer } => {
-                if !answer.is_some_and(f64::is_finite) {
-                    problems.push("Enter the correct number.".to_owned());
-                }
+            QuestionKind::Number { answer, range } => {
+                problems.extend(number_problems(*answer, *range));
             }
             QuestionKind::Order { items } => {
                 if !(MIN_ANSWERS..=MAX_ANSWERS).contains(&items.len()) {
@@ -1162,12 +1207,38 @@ mod tests {
             accepted: vec!["Leonardo".to_owned()],
         };
         assert_eq!(q.problems(), Vec::<String>::new());
-        q.kind = QuestionKind::Number { answer: None };
+        q.kind = QuestionKind::Number {
+            answer: None,
+            range: None,
+        };
         assert_eq!(q.problems(), vec!["Enter the correct number."]);
         q.kind = QuestionKind::Number {
             answer: Some(330.0),
+            range: None,
         };
         assert_eq!(q.problems(), Vec::<String>::new());
+        let range = |min, max| Some(NumberRange { min, max });
+        q.kind = QuestionKind::Number {
+            answer: Some(330.0),
+            range: range(0.0, 1000.0),
+        };
+        assert_eq!(q.problems(), Vec::<String>::new());
+        q.kind = QuestionKind::Number {
+            answer: Some(330.0),
+            range: range(0.0, 100.0),
+        };
+        assert_eq!(
+            q.problems(),
+            vec!["The correct number must be within the range."]
+        );
+        q.kind = QuestionKind::Number {
+            answer: Some(330.0),
+            range: range(10.0, 10.0),
+        };
+        assert_eq!(
+            q.problems(),
+            vec!["The range must go from a smaller to a larger number."]
+        );
         // Leftover choices of a converted question do not count.
         q.answers = vec![answer("a", true), answer("b", true)];
         assert!(!q.is_multi());

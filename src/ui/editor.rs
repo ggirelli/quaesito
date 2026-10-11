@@ -19,8 +19,8 @@ use crate::{
     model::{
         AdvanceMode, Answer, BONUS_PERCENTS, Bonus, ImageReveal, MAX_ANSWERS, MAX_MULTIPLIER,
         MAX_PARTS, MAX_TIME_LIMIT_SECS, MIN_ANSWERS, MIN_PARTS, MIN_TIME_LIMIT_SECS, MultiScoring,
-        Part, PhoneDisplay, PinTolerance, Point, PointsMode, Question, QuestionKind, Quiz,
-        QuizSettings, RevealMode, ValidationIssue, is_video,
+        NumberRange, Part, PhoneDisplay, PinTolerance, Point, PointsMode, Question, QuestionKind,
+        Quiz, QuizSettings, RevealMode, ValidationIssue, is_video,
     },
     protocol::UploadLimits,
 };
@@ -934,8 +934,8 @@ fn QuestionCard(
                     QuestionKind::Text { accepted } => rsx! {
                         AcceptedAnswers { question: index, accepted: accepted.clone() }
                     },
-                    QuestionKind::Number { answer } => rsx! {
-                        NumberAnswer { question: index, answer: *answer }
+                    QuestionKind::Number { answer, range } => rsx! {
+                        NumberAnswer { question: index, answer: *answer, range: *range }
                     },
                     QuestionKind::Order { items } => rsx! {
                         OrderItems { question: index, items: items.clone() }
@@ -1002,7 +1002,10 @@ fn set_kind(question: &mut Question, choice: usize) {
         (2, _) => QuestionKind::Text {
             accepted: vec![String::new()],
         },
-        (3, _) => QuestionKind::Number { answer: None },
+        (3, _) => QuestionKind::Number {
+            answer: None,
+            range: None,
+        },
         _ => {
             if question.answers.len() < MIN_ANSWERS {
                 question.answers.resize_with(MIN_ANSWERS, Answer::default);
@@ -1305,33 +1308,87 @@ fn OrderItems(question: usize, items: Vec<String>) -> Element {
 
 /// The correct number of a closest-number question.
 #[component]
-fn NumberAnswer(question: usize, answer: Option<f64>) -> Element {
+fn NumberAnswer(question: usize, answer: Option<f64>, range: Option<NumberRange>) -> Element {
     let draft: Draft = use_context();
     // Keep what is typed, so "3." or "-" survive until the number is complete.
-    let mut raw = use_signal(|| answer.map(|a| a.to_string()).unwrap_or_default());
+    let shown = |n: Option<f64>| n.map(|n| n.to_string()).unwrap_or_default();
+    let mut raw = use_signal(|| shown(answer));
+    let mut raw_min = use_signal(|| shown(range.map(|r| r.min)));
+    let mut raw_max = use_signal(|| shown(range.map(|r| r.max)));
+    // The range is set once both ends are numbers, and cleared when both are emptied.
+    let set_range = move || {
+        let range = match (parse_number(&raw_min()), parse_number(&raw_max())) {
+            (Some(min), Some(max)) => Some(NumberRange { min, max }),
+            _ => None,
+        };
+        draft.edit_question(question, |q| {
+            if let QuestionKind::Number { range: old, .. } = &mut q.kind {
+                *old = range;
+            }
+        });
+    };
     rsx! {
-        label { class: "field inline",
-            span { "Correct number" }
-            input {
-                r#type: "text",
-                inputmode: "decimal",
-                class: "short",
-                placeholder: "330",
-                value: raw,
-                oninput: move |e| {
-                    let value = e.value();
-                    let parsed = value
-                        .trim()
-                        .replace(',', ".")
-                        .parse::<f64>()
-                        .ok()
-                        .filter(|v| v.is_finite());
-                    raw.set(value);
-                    draft.edit_question(question, |q| q.kind = QuestionKind::Number { answer: parsed });
-                },
+        div { class: "row number-answer",
+            label { class: "field inline",
+                span { "Correct number" }
+                input {
+                    r#type: "text",
+                    inputmode: "decimal",
+                    class: "short",
+                    placeholder: "330",
+                    value: raw,
+                    oninput: move |e| {
+                        let value = e.value();
+                        let parsed = parse_number(&value);
+                        raw.set(value);
+                        draft.edit_question(question, |q| {
+                            if let QuestionKind::Number { answer, .. } = &mut q.kind {
+                                *answer = parsed;
+                            }
+                        });
+                    },
+                }
+            }
+            label { class: "field inline",
+                title: "Optional: teams answer within this range, with a slider on their phones",
+                span { "Range" }
+                input {
+                    r#type: "text",
+                    inputmode: "decimal",
+                    class: "short",
+                    placeholder: "from",
+                    aria_label: "Range from",
+                    value: raw_min,
+                    oninput: move |e| {
+                        raw_min.set(e.value());
+                        set_range();
+                    },
+                }
+                span { "–" }
+                input {
+                    r#type: "text",
+                    inputmode: "decimal",
+                    class: "short",
+                    placeholder: "to",
+                    aria_label: "Range to",
+                    value: raw_max,
+                    oninput: move |e| {
+                        raw_max.set(e.value());
+                        set_range();
+                    },
+                }
             }
         }
     }
+}
+
+/// A typed number, with a comma or a point as decimal separator.
+fn parse_number(text: &str) -> Option<f64> {
+    text.trim()
+        .replace(',', ".")
+        .parse::<f64>()
+        .ok()
+        .filter(|v| v.is_finite())
 }
 
 #[component]

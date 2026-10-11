@@ -1881,6 +1881,12 @@ button.joker {
   overflow-wrap: anywhere;
 }
 
+/* A number question's slider on phones, above the exact field. */
+.number-slider input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
 .phone-question {
   font-family: var(--serif);
   font-size: 1.3rem;
