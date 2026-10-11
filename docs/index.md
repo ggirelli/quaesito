@@ -33,6 +33,19 @@ Windows, macOS and Linux. Free and open source (MIT).
     - **Donations are welcome** on [Ko-fi](https://ko-fi.com/ggirelli); GitHub Sponsors is coming
       soon.
 
+## Made for game nights { .section }
+
+- :material-wifi-off: Runs on your local network, no internet or accounts needed
+- :material-content-save: Quiz editor in the browser that saves as you type
+- :material-test-tube: Test mode: the big screen and phones side by side
+- :material-image-filter-center-focus: Pictures revealed by zooming out or tile by tile
+- :material-music: Soundtracks that start with the clock, and sound effects up to the fanfare
+- :material-pause-circle: Pause, extra time and going back when life happens
+- :material-cards-playing: Jokers and double-points questions
+- :material-restart: Games survive a crash or restart
+- :material-table: Results to print or download as CSV
+- :material-export: Export quizzes with their pictures to share them
+
 ## See it in action { .section }
 
 <video controls preload="metadata" poster="media/demo-poster.webp" style="width:100%;border-radius:12px">
@@ -113,19 +126,6 @@ A quiz played on the test page, narrated. [Transcript](demo.md#transcript).
 <figure markdown>![Several answers on a phone](screenshots/phone-parts.webp)<figcaption>Several answers</figcaption></figure>
 <figure markdown>![Dropping a pin on a phone](screenshots/phone-pin.webp)<figcaption>Pin on a picture</figcaption></figure>
 </div>
-
-## Made for game nights { .section }
-
-- :material-wifi-off: Runs on your local network, no internet or accounts needed
-- :material-content-save: Quiz editor in the browser that saves as you type
-- :material-test-tube: Test mode: the big screen and phones side by side
-- :material-image-filter-center-focus: Pictures revealed by zooming out or tile by tile
-- :material-music: Soundtracks that start with the clock, and sound effects up to the fanfare
-- :material-pause-circle: Pause, extra time and going back when life happens
-- :material-cards-playing: Jokers and double-points questions
-- :material-restart: Games survive a crash or restart
-- :material-table: Results to print or download as CSV
-- :material-export: Export quizzes with their pictures to share them
 
 ![The podium with three teams](screenshots/host-podium.webp)
 
