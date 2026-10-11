@@ -20,6 +20,8 @@ All notable changes to quaesito are listed here. The format follows
 - The README, the user guide and the downloads say up front that quaesito is free, MIT-licensed, without
   warranty and fully vibe coded, and that donations are welcome on Ko-fi.
 - "Test from here" on every question and slide in the editor starts a test right there, skipping the lobby.
+- The quiz list has a search box and sorts by last edit, newest, name or number of questions. **New quiz** sits next
+  to Import and asks for the title in a pop-up.
 
 ### Changed
 

@@ -97,6 +97,8 @@ pub async fn duplicate_quiz(token: String, id: String) -> ServerFnResult<String>
         .await?
         .ok_or_else(|| ServerFnError::new("This quiz does not exist."))?;
     quiz.id = crate::server::store::new_id();
+    // A copy is new: it is created now.
+    quiz.created = None;
     quiz.title = format!("{} (copy)", quiz.title);
     state.quizzes.save(&quiz).await?;
     Ok(quiz.id)
@@ -113,6 +115,8 @@ pub async fn import_quiz(token: String, file: FileStream) -> ServerFnResult<Stri
         .await
         .map_err(|err| ServerFnError::new(format!("{err:#}")))?;
     quiz.id = crate::server::store::new_id();
+    // A copy is new: it is created now.
+    quiz.created = None;
     state.quizzes.save(&quiz).await?;
     Ok(quiz.id)
 }

@@ -367,6 +367,31 @@ textarea {
   gap: 0.6rem;
 }
 
+/* The quiz list's search box, with its magnifier inside, and sort menu. */
+.quiz-filters {
+  flex-wrap: wrap;
+}
+
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 12rem;
+}
+
+.search svg {
+  position: absolute;
+  left: 0.75rem;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+/* As specific as the general input rule, so the padding leaves room for the icon. */
+.quiz-filters .search input[type="search"] {
+  width: 100%;
+  padding-left: 2.4rem;
+}
+
 input.short {
   width: 6rem !important;
 }

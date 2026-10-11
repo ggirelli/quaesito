@@ -1,8 +1,9 @@
 # Building a quiz
 
-On the admin page, type a title and press **Create quiz**. The editor saves as you type and says
-when the quiz is ready to play, or what is still missing. The quiz list flags quizzes that are not
-ready yet.
+On the admin page, press :material-file-plus-outline: **New quiz**, type a title and press
+**Create quiz**. The editor saves as you type and says when the quiz is ready to play, or what is
+still missing. The quiz list flags quizzes that are not ready yet; search it by title, and sort it
+by last edit, newest, name or number of questions.
 
 ![The quiz editor with a multiple-choice question](screenshots/editor-choices.webp)
 
