@@ -26,6 +26,9 @@ All notable changes to quaesito are listed here. The format follows
 
 - A question's picture no longer pushes the big screen's controls off the bottom of a 16:9 screen: the
   big screen is exactly one screen tall and the picture takes the room the question leaves.
+- Nothing is loaded from the internet any more: the user guide bundles its fonts and no longer asks GitHub for the
+  repository's stars, and the server tells browsers to load nothing from other sites.
+- Moving a question or slide in the editor keeps it on screen and keeps the focus on it.
 
 ## [0.1.0] - 2026-10-11
 
