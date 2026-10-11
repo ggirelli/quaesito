@@ -64,7 +64,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 55  | Document the team limit: 50 by default, any number of players per team; always capped for safety, but as high as you like          | ✅ done |
 | 56  | Team limit set when starting a game: 50 by default, the host can lower or raise it                                                 | ✅ done |
 | 57  | New colour palette and symbols in the assets (ASSETS.md prompts), docs and demo video                                              | 📋 todo |
-| 58  | Getting started: easier to follow, per platform                                                                                    | 📋 todo |
+| 58  | Getting started: easier to follow, per platform                                                                                    | ✅ done |
 | 59  | Closest number: optional range, with a slider next to the typed number on phones                                                   | ✅ done |
 | 60  | Stopping the clock by hand stops the soundtrack                                                                                    | ✅ done |
 | 61  | Reveals say so when no team answered                                                                                               | ✅ done |
