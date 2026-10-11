@@ -62,6 +62,7 @@ pub fn App() -> Element {
         document::Meta { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" }
         document::Meta { name: "theme-color", content: "#14121f" }
         document::Stylesheet { href: MAIN_CSS }
+        document::Script { {widgets::THEME_SCRIPT} }
         Router::<Route> {}
     }
 }

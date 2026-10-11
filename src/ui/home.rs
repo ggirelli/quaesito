@@ -5,7 +5,7 @@ use dioxus::prelude::*;
 use super::{
     Route,
     player::JoinCodeForm,
-    widgets::{Brand, HelpLink, Icon, IconKind},
+    widgets::{Brand, HelpLink, Icon, IconKind, ThemeToggle},
 };
 
 #[component]
@@ -17,6 +17,7 @@ pub fn Home() -> Element {
             JoinCodeForm {}
         }
         nav { class: "corner-links",
+            ThemeToggle { class: "corner-link" }
             HelpLink { class: "corner-link" }
             Link {
                 class: "corner-link",
