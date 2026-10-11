@@ -10,6 +10,8 @@ All notable changes to quaesito are listed here. The format follows
 
 - A light theme, next to the dark one: the sun and moon button on the home page, the admin pages and the big screen
   switches it, and every page open on that device follows.
+- A "Shuffle answers" button in the quiz editor, next to "Shuffle questions": it shuffles the answers of every
+  multiple-choice question (the right ones stay right), and can be undone the same way.
 
 ### Fixed
 
