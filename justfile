@@ -2,13 +2,15 @@
 default:
     @just --list
 
-# Run the app with hot reload, reachable from phones on the LAN
-serve port="8080":
+# Run the app with hot reload, reachable from phones on the LAN (with a fresh user guide at /docs/)
+serve port="8080": docs-build
     QUAESITO_ADMIN_PASSWORD="${QUAESITO_ADMIN_PASSWORD:-quaesito}" dx serve --platform web --addr 0.0.0.0 --port {{port}}
 
-# Build an optimized release bundle into ./dist
+# Build an optimized release bundle into ./dist, with the user guide in ./dist/docs as in the downloads
 bundle:
     dx bundle --platform web --release --out-dir dist
+    rm -rf dist/docs
+    uvx --with-requirements docs/requirements.txt mkdocs build --strict --site-dir dist/docs
 
 # Build and run the release bundle on the LAN; quizzes and pictures live in ./data
 play port="8080": bundle
