@@ -13,6 +13,11 @@ All notable changes to quaesito are listed here. The format follows
 - A "Shuffle answers" button in the quiz editor, next to "Shuffle questions": it shuffles the answers of every
   multiple-choice question (the right ones stay right), and can be undone the same way.
 
+### Changed
+
+- The quiz editor has two sidebars that stay in view while you scroll: the buttons to add questions and slides on the
+  left of the list, the shuffle buttons on its right. On narrow screens they stay below the list.
+
 ### Fixed
 
 - Leaving a test returns to the quiz list: "Back to admin" on the test's big screen ends the test instead of opening

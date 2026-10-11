@@ -666,8 +666,60 @@ input.short {
   accent-color: var(--ok);
 }
 
-.button.add {
-  align-self: center;
+/* The quiz editor: the questions and slides in the middle, buttons to add items on the left and
+   to shuffle them on the right, staying in view while the list scrolls. */
+.page.editor {
+  max-width: 1480px;
+  display: grid;
+  grid-template-columns: minmax(10rem, 1fr) minmax(0, 1000px) minmax(10rem, 1fr);
+  grid-template-areas:
+    ". top ."
+    "add list shuffle";
+  gap: 1rem;
+}
+
+.editor-top {
+  grid-area: top;
+}
+
+.editor-list {
+  grid-area: list;
+}
+
+.editor-add {
+  grid-area: add;
+}
+
+.editor-shuffle {
+  grid-area: shuffle;
+}
+
+.editor-side {
+  position: sticky;
+  top: 5rem;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+@media (max-width: 1300px) {
+  .page.editor {
+    max-width: 1000px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "top"
+      "list"
+      "add"
+      "shuffle";
+  }
+
+  .editor-side {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 /* ---------- Answer badges ---------- */
