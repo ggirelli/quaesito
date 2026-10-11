@@ -859,6 +859,7 @@ fn PinPad(
             PinMap {
                 image: map.0,
                 aspect: map.1,
+                pin_scale: 2.0,
                 pins: shown
                     .map(|at| MapPin {
                         at,

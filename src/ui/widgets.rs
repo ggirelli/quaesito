@@ -202,6 +202,9 @@ pub fn PinMap(
     aspect: f64,
     pins: Vec<MapPin>,
     #[props(default)] on_pick: Option<EventHandler<(crate::model::Point, f64)>>,
+    /// Pins are sized relative to the picture; small screens draw them larger.
+    #[props(default = 1.0)]
+    pin_scale: f64,
 ) -> Element {
     let mut mounted = use_signal(|| None::<std::rc::Rc<MountedData>>);
     let pick = move |e: MouseEvent| async move {
@@ -263,7 +266,7 @@ pub fn PinMap(
                 g {
                     key: "{i}",
                     class: "map-pin {pin.class}",
-                    transform: "translate({pin.at.x * MAP_WIDTH:.2} {pin.at.y * height:.2})",
+                    transform: "translate({pin.at.x * MAP_WIDTH:.2} {pin.at.y * height:.2}) scale({pin_scale})",
                     "aria-label": "{pin.title}",
                     circle { r: PIN_RADIUS }
                     // Symbols are drawn as shapes: font glyphs are not centred reliably.

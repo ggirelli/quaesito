@@ -745,6 +745,11 @@ table.results {
   gap: 0.25rem;
 }
 
+/* The big screen takes keys (clickers) but should not draw a focus ring around itself. */
+.host:focus {
+  outline: none;
+}
+
 .host-main {
   flex: 1;
   display: flex;
