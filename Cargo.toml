@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2024"
 description = "Quizzes among friends: a self-hosted, live quiz web app"
 repository = "https://github.com/ggirelli/quaesito"
+license = "MIT"
 publish = false
 
 [dependencies]

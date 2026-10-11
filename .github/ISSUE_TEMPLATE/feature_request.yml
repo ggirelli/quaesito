@@ -1,0 +1,21 @@
+name: Idea or feature request
+description: Suggest a question type, a setting, or anything that would make game nights better.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: The idea
+      description: What would you like quaesito to do?
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: When would it help? Describe the game night situation it is for.
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives
+      description: Workarounds you use today, or other ways it could work.

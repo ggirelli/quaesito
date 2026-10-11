@@ -49,8 +49,8 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 ## TODO (next session)
 
 - [ ] Documentation site on GitHub Pages, with screenshots of the big screen, phones and editor.
-- [ ] Project boilerplate: `CONTRIBUTING.md`, MIT `LICENSE` (and `license` in `Cargo.toml`), code of
-      conduct, security policy, issue and pull request templates, changelog.
+- [x] Project boilerplate: `CONTRIBUTING.md`, MIT `LICENSE` (and `license` in `Cargo.toml`), code of
+      conduct, security policy, issue and pull request templates, changelog, `.editorconfig`.
 - [ ] Ready-to-run downloads for macOS, Linux and Windows (one archive per platform with the
       server and its web files; nothing else to install), built by CI on tagged releases.
 - [ ] Demo video: setting up a quiz, the big screen and phones during a game, the podium.

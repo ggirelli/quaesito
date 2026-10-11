@@ -1,0 +1,42 @@
+name: Bug report
+description: Something does not work as it should.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Create a quiz with …
+        2. Start a game and …
+        3. On the phone, …
+    validations:
+      required: true
+  - type: dropdown
+    id: screen
+    attributes:
+      label: Where
+      multiple: true
+      options:
+        - Admin / editor
+        - Big screen
+        - Phone
+        - Server
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Quaesito version or commit, operating system, and the browsers involved.
+      placeholder: v0.1.0 on Linux; big screen in Firefox 131, phones in Safari 18
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Server output, browser console errors, or screenshots (remove anything private).

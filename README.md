@@ -124,3 +124,13 @@ just play    # release build served on the LAN
 ```
 
 See [DESIGN.md](DESIGN.md) for how it works and [STATUS.md](STATUS.md) for progress.
+
+## Contributing
+
+Bug reports, ideas and pull requests are welcome: see [CONTRIBUTING.md](CONTRIBUTING.md) and the
+[code of conduct](CODE_OF_CONDUCT.md). Report security problems privately as described in
+[SECURITY.md](SECURITY.md). Changes are listed in [CHANGELOG.md](CHANGELOG.md).
+
+## Licence
+
+[MIT](LICENSE)
