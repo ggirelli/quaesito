@@ -24,6 +24,15 @@ Windows, macOS and Linux. Free and open source (MIT).
 
 </div>
 
+## See it in action
+
+<video controls preload="metadata" poster="media/demo-poster.webp" style="width:100%;border-radius:12px">
+  <source src="media/demo.mp4" type="video/mp4">
+  <track kind="captions" src="media/demo.vtt" srclang="en" label="English">
+</video>
+
+A quiz played on the test page, narrated. [Transcript](demo.md#transcript).
+
 ## Ready in three steps
 
 <div class="grid cards" markdown>

@@ -36,6 +36,7 @@ theme:
 
 exclude_docs: |
   requirements.txt
+  media/demo-transcript.md
 
 extra_css:
   - stylesheets/extra.css
@@ -52,6 +53,7 @@ nav:
       - After the game: after-the-game.md
       - Troubleshooting: troubleshooting.md
       - Configuration: configuration.md
+  - Demo video: demo.md
   - Development: development.md
   - How it was made: how-it-was-made.md
 
@@ -65,6 +67,9 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.keys
   - pymdownx.superfences
+  - pymdownx.snippets:
+      base_path: [docs]
+      check_paths: true
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
