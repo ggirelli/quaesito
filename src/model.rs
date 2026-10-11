@@ -431,6 +431,18 @@ impl Question {
         }
     }
 
+    /// Replaces the question's picture. A pin question's spot belonged to the old picture, so it
+    /// is cleared and must be clicked again.
+    pub fn set_image(&mut self, image: Option<String>) {
+        if image != self.image
+            && let QuestionKind::Pin { answer, aspect, .. } = &mut self.kind
+        {
+            *answer = None;
+            *aspect = 0.0;
+        }
+        self.image = image;
+    }
+
     /// How many times a usual question's points this one is worth.
     #[must_use]
     pub fn multiplier(&self) -> u32 {
@@ -870,6 +882,32 @@ mod tests {
         assert_eq!(quiz.media(), ["poster.jpg"]);
         quiz.rename_media(|_| Some("new.jpg".to_owned()));
         assert_eq!(quiz.media(), ["new.jpg"]);
+    }
+
+    #[test]
+    fn a_new_picture_clears_the_pin_spot() {
+        let mut q = Question {
+            image: Some("old.jpg".to_owned()),
+            kind: QuestionKind::Pin {
+                answer: Some(Point { x: 0.5, y: 0.5 }),
+                aspect: 0.75,
+                tolerance: PinTolerance::Normal,
+            },
+            ..Question::default()
+        };
+        q.set_image(Some("old.jpg".to_owned()));
+        assert!(matches!(
+            q.kind,
+            QuestionKind::Pin {
+                answer: Some(_),
+                ..
+            }
+        ));
+        q.set_image(Some("new.jpg".to_owned()));
+        assert!(matches!(
+            q.kind,
+            QuestionKind::Pin { answer: None, aspect, .. } if aspect.abs() < f64::EPSILON
+        ));
     }
 
     #[test]

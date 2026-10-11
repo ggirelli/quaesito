@@ -35,6 +35,7 @@ fn TestPage(code: String) -> Element {
     let mut info = use_resource(move || async move { test_info(token.get(), current()).await });
     let nav = navigator();
     let ready = use_ready_frames();
+    let mut restarting = use_signal(|| false);
     use_effect(use_reactive!(|code| {
         if *current.peek() != code {
             current.set(code);
@@ -67,6 +68,11 @@ fn TestPage(code: String) -> Element {
     let restart = move |_| {
         let quiz_id = quiz_id.clone();
         async move {
+            // A second click while restarting would start a second, orphaned test game.
+            if *restarting.peek() {
+                return;
+            }
+            restarting.set(true);
             let _ = end_session(token.get(), code()).await;
             match start_test(token.get(), quiz_id).await {
                 Ok(code) => {
@@ -74,6 +80,7 @@ fn TestPage(code: String) -> Element {
                 }
                 Err(err) => error.set(Some(message(&err))),
             }
+            restarting.set(false);
         }
     };
     let end = move |_| async move {
@@ -98,7 +105,13 @@ fn TestPage(code: String) -> Element {
         main { class: "test-page",
             div { class: "row test-tools",
                 button { class: "button primary", onclick: add_phone, "＋ Phone" }
-                button { class: "button", onclick: restart, title: "Start the test over", "↺ Restart" }
+                button {
+                    class: "button",
+                    disabled: restarting(),
+                    onclick: restart,
+                    title: "Start the test over",
+                    "↺ Restart"
+                }
                 Link {
                     class: "button",
                     to: Route::Editor { id: info_now.quiz_id.clone() },

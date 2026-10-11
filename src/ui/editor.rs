@@ -431,7 +431,7 @@ fn QuestionCard(
         uploading.set(true);
         upload_error.set(None);
         match upload_question_image(token.get(), file.into()).await {
-            Ok(name) => draft.edit_question(index, |q| q.image = Some(name)),
+            Ok(name) => draft.edit_question(index, |q| q.set_image(Some(name))),
             Err(err) => upload_error.set(Some(message(&err))),
         }
         uploading.set(false);
@@ -533,7 +533,7 @@ fn QuestionCard(
                     img { class: "thumb", src: media_url(image), alt: "Question picture" }
                     button {
                         class: "button ghost",
-                        onclick: move |_| draft.edit_question(index, |q| q.image = None),
+                        onclick: move |_| draft.edit_question(index, |q| q.set_image(None)),
                         "Remove picture"
                     }
                     if !slide {
@@ -725,8 +725,8 @@ fn QuestionCard(
                     QuestionKind::Parts { parts } => rsx! {
                         PartsEditor { question: index, parts: parts.clone() }
                     },
-                    QuestionKind::Pin { answer, tolerance, .. } => rsx! {
-                        PinEditor { question: index, image: question.image.clone(), answer: *answer, tolerance: *tolerance }
+                    QuestionKind::Pin { answer, aspect, tolerance } => rsx! {
+                        PinEditor { question: index, image: question.image.clone(), answer: *answer, aspect: *aspect, tolerance: *tolerance }
                     },
                     QuestionKind::TrueFalse { answer } => rsx! {
                         Choice {
@@ -844,6 +844,7 @@ fn PinEditor(
     question: usize,
     image: Option<String>,
     answer: Option<Point>,
+    aspect: f64,
     tolerance: PinTolerance,
 ) -> Element {
     let draft: Draft = use_context();
@@ -865,6 +866,7 @@ fn PinEditor(
         }
         div { class: "pin-edit",
             PinMap {
+                aspect,
                 image,
                 pins: answer
                     .map(|at| MapPin {
@@ -980,7 +982,12 @@ fn PartImage(question: usize, part: usize, image: Option<String>) -> Element {
         uploading.set(true);
         upload_error.set(None);
         match upload_question_image(token.get(), file.into()).await {
-            Ok(name) => draft.edit_parts(question, |parts| parts[part].image = Some(name)),
+            // Parts may have been removed while uploading: only set a part that still exists.
+            Ok(name) => draft.edit_parts(question, |parts| {
+                if let Some(p) = parts.get_mut(part) {
+                    p.image = Some(name);
+                }
+            }),
             Err(err) => upload_error.set(Some(message(&err))),
         }
         uploading.set(false);
@@ -991,7 +998,11 @@ fn PartImage(question: usize, part: usize, image: Option<String>) -> Element {
             button {
                 class: "button ghost icon",
                 title: "Remove picture",
-                onclick: move |_| draft.edit_parts(question, |parts| parts[part].image = None),
+                onclick: move |_| draft.edit_parts(question, |parts| {
+                    if let Some(p) = parts.get_mut(part) {
+                        p.image = None;
+                    }
+                }),
                 "✕🖼"
             }
         },

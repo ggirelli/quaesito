@@ -124,7 +124,9 @@ Closest number: the closest guesses earn 1000 points each, regardless of speed.
 Pin: spots are fractions of the picture's width and height; distances are measured in picture
 widths, using the picture's height-to-width ratio recorded when the spot is clicked in the editor.
 Within the tolerance's first distance a pin earns full points, beyond the second none, and in
-between a share falling evenly. Pictures of pin questions are never revealed gradually.
+between a share falling evenly. Pictures of pin questions are never revealed gradually. The picture and its pins
+are drawn as one SVG (`PinMap`), so pins stay on their spot however the picture is scaled;
+replacing a pin question's picture clears its spot.
 
 Several answers: each part is matched, grouped and judged like a typed answer; judgement keys are
 the part's index and the normalised text (`2|the beatles`). Each part is worth an even share of

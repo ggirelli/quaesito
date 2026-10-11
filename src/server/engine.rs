@@ -977,7 +977,9 @@ impl Game {
                 Vec::new()
             },
             map: match question.kind {
-                QuestionKind::Pin { .. } => question.image.clone(),
+                QuestionKind::Pin { aspect, .. } => {
+                    question.image.clone().map(|image| (image, aspect))
+                }
                 _ => None,
             },
             multi: question.is_multi(),
@@ -1232,7 +1234,7 @@ impl Game {
             let text = match (&submission.response, part) {
                 (Response::Text(text), None) => text,
                 (Response::Parts(texts), Some(p)) => match texts.get(p) {
-                    Some(text) if !text.trim().is_empty() => text,
+                    Some(text) if !normalize(text).is_empty() => text,
                     _ => continue,
                 },
                 _ => continue,
@@ -1355,22 +1357,16 @@ impl Game {
             }
             (QuestionKind::Parts { parts }, Response::Parts(texts)) => {
                 // The question's points are split evenly between its parts.
-                let count = u32::try_from(parts.len().max(1)).unwrap_or(u32::MAX);
-                let share = (full + count / 2) / count;
-                let mut points = 0;
-                let mut all_right = texts.len() == parts.len();
-                for (p, text) in texts.iter().enumerate() {
-                    if text.trim().is_empty() {
-                        all_right = false;
-                        continue;
-                    }
-                    let (judgement, _) = self.judgement(index, &text_key(Some(p), text));
-                    points += scoring::text_points(judgement, share);
-                    all_right &= judgement.grade == Grade::Full;
-                }
+                let judgements: Vec<Judgement> = texts
+                    .iter()
+                    .enumerate()
+                    .filter(|(_, text)| !normalize(text).is_empty())
+                    .map(|(p, text)| self.judgement(index, &text_key(Some(p), text)).0)
+                    .collect();
                 AnswerOutcome {
-                    points,
-                    fully_correct: all_right,
+                    points: scoring::parts_points(&judgements, parts.len(), full),
+                    fully_correct: judgements.len() == parts.len()
+                        && judgements.iter().all(|j| j.grade == Grade::Full),
                     joker: false,
                 }
             }
@@ -1553,7 +1549,17 @@ fn check_response(question: &Question, response: Response) -> Result<Response, R
             if texts.len() != parts.len() {
                 return Err(Refusal("That answer does not fit this question."));
             }
-            let texts: Vec<String> = texts.iter().map(|t| t.trim().to_owned()).collect();
+            // A part with nothing but punctuation counts as blank, as for a typed answer.
+            let texts: Vec<String> = texts
+                .iter()
+                .map(|t| {
+                    if normalize(t).is_empty() {
+                        String::new()
+                    } else {
+                        t.trim().to_owned()
+                    }
+                })
+                .collect();
             if texts.iter().all(|t| normalize(t).is_empty()) {
                 return Err(Refusal("Please type at least one answer."));
             }
@@ -2211,7 +2217,7 @@ mod tests {
         g.next(t0).unwrap();
         assert!(matches!(
             g.player_view(owls, t0).unwrap().phase,
-            PlayerPhase::Question { map: Some(ref m), input: InputKind::Pin, .. } if m == "map.jpg"
+            PlayerPhase::Question { map: Some((ref m, aspect)), input: InputKind::Pin, .. } if m == "map.jpg" && (aspect - 0.5).abs() < f64::EPSILON
         ));
         let pin = |x, y| Response::Pin(Point { x, y });
         assert!(g.answer(owls, pin(1.5, 0.5), false, t0).is_err());

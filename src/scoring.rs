@@ -104,13 +104,34 @@ pub fn pin_points(full: u32, distance: f64, tolerance: crate::model::PinToleranc
 /// bonus (or minus the malus).
 #[must_use]
 pub fn text_points(judgement: Judgement, full: u32) -> i32 {
-    let fraction = match judgement.grade {
+    parts_points(&[judgement], 1, full)
+}
+
+/// Points for a several-answers question of `parts` parts, given the judgements of the parts
+/// answered: `full` times the share of credit earned (each part worth an even share), plus every
+/// part's bonus (or minus its malus). All parts right is worth exactly `full`.
+#[must_use]
+pub fn parts_points(judgements: &[Judgement], parts: usize, full: u32) -> i32 {
+    if parts == 0 {
+        return 0;
+    }
+    let credit: f64 = judgements.iter().map(|j| grade_share(j.grade)).sum();
+    let parts = f64::from(u32::try_from(parts).unwrap_or(u32::MAX));
+    let base = to_points(f64::from(full) * credit / parts);
+    let bonus: i32 = judgements
+        .iter()
+        .map(|j| j.bonus.clamp(-MAX_BONUS, MAX_BONUS))
+        .sum();
+    i32::try_from(base).unwrap_or(i32::MAX) + bonus
+}
+
+/// The share of the points a grade earns.
+fn grade_share(grade: Grade) -> f64 {
+    match grade {
         Grade::Full => 1.0,
         Grade::Half => 0.5,
         Grade::Wrong => 0.0,
-    };
-    let base = to_points(f64::from(full) * fraction);
-    i32::try_from(base).unwrap_or(i32::MAX) + judgement.bonus.clamp(-MAX_BONUS, MAX_BONUS)
+    }
 }
 
 #[allow(
@@ -246,6 +267,22 @@ mod tests {
         assert_eq!(pin_points(1000, 0.17, Normal), 500);
         assert_eq!(pin_points(1000, 0.3, Normal), 0);
         assert_eq!(pin_points(1000, 2.0, Normal), 0);
+    }
+
+    #[test]
+    fn parts_add_up_to_exactly_the_full_points() {
+        let full = Judgement {
+            grade: Grade::Full,
+            bonus: 0,
+        };
+        for parts in 1..=8 {
+            assert_eq!(parts_points(&vec![full; parts], parts, 1000), 1000);
+        }
+        let half = Judgement {
+            grade: Grade::Half,
+            bonus: 100,
+        };
+        assert_eq!(parts_points(&[full, half], 3, 900), 550);
     }
 
     #[test]

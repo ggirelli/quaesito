@@ -808,7 +808,7 @@ fn OpenPad(
 fn PinPad(
     index: usize,
     total: usize,
-    map: String,
+    map: (String, f64),
     question: Option<String>,
     clock: Clock,
     submitted: Option<Point>,
@@ -857,7 +857,8 @@ fn PinPad(
             }
             JokerToggle { state: joker, armed, locked }
             PinMap {
-                image: map,
+                image: map.0,
+                aspect: map.1,
                 pins: shown
                     .map(|at| MapPin {
                         at,

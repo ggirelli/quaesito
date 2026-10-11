@@ -191,53 +191,107 @@ pub struct MapPin {
     pub class: &'static str,
 }
 
-/// A picture with pins on it. With `on_pick`, tapping it reports the spot and the picture's
-/// height-to-width ratio.
+/// A picture with pins on it, drawn as one SVG so pins stay on their spot at any size.
+///
+/// `aspect` is the picture's height divided by its width; while it is unknown (0, before the
+/// editor's first click) the picture is shown alone. With `on_pick`, tapping it reports the spot
+/// and the picture's height-to-width ratio.
 #[component]
 pub fn PinMap(
     image: String,
+    aspect: f64,
     pins: Vec<MapPin>,
     #[props(default)] on_pick: Option<EventHandler<(crate::model::Point, f64)>>,
 ) -> Element {
     let mut mounted = use_signal(|| None::<std::rc::Rc<MountedData>>);
+    let pick = move |e: MouseEvent| async move {
+        let (Some(handler), Some(element)) = (on_pick, mounted()) else {
+            return;
+        };
+        let Ok(rect) = element.get_client_rect().await else {
+            return;
+        };
+        let (width, height) = (rect.width(), rect.height());
+        if width <= 0.0 || height <= 0.0 {
+            return;
+        }
+        let click = e.client_coordinates();
+        let (x, y) = (click.x - rect.min_x(), click.y - rect.min_y());
+        // The drawing keeps the picture's shape; when the box is another shape the picture is
+        // centred in it ("meet"), so measure from the picture itself.
+        let (point, picture_aspect) = if aspect > 0.0 {
+            let scale = (width / MAP_WIDTH).min(height / (MAP_WIDTH * aspect));
+            let (drawn_w, drawn_h) = (MAP_WIDTH * scale, MAP_WIDTH * aspect * scale);
+            let (left, top) = ((width - drawn_w) / 2.0, (height - drawn_h) / 2.0);
+            ((x - left) / drawn_w, (y - top) / drawn_h, aspect)
+        } else {
+            (x / width, y / height, height / width)
+        }
+        .into_point();
+        handler.call((point, picture_aspect));
+    };
+    if aspect <= 0.0 {
+        return rsx! {
+            div { class: if on_pick.is_some() { "pin-map pickable" } else { "pin-map" },
+                img {
+                    src: media_url(&image),
+                    alt: "",
+                    draggable: false,
+                    onmounted: move |e| mounted.set(Some(e.data())),
+                    onclick: pick,
+                }
+            }
+        };
+    }
+    let height = MAP_WIDTH * aspect;
     rsx! {
-        div { class: if on_pick.is_some() { "pin-map pickable" } else { "pin-map" },
-            img {
-                src: media_url(&image),
-                alt: "",
-                draggable: false,
-                onmounted: move |e| mounted.set(Some(e.data())),
-                onclick: move |e: MouseEvent| async move {
-                    let (Some(handler), Some(element)) = (on_pick, mounted()) else {
-                        return;
-                    };
-                    let Ok(rect) = element.get_client_rect().await else {
-                        return;
-                    };
-                    let (width, height) = (rect.width(), rect.height());
-                    if width <= 0.0 || height <= 0.0 {
-                        return;
-                    }
-                    // Pins ignore the pointer, so the click lands on the picture itself.
-                    let point = e.element_coordinates();
-                    handler.call((
-                        crate::model::Point {
-                            x: (point.x / width).clamp(0.0, 1.0),
-                            y: (point.y / height).clamp(0.0, 1.0),
-                        },
-                        height / width,
-                    ));
-                },
+        svg {
+            class: if on_pick.is_some() { "pin-map pickable" } else { "pin-map" },
+            view_box: "0 0 {MAP_WIDTH} {height}",
+            preserve_aspect_ratio: "xMidYMid meet",
+            onmounted: move |e| mounted.set(Some(e.data())),
+            onclick: pick,
+            image {
+                "href": media_url(&image),
+                x: 0,
+                y: 0,
+                width: MAP_WIDTH,
+                height,
+                preserve_aspect_ratio: "none",
             }
             for (i, pin) in pins.into_iter().enumerate() {
-                span {
+                g {
                     key: "{i}",
                     class: "map-pin {pin.class}",
-                    style: "left: {pin.at.x * 100.0:.3}%; top: {pin.at.y * 100.0:.3}%",
-                    title: "{pin.title}",
-                    "{pin.label}"
+                    transform: "translate({pin.at.x * MAP_WIDTH:.2} {pin.at.y * height:.2})",
+                    "aria-label": "{pin.title}",
+                    circle { r: PIN_RADIUS }
+                    text { text_anchor: "middle", dominant_baseline: "central", "{pin.label}" }
                 }
             }
         }
+    }
+}
+
+/// Width of a [`PinMap`]'s drawing, in its own units.
+const MAP_WIDTH: f64 = 1000.0;
+/// Radius of a pin, in drawing units (a share of the picture's width).
+const PIN_RADIUS: f64 = 30.0;
+
+/// Turns `(x, y, aspect)` with `x` and `y` as shares of the picture into a clamped point.
+trait IntoPoint {
+    fn into_point(self) -> (crate::model::Point, f64);
+}
+
+impl IntoPoint for (f64, f64, f64) {
+    fn into_point(self) -> (crate::model::Point, f64) {
+        let (x, y, aspect) = self;
+        (
+            crate::model::Point {
+                x: x.clamp(0.0, 1.0),
+                y: y.clamp(0.0, 1.0),
+            },
+            aspect,
+        )
     }
 }

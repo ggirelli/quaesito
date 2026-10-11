@@ -973,8 +973,12 @@ fn RevealBody(question: QuestionInfo, reveal: Reveal) -> Element {
         Reveal::Text { accepted, groups } => rsx! {
             TextReveal { question: question.index, accepted, groups }
         },
-        Reveal::Pin { answer, pins, .. } => rsx! {
-            PinReveal { image: question.image.clone().unwrap_or_default(), answer, pins }
+        Reveal::Pin {
+            answer,
+            aspect,
+            pins,
+        } => rsx! {
+            PinReveal { image: question.image.clone().unwrap_or_default(), answer, aspect, pins }
         },
         Reveal::Parts { parts } => rsx! {
             div { class: "parts-reveal",
@@ -1015,7 +1019,7 @@ fn RevealBody(question: QuestionInfo, reveal: Reveal) -> Element {
 
 /// Every team's pin and the right spot, with the closest pins listed.
 #[component]
-fn PinReveal(image: String, answer: Point, pins: Vec<PinGuess>) -> Element {
+fn PinReveal(image: String, answer: Point, aspect: f64, pins: Vec<PinGuess>) -> Element {
     let mut marks: Vec<MapPin> = pins
         .iter()
         .map(|pin| MapPin {
@@ -1038,7 +1042,7 @@ fn PinReveal(image: String, answer: Point, pins: Vec<PinGuess>) -> Element {
     });
     rsx! {
         div { class: "pin-reveal",
-            PinMap { image, pins: marks }
+            PinMap { image, aspect, pins: marks }
             if pins.is_empty() {
                 p { class: "muted", "Nobody dropped a pin." }
             }

@@ -179,7 +179,11 @@ pub async fn start_test(token: String, quiz_id: String) -> ServerFnResult<String
         .create_test(quiz)
         .map_err(|refusal| ServerFnError::new(refusal.0))?;
     for _ in 0..TEST_PHONES {
-        add_test_phone(token.clone(), code.clone()).await?;
+        if let Err(err) = add_test_phone(token.clone(), code.clone()).await {
+            // Do not leave a half-started test game behind.
+            state.sessions.remove(&code);
+            return Err(err);
+        }
     }
     Ok(code)
 }

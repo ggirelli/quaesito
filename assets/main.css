@@ -1971,52 +1971,53 @@ button.joker {
   place-items: center;
 }
 
-/* A picture with pins (pin questions): pins are centred on their spot and let clicks through. */
+/* A picture with pins (pin questions): one SVG drawing, so pins stay on their spot. */
 .pin-map {
-  position: relative;
-  display: inline-block;
+  display: block;
   max-width: 100%;
-  line-height: 0;
-}
-
-.pin-map img {
-  max-width: 100%;
+  width: 100%;
+  height: auto;
   border-radius: var(--radius);
   user-select: none;
 }
 
-.pin-map.pickable img {
+div.pin-map img {
+  display: block;
+  max-width: 100%;
+  border-radius: var(--radius);
+}
+
+.pin-map.pickable {
   cursor: crosshair;
 }
 
-.map-pin {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  min-width: 1.6em;
-  height: 1.6em;
-  padding: 0 0.3em;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  background: var(--surface-2);
-  border: 2px solid #fff;
-  color: #fff;
-  font-size: 0.8em;
+.map-pin circle {
+  fill: var(--surface-2);
+  stroke: #fff;
+  stroke-width: 4;
+}
+
+.map-pin text {
+  fill: #fff;
+  font-size: 32px;
   font-weight: 800;
-  line-height: 1;
   pointer-events: none;
-  box-shadow: 0 2px 6px rgb(0 0 0 / 0.5);
 }
 
-.map-pin.own {
-  background: var(--accent);
-  color: var(--accent-ink);
+.map-pin.own circle {
+  fill: var(--accent);
 }
 
-.map-pin.answer {
-  background: var(--ok);
-  color: #000;
-  z-index: 1;
+.map-pin.own text {
+  fill: var(--accent-ink);
+}
+
+.map-pin.answer circle {
+  fill: var(--ok);
+}
+
+.map-pin.answer text {
+  fill: #000;
 }
 
 .pin-reveal {
@@ -2026,10 +2027,10 @@ button.joker {
   align-items: start;
 }
 
-.pin-reveal .pin-map img {
+.pin-reveal .pin-map {
   max-height: 50vh;
 }
 
-.pin-edit .pin-map img {
+.pin-edit .pin-map {
   max-height: 60vh;
 }

@@ -358,8 +358,8 @@ pub enum PlayerPhase {
         text: Option<(String, Vec<String>)>,
         /// Answer pictures, parallel to the answer texts, when the phone display shows full text.
         answer_images: Vec<Option<String>>,
-        /// The picture to drop a pin on (pin questions only).
-        map: Option<String>,
+        /// The picture to drop a pin on and its height-to-width ratio (pin questions only).
+        map: Option<(String, f64)>,
         multi: bool,
         remaining_ms: u64,
         /// The host paused the clock.
