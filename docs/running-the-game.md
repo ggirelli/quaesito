@@ -1,8 +1,16 @@
 # Running the game
 
-Press **▶ Start** next to a quiz. Put the big screen on the TV, full screen with ++f11++. Teams
-scan the QR code, or open the address shown and type the game code, then pick a name and a
-picture.
+Press **▶ Start** next to a quiz, choose how many teams may join, and start. Put the big screen
+on the TV, full screen with ++f11++. Teams scan the QR code, or open the address shown and type
+the game code, then pick a name and a picture.
+
+!!! info "How many can play"
+    Each team plays from **one phone**, with as many players gathered around it as you like. A
+    game takes **50 teams** unless you choose otherwise when you start it: lower it to keep a game
+    small, or raise it for a big event, **up to 10,000 teams**. There is always a limit, so a
+    misbehaving phone or script cannot flood a game with teams, but you can set it far beyond what
+    any Wi-Fi network holds: a home router usually manages a few dozen phones, so for a crowd use
+    a venue's network or proper access points.
 
 | To… | Press |
 |---|---|
