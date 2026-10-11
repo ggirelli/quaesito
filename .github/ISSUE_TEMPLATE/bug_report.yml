@@ -34,7 +34,7 @@ body:
     attributes:
       label: Environment
       description: Quaesito version or commit, operating system, and the browsers involved.
-      placeholder: v0.1.0 on Linux; big screen in Firefox 131, phones in Safari 18
+      placeholder: v0.2.0 on Linux; big screen in Firefox 131, phones in Safari 18
   - type: textarea
     id: logs
     attributes:

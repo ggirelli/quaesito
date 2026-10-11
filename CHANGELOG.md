@@ -6,47 +6,55 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-11
+
+More ways to ask questions, results at half time, and a quiz night that needs no internet at all.
+
 ### Added
 
-- Number questions can have a range: phones then show a slider next to the field for an exact guess.
-- Text shown with a question, line breaks kept: lyrics, a quote, a riddle.
-- Starting a game asks how many teams may join: 50 by default, from 1 up to 10,000. The lobby shows the limit.
+- **Results slides**, for quizzes that reveal the answers at the end: placed anywhere (at an intermission, say), they
+  walk through the answers since the previous results slide, then show the standings with the points each team
+  gained and the places it moved.
+- **Bonus questions** on choices, true/false, number, order and pin questions: a typed question answered together
+  with the main one, worth +25%, +50% or +100% of its points and judged like typed answers on the reveal.
+- **Text shown with a question**, line breaks kept: lyrics, a quote, a riddle.
+- **Number ranges:** a number question can limit the guesses to a range; phones then show a slider next to the field
+  for an exact guess.
+- **Team limit:** starting a game asks how many teams may join, 50 by default, from 1 up to 10,000. The lobby shows
+  the limit.
+- **Test from here** on every question and slide in the editor starts a test right there, skipping the lobby.
+- **Quiz list search and sorting** by last edit, newest, name or number of questions. **New quiz** sits next to
+  Import and asks for the title in a pop-up.
 - A demo quiz with one question of each kind, added the first time quaesito starts.
-- A help button on the home page and in the admin pages, opening the user guide.
-- The downloads include the user guide, served by quaesito at `/docs/`, so it works offline.
-- Bonus questions on choices, true/false, number, order and pin questions: a typed question answered together with the main
-  one, worth +25%, +50% or +100% of its points and judged like typed answers on the reveal.
-- Results slides, for quizzes that reveal the answers at the end: placed anywhere (at an intermission, say), they walk
-  through the answers since the previous results slide, then show the standings with the points each team gained and
-  the places it moved.
-- The README, the user guide and the downloads say up front that quaesito is free, MIT-licensed, without
-  warranty and fully vibe coded, and that donations are welcome on Ko-fi.
-- "Test from here" on every question and slide in the editor starts a test right there, skipping the lobby.
-- The quiz list has a search box and sorts by last edit, newest, name or number of questions. **New quiz** sits next
-  to Import and asks for the title in a pop-up.
+- A help button on the home page and in the admin pages, opening the user guide. The downloads include the guide,
+  served by quaesito at `/docs/`, so it works offline.
+- The README, the user guide and the downloads say up front that quaesito is free, MIT-licensed, without warranty and
+  fully vibe coded, and that donations are welcome on Ko-fi.
 
 ### Changed
 
-- The lobby illustration and the social preview show the new answer colours and shapes; the screenshots and the demo
-  video are retaken.
+- Answers have new colours (violet, teal, magenta, orange, sky, lime) and shapes (sparkle, moon, heart, bolt, leaf,
+  drop), drawn so they look the same on every phone. The right answer is ringed in white. The lobby illustration,
+  the social preview, the screenshots and the demo video show them.
+- Reveals say "Nobody answered this one." when no team answered, also in the walk through the answers at the end.
+- Stopping the clock by hand stops the soundtrack too; when time runs out, the music still plays on through the
+  reveal.
 - Getting started walks through each system step by step, with the current macOS 15 "Open Anyway" advice and the
   Windows SmartScreen and firewall prompts.
-- Reveals say "Nobody answered this one." when no team answered, also in the walk through the answers at the end.
-- Stopping the clock by hand stops the soundtrack too; when time runs out, the music still plays on through the reveal.
-- Answers have new colours (violet, teal, magenta, orange, sky, lime) and shapes (sparkle, moon, heart, bolt, leaf,
-  drop), drawn so they look the same on every phone. The right answer is ringed in white.
 - The README is shorter and points to the user guide for details.
-- The demo video and the screenshots show a question with a picture and one with a soundtrack.
-- The demo video is narrated with Chatterbox, which sounds livelier than Kokoro.
+- The demo video is narrated with Chatterbox, which sounds livelier than Kokoro, and shows a question with a picture
+  and one with a soundtrack.
 
 ### Fixed
 
-- The user guide at `/docs/` is never shown from a stale browser copy after it is rebuilt or the app is updated.
-- A question's picture no longer pushes the big screen's controls off the bottom of a 16:9 screen: the
-  big screen is exactly one screen tall and the picture takes the room the question leaves.
 - Nothing is loaded from the internet any more: the user guide bundles its fonts and no longer asks GitHub for the
   repository's stars, and the server tells browsers to load nothing from other sites.
+- The user guide at `/docs/` is never shown from a stale browser copy after it is rebuilt or the app is updated.
+- A question's picture no longer pushes the big screen's controls off the bottom of a 16:9 screen: the big screen is
+  exactly one screen tall and the picture takes the room the question leaves.
 - Moving a question or slide in the editor keeps it on screen and keeps the focus on it.
+- The editor's number fields look like the others, and a range that leaves out the correct number is flagged right
+  under them.
 
 ## [0.1.0] - 2026-10-11
 
@@ -76,5 +84,6 @@ The first release: everything needed for a quiz night with friends.
 - **Downloads** for Linux, macOS (Apple silicon) and Windows with a start script, a documentation
   site with screenshots and a narrated demo video.
 
-[Unreleased]: https://github.com/ggirelli/quaesito/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/ggirelli/quaesito/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/ggirelli/quaesito/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/ggirelli/quaesito/releases/tag/v0.1.0
