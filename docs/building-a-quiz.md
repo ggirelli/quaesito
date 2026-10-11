@@ -24,6 +24,12 @@ Each question has an **answer type** (see [question types](question-types.md)), 
 (the quiz's default unless you set one) and a **points** multiplier: a ×2 question earns twice
 the usual points.
 
+## Text with the question
+
+Under the question, an optional box takes text to show with it, line breaks kept: the lyrics for
+"name the song", a quote for "who said it?", a riddle. The big screen shows it under the question,
+and so do phones when they show the full question.
+
 ## Pictures
 
 Add a picture to any question. For a guessing game, choose how it appears while the clock runs:

@@ -1101,7 +1101,16 @@ impl Game {
                 | QuestionKind::Parts { .. } => self.shown_answers(index),
                 _ => Vec::new(),
             },
-            text: full_text.then(|| (question.text.clone(), self.shown_answers(index))),
+            // Phones show the passage (lyrics, a quote…) under the question, line breaks kept.
+            text: full_text.then(|| {
+                let passage = question.passage.trim();
+                let text = if passage.is_empty() {
+                    question.text.clone()
+                } else {
+                    format!("{}\n\n{passage}", question.text)
+                };
+                (text, self.shown_answers(index))
+            }),
             answer_images: if full_text {
                 answer_images(question)
             } else {
@@ -1240,6 +1249,7 @@ impl Game {
             bonus: self
                 .active_bonus(index)
                 .map(|b| (b.text.trim().to_owned(), b.percent)),
+            passage: question.passage.trim().to_owned(),
         }
     }
 
@@ -1972,6 +1982,7 @@ mod tests {
                 },
             ],
             bonus: None,
+            passage: String::new(),
         };
         Quiz {
             settings,
@@ -3334,6 +3345,34 @@ mod tests {
         );
         assert_eq!(g.player_view(cats, t0).unwrap().score, Some(1000));
         assert_eq!(g.player_view(bats, t0).unwrap().score, Some(0));
+    }
+
+    #[test]
+    fn a_passage_shows_with_its_question() {
+        let t0 = Instant::now();
+        let mut quiz = quiz(QuizSettings {
+            phone_display: crate::model::PhoneDisplay::FullText,
+            ..QuizSettings::default()
+        });
+        quiz.questions[0].passage = " Is this the real life?\nIs this just fantasy? ".to_owned();
+        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let owls = join(&mut g, "Owls");
+        g.next(t0).unwrap();
+        let HostPhase::Question { question, .. } = g.host_view(t0).phase else {
+            panic!("expected a question");
+        };
+        assert_eq!(
+            question.passage,
+            "Is this the real life?\nIs this just fantasy?"
+        );
+        let PlayerPhase::Question {
+            text: Some((text, _)),
+            ..
+        } = g.player_view(owls, t0).unwrap().phase
+        else {
+            panic!("expected the full text");
+        };
+        assert_eq!(text, "one\n\nIs this the real life?\nIs this just fantasy?");
     }
 
     #[test]

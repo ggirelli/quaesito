@@ -746,6 +746,9 @@ fn QuestionHeader(question: QuestionInfo, children: Element) -> Element {
             {children}
         }
         h1 { class: "question-title", "{question.text}" }
+        if !question.passage.is_empty() {
+            p { class: "question-passage", "{question.passage}" }
+        }
         if let Some((text, percent)) = &question.bonus {
             p { class: "bonus-line",
                 strong { "Bonus +{percent}%: " }
