@@ -56,7 +56,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 47  | Help button and user guide bundled in the downloads (`/docs/`)                                                                     | ✅ done |
 | 48  | Security review of the recent dependency changes (npm, cargo, docs, CI)                                                            | ✅ done |
 | 49  | Docs home: "Made for game nights" right after the disclaimer, the podium screenshot stays at the bottom                            | ✅ done |
-| 50  | Fully offline: no third-party requests from the app or the bundled guide (no Google Fonts, no GitHub API)                          | 📋 todo |
+| 50  | Fully offline: no third-party requests from the app or the bundled guide (no Google Fonts, no GitHub API)                          | ✅ done |
 | 51  | Editor: moving a question or slide keeps it in view and focused                                                                    | 📋 todo |
 | 52  | Results slides: show the standings mid-quiz (e.g. at an intermission) when revealing at the end                                    | 📋 todo |
 | 53  | Bonus: an open-ended follow-up on any closed question, worth a small extra (e.g. +50%)                                             | 📋 todo |
@@ -84,6 +84,9 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 - `src/ui/`: router (`/`, `/admin`, `/admin/quiz/:id`), `ClientOnly` wrapper so `localStorage`-dependent pages hydrate cleanly, admin gate with token check, dashboard (create/duplicate/export/import/delete), editor with ~1 s autosave and live validation.
 - `GET /export/{id}?token=…` downloads a quiz as JSON.
 - `assets/main.css`: single offline stylesheet (no web fonts/CDNs, the LAN may have no internet).
+- Offline (step 50): the user guide self-hosts its fonts (Material's privacy plugin) and shows the repository link without
+  GitHub's facts (`overrides/partials/source.html`). `RELEASE=1 DEMO_QUIZ=1 tools/browser/run.sh check-offline.js` fails on
+  any request outside the server; debug builds still load Inter from Google for dx's rebuild notice.
 - `src/ui/live.rs`: `use_live` hook keeping a WebSocket alive with reconnection; countdowns run on the client from the last server snapshot.
 - `src/ui/host.rs`: `/host/:code` big screen: lobby with client-side QR code, timed questions, reveals with pick counts, standings, podium 3→2→1. Advance with the button, →, PageDown or N (presentation clickers).
 - Admin dashboard: start a quiz, list live games, reopen or end them.
