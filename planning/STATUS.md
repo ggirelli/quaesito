@@ -86,7 +86,8 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 - `assets/main.css`: single offline stylesheet (no web fonts/CDNs, the LAN may have no internet).
 - Offline (step 50): the user guide self-hosts its fonts (Material's privacy plugin) and shows the repository link without
   GitHub's facts (`overrides/partials/source.html`). `RELEASE=1 DEMO_QUIZ=1 tools/browser/run.sh check-offline.js` fails on
-  any request outside the server; debug builds still load Inter from Google for dx's rebuild notice.
+  any request outside the server. The server sends a content security policy allowing only itself, which also blocks the
+  Inter font that dx's rebuild notice imports from Google in debug builds.
 - `src/ui/live.rs`: `use_live` hook keeping a WebSocket alive with reconnection; countdowns run on the client from the last server snapshot.
 - `src/ui/host.rs`: `/host/:code` big screen: lobby with client-side QR code, timed questions, reveals with pick counts, standings, podium 3→2→1. Advance with the button, →, PageDown or N (presentation clickers).
 - Admin dashboard: start a quiz, list live games, reopen or end them.

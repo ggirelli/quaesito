@@ -5,8 +5,7 @@
 #   tools/browser/run.sh check-pins.js [args…]
 #
 # The build and data stay apart from `just serve`, so both can run at once. RELEASE=1 checks an
-# optimized bundle instead (in target/e2e/dist), as shipped in the downloads: debug builds load a
-# font from Google for dx's rebuild notice.
+# optimized bundle instead (in target/e2e/dist), as shipped in the downloads.
 set -eu
 here=$(cd "$(dirname "$0")" && pwd)
 root=$(cd "$here/../.." && pwd)
