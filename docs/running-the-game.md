@@ -1,7 +1,8 @@
 # Running the game
 
-Press **▶ Start** next to a quiz, choose how many teams may join, and start. Put the big screen
-on the TV, full screen with ++f11++. Teams scan the QR code, or open the address shown and type
+Press **▶ Start** next to a quiz, choose how many teams may join, and start. Tick **Shuffle the
+answers** to play the multiple-choice answers in a new order, for this game only: the saved quiz
+keeps its own. Put the big screen on the TV, full screen with ++f11++. Teams scan the QR code, or open the address shown and type
 the game code, then pick a name and a picture.
 
 !!! info "How many can play"

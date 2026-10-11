@@ -24,6 +24,7 @@
 
 use std::{
     collections::HashMap,
+    hash::{Hash, Hasher},
     time::{Duration, Instant},
 };
 
@@ -1076,6 +1077,26 @@ impl Game {
         })
     }
 
+    /// The order a team's phone lists the answers of question `index` in: its own, but the same
+    /// every time it is asked (after reconnecting or a restart too).
+    fn phone_order(&self, index: usize, team: &Team) -> Vec<usize> {
+        let mut hasher = std::hash::DefaultHasher::new();
+        (&self.code, team.id, index).hash(&mut hasher);
+        let mut state = hasher.finish();
+        let mut order: Vec<usize> = (0..self.quiz.questions[index].answers.len()).collect();
+        for i in (1..order.len()).rev() {
+            // SplitMix64 steps.
+            state = state.wrapping_add(0x9E37_79B9_7F4A_7C15);
+            let mut z = state;
+            z = (z ^ (z >> 30)).wrapping_mul(0xBF58_476D_1CE4_E5B9);
+            z = (z ^ (z >> 27)).wrapping_mul(0x94D0_49BB_1331_11EB);
+            z ^= z >> 31;
+            let j = usize::try_from(z % (i as u64 + 1)).unwrap_or(0);
+            order.swap(i, j);
+        }
+        order
+    }
+
     /// What a phone shows while question `index` is open.
     fn open_question_view(
         &self,
@@ -1096,6 +1117,10 @@ impl Game {
                 InputKind::Order => self.shown[index].len(),
                 InputKind::Parts => question_parts(question),
                 InputKind::Text | InputKind::Number | InputKind::Pin => 0,
+            },
+            order: match question.kind {
+                QuestionKind::Choice => self.phone_order(index, team),
+                _ => Vec::new(),
             },
             // Order items, True/False and part labels cannot be told apart by colour alone:
             // always sent.
@@ -1951,13 +1976,18 @@ fn tidy(accepted: &[String]) -> Vec<String> {
         .collect()
 }
 
+/// A random number in `0..n` (`n` must not be 0).
+#[must_use]
+pub fn random_below(n: usize) -> usize {
+    let random = uuid::Uuid::new_v4().as_u128();
+    usize::try_from(random % n as u128).unwrap_or(0)
+}
+
 /// A random order of `0..n` that differs from the original one when it can.
 fn shuffled(n: usize) -> Vec<usize> {
     let mut order: Vec<usize> = (0..n).collect();
     for i in (1..n).rev() {
-        let random = uuid::Uuid::new_v4().as_u128();
-        let j = usize::try_from(random % (i as u128 + 1)).unwrap_or(0);
-        order.swap(i, j);
+        order.swap(i, random_below(i + 1));
     }
     if n > 1 && order.iter().enumerate().all(|(i, &v)| i == v) {
         order.rotate_left(1);
@@ -2022,6 +2052,36 @@ mod tests {
 
     fn pick(selected: &[usize]) -> Response {
         Response::Choice(selected.to_vec())
+    }
+
+    #[test]
+    fn each_phone_lists_the_answers_in_its_own_lasting_order() {
+        let t0 = Instant::now();
+        let mut quiz = quiz(QuizSettings::default());
+        quiz.questions[0].answers = (0..6)
+            .map(|i| Answer {
+                text: format!("answer {i}"),
+                correct: i == 0,
+                image: None,
+            })
+            .collect();
+        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let teams: Vec<u32> = (0..8).map(|i| join(&mut g, &format!("Team {i}"))).collect();
+        g.next(t0).unwrap();
+        let order = |g: &Game, team| match g.player_view(team, t0).unwrap().phase {
+            PlayerPhase::Question { order, .. } => order,
+            other => panic!("expected the question, got {other:?}"),
+        };
+        let orders: Vec<Vec<usize>> = teams.iter().map(|&t| order(&g, t)).collect();
+        for list in &orders {
+            let mut sorted = list.clone();
+            sorted.sort_unstable();
+            assert_eq!(sorted, (0..6).collect::<Vec<_>>());
+        }
+        // Eight phones, 720 orders: they are not all the same.
+        assert!(orders.iter().any(|o| o != &orders[0]));
+        // Asking again gives the same order.
+        assert_eq!(order(&g, teams[3]), orders[3]);
     }
 
     #[test]

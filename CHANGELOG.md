@@ -12,6 +12,10 @@ All notable changes to quaesito are listed here. The format follows
   switches it, and every page open on that device follows.
 - A "Shuffle answers" button in the quiz editor, next to "Shuffle questions": it shuffles the answers of every
   multiple-choice question (the right ones stay right), and can be undone the same way.
+- Each phone lists the answers of a multiple-choice question in its own order, with the same shapes and colours as the
+  big screen, so a glance at the next table's phone gives nothing away.
+- "Shuffle the answers" when starting a live game: the answers of every multiple-choice question come in a new order for
+  that game only, and the saved quiz keeps its own.
 
 ### Changed
 

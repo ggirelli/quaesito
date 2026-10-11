@@ -426,6 +426,7 @@ fn CreateDialog(on_close: EventHandler<()>) -> Element {
 fn StartDialog(id: String, on_close: EventHandler<()>) -> Element {
     let token: AdminToken = use_context();
     let mut max_teams = use_signal(|| DEFAULT_MAX_TEAMS.to_string());
+    let mut shuffle_answers = use_signal(|| false);
     let mut error = use_signal(|| None::<String>);
     let start = move |evt: FormEvent| {
         evt.prevent_default();
@@ -437,7 +438,7 @@ fn StartDialog(id: String, on_close: EventHandler<()>) -> Element {
                 )));
                 return;
             };
-            match start_session(token.get(), id, Some(limit)).await {
+            match start_session(token.get(), id, Some(limit), Some(shuffle_answers())).await {
                 Ok(code) => {
                     navigator().push(Route::Host { code });
                 }
@@ -462,6 +463,19 @@ fn StartDialog(id: String, on_close: EventHandler<()>) -> Element {
                     "Each team plays from one phone, with as many players around it as you like. "
                     "{DEFAULT_MAX_TEAMS} suits most game nights; raise it for a big event, up to 10,000. "
                     "Your Wi-Fi may hold fewer phones than that."
+                }
+                label { class: "check-field",
+                    input {
+                        r#type: "checkbox",
+                        checked: shuffle_answers(),
+                        onchange: move |e| shuffle_answers.set(e.checked()),
+                    }
+                    span { "Shuffle the answers" }
+                }
+                p { class: "muted small",
+                    "The big screen shows each multiple-choice question's answers in a new order, "
+                    "for this game only: the saved quiz keeps its order. Phones always list the "
+                    "answers in their own order."
                 }
                 ErrorBox { error: error() }
                 button { r#type: "submit", class: "button primary big", "▶ Start" }

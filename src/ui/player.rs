@@ -409,6 +409,7 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
             total,
             input: InputKind::Choice,
             answer_count,
+            order,
             items,
             text,
             answer_images,
@@ -428,6 +429,7 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
                 index,
                 total,
                 answer_count,
+                order,
                 text,
                 labels: items,
                 images: answer_images,
@@ -586,6 +588,8 @@ fn AnswerPad(
     index: usize,
     total: usize,
     answer_count: usize,
+    /// The answers from first to last, by index; empty keeps their own order.
+    order: Vec<usize>,
     text: Option<(String, Vec<String>)>,
     /// Answer labels shown whatever the phone display (True/False).
     labels: Vec<String>,
@@ -624,6 +628,12 @@ fn AnswerPad(
         None => (None, (!labels.is_empty()).then_some(labels)),
     };
     let with_text = labels.is_some() && (display == PhoneDisplay::FullText || question.is_none());
+    // Each answer keeps its index (shape, colour and what is sent), wherever it is listed.
+    let order = if order.len() == answer_count {
+        order
+    } else {
+        (0..answer_count).collect()
+    };
 
     rsx! {
         main { class: "player-main top",
@@ -653,7 +663,7 @@ fn AnswerPad(
                 BonusField { bonus, value: bonus_text, locked }
             }
             div { class: if with_text { "phone-answers with-text" } else { "phone-answers" },
-                for i in 0..answer_count {
+                for i in order {
                     {
                         let mut class = format!("phone-answer a{}", i % ANSWER_STYLES);
                         if chosen.contains(&i) {

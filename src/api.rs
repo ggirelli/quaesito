@@ -180,20 +180,26 @@ pub async fn upload_question_audio(token: String, file: FileStream) -> ServerFnR
 }
 
 /// Starts a live session for a quiz and returns its join code. `max_teams` is the most teams
-/// that can join ([`crate::protocol::DEFAULT_MAX_TEAMS`] when left out).
+/// that can join ([`crate::protocol::DEFAULT_MAX_TEAMS`] when left out). With
+/// `shuffle_answers`, the answers of each multiple-choice question are shuffled for this game
+/// only: the saved quiz keeps its order.
 #[post("/api/admin/session/start")]
 pub async fn start_session(
     token: String,
     quiz_id: String,
     max_teams: Option<usize>,
+    shuffle_answers: Option<bool>,
 ) -> ServerFnResult<String> {
     let state = crate::server::state();
     state.auth.require(&token)?;
-    let quiz = state
+    let mut quiz = state
         .quizzes
         .get(&quiz_id)
         .await?
         .ok_or_else(|| ServerFnError::new("This quiz does not exist."))?;
+    if shuffle_answers == Some(true) {
+        quiz.shuffle_answers(crate::server::engine::random_below);
+    }
     state
         .sessions
         .create(
