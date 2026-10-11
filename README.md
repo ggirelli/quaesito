@@ -18,7 +18,15 @@ Quizzes among friends: a self-hosted, live quiz web app written in Rust with [Di
 
 It runs on your local network and needs no internet connection.
 
-## Playing
+## Download and play
+
+Download the archive for your system from the [latest release](https://github.com/ggirelli/quaesito/releases/latest)
+(Windows, macOS on Apple silicon, Linux), unpack it, and double-click `start.bat` (Windows) or `start.command`
+(macOS), or run `./start.sh` (Linux). Nothing else needs installing. The window that opens shows the address phones
+use and the admin password; your quizzes are kept in the `data` folder next to it. On macOS the first launch may need
+right-click → Open, as the app is not signed.
+
+## Playing from source
 
 ```sh
 QUAESITO_ADMIN_PASSWORD=pick-something just play

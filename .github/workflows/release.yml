@@ -1,0 +1,92 @@
+name: Release
+
+# Builds ready-to-run downloads: on a version tag (v1.2.3) they are attached to a GitHub release;
+# run by hand, they are only kept as workflow artifacts.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+  DIOXUS_CLI_VERSION: 0.7.10
+
+jobs:
+  package:
+    name: package (${{ matrix.name }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # 22.04 builds against an older glibc, so the server runs on more distributions.
+          - { name: linux-x86_64, os: ubuntu-22.04, start: start.sh, archive: tar.gz }
+          - { name: macos-arm64, os: macos-14, start: start.command, archive: tar.gz }
+          - { name: windows-x86_64, os: windows-latest, start: start.bat, archive: zip }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: ${{ matrix.name }}
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: dioxus-cli@${{ env.DIOXUS_CLI_VERSION }}
+      - name: Bundle
+        run: dx bundle --platform web --release --out-dir dist
+      - name: Package
+        shell: bash
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          [ "$GITHUB_REF_TYPE" = tag ] || version="${GITHUB_SHA::7}"
+          name="quaesito-$version-${{ matrix.name }}"
+          mkdir -p "out/$name"
+          cp -R dist/. "out/$name/"
+          cp "packaging/${{ matrix.start }}" packaging/README.txt LICENSE "out/$name/"
+          cd out
+          if [ "${{ matrix.archive }}" = zip ]; then
+            7z a "$name.zip" "$name" >/dev/null
+          else
+            chmod +x "$name/${{ matrix.start }}"
+            tar czf "$name.tar.gz" "$name"
+          fi
+          ls -l
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: out/quaesito-*.*
+          if-no-files-found: error
+
+  release:
+    if: github.ref_type == 'tag'
+    needs: package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/download-artifact@v5
+        with:
+          path: out
+          merge-multiple: true
+      - name: Release notes from the changelog
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          awk -v v="$version" '
+            /^## \[/ { if (on) exit; on = index($0, "[" v "]") > 0; next }
+            on { print }
+          ' CHANGELOG.md > notes.md
+          cat >> notes.md <<'NOTES'
+
+          ### Downloads
+
+          Unpack the archive for your system and double-click `start.bat` (Windows) or
+          `start.command` (macOS), or run `./start.sh` (Linux). See `README.txt` inside.
+          NOTES
+          cat notes.md
+      - uses: softprops/action-gh-release@v2
+        with:
+          body_path: notes.md
+          files: out/*

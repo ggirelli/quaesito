@@ -13,3 +13,6 @@ indent_size = 2
 
 [justfile]
 indent_size = 4
+
+[*.bat]
+end_of_line = crlf
