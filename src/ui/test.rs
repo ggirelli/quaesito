@@ -74,7 +74,7 @@ fn TestPage(code: String) -> Element {
             }
             restarting.set(true);
             let _ = end_session(token.get(), code()).await;
-            match start_test(token.get(), quiz_id).await {
+            match start_test(token.get(), quiz_id, None).await {
                 Ok(code) => {
                     nav.replace(Route::Test { code });
                 }

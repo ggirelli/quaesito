@@ -548,6 +548,26 @@ impl Game {
         Ok(())
     }
 
+    /// Leaves the lobby straight for item `index` (a test from a chosen question or slide):
+    /// the items before it count as not played.
+    ///
+    /// # Errors
+    /// Refuses outside the lobby, without teams, or past the end of the quiz.
+    pub fn start_from(&mut self, index: usize, now: Instant) -> Result<(), Refusal> {
+        if !matches!(self.phase, Phase::Lobby) {
+            return Err(Refusal("The quiz has already started."));
+        }
+        if self.teams.is_empty() {
+            return Err(Refusal("Wait for at least one team to join."));
+        }
+        if index >= self.quiz.questions.len() {
+            return Err(Refusal("The quiz has no such question or slide."));
+        }
+        let phase = self.item_phase(index, now);
+        self.set_phase(phase);
+        Ok(())
+    }
+
     /// The host's "back" button: the previous slide, reveal or podium step. Leaving a question
     /// that is still open withdraws it, so it is asked afresh later.
     ///
@@ -2003,6 +2023,31 @@ mod tests {
         let t0 = Instant::now();
         let restored = Game::restore(g.snapshot(t0), t0);
         assert_eq!(restored.host_view(t0).max_teams, MAX_TEAMS_CEILING);
+    }
+
+    #[test]
+    fn a_test_can_start_from_any_question_or_slide() {
+        let t0 = Instant::now();
+        let mut g = game(QuizSettings::default());
+        assert!(g.start_from(1, t0).is_err()); // no teams yet
+        let owls = join(&mut g, "Owls");
+        assert!(g.start_from(2, t0).is_err());
+        g.start_from(1, t0).unwrap();
+        let HostPhase::Question { question, .. } = g.host_view(t0).phase else {
+            panic!("expected question two");
+        };
+        assert_eq!(question.index, 1);
+        g.answer(owls, pick(&[0]), false, t0).unwrap();
+        assert!(g.start_from(0, t0).is_err());
+        // The skipped question counts as not played.
+        g.back(t0).unwrap();
+        assert!(matches!(
+            g.host_view(t0).phase,
+            HostPhase::Closed {
+                question: QuestionInfo { index: 0, .. },
+                ..
+            }
+        ));
     }
 
     #[test]

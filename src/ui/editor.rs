@@ -189,12 +189,13 @@ fn EditorForm(quiz: Quiz) -> Element {
 
     let mut test_error = use_signal(|| None::<String>);
     let nav = navigator();
-    // Save the latest edits first, so the test plays what is on screen.
-    let test = move |_| async move {
+    // Save the latest edits first, so the test plays what is on screen. `from` starts the test
+    // at that question or slide instead of the lobby.
+    let run_test = move |from: Option<usize>| async move {
         let quiz = draft.quiz.peek().clone();
         let id = quiz.id.clone();
         let result = match save_quiz(token.get(), quiz).await {
-            Ok(found) if found.is_empty() => start_test(token.get(), id).await,
+            Ok(found) if found.is_empty() => start_test(token.get(), id, from).await,
             Ok(_) => Err(ServerFnError::new("Fix the quiz before testing it.")),
             Err(err) => Err(err),
         };
@@ -202,9 +203,18 @@ fn EditorForm(quiz: Quiz) -> Element {
             Ok(code) => {
                 nav.push(Route::Test { code });
             }
-            Err(err) => test_error.set(Some(message(&err))),
+            Err(err) => {
+                test_error.set(Some(message(&err)));
+                document::eval("window.scrollTo({ top: 0, behavior: 'smooth' })");
+            }
         }
     };
+    let test = move |_| run_test(None);
+    use_context_provider(|| {
+        TestFrom(EventHandler::new(move |index| {
+            spawn(run_test(Some(index)));
+        }))
+    });
 
     let quiz = draft.quiz.read();
     let question_count = quiz.questions.len();
@@ -419,6 +429,10 @@ fn SettingsCard(settings: QuizSettings) -> Element {
     }
 }
 
+/// Starts a test at the question or slide at the given position, saving the quiz first.
+#[derive(Clone, Copy)]
+struct TestFrom(EventHandler<usize>);
+
 /// The `part` of [`AcceptedAnswers`] that stands for a question's bonus question.
 const BONUS_PART: usize = usize::MAX;
 
@@ -539,6 +553,7 @@ fn QuestionCard(
     default_limit: u32,
 ) -> Element {
     let draft: Draft = use_context();
+    let test_from: TestFrom = use_context();
     let token: AdminToken = use_context();
     let mut upload_error = use_signal(|| None::<String>);
     let mut uploading = use_signal(|| false);
@@ -645,6 +660,13 @@ fn QuestionCard(
                             });
                         },
                         "⤓"
+                    }
+                    button {
+                        class: "button ghost icon",
+                        title: "Test from here",
+                        aria_label: "Test from here",
+                        onclick: move |_| test_from.0.call(index),
+                        "🧪"
                     }
                     button {
                         class: "button ghost icon",
