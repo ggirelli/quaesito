@@ -363,6 +363,10 @@ pub enum JokerState {
 
 /// The stage of the quiz, as seen by a team. Question indexes count questions only, from 0.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[allow(
+    clippy::large_enum_variant,
+    reason = "one view is built per update and sent straight away"
+)]
 pub enum PlayerPhase {
     Lobby {
         teams: usize,
@@ -380,6 +384,10 @@ pub enum PlayerPhase {
         input: InputKind,
         /// Number of answer buttons (multiple choice only).
         answer_count: usize,
+        /// The answer buttons from first to last, by answer index: each phone gets its own order
+        /// of multiple-choice answers. Empty keeps the big screen's order.
+        #[serde(default)]
+        order: Vec<usize>,
         /// The shuffled items of an order question, or True and False (always sent: they cannot
         /// be told apart by colour alone).
         items: Vec<String>,

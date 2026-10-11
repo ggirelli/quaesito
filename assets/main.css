@@ -660,6 +660,21 @@ input.short {
   user-select: none;
 }
 
+/* A checkbox with its label, in a form. */
+.check-field {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.check-field input {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: var(--accent);
+}
+
 .correct-toggle input {
   width: 1.2rem;
   height: 1.2rem;

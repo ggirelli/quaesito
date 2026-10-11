@@ -2,7 +2,7 @@
 
 | Type | Teams… | Scoring |
 |---|---|---|
-| Choices | pick one or several of 2–6 answers (text and/or picture) | all or nothing, or partial credit |
+| Choices | pick one or several of 2–6 answers (text and/or picture); each phone lists them in its own order, with the big screen's shapes and colours | all or nothing, or partial credit |
 | True/false | say whether a statement is true | like choices |
 | Typed answer | type a short answer | right when it matches an accepted spelling; you can amend |
 | Number | guess a number, with a slider when you set a range | the closest guesses (ties included) win 1000 points |
