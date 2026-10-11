@@ -1,0 +1,75 @@
+site_name: quaesito
+site_description: Quizzes among friends. A self-hosted, live quiz for game nights.
+site_url: https://ggirelli.github.io/quaesito/
+repo_url: https://github.com/ggirelli/quaesito
+repo_name: ggirelli/quaesito
+edit_uri: edit/main/docs/
+copyright: Free software under the MIT licence.
+
+theme:
+  name: material
+  logo: assets/icon-192.png
+  favicon: assets/icon-192.png
+  palette:
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Light mode
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Dark mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.footer
+    - navigation.top
+    - content.code.copy
+    - content.action.edit
+    - search.highlight
+  icon:
+    repo: fontawesome/brands/github
+
+exclude_docs: |
+  requirements.txt
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - Home: index.md
+  - Guide:
+      - Getting started: getting-started.md
+      - Building a quiz: building-a-quiz.md
+      - Question types: question-types.md
+      - Quiz settings: quiz-settings.md
+      - Testing a quiz: testing.md
+      - Running the game: running-the-game.md
+      - After the game: after-the-game.md
+      - Troubleshooting: troubleshooting.md
+      - Configuration: configuration.md
+  - Development: development.md
+  - How it was made: how-it-was-made.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.keys
+  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn

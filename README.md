@@ -18,6 +18,13 @@ Quizzes among friends: a self-hosted, live quiz web app written in Rust with [Di
 
 It runs on your local network and needs no internet connection.
 
+> [!NOTE]
+> Quaesito is **fully vibe coded**: an AI assistant (Claude) wrote all of its code, tests and docs. Read the
+> [disclaimer](DISCLAIMER.md) for what that means before relying on it.
+
+📖 **Documentation, with screenshots:** <https://ggirelli.github.io/quaesito/> (sources in [`docs/`](docs), served
+locally with `just docs`).
+
 ## Download and play
 
 Download the archive for your system from the [latest release](https://github.com/ggirelli/quaesito/releases/latest)

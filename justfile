@@ -43,3 +43,11 @@ deny:
 
 # Everything CI checks
 check: fmt-check clippy test deny
+
+# Serve the documentation site with live reload at http://127.0.0.1:8000
+docs:
+    uvx --with-requirements docs/requirements.txt mkdocs serve --livereload
+
+# Build the documentation site into ./site, failing on warnings (as CI does)
+docs-build:
+    uvx --with-requirements docs/requirements.txt mkdocs build --strict

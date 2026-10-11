@@ -1,0 +1,55 @@
+# Question types
+
+| Type | Teams… | Scoring |
+|---|---|---|
+| Choices | pick one or several of 2–6 answers (text and/or picture) | all or nothing, or partial credit |
+| True/false | say whether a statement is true | like choices |
+| Typed answer | type a short answer | right when it matches an accepted spelling; you can amend |
+| Number | guess a number | the closest guesses (ties included) win 1000 points |
+| Order | tap 2–6 items from first to last | each item in its place earns its share |
+| Several answers | type 2–8 answers at once | each part judged like a typed answer; points shared between parts |
+| Pin | drop a pin on the question's picture | full points close to the spot, fewer further away |
+
+## Typed answers
+
+Teams' answers are compared with the accepted spellings ignoring case, accents, punctuation and
+spacing, but not typos: list the spellings you accept, and amend on the reveal. Identical answers
+are grouped, and for each group you choose ✓ full, ½ half or ✗ no points, plus a bonus or malus in
+steps of 100. A malus can take a team below zero.
+
+## Several answers
+
+For the title and the artist of a song, or the titles of five posters: each part has a label,
+accepted spellings and, optionally, its own picture (shown in a row on the big screen). Phones
+show one field per part; each part is judged on its own, and the question's points are split
+evenly between them.
+
+![Editing a question with several answers](screenshots/editor-parts.webp)
+
+![Judging several answers part by part](screenshots/host-parts-reveal.webp)
+
+## Pin on a picture
+
+Upload the picture to drop pins on (a map, a floor plan, a painting), click the right spot, and
+choose how close pins must be:
+
+| Tolerance | Full points within | No points beyond |
+|---|---|---|
+| Tight | 2% of the picture's width | 15% |
+| Normal | 4% | 30% |
+| Loose | 8% | 50% |
+
+In between, points fall evenly with distance. The reveal shows every team's pin and the right
+spot.
+
+![Editing a pin question by clicking the right spot](screenshots/editor-pin.webp)
+
+## Order
+
+List the items in the right order; phones show them shuffled. Teams tap them from first to last
+(tap again to take one back), and each item in its right place earns its share of the points.
+
+## Slides
+
+Not questions: a title, text and a picture between questions. Phones show "Eyes on the big
+screen" meanwhile.

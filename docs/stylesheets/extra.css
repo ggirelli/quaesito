@@ -1,0 +1,95 @@
+/* Quaesito's colours: amber on deep indigo. */
+:root {
+  --md-primary-fg-color: #14121f;
+  --md-primary-fg-color--light: #2a2640;
+  --md-primary-fg-color--dark: #0d0b16;
+  --md-primary-bg-color: #f4f1ff;
+  --md-accent-fg-color: #e89f00;
+  --md-typeset-a-color: #b97a00;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: #14121f;
+  --md-default-fg-color: #f4f1ff;
+  --md-code-bg-color: #1e1b2e;
+  --md-accent-fg-color: #ffb703;
+  --md-typeset-a-color: #ffb703;
+}
+
+.md-typeset .md-button.md-button--primary,
+.md-typeset .md-button.md-button--primary:hover {
+  background-color: #ffb703;
+  border-color: #ffb703;
+  color: #14121f;
+}
+
+.md-typeset .md-button {
+  margin: 0.2rem 0.4rem 0.2rem 0;
+  color: var(--md-typeset-a-color);
+  border-color: currentColor;
+}
+
+.md-typeset h1 {
+  color: var(--md-default-fg-color);
+  font-weight: 700;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.md-typeset img {
+  border-radius: 12px;
+}
+
+/* Screenshots get a frame; phones a thicker one with rounder corners, like the real thing. */
+.md-typeset img[src*="screenshots/"] {
+  border: 2px solid #36314f;
+  border-radius: 10px;
+}
+
+.md-typeset img[src*="screenshots/phone-"] {
+  border: 6px solid #36314f;
+  border-radius: 22px;
+}
+
+/* Big screen next to a phone. */
+.screen-and-phone {
+  display: grid;
+  grid-template-columns: 1fr 13rem;
+  gap: 1rem;
+  align-items: start;
+}
+
+/* A row of phone screenshots. */
+.phones {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: 0.8rem;
+}
+
+.phones figure,
+.screen-and-phone figure {
+  margin: 0;
+}
+
+.phones figcaption,
+.screen-and-phone figcaption {
+  font-size: 0.75rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+@media (max-width: 45rem) {
+  .hero,
+  .screen-and-phone {
+    grid-template-columns: 1fr;
+  }
+}

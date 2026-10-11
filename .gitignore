@@ -12,3 +12,6 @@
 # Browser tools: dependencies and output.
 /tools/browser/node_modules
 /tools/browser/out
+
+# Built documentation site.
+/site
