@@ -242,6 +242,8 @@ pub struct HostView {
     pub auto_advance_ms: Option<u64>,
     /// The host paused the clock.
     pub paused: bool,
+    /// Faster answers earn more points, so answer times are shown to the millisecond.
+    pub speed_points: bool,
     pub phase: HostPhase,
 }
 

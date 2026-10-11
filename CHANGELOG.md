@@ -15,6 +15,8 @@ All notable changes to quaesito are listed here. The format follows
 
 ### Changed
 
+- When faster answers earn more points, the big screen shows answer times to the millisecond (2.347 s), in the
+  standings and next to the fastest team; with flat points they stay at a tenth of a second.
 - The quiz editor has two sidebars that stay in view while you scroll: the buttons to add questions and slides on the
   left of the list, the shuffle buttons on its right. On narrow screens they stay below the list.
 
