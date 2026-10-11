@@ -30,6 +30,14 @@ Add a picture to any question. For a guessing game, choose how it appears while 
 With a gradual reveal, set how many seconds the whole picture stays visible before the buzzer.
 Pictures are resized and re-encoded when uploaded, up to 15 MB.
 
+## Videos
+
+Instead of a picture, a question or a slide can show a video (MP4 with H.264, WebM or MOV, up to
+200 MB). It plays on the big screen when the question opens, pauses when you pause the game, and
+plays again from the start when you click it. Pin questions need a picture.
+
+The upload limits can be changed; see [configuration](configuration.md).
+
 ## Soundtracks
 
 A question can have a soundtrack (MP3, M4A/AAC, Ogg/Opus, WebM, FLAC or WAV, up to 40 MB). The

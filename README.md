@@ -60,6 +60,9 @@ The big screen plays sound effects (a ticking last five seconds, reveal chimes, 
 **Teams** in the top bar of the big screen lets you rename a team or remove it (it loses its points and its phone goes
 back to the join page).
 
+A question or slide can show a **video** instead of a picture (MP4, WebM or MOV, up to 200 MB by default): it plays on
+the big screen when the question opens, pauses with the game, and plays again when clicked.
+
 A question's picture can be **revealed gradually** while the clock runs: **zoom out** starts on a 5× close-up of its
 centre and widens steadily to the whole picture; **uncover tile by tile** hides it under a 6×4 grid whose tiles drop
 away at an even pace in a shuffled order. Choose how many seconds the whole picture then stays visible before the buzzer
@@ -122,6 +125,10 @@ only, it always earns 1000. Either way, ties are broken by the time spent on cor
 | `QUAESITO_ADMIN_PASSWORD` | generated and printed at startup | Admin password |
 | `QUAESITO_DATA_DIR` | `./data` | Where quizzes, pictures, soundtracks and live games are stored |
 | `QUAESITO_PUBLIC_URL` | LAN address + port | Base URL used in join links and QR codes |
+| `QUAESITO_MAX_PICTURE_MB` | `15` | Largest picture upload |
+| `QUAESITO_MAX_AUDIO_MB` | `40` | Largest soundtrack upload |
+| `QUAESITO_MAX_VIDEO_MB` | `200` | Largest video upload |
+| `QUAESITO_MAX_IMPORT_MB` | `500` | Largest quiz bundle to import |
 | `IP` / `PORT` | `127.0.0.1` / `8080` | Listening address of the server binary |
 
 Live games are saved as they go: if the server restarts (or the laptop crashes), games come back paused where they were,

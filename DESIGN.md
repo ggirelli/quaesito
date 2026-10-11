@@ -158,11 +158,16 @@ Everything lives under a data directory (`QUAESITO_DATA_DIR`, default `./data`):
 
 - `quizzes/<id>.json`: one JSON document per quiz. A quiz is always edited and saved as a whole,
   so plain files written atomically (temp file + rename) are simpler than a database.
-- `media/<random>.{jpg,png,mp3,…}`: uploaded pictures and soundtracks. Question pictures are downscaled to fit
+- `media/<random>.{jpg,png,mp3,mp4,…}`: uploaded pictures, soundtracks and videos. Question pictures are downscaled to fit
   1600×1200 and re-encoded as JPEG; avatars are cropped square, resized to 256×256 and stored as
   PNG. Re-encoding strips metadata and anything that is not plain pixels. Soundtracks are stored
-  as uploaded once their format is recognised from their first bytes; `/media` answers byte-range
-  requests so the big screen can seek (a reloaded host page resumes the music where the clock is).
+  as uploaded once their format is recognised from their first bytes, and so are videos (MP4,
+  WebM, MOV) in a question's or slide's picture slot; `model::is_video` tells them apart by name.
+  `/media` answers byte-range requests from disk, in slices of at most 8 MB for open-ended ranges,
+  so the big screen can seek and stream videos (a reloaded host page resumes the music where the
+  clock is). Upload sizes are capped by `QUAESITO_MAX_{PICTURE,AUDIO,VIDEO,IMPORT}_MB`; the editor
+  checks them before uploading, and bundles are imported by role (a file the quiz uses as a
+  soundtrack is audio, a video name in a picture slot is a video).
 - Running sessions take a snapshot of the quiz at start, so editing never affects a live game.
 - `games/<code>.json`: each live game, saved shortly after every change (`engine::Snapshot`, with
   times relative to the save since `Instant`s do not survive a restart). On startup the saved games

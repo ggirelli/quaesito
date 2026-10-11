@@ -45,6 +45,8 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 36 | Questions with several typed parts (title + artist, five posters…), judged per part | ✅ done |
 | 37 | Pin on a picture (a map, a floor plan…), scored by distance | ✅ done |
 | 38 | Icon buttons for edit, duplicate, export, import and delete (labels on hover) | ✅ done |
+| 39 | Videos in place of question and slide pictures | ✅ done |
+| 40 | Configurable upload limits, checked before uploading | ✅ done |
 
 ## TODO (next session)
 

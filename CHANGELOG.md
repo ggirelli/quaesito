@@ -6,6 +6,17 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- Videos in place of a question's or slide's picture: they play on the big screen when the question
+  opens, pause with the game, and can be played again with a click.
+- Configurable upload limits (`QUAESITO_MAX_PICTURE_MB`, `QUAESITO_MAX_AUDIO_MB`,
+  `QUAESITO_MAX_VIDEO_MB`, `QUAESITO_MAX_IMPORT_MB`), checked by the editor before uploading.
+
+### Changed
+
+- Media are streamed from disk in slices instead of being read whole for every request.
+
 ## [0.1.0] - 2026-10-11
 
 The first release: everything needed for a quiz night with friends.
