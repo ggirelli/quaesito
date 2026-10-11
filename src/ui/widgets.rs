@@ -63,16 +63,45 @@ pub fn message(err: &ServerFnError) -> String {
     }
 }
 
-/// Shapes paired with answer colours, so answers can be told apart without colour.
-pub const ANSWER_SHAPES: [&str; 6] = ["▲", "◆", "●", "■", "★", "⬟"];
+/// Shapes paired with the answer colours (`.a0`…`.a5`), so answers can be told apart without
+/// colour: a sparkle, a moon, a heart, a bolt, a leaf and a drop, drawn on a 24×24 grid. Drawn
+/// rather than typed, since phones render symbol characters differently (some as emoji).
+const ANSWER_SHAPES: [&str; 6] = [
+    "M12 1C13 8 16 11 23 12C16 13 13 16 12 23C11 16 8 13 1 12C8 11 11 8 12 1Z",
+    "M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z",
+    "M12 21.4l-1.5-1.3C5.4 15.4 2 12.3 2 8.5 2 5.4 4.4 3 7.5 3c1.7 0 3.4.8 4.5 2.1C13.1 3.8 14.8 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.8-3.4 6.9-8.6 11.5z",
+    "M13.5 1 3 14h8l-1.5 9L21 10h-8z",
+    "M3 21C3 10 10 3 21 3 21 14 14 21 3 21Z",
+    "M12 1.5C12 1.5 4.5 10 4.5 15a7.5 7.5 0 0 0 15 0C19.5 10 12 1.5 12 1.5Z",
+];
+
+/// How many answer colours and shapes there are; later answers reuse them.
+pub const ANSWER_STYLES: usize = ANSWER_SHAPES.len();
+
+/// The shape of answer `index`, as big as the surrounding text.
+#[component]
+pub fn AnswerShape(index: usize) -> Element {
+    rsx! {
+        svg {
+            class: "shape",
+            view_box: "0 0 24 24",
+            width: "1em",
+            height: "1em",
+            fill: "currentColor",
+            "aria-hidden": "true",
+            path { d: ANSWER_SHAPES[index % ANSWER_STYLES] }
+        }
+    }
+}
 
 /// The coloured shape identifying answer `index`.
 #[component]
 pub fn AnswerBadge(index: usize) -> Element {
-    let shape = ANSWER_SHAPES[index % ANSWER_SHAPES.len()];
-    let class = format!("badge a{}", index % ANSWER_SHAPES.len());
+    let class = format!("badge a{}", index % ANSWER_STYLES);
     rsx! {
-        span { class, aria_hidden: "true", "{shape}" }
+        span { class, aria_hidden: "true",
+            AnswerShape { index }
+        }
     }
 }
 

@@ -16,12 +16,12 @@
   --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
   /* Answer colours, paired with shapes for colour-blind players. */
-  --a0: #ef476f;
-  --a1: #118ab2;
-  --a2: #ffd166;
-  --a3: #06d6a0;
-  --a4: #9b5de5;
-  --a5: #f78c6b;
+  --a0: #8b5cf6;
+  --a1: #14b8a6;
+  --a2: #e0479e;
+  --a3: #fb923c;
+  --a4: #38bdf8;
+  --a5: #a3e635;
 
   color-scheme: dark;
   font-family: var(--sans);
@@ -616,11 +616,16 @@ input.short {
 }
 
 .a0 { background: var(--a0); }
-.a1 { background: var(--a1); }
-.a2 { background: var(--a2); color: var(--accent-ink); }
+.a1 { background: var(--a1); color: var(--accent-ink); }
+.a2 { background: var(--a2); }
 .a3 { background: var(--a3); color: var(--accent-ink); }
-.a4 { background: var(--a4); }
+.a4 { background: var(--a4); color: var(--accent-ink); }
 .a5 { background: var(--a5); color: var(--accent-ink); }
+
+svg.shape {
+  display: block;
+  flex: none;
+}
 
 /* ---------- Host (big screen) ---------- */
 
@@ -1075,7 +1080,8 @@ table.results {
 
 .answer-tile.right {
   transform: scale(1.02);
-  box-shadow: 0 0 0 4px var(--ok);
+  /* A light ring shows on every answer colour, teal and green included. */
+  box-shadow: 0 0 0 3px var(--bg), 0 0 0 7px var(--fg);
 }
 
 .answer-tile.right::after {
@@ -1903,11 +1909,13 @@ button.joker {
 }
 
 /* Light answer colours need dark text, also on tiles and phone buttons. */
-.answer-tile.a2,
+.answer-tile.a1,
 .answer-tile.a3,
+.answer-tile.a4,
 .answer-tile.a5,
-.phone-answer.a2,
+.phone-answer.a1,
 .phone-answer.a3,
+.phone-answer.a4,
 .phone-answer.a5 {
   color: var(--accent-ink);
 }

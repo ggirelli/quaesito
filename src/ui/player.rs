@@ -6,8 +6,8 @@ use super::{
     Route, client,
     live::{ConnectionBanner, Live, countdown_ms, use_clock, use_live},
     widgets::{
-        ANSWER_SHAPES, Brand, ClientOnly, DOT, ErrorBox, MapPin, PinMap, Spinner, TeamAvatar,
-        media_url, message,
+        ANSWER_STYLES, AnswerShape, Brand, ClientOnly, DOT, ErrorBox, MapPin, PinMap, Spinner,
+        TeamAvatar, media_url, message,
     },
 };
 use crate::{
@@ -626,8 +626,7 @@ fn AnswerPad(
             div { class: if with_text { "phone-answers with-text" } else { "phone-answers" },
                 for i in 0..answer_count {
                     {
-                        let shape = ANSWER_SHAPES[i % ANSWER_SHAPES.len()];
-                        let mut class = format!("phone-answer a{}", i % ANSWER_SHAPES.len());
+                        let mut class = format!("phone-answer a{}", i % ANSWER_STYLES);
                         if chosen.contains(&i) {
                             class.push_str(" selected");
                         } else if locked {
@@ -659,7 +658,7 @@ fn AnswerPad(
                                         send(vec![i]).await;
                                     }
                                 },
-                                span { class: "shape", "{shape}" }
+                                AnswerShape { index: i }
                                 if let Some(image) = image {
                                     img { class: "phone-answer-image", src: media_url(&image), alt: "" }
                                 }

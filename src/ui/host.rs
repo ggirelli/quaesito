@@ -9,8 +9,8 @@ use super::{
     live::{ConnectionBanner, Live, countdown_ms, elapsed_now, remaining_ms, use_clock, use_live},
     sfx::{self, Cue, SFX_JS, Sfx},
     widgets::{
-        ANSWER_SHAPES, Brand, ClientOnly, ErrorBox, Icon, IconKind, MapPin, PinMap, QuestionMedia,
-        STAR, Spinner, TeamAvatar, media_url, message,
+        ANSWER_STYLES, AnswerShape, Brand, ClientOnly, ErrorBox, Icon, IconKind, MapPin, PinMap,
+        QuestionMedia, STAR, Spinner, TeamAvatar, media_url, message,
     },
 };
 use crate::{
@@ -903,7 +903,7 @@ fn AnswerGrid(
         div { class: "answer-grid",
             for (i, text) in answers.iter().enumerate() {
                 {
-                    let mut class = format!("answer-tile a{}", i % ANSWER_SHAPES.len());
+                    let mut class = format!("answer-tile a{}", i % ANSWER_STYLES);
                     if let Some((correct, _)) = &reveal {
                         class.push_str(if correct.contains(&i) { " right" } else { " dim" });
                     }
@@ -914,7 +914,7 @@ fn AnswerGrid(
                     }
                     rsx! {
                         div { key: "{i}", class,
-                            span { class: "shape", "{ANSWER_SHAPES[i % ANSWER_SHAPES.len()]}" }
+                            AnswerShape { index: i }
                             if let Some(image) = image {
                                 img { class: "tile-image", src: media_url(&image), alt: "{text}" }
                             }

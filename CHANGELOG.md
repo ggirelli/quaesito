@@ -14,6 +14,9 @@ All notable changes to quaesito are listed here. The format follows
 
 ### Changed
 
+- Answers have new colours (violet, teal, magenta, orange, sky, lime) and shapes (sparkle, moon, heart, bolt, leaf,
+  drop), drawn so they look the same on every phone. The right answer is ringed in white.
+- The README is shorter and points to the user guide for details.
 - The demo video is narrated with Chatterbox, which sounds livelier than Kokoro.
 
 ## [0.1.0] - 2026-10-11
