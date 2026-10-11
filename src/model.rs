@@ -2,6 +2,14 @@
 
 use serde::{Deserialize, Serialize};
 
+/// Whether an uploaded file is a video, from the name the server gave it. Only question and
+/// slide pictures can be videos, so a `WebM` file there is a video.
+#[must_use]
+pub fn is_video(name: &str) -> bool {
+    let ext = name.rsplit_once('.').map_or("", |(_, ext)| ext);
+    matches!(ext, "mp4" | "mov" | "webm")
+}
+
 /// Fewest answers a question may offer.
 pub const MIN_ANSWERS: usize = 2;
 /// Most answers a question may offer (one per answer colour/shape).
@@ -568,8 +576,12 @@ impl Question {
                 }
             }
             QuestionKind::Pin { answer, aspect, .. } => {
-                if self.image.is_none() {
-                    problems.push("Add the picture to drop pins on.".to_owned());
+                match &self.image {
+                    None => problems.push("Add the picture to drop pins on.".to_owned()),
+                    Some(image) if is_video(image) => {
+                        problems.push("Pins are dropped on a picture, not a video.".to_owned());
+                    }
+                    Some(_) => {}
                 }
                 let placed =
                     answer.is_some_and(Point::is_on_picture) && aspect.is_finite() && *aspect > 0.0;

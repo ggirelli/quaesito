@@ -968,6 +968,11 @@ table.results {
   transform: scale(0.6);
 }
 
+.question-video {
+  cursor: pointer;
+  background: #000;
+}
+
 .timer {
   position: relative;
   width: 4.5em;

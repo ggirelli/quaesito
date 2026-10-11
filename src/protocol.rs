@@ -461,6 +461,24 @@ impl GameResults {
     }
 }
 
+/// The largest uploads the server accepts, in bytes (set with `QUAESITO_MAX_*_MB`).
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+pub struct UploadLimits {
+    pub picture: u64,
+    pub audio: u64,
+    pub video: u64,
+    /// A quiz bundle to import, media included.
+    pub import: u64,
+}
+
+impl UploadLimits {
+    /// Megabytes, for messages.
+    #[must_use]
+    pub fn megabytes(bytes: u64) -> u64 {
+        bytes / (1024 * 1024)
+    }
+}
+
 /// Short description of a live session for the admin page.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct SessionSummary {

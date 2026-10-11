@@ -9,8 +9,8 @@ use super::{
     live::{ConnectionBanner, Live, countdown_ms, elapsed_now, remaining_ms, use_clock, use_live},
     sfx::{self, Cue, SFX_JS, Sfx},
     widgets::{
-        ANSWER_SHAPES, Brand, ClientOnly, ErrorBox, Icon, IconKind, MapPin, PinMap, STAR, Spinner,
-        TeamAvatar, media_url, message,
+        ANSWER_SHAPES, Brand, ClientOnly, ErrorBox, Icon, IconKind, MapPin, PinMap, QuestionMedia,
+        STAR, Spinner, TeamAvatar, media_url, message,
     },
 };
 use crate::{
@@ -161,6 +161,7 @@ fn HostScreen(code: String) -> Element {
                             elapsed_ms: elapsed_now(*elapsed_ms, received_at, now(), paused),
                             answered: *answered,
                             teams: view.teams.len(),
+                            paused,
                         }
                     },
                     HostPhase::Closed { question, answered, reveal, fastest, standings, .. } => rsx! {
@@ -712,6 +713,7 @@ fn QuestionSlide(
     elapsed_ms: f64,
     answered: usize,
     teams: usize,
+    paused: bool,
 ) -> Element {
     #[allow(clippy::cast_precision_loss, reason = "time limits are small")]
     let limit = question.time_limit_ms as f64;
@@ -732,7 +734,7 @@ fn QuestionSlide(
         }
         div { class: "question-body",
             if let Some(image) = &question.image {
-                QuestionImage { image: image.clone(), reveal: question.image_reveal, left: reveal_left, seed: question.index }
+                QuestionImage { image: image.clone(), reveal: question.image_reveal, left: reveal_left, seed: question.index, paused }
             }
             div { class: "answered",
                 strong { "{answered}/{teams}" }
@@ -746,21 +748,28 @@ fn QuestionSlide(
 /// A question's picture, revealed as the clock runs: `left` is the share of the clock left (1
 /// when it starts, 0 at the buzzer) and `seed` varies the order tiles drop away.
 #[component]
-fn QuestionImage(image: String, reveal: ImageReveal, left: f64, seed: usize) -> Element {
+fn QuestionImage(
+    image: String,
+    reveal: ImageReveal,
+    left: f64,
+    seed: usize,
+    #[props(default)] paused: bool,
+) -> Element {
     let left = left.clamp(0.0, 1.0);
     match reveal {
         ImageReveal::Shown => rsx! {
-            img { class: "question-image", src: media_url(&image), alt: "" }
+            QuestionMedia { name: image, class: "question-image", autoplay: true, paused }
         },
         ImageReveal::Zoom => {
             let scale = 1.0 + (MAX_ZOOM - 1.0) * left;
             rsx! {
                 div { class: "reveal-frame",
-                    img {
+                    QuestionMedia {
+                        name: image,
                         class: "question-image zoomed",
-                        src: media_url(&image),
-                        alt: "",
                         style: "transform: scale({scale:.3})",
+                        autoplay: true,
+                        paused,
                     }
                 }
             }
@@ -770,7 +779,7 @@ fn QuestionImage(image: String, reveal: ImageReveal, left: f64, seed: usize) -> 
             let order = tile_order(seed);
             rsx! {
                 div { class: "reveal-frame",
-                    img { class: "question-image", src: media_url(&image), alt: "" }
+                    QuestionMedia { name: image, class: "question-image", autoplay: true, paused }
                     div { class: "tiles", aria_hidden: "true",
                         for (i, rank) in order.into_iter().enumerate() {
                             div { key: "{i}", class: if rank < gone { "tile gone" } else { "tile" } }
@@ -801,7 +810,7 @@ fn tiles_gone(left: f64) -> usize {
 fn FullPicture(question: QuestionInfo) -> Element {
     match (&question.image, question.image_reveal) {
         (Some(image), ImageReveal::Zoom | ImageReveal::Tiles) => rsx! {
-            img { class: "question-image revealed-picture", src: media_url(image), alt: "" }
+            QuestionMedia { name: image.clone(), class: "question-image revealed-picture" }
         },
         _ => rsx! {},
     }
@@ -831,7 +840,7 @@ fn SlideView(slide: SlideInfo) -> Element {
                 h1 { class: "slide-title", "{slide.title}" }
             }
             if let Some(image) = &slide.image {
-                img { class: "slide-image", src: media_url(image), alt: "" }
+                QuestionMedia { name: image.clone(), class: "slide-image", autoplay: true }
             }
             if !slide.text.is_empty() {
                 p { class: "slide-text", "{slide.text}" }
@@ -1244,7 +1253,7 @@ fn ReviewSlide(question: QuestionInfo, reveal: Reveal, fastest: Option<Fastest>)
         }
         div { class: "question-body",
             if let Some(image) = &question.image {
-                img { class: "question-image", src: media_url(image), alt: "" }
+                QuestionMedia { name: image.clone(), class: "question-image" }
             }
         }
         RevealBody { question: question.clone(), reveal }

@@ -327,3 +327,61 @@ impl IntoPoint for (f64, f64, f64) {
         )
     }
 }
+
+/// A question's or slide's picture or video. With `autoplay`, a video plays once when shown;
+/// clicking it plays it again from the start.
+#[component]
+pub fn QuestionMedia(
+    name: String,
+    class: String,
+    #[props(default)] style: String,
+    #[props(default)] autoplay: bool,
+    /// Pauses a playing video while the host has paused the game, and resumes it after.
+    #[props(default)]
+    paused: bool,
+) -> Element {
+    let video = crate::model::is_video(&name);
+    let id = format!("video-{}", name.split('.').next().unwrap_or_default());
+    let mut was_paused = use_signal(|| false);
+    use_effect(use_reactive!(|paused, id| {
+        if !video || paused == *was_paused.peek() {
+            return;
+        }
+        was_paused.set(paused);
+        let action = if paused {
+            "v.pause()"
+        } else {
+            "v.play().catch(() => {})"
+        };
+        document::eval(&format!(
+            "const v = document.getElementById('{id}'); if (v && !v.ended) {{ {action}; }}"
+        ));
+    }));
+    if !video {
+        return rsx! {
+            img { class, style, src: media_url(&name), alt: "" }
+        };
+    }
+    let replay = {
+        let id = id.clone();
+        move |_| {
+            document::eval(&format!(
+                "const v = document.getElementById('{id}'); \
+                 if (v) {{ v.currentTime = 0; v.play().catch(() => {{}}); }}"
+            ));
+        }
+    };
+    rsx! {
+        video {
+            id,
+            class: "{class} question-video",
+            style,
+            src: media_url(&name),
+            autoplay,
+            playsinline: true,
+            preload: "auto",
+            title: "Click to play again",
+            onclick: replay,
+        }
+    }
+}

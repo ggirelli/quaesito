@@ -16,7 +16,7 @@ use crate::{
     model::{Quiz, QuizSummary, ValidationIssue},
     protocol::{
         GameResults, HostCommand, HostView, JoinTicket, PlayerCommand, PlayerView, SessionSummary,
-        TestInfo,
+        TestInfo, UploadLimits,
     },
 };
 
@@ -108,9 +108,8 @@ pub async fn duplicate_quiz(token: String, id: String) -> ServerFnResult<String>
 pub async fn import_quiz(token: String, file: FileStream) -> ServerFnResult<String> {
     let state = crate::server::state();
     state.auth.require(&token)?;
-    let bytes =
-        crate::server::media::read_upload(file, crate::server::bundle::MAX_BUNDLE_BYTES).await?;
-    let mut quiz = crate::server::bundle::import(bytes, &state.media)
+    let bytes = crate::server::media::read_upload(file, state.limits.import).await?;
+    let mut quiz = crate::server::bundle::import(bytes, &state.media, &state.limits)
         .await
         .map_err(|err| ServerFnError::new(format!("{err:#}")))?;
     quiz.id = crate::server::store::new_id();
@@ -118,17 +117,53 @@ pub async fn import_quiz(token: String, file: FileStream) -> ServerFnResult<Stri
     Ok(quiz.id)
 }
 
-/// Uploads a question picture and returns its media name.
+/// Uploads a picture (for an answer or a part) and returns its media name.
 #[post("/api/admin/media?token")]
 pub async fn upload_question_image(token: String, file: FileStream) -> ServerFnResult<String> {
     let state = crate::server::state();
     state.auth.require(&token)?;
-    let bytes =
-        crate::server::media::read_upload(file, crate::server::media::MAX_IMAGE_BYTES).await?;
+    let bytes = crate::server::media::read_upload(file, state.limits.picture).await?;
     Ok(state
         .media
         .store(bytes, crate::server::media::ImageKind::Question)
         .await?)
+}
+
+/// Uploads a question's or slide's picture or video and returns its media name.
+#[post("/api/admin/question-media?token")]
+pub async fn upload_question_media(token: String, file: FileStream) -> ServerFnResult<String> {
+    let state = crate::server::state();
+    state.auth.require(&token)?;
+    let limits = state.limits;
+    let bytes = crate::server::media::read_upload(file, limits.picture.max(limits.video)).await?;
+    let mb = crate::protocol::UploadLimits::megabytes;
+    if crate::server::media::video_extension(&bytes).is_some() {
+        if bytes.len() as u64 > limits.video {
+            return Err(ServerFnError::new(format!(
+                "The video is too large (max {} MB).",
+                mb(limits.video)
+            )));
+        }
+        return Ok(state.media.store_video(bytes).await?);
+    }
+    if bytes.len() as u64 > limits.picture {
+        return Err(ServerFnError::new(format!(
+            "The picture is too large (max {} MB).",
+            mb(limits.picture)
+        )));
+    }
+    Ok(state
+        .media
+        .store(bytes, crate::server::media::ImageKind::Question)
+        .await?)
+}
+
+/// The largest uploads the server accepts, for the editor's hints and checks.
+#[post("/api/admin/upload-limits")]
+pub async fn upload_limits(token: String) -> ServerFnResult<UploadLimits> {
+    let state = crate::server::state();
+    state.auth.require(&token)?;
+    Ok(state.limits)
 }
 
 /// Uploads a question soundtrack and returns its media name.
@@ -136,8 +171,7 @@ pub async fn upload_question_image(token: String, file: FileStream) -> ServerFnR
 pub async fn upload_question_audio(token: String, file: FileStream) -> ServerFnResult<String> {
     let state = crate::server::state();
     state.auth.require(&token)?;
-    let bytes =
-        crate::server::media::read_upload(file, crate::server::media::MAX_AUDIO_BYTES).await?;
+    let bytes = crate::server::media::read_upload(file, state.limits.audio).await?;
     Ok(state.media.store_audio(bytes).await?)
 }
 
@@ -334,8 +368,7 @@ pub async fn upload_avatar(
     let team = session
         .read(|g| g.team_for_token(&token))
         .ok_or_else(|| ServerFnError::new("Unknown team."))?;
-    let bytes =
-        crate::server::media::read_upload(file, crate::server::media::MAX_IMAGE_BYTES).await?;
+    let bytes = crate::server::media::read_upload(file, state.limits.picture).await?;
     let name = state
         .media
         .store(bytes, crate::server::media::ImageKind::Avatar)

@@ -1,6 +1,9 @@
-//! Uploaded pictures and soundtracks: validation, processing and serving.
+//! Uploaded pictures, soundtracks and videos: validation, processing and serving.
 
-use std::{io::Cursor, path::PathBuf};
+use std::{
+    io::{Cursor, SeekFrom},
+    path::PathBuf,
+};
 
 use anyhow::Context;
 use dioxus::fullstack::{
@@ -13,10 +16,30 @@ use dioxus::fullstack::{
 };
 use image::{DynamicImage, ImageFormat, ImageReader, Limits, imageops::FilterType};
 
-/// Largest accepted picture upload, in bytes.
-pub const MAX_IMAGE_BYTES: usize = 15 * 1024 * 1024;
-/// Largest accepted soundtrack upload, in bytes.
-pub const MAX_AUDIO_BYTES: usize = 40 * 1024 * 1024;
+use crate::protocol::UploadLimits;
+
+/// Upload limits from `QUAESITO_MAX_PICTURE_MB`, `QUAESITO_MAX_AUDIO_MB`,
+/// `QUAESITO_MAX_VIDEO_MB` and `QUAESITO_MAX_IMPORT_MB`, with defaults of 15, 40, 200 and 500 MB.
+#[must_use]
+pub fn limits_from_env() -> UploadLimits {
+    let megabytes = |var: &str, default: u64| {
+        let mb = std::env::var(var)
+            .ok()
+            .and_then(|v| v.trim().parse::<u64>().ok())
+            .filter(|&mb| mb > 0)
+            .unwrap_or(default);
+        mb.saturating_mul(1024 * 1024)
+    };
+    UploadLimits {
+        picture: megabytes("QUAESITO_MAX_PICTURE_MB", 15),
+        audio: megabytes("QUAESITO_MAX_AUDIO_MB", 40),
+        video: megabytes("QUAESITO_MAX_VIDEO_MB", 200),
+        import: megabytes("QUAESITO_MAX_IMPORT_MB", 500),
+    }
+}
+
+/// Largest slice of a file sent for an open-ended range request (videos stream in slices).
+const MAX_SLICE_BYTES: u64 = 8 * 1024 * 1024;
 
 const QUESTION_MAX_WIDTH: u32 = 1600;
 const QUESTION_MAX_HEIGHT: u32 = 1200;
@@ -73,6 +96,18 @@ impl MediaStore {
         Ok(name)
     }
 
+    /// Stores an uploaded video as-is, returning its file name.
+    ///
+    /// # Errors
+    /// Fails if the data is not a supported video format or cannot be written.
+    pub async fn store_video(&self, bytes: Vec<u8>) -> anyhow::Result<String> {
+        let ext =
+            video_extension(&bytes).context("Unsupported video. Use MP4 (H.264), WebM or MOV.")?;
+        let name = format!("{}.{ext}", uuid::Uuid::new_v4().simple());
+        tokio::fs::write(self.dir.join(&name), bytes).await?;
+        Ok(name)
+    }
+
     /// A stored file's bytes, or `None` for unknown or invalid names.
     pub async fn read_bytes(&self, name: &str) -> Option<Vec<u8>> {
         self.read(name).await.map(|(data, _)| data)
@@ -115,6 +150,14 @@ impl MediaStore {
         let data = tokio::fs::read(self.dir.join(name)).await.ok()?;
         Some((data, content_type))
     }
+
+    /// Opens a stored file by name, with its length and content type.
+    async fn open_file(&self, name: &str) -> Option<(tokio::fs::File, u64, &'static str)> {
+        let content_type = content_type(name)?;
+        let file = tokio::fs::File::open(self.dir.join(name)).await.ok()?;
+        let len = file.metadata().await.ok()?.len();
+        Some((file, len, content_type))
+    }
 }
 
 /// Decodes, resizes and re-encodes a picture. Returns the bytes and file extension.
@@ -156,6 +199,21 @@ pub fn process(bytes: &[u8], kind: ImageKind) -> anyhow::Result<(Vec<u8>, &'stat
     }
 }
 
+/// Recognises a video file by its first bytes and returns the extension to store it under.
+#[must_use]
+pub fn video_extension(bytes: &[u8]) -> Option<&'static str> {
+    match bytes {
+        // ISO media: the brand tells QuickTime and audio-only files from MP4 video.
+        [_, _, _, _, b'f', b't', b'y', b'p', brand @ ..] if brand.len() >= 4 => match &brand[..4] {
+            b"qt  " => Some("mov"),
+            b"M4A " | b"M4B " | b"M4P " => None,
+            _ => Some("mp4"),
+        },
+        [0x1A, 0x45, 0xDF, 0xA3, ..] => Some("webm"),
+        _ => None,
+    }
+}
+
 /// Recognises an audio file by its first bytes and returns the extension to store it under.
 #[must_use]
 pub fn audio_extension(bytes: &[u8]) -> Option<&'static str> {
@@ -192,17 +250,17 @@ pub fn audio_extension(bytes: &[u8]) -> Option<&'static str> {
 /// Fails if the upload is too large or the stream breaks.
 pub async fn read_upload(
     mut file: dioxus::fullstack::FileStream,
-    max_bytes: usize,
+    max_bytes: u64,
 ) -> anyhow::Result<Vec<u8>> {
     use futures_util::StreamExt;
 
     let mut bytes = Vec::new();
     while let Some(chunk) = file.next().await {
         let chunk = chunk.map_err(|err| anyhow::anyhow!("upload interrupted: {err}"))?;
-        if bytes.len() + chunk.len() > max_bytes {
+        if (bytes.len() + chunk.len()) as u64 > max_bytes {
             anyhow::bail!(
                 "The file is too large (max {} MB).",
-                max_bytes / 1024 / 1024
+                UploadLimits::megabytes(max_bytes)
             );
         }
         bytes.extend_from_slice(&chunk);
@@ -226,16 +284,22 @@ fn content_type(name: &str) -> Option<&'static str> {
         "ogg" => Some("audio/ogg"),
         "flac" => Some("audio/flac"),
         "wav" => Some("audio/wav"),
-        "webm" => Some("audio/webm"),
+        // WebM soundtracks play fine when served as video.
+        "webm" => Some("video/webm"),
+        "mp4" => Some("video/mp4"),
+        "mov" => Some("video/quicktime"),
         _ => None,
     }
 }
 
 /// Axum handler for `GET /media/{name}`.
 ///
-/// Honours single byte ranges so browsers can seek in soundtracks.
+/// Honours single byte ranges so browsers can seek in soundtracks and videos, reading only the
+/// slice asked for; open-ended ranges get at most [`MAX_SLICE_BYTES`] at a time.
 pub async fn serve(Path(name): Path<String>, headers: HeaderMap) -> Response {
-    let Some((data, content_type)) = super::state().media.read(&name).await else {
+    use tokio::io::{AsyncReadExt, AsyncSeekExt};
+
+    let Some((mut file, len, content_type)) = super::state().media.open_file(&name).await else {
         return StatusCode::NOT_FOUND.into_response();
     };
     let common = [
@@ -249,44 +313,53 @@ pub async fn serve(Path(name): Path<String>, headers: HeaderMap) -> Response {
     let range = headers
         .get(header::RANGE)
         .and_then(|value| value.to_str().ok());
-    match range.map(|r| byte_range(r, data.len())) {
-        None => (common, Body::from(data)).into_response(),
-        Some(Some((start, end))) => (
-            StatusCode::PARTIAL_CONTENT,
-            common,
-            [(
-                header::CONTENT_RANGE,
-                format!("bytes {start}-{end}/{}", data.len()),
-            )],
-            Body::from(data[start..=end].to_vec()),
-        )
-            .into_response(),
-        Some(None) => (
+    let Some(range) = range else {
+        let mut data = Vec::new();
+        return match file.read_to_end(&mut data).await {
+            Ok(_) => (common, Body::from(data)).into_response(),
+            Err(_) => StatusCode::INTERNAL_SERVER_ERROR.into_response(),
+        };
+    };
+    let Some((start, end)) = byte_range(range, len) else {
+        return (
             StatusCode::RANGE_NOT_SATISFIABLE,
-            [(header::CONTENT_RANGE, format!("bytes */{}", data.len()))],
+            [(header::CONTENT_RANGE, format!("bytes */{len}"))],
         )
-            .into_response(),
+            .into_response();
+    };
+    let mut data = vec![0; usize::try_from(end - start + 1).unwrap_or(0)];
+    if file.seek(SeekFrom::Start(start)).await.is_err() || file.read_exact(&mut data).await.is_err()
+    {
+        return StatusCode::INTERNAL_SERVER_ERROR.into_response();
     }
+    (
+        StatusCode::PARTIAL_CONTENT,
+        common,
+        [(header::CONTENT_RANGE, format!("bytes {start}-{end}/{len}"))],
+        Body::from(data),
+    )
+        .into_response()
 }
 
-/// Parses a single `bytes=` range into inclusive bounds within a body of `len` bytes.
-fn byte_range(header: &str, len: usize) -> Option<(usize, usize)> {
+/// Parses a single `bytes=` range into inclusive bounds within a body of `len` bytes. An
+/// open-ended range (`bytes=N-`) is cut to [`MAX_SLICE_BYTES`].
+fn byte_range(header: &str, len: u64) -> Option<(u64, u64)> {
     let spec = header.strip_prefix("bytes=")?.trim();
     let (start, end) = spec.split_once('-')?;
     let last = len.checked_sub(1)?;
     let (start, end) = if start.is_empty() {
         // `bytes=-N`: the final N bytes.
-        let suffix: usize = end.parse().ok()?;
+        let suffix: u64 = end.parse().ok()?;
         if suffix == 0 {
             return None;
         }
         (len.saturating_sub(suffix), last)
     } else {
-        let start: usize = start.parse().ok()?;
+        let start: u64 = start.parse().ok()?;
         let end = if end.is_empty() {
-            last
+            last.min(start.saturating_add(MAX_SLICE_BYTES - 1))
         } else {
-            end.parse::<usize>().ok()?.min(last)
+            end.parse::<u64>().ok()?.min(last)
         };
         (start, end)
     };
@@ -326,6 +399,26 @@ mod tests {
         assert!(store.read_bytes(&unused).await.is_none());
         assert!(dir.join("notes.txt").exists());
         let _ = tokio::fs::remove_dir_all(dir).await;
+    }
+
+    #[test]
+    fn videos_are_recognised_by_their_first_bytes() {
+        let iso = |brand: &[u8]| {
+            let mut bytes = vec![0, 0, 0, 0x20];
+            bytes.extend(b"ftyp");
+            bytes.extend(brand);
+            bytes
+        };
+        assert_eq!(video_extension(&iso(b"isom")), Some("mp4"));
+        assert_eq!(video_extension(&iso(b"mp42")), Some("mp4"));
+        assert_eq!(video_extension(&iso(b"qt  ")), Some("mov"));
+        assert_eq!(video_extension(&iso(b"M4A ")), None);
+        assert_eq!(video_extension(&[0x1A, 0x45, 0xDF, 0xA3, 1]), Some("webm"));
+        assert_eq!(video_extension(b"ID3\x04"), None);
+        assert_eq!(
+            content_type(&format!("{}.mp4", "a".repeat(32))),
+            Some("video/mp4")
+        );
     }
 
     #[test]
@@ -383,6 +476,14 @@ mod tests {
         assert_eq!(byte_range("bytes=4-2", 10), None);
         assert_eq!(byte_range("bytes=0-", 0), None);
         assert_eq!(byte_range("items=0-1", 10), None);
+        // Open-ended ranges of big files come in slices.
+        let big = MAX_SLICE_BYTES * 3;
+        assert_eq!(byte_range("bytes=0-", big), Some((0, MAX_SLICE_BYTES - 1)));
+        assert_eq!(
+            byte_range("bytes=0-", MAX_SLICE_BYTES / 2),
+            Some((0, MAX_SLICE_BYTES / 2 - 1))
+        );
+        assert_eq!(byte_range("bytes=5-", big), Some((5, MAX_SLICE_BYTES + 4)));
     }
 
     #[test]

@@ -31,6 +31,8 @@ pub struct AppState {
     pub quizzes: QuizStore,
     pub media: MediaStore,
     pub sessions: Sessions,
+    /// The largest uploads accepted.
+    pub limits: crate::protocol::UploadLimits,
 }
 
 static STATE: OnceLock<AppState> = OnceLock::new();
@@ -58,6 +60,7 @@ pub async fn init() -> anyhow::Result<()> {
         quizzes: QuizStore::open(data_dir.join("quizzes")).await?,
         media: MediaStore::open(data_dir.join("media")).await?,
         sessions: Sessions::open(data_dir.join("games")).await?,
+        limits: media::limits_from_env(),
     };
     dioxus::logger::tracing::info!("data directory: {}", data_dir.display());
     // A concurrent initialisation may have won the race; either state is equivalent.

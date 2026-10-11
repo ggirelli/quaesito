@@ -12,13 +12,17 @@ use super::{
     },
 };
 use crate::{
-    api::{get_quiz, save_quiz, start_test, upload_question_audio, upload_question_image},
+    api::{
+        get_quiz, save_quiz, start_test, upload_limits, upload_question_audio,
+        upload_question_image, upload_question_media,
+    },
     model::{
         AdvanceMode, Answer, ImageReveal, MAX_ANSWERS, MAX_MULTIPLIER, MAX_PARTS,
         MAX_TIME_LIMIT_SECS, MIN_ANSWERS, MIN_PARTS, MIN_TIME_LIMIT_SECS, MultiScoring, Part,
         PhoneDisplay, PinTolerance, Point, PointsMode, Question, QuestionKind, Quiz, QuizSettings,
-        RevealMode, ValidationIssue,
+        RevealMode, ValidationIssue, is_video,
     },
+    protocol::UploadLimits,
 };
 
 /// Seconds a gradually revealed picture stays fully visible, suggested when picking a reveal.
@@ -117,6 +121,27 @@ impl Draft {
     }
 }
 
+/// The server's upload limits, once known.
+#[derive(Clone, Copy)]
+struct Limits(Resource<Option<UploadLimits>>);
+
+impl Limits {
+    fn get(self) -> Option<UploadLimits> {
+        (*self.0.read()).flatten()
+    }
+}
+
+/// An error when `file` is larger than `max` bytes, before spending time uploading it.
+fn too_large(file: &dioxus::html::FileData, max: Option<u64>, what: &str) -> Option<String> {
+    let max = max?;
+    (file.size() > max).then(|| {
+        format!(
+            "This {what} is too large (max {} MB).",
+            UploadLimits::megabytes(max)
+        )
+    })
+}
+
 #[derive(Clone, Copy, PartialEq)]
 enum SaveState {
     Saved,
@@ -133,6 +158,8 @@ fn EditorForm(quiz: Quiz) -> Element {
         revision: use_signal(|| 0),
     };
     use_context_provider(|| draft);
+    let limits = use_resource(move || async move { upload_limits(token.get()).await.ok() });
+    use_context_provider(|| Limits(limits));
     let save_state = use_autosave(token, draft, issues);
     // The order before the last shuffle, and the revision the shuffle produced: undo is offered
     // until anything else changes.
@@ -424,13 +451,24 @@ fn QuestionCard(
         .map(|s| s.to_string())
         .unwrap_or_default();
 
+    let limits: Limits = use_context();
     let upload = move |evt: FormEvent| async move {
         let Some(file) = evt.files().into_iter().next() else {
             return;
         };
+        let video = file.content_type().is_some_and(|t| t.starts_with("video/"));
+        let error = if video {
+            too_large(&file, limits.get().map(|l| l.video), "video")
+        } else {
+            too_large(&file, limits.get().map(|l| l.picture), "picture")
+        };
+        if let Some(error) = error {
+            upload_error.set(Some(error));
+            return;
+        }
         uploading.set(true);
         upload_error.set(None);
-        match upload_question_image(token.get(), file.into()).await {
+        match upload_question_media(token.get(), file.into()).await {
             Ok(name) => draft.edit_question(index, |q| q.set_image(Some(name))),
             Err(err) => upload_error.set(Some(message(&err))),
         }
@@ -441,6 +479,10 @@ fn QuestionCard(
         let Some(file) = evt.files().into_iter().next() else {
             return;
         };
+        if let Some(error) = too_large(&file, limits.get().map(|l| l.audio), "soundtrack") {
+            upload_error.set(Some(error));
+            return;
+        }
         uploading_audio.set(true);
         upload_error.set(None);
         match upload_question_audio(token.get(), file.into()).await {
@@ -530,11 +572,21 @@ fn QuestionCard(
             }
             div { class: "question-media row",
                 if let Some(image) = &question.image {
-                    img { class: "thumb", src: media_url(image), alt: "Question picture" }
+                    if is_video(image) {
+                        video {
+                            class: "thumb",
+                            src: media_url(image),
+                            preload: "metadata",
+                            muted: true,
+                            controls: true,
+                        }
+                    } else {
+                        img { class: "thumb", src: media_url(image), alt: "Question picture" }
+                    }
                     button {
                         class: "button ghost",
                         onclick: move |_| draft.edit_question(index, |q| q.set_image(None)),
-                        "Remove picture"
+                        if is_video(image) { "Remove video" } else { "Remove picture" }
                     }
                     if !slide {
                         label { class: "field inline",
@@ -586,11 +638,20 @@ fn QuestionCard(
                         }
                     }
                 } else {
-                    label { class: "button ghost",
-                        if uploading() { "Uploading…" } else { "＋ Add picture" }
+                    label {
+                        class: "button ghost",
+                        title: match limits.get() {
+                            Some(l) => format!(
+                                "Pictures up to {} MB; videos (MP4, WebM, MOV) up to {} MB",
+                                UploadLimits::megabytes(l.picture),
+                                UploadLimits::megabytes(l.video),
+                            ),
+                            None => "A picture, or a video (MP4, WebM, MOV)".to_owned(),
+                        },
+                        if uploading() { "Uploading…" } else { "＋ Add picture or video" }
                         input {
                             r#type: "file",
-                            accept: "image/*",
+                            accept: "image/*,video/mp4,video/webm,video/quicktime",
                             class: "visually-hidden",
                             onchange: upload,
                         }

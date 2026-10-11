@@ -6,11 +6,12 @@ use std::io::{Cursor, Read, Write};
 use anyhow::Context;
 use zip::{CompressionMethod, ZipArchive, ZipWriter, write::SimpleFileOptions};
 
-use super::media::{self, ImageKind, MediaStore};
-use crate::model::Quiz;
+use super::media::{ImageKind, MediaStore};
+use crate::{
+    model::{Quiz, is_video},
+    protocol::UploadLimits,
+};
 
-/// Largest accepted import, in bytes.
-pub const MAX_BUNDLE_BYTES: usize = 300 * 1024 * 1024;
 /// The quiz document inside a bundle.
 const QUIZ_FILE: &str = "quiz.json";
 /// Largest quiz document accepted inside a bundle.
@@ -49,16 +50,34 @@ pub async fn export(quiz: &Quiz, store: &MediaStore) -> anyhow::Result<Vec<u8>> 
 ///
 /// # Errors
 /// Fails if the data is neither a quiz bundle nor quiz JSON.
-pub async fn import(bytes: Vec<u8>, store: &MediaStore) -> anyhow::Result<Quiz> {
+pub async fn import(
+    bytes: Vec<u8>,
+    store: &MediaStore,
+    limits: &UploadLimits,
+) -> anyhow::Result<Quiz> {
     if !bytes.starts_with(b"PK\x03\x04") {
         return serde_json::from_slice(&bytes).context("Not a quiz file");
     }
-    let (mut quiz, files) = tokio::task::spawn_blocking(move || unpack(bytes)).await??;
+    let largest = limits.picture.max(limits.audio).max(limits.video);
+    let (mut quiz, files) = tokio::task::spawn_blocking(move || unpack(bytes, largest)).await??;
+    // What a file is depends on where the quiz uses it: a WebM file can be a soundtrack or a
+    // video, and an MP4 video starts like an M4A soundtrack.
+    let soundtracks: std::collections::HashSet<String> = quiz
+        .questions
+        .iter()
+        .filter_map(|q| q.audio.clone())
+        .collect();
     let mut renamed = std::collections::HashMap::new();
     for (name, bytes) in files {
-        let stored = if media::audio_extension(&bytes).is_some() {
+        let size = bytes.len() as u64;
+        let stored = if soundtracks.contains(&name) {
+            check_size(size, limits.audio, &name)?;
             store.store_audio(bytes).await
+        } else if is_video(&name) {
+            check_size(size, limits.video, &name)?;
+            store.store_video(bytes).await
         } else {
+            check_size(size, limits.picture, &name)?;
             store.store(bytes, ImageKind::Question).await
         };
         match stored {
@@ -75,13 +94,22 @@ pub async fn import(bytes: Vec<u8>, store: &MediaStore) -> anyhow::Result<Quiz> 
 /// Bundled files by their name in the quiz.
 type MediaFiles = Vec<(String, Vec<u8>)>;
 
-/// The quiz and the bundled media it refers to.
-fn unpack(bytes: Vec<u8>) -> anyhow::Result<(Quiz, MediaFiles)> {
+/// Refuses a bundled file larger than this server accepts for its kind.
+fn check_size(size: u64, limit: u64, name: &str) -> anyhow::Result<()> {
+    anyhow::ensure!(
+        size <= limit,
+        "{name} is larger than this server accepts ({} MB)",
+        UploadLimits::megabytes(limit)
+    );
+    Ok(())
+}
+
+/// The quiz and the bundled media it refers to, each file at most `limit` bytes.
+fn unpack(bytes: Vec<u8>, limit: u64) -> anyhow::Result<(Quiz, MediaFiles)> {
     let mut archive = ZipArchive::new(Cursor::new(bytes)).context("Not a quiz bundle")?;
     let json = read_entry(&mut archive, QUIZ_FILE, MAX_QUIZ_BYTES)?
         .context("The bundle has no quiz.json")?;
     let quiz: Quiz = serde_json::from_slice(&json).context("Not a valid quiz")?;
-    let limit = u64::try_from(media::MAX_AUDIO_BYTES).unwrap_or(u64::MAX);
     let mut files = Vec::new();
     for name in quiz.media() {
         if let Some(bytes) = read_entry(&mut archive, &format!("media/{name}"), limit)? {
@@ -125,6 +153,10 @@ mod tests {
         out.into_inner()
     }
 
+    fn limits() -> UploadLimits {
+        crate::server::media::limits_from_env()
+    }
+
     #[tokio::test]
     async fn bundles_round_trip_with_their_media() {
         let dir = std::env::temp_dir().join(format!("quaesito-bundle-{}", uuid::Uuid::new_v4()));
@@ -156,7 +188,7 @@ mod tests {
         };
 
         let bytes = export(&quiz, &store).await.unwrap();
-        let imported = import(bytes, &store).await.unwrap();
+        let imported = import(bytes, &store, &limits()).await.unwrap();
         let question = &imported.questions[0];
         let new_picture = question.image.clone().unwrap();
         assert_ne!(new_picture, picture);
@@ -173,8 +205,15 @@ mod tests {
 
         // Older plain JSON exports still import.
         let json = serde_json::to_vec(&quiz).unwrap();
-        assert_eq!(import(json, &store).await.unwrap().title, "Bundled");
-        assert!(import(b"PK\x03\x04garbage".to_vec(), &store).await.is_err());
+        assert_eq!(
+            import(json, &store, &limits()).await.unwrap().title,
+            "Bundled"
+        );
+        assert!(
+            import(b"PK\x03\x04garbage".to_vec(), &store, &limits())
+                .await
+                .is_err()
+        );
         let _ = tokio::fs::remove_dir_all(dir).await;
     }
 }
