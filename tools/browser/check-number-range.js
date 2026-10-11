@@ -12,6 +12,15 @@ const L = require('./lib.js');
   const saved = await L.api('/api/admin/quiz/get', { token: ctx.token, id: ctx.id });
   console.log('saved:', JSON.stringify(saved.questions[0].kind));
   await ed.screenshot({ path: 'out/number-range-editor.png' });
+  // A range that leaves the correct number out is flagged right under it.
+  await ed.$eval('input[aria-label="Range to"]', (i) => { i.value = ''; });
+  await ed.type('input[aria-label="Range to"]', '50');
+  await L.sleep(300);
+  console.log('range warning:', await ed.$eval('.number-edit + .field-error', (p) => p.innerText).catch(() => 'MISSING'));
+  await ed.screenshot({ path: 'out/number-range-invalid.png' });
+  await ed.$eval('input[aria-label="Range to"]', (i) => { i.value = ''; });
+  await ed.type('input[aria-label="Range to"]', '200');
+  await L.sleep(2000);
 
   const code = await L.api('/api/admin/session/start', { token: ctx.token, quiz_id: ctx.id });
   const host = await L.openHost(ctx, code);

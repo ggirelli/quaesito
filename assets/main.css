@@ -392,6 +392,22 @@ textarea {
   padding-left: 2.4rem;
 }
 
+/* A number question's answer and range in the editor. */
+.number-edit {
+  flex-wrap: wrap;
+}
+
+.number-edit input.short {
+  width: 7rem !important;
+}
+
+/* A problem shown right under the field it is about. */
+.field-error {
+  margin: 0;
+  color: var(--danger);
+  font-size: 0.875rem;
+}
+
 input.short {
   width: 6rem !important;
 }
