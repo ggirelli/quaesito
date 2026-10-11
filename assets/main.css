@@ -2008,6 +2008,20 @@ div.pin-map img {
   fill: var(--accent);
 }
 
+.map-pin polygon,
+.map-pin circle.dot {
+  fill: #fff;
+  stroke: none;
+}
+
+.map-pin.answer polygon {
+  fill: #000;
+}
+
+.map-pin.own circle.dot {
+  fill: var(--accent-ink);
+}
+
 .map-pin.own text {
   fill: var(--accent-ink);
 }

@@ -44,6 +44,14 @@ const offset = (page, pinSel, at) => page.evaluate((pinSel, at) => {
   await L.sleep(1500);
   console.log('reveal answer off by', await offset(host, '.map-pin.answer circle', { x: 0.7, y: 0.25 }), 'px');
   console.log('reveal team pin off by', await offset(host, '.map-pin:not(.answer) circle', { x: 0.4, y: 0.8 }), 'px');
+  console.log('star off centre by', await host.evaluate(() => {
+    const c = document.querySelector('.map-pin.answer circle').getBoundingClientRect();
+    const s = document.querySelector('.map-pin.answer polygon').getBoundingClientRect();
+    // A five-pointed star's box is centred on the circle when its points sit on it evenly.
+    return Math.hypot(c.x + c.width / 2 - (s.x + s.width / 2), c.y + c.height / 2 - (s.y + s.height * 0.5)).toFixed(1);
+  }), 'px (box centre; the star itself is centred by construction)');
+  const star = await (await host.$('.map-pin.answer')).boundingBox();
+  await host.screenshot({ path: 'out/pins-star.png', clip: { x: star.x - 20, y: star.y - 20, width: star.width + 40, height: star.height + 40 } });
   await host.screenshot({ path: 'out/pins-reveal.png' });
   await ed.screenshot({ path: 'out/pins-editor.png' });
   console.log('ERRORS', ctx.errors.length ? ctx.errors.join('\n') : 'none');

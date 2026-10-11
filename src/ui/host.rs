@@ -9,7 +9,7 @@ use super::{
     live::{ConnectionBanner, Live, countdown_ms, elapsed_now, remaining_ms, use_clock, use_live},
     sfx::{self, Cue, SFX_JS, Sfx},
     widgets::{
-        ANSWER_SHAPES, Brand, ClientOnly, ErrorBox, Icon, IconKind, MapPin, PinMap, Spinner,
+        ANSWER_SHAPES, Brand, ClientOnly, ErrorBox, Icon, IconKind, MapPin, PinMap, STAR, Spinner,
         TeamAvatar, media_url, message,
     },
 };
@@ -1036,7 +1036,7 @@ fn PinReveal(image: String, answer: Point, aspect: f64, pins: Vec<PinGuess>) -> 
         .collect();
     marks.push(MapPin {
         at: answer,
-        label: "★".to_owned(),
+        label: STAR.to_owned(),
         title: "The right spot".to_owned(),
         class: "answer",
     });

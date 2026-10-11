@@ -7,8 +7,8 @@ use super::{
     admin::{AdminGate, AdminHeader, AdminToken},
     client,
     widgets::{
-        AnswerBadge, ClientOnly, ErrorBox, Icon, IconKind, MapPin, PinMap, Spinner, media_url,
-        message,
+        AnswerBadge, ClientOnly, ErrorBox, Icon, IconKind, MapPin, PinMap, STAR, Spinner,
+        media_url, message,
     },
 };
 use crate::{
@@ -871,7 +871,7 @@ fn PinEditor(
                 pins: answer
                     .map(|at| MapPin {
                         at,
-                        label: "★".to_owned(),
+                        label: STAR.to_owned(),
                         title: "The right spot".to_owned(),
                         class: "answer",
                     })

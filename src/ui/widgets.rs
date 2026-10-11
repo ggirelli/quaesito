@@ -266,11 +266,40 @@ pub fn PinMap(
                     transform: "translate({pin.at.x * MAP_WIDTH:.2} {pin.at.y * height:.2})",
                     "aria-label": "{pin.title}",
                     circle { r: PIN_RADIUS }
-                    text { text_anchor: "middle", dominant_baseline: "central", "{pin.label}" }
+                    // Symbols are drawn as shapes: font glyphs are not centred reliably.
+                    match pin.label.as_str() {
+                        STAR => rsx! {
+                            polygon { points: star_points(PIN_RADIUS * 0.68) }
+                        },
+                        DOT => rsx! {
+                            circle { class: "dot", r: PIN_RADIUS * 0.35 }
+                        },
+                        label => rsx! {
+                            text { text_anchor: "middle", dominant_baseline: "central", "{label}" }
+                        },
+                    }
                 }
             }
         }
     }
+}
+
+/// A [`MapPin`] label drawn as a star (the right spot).
+pub const STAR: &str = "★";
+/// A [`MapPin`] label drawn as a dot (your own pin).
+pub const DOT: &str = "•";
+
+/// Points of a five-pointed star of radius `outer`, centred on the origin, pointing up.
+fn star_points(outer: f64) -> String {
+    let inner = outer * 0.42;
+    (0..10)
+        .map(|i| {
+            let radius = if i % 2 == 0 { outer } else { inner };
+            let angle = std::f64::consts::PI * (f64::from(i) / 5.0 - 0.5);
+            format!("{:.2},{:.2}", radius * angle.cos(), radius * angle.sin())
+        })
+        .collect::<Vec<_>>()
+        .join(" ")
 }
 
 /// Width of a [`PinMap`]'s drawing, in its own units.

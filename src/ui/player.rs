@@ -6,8 +6,8 @@ use super::{
     Route, client,
     live::{ConnectionBanner, Live, countdown_ms, use_clock, use_live},
     widgets::{
-        ANSWER_SHAPES, Brand, ClientOnly, ErrorBox, MapPin, PinMap, Spinner, TeamAvatar, media_url,
-        message,
+        ANSWER_SHAPES, Brand, ClientOnly, DOT, ErrorBox, MapPin, PinMap, Spinner, TeamAvatar,
+        media_url, message,
     },
 };
 use crate::{
@@ -862,7 +862,7 @@ fn PinPad(
                 pins: shown
                     .map(|at| MapPin {
                         at,
-                        label: "📍".to_owned(),
+                        label: DOT.to_owned(),
                         title: "Your pin".to_owned(),
                         class: "own",
                     })
