@@ -206,9 +206,14 @@ const TEST_PHONES: usize = 2;
 #[cfg(feature = "server")]
 const MAX_TEST_PHONES: usize = 6;
 
-/// Starts an admin's test game, with phones already joined, and returns its join code.
+/// Starts an admin's test game, with phones already joined, and returns its join code. With
+/// `from`, the test skips the lobby and starts at that question or slide (by position).
 #[post("/api/admin/test/start")]
-pub async fn start_test(token: String, quiz_id: String) -> ServerFnResult<String> {
+pub async fn start_test(
+    token: String,
+    quiz_id: String,
+    from: Option<usize>,
+) -> ServerFnResult<String> {
     let state = crate::server::state();
     state.auth.require(&token)?;
     let quiz = state
@@ -225,6 +230,16 @@ pub async fn start_test(token: String, quiz_id: String) -> ServerFnResult<String
             // Do not leave a half-started test game behind.
             state.sessions.remove(&code);
             return Err(err);
+        }
+    }
+    if let Some(from) = from {
+        let started = state
+            .sessions
+            .get(&code)
+            .map(|session| session.update(|g, now| g.start_from(from, now)));
+        if let Some(Err(refusal)) = started {
+            state.sessions.remove(&code);
+            return Err(ServerFnError::new(refusal.0));
         }
     }
     Ok(code)

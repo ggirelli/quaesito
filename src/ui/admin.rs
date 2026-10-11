@@ -325,7 +325,7 @@ fn QuizActions(
         move |_| {
             let id = id.clone();
             async move {
-                match start_test(token.get(), id).await {
+                match start_test(token.get(), id, None).await {
                     Ok(code) => {
                         navigator().push(Route::Test { code });
                     }
