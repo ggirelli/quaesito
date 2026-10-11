@@ -33,16 +33,17 @@ use super::matching::normalize;
 use crate::{
     model::{AdvanceMode, Bonus, MAX_TEXT_ANSWER_CHARS, Question, QuestionKind, Quiz, RevealMode},
     protocol::{
-        AnswerOutcome, Fastest, GameResults, Grade, Guess, HostPhase, HostView, InputKind,
-        JokerState, Judgement, MAX_NAME_CHARS, PartReveal, PinGuess, PlayerPhase, PlayerView,
-        QuestionInfo, Response, ResultRow, Reveal, RoundResult, SlideInfo, StandingRow, TeamInfo,
-        TextGroup, Upcoming,
+        AnswerOutcome, DEFAULT_MAX_TEAMS, Fastest, GameResults, Grade, Guess, HostPhase, HostView,
+        InputKind, JokerState, Judgement, MAX_NAME_CHARS, MAX_TEAMS_CEILING, PartReveal, PinGuess,
+        PlayerPhase, PlayerView, QuestionInfo, Response, ResultRow, Reveal, RoundResult, SlideInfo,
+        StandingRow, TeamInfo, TextGroup, Upcoming,
     },
     scoring::{self, Tally},
 };
 
-/// Most teams in one session.
-pub const MAX_TEAMS: usize = 50;
+fn default_max_teams() -> usize {
+    DEFAULT_MAX_TEAMS
+}
 
 /// Auto-advance pause after a question when its answers are shown.
 const AUTO_AFTER_REVEAL: Duration = Duration::from_secs(8);
@@ -61,6 +62,9 @@ pub struct Snapshot {
     quiz: Quiz,
     teams: Vec<Team>,
     next_team_id: u32,
+    /// The most teams that can join.
+    #[serde(default = "default_max_teams")]
+    max_teams: usize,
     phase: SavedPhase,
     judgements: Vec<HashMap<String, Judgement>>,
     played: Vec<bool>,
@@ -109,6 +113,8 @@ pub struct Game {
     quiz: Quiz,
     teams: Vec<Team>,
     next_team_id: u32,
+    /// The most teams that can join.
+    max_teams: usize,
     phase: Phase,
     /// Per question: the judge's amendments to typed answers, by normalised text.
     judgements: Vec<HashMap<String, Judgement>>,
@@ -213,6 +219,7 @@ impl Game {
             quiz,
             teams: Vec::new(),
             next_team_id: 1,
+            max_teams: DEFAULT_MAX_TEAMS,
             phase: Phase::Lobby,
             judgements: vec![HashMap::new(); quiz_len],
             played: vec![false; quiz_len],
@@ -252,6 +259,7 @@ impl Game {
                 })
                 .collect(),
             next_team_id: self.next_team_id,
+            max_teams: self.max_teams,
             phase: match self.phase {
                 Phase::Lobby => SavedPhase::Lobby,
                 Phase::Ready { index } => SavedPhase::Ready { index },
@@ -305,6 +313,7 @@ impl Game {
             quiz: snapshot.quiz,
             teams: snapshot.teams,
             next_team_id: snapshot.next_team_id,
+            max_teams: snapshot.max_teams,
             phase,
             judgements: snapshot.judgements,
             played: snapshot.played,
@@ -318,6 +327,18 @@ impl Game {
     #[must_use]
     pub fn code(&self) -> &str {
         &self.code
+    }
+
+    /// Sets the most teams that can join, from 1 to [`MAX_TEAMS_CEILING`].
+    ///
+    /// # Errors
+    /// Refuses a limit out of that range.
+    pub fn set_max_teams(&mut self, max_teams: usize) -> Result<(), Refusal> {
+        if !(1..=MAX_TEAMS_CEILING).contains(&max_teams) {
+            return Err(Refusal("A game takes 1 to 10,000 teams."));
+        }
+        self.max_teams = max_teams;
+        Ok(())
     }
 
     #[must_use]
@@ -365,7 +386,7 @@ impl Game {
     /// Refuses empty, overlong or duplicate names, and joining a full or finished game.
     pub fn join(&mut self, name: &str, token: String) -> Result<u32, Refusal> {
         let name = self.check_name(name, None)?;
-        if self.teams.len() >= MAX_TEAMS {
+        if self.teams.len() >= self.max_teams {
             return Err(Refusal("This game is full."));
         }
         if matches!(self.phase, Phase::Podium { .. })
@@ -901,6 +922,7 @@ impl Game {
             title: self.quiz.title.clone(),
             code: self.code.clone(),
             teams: self.teams.iter().map(Team::info).collect(),
+            max_teams: self.max_teams,
             paused: self.paused_at.is_some(),
             auto_advance_ms: match self.phase {
                 Phase::Question { .. } => None,
@@ -1959,6 +1981,27 @@ mod tests {
     fn invalid_quizzes_cannot_start_a_game() {
         let empty = Quiz::new("id".to_owned(), "Empty".to_owned());
         assert!(Game::new("1".to_owned(), empty).is_err());
+    }
+
+    #[test]
+    fn the_host_sets_how_many_teams_can_join() {
+        let mut g = game(QuizSettings::default());
+        assert_eq!(g.host_view(Instant::now()).max_teams, DEFAULT_MAX_TEAMS);
+        assert!(g.set_max_teams(0).is_err());
+        assert!(g.set_max_teams(MAX_TEAMS_CEILING + 1).is_err());
+        g.set_max_teams(2).unwrap();
+        join(&mut g, "Owls");
+        join(&mut g, "Cats");
+        assert_eq!(
+            g.join("Bats", "token-bats".to_owned()),
+            Err(Refusal("This game is full."))
+        );
+        g.set_max_teams(MAX_TEAMS_CEILING).unwrap();
+        join(&mut g, "Bats");
+        // The limit survives a restart.
+        let t0 = Instant::now();
+        let restored = Game::restore(g.snapshot(t0), t0);
+        assert_eq!(restored.host_view(t0).max_teams, MAX_TEAMS_CEILING);
     }
 
     #[test]

@@ -175,9 +175,14 @@ pub async fn upload_question_audio(token: String, file: FileStream) -> ServerFnR
     Ok(state.media.store_audio(bytes).await?)
 }
 
-/// Starts a live session for a quiz and returns its join code.
+/// Starts a live session for a quiz and returns its join code. `max_teams` is the most teams
+/// that can join ([`crate::protocol::DEFAULT_MAX_TEAMS`] when left out).
 #[post("/api/admin/session/start")]
-pub async fn start_session(token: String, quiz_id: String) -> ServerFnResult<String> {
+pub async fn start_session(
+    token: String,
+    quiz_id: String,
+    max_teams: Option<usize>,
+) -> ServerFnResult<String> {
     let state = crate::server::state();
     state.auth.require(&token)?;
     let quiz = state
@@ -187,7 +192,10 @@ pub async fn start_session(token: String, quiz_id: String) -> ServerFnResult<Str
         .ok_or_else(|| ServerFnError::new("This quiz does not exist."))?;
     state
         .sessions
-        .create(quiz)
+        .create(
+            quiz,
+            max_teams.unwrap_or(crate::protocol::DEFAULT_MAX_TEAMS),
+        )
         .map_err(|refusal| ServerFnError::new(refusal.0))
 }
 

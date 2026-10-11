@@ -679,6 +679,16 @@ svg.shape {
   margin: 0;
 }
 
+.lobby-limit {
+  margin: 0;
+  text-align: center;
+}
+
+/* Small dialogs, e.g. starting a game. */
+.dialog {
+  width: min(28rem, 100%);
+}
+
 .wide-panel {
   width: min(70rem, 100%);
 }
