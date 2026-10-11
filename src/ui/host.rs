@@ -14,7 +14,7 @@ use super::{
     },
 };
 use crate::{
-    api::{game_results, host_socket, join_origin},
+    api::{end_session, game_results, host_socket, join_origin},
     model::{ImageReveal, Point},
     protocol::{
         Fastest, Grade, Guess, HostCommand, HostPhase, HostView, InputKind, Judgement,
@@ -89,7 +89,7 @@ fn HostScreen(code: String) -> Element {
             div { class: "page center",
                 if live.socket.is_err() {
                     h1 { "This game is not running" }
-                    Link { class: "button", to: Route::Admin {}, "Back to admin" }
+                    BackToAdmin { class: "button", code: code() }
                 } else {
                     Spinner {}
                 }
@@ -264,7 +264,7 @@ fn HostScreen(code: String) -> Element {
                         onclick: move |_| show_results.set(true),
                         "📊 Results"
                     }
-                    Link { class: "button big", to: Route::Admin {}, "Back to admin" }
+                    BackToAdmin { class: "button big", code: code() }
                 }
             }
             if show_results() {
@@ -541,6 +541,31 @@ fn TeamRow(team: TeamInfo, taken: Vec<String>) -> Element {
                 button { class: "button ghost", onclick: move |_| confirming.set(true), "Remove" }
             }
         }
+    }
+}
+
+/// Back to the quiz list. In the test page's frame it ends the test and leaves the test page,
+/// instead of opening the admin pages inside the frame.
+#[component]
+fn BackToAdmin(class: &'static str, code: String) -> Element {
+    let token: AdminToken = use_context();
+    let leave = move |_| {
+        let code = code.clone();
+        async move {
+            let framed = document::eval("return window.self !== window.top;")
+                .join::<bool>()
+                .await
+                .unwrap_or(false);
+            if framed {
+                let _ = end_session(token.get(), code).await;
+                document::eval("window.top.location.assign('/admin');");
+            } else {
+                navigator().push(Route::Admin {});
+            }
+        }
+    };
+    rsx! {
+        button { class, onclick: leave, "Back to admin" }
     }
 }
 

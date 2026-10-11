@@ -83,13 +83,11 @@ fn TestPage(code: String) -> Element {
             restarting.set(false);
         }
     };
+    // Straight to the quiz list: going back would only step through the big screen frame's
+    // own pages, which share this window's history.
     let end = move |_| async move {
         let _ = end_session(token.get(), code()).await;
-        if nav.can_go_back() {
-            nav.go_back();
-        } else {
-            nav.push(Route::Admin {});
-        }
+        nav.push(Route::Admin {});
     };
     let add_phone = move |_| async move {
         match add_test_phone(token.get(), code()).await {
