@@ -1169,7 +1169,7 @@ table.results {
 .closed-layout {
   flex: 1;
   display: grid;
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
   gap: 3vw;
   align-items: start;
 }
@@ -1367,6 +1367,7 @@ ol.order-items {
 .text-group,
 .guess {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
   padding: 0.6em 0.9em;
@@ -1391,7 +1392,7 @@ ol.order-items {
 
 .group-text {
   flex: 1;
-  min-width: 0;
+  min-width: 7em;
   display: flex;
   flex-direction: column;
   overflow-wrap: anywhere;
