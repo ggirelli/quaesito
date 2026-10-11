@@ -55,7 +55,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 46  | Demo quiz added on first start                                                                                                     | ✅ done |
 | 47  | Help button and user guide bundled in the downloads (`/docs/`)                                                                     | ✅ done |
 | 48  | Security review of the recent dependency changes (npm, cargo, docs, CI)                                                            | ✅ done |
-| 49  | Docs home: "Made for game nights" right after the disclaimer, the podium screenshot stays at the bottom                            | 📋 todo |
+| 49  | Docs home: "Made for game nights" right after the disclaimer, the podium screenshot stays at the bottom                            | ✅ done |
 | 50  | Fully offline: no third-party requests from the app or the bundled guide (no Google Fonts, no GitHub API)                          | 📋 todo |
 | 51  | Editor: moving a question or slide keeps it in view and focused                                                                    | 📋 todo |
 | 52  | Results slides: show the standings mid-quiz (e.g. at an intermission) when revealing at the end                                    | 📋 todo |
