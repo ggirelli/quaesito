@@ -68,6 +68,18 @@ fn HostScreen(code: String) -> Element {
     use_sound_effects(live.view, live.received_at, now);
 
     let send = move |command: HostCommand| async move {
+        // Stopping the clock by hand stops the soundtrack too; when time runs out, the music
+        // plays on through the reveal.
+        let stopping = command == HostCommand::Next
+            && matches!(
+                live.view.peek().as_ref().map(|v| &v.phase),
+                Some(HostPhase::Question { .. })
+            );
+        if stopping {
+            document::eval(
+                "const a = document.getElementById('soundtrack'); if (a) { a.pause(); }",
+            );
+        }
         let _ = live.socket.send(command).await;
     };
 

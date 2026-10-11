@@ -19,6 +19,7 @@ All notable changes to quaesito are listed here. The format follows
 
 ### Changed
 
+- Stopping the clock by hand stops the soundtrack too; when time runs out, the music still plays on through the reveal.
 - Answers have new colours (violet, teal, magenta, orange, sky, lime) and shapes (sparkle, moon, heart, bolt, leaf,
   drop), drawn so they look the same on every phone. The right answer is ringed in white.
 - The README is shorter and points to the user guide for details.
