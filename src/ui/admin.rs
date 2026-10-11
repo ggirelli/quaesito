@@ -72,6 +72,17 @@ fn LoginForm() -> Element {
     let mut password = use_signal(String::new);
     let mut error = use_signal(|| None::<String>);
     rsx! {
+        nav { class: "corner-links",
+            ThemeToggle { class: "corner-link" }
+            HelpLink { class: "corner-link" }
+            Link {
+                class: "corner-link",
+                to: Route::Home {},
+                title: "Home page",
+                aria_label: "Home page",
+                Icon { kind: IconKind::Home }
+            }
+        }
         main { class: "page center narrow stack",
             Brand { large: true }
             form {
