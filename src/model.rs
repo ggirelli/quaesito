@@ -68,6 +68,12 @@ impl Quiz {
         }
         for (index, question) in self.questions.iter().enumerate() {
             let mut problems = question.problems();
+            if question.is_results() && self.settings.reveal != RevealMode::AtEnd {
+                problems.push(
+                    "Results slides only work when the answers are revealed at the end (see the settings)."
+                        .to_owned(),
+                );
+            }
             if question.reveals_image()
                 && question.image_hold_secs >= question.time_limit_secs(&self.settings)
             {
@@ -415,7 +421,14 @@ pub enum QuestionKind {
     },
     /// Not a question: a title, text and/or picture shown on the big screen, with nothing to
     /// answer.
-    Slide { title: String },
+    Slide {
+        title: String,
+        /// A results slide: when answers are revealed at the end, it walks through the answers
+        /// to the questions since the previous results slide, then shows the standings (an
+        /// intermission, say). Its title heads the standings; it has no text or picture.
+        #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+        results: bool,
+    },
 }
 
 impl Question {
@@ -434,6 +447,19 @@ impl Question {
         Self {
             kind: QuestionKind::Slide {
                 title: String::new(),
+                results: false,
+            },
+            ..Self::default()
+        }
+    }
+
+    /// A fresh results slide.
+    #[must_use]
+    pub fn results_slide() -> Self {
+        Self {
+            kind: QuestionKind::Slide {
+                title: "Results so far".to_owned(),
+                results: true,
             },
             ..Self::default()
         }
@@ -470,6 +496,12 @@ impl Question {
     #[must_use]
     pub fn is_slide(&self) -> bool {
         matches!(self.kind, QuestionKind::Slide { .. })
+    }
+
+    /// Whether this is a results slide (see [`QuestionKind::Slide`]).
+    #[must_use]
+    pub fn is_results(&self) -> bool {
+        matches!(self.kind, QuestionKind::Slide { results: true, .. })
     }
 
     /// Effective time limit given the quiz settings.
@@ -511,7 +543,10 @@ impl Question {
     }
 
     fn problems(&self) -> Vec<String> {
-        if let QuestionKind::Slide { title } = &self.kind {
+        if let QuestionKind::Slide { title, results } = &self.kind {
+            if *results {
+                return Vec::new();
+            }
             let empty =
                 title.trim().is_empty() && self.text.trim().is_empty() && self.image.is_none();
             return if empty {
@@ -719,6 +754,38 @@ mod tests {
     }
 
     #[test]
+    fn results_slides_need_answers_revealed_at_the_end() {
+        let mut quiz = Quiz::new("id".to_owned(), "Quiz".to_owned());
+        quiz.questions.push(Question {
+            text: "Q".to_owned(),
+            answers: vec![
+                Answer {
+                    text: "a".to_owned(),
+                    correct: true,
+                    image: None,
+                },
+                Answer {
+                    text: "b".to_owned(),
+                    correct: false,
+                    image: None,
+                },
+            ],
+            ..Question::default()
+        });
+        quiz.questions.push(Question::results_slide());
+        quiz.settings.reveal = RevealMode::AfterEachQuestion;
+        let issues = quiz.validate();
+        assert_eq!(issues.len(), 1);
+        assert_eq!(issues[0].question, Some(1));
+        quiz.settings.reveal = RevealMode::AtEnd;
+        assert_eq!(quiz.validate(), Vec::new());
+        // Plain slides are saved without the flag.
+        let plain = serde_json::to_string(&Question::slide()).unwrap();
+        assert!(!plain.contains("results"));
+        assert!(Question::results_slide().is_slide());
+    }
+
+    #[test]
     fn slides_are_numbered_apart_and_need_content() {
         let mut quiz = quiz();
         quiz.questions.insert(0, Question::slide());
@@ -731,6 +798,7 @@ mod tests {
         assert!(issues[0].to_string().starts_with("Slide 1: "));
         quiz.questions[0].kind = QuestionKind::Slide {
             title: "Round 2".to_owned(),
+            results: false,
         };
         assert_eq!(quiz.validate(), Vec::new());
         // Slides alone do not make a quiz.
@@ -747,6 +815,7 @@ mod tests {
         let slide = |title: &str| Question {
             kind: QuestionKind::Slide {
                 title: title.to_owned(),
+                results: false,
             },
             ..Question::default()
         };
@@ -768,7 +837,7 @@ mod tests {
             .questions
             .iter()
             .map(|q| match &q.kind {
-                QuestionKind::Slide { title } => title.as_str(),
+                QuestionKind::Slide { title, .. } => title.as_str(),
                 _ => q.text.as_str(),
             })
             .collect();

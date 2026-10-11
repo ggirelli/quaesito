@@ -58,13 +58,14 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 49  | Docs home: "Made for game nights" right after the disclaimer, the podium screenshot stays at the bottom                            | ✅ done |
 | 50  | Fully offline: no third-party requests from the app or the bundled guide (no Google Fonts, no GitHub API)                          | ✅ done |
 | 51  | Editor: moving a question or slide keeps it in view and focused                                                                    | ✅ done |
-| 52  | Results slides: show the standings mid-quiz (e.g. at an intermission) when revealing at the end                                    | 📋 todo |
+| 52  | Results slides: show the standings mid-quiz (e.g. at an intermission) when revealing at the end                                    | ✅ done |
 | 53  | Bonus: an open-ended follow-up on any closed question, worth a small extra (e.g. +50%)                                             | 📋 todo |
 | 54  | Text on question slides (lyrics, quotes…)                                                                                          | 📋 todo |
-| 55  | How many players can join: find the limits and document them                                                                       | 📋 todo |
-| 56  | Optional cap on the number of teams when starting a game                                                                           | 📋 todo |
+| 55  | Document the team limit: 50 by default, any number of players per team; always capped for safety, but as high as you like          | 📋 todo |
+| 56  | Team limit set when starting a game: 50 by default, the host can lower or raise it                                                 | 📋 todo |
 | 57  | New colour palette and symbols in the assets (ASSETS.md prompts), docs and demo video                                              | 📋 todo |
 | 58  | Getting started: easier to follow, per platform                                                                                    | 📋 todo |
+| 59  | Closest number: optional range, with a slider next to the typed number on phones                                                   | 📋 todo |
 
 ## Notes
 

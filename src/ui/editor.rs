@@ -250,6 +250,14 @@ fn EditorForm(quiz: Quiz) -> Element {
                     onclick: move |_| draft.edit(|q| q.questions.push(Question::slide())),
                     "＋ Add slide"
                 }
+                if quiz.settings.reveal == RevealMode::AtEnd {
+                    button {
+                        class: "button add-slide",
+                        title: "Reveal the answers so far and show the standings, e.g. at an intermission",
+                        onclick: move |_| draft.edit(|q| q.questions.push(Question::results_slide())),
+                        "＋ Add results slide"
+                    }
+                }
                 span { class: "grow" }
                 if can_undo {
                     button { class: "button ghost", onclick: undo_shuffle, "↶ Undo shuffle" }
@@ -462,6 +470,7 @@ fn QuestionCard(
     let answer_count = question.answers.len();
     let multi = question.is_multi();
     let slide = question.is_slide();
+    let results_slide = question.is_results();
     let limit = question
         .time_limit_secs
         .map(|s| s.to_string())
@@ -582,138 +591,149 @@ fn QuestionCard(
                     }
                 }
             }
-            if let QuestionKind::Slide { title } = &question.kind {
+            if let QuestionKind::Slide { title, results } = &question.kind {
                 input {
                     class: "slide-title-input",
-                    placeholder: "Slide title, e.g. Round 2: Music",
+                    placeholder: if *results { "Title above the standings, e.g. Half time!" } else { "Slide title, e.g. Round 2: Music" },
                     value: "{title}",
                     oninput: move |e| {
                         let title = e.value();
-                        draft.edit_question(index, |q| q.kind = QuestionKind::Slide { title });
+                        draft.edit_question(index, |q| {
+                            if let QuestionKind::Slide { title: old, .. } = &mut q.kind {
+                                *old = title;
+                            }
+                        });
                     },
                 }
+                if *results {
+                    p { class: "muted",
+                        "📊 Reveals the answers to the questions since the previous results slide, then shows the standings."
+                    }
+                }
             }
-            textarea {
-                class: "question-text",
-                placeholder: if slide { "Text (optional)…" } else { "Type the question…" },
-                rows: 2,
-                value: "{question.text}",
-                oninput: move |e| draft.edit_question(index, |q| q.text = e.value()),
-            }
-            div { class: "question-media row",
-                if let Some(image) = &question.image {
-                    if is_video(image) {
-                        video {
-                            class: "thumb",
-                            src: media_url(image),
-                            preload: "metadata",
-                            muted: true,
-                            controls: true,
+            if !results_slide {
+                textarea {
+                    class: "question-text",
+                    placeholder: if slide { "Text (optional)…" } else { "Type the question…" },
+                    rows: 2,
+                    value: "{question.text}",
+                    oninput: move |e| draft.edit_question(index, |q| q.text = e.value()),
+                }
+                div { class: "question-media row",
+                    if let Some(image) = &question.image {
+                        if is_video(image) {
+                            video {
+                                class: "thumb",
+                                src: media_url(image),
+                                preload: "metadata",
+                                muted: true,
+                                controls: true,
+                            }
+                        } else {
+                            img { class: "thumb", src: media_url(image), alt: "Question picture" }
+                        }
+                        button {
+                            class: "button ghost",
+                            onclick: move |_| draft.edit_question(index, |q| q.set_image(None)),
+                            if is_video(image) { "Remove video" } else { "Remove picture" }
+                        }
+                        if !slide {
+                            label { class: "field inline",
+                                title: "How the picture appears while the clock runs",
+                                span { "Reveal" }
+                                select {
+                                    value: match question.image_reveal {
+                                        ImageReveal::Shown => "shown",
+                                        ImageReveal::Zoom => "zoom",
+                                        ImageReveal::Tiles => "tiles",
+                                    },
+                                    onchange: move |e| {
+                                        let reveal = match e.value().as_str() {
+                                            "zoom" => ImageReveal::Zoom,
+                                            "tiles" => ImageReveal::Tiles,
+                                            _ => ImageReveal::Shown,
+                                        };
+                                        draft.edit_question(index, |q| {
+                                            // Suggest a few seconds to look at the whole picture.
+                                            if q.image_reveal == ImageReveal::Shown && q.image_hold_secs == 0 {
+                                                q.image_hold_secs = DEFAULT_HOLD_SECS;
+                                            }
+                                            q.image_reveal = reveal;
+                                        });
+                                    },
+                                    option { value: "shown", "Show it all" }
+                                    option { value: "zoom", "Zoom out from a close-up" }
+                                    option { value: "tiles", "Uncover tile by tile" }
+                                }
+                            }
+                            if question.image_reveal != ImageReveal::Shown {
+                                label { class: "field inline",
+                                    title: "The reveal takes the rest of the question's time",
+                                    span { "then fully visible for" }
+                                    input {
+                                        r#type: "number",
+                                        class: "short",
+                                        min: 0,
+                                        max: MAX_TIME_LIMIT_SECS,
+                                        value: "{question.image_hold_secs}",
+                                        oninput: move |e| {
+                                            if let Ok(secs) = e.value().trim().parse() {
+                                                draft.edit_question(index, |q| q.image_hold_secs = secs);
+                                            }
+                                        },
+                                    }
+                                    span { "s" }
+                                }
+                            }
                         }
                     } else {
-                        img { class: "thumb", src: media_url(image), alt: "Question picture" }
-                    }
-                    button {
-                        class: "button ghost",
-                        onclick: move |_| draft.edit_question(index, |q| q.set_image(None)),
-                        if is_video(image) { "Remove video" } else { "Remove picture" }
+                        label {
+                            class: "button ghost",
+                            title: match limits.get() {
+                                Some(l) => format!(
+                                    "Pictures up to {} MB; videos (MP4, WebM, MOV) up to {} MB",
+                                    UploadLimits::megabytes(l.picture),
+                                    UploadLimits::megabytes(l.video),
+                                ),
+                                None => "A picture, or a video (MP4, WebM, MOV)".to_owned(),
+                            },
+                            if uploading() { "Uploading…" } else { "＋ Add picture or video" }
+                            input {
+                                r#type: "file",
+                                accept: "image/*,video/mp4,video/webm,video/quicktime",
+                                class: "visually-hidden",
+                                onchange: upload,
+                            }
+                        }
                     }
                     if !slide {
                         label { class: "field inline",
-                            title: "How the picture appears while the clock runs",
-                            span { "Reveal" }
+                            span { "Seconds" }
+                            input {
+                                r#type: "number",
+                                class: "short",
+                                min: MIN_TIME_LIMIT_SECS,
+                                max: MAX_TIME_LIMIT_SECS,
+                                placeholder: "{default_limit}",
+                                value: "{limit}",
+                                oninput: move |e| {
+                                    let value = e.value();
+                                    draft.edit_question(index, |q| q.time_limit_secs = value.trim().parse().ok());
+                                },
+                            }
+                        }
+                        label { class: "field inline",
+                            title: "How many times a usual question's points this one is worth",
+                            span { "Points" }
                             select {
-                                value: match question.image_reveal {
-                                    ImageReveal::Shown => "shown",
-                                    ImageReveal::Zoom => "zoom",
-                                    ImageReveal::Tiles => "tiles",
-                                },
+                                value: "{question.multiplier()}",
                                 onchange: move |e| {
-                                    let reveal = match e.value().as_str() {
-                                        "zoom" => ImageReveal::Zoom,
-                                        "tiles" => ImageReveal::Tiles,
-                                        _ => ImageReveal::Shown,
-                                    };
-                                    draft.edit_question(index, |q| {
-                                        // Suggest a few seconds to look at the whole picture.
-                                        if q.image_reveal == ImageReveal::Shown && q.image_hold_secs == 0 {
-                                            q.image_hold_secs = DEFAULT_HOLD_SECS;
-                                        }
-                                        q.image_reveal = reveal;
-                                    });
+                                    let multiplier = e.value().parse().ok().filter(|&m| m > 1);
+                                    draft.edit_question(index, |q| q.multiplier = multiplier);
                                 },
-                                option { value: "shown", "Show it all" }
-                                option { value: "zoom", "Zoom out from a close-up" }
-                                option { value: "tiles", "Uncover tile by tile" }
-                            }
-                        }
-                        if question.image_reveal != ImageReveal::Shown {
-                            label { class: "field inline",
-                                title: "The reveal takes the rest of the question's time",
-                                span { "then fully visible for" }
-                                input {
-                                    r#type: "number",
-                                    class: "short",
-                                    min: 0,
-                                    max: MAX_TIME_LIMIT_SECS,
-                                    value: "{question.image_hold_secs}",
-                                    oninput: move |e| {
-                                        if let Ok(secs) = e.value().trim().parse() {
-                                            draft.edit_question(index, |q| q.image_hold_secs = secs);
-                                        }
-                                    },
+                                for m in 1..=MAX_MULTIPLIER {
+                                    option { value: "{m}", "×{m}" }
                                 }
-                                span { "s" }
-                            }
-                        }
-                    }
-                } else {
-                    label {
-                        class: "button ghost",
-                        title: match limits.get() {
-                            Some(l) => format!(
-                                "Pictures up to {} MB; videos (MP4, WebM, MOV) up to {} MB",
-                                UploadLimits::megabytes(l.picture),
-                                UploadLimits::megabytes(l.video),
-                            ),
-                            None => "A picture, or a video (MP4, WebM, MOV)".to_owned(),
-                        },
-                        if uploading() { "Uploading…" } else { "＋ Add picture or video" }
-                        input {
-                            r#type: "file",
-                            accept: "image/*,video/mp4,video/webm,video/quicktime",
-                            class: "visually-hidden",
-                            onchange: upload,
-                        }
-                    }
-                }
-                if !slide {
-                    label { class: "field inline",
-                        span { "Seconds" }
-                        input {
-                            r#type: "number",
-                            class: "short",
-                            min: MIN_TIME_LIMIT_SECS,
-                            max: MAX_TIME_LIMIT_SECS,
-                            placeholder: "{default_limit}",
-                            value: "{limit}",
-                            oninput: move |e| {
-                                let value = e.value();
-                                draft.edit_question(index, |q| q.time_limit_secs = value.trim().parse().ok());
-                            },
-                        }
-                    }
-                    label { class: "field inline",
-                        title: "How many times a usual question's points this one is worth",
-                        span { "Points" }
-                        select {
-                            value: "{question.multiplier()}",
-                            onchange: move |e| {
-                                let multiplier = e.value().parse().ok().filter(|&m| m > 1);
-                                draft.edit_question(index, |q| q.multiplier = multiplier);
-                            },
-                            for m in 1..=MAX_MULTIPLIER {
-                                option { value: "{m}", "×{m}" }
                             }
                         }
                     }

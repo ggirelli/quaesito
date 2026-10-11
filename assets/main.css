@@ -1168,6 +1168,13 @@ table.results {
   color: var(--accent);
 }
 
+/* A results slide: the standings under the slide's title. */
+.results-slide .standings {
+  width: min(40rem, 90vw);
+  text-align: left;
+  font-size: 1.3em;
+}
+
 .standing .score {
   font-variant-numeric: tabular-nums;
   font-weight: 800;

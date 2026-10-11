@@ -11,6 +11,9 @@ All notable changes to quaesito are listed here. The format follows
 - A demo quiz with one question of each kind, added the first time quaesito starts.
 - A help button on the home page and in the admin pages, opening the user guide.
 - The downloads include the user guide, served by quaesito at `/docs/`, so it works offline.
+- Results slides, for quizzes that reveal the answers at the end: placed anywhere (at an intermission, say), they walk
+  through the answers since the previous results slide, then show the standings with the points each team gained and
+  the places it moved.
 - The README, the user guide and the downloads say up front that quaesito is free, MIT-licensed, without
   warranty and fully vibe coded, and that donations are welcome on Ko-fi.
 
@@ -26,6 +29,9 @@ All notable changes to quaesito are listed here. The format follows
 
 - A question's picture no longer pushes the big screen's controls off the bottom of a 16:9 screen: the
   big screen is exactly one screen tall and the picture takes the room the question leaves.
+- Nothing is loaded from the internet any more: the user guide bundles its fonts and no longer asks GitHub for the
+  repository's stars, and the server tells browsers to load nothing from other sites.
+- Moving a question or slide in the editor keeps it on screen and keeps the focus on it.
 
 ## [0.1.0] - 2026-10-11
 
