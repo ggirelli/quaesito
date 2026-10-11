@@ -55,6 +55,24 @@
   border-radius: 22px;
 }
 
+/* Home page sections: room to breathe, and a thin line between them. */
+.md-typeset h2.section {
+  margin-top: 4rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+  margin-bottom: 1.5rem;
+}
+
+.md-typeset .screen-and-phone,
+.md-typeset .phones,
+.md-typeset .grid.cards {
+  margin: 1.5rem 0 2rem;
+}
+
+.md-typeset h2.section ~ p > img {
+  margin: 1rem 0;
+}
+
 /* Big screen next to a phone. */
 .screen-and-phone {
   display: grid;

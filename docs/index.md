@@ -24,7 +24,7 @@ Windows, macOS and Linux. Free and open source (MIT).
 
 </div>
 
-## See it in action
+## See it in action { .section }
 
 <video controls preload="metadata" poster="media/demo-poster.webp" style="width:100%;border-radius:12px">
   <source src="media/demo.mp4" type="video/mp4">
@@ -33,7 +33,7 @@ Windows, macOS and Linux. Free and open source (MIT).
 
 A quiz played on the test page, narrated. [Transcript](demo.md#transcript).
 
-## Ready in three steps
+## Ready in three steps { .section }
 
 <div class="grid cards" markdown>
 
@@ -54,7 +54,7 @@ A quiz played on the test page, narrated. [Transcript](demo.md#transcript).
 
 </div>
 
-## The big screen and the phones
+## The big screen and the phones { .section }
 
 <div class="screen-and-phone" markdown>
 <figure markdown>
@@ -78,7 +78,7 @@ A quiz played on the test page, narrated. [Transcript](demo.md#transcript).
 </figure>
 </div>
 
-## Every kind of question
+## Every kind of question { .section }
 
 <div class="grid cards" markdown>
 
@@ -105,7 +105,7 @@ A quiz played on the test page, narrated. [Transcript](demo.md#transcript).
 <figure markdown>![Dropping a pin on a phone](screenshots/phone-pin.webp)<figcaption>Pin on a picture</figcaption></figure>
 </div>
 
-## Made for game nights
+## Made for game nights { .section }
 
 - :material-wifi-off: Runs on your local network, no internet or accounts needed
 - :material-content-save: Quiz editor in the browser that saves as you type
