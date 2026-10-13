@@ -9,6 +9,7 @@
 | Order | tap 2–6 items from first to last | each item in its place earns its share |
 | Several answers | type 2–8 answers at once | each part judged like a typed answer; points shared between parts |
 | Pin | drop a pin on the question's picture | full points close to the spot, fewer further away |
+| Pairs | match each of 2–6 items (text and/or picture) with its partner | each pair matched earns its share |
 
 ## Typed answers
 
@@ -50,6 +51,21 @@ spot.
 
 ![Editing a pin question by clicking the right spot](screenshots/editor-pin.webp)
 
+## Pairs
+
+Write each pair matched, a country and its capital, a flag and its name: each side takes a text,
+a picture or both. The big screen shows the left items with the answer shapes and the right ones,
+shuffled, with letters A to F. Phones show both columns, pictures included: teams tap an item,
+then its partner in the other column (tap a matched item to change it). Teams may submit with
+pairs left unmatched, and each pair matched earns its share of the points. The reveal shows the
+right pairs and how many teams matched each one.
+
+![Editing a pairs question, with words on the left and pictures on the right](screenshots/editor-pairs.webp)
+
+![A pairs question on the big screen](screenshots/host-pairs.webp)
+
+![The right pairs revealed, with how many teams matched each one](screenshots/host-pairs-reveal.webp)
+
 ## Order
 
 List the items in the right order; phones show them shuffled. Teams tap them from first to last
@@ -57,7 +73,7 @@ List the items in the right order; phones show them shuffled. Teams tap them fro
 
 ## Bonus questions
 
-Choices, true/false, number, order and pin questions can carry a **bonus question**: **＋ Add a bonus
+Choices, true/false, number, order, pin and pairs questions can carry a **bonus question**: **＋ Add a bonus
 question** in the editor, type it (say, "Who sings it?" under "Which band is this?") with its
 accepted answers, and choose what it is worth: +25%, +50% or +100% of the points the question can
 earn. The big screen shows it under the question, and phones get a bonus field next to the
