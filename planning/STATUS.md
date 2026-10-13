@@ -73,6 +73,10 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 64  | Release 0.2.0 (`v0.2.0` tag: downloads built by CI)                                                                                | ✅ done |
 | 65  | Light theme, switched like the guide's (sun and moon button), kept per device                                                      | ✅ done |
 | 66  | Release 0.3.0 (`v0.3.0` tag: downloads built by CI)                                                                                | ✅ done |
+| 67  | Pairs questions: match each item on the left with its partner on the right                                                         | ✅ done |
+| 68  | Versioned quiz file format with a published JSON Schema; import asks before leaving out unknown question kinds                     | ✅ done |
+| 69  | Import and export progress bar; imported pictures processed in parallel                                                            | ✅ done |
+| 70  | Release 0.4.0 (`v0.4.0` tag: downloads built by CI)                                                                                | ✅ done |
 
 ## Notes
 
