@@ -50,6 +50,19 @@
       "image": "lobby.jpg"
     },
     {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            { "left": { "text": "Kangaroo" }, "right": { "text": "Joey" } },
+            { "left": { "text": "Swan" }, "right": { "text": "Cygnet" } },
+            { "left": { "text": "Owl" }, "right": { "text": "Owlet" } },
+            { "left": { "text": "Hare" }, "right": { "text": "Leveret" } }
+          ]
+        }
+      },
+      "text": "Match each animal with its young."
+    },
+    {
       "kind": { "Slide": { "title": "Your turn!" } },
       "text": "Make your own quiz with Create quiz, or change this one. Help, at the top, opens the user guide."
     }
