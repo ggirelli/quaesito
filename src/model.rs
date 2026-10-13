@@ -993,6 +993,19 @@ pub enum ImportOutcome {
     NeedsConsent(ImportWarning),
 }
 
+/// One line of the import route's answer: progress while the bundled media are processed, then
+/// how it ended.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum ImportProgress {
+    /// Pictures, videos and soundtracks processed so far, of all the bundle brings.
+    Media {
+        done: usize,
+        total: usize,
+    },
+    Done(ImportOutcome),
+    Failed(String),
+}
+
 /// Why an imported quiz would not come through whole.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ImportWarning {

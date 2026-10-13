@@ -4,14 +4,15 @@ use dioxus::prelude::*;
 
 use super::{
     Route, client,
+    transfer::{self, IMPORT_INPUT, TransferStatus, Transfers},
     widgets::{
         Brand, ClientOnly, Dialog, ErrorBox, HelpLink, Icon, IconKind, Spinner, ThemeToggle,
         message,
     },
 };
 use crate::api::{
-    admin_check, admin_login, create_quiz, delete_quiz, duplicate_quiz, end_session, import_quiz,
-    list_quizzes, list_sessions, start_session, start_test,
+    admin_check, admin_login, create_quiz, delete_quiz, duplicate_quiz, end_session, list_quizzes,
+    list_sessions, start_session, start_test,
 };
 use crate::model::{ImportOutcome, ImportWarning, QuizSummary};
 use crate::protocol::{DEFAULT_MAX_TEAMS, MAX_TEAMS_CEILING};
@@ -160,34 +161,38 @@ fn Dashboard() -> Element {
     let mut search = use_signal(String::new);
     let mut sort = use_signal(|| QuizSort::Edited);
 
-    // A file from a newer version, waiting for the admin to import it anyway.
-    let mut unsure = use_signal(|| None::<(dioxus::html::FileData, ImportWarning)>);
+    let transfers = use_context_provider(|| Transfers(Signal::new(None)));
+    let busy = move || (transfers.0)().is_some();
+    // The name of a file from a newer version, waiting for the admin to import it anyway; the
+    // file stays chosen in the import input meanwhile.
+    let mut unsure = use_signal(|| None::<(String, ImportWarning)>);
 
-    let import = move |evt: FormEvent| async move {
-        let Some(file) = evt.files().into_iter().next() else {
-            return;
-        };
-        let result = import_quiz(token.get(), false, file.clone().into())
-            .await
-            .map_err(|e| message(&e));
+    let send = move |name: String, consent: bool| async move {
+        error.set(None);
+        let result = transfer::import(token.get(), consent, &name, transfers).await;
         match result {
+            Ok(ImportOutcome::NeedsConsent(warning)) => {
+                unsure.set(Some((name, warning)));
+                return;
+            }
             Ok(ImportOutcome::Imported(_)) => quizzes.restart(),
-            Ok(ImportOutcome::NeedsConsent(warning)) => unsure.set(Some((file, warning))),
             Err(err) => error.set(Some(err)),
+        }
+        transfer::clear_import_input();
+    };
+    let import = move |evt: FormEvent| async move {
+        if let Some(file) = evt.files().into_iter().next() {
+            send(file.name(), false).await;
         }
     };
     let import_anyway = move |()| async move {
-        let Some((file, _)) = unsure() else {
-            return;
-        };
-        let result = import_quiz(token.get(), true, file.into())
-            .await
-            .map_err(|e| message(&e));
-        unsure.set(None);
-        match result {
-            Ok(_) => quizzes.restart(),
-            Err(err) => error.set(Some(err)),
+        if let Some((name, _)) = unsure.take() {
+            send(name, true).await;
         }
+    };
+    let cancel_import = move |()| {
+        unsure.set(None);
+        transfer::clear_import_input();
     };
 
     rsx! {
@@ -208,13 +213,16 @@ fn Dashboard() -> Element {
                         }
                         label {
                             class: "button ghost icon",
+                            class: if busy() { "disabled" },
                             title: "Import a quiz (.zip or .json)",
                             aria_label: "Import a quiz",
                             Icon { kind: IconKind::Import }
                             input {
+                                id: IMPORT_INPUT,
                                 r#type: "file",
                                 accept: ".zip,.json,application/zip,application/json",
                                 class: "visually-hidden",
+                                disabled: busy(),
                                 onchange: import,
                             }
                         }
@@ -224,12 +232,9 @@ fn Dashboard() -> Element {
                     CreateDialog { on_close: move |()| creating.set(false) }
                 }
                 if let Some((_, warning)) = unsure() {
-                    ImportConsentDialog {
-                        warning,
-                        on_import: import_anyway,
-                        on_close: move |()| unsure.set(None),
-                    }
+                    ImportConsentDialog { warning, on_import: import_anyway, on_close: cancel_import }
                 }
+                TransferStatus {}
                 div { class: "row quiz-filters",
                     label { class: "search grow",
                         Icon { kind: IconKind::Search }
@@ -294,6 +299,7 @@ fn Dashboard() -> Element {
                                         }
                                         QuizActions {
                                             id: quiz.id.clone(),
+                                            title: quiz.title.clone(),
                                             playable: quiz.issues.is_empty(),
                                             on_change: move |()| quizzes.restart(),
                                             on_error: move |e| error.set(Some(e)),
@@ -464,7 +470,6 @@ fn ImportConsentDialog(
     on_import: EventHandler<()>,
     on_close: EventHandler<()>,
 ) -> Element {
-    let mut importing = use_signal(|| false);
     let unknown = warning.unknown;
     rsx! {
         Dialog { title: "Import “{warning.title}”?", on_close,
@@ -498,14 +503,8 @@ fn ImportConsentDialog(
             div { class: "row",
                 button {
                     class: "button primary",
-                    disabled: importing(),
-                    onclick: move |_| {
-                        importing.set(true);
-                        on_import.call(());
-                    },
-                    if importing() {
-                        "Importing…"
-                    } else if unknown.is_empty() {
+                    onclick: move |_| on_import.call(()),
+                    if unknown.is_empty() {
                         "Import anyway"
                     } else {
                         "Import without them"
@@ -586,12 +585,24 @@ fn StartDialog(id: String, on_close: EventHandler<()>) -> Element {
 #[component]
 fn QuizActions(
     id: String,
+    title: String,
     playable: bool,
     on_change: EventHandler<()>,
     on_error: EventHandler<String>,
 ) -> Element {
     let token: AdminToken = use_context();
-    let export_href = format!("/export/{id}?token={}", token.get());
+    let transfers: Transfers = use_context();
+    let export = {
+        let id = id.clone();
+        move |_| {
+            let (id, title) = (id.clone(), title.clone());
+            async move {
+                if let Err(err) = transfer::export(token.get(), id, &title, transfers).await {
+                    on_error.call(err);
+                }
+            }
+        }
+    };
     let duplicate = {
         let id = id.clone();
         move |_| {
@@ -665,10 +676,10 @@ fn QuizActions(
                 onclick: duplicate,
                 Icon { kind: IconKind::Copy }
             }
-            a {
+            button {
                 class: "button ghost icon",
-                href: export_href,
-                download: true,
+                disabled: (transfers.0)().is_some(),
+                onclick: export,
                 title: "Export (.zip with pictures and soundtracks)",
                 aria_label: "Export",
                 Icon { kind: IconKind::Export }
