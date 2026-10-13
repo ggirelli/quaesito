@@ -23,6 +23,11 @@ behind its sources, say after editing the docs while `dx serve` runs: `just docs
 it). The downloads ship the guide built from their release. This site follows `main`, so it can
 describe features that are not released yet.
 
+The [quiz file format](quiz-file-format.md) schema in `docs/schema` is generated from the quiz types,
+and a test fails when they drift apart. After changing what a quiz holds, `just schema` rewrites it;
+if an older version would misread or lose the change (a new kind of question, a new setting value),
+raise `QUIZ_FORMAT` in `src/model.rs` first, so the new schema is published next to the old one.
+
 See [CONTRIBUTING.md](https://github.com/ggirelli/quaesito/blob/main/CONTRIBUTING.md) for how to
 contribute, and
 [DESIGN.md](https://github.com/ggirelli/quaesito/blob/main/planning/DESIGN.md) for how it works inside.
