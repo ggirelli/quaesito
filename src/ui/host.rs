@@ -9,17 +9,18 @@ use super::{
     live::{ConnectionBanner, Live, countdown_ms, elapsed_now, remaining_ms, use_clock, use_live},
     sfx::{self, Cue, SFX_JS, Sfx},
     widgets::{
-        ANSWER_STYLES, AnswerShape, Brand, ClientOnly, ErrorBox, Icon, IconKind, MapPin, PinMap,
-        QuestionMedia, STAR, Spinner, TeamAvatar, ThemeToggle, media_url, message,
+        ANSWER_STYLES, AnswerBadge, AnswerShape, Brand, ClientOnly, ErrorBox, Icon, IconKind,
+        MapPin, PairItemContent, PinMap, QuestionMedia, STAR, Spinner, TeamAvatar, ThemeToggle,
+        media_url, message, pair_letter,
     },
 };
 use crate::{
     api::{end_session, game_results, host_socket, join_origin},
-    model::{ImageReveal, Point},
+    model::{ImageReveal, Pair, Point},
     protocol::{
         Fastest, Grade, Guess, HostCommand, HostPhase, HostView, InputKind, Judgement,
-        MAX_NAME_CHARS, PartReveal, PinGuess, QuestionInfo, Reveal, SlideInfo, StandingRow,
-        TeamInfo, TextGroup, Upcoming,
+        MAX_NAME_CHARS, PairColumns, PartReveal, PinGuess, QuestionInfo, Reveal, SlideInfo,
+        StandingRow, TeamInfo, TextGroup, Upcoming,
     },
     scoring::MAX_BONUS,
 };
@@ -1040,6 +1041,14 @@ fn AnswersOrPrompt(question: QuestionInfo) -> Element {
                 }
             };
         }
+        InputKind::Pairs => {
+            return rsx! {
+                div { class: "open-reveal",
+                    p { class: "open-prompt", "🔗 Match the pairs on your phone" }
+                    PairBoard { columns: question.pairs.clone().unwrap_or_default() }
+                }
+            };
+        }
         InputKind::Pin => "📍 Drop a pin on your phone",
         InputKind::Text => "✍️ Type your answer on your phone",
         InputKind::Number => "🔢 Enter a number on your phone: closest wins",
@@ -1104,6 +1113,72 @@ fn RevealBody(question: QuestionInfo, reveal: Reveal) -> Element {
         Reveal::Number { answer, guesses } => rsx! {
             NumberReveal { answer, guesses }
         },
+        Reveal::Pairs { pairs, matched } => rsx! {
+            PairsReveal { columns: question.pairs.clone().unwrap_or_default(), pairs, matched }
+        },
+    }
+}
+
+/// The two columns of a pairs question: shapes on the left, letters on the right.
+#[component]
+fn PairBoard(columns: PairColumns) -> Element {
+    rsx! {
+        div { class: "pair-board",
+            ul { class: "pair-column",
+                for (l, item) in columns.left.into_iter().enumerate() {
+                    li { key: "{l}", class: "pair-card",
+                        AnswerBadge { index: l }
+                        span { class: "pair-body",
+                            PairItemContent { item }
+                        }
+                    }
+                }
+            }
+            ul { class: "pair-column",
+                for (r, item) in columns.right.into_iter().enumerate() {
+                    li { key: "{r}", class: "pair-card",
+                        span { class: "order-rank", "{pair_letter(r)}" }
+                        span { class: "pair-body",
+                            PairItemContent { item }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/// The right pairs, each with the letter it had on the right and how many teams matched it.
+#[component]
+fn PairsReveal(columns: PairColumns, pairs: Vec<Pair>, matched: Vec<u32>) -> Element {
+    rsx! {
+        ul { class: "pairs-reveal",
+            for (l, pair) in pairs.into_iter().enumerate() {
+                li { key: "{l}", class: "pair-row",
+                    span { class: "pair-card",
+                        AnswerBadge { index: l }
+                        span { class: "pair-body",
+                            PairItemContent { item: pair.left }
+                        }
+                    }
+                    span { class: "pair-link", "🔗" }
+                    span { class: "pair-card",
+                        if let Some(r) = columns.right.iter().position(|item| *item == pair.right) {
+                            span { class: "order-rank", "{pair_letter(r)}" }
+                        }
+                        span { class: "pair-body",
+                            PairItemContent { item: pair.right }
+                        }
+                    }
+                    span { class: "muted small",
+                        {
+                            let n = matched.get(l).copied().unwrap_or(0);
+                            if n == 1 { "1 team got it".to_owned() } else { format!("{n} teams got it") }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

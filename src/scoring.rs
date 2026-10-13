@@ -72,8 +72,8 @@ pub fn score(question: &Question, selected: &[usize], full: u32, mode: MultiScor
     to_points(f64::from(full) * fraction)
 }
 
-/// Points for an order question: `full` (see [`full_points`]) times the share of items put in
-/// their right place.
+/// Points for an order or pairs question: `full` (see [`full_points`]) times the share of items
+/// put in their right place (or of pairs rightly matched).
 #[must_use]
 pub fn order_points(full: u32, in_place: usize, items: usize) -> u32 {
     if items == 0 {

@@ -4,7 +4,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use crate::model::{ImageReveal, PhoneDisplay, Point};
+use crate::model::{ImageReveal, Pair, PairItem, PhoneDisplay, Point};
 
 /// Longest team name, in characters.
 pub const MAX_NAME_CHARS: usize = 24;
@@ -41,6 +41,8 @@ pub enum InputKind {
     Parts,
     /// A pin dropped on the question's picture.
     Pin,
+    /// Items to match with their partners.
+    Pairs,
 }
 
 /// A team's answer to a question.
@@ -56,6 +58,17 @@ pub enum Response {
     Parts(Vec<String>),
     /// Where the team dropped its pin on the picture.
     Pin(Point),
+    /// For each item on the left, from top to bottom, the item on the right it was matched
+    /// with (by index in the shuffled right column), if any.
+    Pairs(Vec<Option<usize>>),
+}
+
+/// The two columns of a pairs question as shown: the left one in the quiz's order, the right one
+/// shuffled.
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PairColumns {
+    pub left: Vec<PairItem>,
+    pub right: Vec<PairItem>,
 }
 
 /// The judge's verdict on a typed answer.
@@ -105,6 +118,8 @@ pub struct QuestionInfo {
     pub bonus: Option<(String, u32)>,
     /// Text shown with the question (lyrics, a quote…), line breaks kept; empty when none.
     pub passage: String,
+    /// The columns of a pairs question.
+    pub pairs: Option<PairColumns>,
 }
 
 /// A slide as shown on the big screen; any part may be empty.
@@ -157,6 +172,8 @@ pub enum Reveal {
         aspect: f64,
         pins: Vec<PinGuess>,
     },
+    /// The right pairs, and how many teams matched each one.
+    Pairs { pairs: Vec<Pair>, matched: Vec<u32> },
 }
 
 /// One team's pin on a picture.
@@ -407,6 +424,9 @@ pub enum PlayerPhase {
         range: Option<crate::model::NumberRange>,
         /// The bonus question and its worth in percent, to answer together with the question.
         bonus: Option<(String, u32)>,
+        /// The columns of a pairs question (pictures always sent, as thumbnails).
+        #[serde(default)]
+        pairs: Option<PairColumns>,
     },
     Closed {
         index: usize,

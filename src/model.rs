@@ -172,8 +172,18 @@ impl Quiz {
             names.extend(question.image.iter().cloned());
             names.extend(question.audio.iter().cloned());
             names.extend(question.answers.iter().filter_map(|a| a.image.clone()));
-            if let QuestionKind::Parts { parts } = &question.kind {
-                names.extend(parts.iter().filter_map(|p| p.image.clone()));
+            match &question.kind {
+                QuestionKind::Parts { parts } => {
+                    names.extend(parts.iter().filter_map(|p| p.image.clone()));
+                }
+                QuestionKind::Pairs { pairs } => names.extend(
+                    pairs
+                        .iter()
+                        .flat_map(|p| [&p.left.image, &p.right.image])
+                        .flatten()
+                        .cloned(),
+                ),
+                _ => {}
             }
         }
         names.sort();
@@ -192,10 +202,19 @@ impl Quiz {
             for answer in &mut question.answers {
                 apply(&mut answer.image);
             }
-            if let QuestionKind::Parts { parts } = &mut question.kind {
-                for part in parts {
-                    apply(&mut part.image);
+            match &mut question.kind {
+                QuestionKind::Parts { parts } => {
+                    for part in parts {
+                        apply(&mut part.image);
+                    }
                 }
+                QuestionKind::Pairs { pairs } => {
+                    for pair in pairs {
+                        apply(&mut pair.left.image);
+                        apply(&mut pair.right.image);
+                    }
+                }
+                _ => {}
             }
         }
     }
@@ -456,6 +475,74 @@ pub struct Part {
     pub image: Option<String>,
 }
 
+/// One side of a [`QuestionKind::Pairs`] pair: a text, a picture, or both.
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PairItem {
+    #[serde(default)]
+    pub text: String,
+    /// Name of an uploaded picture, if any.
+    #[serde(default)]
+    pub image: Option<String>,
+}
+
+impl PairItem {
+    /// Whether the item has neither text nor picture.
+    #[must_use]
+    pub fn is_empty(&self) -> bool {
+        self.text.trim().is_empty() && self.image.is_none()
+    }
+
+    /// What tells the item apart from the others in its column.
+    fn identity(&self) -> (String, Option<&str>) {
+        (self.text.trim().to_lowercase(), self.image.as_deref())
+    }
+}
+
+/// Two items that go together in a [`QuestionKind::Pairs`] question.
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
+pub struct Pair {
+    #[serde(default)]
+    pub left: PairItem,
+    #[serde(default)]
+    pub right: PairItem,
+}
+
+/// Whether two of the items are alike, so teams could not tell which goes where.
+fn has_twins<'a>(items: impl Iterator<Item = &'a PairItem>) -> bool {
+    let mut seen = Vec::new();
+    for item in items.filter(|i| !i.is_empty()) {
+        let identity = item.identity();
+        if seen.contains(&identity) {
+            return true;
+        }
+        seen.push(identity);
+    }
+    false
+}
+
+/// What is wrong with a pairs question's pairs: too few or too many, empty sides, or items a
+/// team could not tell apart.
+fn pair_problems(pairs: &[Pair]) -> Vec<String> {
+    let mut problems = Vec::new();
+    if !(MIN_ANSWERS..=MAX_ANSWERS).contains(&pairs.len()) {
+        problems.push(format!(
+            "Make between {MIN_ANSWERS} and {MAX_ANSWERS} pairs."
+        ));
+    }
+    if pairs
+        .iter()
+        .any(|p| p.left.is_empty() || p.right.is_empty())
+    {
+        problems.push("Both sides of every pair need a text or a picture.".to_owned());
+    }
+    if has_twins(pairs.iter().map(|p| &p.left)) || has_twins(pairs.iter().map(|p| &p.right)) {
+        problems.push(
+            "Two items in a column are the same: teams could not tell them apart.".to_owned(),
+        );
+    }
+    problems
+}
+
 /// What is missing from a closest-number question: its answer, and a sensible range around it.
 fn number_problems(answer: Option<f64>, range: Option<NumberRange>) -> Vec<String> {
     let mut problems = Vec::new();
@@ -534,6 +621,9 @@ pub enum QuestionKind {
         #[serde(default)]
         tolerance: PinTolerance,
     },
+    /// Match each item on the left with its partner on the right; `pairs` are listed matched,
+    /// and the right column is shown shuffled. Each pair rightly matched earns its share.
+    Pairs { pairs: Vec<Pair> },
     /// Not a question: a title, text and/or picture shown on the big screen, with nothing to
     /// answer.
     Slide {
@@ -608,7 +698,7 @@ impl Question {
     }
 
     /// Whether the question can carry a [`Bonus`]: those answered without typing words
-    /// (multiple choice, true/false, closest number, put in order, pin on a picture).
+    /// (multiple choice, true/false, closest number, put in order, pin on a picture, pairs).
     #[must_use]
     pub fn takes_bonus(&self) -> bool {
         matches!(
@@ -618,6 +708,7 @@ impl Question {
                 | QuestionKind::Number { .. }
                 | QuestionKind::Order { .. }
                 | QuestionKind::Pin { .. }
+                | QuestionKind::Pairs { .. }
         )
     }
 
@@ -756,6 +847,7 @@ impl Question {
                     problems.push("Every answer needs at least one accepted spelling.".to_owned());
                 }
             }
+            QuestionKind::Pairs { pairs } => problems.extend(pair_problems(pairs)),
             QuestionKind::Pin { answer, aspect, .. } => {
                 match &self.image {
                     None => problems.push("Add the picture to drop pins on.".to_owned()),
@@ -1084,6 +1176,50 @@ mod tests {
         assert_eq!(q.problems(), Vec::<String>::new());
     }
 
+    fn pair(left: &str, right: &str) -> Pair {
+        Pair {
+            left: PairItem {
+                text: left.to_owned(),
+                image: None,
+            },
+            right: PairItem {
+                text: right.to_owned(),
+                image: None,
+            },
+        }
+    }
+
+    #[test]
+    fn pairs_questions_need_two_to_six_full_and_distinct_pairs() {
+        let mut q = Question {
+            text: "Match the capitals".to_owned(),
+            kind: QuestionKind::Pairs {
+                pairs: vec![pair("France", "Paris")],
+            },
+            ..Question::default()
+        };
+        assert_eq!(q.problems(), vec!["Make between 2 and 6 pairs."]);
+        q.kind = QuestionKind::Pairs {
+            pairs: vec![pair("France", "Paris"), pair("Italy", " ")],
+        };
+        assert_eq!(
+            q.problems(),
+            vec!["Both sides of every pair need a text or a picture."]
+        );
+        q.kind = QuestionKind::Pairs {
+            pairs: vec![pair("France", "Paris"), pair("Italy", "paris ")],
+        };
+        assert_eq!(
+            q.problems(),
+            vec!["Two items in a column are the same: teams could not tell them apart."]
+        );
+        let mut pairs = vec![pair("France", "Paris"), pair("Italy", "")];
+        pairs[1].right.image = Some("rome.jpg".to_owned());
+        q.kind = QuestionKind::Pairs { pairs };
+        assert_eq!(q.problems(), Vec::<String>::new());
+        assert!(q.takes_bonus());
+    }
+
     #[test]
     fn media_lists_and_renames_every_upload() {
         let mut quiz = quiz();
@@ -1094,9 +1230,19 @@ mod tests {
             image: Some("q.jpg".to_owned()),
             ..Question::slide()
         });
-        assert_eq!(quiz.media(), ["a.jpg", "q.jpg", "s.mp3"]);
+        let mut pairs = vec![pair("Paris", ""), pair("", "Rome")];
+        pairs[0].right.image = Some("r.jpg".to_owned());
+        pairs[1].left.image = Some("l.jpg".to_owned());
+        quiz.questions.push(Question {
+            kind: QuestionKind::Pairs { pairs },
+            ..Question::default()
+        });
+        assert_eq!(quiz.media(), ["a.jpg", "l.jpg", "q.jpg", "r.jpg", "s.mp3"]);
         quiz.rename_media(|name| (name != "s.mp3").then(|| format!("new-{name}")));
-        assert_eq!(quiz.media(), ["new-a.jpg", "new-q.jpg"]);
+        assert_eq!(
+            quiz.media(),
+            ["new-a.jpg", "new-l.jpg", "new-q.jpg", "new-r.jpg"]
+        );
         assert_eq!(quiz.questions[0].audio, None);
     }
 

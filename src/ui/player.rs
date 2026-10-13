@@ -6,16 +6,16 @@ use super::{
     Route, client,
     live::{ConnectionBanner, Live, countdown_ms, use_clock, use_live},
     widgets::{
-        ANSWER_STYLES, AnswerShape, Brand, ClientOnly, DOT, ErrorBox, MapPin, PinMap, Spinner,
-        TeamAvatar, media_url, message,
+        ANSWER_STYLES, AnswerBadge, AnswerShape, Brand, ClientOnly, DOT, ErrorBox, MapPin,
+        PairItemContent, PinMap, Spinner, TeamAvatar, media_url, message, pair_letter,
     },
 };
 use crate::{
     api::{check_ticket, game_info, join_game, player_socket, upload_avatar},
     model::{MAX_TEXT_ANSWER_CHARS, NumberRange, PhoneDisplay, Point},
     protocol::{
-        AnswerOutcome, InputKind, JokerState, MAX_NAME_CHARS, PlayerCommand, PlayerPhase,
-        PlayerView, Response, TeamInfo,
+        AnswerOutcome, InputKind, JokerState, MAX_NAME_CHARS, PairColumns, PlayerCommand,
+        PlayerPhase, PlayerView, Response, TeamInfo,
     },
 };
 
@@ -379,6 +379,34 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
         PlayerPhase::Question {
             index,
             total,
+            input: InputKind::Pairs,
+            pairs,
+            text,
+            remaining_ms: left,
+            paused,
+            time_limit_ms,
+            submitted,
+            bonus,
+            ..
+        } => rsx! {
+            PairsPad {
+                bonus,
+                key: "{index}",
+                joker: view.joker,
+                index,
+                total,
+                columns: pairs.unwrap_or_default(),
+                question: text.map(|(question, _)| question),
+                clock: Clock { left_ms: left, limit_ms: time_limit_ms, paused, received_at: live_received },
+                submitted: match submitted {
+                    Some(Response::Pairs(links)) => Some(links),
+                    _ => None,
+                },
+            }
+        },
+        PlayerPhase::Question {
+            index,
+            total,
             input: InputKind::Order,
             items,
             text,
@@ -421,6 +449,7 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
             submitted,
             bonus,
             range: _,
+            pairs: _,
         } => rsx! {
             AnswerPad {
                 bonus,
@@ -800,7 +829,8 @@ fn OpenPad(
                             Response::Choice(_)
                             | Response::Order(_)
                             | Response::Parts(_)
-                            | Response::Pin(_) => String::new(),
+                            | Response::Pin(_)
+                            | Response::Pairs(_) => String::new(),
                         }
                     }
                 },
@@ -1173,6 +1203,181 @@ fn OrderPad(
                     button {
                         class: "button primary big grow",
                         disabled: !complete,
+                        onclick: send,
+                        "Submit"
+                    }
+                }
+            }
+        }
+    }
+}
+
+/// An item tapped first on a pairs question, waiting for its partner.
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum PairPick {
+    Left(usize),
+    Right(usize),
+}
+
+/// Links left item `left` with right item `right`, unlinking whatever either was linked to.
+fn link_pair(links: &mut [Option<usize>], left: usize, right: usize) {
+    for link in links.iter_mut() {
+        if *link == Some(right) {
+            *link = None;
+        }
+    }
+    links[left] = Some(right);
+}
+
+/// A pairs question: tap an item, then its partner in the other column; tap a matched item to
+/// change its partner. Any number of pairs can be submitted.
+#[component]
+fn PairsPad(
+    index: usize,
+    total: usize,
+    columns: PairColumns,
+    question: Option<String>,
+    clock: Clock,
+    submitted: Option<Vec<Option<usize>>>,
+    joker: JokerState,
+    bonus: Option<(String, u32)>,
+) -> Element {
+    let live_socket: Live<PlayerCommand, PlayerView> = use_context();
+    let count = columns.left.len();
+    let mut links = use_signal(|| vec![None::<usize>; count]);
+    let mut pick = use_signal(|| None::<PairPick>);
+    let bonus_text = use_signal(String::new);
+    let has_bonus = bonus.is_some();
+    let armed = use_signal(|| false);
+    let now = use_clock(200);
+    let (left_ms, width) = clock.at(now());
+    let locked = submitted.is_some() || left_ms <= 0.0;
+    let shown = submitted.clone().unwrap_or_else(|| links.cloned());
+    let partner_of = |right: usize| shown.iter().position(|&l| l == Some(right));
+    let anything = links.read().iter().any(Option::is_some);
+    let mut tap = move |tapped: PairPick| {
+        let current = links.cloned();
+        // A matched item comes loose and waits for a new partner.
+        let matched = match tapped {
+            PairPick::Left(l) => current[l].is_some(),
+            PairPick::Right(r) => current.contains(&Some(r)),
+        };
+        match (pick(), tapped) {
+            (Some(PairPick::Left(l)), PairPick::Right(r))
+            | (Some(PairPick::Right(r)), PairPick::Left(l)) => {
+                links.with_mut(|links| link_pair(links, l, r));
+                pick.set(None);
+            }
+            (Some(picked), _) if picked == tapped => pick.set(None),
+            _ => {
+                if matched {
+                    links.with_mut(|links| match tapped {
+                        PairPick::Left(l) => links[l] = None,
+                        PairPick::Right(r) => {
+                            for link in links.iter_mut() {
+                                if *link == Some(r) {
+                                    *link = None;
+                                }
+                            }
+                        }
+                    });
+                }
+                pick.set(Some(tapped));
+            }
+        }
+    };
+    let send = move |_| async move {
+        let _ = live_socket
+            .socket
+            .send(PlayerCommand::Answer {
+                response: Response::Pairs(links()),
+                joker: armed(),
+                bonus: has_bonus.then(|| bonus_text.cloned()),
+            })
+            .await;
+    };
+    rsx! {
+        main { class: "player-main top",
+            div { class: "phone-timer",
+                div { style: "width: {width}%" }
+            }
+            div { class: "row between",
+                span { class: "muted", "Question {index + 1} of {total}" }
+                span { class: "muted",
+                    if clock.paused { "⏸ Paused" } else { "{(left_ms / 1000.0).ceil()}s" }
+                }
+            }
+            if let Some(question) = question {
+                p { class: "phone-question", "{question}" }
+            }
+            if locked {
+                p { class: "strong",
+                    if submitted.is_some() { "🔒 Pairs locked in" } else { "⌛ Time's up" }
+                }
+            } else {
+                p { class: "muted", "Tap an item, then its partner. Tap a matched item to change it." }
+            }
+            JokerToggle { state: joker, armed, locked }
+            if let Some(bonus) = bonus.clone() {
+                BonusField { bonus, value: bonus_text, locked }
+            }
+            div { class: "pairs-pad",
+                ul { class: "pair-column",
+                    for (l, item) in columns.left.iter().enumerate() {
+                        li { key: "l{l}",
+                            button {
+                                class: if pick() == Some(PairPick::Left(l)) { "pair-choice picked" } else { "pair-choice" },
+                                disabled: locked,
+                                aria_pressed: pick() == Some(PairPick::Left(l)),
+                                onclick: move |_| tap(PairPick::Left(l)),
+                                AnswerBadge { index: l }
+                                span { class: "pair-body",
+                                    PairItemContent { item: item.clone() }
+                                }
+                                span { class: "pair-mark",
+                                    match shown.get(l).copied().flatten() {
+                                        Some(r) => format!("→ {}", pair_letter(r)),
+                                        None => String::new(),
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                ul { class: "pair-column",
+                    for (r, item) in columns.right.iter().enumerate() {
+                        li { key: "r{r}",
+                            button {
+                                class: if pick() == Some(PairPick::Right(r)) { "pair-choice picked" } else { "pair-choice" },
+                                disabled: locked,
+                                aria_pressed: pick() == Some(PairPick::Right(r)),
+                                onclick: move |_| tap(PairPick::Right(r)),
+                                span { class: "order-rank", "{pair_letter(r)}" }
+                                span { class: "pair-body",
+                                    PairItemContent { item: item.clone() }
+                                }
+                                if let Some(l) = partner_of(r) {
+                                    AnswerBadge { index: l }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if !locked {
+                div { class: "row",
+                    button {
+                        class: "button ghost",
+                        disabled: !anything,
+                        onclick: move |_| {
+                            links.set(vec![None; count]);
+                            pick.set(None);
+                        },
+                        "Start over"
+                    }
+                    button {
+                        class: "button primary big grow",
+                        disabled: !anything,
                         onclick: send,
                         "Submit"
                     }

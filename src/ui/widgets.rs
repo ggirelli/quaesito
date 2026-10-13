@@ -122,6 +122,26 @@ pub fn AnswerShape(index: usize) -> Element {
     }
 }
 
+/// The letter naming item `index` of a pairs question's right column: A, B…
+#[must_use]
+pub fn pair_letter(index: usize) -> char {
+    char::from(b'A' + u8::try_from(index % 26).unwrap_or(0))
+}
+
+/// An item of a pairs question: its picture, if any, then its text.
+#[component]
+pub fn PairItemContent(item: crate::model::PairItem) -> Element {
+    let text = item.text.trim().to_owned();
+    rsx! {
+        if let Some(image) = &item.image {
+            img { class: "pair-image", src: media_url(image), alt: "{text}" }
+        }
+        if !text.is_empty() {
+            span { class: "pair-text", "{text}" }
+        }
+    }
+}
+
 /// The coloured shape identifying answer `index`.
 #[component]
 pub fn AnswerBadge(index: usize) -> Element {

@@ -38,9 +38,9 @@ use crate::{
     },
     protocol::{
         AnswerOutcome, DEFAULT_MAX_TEAMS, Fastest, GameResults, Grade, Guess, HostPhase, HostView,
-        InputKind, JokerState, Judgement, MAX_NAME_CHARS, MAX_TEAMS_CEILING, PartReveal, PinGuess,
-        PlayerPhase, PlayerView, QuestionInfo, Response, ResultRow, Reveal, RoundResult, SlideInfo,
-        StandingRow, TeamInfo, TextGroup, Upcoming,
+        InputKind, JokerState, Judgement, MAX_NAME_CHARS, MAX_TEAMS_CEILING, PairColumns,
+        PartReveal, PinGuess, PlayerPhase, PlayerView, QuestionInfo, Response, ResultRow, Reveal,
+        RoundResult, SlideInfo, StandingRow, TeamInfo, TextGroup, Upcoming,
     },
     scoring::{self, Tally},
 };
@@ -127,7 +127,8 @@ pub struct Game {
     played: Vec<bool>,
     /// When the host paused the game, if it is paused.
     paused_at: Option<Instant>,
-    /// Per order question: the items as shown, by index in the right order (empty otherwise).
+    /// Per order question: the items as shown, by index in the right order. Per pairs question:
+    /// the right column as shown, by index of the pair. Empty otherwise.
     shown: Vec<Vec<usize>>,
 }
 
@@ -215,6 +216,7 @@ impl Game {
             .iter()
             .map(|q| match &q.kind {
                 QuestionKind::Order { items } => shuffled(items.len()),
+                QuestionKind::Pairs { pairs } => shuffled(pairs.len()),
                 _ => Vec::new(),
             })
             .collect();
@@ -1116,7 +1118,7 @@ impl Game {
                 InputKind::Choice => question.choices().len(),
                 InputKind::Order => self.shown[index].len(),
                 InputKind::Parts => question_parts(question),
-                InputKind::Text | InputKind::Number | InputKind::Pin => 0,
+                InputKind::Text | InputKind::Number | InputKind::Pin | InputKind::Pairs => 0,
             },
             order: match question.kind {
                 QuestionKind::Choice => self.phone_order(index, team),
@@ -1163,7 +1165,40 @@ impl Game {
             bonus: self
                 .active_bonus(index)
                 .map(|b| (b.text.trim().to_owned(), b.percent)),
+            pairs: self.pair_columns(index),
         }
+    }
+
+    /// The columns of pairs question `index` as shown, or none for other kinds.
+    fn pair_columns(&self, index: usize) -> Option<PairColumns> {
+        let QuestionKind::Pairs { pairs } = &self.quiz.questions[index].kind else {
+            return None;
+        };
+        Some(PairColumns {
+            left: pairs.iter().map(|p| p.left.clone()).collect(),
+            right: self.shown[index]
+                .iter()
+                .map(|&i| pairs[i].right.clone())
+                .collect(),
+        })
+    }
+
+    /// Whether a pairs answer (right items by index in the shown column) matches left item
+    /// `left` with its partner.
+    fn is_matched(&self, index: usize, links: &[Option<usize>], left: usize) -> bool {
+        links
+            .get(left)
+            .copied()
+            .flatten()
+            .and_then(|right| self.shown[index].get(right))
+            == Some(&left)
+    }
+
+    /// How many pairs a pairs answer matches rightly.
+    fn matched(&self, index: usize, links: &[Option<usize>]) -> usize {
+        (0..links.len())
+            .filter(|&left| self.is_matched(index, links, left))
+            .count()
     }
 
     fn team_mut(&mut self, id: u32) -> Option<&mut Team> {
@@ -1283,6 +1318,7 @@ impl Game {
                 .active_bonus(index)
                 .map(|b| (b.text.trim().to_owned(), b.percent)),
             passage: question.passage.trim().to_owned(),
+            pairs: self.pair_columns(index),
         }
     }
 
@@ -1360,6 +1396,22 @@ impl Game {
                 Reveal::Order {
                     items: items.clone(),
                     placed,
+                }
+            }
+            QuestionKind::Pairs { pairs } => {
+                let mut matched = vec![0; pairs.len()];
+                for (_, response) in responses() {
+                    if let Response::Pairs(links) = response {
+                        for (left, count) in matched.iter_mut().enumerate() {
+                            if self.is_matched(index, links, left) {
+                                *count += 1;
+                            }
+                        }
+                    }
+                }
+                Reveal::Pairs {
+                    pairs: pairs.clone(),
+                    matched,
                 }
             }
             QuestionKind::Choice | QuestionKind::TrueFalse { .. } => {
@@ -1684,6 +1736,15 @@ impl Game {
                     joker: false,
                 }
             }
+            (QuestionKind::Pairs { pairs }, Response::Pairs(links)) => {
+                let matched = self.matched(index, links);
+                AnswerOutcome {
+                    points: i32::try_from(scoring::order_points(full, matched, pairs.len()))
+                        .unwrap_or(i32::MAX),
+                    fully_correct: matched == pairs.len(),
+                    joker: false,
+                }
+            }
             _ => AnswerOutcome {
                 points: 0,
                 fully_correct: false,
@@ -1902,6 +1963,21 @@ fn check_response(question: &Question, response: Response) -> Result<Response, R
             }
             Ok(Response::Order(order))
         }
+        (QuestionKind::Pairs { pairs }, Response::Pairs(links)) => {
+            let mut used: Vec<usize> = links.iter().flatten().copied().collect();
+            used.sort_unstable();
+            used.dedup();
+            if links.len() != pairs.len()
+                || used.len() != links.iter().flatten().count()
+                || used.last().is_some_and(|&r| r >= pairs.len())
+            {
+                return Err(Refusal("Match each item with one partner at most."));
+            }
+            if used.is_empty() {
+                return Err(Refusal("Match at least one pair."));
+            }
+            Ok(Response::Pairs(links))
+        }
         _ => Err(Refusal("That answer does not fit this question.")),
     }
 }
@@ -1916,6 +1992,7 @@ fn input_kind(question: &Question) -> InputKind {
         QuestionKind::Order { .. } => InputKind::Order,
         QuestionKind::Parts { .. } => InputKind::Parts,
         QuestionKind::Pin { .. } => InputKind::Pin,
+        QuestionKind::Pairs { .. } => InputKind::Pairs,
     }
 }
 
@@ -2395,6 +2472,95 @@ mod tests {
             Reveal::Order {
                 items: vec!["A".to_owned(), "B".to_owned(), "C".to_owned()],
                 placed: vec![2, 1, 1],
+            }
+        );
+        let score = |team| {
+            g.standings()
+                .into_iter()
+                .find(|r| r.team.id == team)
+                .unwrap()
+                .score
+        };
+        assert_eq!((score(owls), score(cats), score(pigs)), (1000, 0, 333));
+    }
+
+    #[test]
+    fn pairs_answers_score_each_pair_matched() {
+        let t0 = Instant::now();
+        let mut quiz = quiz(QuizSettings::default());
+        let item = |text: &str| crate::model::PairItem {
+            text: text.to_owned(),
+            image: None,
+        };
+        let pairs: Vec<crate::model::Pair> =
+            [("France", "Paris"), ("Italy", "Rome"), ("Spain", "Madrid")]
+                .into_iter()
+                .map(|(left, right)| crate::model::Pair {
+                    left: item(left),
+                    right: item(right),
+                })
+                .collect();
+        quiz.questions[0].kind = QuestionKind::Pairs {
+            pairs: pairs.clone(),
+        };
+        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        assert_ne!(g.shown[0], vec![0, 1, 2]);
+        // The right column shows Madrid, Paris, Rome.
+        g.shown[0] = vec![2, 0, 1];
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        let pigs = join(&mut g, "Pigs");
+        g.next(t0).unwrap();
+        let columns = PairColumns {
+            left: vec![item("France"), item("Italy"), item("Spain")],
+            right: vec![item("Madrid"), item("Paris"), item("Rome")],
+        };
+        let HostPhase::Question { question, .. } = g.host_view(t0).phase else {
+            panic!("expected the question");
+        };
+        assert_eq!(question.input, InputKind::Pairs);
+        assert_eq!(question.pairs.as_ref(), Some(&columns));
+        assert!(matches!(
+            g.player_view(owls, t0).unwrap().phase,
+            PlayerPhase::Question { pairs: Some(ref p), .. } if p == &columns
+        ));
+        for wrong in [
+            vec![Some(0), Some(0), None],
+            vec![Some(3), None, None],
+            vec![Some(1), Some(2)],
+            vec![None, None, None],
+        ] {
+            assert!(g.answer(owls, Response::Pairs(wrong), false, t0).is_err());
+        }
+        g.answer(
+            owls,
+            Response::Pairs(vec![Some(1), Some(2), Some(0)]),
+            false,
+            t0,
+        )
+        .unwrap();
+        g.answer(
+            cats,
+            Response::Pairs(vec![Some(0), Some(1), Some(2)]),
+            false,
+            t0,
+        )
+        .unwrap();
+        // Partly matched answers count too.
+        g.answer(pigs, Response::Pairs(vec![Some(1), None, None]), false, t0)
+            .unwrap();
+        let HostPhase::Closed {
+            reveal: Some(reveal),
+            ..
+        } = g.host_view(t0).phase
+        else {
+            panic!("expected results");
+        };
+        assert_eq!(
+            reveal,
+            Reveal::Pairs {
+                pairs,
+                matched: vec![2, 1, 1],
             }
         );
         let score = |team| {
