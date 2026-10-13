@@ -39,6 +39,10 @@ clippy: clippy-server clippy-web
 test:
     cargo test --no-default-features --features server --locked
 
+# Rewrite the published schema of the quiz file format (docs/schema) from the quiz types
+schema:
+    QUAESITO_WRITE_SCHEMA=1 cargo test --no-default-features --features server --locked the_published_schema_is_current
+
 # Check advisories, licenses, bans and sources
 deny:
     cargo deny --locked check

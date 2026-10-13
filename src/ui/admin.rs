@@ -13,7 +13,7 @@ use crate::api::{
     admin_check, admin_login, create_quiz, delete_quiz, duplicate_quiz, end_session, import_quiz,
     list_quizzes, list_sessions, start_session, start_test,
 };
-use crate::model::QuizSummary;
+use crate::model::{ImportOutcome, ImportWarning, QuizSummary};
 use crate::protocol::{DEFAULT_MAX_TEAMS, MAX_TEAMS_CEILING};
 
 const TOKEN_KEY: &str = "quaesito.admin";
@@ -62,7 +62,9 @@ pub fn AdminGate(children: Element) -> Element {
             div { class: "page center", Spinner {} }
         },
         (true, Some(true)) => children,
-        _ => rsx! { LoginForm {} },
+        _ => rsx! {
+            LoginForm {}
+        },
     }
 }
 
@@ -136,7 +138,10 @@ pub fn AdminHeader(#[props(default)] back: bool, children: Element) -> Element {
             div { class: "row",
                 ThemeToggle { class: "button ghost icon" }
                 HelpLink { class: "button ghost", label: true }
-                Link { class: "button ghost", to: Route::Home {}, title: "Home page",
+                Link {
+                    class: "button ghost",
+                    to: Route::Home {},
+                    title: "Home page",
                     Icon { kind: IconKind::Home }
                     "Home"
                 }
@@ -155,13 +160,30 @@ fn Dashboard() -> Element {
     let mut search = use_signal(String::new);
     let mut sort = use_signal(|| QuizSort::Edited);
 
+    // A file from a newer version, waiting for the admin to import it anyway.
+    let mut unsure = use_signal(|| None::<(dioxus::html::FileData, ImportWarning)>);
+
     let import = move |evt: FormEvent| async move {
         let Some(file) = evt.files().into_iter().next() else {
             return;
         };
-        let result = import_quiz(token.get(), file.into())
+        let result = import_quiz(token.get(), false, file.clone().into())
             .await
             .map_err(|e| message(&e));
+        match result {
+            Ok(ImportOutcome::Imported(_)) => quizzes.restart(),
+            Ok(ImportOutcome::NeedsConsent(warning)) => unsure.set(Some((file, warning))),
+            Err(err) => error.set(Some(err)),
+        }
+    };
+    let import_anyway = move |()| async move {
+        let Some((file, _)) = unsure() else {
+            return;
+        };
+        let result = import_quiz(token.get(), true, file.into())
+            .await
+            .map_err(|e| message(&e));
+        unsure.set(None);
         match result {
             Ok(_) => quizzes.restart(),
             Err(err) => error.set(Some(err)),
@@ -201,6 +223,13 @@ fn Dashboard() -> Element {
                 if creating() {
                     CreateDialog { on_close: move |()| creating.set(false) }
                 }
+                if let Some((_, warning)) = unsure() {
+                    ImportConsentDialog {
+                        warning,
+                        on_import: import_anyway,
+                        on_close: move |()| unsure.set(None),
+                    }
+                }
                 div { class: "row quiz-filters",
                     label { class: "search grow",
                         Icon { kind: IconKind::Search }
@@ -224,8 +253,12 @@ fn Dashboard() -> Element {
                     }
                 }
                 match quizzes() {
-                    None => rsx! { Spinner {} },
-                    Some(Err(err)) => rsx! { ErrorBox { error: Some(message(&err)) } },
+                    None => rsx! {
+                        Spinner {}
+                    },
+                    Some(Err(err)) => rsx! {
+                        ErrorBox { error: Some(message(&err)) }
+                    },
                     Some(Ok(list)) if list.is_empty() => rsx! {
                         p { class: "muted", "No quizzes yet. Create your first one with New quiz." }
                     },
@@ -242,7 +275,9 @@ fn Dashboard() -> Element {
                                         div { class: "grow",
                                             Link {
                                                 class: "strong",
-                                                to: Route::Editor { id: quiz.id.clone() },
+                                                to: Route::Editor {
+                                                    id: quiz.id.clone(),
+                                                },
                                                 "{quiz.title}"
                                             }
                                             div { class: "muted small",
@@ -422,6 +457,70 @@ fn CreateDialog(on_close: EventHandler<()>) -> Element {
     }
 }
 
+/// Asks before importing a quiz from a newer version, saying what would be left out.
+#[component]
+fn ImportConsentDialog(
+    warning: ImportWarning,
+    on_import: EventHandler<()>,
+    on_close: EventHandler<()>,
+) -> Element {
+    let mut importing = use_signal(|| false);
+    let unknown = warning.unknown;
+    rsx! {
+        Dialog { title: "Import “{warning.title}”?", on_close,
+            // Plain flow, so the paragraphs' margins collapse.
+            div {
+                p {
+                    "This quiz was made with a newer version of Quaesito, and this one cannot read all of it."
+                }
+                if unknown.is_empty() {
+                    p { "Some of its content may be lost." }
+                } else {
+                    p {
+                        "These questions are of kinds this version does not know, and would be left out:"
+                    }
+                    ul {
+                        for question in unknown.iter() {
+                            li {
+                                strong { "{question.place}" }
+                                if !question.text.is_empty() {
+                                    " “{question.text}”"
+                                }
+                                span { class: "muted", " ({question.kind})" }
+                            }
+                        }
+                    }
+                }
+                p { class: "muted small",
+                    "Update Quaesito to import everything, or import what this version can read."
+                }
+            }
+            div { class: "row",
+                button {
+                    class: "button primary",
+                    disabled: importing(),
+                    onclick: move |_| {
+                        importing.set(true);
+                        on_import.call(());
+                    },
+                    if importing() {
+                        "Importing…"
+                    } else if unknown.is_empty() {
+                        "Import anyway"
+                    } else {
+                        "Import without them"
+                    }
+                }
+                button {
+                    class: "button ghost",
+                    onclick: move |_| on_close.call(()),
+                    "Cancel"
+                }
+            }
+        }
+    }
+}
+
 #[component]
 fn StartDialog(id: String, on_close: EventHandler<()>) -> Element {
     let token: AdminToken = use_context();
@@ -576,7 +675,11 @@ fn QuizActions(
             }
             if confirming() {
                 button { class: "button danger", onclick: delete, "Really delete?" }
-                button { class: "button ghost", onclick: move |_| confirming.set(false), "Keep" }
+                button {
+                    class: "button ghost",
+                    onclick: move |_| confirming.set(false),
+                    "Keep"
+                }
             } else {
                 button {
                     class: "button ghost icon danger-icon",
@@ -627,22 +730,30 @@ fn LiveGames(on_error: EventHandler<String>) -> Element {
                         div { class: "grow",
                             div { class: "strong", "{session.title}" }
                             div { class: "muted small",
-                                if session.test { "🧪 test · " }
+                                if session.test {
+                                    "🧪 test · "
+                                }
                                 "{session.teams} teams"
-                                if session.finished { " · finished" }
+                                if session.finished {
+                                    " · finished"
+                                }
                             }
                         }
                         div { class: "row actions",
                             if session.test {
                                 Link {
                                     class: "button primary",
-                                    to: Route::Test { code: session.code.clone() },
+                                    to: Route::Test {
+                                        code: session.code.clone(),
+                                    },
                                     "Open test"
                                 }
                             } else {
                                 Link {
                                     class: "button primary",
-                                    to: Route::Host { code: session.code.clone() },
+                                    to: Route::Host {
+                                        code: session.code.clone(),
+                                    },
                                     "Open big screen"
                                 }
                             }

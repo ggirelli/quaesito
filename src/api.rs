@@ -13,7 +13,7 @@ use dioxus::{
 };
 
 use crate::{
-    model::{Quiz, QuizSummary, ValidationIssue},
+    model::{ImportOutcome, Quiz, QuizSummary, ValidationIssue},
     protocol::{
         GameResults, HostCommand, HostView, JoinTicket, PlayerCommand, PlayerView, SessionSummary,
         TestInfo, UploadLimits,
@@ -104,21 +104,31 @@ pub async fn duplicate_quiz(token: String, id: String) -> ServerFnResult<String>
     Ok(quiz.id)
 }
 
-/// Imports an exported quiz (zip bundle with media, or plain JSON) under a new id, and returns
-/// that id.
-#[post("/api/admin/quiz/import?token")]
-pub async fn import_quiz(token: String, file: FileStream) -> ServerFnResult<String> {
+/// Imports an exported quiz (zip bundle with media, or plain JSON) under a new id. A file from a
+/// newer version is only imported with `consent`, without what this version cannot read.
+#[post("/api/admin/quiz/import?token&consent")]
+pub async fn import_quiz(
+    token: String,
+    consent: bool,
+    file: FileStream,
+) -> ServerFnResult<ImportOutcome> {
+    use crate::server::bundle::Imported;
+
     let state = crate::server::state();
     state.auth.require(&token)?;
     let bytes = crate::server::media::read_upload(file, state.limits.import).await?;
-    let mut quiz = crate::server::bundle::import(bytes, &state.media, &state.limits)
+    let imported = crate::server::bundle::import(bytes, &state.media, &state.limits, consent)
         .await
         .map_err(|err| ServerFnError::new(format!("{err:#}")))?;
+    let mut quiz = match imported {
+        Imported::Quiz(quiz) => quiz,
+        Imported::NeedsConsent(warning) => return Ok(ImportOutcome::NeedsConsent(warning)),
+    };
     quiz.id = crate::server::store::new_id();
     // A copy is new: it is created now.
     quiz.created = None;
     state.quizzes.save(&quiz).await?;
-    Ok(quiz.id)
+    Ok(ImportOutcome::Imported(quiz.id))
 }
 
 /// Uploads a picture (for an answer or a part) and returns its media name.
