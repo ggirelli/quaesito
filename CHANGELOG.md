@@ -6,6 +6,12 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- Pairs questions: teams match each item on the left with its partner on the right (texts, pictures or both, two to six
+  pairs). Phones show both columns, the right one shuffled; each pair matched earns its share of the points, and teams
+  may leave some unmatched.
+
 ## [0.3.0] - 2026-10-11
 
 A light theme, answers shuffled on every phone, and a Windows download that runs on a fresh computer.

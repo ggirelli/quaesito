@@ -112,6 +112,7 @@ A quiz played on the test page, narrated. [Transcript](demo.md#transcript).
 -   **Put in order:** oldest first, biggest first; each item in place earns points.
 -   **Several answers:** title and artist, or five posters, each part judged on its own.
 -   **Pin on a picture:** maps, floor plans, paintings; the closer the pin, the more points.
+-   **Pairs:** countries and capitals, flags and names; each pair matched earns points.
 -   **Slides:** announce rounds and rules between questions.
 
 </div>
