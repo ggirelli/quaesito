@@ -127,6 +127,7 @@ A quiz played on the test page, narrated. [Transcript](demo.md#transcript).
 <figure markdown>![Putting items in order on a phone](screenshots/phone-order.webp)<figcaption>Put in order</figcaption></figure>
 <figure markdown>![Several answers on a phone](screenshots/phone-parts.webp)<figcaption>Several answers</figcaption></figure>
 <figure markdown>![Dropping a pin on a phone](screenshots/phone-pin.webp)<figcaption>Pin on a picture</figcaption></figure>
+<figure markdown>![Matching pairs on a phone](screenshots/phone-pairs.webp)<figcaption>Pairs</figcaption></figure>
 </div>
 
 ![The podium with three teams](screenshots/host-podium.webp)

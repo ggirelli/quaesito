@@ -13,7 +13,7 @@ const next = async (host, wait = 1200) => { await host.keyboard.press('ArrowRigh
 
 /** Answers the open question on a phone. */
 async function answer(phone, how) {
-  await phone.waitForSelector('.phone-answer, .open-form, .order-choice, .pin-map', { timeout: 15000 });
+  await phone.waitForSelector('.phone-answer, .open-form, .order-choice, .pin-map, .pair-choice', { timeout: 15000 });
   if (how.pick !== undefined) {
     (await phone.$$('.phone-answer'))[how.pick].tap();
   } else if (how.type !== undefined) {
@@ -25,6 +25,18 @@ async function answer(phone, how) {
   } else if (how.order) {
     const items = await phone.$$eval('.order-choice span:last-child', (e) => e.map((x) => x.innerText));
     for (const item of how.order) { (await phone.$$('.order-choice'))[items.indexOf(item)].tap(); await L.sleep(120); }
+    if (how.shoot) await shot(phone, how.shoot);
+    await L.clickText(phone, 'button', 'Submit');
+  } else if (how.pairs) {
+    // [left item's text, right item's index in the quiz]: the right column is shuffled, so its
+    // pictures are found by name.
+    for (const [left, right] of how.pairs) {
+      await L.clickText(phone, '.pairs-pad .pair-column:first-child .pair-choice', left);
+      await L.sleep(120);
+      await phone.evaluate((n) => [...document.querySelectorAll('.pairs-pad .pair-column:last-child .pair-choice')]
+        .find((b) => b.querySelector('img').src.endsWith(`b${n}.jpg`)).click(), right + 1);
+      await L.sleep(120);
+    }
     if (how.shoot) await shot(phone, how.shoot);
     await L.clickText(phone, 'button', 'Submit');
   } else if (how.pin) {
@@ -40,6 +52,7 @@ async function answer(phone, how) {
 
 (async () => {
   const quiz = sample.quiz();
+  quiz.questions.splice(8, 0, sample.pairs());
   const ctx = await L.setup(quiz, { joker: true });
   const pictures = sample.avatars(path.join(__dirname, 'out/avatars'));
 
@@ -53,7 +66,7 @@ async function answer(phone, how) {
   await shot(admin, 'dashboard');
   const editor = await L.openAdmin(ctx, `/admin/quiz/${ctx.id}`, 1280, 1000);
   await editor.waitForSelector('.question');
-  for (const [i, name] of [[1, 'editor-choices'], [6, 'editor-parts'], [7, 'editor-pin']]) {
+  for (const [i, name] of [[1, 'editor-choices'], [6, 'editor-parts'], [7, 'editor-pin'], [8, 'editor-pairs']]) {
     await editor.evaluate((i) => document.querySelectorAll('.question')[i].scrollIntoView({ block: 'start' }), i);
     await editor.evaluate(() => window.scrollBy(0, -80));
     await L.sleep(500);
@@ -137,6 +150,14 @@ async function answer(phone, how) {
   await answer(phones[2], { pin: [0.6, 0.75] });
   await L.sleep(1200);
   await shot(host, 'host-pin');
+
+  await next(host); // pairs
+  await shot(host, 'host-pairs');
+  await answer(phones[0], { pairs: [['Plant', 0], ['Popcorn', 1], ['Phone', 2], ['Big screen', 3]], shoot: 'phone-pairs' });
+  await answer(phones[1], { pairs: [['Plant', 0], ['Popcorn', 1], ['Phone', 3]] });
+  await answer(phones[2], { pairs: [['Plant', 0], ['Popcorn', 1], ['Phone', 3], ['Big screen', 2]] });
+  await L.sleep(1200);
+  await shot(host, 'host-pairs-reveal');
 
   await next(host); // picture
   await shot(host, 'host-picture');

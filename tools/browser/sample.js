@@ -87,4 +87,23 @@ function quiz() {
   };
 }
 
-module.exports = { quiz, avatars, tune };
+/**
+ * A pairs question, texts on the left and pictures on the right: things in the lobby
+ * illustration and their close-ups. The documentation screenshots play it after the pin
+ * question; the demo video leaves it out, so its narration stays in step.
+ */
+function pairs() {
+  const closeUp = (n, crop) => ({ image: media(`aaaaaaaaaaaaaaaaaaaaaaaaaaaaaab${n}`, crop) });
+  return {
+    text: 'Match each word with its close-up',
+    kind: { Pairs: { pairs: [
+      { left: { text: 'Plant' }, right: closeUp(1, '200x180+20+200') },
+      { left: { text: 'Popcorn' }, right: closeUp(2, '150x100+405+440') },
+      { left: { text: 'Phone' }, right: closeUp(3, '90x110+212+295') },
+      { left: { text: 'Big screen' }, right: closeUp(4, '440x270+250+85') },
+    ] } },
+    answers: [],
+  };
+}
+
+module.exports = { quiz, avatars, tune, pairs };

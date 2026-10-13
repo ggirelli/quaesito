@@ -60,6 +60,12 @@ then its partner in the other column (tap a matched item to change it). Teams ma
 pairs left unmatched, and each pair matched earns its share of the points. The reveal shows the
 right pairs and how many teams matched each one.
 
+![Editing a pairs question, with words on the left and pictures on the right](screenshots/editor-pairs.webp)
+
+![A pairs question on the big screen](screenshots/host-pairs.webp)
+
+![The right pairs revealed, with how many teams matched each one](screenshots/host-pairs-reveal.webp)
+
 ## Order
 
 List the items in the right order; phones show them shuffled. Teams tap them from first to last
