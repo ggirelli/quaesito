@@ -75,6 +75,7 @@ music too; when time runs out instead, it plays on while the answers are shown.
 
 The export icon on the admin page downloads a quiz as a `.zip` with its pictures and
 soundtracks. **Import** on another computer brings it back as a new quiz; older `.json` exports
-import too. A quiz made with a newer version of Quaesito asks first, and says what this version
+import too. A bar above the list follows big quizzes as they upload, as their pictures and
+soundtracks are processed, and as exports download. A quiz made with a newer version of Quaesito asks first, and says what this version
 would leave out. The [quiz file format](quiz-file-format.md) page describes what is inside, to write
 or generate quizzes yourself.

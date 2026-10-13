@@ -20,6 +20,9 @@ All notable changes to quaesito are listed here. The format follows
 - Importing a quiz made with a newer version of Quaesito asks first, and lists the questions of kinds this version does
   not know: **Import without them** brings in the rest, instead of the whole import failing. Quaesito 0.3 and earlier
   still refuse such quizzes outright.
+- Importing and exporting show their progress in a bar above the quiz list: the upload, the pictures and soundtracks
+  being processed (12 of 80…), then the download of an export. Big quizzes no longer look stuck.
+- Imported pictures are processed on every core at once, so big bundles import faster.
 
 ## [0.3.0] - 2026-10-11
 

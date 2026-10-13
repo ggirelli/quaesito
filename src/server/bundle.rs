@@ -4,6 +4,7 @@
 use std::io::{Cursor, Read, Write};
 
 use anyhow::Context;
+use futures_util::StreamExt;
 use zip::{CompressionMethod, ZipArchive, ZipWriter, write::SimpleFileOptions};
 
 use super::media::{ImageKind, MediaStore};
@@ -80,7 +81,8 @@ pub async fn export(quiz: &Quiz, store: &MediaStore) -> anyhow::Result<Vec<u8>> 
 ///
 /// A file from a newer version is only imported with `consent`, leaving out the questions of
 /// kinds this version does not know; without it, nothing is stored and the warning says what
-/// would be lost.
+/// would be lost. `on_media(done, total)` follows the processing of the bundled media, several
+/// at a time.
 ///
 /// # Errors
 /// Fails if the data is neither a quiz bundle nor quiz JSON.
@@ -89,6 +91,7 @@ pub async fn import(
     store: &MediaStore,
     limits: &UploadLimits,
     consent: bool,
+    mut on_media: impl FnMut(usize, usize),
 ) -> anyhow::Result<Imported> {
     if !bytes.starts_with(b"PK\x03\x04") {
         return Ok(match parse(&bytes)? {
@@ -115,19 +118,37 @@ pub async fn import(
         .iter()
         .filter_map(|q| q.audio.clone())
         .collect();
-    let mut renamed = std::collections::HashMap::new();
-    for (name, bytes) in files {
-        let size = bytes.len() as u64;
-        let stored = if soundtracks.contains(&name) {
-            check_size(size, limits.audio, &name)?;
-            store.store_audio(bytes).await
-        } else if is_video(&name) {
-            check_size(size, limits.video, &name)?;
-            store.store_video(bytes).await
+    for (name, bytes) in &files {
+        let limit = if soundtracks.contains(name) {
+            limits.audio
+        } else if is_video(name) {
+            limits.video
         } else {
-            check_size(size, limits.picture, &name)?;
-            store.store(bytes, ImageKind::Question).await
+            limits.picture
         };
+        check_size(bytes.len() as u64, limit, name)?;
+    }
+    let total = files.len();
+    on_media(0, total);
+    // Pictures are decoded and resized on as many cores as there are.
+    let parallel = std::thread::available_parallelism().map_or(2, std::num::NonZero::get);
+    let mut processed = futures_util::stream::iter(files)
+        .map(|(name, bytes)| async {
+            let stored = if soundtracks.contains(&name) {
+                store.store_audio(bytes).await
+            } else if is_video(&name) {
+                store.store_video(bytes).await
+            } else {
+                store.store(bytes, ImageKind::Question).await
+            };
+            (name, stored)
+        })
+        .buffer_unordered(parallel);
+    let mut renamed = std::collections::HashMap::new();
+    let mut done = 0;
+    while let Some((name, stored)) = processed.next().await {
+        done += 1;
+        on_media(done, total);
         match stored {
             Ok(new_name) => {
                 renamed.insert(name, new_name);
@@ -329,7 +350,16 @@ mod tests {
         };
 
         let bytes = export(&quiz, &store).await.unwrap();
-        let imported = quiz_of(import(bytes, &store, &limits(), false).await.unwrap());
+        let mut progress = Vec::new();
+        let imported = quiz_of(
+            import(bytes, &store, &limits(), false, |done, total| {
+                progress.push((done, total));
+            })
+            .await
+            .unwrap(),
+        );
+        // Both bundled files are counted, from none.
+        assert_eq!(progress, [(0, 2), (1, 2), (2, 2)]);
         let question = &imported.questions[0];
         let new_picture = question.image.clone().unwrap();
         assert_ne!(new_picture, picture);
@@ -347,13 +377,24 @@ mod tests {
         // Older plain JSON exports still import.
         let json = serde_json::to_vec(&quiz).unwrap();
         assert_eq!(
-            quiz_of(import(json, &store, &limits(), false).await.unwrap()).title,
+            quiz_of(
+                import(json, &store, &limits(), false, |_, _| {})
+                    .await
+                    .unwrap()
+            )
+            .title,
             "Bundled"
         );
         assert!(
-            import(b"PK\x03\x04garbage".to_vec(), &store, &limits(), false)
-                .await
-                .is_err()
+            import(
+                b"PK\x03\x04garbage".to_vec(),
+                &store,
+                &limits(),
+                false,
+                |_, _| {}
+            )
+            .await
+            .is_err()
         );
         let _ = tokio::fs::remove_dir_all(dir).await;
     }
@@ -479,11 +520,15 @@ mod tests {
             Some(QUIZ_FORMAT + 1),
             r#"{"text":"Q"},{"text":"New","kind":{"Hotspot":{}}}"#,
         );
-        let unsure = import(json.clone(), &store, &limits(), false)
+        let unsure = import(json.clone(), &store, &limits(), false, |_, _| {})
             .await
             .unwrap();
         assert_eq!(warning_of(unsure).unknown.len(), 1);
-        let quiz = quiz_of(import(json, &store, &limits(), true).await.unwrap());
+        let quiz = quiz_of(
+            import(json, &store, &limits(), true, |_, _| {})
+                .await
+                .unwrap(),
+        );
         assert_eq!(quiz.questions.len(), 1);
         let _ = tokio::fs::remove_dir_all(dir).await;
     }

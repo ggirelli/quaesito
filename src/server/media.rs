@@ -244,12 +244,13 @@ pub fn audio_extension(bytes: &[u8]) -> Option<&'static str> {
     }
 }
 
-/// Reads an upload into memory, refusing more than `max_bytes`.
+/// Reads an upload (a file sent to a server function, or a request body) into memory, refusing
+/// more than `max_bytes`.
 ///
 /// # Errors
 /// Fails if the upload is too large or the stream breaks.
-pub async fn read_upload(
-    mut file: dioxus::fullstack::FileStream,
+pub async fn read_upload<E: std::fmt::Display>(
+    mut file: impl futures_util::Stream<Item = Result<dioxus::fullstack::axum::body::Bytes, E>> + Unpin,
     max_bytes: u64,
 ) -> anyhow::Result<Vec<u8>> {
     use futures_util::StreamExt;

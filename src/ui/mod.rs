@@ -9,6 +9,7 @@ mod live;
 mod player;
 mod sfx;
 mod test;
+mod transfer;
 mod widgets;
 
 use dioxus::prelude::*;

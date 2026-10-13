@@ -338,9 +338,15 @@ button.corner-link {
   transform: scale(0.97);
 }
 
-.button:disabled {
+.button:disabled,
+.button.disabled {
   opacity: 0.4;
   cursor: default;
+}
+
+/* A file input dressed as a button: disabled, it ignores clicks too. */
+.button.disabled {
+  pointer-events: none;
 }
 
 .button.primary {
@@ -462,6 +468,54 @@ input.short {
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* An import or export under way, on the admin page. */
+.transfer progress {
+  width: 100%;
+  height: 0.5rem;
+  appearance: none;
+  border: none;
+  border-radius: 999px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.transfer progress::-webkit-progress-bar {
+  background: var(--surface-2);
+}
+
+.transfer progress::-webkit-progress-value {
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+
+.transfer progress::-moz-progress-bar {
+  background: var(--accent);
+}
+
+/* Of unknown length: a glow sweeping across. */
+.transfer progress:indeterminate {
+  background: linear-gradient(90deg, var(--surface-2) 30%, var(--accent) 50%, var(--surface-2) 70%);
+  background-size: 300% 100%;
+  animation: sweep 1.4s linear infinite;
+}
+
+.transfer progress:indeterminate::-webkit-progress-bar {
+  background: transparent;
+}
+
+.transfer progress:indeterminate::-moz-progress-bar {
+  background: transparent;
+}
+
+@keyframes sweep {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
   }
 }
 

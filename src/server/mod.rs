@@ -17,17 +17,18 @@ use std::{collections::HashSet, path::PathBuf, sync::OnceLock, time::Duration};
 use dioxus::fullstack::{
     axum::{
         Router,
+        body::Body,
         extract::{Path, Query},
         http::{HeaderValue, StatusCode, header},
         response::{IntoResponse, Response},
     },
-    routing::get,
+    routing::{get, post},
 };
 
 use tower_http::set_header::SetResponseHeaderLayer;
 
 use self::{auth::Auth, media::MediaStore, sessions::Sessions, store::QuizStore};
-use crate::model::Quiz;
+use crate::model::{ImportOutcome, ImportProgress, Quiz};
 
 /// Everything the server keeps for its lifetime.
 pub struct AppState {
@@ -151,7 +152,68 @@ pub fn routes() -> Router {
     Router::new()
         .route("/media/{name}", get(media::serve))
         .route("/export/{id}", get(export))
+        .route("/import", post(import))
         .merge(docs::routes())
+}
+
+#[derive(serde::Deserialize)]
+struct ImportQuery {
+    token: String,
+    /// Import a quiz from a newer version anyway, without what this version cannot read.
+    #[serde(default)]
+    consent: bool,
+}
+
+/// `POST /import?token=…&consent=…`, with an exported quiz (zip bundle with media, or plain
+/// JSON) as the body: imports it under a new id. The answer streams one JSON
+/// [`ImportProgress`] per line, so the admin page can follow the processing of the media.
+async fn import(Query(query): Query<ImportQuery>, body: Body) -> Response {
+    let state = state();
+    if !state.auth.is_valid(&query.token) {
+        return StatusCode::UNAUTHORIZED.into_response();
+    }
+    let bytes = match media::read_upload(body.into_data_stream(), state.limits.import).await {
+        Ok(bytes) => bytes,
+        Err(err) => return (StatusCode::BAD_REQUEST, format!("{err:#}")).into_response(),
+    };
+    let (progress, lines) = tokio::sync::mpsc::unbounded_channel();
+    // The import finishes even if the page stops listening.
+    tokio::spawn(async move {
+        let media_progress = progress.clone();
+        let imported = bundle::import(bytes, &state.media, &state.limits, query.consent, {
+            move |done, total| {
+                let _ = media_progress.send(ImportProgress::Media { done, total });
+            }
+        })
+        .await;
+        let end = match imported {
+            Ok(bundle::Imported::Quiz(mut quiz)) => {
+                quiz.id = store::new_id();
+                // A copy is new: it is created now.
+                quiz.created = None;
+                match state.quizzes.save(&quiz).await {
+                    Ok(()) => ImportProgress::Done(ImportOutcome::Imported(quiz.id)),
+                    Err(err) => ImportProgress::Failed(format!("{err:#}")),
+                }
+            }
+            Ok(bundle::Imported::NeedsConsent(warning)) => {
+                ImportProgress::Done(ImportOutcome::NeedsConsent(warning))
+            }
+            Err(err) => ImportProgress::Failed(format!("{err:#}")),
+        };
+        let _ = progress.send(end);
+    });
+    let lines = futures_util::stream::unfold(lines, |mut lines| async move {
+        let line = lines.recv().await?;
+        let mut json = serde_json::to_vec(&line).unwrap_or_default();
+        json.push(b'\n');
+        Some((Ok::<_, std::convert::Infallible>(json), lines))
+    });
+    (
+        [(header::CONTENT_TYPE, "application/x-ndjson")],
+        Body::from_stream(lines),
+    )
+        .into_response()
 }
 
 #[derive(serde::Deserialize)]
