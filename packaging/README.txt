@@ -40,4 +40,4 @@ home page, or Help in the admin pages. Online: https://ggirelli.github.io/quaesi
 More: https://github.com/ggirelli/quaesito
 Licence: MIT (see LICENSE). Free and open source, provided as is, without warranty.
 Fully vibe coded: an AI assistant wrote all of it.
-Donations are welcome: https://ko-fi.com/ggirelli
+Donations are welcome: https://github.com/sponsors/ggirelli or https://ko-fi.com/ggirelli
