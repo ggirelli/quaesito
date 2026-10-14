@@ -44,6 +44,8 @@ jobs:
       # The user guide ships with the app and is served at /docs/, so it works without internet.
       - name: User guide
         run: uvx --with-requirements docs/requirements.txt mkdocs build --strict --site-dir guide
+        env:
+          NO_MKDOCS_2_WARNING: "true" # MkDocs is pinned below 2.0 in docs/requirements.txt
       - name: Package
         shell: bash
         run: |
