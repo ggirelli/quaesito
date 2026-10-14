@@ -6,6 +6,10 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- Donations are now also welcome on [GitHub Sponsors](https://github.com/sponsors/ggirelli).
+
 ## [0.4.0] - 2026-10-13
 
 Pairs questions, a documented quiz file format, and progress bars for big imports and exports.

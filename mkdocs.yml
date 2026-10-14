@@ -95,6 +95,9 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/ggirelli/quaesito
       name: Source code
+    - icon: fontawesome/solid/heart
+      link: https://github.com/sponsors/ggirelli
+      name: Sponsor quaesito on GitHub
     - icon: simple/kofi
       link: https://ko-fi.com/ggirelli
       name: Support quaesito on Ko-fi

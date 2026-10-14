@@ -30,8 +30,8 @@ Windows, macOS and Linux. Free and open source (MIT).
       **without warranty**.
     - **Fully vibe coded:** an AI assistant (Claude) wrote all of its code, tests and docs; see
       [how it was made](how-it-was-made.md).
-    - **Donations are welcome** on [Ko-fi](https://ko-fi.com/ggirelli); GitHub Sponsors is coming
-      soon.
+    - **Donations are welcome** on [GitHub Sponsors](https://github.com/sponsors/ggirelli) or
+      [Ko-fi](https://ko-fi.com/ggirelli).
 
 ## Made for game nights { .section }
 
