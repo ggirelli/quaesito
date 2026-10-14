@@ -1,0 +1,386 @@
+[
+  {
+    "file": "nature-animal-records.json",
+    "entry": 4,
+    "question": "Which living animal has the longest neck relative to its body?",
+    "problem": "ambiguous",
+    "explanation": "The giraffe has the longest neck in absolute terms, but relative to body size, swans and flamingos are arguable. It also repeats the giraffe fact from entry 3.",
+    "fix": "Drop it as a near-duplicate of entry 3, or reword as 'Which living animal has the longest neck in absolute length?'"
+  },
+  {
+    "file": "nature-animal-records.json",
+    "entry": 11,
+    "question": "Which bird is often cited as the heaviest living bird capable of flight?",
+    "problem": "ambiguous",
+    "explanation": "The great bustard, one of the distractors, is cited just as often as the kori bustard as the heaviest flying bird. Large males of both species reach about 18-21 kg.",
+    "fix": "Replace the Great bustard distractor with Andean condor."
+  },
+  {
+    "file": "nature-animal-records.json",
+    "entry": 12,
+    "question": "Which mammal has the longest gestation period, at around 22 months?",
+    "problem": "duplicate",
+    "explanation": "This asks the same fact as Mammals entry 24 (African elephant gestation of about 22 months).",
+    "fix": "Drop one of them, for example Mammals entry 24."
+  },
+  {
+    "file": "nature-animal-records.json",
+    "entry": 13,
+    "question": "A blue whale is the largest animal known to have ever lived.",
+    "problem": "duplicate",
+    "explanation": "This asks the same fact as Mammals entry 2 ('What is the largest animal known to have ever lived?' Blue whale).",
+    "fix": "Drop one of them."
+  },
+  {
+    "file": "nature-animal-records.json",
+    "entry": 15,
+    "question": "The peregrine falcon is the fastest animal during a hunting dive.",
+    "problem": "duplicate",
+    "explanation": "This asks the same fact as Birds entry 19 (the peregrine falcon is renowned for extreme speed in its hunting dive).",
+    "fix": "Drop one of them."
+  },
+  {
+    "file": "nature-animal-records.json",
+    "entry": 19,
+    "question": "What is the fastest bird in level flight, often cited in studies of flight speed?",
+    "problem": "ambiguous",
+    "explanation": "The record is disputed. The white-throated needletail (about 170 km/h, unverified) is widely cited as the fastest in level flight. The common swift holds the fastest radar-verified record (about 111.6 km/h, Henningsson et al. 2010). Other claims include the red-breasted merganser.",
+    "fix": "Reword as 'Which bird holds the fastest radar-verified level-flight speed, about 112 km/h?' and keep accepted Common swift/Swift. Alternatively, add 'White-throated needletail' to accepted."
+  },
+  {
+    "file": "nature-animal-records.json",
+    "entry": 20,
+    "question": "Which mammal has the longest ears relative to its body among familiar domestic breeds?",
+    "problem": "quality",
+    "explanation": "The wording is confused: it asks for a 'mammal' among 'domestic breeds' and judges ears 'relative to body'. The English lop's record is for absolute ear length among rabbits.",
+    "fix": "Reword as 'Which rabbit breed is famous for having the longest ears?' Set accepted to English lop, Lop rabbit, Lop (add 'Lop', which is not in the current list)."
+  },
+  {
+    "file": "nature-animal-records.json",
+    "entry": 21,
+    "question": "What is the largest living species of salamander?",
+    "problem": "misleading",
+    "explanation": "A 2019 study split the Chinese giant salamander and named the South China giant salamander (Andrias sligoi) as probably the largest species. A player who knows this would be marked wrong.",
+    "fix": "Add 'South China giant salamander' and 'Andrias sligoi' to accepted."
+  },
+  {
+    "file": "nature-animal-records.json",
+    "entry": 23,
+    "question": "Approximately how many metres long can a blue whale grow? Give metres.",
+    "problem": "duplicate",
+    "explanation": "This is the same question as Sea life entry 23 ('About how many metres long can a blue whale grow?', answer 30).",
+    "fix": "Drop one of them."
+  },
+  {
+    "file": "nature-animal-records.json",
+    "entry": 26,
+    "question": "Order these living animals by typical maximum adult mass, largest first.",
+    "problem": "ambiguous",
+    "explanation": "The weights of the hippopotamus and the white rhinoceros overlap: both reach about 4,500 kg at most, and sources rank them differently (Wikipedia's list puts the white rhino above the hippo). Positions 3 and 4 are disputed.",
+    "fix": "Replace White rhinoceros with Giraffe, giving Blue whale, African elephant, Hippopotamus, Giraffe."
+  },
+  {
+    "file": "nature-animal-records.json",
+    "entry": 27,
+    "question": "Order these animals by approximate top running speed on land, fastest first.",
+    "problem": "ambiguous",
+    "explanation": "Pronghorn (about 88 km/h) and springbok (about 88-90 km/h) are effectively tied, and some sources rank the springbok faster.",
+    "fix": "Replace Springbok with African elephant (about 40 km/h), giving Cheetah, Pronghorn, Lion, African elephant."
+  },
+  {
+    "file": "nature-animal-records.json",
+    "entry": 28,
+    "question": "Name the three living mammal species commonly grouped as monotremes.",
+    "problem": "wrong",
+    "explanation": "There are five living monotreme species: the platypus, the short-beaked echidna, and three long-beaked echidnas (western, eastern, and Sir David's). The accepted lists already mix species and groups. The fact also overlaps with Mammals entry 28.",
+    "fix": "Drop it as overlapping Mammals entry 28 (preferred). Alternatively, reword as 'Name the three living genera of monotremes (by common name).' Parts: Platypus/Duck-billed platypus; Short-beaked echidna; Long-beaked echidna (plus Western/Eastern/Sir David's/Attenborough's long-beaked echidna)."
+  },
+  {
+    "file": "nature-birds.json",
+    "entry": 5,
+    "question": "Which bird has nostrils near the tip of its beak and can drink salt water?",
+    "problem": "wrong",
+    "explanation": "Albatrosses have tubular nostrils on the sides of the bill, not near the tip. The kiwi is the bird with nostrils at the tip of its beak. The salt-water part also repeats the fact in entry 10 (albatross drinking seawater).",
+    "fix": "Drop it as a duplicate of entry 10 (preferred, since entry 10 is being fixed to keep the salt-gland fact). Alternatively, rewrite it as 'Which bird has tube-shaped nostrils along the sides of its bill and can drink salt water?'"
+  },
+  {
+    "file": "nature-birds.json",
+    "entry": 7,
+    "question": "What is the name of the specialised feathers that make an owl's flight quiet?",
+    "problem": "quality",
+    "explanation": "These feathers have no special name, so 'Fringed flight feathers' is a description, and the distractors are general feather types. What makes owl flight quiet is comb-like serrations on the leading edge and soft fringes on the trailing edge of the flight feathers.",
+    "fix": "Reword as 'Which feature of an owl's flight feathers helps make its flight nearly silent?' with answer 'Comb-like serrated edges' and distractors 'Waterproof oil coating', 'Extra-stiff shafts', 'Metallic sheen'."
+  },
+  {
+    "file": "nature-birds.json",
+    "entry": 9,
+    "question": "Which bird is the only extant member of its family and is native to New Zealand?",
+    "problem": "wrong",
+    "explanation": "The kagu (Rhynochetos jubatus) is native to New Caledonia, not New Zealand. Also, the hoatzin, secretarybird and shoebill are each the only living member of their own families, so the 'only extant member' part does not tell the options apart. Only the location does.",
+    "fix": "Change the text to 'Which bird is the only extant member of its family and is native to New Caledonia?'"
+  },
+  {
+    "file": "nature-birds.json",
+    "entry": 10,
+    "question": "Which seabird can drink seawater and excrete excess salt through glands above its eyes?",
+    "problem": "ambiguous",
+    "explanation": "All seabirds have supraorbital salt glands, including the Atlantic puffin, common murre and northern gannet. All four options are correct.",
+    "fix": "Replace the distractors with non-marine birds (for example Pigeon, Crow, Pheasant) and change 'Which seabird' to 'Which bird', or reword the question around a feature only the albatross has, such as the largest wingspan."
+  },
+  {
+    "file": "nature-birds.json",
+    "entry": 12,
+    "question": "Which bird's eggs are often described as having a vivid turquoise-blue shell?",
+    "problem": "wrong",
+    "explanation": "Emu eggs are dark green, often called avocado green, and not vivid turquoise-blue. Cassowary eggs, one of the distractors, are also green (bright pea-green).",
+    "fix": "Change the text to 'Which large bird lays dark green, avocado-coloured eggs?' and replace the Cassowary distractor with Penguin. Emu stays correct."
+  },
+  {
+    "file": "nature-birds.json",
+    "entry": 21,
+    "question": "Which African bird is named for its enormous, shoe-shaped bill?",
+    "problem": "misleading",
+    "explanation": "'Shoe-shaped bill' gives away 'Shoebill'.",
+    "fix": "Reword as 'Which large African wading bird, also called the whalehead, stands motionless in papyrus swamps to catch lungfish?' and keep the accepted list."
+  },
+  {
+    "file": "nature-birds.json",
+    "entry": 22,
+    "question": "How many legs does a typical adult bird have?",
+    "problem": "quality",
+    "explanation": "The question is trivial: any player knows birds have two legs.",
+    "fix": "Replace it with 'How many toes does an ostrich have on each foot?' (answer 2, range 1-5)."
+  },
+  {
+    "file": "nature-birds.json",
+    "entry": 23,
+    "question": "How many primary flight feathers does a typical pigeon have on each wing?",
+    "problem": "wrong",
+    "explanation": "Pigeons (rock doves) have 10 primary feathers on each wing, not 9.",
+    "fix": "Set answer to 10 and keep the range 4-14."
+  },
+  {
+    "file": "nature-birds.json",
+    "entry": 24,
+    "question": "How many days does a chicken egg typically take to hatch, from incubation start?",
+    "problem": "wrong",
+    "explanation": "A chicken egg takes about 21 days to hatch, not 11. The current range (5-18) does not include the correct value.",
+    "fix": "Set answer to 21 and the range to min 14, max 28."
+  },
+  {
+    "file": "nature-birds.json",
+    "entry": 25,
+    "question": "About how many centimetres long can an emperor penguin grow?",
+    "problem": "wrong",
+    "explanation": "Adult emperor penguins reach about 100-130 cm (around 115-122 cm tall/long). 80 cm is too small.",
+    "fix": "Set answer to 115 and the range to min 80, max 150."
+  },
+  {
+    "file": "nature-birds.json",
+    "entry": 28,
+    "question": "Name these four living flightless bird groups: African, Australian, New Zealand, and tropical forest.",
+    "problem": "ambiguous",
+    "explanation": "The part labels ('Flightless bird 1-4') do not say which region each slot is for. 'Australian' also fits the cassowary, which lives in Queensland's tropical forests.",
+    "fix": "Relabel the parts 'African savanna', 'Australian outback', 'New Zealand', 'Australia/New Guinea rainforest', and change the text to match."
+  },
+  {
+    "file": "nature-birds.json",
+    "entry": 30,
+    "question": "Match each bird group with a characteristic adaptation.",
+    "problem": "ambiguous",
+    "explanation": "'Hooked beak' fits the parrot as well as the eagle.",
+    "fix": "Change Eagle's partner to 'Powerful talons'."
+  },
+  {
+    "file": "nature-dinosaurs.json",
+    "entry": 5,
+    "question": "What is the distinctive hollow head crest of Parasaurolophus called?",
+    "problem": "quality",
+    "explanation": "'Cranial crest' just restates 'head crest' from the question. There is no special name, so the question gives itself away.",
+    "fix": "Reword as 'What is the leading hypothesis for the function of Parasaurolophus's hollow head crest?' with correct answer 'Producing resonant calls' and distractors 'Storing water', 'Digging', 'Venom delivery'."
+  },
+  {
+    "file": "nature-dinosaurs.json",
+    "entry": 18,
+    "question": "What is the common shortened name of Tyrannosaurus rex?",
+    "problem": "misleading",
+    "explanation": "The accepted list includes 'Tyrannosaurus rex' and 'Tyrannosaurus', which are copied from the question, so repeating the question scores a point.",
+    "fix": "Reword as 'Which dinosaur's name means \"tyrant lizard king\"?' and keep the accepted list."
+  },
+  {
+    "file": "nature-dinosaurs.json",
+    "entry": 22,
+    "question": "How many horns are visible on the head of a typical Triceratops reconstruction?",
+    "problem": "duplicate",
+    "explanation": "This repeats entry 1 ('famous for the three horns', Triceratops). The name itself also means 'three-horned face'.",
+    "fix": "Drop it."
+  },
+  {
+    "file": "nature-dinosaurs.json",
+    "entry": 24,
+    "question": "About how many million years ago did the first dinosaurs appear?",
+    "problem": "wrong",
+    "explanation": "The first dinosaurs appeared about 230-245 million years ago, in the Late or Middle Triassic. 150 Ma is in the Late Jurassic, and the range (80-220) does not include the correct value.",
+    "fix": "Set answer to 230 and the range to min 200, max 260."
+  },
+  {
+    "file": "nature-dinosaurs.json",
+    "entry": 27,
+    "question": "Order these dinosaurs by the approximate age of their first appearance, earliest first.",
+    "problem": "ambiguous",
+    "explanation": "Tyrannosaurus rex and Triceratops both first appear about 68 million years ago, so their order is a tie.",
+    "fix": "Replace Tyrannosaurus rex with Spinosaurus (about 99-112 Ma), giving Eoraptor, Stegosaurus, Spinosaurus, Triceratops."
+  },
+  {
+    "file": "nature-dinosaurs.json",
+    "entry": 28,
+    "question": "Name four well-known plant-eating dinosaurs: one horned, one plated, and two long-necked sauropods.",
+    "problem": "misleading",
+    "explanation": "Each accepted list allows only one name, so obvious correct answers would be marked wrong: Apatosaurus, Brontosaurus, Argentinosaurus or Camarasaurus for the sauropods; Styracosaurus for horned; Kentrosaurus for plated.",
+    "fix": "Label the parts 'Horned', 'Plated', 'Sauropod 1', 'Sauropod 2'. Add Styracosaurus/Centrosaurus to Horned and Kentrosaurus to Plated. Make both sauropod parts accept Diplodocus, Brachiosaurus, Apatosaurus, Brontosaurus, Argentinosaurus, Camarasaurus (check that the engine does not accept the same name twice)."
+  },
+  {
+    "file": "nature-insects-bugs.json",
+    "entry": 18,
+    "question": "What is the common North American name for a ladybird?",
+    "problem": "misleading",
+    "explanation": "The accepted list includes 'Ladybird' and 'Ladybird beetle', which are the British terms used in the question, so repeating the question scores a point.",
+    "fix": "Set accepted to ['Ladybug', 'Lady beetle', 'Ladybug beetle']."
+  },
+  {
+    "file": "nature-insects-bugs.json",
+    "entry": 19,
+    "question": "Which insect is named for the prayer-like pose of its folded front legs?",
+    "problem": "misleading",
+    "explanation": "'Prayer-like pose' gives away 'praying mantis'.",
+    "fix": "Reword as 'Which predatory insect has raptorial front legs, and its female sometimes eats the male after mating?' and keep the accepted list."
+  },
+  {
+    "file": "nature-insects-bugs.json",
+    "entry": 20,
+    "question": "The caterpillar of which moth is used to produce commercial silk?",
+    "problem": "misleading",
+    "explanation": "The question asks for the moth, but the accepted answers name the caterpillar. The correct moth names are missing.",
+    "fix": "Add 'Silk moth', 'Domestic silk moth', 'Silkworm moth', 'Bombyx mori' to accepted."
+  },
+  {
+    "file": "nature-insects-bugs.json",
+    "entry": 22,
+    "question": "How many legs does a typical adult ant have?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as entry 1 (an adult insect has six legs). It is also trivial.",
+    "fix": "Drop it, or replace it with 'How many main body regions (tagmata) does an adult insect have?' (answer 3, range 1-6)."
+  },
+  {
+    "file": "nature-insects-bugs.json",
+    "entry": 24,
+    "question": "How many years underground before emerging is typical of the 17-year periodical cicada?",
+    "problem": "misleading",
+    "explanation": "The question contains the answer (17).",
+    "fix": "Reword as 'How many years do the longest-lived periodical cicadas spend underground before emerging?' and keep answer 17, range 10-25."
+  },
+  {
+    "file": "nature-insects-bugs.json",
+    "entry": 25,
+    "question": "About how many eggs can a queen honeybee lay per day at peak production?",
+    "problem": "wrong",
+    "explanation": "At peak, a queen honeybee lays about 1,500-2,000 eggs per day. 300 is far too low.",
+    "fix": "Set answer to 1500 and the range to min 800, max 2500."
+  },
+  {
+    "file": "nature-insects-bugs.json",
+    "entry": 29,
+    "question": "Match each insect with a characteristic.",
+    "problem": "ambiguous",
+    "explanation": "'Six legs' fits all four insects (honeybee, butterfly, cricket, ant).",
+    "fix": "Change Ant's partner to 'Follows pheromone trails'."
+  },
+  {
+    "file": "nature-mammals.json",
+    "entry": 5,
+    "question": "A narwhal's long spiral tusk is actually an unusually long what?",
+    "problem": "duplicate",
+    "explanation": "This asks the same fact as Sea life entry 20 (the Arctic whale whose tusk is an elongated tooth).",
+    "fix": "Drop one of them."
+  },
+  {
+    "file": "nature-mammals.json",
+    "entry": 11,
+    "question": "Which mammal's lower incisors grow into the prominent tusks seen in both sexes?",
+    "problem": "wrong",
+    "explanation": "Walrus tusks are elongated upper canine teeth, not lower incisors. The hippo, a distractor, is the one whose tusks include lower incisors (and canines).",
+    "fix": "Change the text to 'Which mammal's upper canine teeth grow into long, downward-pointing tusks seen in both sexes?' Walrus stays correct."
+  },
+  {
+    "file": "nature-mammals.json",
+    "entry": 17,
+    "question": "A blue whale's heart can weigh several hundred kilograms.",
+    "problem": "ambiguous",
+    "explanation": "The only blue whale heart ever weighed (Royal Ontario Museum, 2014) was about 180 kg. Older estimates of 600+ kg exist, so whether it is 'several hundred' depends on the source.",
+    "fix": "Change the text to 'A blue whale's heart can weigh more than 150 kilograms.' and keep the answer true."
+  },
+  {
+    "file": "nature-mammals.json",
+    "entry": 19,
+    "question": "Which egg-laying mammal has a broad, duck-like bill?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as Mammals entry 1 (the egg-laying mammal is the platypus). Platypus also comes up again in Mammals entry 28 and Animal records entry 28.",
+    "fix": "Drop it, or replace it with a different platypus fact (for example, that males have venomous ankle spurs)."
+  },
+  {
+    "file": "nature-plants-trees.json",
+    "entry": 10,
+    "question": "What is the botanical term for a tree's annual growth ring?",
+    "problem": "quality",
+    "explanation": "The answer 'Annual ring' is copied from the question, so it is meaningless.",
+    "fix": "Reword as 'What is the science of dating events using tree growth rings called?' with answer 'Dendrochronology' and distractors 'Palynology', 'Phenology', 'Mycology'."
+  },
+  {
+    "file": "nature-plants-trees.json",
+    "entry": 19,
+    "question": "What genus includes the giant sequoia, one of California's iconic trees?",
+    "problem": "wrong",
+    "explanation": "The giant sequoia is Sequoiadendron giganteum. The genus Sequoia contains only the coast redwood, so the accepted answer 'Sequoia' is wrong. That word also appears in the question.",
+    "fix": "Set accepted to ['Sequoiadendron'] only."
+  },
+  {
+    "file": "nature-plants-trees.json",
+    "entry": 20,
+    "question": "What plant is famous for folding its leaves when touched?",
+    "problem": "duplicate",
+    "explanation": "The true/false in entry 15 already gives this away ('the sensitive plant folding its leaves'), so this repeats the same fact.",
+    "fix": "Drop one of them, or reword entry 15 without naming the sensitive plant (for example, use the Venus flytrap)."
+  },
+  {
+    "file": "nature-plants-trees.json",
+    "entry": 24,
+    "question": "How many cotyledons, or seed leaves, does a typical monocot seedling have?",
+    "problem": "wrong",
+    "explanation": "Monocots have one cotyledon (hence 'mono'). Dicots have two.",
+    "fix": "Set answer to 1 and the range to min 0, max 5, so the answer is not at the edge of the range."
+  },
+  {
+    "file": "nature-sea-life.json",
+    "entry": 18,
+    "question": "What common name is given to the orange reef fish associated with anemones in Finding Nemo?",
+    "problem": "misleading",
+    "explanation": "'Nemo' is the character's name, not the fish's common name, yet it is accepted. 'Anemonefish' is a standard name that is missing.",
+    "fix": "Remove 'Nemo' from accepted and add 'Anemonefish', 'Clown anemonefish', 'Orange clownfish'."
+  },
+  {
+    "file": "nature-sea-life.json",
+    "entry": 25,
+    "question": "At roughly how many metres below sea level does sunlight become too faint for photosynthesis?",
+    "problem": "wrong",
+    "explanation": "The photic (euphotic) zone where photosynthesis is possible ends at about 200 m. Around 1,000 m is where nearly all light is gone (the start of the aphotic midnight zone), not the photosynthesis limit.",
+    "fix": "Set answer to 200 and the range to min 50, max 400."
+  },
+  {
+    "file": "nature-sea-life.json",
+    "entry": 30,
+    "question": "Match each sea animal with its distinctive feature.",
+    "problem": "ambiguous",
+    "explanation": "Sea cucumbers also have tube feet, and sea stars are also echinoderms, so 'Tube feet' and 'Echinoderm with soft body' could each match either animal.",
+    "fix": "Change Sea star's partner to 'Can regrow lost arms'."
+  }
+]

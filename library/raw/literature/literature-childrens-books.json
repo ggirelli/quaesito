@@ -1,0 +1,669 @@
+[
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who wrote the Harry Potter books?",
+      "answers": [
+        {
+          "text": "J. K. Rowling",
+          "correct": true
+        },
+        {
+          "text": "J. R. R. Tolkien"
+        },
+        {
+          "text": "C. S. Lewis"
+        },
+        {
+          "text": "Philip Pullman"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the bear in A. A. Milne's stories?",
+      "answers": [
+        {
+          "text": "Winnie-the-Pooh",
+          "correct": true
+        },
+        {
+          "text": "Paddington"
+        },
+        {
+          "text": "Baloo"
+        },
+        {
+          "text": "Rupert"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who wrote Matilda?",
+      "answers": [
+        {
+          "text": "Roald Dahl",
+          "correct": true
+        },
+        {
+          "text": "David Walliams"
+        },
+        {
+          "text": "Michael Morpurgo"
+        },
+        {
+          "text": "Dick King-Smith"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which girl's adventures begin when she follows a White Rabbit?",
+      "answers": [
+        {
+          "text": "Alice",
+          "correct": true
+        },
+        {
+          "text": "Dorothy"
+        },
+        {
+          "text": "Wendy"
+        },
+        {
+          "text": "Lucy"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who created Pippi Longstocking?",
+      "answers": [
+        {
+          "text": "Astrid Lindgren",
+          "correct": true
+        },
+        {
+          "text": "Tove Jansson"
+        },
+        {
+          "text": "Beatrix Potter"
+        },
+        {
+          "text": "Enid Blyton"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the island where Peter Pan and the Lost Boys live?",
+      "answers": [
+        {
+          "text": "Neverland",
+          "correct": true
+        },
+        {
+          "text": "Treasure Island"
+        },
+        {
+          "text": "Avalon"
+        },
+        {
+          "text": "Lilliput"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which author wrote The Hobbit?",
+      "answers": [
+        {
+          "text": "J. R. R. Tolkien",
+          "correct": true
+        },
+        {
+          "text": "C. S. Lewis"
+        },
+        {
+          "text": "Terry Pratchett"
+        },
+        {
+          "text": "Ursula K. Le Guin"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In The Wind in the Willows, which character is especially obsessed with motorcars?",
+      "answers": [
+        {
+          "text": "Mr. Toad",
+          "correct": true
+        },
+        {
+          "text": "Mole"
+        },
+        {
+          "text": "Rat"
+        },
+        {
+          "text": "Badger"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who wrote the novel The Secret Garden?",
+      "answers": [
+        {
+          "text": "Frances Hodgson Burnett",
+          "correct": true
+        },
+        {
+          "text": "E. Nesbit"
+        },
+        {
+          "text": "Louisa May Alcott"
+        },
+        {
+          "text": "Lucy Maud Montgomery"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who wrote the children's novel The Neverending Story?",
+      "answers": [
+        {
+          "text": "Michael Ende",
+          "correct": true
+        },
+        {
+          "text": "Cornelia Funke"
+        },
+        {
+          "text": "Erich Kästner"
+        },
+        {
+          "text": "Otfried Preußler"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which author created the Moomins?",
+      "answers": [
+        {
+          "text": "Tove Jansson",
+          "correct": true
+        },
+        {
+          "text": "Astrid Lindgren"
+        },
+        {
+          "text": "Elsa Beskow"
+        },
+        {
+          "text": "Selma Lagerlöf"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who wrote The Little Prince?",
+      "answers": [
+        {
+          "text": "Antoine de Saint-Exupéry",
+          "correct": true
+        },
+        {
+          "text": "Jules Verne"
+        },
+        {
+          "text": "Victor Hugo"
+        },
+        {
+          "text": "Marcel Pagnol"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Charlotte's Web features a pig named Wilbur."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "The Cat in the Hat was written by Maurice Sendak."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The first published Narnia novel was The Lion, the Witch and the Wardrobe."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "Anne of Green Gables is set mainly in Australia."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The original Babar stories were created by Jean de Brunhoff."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Pevensie"
+          ]
+        }
+      },
+      "text": "What is the surname of the siblings in The Lion, the Witch and the Wardrobe?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Peter Rabbit",
+            "Peter"
+          ]
+        }
+      },
+      "text": "What is the name of the rabbit in Beatrix Potter's best-known books?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "L. Frank Baum",
+            "Frank Baum",
+            "Baum"
+          ]
+        }
+      },
+      "text": "Who wrote The Wonderful Wizard of Oz?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Charlotte's Web",
+            "Charlottes Web"
+          ]
+        }
+      },
+      "text": "What is the title of E. B. White's novel about a pig and a spider?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 4,
+          "range": {
+            "min": 1,
+            "max": 8
+          }
+        }
+      },
+      "text": "How many children are there in the Pevensie family in the Narnia books?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 7,
+          "range": {
+            "min": 3,
+            "max": 12
+          }
+        }
+      },
+      "text": "How many books are in the original Harry Potter series?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 7,
+          "range": {
+            "min": 3,
+            "max": 12
+          }
+        }
+      },
+      "text": "How many Baudelaire children are there in A Series of Unfortunate Events?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 3,
+          "range": {
+            "min": 1,
+            "max": 7
+          }
+        }
+      },
+      "text": "How many siblings does the Baudelaire family have in A Series of Unfortunate Events?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "The Hobbit",
+            "The Lion, the Witch and the Wardrobe",
+            "Charlie and the Chocolate Factory",
+            "Harry Potter and the Philosopher's Stone"
+          ]
+        }
+      },
+      "text": "Put these children's fantasy novels in order of first publication, earliest first."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Alice's Adventures in Wonderland",
+            "The Wonderful Wizard of Oz",
+            "The Hobbit",
+            "The Little Prince"
+          ]
+        }
+      },
+      "text": "Put these children's classics in order of first publication, earliest first."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Author of Matilda",
+              "accepted": [
+                "Roald Dahl",
+                "Dahl"
+              ]
+            },
+            {
+              "label": "Author of The Secret Garden",
+              "accepted": [
+                "Frances Hodgson Burnett",
+                "F. H. Burnett",
+                "Burnett"
+              ]
+            },
+            {
+              "label": "Author of Pippi Longstocking",
+              "accepted": [
+                "Astrid Lindgren",
+                "Lindgren"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name the author of each of these children's classics."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "A. A. Milne"
+              },
+              "right": {
+                "text": "Winnie-the-Pooh"
+              }
+            },
+            {
+              "left": {
+                "text": "Beatrix Potter"
+              },
+              "right": {
+                "text": "Peter Rabbit"
+              }
+            },
+            {
+              "left": {
+                "text": "Lewis Carroll"
+              },
+              "right": {
+                "text": "Alice's Adventures in Wonderland"
+              }
+            },
+            {
+              "left": {
+                "text": "E. B. White"
+              },
+              "right": {
+                "text": "Charlotte's Web"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each author to a children's book or character associated with their work."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Tove Jansson"
+              },
+              "right": {
+                "text": "The Moomins"
+              }
+            },
+            {
+              "left": {
+                "text": "Michael Ende"
+              },
+              "right": {
+                "text": "The Neverending Story"
+              }
+            },
+            {
+              "left": {
+                "text": "Frances Hodgson Burnett"
+              },
+              "right": {
+                "text": "The Secret Garden"
+              }
+            },
+            {
+              "left": {
+                "text": "L. Frank Baum"
+              },
+              "right": {
+                "text": "The Wonderful Wizard of Oz"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each author to the children's classic they wrote or created."
+    }
+  }
+]

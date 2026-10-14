@@ -1,0 +1,660 @@
+[
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Spanish artist co-founded Cubism with Georges Braque?",
+      "answers": [
+        {
+          "text": "Pablo Picasso",
+          "correct": true
+        },
+        {
+          "text": "Salvador Dalí"
+        },
+        {
+          "text": "Joan Miró"
+        },
+        {
+          "text": "Diego Velázquez"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Mexican artist is known for self-portraits and works reflecting her own life and pain?",
+      "answers": [
+        {
+          "text": "Frida Kahlo",
+          "correct": true
+        },
+        {
+          "text": "Georgia O’Keeffe"
+        },
+        {
+          "text": "Tamara de Lempicka"
+        },
+        {
+          "text": "Leonora Carrington"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who painted the ceiling of the Sistine Chapel?",
+      "answers": [
+        {
+          "text": "Michelangelo",
+          "correct": true
+        },
+        {
+          "text": "Raphael"
+        },
+        {
+          "text": "Leonardo da Vinci"
+        },
+        {
+          "text": "Donatello"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Dutch painter created The Starry Night?",
+      "answers": [
+        {
+          "text": "Vincent van Gogh",
+          "correct": true
+        },
+        {
+          "text": "Johannes Vermeer"
+        },
+        {
+          "text": "Rembrandt van Rijn"
+        },
+        {
+          "text": "Piet Mondrian"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which artist painted the water-lily series at his garden in Giverny?",
+      "answers": [
+        {
+          "text": "Claude Monet",
+          "correct": true
+        },
+        {
+          "text": "Paul Cézanne"
+        },
+        {
+          "text": "Édouard Manet"
+        },
+        {
+          "text": "Edgar Degas"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which artist painted the ceiling frescoes of the Vatican's Raphael Rooms?",
+      "answers": [
+        {
+          "text": "Raphael",
+          "correct": true
+        },
+        {
+          "text": "Titian"
+        },
+        {
+          "text": "Caravaggio"
+        },
+        {
+          "text": "Tintoretto"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which artist painted American Gothic, featuring a farmer and a woman holding a pitchfork?",
+      "answers": [
+        {
+          "text": "Grant Wood",
+          "correct": true
+        },
+        {
+          "text": "Edward Hopper"
+        },
+        {
+          "text": "Thomas Hart Benton"
+        },
+        {
+          "text": "Andrew Wyeth"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which artist created the cut-paper work Jazz late in his life?",
+      "answers": [
+        {
+          "text": "Henri Matisse",
+          "correct": true
+        },
+        {
+          "text": "Pablo Picasso"
+        },
+        {
+          "text": "Marc Chagall"
+        },
+        {
+          "text": "Fernand Léger"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who painted The Garden of Earthly Delights?",
+      "answers": [
+        {
+          "text": "Hieronymus Bosch",
+          "correct": true
+        },
+        {
+          "text": "Pieter Bruegel the Elder"
+        },
+        {
+          "text": "Jan van Eyck"
+        },
+        {
+          "text": "Albrecht Dürer"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which artist is associated with the drip-painting technique and Abstract Expressionism?",
+      "answers": [
+        {
+          "text": "Jackson Pollock",
+          "correct": true
+        },
+        {
+          "text": "Mark Rothko"
+        },
+        {
+          "text": "Willem de Kooning"
+        },
+        {
+          "text": "Barnett Newman"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Italian painter is often credited with pioneering the technique of chiaroscuro in Renaissance painting?",
+      "answers": [
+        {
+          "text": "Leonardo da Vinci",
+          "correct": true
+        },
+        {
+          "text": "Sandro Botticelli"
+        },
+        {
+          "text": "Fra Angelico"
+        },
+        {
+          "text": "Andrea Mantegna"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which artist created the 1915 painting Black Square?",
+      "answers": [
+        {
+          "text": "Kazimir Malevich",
+          "correct": true
+        },
+        {
+          "text": "Wassily Kandinsky"
+        },
+        {
+          "text": "El Lissitzky"
+        },
+        {
+          "text": "Piet Mondrian"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Salvador Dalí was a leading figure in Surrealism."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "Georgia O’Keeffe is best known for painting the water lilies at Giverny."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Katsushika Hokusai created the woodblock print The Great Wave off Kanagawa."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "Édouard Manet painted the famous portrait Girl with a Pearl Earring."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Artemisia Gentileschi was a Baroque painter known for dramatic biblical scenes."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Frida Kahlo",
+            "Kahlo"
+          ]
+        }
+      },
+      "text": "Which Mexican artist painted many vivid self-portraits and is often shown wearing traditional Tehuana dress?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Hokusai",
+            "Katsushika Hokusai"
+          ]
+        }
+      },
+      "text": "Who created the Japanese woodblock print The Great Wave off Kanagawa?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Artemisia Gentileschi",
+            "Gentileschi"
+          ]
+        }
+      },
+      "text": "Which Baroque woman painter created Judith Slaying Holofernes?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "El Greco"
+          ]
+        }
+      },
+      "text": "What is the usual name of the Greek-born painter famous for elongated figures and dramatic religious works in Spain?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 4,
+          "range": {
+            "min": 1,
+            "max": 8
+          }
+        }
+      },
+      "text": "How many paintings of the sunflower series did Van Gogh make in Arles, in the best-known group?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 86,
+          "range": {
+            "min": 60,
+            "max": 120
+          }
+        }
+      },
+      "text": "At approximately what age, in years, did Pablo Picasso die?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 37,
+          "range": {
+            "min": 20,
+            "max": 55
+          }
+        }
+      },
+      "text": "At approximately what age, in years, did Vincent van Gogh die?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 35,
+          "range": {
+            "min": 20,
+            "max": 50
+          }
+        }
+      },
+      "text": "How many years old was Rembrandt when he completed The Night Watch in 1642?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Leonardo da Vinci",
+            "Rembrandt van Rijn",
+            "Claude Monet",
+            "Pablo Picasso"
+          ]
+        }
+      },
+      "text": "Put these artists in chronological order by birth, earliest first."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Sandro Botticelli",
+            "Artemisia Gentileschi",
+            "Vincent van Gogh",
+            "Frida Kahlo"
+          ]
+        }
+      },
+      "text": "Put these artists in chronological order by birth, earliest first."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Artist",
+              "accepted": [
+                "Edvard Munch",
+                "Munch"
+              ]
+            },
+            {
+              "label": "Painting",
+              "accepted": [
+                "The Scream",
+                "Scream"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name the artist and painting featuring a figure with an open mouth against a swirling sky."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Leonardo da Vinci"
+              },
+              "right": {
+                "text": "Mona Lisa"
+              }
+            },
+            {
+              "left": {
+                "text": "Vincent van Gogh"
+              },
+              "right": {
+                "text": "The Starry Night"
+              }
+            },
+            {
+              "left": {
+                "text": "Claude Monet"
+              },
+              "right": {
+                "text": "Water Lilies"
+              }
+            },
+            {
+              "left": {
+                "text": "Pablo Picasso"
+              },
+              "right": {
+                "text": "Guernica"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each artist to a famous work they created."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Famous artists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Kazimir Malevich"
+              },
+              "right": {
+                "text": "Black Square"
+              }
+            },
+            {
+              "left": {
+                "text": "Grant Wood"
+              },
+              "right": {
+                "text": "American Gothic"
+              }
+            },
+            {
+              "left": {
+                "text": "Hieronymus Bosch"
+              },
+              "right": {
+                "text": "The Garden of Earthly Delights"
+              }
+            },
+            {
+              "left": {
+                "text": "Artemisia Gentileschi"
+              },
+              "right": {
+                "text": "Judith Slaying Holofernes"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each artist to a famous work they created."
+    }
+  }
+]

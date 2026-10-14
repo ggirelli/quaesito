@@ -1,0 +1,679 @@
+[
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which plant is traditionally associated with kissing at Christmas?",
+      "answers": [
+        {
+          "text": "Mistletoe",
+          "correct": true
+        },
+        {
+          "text": "Holly"
+        },
+        {
+          "text": "Ivy"
+        },
+        {
+          "text": "Laurel"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What are the small oil lamps lit during Diwali commonly called?",
+      "answers": [
+        {
+          "text": "Diyas",
+          "correct": true
+        },
+        {
+          "text": "Lanterns"
+        },
+        {
+          "text": "Joss sticks"
+        },
+        {
+          "text": "Koinobori"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which flowers are central to Japan's springtime hanami tradition?",
+      "answers": [
+        {
+          "text": "Cherry blossoms",
+          "correct": true
+        },
+        {
+          "text": "Lotus flowers"
+        },
+        {
+          "text": "Chrysanthemums"
+        },
+        {
+          "text": "Plum fruits"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "During which Jewish festival is a special candleholder lit over eight nights?",
+      "answers": [
+        {
+          "text": "Hanukkah",
+          "correct": true
+        },
+        {
+          "text": "Purim"
+        },
+        {
+          "text": "Passover"
+        },
+        {
+          "text": "Sukkot"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is traditionally hidden inside a Greek New Year's cake, the vasilopita?",
+      "answers": [
+        {
+          "text": "A coin",
+          "correct": true
+        },
+        {
+          "text": "A small bell"
+        },
+        {
+          "text": "A paper star"
+        },
+        {
+          "text": "A dried fig"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which holiday is celebrated with a decorated tree in many parts of the world?",
+      "answers": [
+        {
+          "text": "Christmas",
+          "correct": true
+        },
+        {
+          "text": "Eid al-Fitr"
+        },
+        {
+          "text": "Vesak"
+        },
+        {
+          "text": "Nowruz"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the pre-Lenten celebration famous for parades in Rio de Janeiro?",
+      "answers": [
+        {
+          "text": "Carnival",
+          "correct": true
+        },
+        {
+          "text": "Obon"
+        },
+        {
+          "text": "Oktoberfest"
+        },
+        {
+          "text": "Midsummer"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In Thailand, which festival is famous for water-splashing celebrations in April?",
+      "answers": [
+        {
+          "text": "Songkran",
+          "correct": true
+        },
+        {
+          "text": "Loy Krathong"
+        },
+        {
+          "text": "Tet"
+        },
+        {
+          "text": "Chuseok"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the traditional name for Scotland's New Year's Eve celebration?",
+      "answers": [
+        {
+          "text": "Hogmanay",
+          "correct": true
+        },
+        {
+          "text": "Beltane"
+        },
+        {
+          "text": "Burns Night"
+        },
+        {
+          "text": "Up Helly Aa"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which festival marks the Persian New Year around the spring equinox?",
+      "answers": [
+        {
+          "text": "Nowruz",
+          "correct": true
+        },
+        {
+          "text": "Yalda"
+        },
+        {
+          "text": "Shab-e-Barat"
+        },
+        {
+          "text": "Ashura"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "At a traditional Japanese New Year visit to a shrine, what practice is common?",
+      "answers": [
+        {
+          "text": "Hatsumode",
+          "correct": true
+        },
+        {
+          "text": "Hanami"
+        },
+        {
+          "text": "Momijigari"
+        },
+        {
+          "text": "Bon odori"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Mexican holiday traditionally includes visits to family graves and offerings for deceased loved ones?",
+      "answers": [
+        {
+          "text": "Día de los Muertos",
+          "correct": true
+        },
+        {
+          "text": "Las Posadas"
+        },
+        {
+          "text": "Cinco de Mayo"
+        },
+        {
+          "text": "Día de la Candelaria"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In the UK, Boxing Day falls on 26 December.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Jewish festival of Hanukkah lasts for twelve nights.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Kwanzaa is celebrated over seven days, beginning on 26 December.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Hindu festival of Holi is traditionally associated with throwing coloured powders.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Midsummer is celebrated in Sweden only on 21 June every year.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What Hindu festival is widely known as the Festival of Colours?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Holi"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the Islamic month of fasting?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Ramadan",
+            "Ramadhan"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the seven-day African American cultural celebration that begins on 26 December?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Kwanzaa"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the Jewish New Year?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Rosh Hashanah",
+            "Rosh Hashana"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many animals are in the traditional Chinese zodiac cycle?",
+      "kind": {
+        "Number": {
+          "answer": 12,
+          "range": {
+            "min": 7,
+            "max": 20
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Including the helper candle, how many candles are on a Hanukkah hanukkiah?",
+      "kind": {
+        "Number": {
+          "answer": 9,
+          "range": {
+            "min": 4,
+            "max": 16
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many principles, known as the Nguzo Saba, are celebrated during Kwanzaa?",
+      "kind": {
+        "Number": {
+          "answer": 7,
+          "range": {
+            "min": 1,
+            "max": 12
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many days are there in the traditional Twelve Days of Christmas?",
+      "kind": {
+        "Number": {
+          "answer": 12,
+          "range": {
+            "min": 5,
+            "max": 21
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these fixed-date holidays in calendar order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "New Year's Day (1 January)",
+            "Valentine's Day (14 February)",
+            "Halloween (31 October)",
+            "Christmas Day (25 December)"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these seasonal festivals in approximate calendar order in the Northern Hemisphere, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Nowruz (around 20 March)",
+            "Midsummer (June)",
+            "Halloween (October)",
+            "Yule (December)"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the three gifts traditionally brought to Jesus by the Magi.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Gift 1",
+              "accepted": [
+                "Gold"
+              ]
+            },
+            {
+              "label": "Gift 2",
+              "accepted": [
+                "Frankincense"
+              ]
+            },
+            {
+              "label": "Gift 3",
+              "accepted": [
+                "Myrrh"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each celebration with the country most strongly associated with its modern tradition.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Songkran"
+              },
+              "right": {
+                "text": "Thailand"
+              }
+            },
+            {
+              "left": {
+                "text": "Hogmanay"
+              },
+              "right": {
+                "text": "Scotland"
+              }
+            },
+            {
+              "left": {
+                "text": "La Tomatina"
+              },
+              "right": {
+                "text": "Spain"
+              }
+            },
+            {
+              "left": {
+                "text": "Hanami"
+              },
+              "right": {
+                "text": "Japan"
+              }
+            },
+            {
+              "left": {
+                "text": "Nowruz"
+              },
+              "right": {
+                "text": "Iran"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Holidays & traditions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each holiday with the item or custom most associated with it.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Diwali"
+              },
+              "right": {
+                "text": "Oil lamps"
+              }
+            },
+            {
+              "left": {
+                "text": "Halloween"
+              },
+              "right": {
+                "text": "Jack-o'-lanterns"
+              }
+            },
+            {
+              "left": {
+                "text": "Hanukkah"
+              },
+              "right": {
+                "text": "Hanukkiah"
+              }
+            },
+            {
+              "left": {
+                "text": "Día de los Muertos"
+              },
+              "right": {
+                "text": "Marigolds"
+              }
+            },
+            {
+              "left": {
+                "text": "Chinese New Year"
+              },
+              "right": {
+                "text": "Red envelopes"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

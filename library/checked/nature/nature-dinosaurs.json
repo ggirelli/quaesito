@@ -1,0 +1,533 @@
+[
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which dinosaur is famous for the three horns on its head shield?",
+      "answers": [
+        {
+          "text": "Triceratops",
+          "correct": true
+        },
+        {
+          "text": "Stegosaurus"
+        },
+        {
+          "text": "Allosaurus"
+        },
+        {
+          "text": "Ankylosaurus"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which dinosaur had a large sail-like structure on its back?",
+      "answers": [
+        {
+          "text": "Spinosaurus",
+          "correct": true
+        },
+        {
+          "text": "Tyrannosaurus"
+        },
+        {
+          "text": "Iguanodon"
+        },
+        {
+          "text": "Velociraptor"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What did herbivorous dinosaurs mainly eat?",
+      "answers": [
+        {
+          "text": "Plants",
+          "correct": true
+        },
+        {
+          "text": "Fish"
+        },
+        {
+          "text": "Insects"
+        },
+        {
+          "text": "Other dinosaurs"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which dinosaur is known for the plates along its back and spikes on its tail?",
+      "answers": [
+        {
+          "text": "Stegosaurus",
+          "correct": true
+        },
+        {
+          "text": "Diplodocus"
+        },
+        {
+          "text": "Parasaurolophus"
+        },
+        {
+          "text": "Carnotaurus"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which dinosaur group includes Triceratops and Styracosaurus?",
+      "answers": [
+        {
+          "text": "Ceratopsians",
+          "correct": true
+        },
+        {
+          "text": "Hadrosaurs"
+        },
+        {
+          "text": "Sauropods"
+        },
+        {
+          "text": "Dromaeosaurs"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What are two leading hypotheses for the function of Stegosaurus's back plates?",
+      "answers": [
+        {
+          "text": "Display and heat exchange",
+          "correct": true
+        },
+        {
+          "text": "Grinding food into pulp"
+        },
+        {
+          "text": "Producing venom"
+        },
+        {
+          "text": "Digging underground nests"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which feathered Jurassic animal is a classic early example in discussions of bird evolution?",
+      "answers": [
+        {
+          "text": "Archaeopteryx",
+          "correct": true
+        },
+        {
+          "text": "Oviraptor"
+        },
+        {
+          "text": "Compsognathus"
+        },
+        {
+          "text": "Microraptor"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which group of dinosaurs includes the long-necked Diplodocus and Apatosaurus?",
+      "answers": [
+        {
+          "text": "Sauropods",
+          "correct": true
+        },
+        {
+          "text": "Theropods"
+        },
+        {
+          "text": "Ceratopsians"
+        },
+        {
+          "text": "Ankylosaurs"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the geologic period when non-avian dinosaurs became extinct?",
+      "answers": [
+        {
+          "text": "Cretaceous",
+          "correct": true
+        },
+        {
+          "text": "Jurassic"
+        },
+        {
+          "text": "Triassic"
+        },
+        {
+          "text": "Permian"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which feathered dinosaur is known from fossils showing four wings?",
+      "answers": [
+        {
+          "text": "Microraptor",
+          "correct": true
+        },
+        {
+          "text": "Deinonychus"
+        },
+        {
+          "text": "Coelophysis"
+        },
+        {
+          "text": "Plateosaurus"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which dinosaur genus has a name meaning 'different lizard'?",
+      "answers": [
+        {
+          "text": "Allosaurus",
+          "correct": true
+        },
+        {
+          "text": "Tyrannosaurus"
+        },
+        {
+          "text": "Brachiosaurus"
+        },
+        {
+          "text": "Stegosaurus"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Birds are living descendants of theropod dinosaurs."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "All dinosaurs lived at the same time as humans."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Some dinosaurs had feathers or feather-like coverings."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "Pterosaurs were dinosaurs."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The asteroid impact at the end of the Cretaceous is strongly linked to the extinction of non-avian dinosaurs."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Velociraptor"
+          ]
+        }
+      },
+      "text": "Which small theropod was portrayed as a pack hunter in the Jurassic Park films?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Pachycephalosaurus"
+          ]
+        }
+      },
+      "text": "Which dinosaur is known for its thick, domed skull?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Theropods",
+            "Theropod"
+          ]
+        }
+      },
+      "text": "What dinosaur group includes T. rex and the ancestors of modern birds?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 66,
+          "range": {
+            "min": 50,
+            "max": 85
+          }
+        }
+      },
+      "text": "About how many million years ago did the non-avian dinosaurs go extinct?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 12,
+          "range": {
+            "min": 7,
+            "max": 18
+          }
+        }
+      },
+      "text": "About how many metres long could an adult Tyrannosaurus rex grow?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Triassic",
+            "Jurassic",
+            "Cretaceous"
+          ]
+        }
+      },
+      "text": "Put the three periods of the Mesozoic Era in chronological order, earliest first."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Triceratops"
+              },
+              "right": {
+                "text": "Three facial horns"
+              }
+            },
+            {
+              "left": {
+                "text": "Stegosaurus"
+              },
+              "right": {
+                "text": "Back plates"
+              }
+            },
+            {
+              "left": {
+                "text": "Ankylosaurus"
+              },
+              "right": {
+                "text": "Armoured body and tail club"
+              }
+            },
+            {
+              "left": {
+                "text": "Diplodocus"
+              },
+              "right": {
+                "text": "Long neck and tail"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each dinosaur with its distinctive feature."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Dinosaurs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Sauropods"
+              },
+              "right": {
+                "text": "Long-necked herbivores"
+              }
+            },
+            {
+              "left": {
+                "text": "Theropods"
+              },
+              "right": {
+                "text": "Mostly bipedal dinosaurs"
+              }
+            },
+            {
+              "left": {
+                "text": "Ceratopsians"
+              },
+              "right": {
+                "text": "Beaked, often horned heads"
+              }
+            },
+            {
+              "left": {
+                "text": "Ankylosaurs"
+              },
+              "right": {
+                "text": "Heavy body armour"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each dinosaur group with a typical characteristic."
+    }
+  }
+]

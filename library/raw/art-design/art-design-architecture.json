@@ -1,0 +1,660 @@
+[
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which architect designed the glass pyramid at the Louvre in Paris?",
+      "answers": [
+        {
+          "text": "I. M. Pei",
+          "correct": true
+        },
+        {
+          "text": "Frank Gehry"
+        },
+        {
+          "text": "Renzo Piano"
+        },
+        {
+          "text": "Norman Foster"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which ancient structure in Rome was built as a temple and later used as a church?",
+      "answers": [
+        {
+          "text": "The Pantheon",
+          "correct": true
+        },
+        {
+          "text": "The Colosseum"
+        },
+        {
+          "text": "Circus Maximus"
+        },
+        {
+          "text": "Trajan's Column"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which architect designed Barcelona's unfinished Sagrada Família basilica?",
+      "answers": [
+        {
+          "text": "Antoni Gaudí",
+          "correct": true
+        },
+        {
+          "text": "Lluís Domènech i Montaner"
+        },
+        {
+          "text": "Santiago Calatrava"
+        },
+        {
+          "text": "Josep Puig i Cadafalch"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name for a pointed arch commonly associated with Gothic architecture?",
+      "answers": [
+        {
+          "text": "Pointed arch",
+          "correct": true
+        },
+        {
+          "text": "Round arch"
+        },
+        {
+          "text": "Segmental arch"
+        },
+        {
+          "text": "Parabolic arch"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which building in India was commissioned by Shah Jahan as a mausoleum for Mumtaz Mahal?",
+      "answers": [
+        {
+          "text": "The Taj Mahal",
+          "correct": true
+        },
+        {
+          "text": "The Red Fort"
+        },
+        {
+          "text": "Qutub Minar"
+        },
+        {
+          "text": "Humayun's Tomb"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which architect designed Fallingwater, a house built over a waterfall in Pennsylvania?",
+      "answers": [
+        {
+          "text": "Frank Lloyd Wright",
+          "correct": true
+        },
+        {
+          "text": "Louis Sullivan"
+        },
+        {
+          "text": "Philip Johnson"
+        },
+        {
+          "text": "Richard Neutra"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which ancient Greek building on the Acropolis was dedicated to Athena?",
+      "answers": [
+        {
+          "text": "The Parthenon",
+          "correct": true
+        },
+        {
+          "text": "The Erechtheion"
+        },
+        {
+          "text": "The Temple of Hephaestus"
+        },
+        {
+          "text": "The Temple of Apollo"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which architect co-founded the Bauhaus school in 1919?",
+      "answers": [
+        {
+          "text": "Walter Gropius",
+          "correct": true
+        },
+        {
+          "text": "Ludwig Mies van der Rohe"
+        },
+        {
+          "text": "Le Corbusier"
+        },
+        {
+          "text": "Hannes Meyer"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which architect designed the Barcelona Pavilion for the 1929 International Exposition?",
+      "answers": [
+        {
+          "text": "Ludwig Mies van der Rohe",
+          "correct": true
+        },
+        {
+          "text": "Walter Gropius"
+        },
+        {
+          "text": "Le Corbusier"
+        },
+        {
+          "text": "Marcel Breuer"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which architectural style is associated with flying buttresses and large stained-glass windows?",
+      "answers": [
+        {
+          "text": "Gothic",
+          "correct": true
+        },
+        {
+          "text": "Romanesque"
+        },
+        {
+          "text": "Baroque"
+        },
+        {
+          "text": "Neoclassical"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which architect designed the Salk Institute in La Jolla, California?",
+      "answers": [
+        {
+          "text": "Louis Kahn",
+          "correct": true
+        },
+        {
+          "text": "Paul Rudolph"
+        },
+        {
+          "text": "Eero Saarinen"
+        },
+        {
+          "text": "Philip Johnson"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who designed the 1958 Seagram Building in New York with Philip Johnson?",
+      "answers": [
+        {
+          "text": "Ludwig Mies van der Rohe",
+          "correct": true
+        },
+        {
+          "text": "Gordon Bunshaft"
+        },
+        {
+          "text": "Minoru Yamasaki"
+        },
+        {
+          "text": "Skidmore, Owings & Merrill"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The Eiffel Tower was built for the 1889 World's Fair in Paris."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "The Colosseum in Rome was built primarily from marble blocks."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The Roman arch helped builders span wider openings than a simple post-and-lintel system."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "Frank Lloyd Wright designed the Sydney Opera House."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The Bauhaus school moved from Weimar to Dessau in 1925."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "The Parthenon",
+            "Parthenon"
+          ]
+        }
+      },
+      "text": "What is the name of the famous ancient Greek temple atop the Acropolis in Athens?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Brunelleschi",
+            "Filippo Brunelleschi"
+          ]
+        }
+      },
+      "text": "Which architect-engineer designed the dome of Florence Cathedral?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Centre Pompidou",
+            "Pompidou Centre"
+          ]
+        }
+      },
+      "text": "What is the name of the Paris cultural centre designed by Renzo Piano and Richard Rogers?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Vanna Venturi House",
+            "Venturi House"
+          ]
+        }
+      },
+      "text": "What is the name of Robert Venturi's influential 1960s house in Philadelphia?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 324,
+          "range": {
+            "min": 250,
+            "max": 400
+          }
+        }
+      },
+      "text": "How many metres tall is the Eiffel Tower, including its antenna?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 55,
+          "range": {
+            "min": 35,
+            "max": 80
+          }
+        }
+      },
+      "text": "Approximately how many metres high is the dome of Florence Cathedral, measured to the top of its lantern?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 160,
+          "range": {
+            "min": 100,
+            "max": 230
+          }
+        }
+      },
+      "text": "Approximately how many metres long is the Parthenon's main building, measured along its long side?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 828,
+          "range": {
+            "min": 650,
+            "max": 1000
+          }
+        }
+      },
+      "text": "How many metres tall is the Burj Khalifa, the skyscraper in Dubai?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "The Parthenon",
+            "The Pantheon",
+            "The Eiffel Tower",
+            "The Sydney Opera House"
+          ]
+        }
+      },
+      "text": "Put these buildings in chronological order by completion, earliest first."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "The Crystal Palace",
+            "The Eiffel Tower",
+            "The Bauhaus building in Dessau",
+            "The Sydney Opera House"
+          ]
+        }
+      },
+      "text": "Put these buildings in chronological order by opening or completion, earliest first."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Architect",
+              "accepted": [
+                "Frank Lloyd Wright",
+                "Wright"
+              ]
+            },
+            {
+              "label": "House",
+              "accepted": [
+                "Fallingwater"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name the architect and the house built over a waterfall in Pennsylvania."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Antoni Gaudí"
+              },
+              "right": {
+                "text": "Sagrada Família"
+              }
+            },
+            {
+              "left": {
+                "text": "I. M. Pei"
+              },
+              "right": {
+                "text": "Louvre Pyramid"
+              }
+            },
+            {
+              "left": {
+                "text": "Frank Lloyd Wright"
+              },
+              "right": {
+                "text": "Fallingwater"
+              }
+            },
+            {
+              "left": {
+                "text": "Jørn Utzon"
+              },
+              "right": {
+                "text": "Sydney Opera House"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each architect to the building they designed."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Architecture",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Louis Kahn"
+              },
+              "right": {
+                "text": "Salk Institute"
+              }
+            },
+            {
+              "left": {
+                "text": "Walter Gropius"
+              },
+              "right": {
+                "text": "Bauhaus building in Dessau"
+              }
+            },
+            {
+              "left": {
+                "text": "Ludwig Mies van der Rohe"
+              },
+              "right": {
+                "text": "Barcelona Pavilion"
+              }
+            },
+            {
+              "left": {
+                "text": "Robert Venturi"
+              },
+              "right": {
+                "text": "Vanna Venturi House"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each architect to the building they designed."
+    }
+  }
+]

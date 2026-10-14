@@ -1,0 +1,607 @@
+[
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which letter comes immediately after Q in the English alphabet?",
+      "answers": [
+        {
+          "text": "R",
+          "correct": true
+        },
+        {
+          "text": "P"
+        },
+        {
+          "text": "S"
+        },
+        {
+          "text": "T"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which language is traditionally written using the Hangul script?",
+      "answers": [
+        {
+          "text": "Korean",
+          "correct": true
+        },
+        {
+          "text": "Thai"
+        },
+        {
+          "text": "Japanese"
+        },
+        {
+          "text": "Mongolian"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which of these is a vowel in the English alphabet?",
+      "answers": [
+        {
+          "text": "E",
+          "correct": true
+        },
+        {
+          "text": "B"
+        },
+        {
+          "text": "K"
+        },
+        {
+          "text": "T"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Braille is primarily designed to be read by using which sense?",
+      "answers": [
+        {
+          "text": "Touch",
+          "correct": true
+        },
+        {
+          "text": "Hearing"
+        },
+        {
+          "text": "Smell"
+        },
+        {
+          "text": "Taste"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which writing system is read from right to left?",
+      "answers": [
+        {
+          "text": "Arabic script",
+          "correct": true
+        },
+        {
+          "text": "Latin script"
+        },
+        {
+          "text": "Hangul"
+        },
+        {
+          "text": "Greek alphabet"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The word 'alphabet' comes from the names of which two Greek letters?",
+      "answers": [
+        {
+          "text": "Alpha and beta",
+          "correct": true
+        },
+        {
+          "text": "Gamma and delta"
+        },
+        {
+          "text": "Delta and theta"
+        },
+        {
+          "text": "Lambda and omega"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which script is used for writing Russian?",
+      "answers": [
+        {
+          "text": "Cyrillic",
+          "correct": true
+        },
+        {
+          "text": "Devanagari"
+        },
+        {
+          "text": "Hebrew"
+        },
+        {
+          "text": "Ge'ez"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which ancient script was deciphered with help from the Rosetta Stone?",
+      "answers": [
+        {
+          "text": "Egyptian hieroglyphs",
+          "correct": true
+        },
+        {
+          "text": "Linear B"
+        },
+        {
+          "text": "Cuneiform"
+        },
+        {
+          "text": "Etruscan"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which script is used for the main writing system of Hindi?",
+      "answers": [
+        {
+          "text": "Devanagari",
+          "correct": true
+        },
+        {
+          "text": "Gujarati"
+        },
+        {
+          "text": "Bengali"
+        },
+        {
+          "text": "Gurmukhi"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which ancient writing system used wedge-shaped marks on clay tablets?",
+      "answers": [
+        {
+          "text": "Cuneiform",
+          "correct": true
+        },
+        {
+          "text": "Ogham"
+        },
+        {
+          "text": "Runes"
+        },
+        {
+          "text": "Linear A"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which script was used to write the language of the ancient Mycenaeans?",
+      "answers": [
+        {
+          "text": "Linear B",
+          "correct": true
+        },
+        {
+          "text": "Linear A"
+        },
+        {
+          "text": "Phoenician"
+        },
+        {
+          "text": "Proto-Sinaitic"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "Japanese is normally written using only the hiragana script."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The Cyrillic alphabet is used to write Bulgarian."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "Linear A has been fully deciphered and its language is known."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Hangul",
+            "Hangeul"
+          ]
+        }
+      },
+      "text": "What is the name of the Korean alphabet?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Hieroglyphs",
+            "Egyptian hieroglyphs",
+            "Hieroglyphics"
+          ]
+        }
+      },
+      "text": "What is the name of the ancient Egyptian picture-based writing system?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 24,
+          "range": {
+            "min": 18,
+            "max": 32
+          }
+        }
+      },
+      "text": "How many basic letters are in the Greek alphabet?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 6,
+          "range": {
+            "min": 4,
+            "max": 10
+          }
+        }
+      },
+      "text": "How many dots are in a standard Braille cell?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 46,
+          "range": {
+            "min": 35,
+            "max": 60
+          }
+        }
+      },
+      "text": "How many signs are in the basic Japanese hiragana syllabary, excluding obsolete wi and we?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Latin"
+              },
+              "right": {
+                "text": "English"
+              }
+            },
+            {
+              "left": {
+                "text": "Cyrillic"
+              },
+              "right": {
+                "text": "Russian"
+              }
+            },
+            {
+              "left": {
+                "text": "Hangul"
+              },
+              "right": {
+                "text": "Korean"
+              }
+            },
+            {
+              "left": {
+                "text": "Devanagari"
+              },
+              "right": {
+                "text": "Hindi"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each script or alphabet with a language commonly written using it."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Linear B"
+              },
+              "right": {
+                "text": "Mycenaean Greek"
+              }
+            },
+            {
+              "left": {
+                "text": "Ogham"
+              },
+              "right": {
+                "text": "Early Irish"
+              }
+            },
+            {
+              "left": {
+                "text": "Cuneiform"
+              },
+              "right": {
+                "text": "Sumerian"
+              }
+            },
+            {
+              "left": {
+                "text": "Hieroglyphs"
+              },
+              "right": {
+                "text": "Ancient Egyptian"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each writing system with a language it was used to write."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which alphabet was the main model for the Cyrillic alphabet?",
+      "answers": [
+        {
+          "text": "Greek alphabet",
+          "correct": true
+        },
+        {
+          "text": "Cyrillic alphabet"
+        },
+        {
+          "text": "Latin alphabet"
+        },
+        {
+          "text": "Armenian alphabet"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Runes",
+            "Runic script",
+            "Futhark",
+            "Younger Futhark",
+            "Runic alphabet",
+            "Runic"
+          ]
+        }
+      },
+      "text": "What is the name of the ancient script used for writing Old Norse inscriptions?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Epsilon",
+            "Theta",
+            "Lambda",
+            "Sigma"
+          ]
+        }
+      },
+      "text": "Order these Greek letters by their position in the Greek alphabet."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Cuneiform",
+            "Linear B",
+            "Phoenician alphabet",
+            "Latin alphabet"
+          ]
+        }
+      },
+      "text": "Order these writing systems by earliest known use, earliest first."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Alphabets & scripts",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Greek letter after epsilon",
+              "accepted": [
+                "zeta"
+              ]
+            },
+            {
+              "label": "Greek letter after kappa",
+              "accepted": [
+                "lambda"
+              ]
+            },
+            {
+              "label": "Greek letter after rho",
+              "accepted": [
+                "sigma"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Type the Greek letter that comes after each letter."
+    }
+  }
+]

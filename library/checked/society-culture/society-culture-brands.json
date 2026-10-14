@@ -1,0 +1,533 @@
+[
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which company makes the PlayStation video game consoles?",
+      "answers": [
+        {
+          "text": "Sony",
+          "correct": true
+        },
+        {
+          "text": "Nintendo"
+        },
+        {
+          "text": "Sega"
+        },
+        {
+          "text": "Panasonic"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which sportswear brand uses a swoosh as its logo?",
+      "answers": [
+        {
+          "text": "Nike",
+          "correct": true
+        },
+        {
+          "text": "Adidas"
+        },
+        {
+          "text": "Puma"
+        },
+        {
+          "text": "Reebok"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which brand is famous for its interlocking double-C logo?",
+      "answers": [
+        {
+          "text": "Chanel",
+          "correct": true
+        },
+        {
+          "text": "Gucci"
+        },
+        {
+          "text": "Prada"
+        },
+        {
+          "text": "Dior"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which company owns the Android mobile operating system?",
+      "answers": [
+        {
+          "text": "Google",
+          "correct": true
+        },
+        {
+          "text": "Microsoft"
+        },
+        {
+          "text": "Samsung"
+        },
+        {
+          "text": "Amazon"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which fast-food chain is associated with the slogan 'I'm lovin' it'?",
+      "answers": [
+        {
+          "text": "McDonald's",
+          "correct": true
+        },
+        {
+          "text": "Burger King"
+        },
+        {
+          "text": "KFC"
+        },
+        {
+          "text": "Wendy's"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which car brand uses a four-ring emblem?",
+      "answers": [
+        {
+          "text": "Audi",
+          "correct": true
+        },
+        {
+          "text": "BMW"
+        },
+        {
+          "text": "Volvo"
+        },
+        {
+          "text": "Lexus"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which company created the Barbie doll?",
+      "answers": [
+        {
+          "text": "Mattel",
+          "correct": true
+        },
+        {
+          "text": "Hasbro"
+        },
+        {
+          "text": "Lego Group"
+        },
+        {
+          "text": "Fisher-Price"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which brand's name comes from the initials of its founder, Ingvar Kamprad, and his family farm and village?",
+      "answers": [
+        {
+          "text": "IKEA",
+          "correct": true
+        },
+        {
+          "text": "H&M"
+        },
+        {
+          "text": "LEGO"
+        },
+        {
+          "text": "ASICS"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Japanese brand takes its name from the Latin phrase 'a sound mind in a sound body'?",
+      "answers": [
+        {
+          "text": "ASICS",
+          "correct": true
+        },
+        {
+          "text": "Canon"
+        },
+        {
+          "text": "Casio"
+        },
+        {
+          "text": "Nikon"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which company was originally called 'Blue Ribbon Sports'?",
+      "answers": [
+        {
+          "text": "Nike",
+          "correct": true
+        },
+        {
+          "text": "New Balance"
+        },
+        {
+          "text": "Under Armour"
+        },
+        {
+          "text": "Converse"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The LEGO name is derived from the Danish words 'leg godt', meaning 'play well'.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The first Apple computer was called the Macintosh.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The company that makes Oreo cookies is Mondelez International.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The automobile brand Volvo was founded in Germany.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which brand makes the Galaxy line of smartphones?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Samsung"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which soft drink brand is known for its red-and-white script logo?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Coca-Cola",
+            "Coke"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year was the LEGO Group founded?",
+      "kind": {
+        "Number": {
+          "answer": 1932,
+          "range": {
+            "min": 1900,
+            "max": 1945
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year was the first McDonald's restaurant opened by Richard and Maurice McDonald?",
+      "kind": {
+        "Number": {
+          "answer": 1940,
+          "range": {
+            "min": 1920,
+            "max": 1970
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many stripes are on the Adidas logo commonly known as the Performance logo?",
+      "kind": {
+        "Number": {
+          "answer": 3,
+          "range": {
+            "min": 1,
+            "max": 8
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these technology brands in order of founding year, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Nokia (1865)",
+            "Nintendo (1889)",
+            "Sony (1946)",
+            "Apple (1976)"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these fashion brands in order of founding year, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Hermès (1837)",
+            "Levi Strauss & Co. (1853)",
+            "Prada (1913)",
+            "Gucci (1921)"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each brand with the product it is especially known for.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Dyson"
+              },
+              "right": {
+                "text": "Vacuum cleaners"
+              }
+            },
+            {
+              "left": {
+                "text": "Rolex"
+              },
+              "right": {
+                "text": "Watches"
+              }
+            },
+            {
+              "left": {
+                "text": "Fender"
+              },
+              "right": {
+                "text": "Electric guitars"
+              }
+            },
+            {
+              "left": {
+                "text": "Birkenstock"
+              },
+              "right": {
+                "text": "Sandals"
+              }
+            },
+            {
+              "left": {
+                "text": "Bialetti"
+              },
+              "right": {
+                "text": "Moka pots"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each brand with its country of origin.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Nokia"
+              },
+              "right": {
+                "text": "Finland"
+              }
+            },
+            {
+              "left": {
+                "text": "L'Oréal"
+              },
+              "right": {
+                "text": "France"
+              }
+            },
+            {
+              "left": {
+                "text": "Nintendo"
+              },
+              "right": {
+                "text": "Japan"
+              }
+            },
+            {
+              "left": {
+                "text": "IKEA"
+              },
+              "right": {
+                "text": "Sweden"
+              }
+            },
+            {
+              "left": {
+                "text": "Lamborghini"
+              },
+              "right": {
+                "text": "Italy"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

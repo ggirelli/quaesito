@@ -1,0 +1,179 @@
+[
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which country did Germany invade, starting the war in Europe?",
+      "answers": [
+        {
+          "text": "Poland",
+          "correct": true
+        },
+        {
+          "text": "Belgium"
+        },
+        {
+          "text": "Norway"
+        },
+        {
+          "text": "France"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What was the code name for the Allied invasion of Normandy?",
+      "answers": [
+        {
+          "text": "Operation Overlord",
+          "correct": true
+        },
+        {
+          "text": "Operation Torch"
+        },
+        {
+          "text": "Operation Market Garden"
+        },
+        {
+          "text": "Operation Barbarossa"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Soviet city endured a siege from 1941 to 1944 during World War II?",
+      "answers": [
+        {
+          "text": "Leningrad",
+          "correct": true
+        },
+        {
+          "text": "Stalingrad"
+        },
+        {
+          "text": "Moscow"
+        },
+        {
+          "text": "Sevastopol"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which German general surrendered Army Group Africa in Tunisia in May 1943?",
+      "answers": [
+        {
+          "text": "Hans-Jürgen von Arnim",
+          "correct": true
+        },
+        {
+          "text": "Erwin Rommel"
+        },
+        {
+          "text": "Albert Kesselring"
+        },
+        {
+          "text": "Gerd von Rundstedt"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What was the name of the Allied deception plan that misled Germany about the Normandy landing site?",
+      "answers": [
+        {
+          "text": "Operation Fortitude",
+          "correct": true
+        },
+        {
+          "text": "Operation Mincemeat"
+        },
+        {
+          "text": "Operation Cockade"
+        },
+        {
+          "text": "Operation Jubilee"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 6,
+          "range": {
+            "min": 2,
+            "max": 12
+          }
+        }
+      },
+      "text": "How many years passed between Germany's invasion of Poland and its surrender? Give the number."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Axis power",
+              "accepted": [
+                "Germany",
+                "Italy",
+                "Japan"
+              ]
+            },
+            {
+              "label": "Axis power",
+              "accepted": [
+                "Germany",
+                "Italy",
+                "Japan"
+              ]
+            },
+            {
+              "label": "Axis power",
+              "accepted": [
+                "Germany",
+                "Italy",
+                "Japan"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name the three principal Axis powers in World War II."
+    }
+  }
+]

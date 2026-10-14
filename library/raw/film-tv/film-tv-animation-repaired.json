@@ -1,0 +1,177 @@
+[
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Disney film features the talking snowman Olaf?",
+      "answers": [
+        {
+          "text": "Moana"
+        },
+        {
+          "text": "Frozen",
+          "correct": true
+        },
+        {
+          "text": "Tangled"
+        },
+        {
+          "text": "Brave"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which animated series is set in the town of Quahog?",
+      "answers": [
+        {
+          "text": "Family Guy",
+          "correct": true
+        },
+        {
+          "text": "The Simpsons"
+        },
+        {
+          "text": "South Park"
+        },
+        {
+          "text": "Futurama"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In Shrek, which actor voices Donkey?",
+      "answers": [
+        {
+          "text": "Eddie Murphy",
+          "correct": true
+        },
+        {
+          "text": "Mike Myers"
+        },
+        {
+          "text": "Chris Rock"
+        },
+        {
+          "text": "Antonio Banderas"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the sleek probe robot WALL-E falls in love with?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "EVE",
+            "Eve",
+            "E.V.E."
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these Pixar films in release order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Toy Story",
+            "A Bug's Life",
+            "Monsters, Inc.",
+            "Finding Nemo"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these Studio Ghibli films in release order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Nausicaä of the Valley of the Wind",
+            "My Neighbor Totoro",
+            "Princess Mononoke",
+            "Spirited Away"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each animated character with the franchise they belong to.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Pikachu"
+              },
+              "right": {
+                "text": "Pokémon"
+              }
+            },
+            {
+              "left": {
+                "text": "Bender"
+              },
+              "right": {
+                "text": "Futurama"
+              }
+            },
+            {
+              "left": {
+                "text": "Velma Dinkley"
+              },
+              "right": {
+                "text": "Scooby-Doo"
+              }
+            },
+            {
+              "left": {
+                "text": "Aang"
+              },
+              "right": {
+                "text": "Avatar: The Last Airbender"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

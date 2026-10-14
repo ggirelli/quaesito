@@ -1,0 +1,60 @@
+[
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which natural fibre is produced by the larvae of Bombyx mori?",
+      "answers": [
+        {
+          "text": "Silk",
+          "correct": true
+        },
+        {
+          "text": "Linen"
+        },
+        {
+          "text": "Wool"
+        },
+        {
+          "text": "Hemp"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Gabrielle"
+          ]
+        }
+      },
+      "text": "What was Coco Chanel's real first name?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 1921,
+          "range": {
+            "min": 1900,
+            "max": 1945
+          }
+        }
+      },
+      "text": "In what year was Chanel No. 5 launched?"
+    }
+  }
+]

@@ -1,0 +1,346 @@
+[
+  {
+    "file": "music-album-covers-firsts.json",
+    "entry": 1,
+    "question": "Which band appears on the cover of The Beatles' album Abbey Road?",
+    "problem": "misleading",
+    "explanation": "The question text names The Beatles, so the answer is given away. It also asks the same fact as music-bands-artists.json #1 (Abbey Road / The Beatles).",
+    "fix": "drop (the suggested zebra-crossing rewrite would duplicate this file's #30 pair 'Four people crossing a road' -> Abbey Road)"
+  },
+  {
+    "file": "music-album-covers-firsts.json",
+    "entry": 7,
+    "question": "Which band's debut album cover shows its members seated on a sofa?",
+    "problem": "wrong",
+    "explanation": "The Ramones' 1976 debut cover (photo by Roberta Bayley) shows the four members standing and leaning against a brick wall, not sitting on a sofa. None of the listed debuts shows a band on a sofa.",
+    "fix": "Change text to 'Which band's 1976 debut album cover shows four members in leather jackets leaning against a brick wall?' and keep Ramones as correct."
+  },
+  {
+    "file": "music-album-covers-firsts.json",
+    "entry": 9,
+    "question": "Which album cover depicts a prism and rainbow on a black background?",
+    "problem": "duplicate",
+    "explanation": "This asks the same fact as entry #3 ('Which Pink Floyd album cover shows a prism splitting light?'), and the prism cover appears again in #18 and #30.",
+    "fix": "drop"
+  },
+  {
+    "file": "music-album-covers-firsts.json",
+    "entry": 10,
+    "question": "Which Beastie Boys album was the first rap LP released by Def Jam?",
+    "problem": "wrong",
+    "explanation": "Def Jam's first LP was LL Cool J's Radio (18 Nov 1985). Licensed to Ill came out in 1986.",
+    "fix": "Change text to 'Which 1986 Beastie Boys debut album was released on Def Jam?' (Licensed to Ill), or ask 'Which album was Def Jam's first LP?' with LL Cool J's Radio as the answer."
+  },
+  {
+    "file": "music-album-covers-firsts.json",
+    "entry": 11,
+    "question": "Which Beatles album was first released in the UK with a gatefold sleeve?",
+    "problem": "wrong",
+    "explanation": "The first Beatles UK album with a gatefold sleeve was Beatles for Sale (December 1964), not Sgt. Pepper.",
+    "fix": "Make Beatles for Sale the correct answer and replace the Sgt. Pepper option, or rephrase as 'Which of these Beatles albums had a gatefold sleeve with cut-out inserts?' with Sgt. Pepper correct."
+  },
+  {
+    "file": "music-album-covers-firsts.json",
+    "entry": 12,
+    "question": "Which cover is famous for its close-up of a child's face and a butterfly?",
+    "problem": "wrong",
+    "explanation": "The cover of In the Court of the Crimson King is Barry Godber's painting of an adult man's screaming face. It has no child and no butterfly. No option fits the description.",
+    "fix": "Change text to 'Which album cover is famous for Barry Godber's painting of a screaming face in extreme close-up?' and keep In the Court of the Crimson King as correct."
+  },
+  {
+    "file": "music-album-covers-firsts.json",
+    "entry": 18,
+    "question": "Which band released the prism-cover album The Dark Side of the Moon?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as music-bands-artists.json #7 (Which band released The Dark Side of the Moon? Pink Floyd). Entry #3 in this file also names Pink Floyd with the prism cover, which gives this answer away.",
+    "fix": "drop"
+  },
+  {
+    "file": "music-album-covers-firsts.json",
+    "entry": 23,
+    "question": "How many people are shown in the Sgt. Pepper cover collage?",
+    "problem": "ambiguous",
+    "explanation": "Sources disagree on the count: 'more than 70', 57 photographs plus 9 waxworks, around 88 figures. The total depends on whether the Beatles, the wax Beatles, dolls and statues are counted, so 71 is not a settled answer.",
+    "fix": "Drop, or ask an undisputed fact instead, e.g. 'In what year was Sgt. Pepper released?' (1967)."
+  },
+  {
+    "file": "music-album-covers-firsts.json",
+    "entry": 24,
+    "question": "In what year was the first commercially released picture-disc album issued?",
+    "problem": "ambiguous",
+    "explanation": "The 1970 answer refers to Curved Air's Air Conditioning, which is usually described more narrowly: the first commercially available LP picture disc in the UK, or the first rock picture-disc album. Picture-disc records (78s such as the 1946-47 Vogue discs) existed decades earlier. An unqualified worldwide 'first picture-disc album' claim cannot be backed up.",
+    "fix": "Change text to 'In what year did Curved Air release Air Conditioning, often cited as the first picture-disc LP?' (answer 1970), or drop."
+  },
+  {
+    "file": "music-classical.json",
+    "entry": 16,
+    "question": "The opera Carmen was composed by Giuseppe Verdi.",
+    "problem": "duplicate",
+    "explanation": "Entry #19 (Who composed Carmen? Bizet) and the #30 pair (Bizet–Carmen) ask the same fact.",
+    "fix": "Drop this entry, or swap the opera, e.g. 'The opera Tosca was composed by Giuseppe Verdi.' (false; it is Puccini)."
+  },
+  {
+    "file": "music-classical.json",
+    "entry": 21,
+    "question": "Who composed The Rite of Spring?",
+    "problem": "duplicate",
+    "explanation": "Entry #7 says 'Stravinsky's The Rite of Spring' in its question text, which gives this answer away, and #27 also lists 'Stravinsky: The Rite of Spring'.",
+    "fix": "Drop, or replace with another work, e.g. 'Who composed The Firebird?' (Stravinsky) and remove 'Stravinsky's' from #7's wording."
+  },
+  {
+    "file": "music-classical.json",
+    "entry": 22,
+    "question": "How many keys does a standard modern concert grand piano have?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as entry #14 (True/False: 'A standard modern concert grand piano has 88 keys'). The identical question also appears as music-instruments.json #25, and instruments #1 asks the same 88-key fact.",
+    "fix": "Drop this entry and drop music-instruments.json #25; keep one 88-key question in the category."
+  },
+  {
+    "file": "music-classical.json",
+    "entry": 28,
+    "question": "Name three famous ballets composed by Tchaikovsky.",
+    "problem": "ambiguous",
+    "explanation": "The app grades Parts slot by slot: engine.rs judges each text against its own part index. Labels '1st/2nd/3rd ballet' with one fixed title each mark a team wrong for giving Nutcracker first, even though any order is correct.",
+    "fix": "Relabel by premiere year: 'Ballet of 1877' = Swan Lake; 'Ballet of 1890' = The Sleeping Beauty, Sleeping Beauty; 'Ballet of 1892' = The Nutcracker, Nutcracker. Do not put all titles in every slot, because a team could then answer 'Swan Lake' three times and get full marks."
+  },
+  {
+    "file": "music-eurovision.json",
+    "entry": 3,
+    "question": "Which country has traditionally performed last in Eurovision's running order most often?",
+    "problem": "wrong",
+    "explanation": "No such tradition exists for the United Kingdom, and there is no well-established record for performing last. The running order has been drawn or producer-set, so this answer cannot be backed up.",
+    "fix": "drop"
+  },
+  {
+    "file": "music-eurovision.json",
+    "entry": 9,
+    "question": "Which country made its Eurovision debut in 2015 with 'Warrior'?",
+    "problem": "wrong",
+    "explanation": "Australia debuted in 2015 with Guy Sebastian's 'Tonight Again'. 'Warrior' was Georgia's 2015 entry (Nina Sublatti), and Georgia debuted in 2007. The question also duplicates entry #17 (True/False: Australia first competed in 2015).",
+    "fix": "Change 'Warrior' to 'Tonight Again' (Australia stays correct) and drop #17, or drop this entry."
+  },
+  {
+    "file": "music-eurovision.json",
+    "entry": 14,
+    "question": "ABBA won Eurovision representing Sweden in 1974.",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as entry #2 (Which Swedish group won in 1974 with 'Waterloo'? ABBA), whose wording also gives this away.",
+    "fix": "drop"
+  },
+  {
+    "file": "music-eurovision.json",
+    "entry": 16,
+    "question": "Céline Dion represented France when she won Eurovision in 1988.",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as entry #5 (Which country did Céline Dion represent in 1988? Switzerland). The first review gave the number as #15, which is actually the colour-broadcast True/False.",
+    "fix": "drop (the suggested replacement 'first broadcast in colour in 1968' would duplicate the existing #15, 'first broadcast in colour in 1956', which is false)"
+  },
+  {
+    "file": "music-eurovision.json",
+    "entry": 18,
+    "question": "What was the title of Portugal's first Eurovision-winning song in 2017?",
+    "problem": "duplicate",
+    "explanation": "The #30 Pairs entry matches 'Portugal (2017)' to 'Amar pelos dois', which is the same fact. The first review gave the number as #17, which is actually the Australia True/False.",
+    "fix": "Replace the Portugal pair in #30, e.g. 'Netherlands (2019)' – 'Arcade', or drop this entry."
+  },
+  {
+    "file": "music-eurovision.json",
+    "entry": 22,
+    "question": "In what year was the first Eurovision Song Contest held?",
+    "problem": "duplicate",
+    "explanation": "Entry #1 says 'the first Eurovision Song Contest in 1956' in its question text, which gives this answer away. The first review gave the number as #21, which is actually the Ukraine 2016 question.",
+    "fix": "Drop, or remove 'in 1956' from #1's text."
+  },
+  {
+    "file": "music-instruments.json",
+    "entry": 5,
+    "question": "Which percussion instrument is made of a set of tuned metal bars?",
+    "problem": "ambiguous",
+    "explanation": "The vibraphone, which is listed as a distractor, is also a set of tuned metal bars.",
+    "fix": "Replace the Vibraphone option with Timpani or Wood block (not Celesta, which also uses tuned metal bars), or rephrase as 'small, high-pitched set of tuned steel bars struck with hard mallets, with no resonators or motor'."
+  },
+  {
+    "file": "music-instruments.json",
+    "entry": 6,
+    "question": "Which instrument is commonly associated with Scottish bagpipe music?",
+    "problem": "quality",
+    "explanation": "Asking which bagpipe goes with bagpipe music is circular, and 'Highland' gives Scotland away.",
+    "fix": "Rephrase as 'Which type of bagpipe is played in Scottish pipe bands?' or 'Which bagpipes, from Ireland, are pumped with a bellows under the arm?' (Uilleann pipes)."
+  },
+  {
+    "file": "music-instruments.json",
+    "entry": 15,
+    "question": "The oboe is normally tuned by giving the orchestra its tuning A.",
+    "problem": "quality",
+    "explanation": "The statement is garbled. The oboe gives the orchestra its tuning A; it is not 'tuned by giving' anything. As written, players cannot tell what is being asserted.",
+    "fix": "Change text to 'The oboe normally gives the orchestra its tuning A.' (true)."
+  },
+  {
+    "file": "music-instruments.json",
+    "entry": 18,
+    "question": "Which instrument has a mouthpiece, valves and a flared bell, and is common in brass bands?",
+    "problem": "ambiguous",
+    "explanation": "Trumpet, flugelhorn, tenor horn, baritone, euphonium and tuba all match this description, but only Cornet is accepted.",
+    "fix": "Rephrase as 'Which compact, conical-bore cousin of the trumpet is the lead melody instrument of British brass bands?' (Cornet), or accept the other valved brass instruments."
+  },
+  {
+    "file": "music-instruments.json",
+    "entry": 22,
+    "question": "How many strings does a standard four-string bass guitar have?",
+    "problem": "misleading",
+    "explanation": "The question text says 'four-string', which states the answer.",
+    "fix": "Change text to 'How many strings does a standard bass guitar have?' (4)."
+  },
+  {
+    "file": "music-instruments.json",
+    "entry": 25,
+    "question": "How many keys does a standard modern concert grand piano have?",
+    "problem": "duplicate",
+    "explanation": "This is identical to music-classical.json #22 and asks the same fact as #1 in this file (instrument with 88 keys).",
+    "fix": "drop"
+  },
+  {
+    "file": "music-instruments.json",
+    "entry": 28,
+    "question": "Name the three percussion instruments in a standard drum kit.",
+    "problem": "ambiguous",
+    "explanation": "A standard kit has more than three instruments (toms, ride and crash cymbals), so 'the three' is wrong. Parts are also graded slot by slot, so '1st/2nd/3rd instrument' with one fixed answer each marks correct answers in another order as wrong.",
+    "fix": "Relabel by role: 'Drum played with a foot pedal' (Bass drum, Kick drum), 'Drum with wires under its bottom head' (Snare drum, Snare), 'Pair of cymbals closed with a foot pedal' (Hi-hat, Hi hat); change text to 'Name these drum-kit instruments.'"
+  },
+  {
+    "file": "music-jazz-blues.json",
+    "entry": 2,
+    "question": "Which singer was nicknamed the 'Queen of the Blues'?",
+    "problem": "ambiguous",
+    "explanation": "Dinah Washington, which is listed as a distractor, was also widely billed as the 'Queen of the Blues', as was Koko Taylor.",
+    "fix": "Replace the Dinah Washington option with Ella Fitzgerald or Peggy Lee, or name Koko Taylor's Chicago blues context in the question."
+  },
+  {
+    "file": "music-jazz-blues.json",
+    "entry": 22,
+    "question": "How many beats are in one bar of a standard 12-bar blues in 4/4 time?",
+    "problem": "wrong",
+    "explanation": "One bar of 4/4 has 4 beats. The answer 48 is the number of beats in the whole 12-bar chorus.",
+    "fix": "Change text to 'How many beats are in one full chorus of a standard 12-bar blues in 4/4 time?' (48, range 24–72)."
+  },
+  {
+    "file": "music-jazz-blues.json",
+    "entry": 24,
+    "question": "How many strings does a standard six-string electric blues guitar have?",
+    "problem": "misleading",
+    "explanation": "The question text says 'six-string', which states the answer.",
+    "fix": "Drop, or change to 'How many strings does a standard electric guitar have?' (6)."
+  },
+  {
+    "file": "music-jazz-blues.json",
+    "entry": 26,
+    "question": "Put these musicians in order of birth, earliest first.",
+    "problem": "wrong",
+    "explanation": "Duke Ellington was born 29 April 1899, before Louis Armstrong (4 August 1901). Jelly Roll Morton was born in 1890 and Charlie Parker in 1920.",
+    "fix": "Order the items as: Jelly Roll Morton, Duke Ellington, Louis Armstrong, Charlie Parker."
+  },
+  {
+    "file": "music-jazz-blues.json",
+    "entry": 27,
+    "question": "Put these albums in order of original release, earliest first.",
+    "problem": "wrong",
+    "explanation": "The Shape of Jazz to Come came out in late 1959 (Atlantic, about October/November), and Giant Steps came out in early 1960. Kind of Blue was August 1959 and Bitches Brew 1970.",
+    "fix": "Order the items as: Kind of Blue, The Shape of Jazz to Come, Giant Steps, Bitches Brew."
+  },
+  {
+    "file": "music-jazz-blues.json",
+    "entry": 28,
+    "question": "Name the three musicians often called the 'Kings of the Blues'.",
+    "problem": "ambiguous",
+    "explanation": "Parts are graded slot by slot, so the labels 'Guitarist 1/2/3' with one fixed name each mark a team wrong for naming the three Kings in another order.",
+    "fix": "Relabel distinctly, e.g. 'Played a guitar named Lucille' = B.B. King, BB King; 'Flying V, \"Born Under a Bad Sign\"' = Albert King; '\"Hide Away\" instrumental' = Freddie King. Do not put all names in every slot, because a team could then answer 'B.B. King' three times and get full marks."
+  },
+  {
+    "file": "music-musicals.json",
+    "entry": 2,
+    "question": "Which musical features the song 'Memory' and a tribe of cats?",
+    "problem": "misleading",
+    "explanation": "'A tribe of cats' gives away the answer Cats.",
+    "fix": "Change text to 'Which Andrew Lloyd Webber musical features the song \"Memory\"?'"
+  },
+  {
+    "file": "music-musicals.json",
+    "entry": 4,
+    "question": "Which musical tells the story of Alexander Hamilton?",
+    "problem": "misleading",
+    "explanation": "The question names Hamilton, which is the answer.",
+    "fix": "Change text to 'Which Lin-Manuel Miranda musical tells the story of a US Founding Father who was the first Secretary of the Treasury?'"
+  },
+  {
+    "file": "music-musicals.json",
+    "entry": 12,
+    "question": "Which musical by Kander and Ebb is set in a Chicago courtroom and prison?",
+    "problem": "misleading",
+    "explanation": "The question says 'Chicago', which gives away the answer Chicago.",
+    "fix": "Change text to 'Which Kander and Ebb musical follows murderesses Roxie Hart and Velma Kelly?'"
+  },
+  {
+    "file": "music-musicals.json",
+    "entry": 15,
+    "question": "The musical Rent is loosely based on Puccini's opera La Bohème.",
+    "problem": "duplicate",
+    "explanation": "The #29 Pairs entry matches Rent to La Bohème, which is the same fact.",
+    "fix": "Replace the Rent pair in #29, e.g. 'Miss Saigon' – 'Madama Butterfly', or drop this entry."
+  },
+  {
+    "file": "music-musicals.json",
+    "entry": 16,
+    "question": "Andrew Lloyd Webber composed the music for Les Misérables.",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as entry #1 (Who composed Les Misérables? Claude-Michel Schönberg).",
+    "fix": "Drop, or change to 'Andrew Lloyd Webber composed the music for Evita.' (true)."
+  },
+  {
+    "file": "music-musicals.json",
+    "entry": 18,
+    "question": "Which musical features the song 'The Sound of Music'?",
+    "problem": "misleading",
+    "explanation": "The song title is the same as the musical's title, so the answer is given away.",
+    "fix": "Change to 'Which musical features the songs \"Edelweiss\" and \"Do-Re-Mi\"?' (The Sound of Music)."
+  },
+  {
+    "file": "music-musicals.json",
+    "entry": 20,
+    "question": "Who composed the music and lyrics for Falsettos?",
+    "problem": "wrong",
+    "explanation": "The accepted answer is 'Rent', which is a musical, not a person. Falsettos was written by William Finn (music and lyrics; book with James Lapine).",
+    "fix": "Set accepted to ['William Finn', 'Finn']."
+  },
+  {
+    "file": "music-musicals.json",
+    "entry": 22,
+    "question": "How many sisters does Maria have in The Sound of Music?",
+    "problem": "quality",
+    "explanation": "Maria is a postulant among the abbey's nuns, who are 'Sisters', so the question can be read two ways. Siblings are never mentioned, which makes 0 a trick answer, and the range minimum of -2 makes no sense.",
+    "fix": "drop"
+  },
+  {
+    "file": "music-musicals.json",
+    "entry": 23,
+    "question": "How many minutes are in a non-leap year, as asked in Rent's song 'Seasons of Love'?",
+    "problem": "wrong",
+    "explanation": "A non-leap year has 525,600 minutes, which is also the song's famous lyric. The answer 1968 is wrong and looks swapped with entry #24.",
+    "fix": "Set answer 525600, range min 100000, max 900000."
+  },
+  {
+    "file": "music-musicals.json",
+    "entry": 24,
+    "question": "How many years does the musical Rent famously cover in its title phrase?",
+    "problem": "wrong",
+    "explanation": "Rent spans one year (Christmas Eve to Christmas Eve), and 'Rent' is not a phrase that counts years. The answer 525600 is in minutes, not years, and was swapped in from #23.",
+    "fix": "Drop (it would duplicate #23 once that is fixed), or ask 'Over how many years does the plot of Rent unfold?' with answer 1, range 0–5."
+  },
+  {
+    "file": "music-musicals.json",
+    "entry": 28,
+    "question": "Name the three principal characters in The Wizard of Oz stage musical.",
+    "problem": "misleading",
+    "explanation": "The part label 'Scarecrow' is also its only accepted answer, so the label gives it away. Picking 'three principal characters' also arbitrarily leaves out the Cowardly Lion.",
+    "fix": "Relabel the parts as 'Wants a brain' (Scarecrow, The Scarecrow), 'Wants a heart' (Tin Man, The Tin Man, Tin Woodman), 'Wants courage' (Cowardly Lion, Lion), and change text to 'Name Dorothy's three companions.'"
+  }
+]

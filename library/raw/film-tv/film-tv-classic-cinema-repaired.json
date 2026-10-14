@@ -1,0 +1,284 @@
+[
+  {
+    "category": "Film & TV",
+    "topic": "Classic cinema",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which actor created and played the Little Tramp character in silent films?",
+      "answers": [
+        {
+          "text": "Buster Keaton"
+        },
+        {
+          "text": "Charlie Chaplin",
+          "correct": true
+        },
+        {
+          "text": "Harold Lloyd"
+        },
+        {
+          "text": "Stan Laurel"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Classic cinema",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which ship is central to the story of the original King Kong film?",
+      "answers": [
+        {
+          "text": "RMS Titanic"
+        },
+        {
+          "text": "S.S. Venture",
+          "correct": true
+        },
+        {
+          "text": "HMS Bounty"
+        },
+        {
+          "text": "Queen Mary"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Classic cinema",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In which film does Humphrey Bogart say \"We'll always have Paris\"?",
+      "answers": [
+        {
+          "text": "The Maltese Falcon"
+        },
+        {
+          "text": "Casablanca",
+          "correct": true
+        },
+        {
+          "text": "To Have and Have Not"
+        },
+        {
+          "text": "Sabrina"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Classic cinema",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who directed the silent German science-fiction film Metropolis?",
+      "answers": [
+        {
+          "text": "F. W. Murnau"
+        },
+        {
+          "text": "Fritz Lang",
+          "correct": true
+        },
+        {
+          "text": "G. W. Pabst"
+        },
+        {
+          "text": "Robert Wiene"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Classic cinema",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Japanese director made the film Seven Samurai?",
+      "answers": [
+        {
+          "text": "Yasujirō Ozu"
+        },
+        {
+          "text": "Kenji Mizoguchi"
+        },
+        {
+          "text": "Akira Kurosawa",
+          "correct": true
+        },
+        {
+          "text": "Masaki Kobayashi"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Classic cinema",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In the original 1954 Godzilla film, Godzilla was mostly played by an actor in a rubber suit.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Classic cinema",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which 1941 Orson Welles film centres on the mystery of the word \"Rosebud\"?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Citizen Kane"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Classic cinema",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these films in release order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "The Cabinet of Dr. Caligari",
+            "Nosferatu",
+            "Metropolis",
+            "M"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Classic cinema",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these Alfred Hitchcock films in release order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "The 39 Steps",
+            "Rebecca",
+            "Notorious",
+            "Rear Window"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Classic cinema",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each classic film with its director.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Sunset Boulevard"
+              },
+              "right": {
+                "text": "Billy Wilder"
+              }
+            },
+            {
+              "left": {
+                "text": "Tokyo Story"
+              },
+              "right": {
+                "text": "Yasujirō Ozu"
+              }
+            },
+            {
+              "left": {
+                "text": "La Dolce Vita"
+              },
+              "right": {
+                "text": "Federico Fellini"
+              }
+            },
+            {
+              "left": {
+                "text": "Ugetsu"
+              },
+              "right": {
+                "text": "Kenji Mizoguchi"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Classic cinema",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each classic film with its director.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "The Rules of the Game"
+              },
+              "right": {
+                "text": "Jean Renoir"
+              }
+            },
+            {
+              "left": {
+                "text": "L'Atalante"
+              },
+              "right": {
+                "text": "Jean Vigo"
+              }
+            },
+            {
+              "left": {
+                "text": "The Passion of Joan of Arc"
+              },
+              "right": {
+                "text": "Carl Theodor Dreyer"
+              }
+            },
+            {
+              "left": {
+                "text": "The Gold Rush"
+              },
+              "right": {
+                "text": "Charlie Chaplin"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

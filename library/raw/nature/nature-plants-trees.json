@@ -1,0 +1,676 @@
+[
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which part of a plant usually absorbs water and minerals from the soil?",
+      "answers": [
+        {
+          "text": "Roots",
+          "correct": true
+        },
+        {
+          "text": "Leaves"
+        },
+        {
+          "text": "Flowers"
+        },
+        {
+          "text": "Fruits"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What gas do plants take in for photosynthesis?",
+      "answers": [
+        {
+          "text": "Carbon dioxide",
+          "correct": true
+        },
+        {
+          "text": "Oxygen"
+        },
+        {
+          "text": "Nitrogen"
+        },
+        {
+          "text": "Hydrogen"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which tree produces acorns?",
+      "answers": [
+        {
+          "text": "Oak",
+          "correct": true
+        },
+        {
+          "text": "Birch"
+        },
+        {
+          "text": "Willow"
+        },
+        {
+          "text": "Ash"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which plant is famous for turning towards sunlight as it grows?",
+      "answers": [
+        {
+          "text": "Sunflower",
+          "correct": true
+        },
+        {
+          "text": "Tulip"
+        },
+        {
+          "text": "Daffodil"
+        },
+        {
+          "text": "Bluebell"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the waxy layer that helps prevent water loss from leaves called?",
+      "answers": [
+        {
+          "text": "Cuticle",
+          "correct": true
+        },
+        {
+          "text": "Cambium"
+        },
+        {
+          "text": "Xylem"
+        },
+        {
+          "text": "Pith"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which tissue transports water from roots towards the leaves?",
+      "answers": [
+        {
+          "text": "Xylem",
+          "correct": true
+        },
+        {
+          "text": "Phloem"
+        },
+        {
+          "text": "Epidermis"
+        },
+        {
+          "text": "Cork"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name for a plant that grows on another plant without usually parasitising it?",
+      "answers": [
+        {
+          "text": "Epiphyte",
+          "correct": true
+        },
+        {
+          "text": "Parasite"
+        },
+        {
+          "text": "Saprophyte"
+        },
+        {
+          "text": "Carnivore"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which tree is the main source of natural cork used in bottle stoppers?",
+      "answers": [
+        {
+          "text": "Cork oak",
+          "correct": true
+        },
+        {
+          "text": "Silver birch"
+        },
+        {
+          "text": "European beech"
+        },
+        {
+          "text": "Scots pine"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which plant group reproduces using cones rather than flowers?",
+      "answers": [
+        {
+          "text": "Gymnosperms",
+          "correct": true
+        },
+        {
+          "text": "Mosses"
+        },
+        {
+          "text": "Ferns"
+        },
+        {
+          "text": "Grasses"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the botanical term for a tree's annual growth ring?",
+      "answers": [
+        {
+          "text": "Annual ring",
+          "correct": true
+        },
+        {
+          "text": "Lenticel"
+        },
+        {
+          "text": "Stoma"
+        },
+        {
+          "text": "Node"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which plant is known for trapping insects with hinged leaves that snap shut?",
+      "answers": [
+        {
+          "text": "Venus flytrap",
+          "correct": true
+        },
+        {
+          "text": "Sundew"
+        },
+        {
+          "text": "Pitcher plant"
+        },
+        {
+          "text": "Butterwort"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which tree genus includes many species with distinctive white, peeling bark?",
+      "answers": [
+        {
+          "text": "Birch",
+          "correct": true
+        },
+        {
+          "text": "Maple"
+        },
+        {
+          "text": "Elm"
+        },
+        {
+          "text": "Larch"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Bamboo is a type of grass, not a tree."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "Plants obtain most of their dry mass directly from the soil."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Some plants can detect and respond to touch, such as the sensitive plant folding its leaves."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "All conifers keep their leaves throughout the year."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The world's tallest known living trees are coast redwoods native to California."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Maple",
+            "Acer"
+          ]
+        }
+      },
+      "text": "Which tree genus provides sap commonly boiled to make syrup in Canada?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Sequoia",
+            "Sequoiadendron"
+          ]
+        }
+      },
+      "text": "What genus includes the giant sequoia, one of California's iconic trees?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Mimosa pudica",
+            "Sensitive plant",
+            "Touch-me-not"
+          ]
+        }
+      },
+      "text": "What plant is famous for folding its leaves when touched?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Welwitschia",
+            "Welwitschia mirabilis"
+          ]
+        }
+      },
+      "text": "Which unusual Namib Desert plant grows just two persistent leaves throughout its life?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 4,
+          "range": {
+            "min": 2,
+            "max": 7
+          }
+        }
+      },
+      "text": "How many major whorls are commonly described in a complete flower?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 4.8,
+          "range": {
+            "min": 2.0,
+            "max": 6.0
+          }
+        }
+      },
+      "text": "About how many thousand years old can the oldest bristlecone pines become?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 2,
+          "range": {
+            "min": 1,
+            "max": 5
+          }
+        }
+      },
+      "text": "How many cotyledons, or seed leaves, does a typical monocot seedling have?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 400,
+          "range": {
+            "min": 150,
+            "max": 700
+          }
+        }
+      },
+      "text": "Under favourable conditions, about how many litres of water might a large tree transpire in a day?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Seed",
+            "Germination",
+            "Seedling",
+            "Mature plant"
+          ]
+        }
+      },
+      "text": "Put these stages of a typical seed plant's life in order, earliest first."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Moss",
+            "Fern",
+            "Conifer",
+            "Flowering plant"
+          ]
+        }
+      },
+      "text": "Order these plant groups by the first appearance of their major lineages in Earth's history, earliest first."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Plant part 1",
+              "accepted": [
+                "Root",
+                "Roots"
+              ]
+            },
+            {
+              "label": "Plant part 2",
+              "accepted": [
+                "Stem",
+                "Stems"
+              ]
+            },
+            {
+              "label": "Plant part 3",
+              "accepted": [
+                "Leaf",
+                "Leaves"
+              ]
+            },
+            {
+              "label": "Plant part 4",
+              "accepted": [
+                "Flower",
+                "Flowers"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name four common plant organs: the water-absorbing, supporting, food-making, and reproductive organs."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Oak"
+              },
+              "right": {
+                "text": "Acorns"
+              }
+            },
+            {
+              "left": {
+                "text": "Maple"
+              },
+              "right": {
+                "text": "Winged seeds"
+              }
+            },
+            {
+              "left": {
+                "text": "Willow"
+              },
+              "right": {
+                "text": "Often grows near water"
+              }
+            },
+            {
+              "left": {
+                "text": "Sunflower"
+              },
+              "right": {
+                "text": "Large flower head"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each plant with a characteristic."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Xylem"
+              },
+              "right": {
+                "text": "Transports water"
+              }
+            },
+            {
+              "left": {
+                "text": "Phloem"
+              },
+              "right": {
+                "text": "Transports sugars"
+              }
+            },
+            {
+              "left": {
+                "text": "Cuticle"
+              },
+              "right": {
+                "text": "Reduces water loss"
+              }
+            },
+            {
+              "left": {
+                "text": "Stomata"
+              },
+              "right": {
+                "text": "Gas exchange pores"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each plant structure with its main function."
+    }
+  }
+]

@@ -1,0 +1,589 @@
+[
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who delivered the 'I Have a Dream' speech in Washington, D.C.?",
+      "answers": [
+        {
+          "text": "Martin Luther King Jr.",
+          "correct": true
+        },
+        {
+          "text": "Malcolm X"
+        },
+        {
+          "text": "Ralph Abernathy"
+        },
+        {
+          "text": "John Lewis"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which U.S. president began the Gettysburg Address with 'Four score and seven years ago'?",
+      "answers": [
+        {
+          "text": "Abraham Lincoln",
+          "correct": true
+        },
+        {
+          "text": "Ulysses S. Grant"
+        },
+        {
+          "text": "Andrew Johnson"
+        },
+        {
+          "text": "Theodore Roosevelt"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which British prime minister gave the 'We shall fight on the beaches' speech in 1940?",
+      "answers": [
+        {
+          "text": "Winston Churchill",
+          "correct": true
+        },
+        {
+          "text": "Clement Attlee"
+        },
+        {
+          "text": "Neville Chamberlain"
+        },
+        {
+          "text": "Harold Macmillan"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Nelson Mandela delivered his 1964 'I am prepared to die' speech during which trial?",
+      "answers": [
+        {
+          "text": "Rivonia Trial",
+          "correct": true
+        },
+        {
+          "text": "Treason Trial"
+        },
+        {
+          "text": "Delmas Treason Trial"
+        },
+        {
+          "text": "Little Rivonia Trial"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which speech by Sojourner Truth is associated with the phrase 'Ain't I a Woman?'",
+      "answers": [
+        {
+          "text": "Her 1851 women's rights speech",
+          "correct": true
+        },
+        {
+          "text": "Her 1863 Emancipation speech"
+        },
+        {
+          "text": "Her 1848 Seneca Falls address"
+        },
+        {
+          "text": "Her 1870 suffrage testimony"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "At which event did Franklin D. Roosevelt say, 'The only thing we have to fear is fear itself'?",
+      "answers": [
+        {
+          "text": "His first inaugural address",
+          "correct": true
+        },
+        {
+          "text": "His first State of the Union"
+        },
+        {
+          "text": "The Democratic convention of 1932"
+        },
+        {
+          "text": "His 1941 fireside chat"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which leader delivered the 'Tear down this wall!' speech in West Berlin in 1987?",
+      "answers": [
+        {
+          "text": "Ronald Reagan",
+          "correct": true
+        },
+        {
+          "text": "George H. W. Bush"
+        },
+        {
+          "text": "Helmut Kohl"
+        },
+        {
+          "text": "Margaret Thatcher"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which speech did Jawaharlal Nehru deliver as India became independent in 1947?",
+      "answers": [
+        {
+          "text": "Tryst with Destiny",
+          "correct": true
+        },
+        {
+          "text": "Quit India"
+        },
+        {
+          "text": "Swaraj for All"
+        },
+        {
+          "text": "The Discovery of India"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who gave the 1962 'We choose to go to the Moon' speech at Rice University?",
+      "answers": [
+        {
+          "text": "John F. Kennedy",
+          "correct": true
+        },
+        {
+          "text": "Lyndon B. Johnson"
+        },
+        {
+          "text": "Wernher von Braun"
+        },
+        {
+          "text": "Neil Armstrong"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Roman statesman is associated with 'Friends, Romans, countrymen' in Shakespeare's play?",
+      "answers": [
+        {
+          "text": "Mark Antony",
+          "correct": true
+        },
+        {
+          "text": "Julius Caesar"
+        },
+        {
+          "text": "Cicero"
+        },
+        {
+          "text": "Brutus"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which speech did Emmeline Pankhurst deliver in Hartford, Connecticut, in 1913?",
+      "answers": [
+        {
+          "text": "'Freedom or Death'",
+          "correct": true
+        },
+        {
+          "text": "'Votes for Women'"
+        },
+        {
+          "text": "'Deeds, Not Words'"
+        },
+        {
+          "text": "'The Cause of Women'"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who delivered the 'Cross of Gold' speech at the 1896 Democratic convention?",
+      "answers": [
+        {
+          "text": "William Jennings Bryan",
+          "correct": true
+        },
+        {
+          "text": "Grover Cleveland"
+        },
+        {
+          "text": "William McKinley"
+        },
+        {
+          "text": "Theodore Roosevelt"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Gettysburg Address was delivered during the American Civil War.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Churchill's 'We shall fight on the beaches' speech was delivered after the Second World War ended.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The 'Tear down this wall!' speech was delivered in East Berlin.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year was the Gettysburg Address delivered?",
+      "kind": {
+        "Number": {
+          "answer": 1863,
+          "range": {
+            "min": 1840,
+            "max": 1900
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did Martin Luther King Jr. deliver 'I Have a Dream'?",
+      "kind": {
+        "Number": {
+          "answer": 1963,
+          "range": {
+            "min": 1940,
+            "max": 1980
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did Ronald Reagan give his 'Tear down this wall!' speech?",
+      "kind": {
+        "Number": {
+          "answer": 1987,
+          "range": {
+            "min": 1970,
+            "max": 2000
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did Emmeline Pankhurst deliver 'Freedom or Death' in Hartford?",
+      "kind": {
+        "Number": {
+          "answer": 1913,
+          "range": {
+            "min": 1890,
+            "max": 1930
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these speeches in chronological order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Gettysburg Address (1863)",
+            "Churchill's Iron Curtain speech (1946)",
+            "King's I Have a Dream speech (1963)",
+            "Reagan's Berlin Wall speech (1987)"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these inaugural addresses in chronological order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "George Washington's first inaugural (1789)",
+            "Abraham Lincoln's first inaugural (1861)",
+            "Franklin D. Roosevelt's first inaugural (1933)",
+            "John F. Kennedy's inaugural (1961)"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the three U.S. presidents who delivered inaugural addresses in 1789, 1861 and 1961.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "1789",
+              "accepted": [
+                "George Washington",
+                "Washington"
+              ]
+            },
+            {
+              "label": "1861",
+              "accepted": [
+                "Abraham Lincoln",
+                "Lincoln"
+              ]
+            },
+            {
+              "label": "1961",
+              "accepted": [
+                "John F. Kennedy",
+                "Kennedy",
+                "JFK"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each speech with the person who delivered it.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Gettysburg Address"
+              },
+              "right": {
+                "text": "Abraham Lincoln"
+              }
+            },
+            {
+              "left": {
+                "text": "I Have a Dream"
+              },
+              "right": {
+                "text": "Martin Luther King Jr."
+              }
+            },
+            {
+              "left": {
+                "text": "Tryst with Destiny"
+              },
+              "right": {
+                "text": "Jawaharlal Nehru"
+              }
+            },
+            {
+              "left": {
+                "text": "Tear down this wall!"
+              },
+              "right": {
+                "text": "Ronald Reagan"
+              }
+            },
+            {
+              "left": {
+                "text": "Freedom or Death"
+              },
+              "right": {
+                "text": "Emmeline Pankhurst"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Famous speeches",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each speaker with the speech or address associated with them.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Sojourner Truth"
+              },
+              "right": {
+                "text": "Ain't I a Woman?"
+              }
+            },
+            {
+              "left": {
+                "text": "Winston Churchill"
+              },
+              "right": {
+                "text": "Iron Curtain speech"
+              }
+            },
+            {
+              "left": {
+                "text": "John F. Kennedy"
+              },
+              "right": {
+                "text": "We choose to go to the Moon"
+              }
+            },
+            {
+              "left": {
+                "text": "Franklin D. Roosevelt"
+              },
+              "right": {
+                "text": "First inaugural address"
+              }
+            },
+            {
+              "left": {
+                "text": "Nelson Mandela"
+              },
+              "right": {
+                "text": "I am prepared to die"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

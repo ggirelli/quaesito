@@ -1,0 +1,20 @@
+[
+  {
+    "category": "Literature",
+    "topic": "Children's books",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 3,
+          "range": {
+            "min": 1,
+            "max": 7
+          }
+        }
+      },
+      "text": "How many Baudelaire children are there in A Series of Unfortunate Events?"
+    }
+  }
+]

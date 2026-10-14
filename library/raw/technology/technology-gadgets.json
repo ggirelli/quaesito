@@ -1,0 +1,661 @@
+[
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which company introduced the Walkman portable cassette player in 1979?",
+      "answers": [
+        {
+          "text": "Sony",
+          "correct": true
+        },
+        {
+          "text": "Panasonic"
+        },
+        {
+          "text": "Philips"
+        },
+        {
+          "text": "Aiwa"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What does the 'S' in USB stand for?",
+      "answers": [
+        {
+          "text": "Serial",
+          "correct": true
+        },
+        {
+          "text": "Secure"
+        },
+        {
+          "text": "System"
+        },
+        {
+          "text": "Storage"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which connector is commonly used for modern wired headphones and is reversible?",
+      "answers": [
+        {
+          "text": "USB-C",
+          "correct": true
+        },
+        {
+          "text": "VGA"
+        },
+        {
+          "text": "PS/2"
+        },
+        {
+          "text": "DVI"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which device uses e-ink to imitate the appearance of ink on paper?",
+      "answers": [
+        {
+          "text": "E-reader",
+          "correct": true
+        },
+        {
+          "text": "Action camera"
+        },
+        {
+          "text": "Smart speaker"
+        },
+        {
+          "text": "Fitness band"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which company makes the Kindle e-reader?",
+      "answers": [
+        {
+          "text": "Amazon",
+          "correct": true
+        },
+        {
+          "text": "Sony"
+        },
+        {
+          "text": "Kobo"
+        },
+        {
+          "text": "Samsung"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the main purpose of a power bank?",
+      "answers": [
+        {
+          "text": "Recharge portable devices",
+          "correct": true
+        },
+        {
+          "text": "Boost Wi-Fi signals"
+        },
+        {
+          "text": "Store digital photos"
+        },
+        {
+          "text": "Measure heart rate"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which company developed the original Game Boy handheld console?",
+      "answers": [
+        {
+          "text": "Nintendo",
+          "correct": true
+        },
+        {
+          "text": "Sega"
+        },
+        {
+          "text": "Atari"
+        },
+        {
+          "text": "NEC"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What does NFC allow devices to do over a very short distance?",
+      "answers": [
+        {
+          "text": "Exchange data wirelessly",
+          "correct": true
+        },
+        {
+          "text": "Project video onto walls"
+        },
+        {
+          "text": "Measure room temperature"
+        },
+        {
+          "text": "Compress audio files"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which display technology uses organic light-emitting diodes?",
+      "answers": [
+        {
+          "text": "OLED",
+          "correct": true
+        },
+        {
+          "text": "LCD"
+        },
+        {
+          "text": "E-paper"
+        },
+        {
+          "text": "DLP"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What kind of sensor detects device rotation and angular velocity?",
+      "answers": [
+        {
+          "text": "Gyroscope",
+          "correct": true
+        },
+        {
+          "text": "Barometer"
+        },
+        {
+          "text": "Magnetometer"
+        },
+        {
+          "text": "Thermistor"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which company developed the first widely marketed digital camera, the Dycam Model 1?",
+      "answers": [
+        {
+          "text": "Dycam",
+          "correct": true
+        },
+        {
+          "text": "Kodak"
+        },
+        {
+          "text": "Canon"
+        },
+        {
+          "text": "Casio"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which connector was designed by Apple and introduced with the iPhone 5 in 2012?",
+      "answers": [
+        {
+          "text": "Lightning",
+          "correct": true
+        },
+        {
+          "text": "FireWire"
+        },
+        {
+          "text": "30-pin Dock"
+        },
+        {
+          "text": "MagSafe"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The original Sony Walkman played compact discs.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "A QR code can store information in two dimensions.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Bluetooth was named after a 10th-century Scandinavian king.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The first iPhone included a removable battery designed for user swapping.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "An accelerometer can measure changes in motion and acceleration.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the common name for a device that converts digital audio into an analog signal for headphones?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "DAC",
+            "Digital-to-analog converter"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What brand name did Nintendo use for its motion-sensing game controller system for the Wii?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Wii Remote",
+            "Wiimote",
+            "Wii remote"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the short name for a small camera designed to be worn or mounted during action sports?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Action camera",
+            "GoPro"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the standard three-pronged connector used to plug many desktop PCs into mains power?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "IEC C13",
+            "C13",
+            "IEC 60320 C13"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year was the original Sony Walkman TPS-L2 released?",
+      "kind": {
+        "Number": {
+          "answer": 1979,
+          "range": {
+            "min": 1965,
+            "max": 1995
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many megapixels did the first iPhone's rear camera have?",
+      "kind": {
+        "Number": {
+          "answer": 2,
+          "range": {
+            "min": 0,
+            "max": 8
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did Apple introduce the iPod?",
+      "kind": {
+        "Number": {
+          "answer": 2001,
+          "range": {
+            "min": 1990,
+            "max": 2010
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many pins did the original Apple iPod dock connector have?",
+      "kind": {
+        "Number": {
+          "answer": 30,
+          "range": {
+            "min": 10,
+            "max": 50
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these Apple portable devices in order of first release, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "iPod",
+            "iPhone",
+            "iPad",
+            "Apple Watch"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Order these removable storage formats by introduction, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Floppy disk",
+            "CD-R",
+            "USB flash drive",
+            "SD card"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the two common sensors in a phone used to detect orientation and rotation. Type each sensor.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Linear acceleration",
+              "accepted": [
+                "Accelerometer"
+              ]
+            },
+            {
+              "label": "Rotation",
+              "accepted": [
+                "Gyroscope"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each gadget with its best-known original maker.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Walkman"
+              },
+              "right": {
+                "text": "Sony"
+              }
+            },
+            {
+              "left": {
+                "text": "Kindle"
+              },
+              "right": {
+                "text": "Amazon"
+              }
+            },
+            {
+              "left": {
+                "text": "Game Boy"
+              },
+              "right": {
+                "text": "Nintendo"
+              }
+            },
+            {
+              "left": {
+                "text": "iPod"
+              },
+              "right": {
+                "text": "Apple"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each port or connector with its common use.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "HDMI"
+              },
+              "right": {
+                "text": "Digital audio and video"
+              }
+            },
+            {
+              "left": {
+                "text": "Ethernet"
+              },
+              "right": {
+                "text": "Wired network connection"
+              }
+            },
+            {
+              "left": {
+                "text": "USB-A"
+              },
+              "right": {
+                "text": "Peripheral data and power"
+              }
+            },
+            {
+              "left": {
+                "text": "3.5 mm jack"
+              },
+              "right": {
+                "text": "Analog audio"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,664 @@
+[
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which invention made Gutenberg famous for transforming book production in Europe?",
+      "answers": [
+        {
+          "text": "Movable-type printing press",
+          "correct": true
+        },
+        {
+          "text": "Mechanical clock"
+        },
+        {
+          "text": "Paper-making machine"
+        },
+        {
+          "text": "Spinning jenny"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which ancient material, made from plant stems, was used for writing in Egypt?",
+      "answers": [
+        {
+          "text": "Papyrus",
+          "correct": true
+        },
+        {
+          "text": "Parchment"
+        },
+        {
+          "text": "Bamboo"
+        },
+        {
+          "text": "Vellum"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who is widely credited with inventing the practical telephone in the 1870s?",
+      "answers": [
+        {
+          "text": "Alexander Graham Bell",
+          "correct": true
+        },
+        {
+          "text": "Thomas Edison"
+        },
+        {
+          "text": "Guglielmo Marconi"
+        },
+        {
+          "text": "Nikola Tesla"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which invention allowed ships to determine longitude more reliably at sea?",
+      "answers": [
+        {
+          "text": "Marine chronometer",
+          "correct": true
+        },
+        {
+          "text": "Astrolabe"
+        },
+        {
+          "text": "Sextant"
+        },
+        {
+          "text": "Magnetic compass"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which device did James Watt substantially improve, helping power the Industrial Revolution?",
+      "answers": [
+        {
+          "text": "Steam engine",
+          "correct": true
+        },
+        {
+          "text": "Cotton gin"
+        },
+        {
+          "text": "Telegraph"
+        },
+        {
+          "text": "Internal combustion engine"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Chinese invention used to transmit messages was first developed for military signalling?",
+      "answers": [
+        {
+          "text": "Gunpowder",
+          "correct": true
+        },
+        {
+          "text": "Porcelain"
+        },
+        {
+          "text": "Movable type"
+        },
+        {
+          "text": "Silk weaving"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which invention by Eli Whitney is associated with separating cotton fibres from seeds?",
+      "answers": [
+        {
+          "text": "Cotton gin",
+          "correct": true
+        },
+        {
+          "text": "Power loom"
+        },
+        {
+          "text": "Spinning mule"
+        },
+        {
+          "text": "Seed drill"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which technology made long-distance text communication possible over wires in the 19th century?",
+      "answers": [
+        {
+          "text": "Electric telegraph",
+          "correct": true
+        },
+        {
+          "text": "Phonograph"
+        },
+        {
+          "text": "Telephone exchange"
+        },
+        {
+          "text": "Wireless radio"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which invention is associated with Johannes Gutenberg's 15th-century printing revolution?",
+      "answers": [
+        {
+          "text": "Metal movable type",
+          "correct": true
+        },
+        {
+          "text": "Lithographic stone"
+        },
+        {
+          "text": "Typewriter ribbon"
+        },
+        {
+          "text": "Photographic plate"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which invention replaced vacuum tubes in many computer circuits?",
+      "answers": [
+        {
+          "text": "Transistor",
+          "correct": true
+        },
+        {
+          "text": "Relay switch"
+        },
+        {
+          "text": "Cathode-ray tube"
+        },
+        {
+          "text": "Vacuum diode"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which engineer developed the first successful practical incandescent light bulb system in the late 19th century?",
+      "answers": [
+        {
+          "text": "Thomas Edison",
+          "correct": true
+        },
+        {
+          "text": "George Westinghouse"
+        },
+        {
+          "text": "Samuel Morse"
+        },
+        {
+          "text": "Michael Faraday"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which device, patented by Hedy Lamarr and George Antheil, helped inspire later spread-spectrum techniques?",
+      "answers": [
+        {
+          "text": "Frequency-hopping system",
+          "correct": true
+        },
+        {
+          "text": "Radar altimeter"
+        },
+        {
+          "text": "Magnetic tape recorder"
+        },
+        {
+          "text": "Microwave oven"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The wheel was invented before written records began in many parts of the world.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The first successful powered flight by the Wright brothers took place in 1903.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Johannes Gutenberg invented paper itself in 15th-century Germany.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The first commercial microwave oven was introduced before the first artificial satellite was launched.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "The first public demonstration of the telegraph used Morse code.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What invention by Samuel Morse sent messages using dots and dashes?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Morse code",
+            "Telegraph",
+            "Electric telegraph"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What was the name of the first artificial satellite, launched in 1957?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Sputnik",
+            "Sputnik 1"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What 18th-century device, invented by John Harrison, solved the practical longitude problem at sea?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Marine chronometer",
+            "Chronometer"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What invention by Karl Benz is commonly regarded as the first practical petrol-powered automobile?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Benz Patent-Motorwagen",
+            "Patent-Motorwagen",
+            "Motorwagen"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did the Wright brothers make their first powered flight?",
+      "kind": {
+        "Number": {
+          "answer": 1903,
+          "range": {
+            "min": 1850,
+            "max": 1950
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year was the first successful transatlantic wireless signal sent by Marconi?",
+      "kind": {
+        "Number": {
+          "answer": 1901,
+          "range": {
+            "min": 1850,
+            "max": 1950
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year was the first patent for a practical telephone granted to Alexander Graham Bell?",
+      "kind": {
+        "Number": {
+          "answer": 1876,
+          "range": {
+            "min": 1840,
+            "max": 1920
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year was the first working transistor demonstrated at Bell Labs?",
+      "kind": {
+        "Number": {
+          "answer": 1947,
+          "range": {
+            "min": 1900,
+            "max": 2000
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these inventions in chronological order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Printing press in Europe",
+            "Steam engine improved by Watt",
+            "Telephone",
+            "Transistor"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these communication technologies in chronological order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Electric telegraph",
+            "Telephone",
+            "Commercial radio broadcasting",
+            "Internet opened to the public"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the two inventors credited with developing the first practical telephone.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "First inventor",
+              "accepted": [
+                "Alexander Graham Bell",
+                "Bell"
+              ]
+            },
+            {
+              "label": "Second inventor",
+              "accepted": [
+                "Thomas Watson",
+                "Watson",
+                "Thomas A. Watson"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each inventor with the invention they are best known for.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Samuel Morse"
+              },
+              "right": {
+                "text": "Electric telegraph"
+              }
+            },
+            {
+              "left": {
+                "text": "Eli Whitney"
+              },
+              "right": {
+                "text": "Cotton gin"
+              }
+            },
+            {
+              "left": {
+                "text": "Johannes Gutenberg"
+              },
+              "right": {
+                "text": "Movable-type printing press"
+              }
+            },
+            {
+              "left": {
+                "text": "Karl Benz"
+              },
+              "right": {
+                "text": "Petrol-powered automobile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Inventions through time",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each technology with its key purpose.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Sextant"
+              },
+              "right": {
+                "text": "Measure angles for navigation"
+              }
+            },
+            {
+              "left": {
+                "text": "Chronometer"
+              },
+              "right": {
+                "text": "Keep precise time at sea"
+              }
+            },
+            {
+              "left": {
+                "text": "Microscope"
+              },
+              "right": {
+                "text": "Magnify tiny objects"
+              }
+            },
+            {
+              "left": {
+                "text": "Seismograph"
+              },
+              "right": {
+                "text": "Record ground motion"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

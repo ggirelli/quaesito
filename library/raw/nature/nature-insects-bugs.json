@@ -1,0 +1,679 @@
+[
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many legs does an adult insect have?",
+      "answers": [
+        {
+          "text": "Six",
+          "correct": true
+        },
+        {
+          "text": "Four"
+        },
+        {
+          "text": "Eight"
+        },
+        {
+          "text": "Ten"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which insect produces honey from flower nectar?",
+      "answers": [
+        {
+          "text": "Honeybee",
+          "correct": true
+        },
+        {
+          "text": "Ant"
+        },
+        {
+          "text": "Termite"
+        },
+        {
+          "text": "Dragonfly"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What do caterpillars become after metamorphosis?",
+      "answers": [
+        {
+          "text": "Butterflies or moths",
+          "correct": true
+        },
+        {
+          "text": "Beetles or ants"
+        },
+        {
+          "text": "Spiders or mites"
+        },
+        {
+          "text": "Wasps or flies"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which insect is known for rubbing its wings or legs together to make a chirping sound?",
+      "answers": [
+        {
+          "text": "Cricket",
+          "correct": true
+        },
+        {
+          "text": "Ladybird"
+        },
+        {
+          "text": "Firefly"
+        },
+        {
+          "text": "Mosquito"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the hard outer covering of an insect called?",
+      "answers": [
+        {
+          "text": "Exoskeleton",
+          "correct": true
+        },
+        {
+          "text": "Endoskeleton"
+        },
+        {
+          "text": "Carapace"
+        },
+        {
+          "text": "Shell gland"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which insect communicates the location of food with a waggle dance?",
+      "answers": [
+        {
+          "text": "Honeybee",
+          "correct": true
+        },
+        {
+          "text": "Bumblebee"
+        },
+        {
+          "text": "Paper wasp"
+        },
+        {
+          "text": "Leafcutter ant"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which insects cultivate fungi as their main food source?",
+      "answers": [
+        {
+          "text": "Leafcutter ants",
+          "correct": true
+        },
+        {
+          "text": "Monarch butterflies"
+        },
+        {
+          "text": "Praying mantises"
+        },
+        {
+          "text": "Fire ants"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which insect group includes aphids and cicadas?",
+      "answers": [
+        {
+          "text": "True bugs",
+          "correct": true
+        },
+        {
+          "text": "Beetles"
+        },
+        {
+          "text": "Moths"
+        },
+        {
+          "text": "Wasps"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which insect has a larval stage called a wireworm?",
+      "answers": [
+        {
+          "text": "Click beetle",
+          "correct": true
+        },
+        {
+          "text": "Ladybird beetle"
+        },
+        {
+          "text": "Dung beetle"
+        },
+        {
+          "text": "Weevil"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which butterfly is famous for migrating from North America to central Mexico?",
+      "answers": [
+        {
+          "text": "Monarch",
+          "correct": true
+        },
+        {
+          "text": "Swallowtail"
+        },
+        {
+          "text": "Painted lady"
+        },
+        {
+          "text": "Red admiral"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which insect order includes lacewings and antlions?",
+      "answers": [
+        {
+          "text": "Neuroptera",
+          "correct": true
+        },
+        {
+          "text": "Diptera"
+        },
+        {
+          "text": "Hemiptera"
+        },
+        {
+          "text": "Coleoptera"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which insect uses a spring-loaded mechanism in its hind legs to catapult itself?",
+      "answers": [
+        {
+          "text": "Flea",
+          "correct": true
+        },
+        {
+          "text": "Housefly"
+        },
+        {
+          "text": "Mantis"
+        },
+        {
+          "text": "Termite"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Butterflies taste with sensors on their feet."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "Spiders are insects."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Fireflies produce light through a chemical reaction called bioluminescence."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "All bees live in large colonies with a queen."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Some insects can survive being frozen by producing ice-binding or cryoprotective compounds."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Ladybird",
+            "Ladybug",
+            "Lady beetle",
+            "Ladybird beetle"
+          ]
+        }
+      },
+      "text": "What is the common North American name for a ladybird?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Mantis",
+            "Praying mantis"
+          ]
+        }
+      },
+      "text": "Which insect is named for the prayer-like pose of its folded front legs?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Silkworm",
+            "Silkworm moth larva"
+          ]
+        }
+      },
+      "text": "The caterpillar of which moth is used to produce commercial silk?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Bombardier beetle",
+            "Bombardier"
+          ]
+        }
+      },
+      "text": "Which beetle defends itself by ejecting a hot, irritating chemical spray?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 6,
+          "range": {
+            "min": 3,
+            "max": 10
+          }
+        }
+      },
+      "text": "How many legs does a typical adult ant have?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 4,
+          "range": {
+            "min": 2,
+            "max": 8
+          }
+        }
+      },
+      "text": "How many stages are there in complete insect metamorphosis, from egg to adult?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 17,
+          "range": {
+            "min": 10,
+            "max": 25
+          }
+        }
+      },
+      "text": "How many years underground before emerging is typical of the 17-year periodical cicada?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 300,
+          "range": {
+            "min": 100,
+            "max": 600
+          }
+        }
+      },
+      "text": "About how many eggs can a queen honeybee lay per day at peak production?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Egg",
+            "Larva",
+            "Pupa",
+            "Adult"
+          ]
+        }
+      },
+      "text": "Put the stages of complete insect metamorphosis in order, earliest first."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Egg",
+            "Nymph",
+            "Adult"
+          ]
+        }
+      },
+      "text": "Put the stages of incomplete insect metamorphosis in order, earliest first."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Social insect 1",
+              "accepted": [
+                "Ant",
+                "Ants"
+              ]
+            },
+            {
+              "label": "Social insect 2",
+              "accepted": [
+                "Honeybee",
+                "Honey bee",
+                "Bee",
+                "Bees"
+              ]
+            },
+            {
+              "label": "Social insect 3",
+              "accepted": [
+                "Termite",
+                "Termites"
+              ]
+            },
+            {
+              "label": "Social insect 4",
+              "accepted": [
+                "Paper wasp",
+                "Wasp",
+                "Wasps"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name four insect groups with social species that live in colonies with division of labour."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Honeybee"
+              },
+              "right": {
+                "text": "Makes honey"
+              }
+            },
+            {
+              "left": {
+                "text": "Butterfly"
+              },
+              "right": {
+                "text": "Tastes with its feet"
+              }
+            },
+            {
+              "left": {
+                "text": "Cricket"
+              },
+              "right": {
+                "text": "Chirping sound"
+              }
+            },
+            {
+              "left": {
+                "text": "Ant"
+              },
+              "right": {
+                "text": "Six legs"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each insect with a characteristic."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Click beetle"
+              },
+              "right": {
+                "text": "Wireworm larva"
+              }
+            },
+            {
+              "left": {
+                "text": "Monarch butterfly"
+              },
+              "right": {
+                "text": "Long-distance migration"
+              }
+            },
+            {
+              "left": {
+                "text": "Bombardier beetle"
+              },
+              "right": {
+                "text": "Hot chemical spray"
+              }
+            },
+            {
+              "left": {
+                "text": "Leafcutter ant"
+              },
+              "right": {
+                "text": "Fungus farming"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each insect with its distinctive feature."
+    }
+  }
+]

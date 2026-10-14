@@ -1,0 +1,88 @@
+[
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Italian word, literally 'flask', came to mean a humiliating failure?",
+      "answers": [
+        {
+          "text": "Fiasco",
+          "correct": true
+        },
+        {
+          "text": "Filigree",
+          "correct": false
+        },
+        {
+          "text": "Finale",
+          "correct": false
+        },
+        {
+          "text": "Fresco",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which language gave English the word 'boondocks' (from a word for 'mountain')?",
+      "answers": [
+        {
+          "text": "Tagalog",
+          "correct": true
+        },
+        {
+          "text": "Malay"
+        },
+        {
+          "text": "Hawaiian"
+        },
+        {
+          "text": "Tamil"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "wanderlust"
+          ]
+        }
+      },
+      "text": "What German loanword means a strong desire to travel?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Déjà vu",
+            "Kindergarten",
+            "Origami",
+            "Saudade"
+          ]
+        }
+      },
+      "text": "Order these loanwords by their source language's name, alphabetically."
+    }
+  }
+]

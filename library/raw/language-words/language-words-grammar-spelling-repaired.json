@@ -1,0 +1,140 @@
+[
+  {
+    "category": "Language & Words",
+    "topic": "Grammar & spelling",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which word means 'to receive willingly' or 'agree to'?",
+      "answers": [
+        {
+          "text": "Accept",
+          "correct": true
+        },
+        {
+          "text": "Except"
+        },
+        {
+          "text": "Expect"
+        },
+        {
+          "text": "Aspect"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Grammar & spelling",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which spelling is correct?",
+      "answers": [
+        {
+          "text": "Embarrassment",
+          "correct": true
+        },
+        {
+          "text": "Embarassment",
+          "correct": false
+        },
+        {
+          "text": "Embarrasment",
+          "correct": false
+        },
+        {
+          "text": "Embarasment",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Grammar & spelling",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "adjective",
+            "adjectival modifier",
+            "modifier",
+            "adjectival phrase",
+            "adjective phrase",
+            "adjectival"
+          ]
+        }
+      },
+      "text": "What is the grammatical term for a word or phrase that modifies a noun?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Grammar & spelling",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Past perfect",
+            "Simple past",
+            "Present",
+            "Future"
+          ]
+        }
+      },
+      "text": "Order these tenses from earliest to latest time reference."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Grammar & spelling",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Their"
+              },
+              "right": {
+                "text": "Possessive determiner"
+              }
+            },
+            {
+              "left": {
+                "text": "There"
+              },
+              "right": {
+                "text": "Place or existence"
+              }
+            },
+            {
+              "left": {
+                "text": "They’re"
+              },
+              "right": {
+                "text": "They are"
+              }
+            },
+            {
+              "left": {
+                "text": "You're"
+              },
+              "right": {
+                "text": "You are"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each word or contraction to its grammatical use."
+    }
+  }
+]

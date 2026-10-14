@@ -1,0 +1,662 @@
+[
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the coffee shop often visited by the friends in Friends?",
+      "answers": [
+        {
+          "text": "Central Perk",
+          "correct": true
+        },
+        {
+          "text": "MacLaren's Pub"
+        },
+        {
+          "text": "Monk's Café"
+        },
+        {
+          "text": "Luke's Diner"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In The Office (US), what company does the Scranton branch work for?",
+      "answers": [
+        {
+          "text": "Dunder Mifflin",
+          "correct": true
+        },
+        {
+          "text": "Initech"
+        },
+        {
+          "text": "Sterling Cooper"
+        },
+        {
+          "text": "Pied Piper"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the chemistry teacher turned drug manufacturer in Breaking Bad?",
+      "answers": [
+        {
+          "text": "Saul Goodman"
+        },
+        {
+          "text": "Walter White",
+          "correct": true
+        },
+        {
+          "text": "Hank Schrader"
+        },
+        {
+          "text": "Jesse Pinkman"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which fantasy series features the continent of Westeros?",
+      "answers": [
+        {
+          "text": "The Witcher"
+        },
+        {
+          "text": "Game of Thrones",
+          "correct": true
+        },
+        {
+          "text": "Shadow and Bone"
+        },
+        {
+          "text": "The Wheel of Time"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the animated family living at 742 Evergreen Terrace?",
+      "answers": [
+        {
+          "text": "The Griffins"
+        },
+        {
+          "text": "The Simpsons",
+          "correct": true
+        },
+        {
+          "text": "The Belchers"
+        },
+        {
+          "text": "The Flintstones"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In Stranger Things, what is the name of the parallel dimension?",
+      "answers": [
+        {
+          "text": "The Upside Down",
+          "correct": true
+        },
+        {
+          "text": "The Nether"
+        },
+        {
+          "text": "The Fade"
+        },
+        {
+          "text": "The Other Side"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which actor plays the title character in the TV series House?",
+      "answers": [
+        {
+          "text": "Hugh Laurie",
+          "correct": true
+        },
+        {
+          "text": "Kelsey Grammer"
+        },
+        {
+          "text": "James Spader"
+        },
+        {
+          "text": "Patrick Dempsey"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the fictional paper company in Parks and Recreation?",
+      "answers": [
+        {
+          "text": "Sweetums"
+        },
+        {
+          "text": "Pawnee Paper Company",
+          "correct": true
+        },
+        {
+          "text": "Dunder Mifflin"
+        },
+        {
+          "text": "Wernham Hogg"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which British sci-fi series features the time machine called the TARDIS?",
+      "answers": [
+        {
+          "text": "Blake's 7"
+        },
+        {
+          "text": "Doctor Who",
+          "correct": true
+        },
+        {
+          "text": "Red Dwarf"
+        },
+        {
+          "text": "Space: 1999"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the fictional town where Twin Peaks is set?",
+      "answers": [
+        {
+          "text": "Twin Peaks",
+          "correct": true
+        },
+        {
+          "text": "Mystic Falls"
+        },
+        {
+          "text": "Sunnydale"
+        },
+        {
+          "text": "Storybrooke"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which creator developed the HBO series The Wire?",
+      "answers": [
+        {
+          "text": "David Simon",
+          "correct": true
+        },
+        {
+          "text": "David Chase"
+        },
+        {
+          "text": "Aaron Sorkin"
+        },
+        {
+          "text": "Shonda Rhimes"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "In The Sopranos, what is the name of Tony Soprano's psychiatrist?",
+      "answers": [
+        {
+          "text": "Dr. Jennifer Melfi",
+          "correct": true
+        },
+        {
+          "text": "Dr. Wendy Rhoades"
+        },
+        {
+          "text": "Dr. Sharon Fieldstone"
+        },
+        {
+          "text": "Dr. Linda Martin"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The character Sheldon Cooper appears in The Big Bang Theory.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The TV series The Crown is a science-fiction drama about a future British monarchy.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The X-Files follows FBI agents Mulder and Scully.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In Seinfeld, the character Kramer is Jerry's biological brother.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "The original British version of The Office was created by Ricky Gervais and Stephen Merchant.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the surname of the family in Modern Family whose father is Jay?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Pritchett",
+            "Jay Pritchett"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the bar in How I Met Your Mother?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "MacLaren's Pub",
+            "MacLaren's",
+            "MacLarens"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which fictional detective lives at 221B Baker Street in the BBC series starring Benedict Cumberbatch?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Sherlock",
+            "Sherlock Holmes"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the island where the survivors crash in Lost?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "The Island",
+            "Island"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did the first episode of Friends air in the United States?",
+      "kind": {
+        "Number": {
+          "answer": 1994,
+          "range": {
+            "min": 1980,
+            "max": 2010
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did the first episode of The Simpsons air as a standalone series?",
+      "kind": {
+        "Number": {
+          "answer": 1989,
+          "range": {
+            "min": 1970,
+            "max": 2005
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did Breaking Bad first premiere?",
+      "kind": {
+        "Number": {
+          "answer": 2008,
+          "range": {
+            "min": 1990,
+            "max": 2020
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did the original Star Trek series first premiere?",
+      "kind": {
+        "Number": {
+          "answer": 1966,
+          "range": {
+            "min": 1950,
+            "max": 1990
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these sitcoms in the order their first episodes aired, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Cheers (1982)",
+            "Seinfeld (1989)",
+            "Friends (1994)",
+            "The Office (US) (2005)"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these HBO dramas in the order their first episodes aired, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Oz (1997)",
+            "The Sopranos (1999)",
+            "The Wire (2002)",
+            "Game of Thrones (2011)"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the two lead FBI agents in The X-Files.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Agent 1",
+              "accepted": [
+                "Fox Mulder",
+                "Mulder"
+              ]
+            },
+            {
+              "label": "Agent 2",
+              "accepted": [
+                "Dana Scully",
+                "Scully"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each series with its fictional workplace.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "The Office (US)"
+              },
+              "right": {
+                "text": "Dunder Mifflin"
+              }
+            },
+            {
+              "left": {
+                "text": "Parks and Recreation"
+              },
+              "right": {
+                "text": "Pawnee City Hall"
+              }
+            },
+            {
+              "left": {
+                "text": "Brooklyn Nine-Nine"
+              },
+              "right": {
+                "text": "99th Precinct"
+              }
+            },
+            {
+              "left": {
+                "text": "House"
+              },
+              "right": {
+                "text": "Princeton-Plainsboro Hospital"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each series with its creator.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "The Sopranos"
+              },
+              "right": {
+                "text": "David Chase"
+              }
+            },
+            {
+              "left": {
+                "text": "The Wire"
+              },
+              "right": {
+                "text": "David Simon"
+              }
+            },
+            {
+              "left": {
+                "text": "Fleabag"
+              },
+              "right": {
+                "text": "Phoebe Waller-Bridge"
+              }
+            },
+            {
+              "left": {
+                "text": "The Good Place"
+              },
+              "right": {
+                "text": "Michael Schur"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

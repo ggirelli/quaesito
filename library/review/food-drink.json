@@ -1,0 +1,362 @@
+[
+  {
+    "file": "food-drink-cheese.json",
+    "entry": 7,
+    "question": "Which Italian cheese is traditionally aged in a pit, giving it its name meaning 'cheese of the pit'?",
+    "problem": "misleading",
+    "explanation": "The question translates the answer (formaggio = cheese, fossa = pit), and it is the only option containing 'formaggio'.",
+    "fix": "text -> \"Which Italian cheese from Emilia-Romagna and Marche is aged in sealed underground pits?\""
+  },
+  {
+    "file": "food-drink-cheese.json",
+    "entry": 8,
+    "question": "Which cheese is the key ingredient in the Indian dish palak paneer?",
+    "problem": "misleading",
+    "explanation": "The dish name contains the answer, Paneer.",
+    "fix": "text -> \"Which fresh, unaged cheese is cubed and cooked with spinach in a classic North Indian dish?\""
+  },
+  {
+    "file": "food-drink-cheese.json",
+    "entry": 9,
+    "question": "Which Italian cheese is traditionally made using water buffalo milk?",
+    "problem": "misleading",
+    "explanation": "The answer 'Mozzarella di bufala' repeats 'buffalo' from the question. No other option fits.",
+    "fix": "answer -> \"Mozzarella\" and add another fresh cheese as a distractor (e.g. Stracchino), or text -> \"Which Campanian cheese with PDO status is made from water-buffalo milk?\""
+  },
+  {
+    "file": "food-drink-cheese.json",
+    "entry": 10,
+    "question": "Which French cheese is matured in the caves of Combalou near Roquefort-sur-Soulzon?",
+    "problem": "misleading",
+    "explanation": "Naming the village Roquefort-sur-Soulzon gives the answer away. It also overlaps with entry 4.",
+    "fix": "text -> \"Which French blue cheese must be matured in the Combalou caves?\""
+  },
+  {
+    "file": "food-drink-cheese.json",
+    "entry": 18,
+    "question": "What cheese is traditionally used in a Greek salad?",
+    "problem": "duplicate",
+    "explanation": "Same question and answer (Feta) as cheese entry 1.",
+    "fix": "drop one of them, or rewrite entry 18 as \"Which brined Greek cheese has PDO status and is traditionally made from sheep's milk (or sheep's with some goat's milk)?\""
+  },
+  {
+    "file": "food-drink-cheese.json",
+    "entry": 19,
+    "question": "What fresh Italian cheese has a name meaning 'twice cooked' and is made from whey?",
+    "problem": "duplicate",
+    "explanation": "Same fact as cheese entry 6 (ricotta is made from whey), and it repeats in the entry 30 pairs.",
+    "fix": "remove 'and is made from whey' from entry 19 so it tests the etymology only, or drop entry 6"
+  },
+  {
+    "file": "food-drink-cheese.json",
+    "entry": 20,
+    "question": "What cheese is the main ingredient in the Italian dessert tiramisu?",
+    "problem": "duplicate",
+    "explanation": "Same fact as cheese entry 5 (mascarpone in tiramisu). sweets-desserts entry 2 asks it the other way round.",
+    "fix": "drop entry 20"
+  },
+  {
+    "file": "food-drink-cheese.json",
+    "entry": 21,
+    "question": "What Sardinian cheese is famous for being made with live cheese-fly larvae?",
+    "problem": "duplicate",
+    "explanation": "Same fact as cheese entry 11 (casu marzu and cheese-fly larvae).",
+    "fix": "drop one of them"
+  },
+  {
+    "file": "food-drink-cheese.json",
+    "entry": 23,
+    "question": "How many litres of milk are needed to make approximately 1 kilogram of hard cheese?",
+    "problem": "duplicate",
+    "explanation": "Same question, answer (10) and range as cheese entry 22.",
+    "fix": "drop, or change it to Parmigiano Reggiano: about 14-16 L per kg (roughly 550 L of milk for a ~40 kg wheel), answer 15, range 5-30"
+  },
+  {
+    "file": "food-drink-cheese.json",
+    "entry": 28,
+    "question": "Name three cheeses commonly used in Swiss cheese fondue.",
+    "problem": "ambiguous",
+    "explanation": "The slots are fixed ('Cheese 1' only accepts Gruyère, and so on), so a correct set in another order may be marked wrong. Appenzeller and raclette cheese are also commonly used and are rejected.",
+    "fix": "accept every cheese in every slot (gruyère, emmental/emmentaler, vacherin, vacherin fribourgeois, appenzeller), noting that the same cheese typed twice would then count twice; better, change the text to \"Name the two cheeses in a moitié-moitié fondue\" with labelled slots or one slot each accepting gruyère and vacherin fribourgeois"
+  },
+  {
+    "file": "food-drink-cocktails.json",
+    "entry": 7,
+    "question": "Which ingredient gives a Piña Colada its characteristic creamy coconut flavour?",
+    "problem": "misleading",
+    "explanation": "'Creamy coconut' makes 'Coconut cream' the obvious pick, and no distractor involves coconut.",
+    "fix": "text -> \"Besides rum, which two-word ingredient is blended with pineapple juice in a Piña Colada?\", or add distractors such as Coconut water and Coconut rum"
+  },
+  {
+    "file": "food-drink-cocktails.json",
+    "entry": 17,
+    "question": "The original recipe for the Last Word includes green Chartreuse.",
+    "problem": "duplicate",
+    "explanation": "Same fact as cocktails entry 10, which lists green Chartreuse in the question, and the entry 30 pair.",
+    "fix": "drop"
+  },
+  {
+    "file": "food-drink-cocktails.json",
+    "entry": 20,
+    "question": "What cocktail is traditionally made with gin, Campari and sweet vermouth?",
+    "problem": "duplicate",
+    "explanation": "The Negroni recipe is asked three times: entry 15 (TrueFalse), entry 20 (Text) and entry 28 (Parts). Entry 5 also covers Campari.",
+    "fix": "keep one (e.g. entry 28) and drop entries 15 and 20"
+  },
+  {
+    "file": "food-drink-cocktails.json",
+    "entry": 21,
+    "question": "What cocktail shares its name with a New Orleans neighbourhood and uses rye whiskey and absinthe?",
+    "problem": "wrong",
+    "explanation": "There is no New Orleans neighbourhood called Sazerac. The cocktail is named after Sazerac de Forge et Fils, the cognac brand originally used in it (and the Sazerac Coffee House).",
+    "fix": "text -> \"What New Orleans cocktail, named after a brand of cognac, is made with rye whiskey (or cognac), Peychaud's bitters and an absinthe rinse?\""
+  },
+  {
+    "file": "food-drink-cocktails.json",
+    "entry": 23,
+    "question": "How many ingredients are in the classic four-part Last Word recipe?",
+    "problem": "misleading",
+    "explanation": "'Four-part' gives the answer (4) away. Entry 10 also lists all four ingredients.",
+    "fix": "drop; or text -> \"The Last Word is made with equal parts of how many ingredients?\""
+  },
+  {
+    "file": "food-drink-cocktails.json",
+    "entry": 25,
+    "question": "How many dashes of Angostura bitters are commonly specified in the classic Old Fashioned recipe by the IBA?",
+    "problem": "wrong",
+    "explanation": "The IBA Old Fashioned asks for 'few dashes' of Angostura bitters, not a specific number, so 3 has no basis in the IBA spec.",
+    "fix": "drop, or change it to a fact the IBA does give, e.g. \"How many millilitres of bourbon or rye are in the IBA Old Fashioned?\" answer 45, range 20-80"
+  },
+  {
+    "file": "food-drink-cocktails.json",
+    "entry": 26,
+    "question": "Put these steps for building a classic mojito in order, earliest first.",
+    "problem": "ambiguous",
+    "explanation": "In the classic and IBA method the mint is muddled with the lime and sugar, not added afterwards with the rum. As written, the order contradicts the standard build.",
+    "fix": "items -> [\"Add mint, lime and sugar\", \"Muddle gently\", \"Add rum and ice\", \"Top with soda water\"]"
+  },
+  {
+    "file": "food-drink-cocktails.json",
+    "entry": 27,
+    "question": "Put these cocktails in order of their earliest widely documented appearance, earliest first.",
+    "problem": "ambiguous",
+    "explanation": "The name 'Old Fashioned' dates from the 1880s, the same period as the Manhattan (first printed c.1884). Which comes first depends on whether you count the earlier 'whiskey cocktail'.",
+    "fix": "replace Manhattan with a clearly later drink, e.g. items [\"Old Fashioned\", \"Daiquiri\", \"Margarita\", \"Cosmopolitan\"]"
+  },
+  {
+    "file": "food-drink-ingredients.json",
+    "entry": 18,
+    "question": "What is the name of the fermented soybean paste used in Japanese miso soup?",
+    "problem": "misleading",
+    "explanation": "The question says 'miso soup', so the answer is in the question. It also duplicates world-cuisines entries 8 and 18.",
+    "fix": "drop; or text -> \"What fermented paste of soybeans, salt and koji is a staple of Japanese cooking?\""
+  },
+  {
+    "file": "food-drink-ingredients.json",
+    "entry": 20,
+    "question": "What spice is made from the dried stigmas of Crocus sativus?",
+    "problem": "duplicate",
+    "explanation": "The saffron-stigma fact is asked four times: ingredients entries 3, 15, 20 and the Saffron-Stigmas pair in entry 29.",
+    "fix": "drop entries 15 and 20 (keep 3 and 29, or replace the Saffron pair with e.g. Nutmeg -> Seed)"
+  },
+  {
+    "file": "food-drink-ingredients.json",
+    "entry": 21,
+    "question": "What is the name of the pungent resinous spice also known as hing?",
+    "problem": "misleading",
+    "explanation": "\"hing\" is in the accepted list, but the question already gives it. A player can just repeat the word.",
+    "fix": "remove \"hing\" from accepted; keep asafoetida/asafetida and add \"asafoetida powder\""
+  },
+  {
+    "file": "food-drink-ingredients.json",
+    "entry": 30,
+    "question": "Match each ingredient with its characteristic compound.",
+    "problem": "duplicate",
+    "explanation": "Entry 28 (Parts) asks the same three pairs (chilli-capsaicin, turmeric-curcumin, black pepper-piperine). Entries 5, 9 and 12 also cover capsaicin, curcumin and allicin.",
+    "fix": "drop entry 28, or use different ingredients in one of them (e.g. cinnamon-cinnamaldehyde, clove-eugenol, mint-menthol)"
+  },
+  {
+    "file": "food-drink-sweets-desserts.json",
+    "entry": 3,
+    "question": "Which spice is most associated with the flavour of gingerbread?",
+    "problem": "misleading",
+    "explanation": "The question says 'gingerbread', so the answer Ginger is given away.",
+    "fix": "drop; or ask which spice besides ginger is typical in German Lebkuchen"
+  },
+  {
+    "file": "food-drink-sweets-desserts.json",
+    "entry": 4,
+    "question": "What is the main ingredient in marzipan?",
+    "problem": "duplicate",
+    "explanation": "Same fact as ingredients entry 11 (almond in marzipan) and the Marzipan-Almonds pair in sweets entry 30.",
+    "fix": "drop one of the MC entries"
+  },
+  {
+    "file": "food-drink-sweets-desserts.json",
+    "entry": 11,
+    "question": "Which French confection is made by coating fruit or nuts in cooked sugar that crystallises around them?",
+    "problem": "misleading",
+    "explanation": "The French praline is almonds (nuts) coated in cooked, crystallised sugar. Sugar-coated fruit is candied or crystallised fruit, not a praline, so 'fruit or' is wrong.",
+    "fix": "text -> \"Which French confection is made by coating almonds in cooked sugar that crystallises around them?\""
+  },
+  {
+    "file": "food-drink-sweets-desserts.json",
+    "entry": 15,
+    "question": "Traditional baklava is usually made with layers of shortcrust pastry.",
+    "problem": "duplicate",
+    "explanation": "Same fact as sweets entry 8 (baklava uses filo pastry).",
+    "fix": "drop"
+  },
+  {
+    "file": "food-drink-sweets-desserts.json",
+    "entry": 18,
+    "question": "What dessert is made by caramelising sugar on top of a vanilla custard?",
+    "problem": "duplicate",
+    "explanation": "Same fact as sweets entry 6 (crème brûlée). The accepted list also repeats \"creme brulee\".",
+    "fix": "drop entry 18, or keep it with accepted [\"crème brûlée\", \"creme brulee\"] (normalize() already folds accents, so further accent variants are redundant)"
+  },
+  {
+    "file": "food-drink-sweets-desserts.json",
+    "entry": 19,
+    "question": "What Italian dessert's name literally means 'cooked cream'?",
+    "problem": "misleading",
+    "explanation": "The accepted list leaves out the common one-word spelling 'pannacotta'. It also duplicates entry 9 and the Panna cotta pair in entry 30.",
+    "fix": "accepted -> [\"panna cotta\", \"pannacotta\", \"panna cota\"]"
+  },
+  {
+    "file": "food-drink-sweets-desserts.json",
+    "entry": 20,
+    "question": "What Japanese sweet is made from pounded glutinous rice?",
+    "problem": "duplicate",
+    "explanation": "Same question text and answer as sweets entry 12 (Mochi). Entry 30 also pairs Mochi with glutinous rice.",
+    "fix": "drop one of them"
+  },
+  {
+    "file": "food-drink-sweets-desserts.json",
+    "entry": 22,
+    "question": "How many grams are in a standard kilogram of sugar?",
+    "problem": "quality",
+    "explanation": "This is a unit definition (1 kg = 1000 g) and has nothing to do with sweets.",
+    "fix": "drop, or replace with a real sugar fact (e.g. approximate grams of sugar in a 330 mL can of cola, ~35)"
+  },
+  {
+    "file": "food-drink-sweets-desserts.json",
+    "entry": 24,
+    "question": "How many layers of pastry are traditionally used in a mille-feuille, as its name suggests?",
+    "problem": "wrong",
+    "explanation": "Mille-feuille means 'thousand leaves', so the name suggests 1000, not 3. Three layers of puff pastry is the traditional build, but the name does not suggest that.",
+    "fix": "text -> \"How many layers of puff pastry are traditionally used in a mille-feuille?\" (answer 3 stays)"
+  },
+  {
+    "file": "food-drink-wine-beer.json",
+    "entry": 6,
+    "question": "What is the name for the vessel in which beer is fermented and served under pressure?",
+    "problem": "ambiguous",
+    "explanation": "Beer is not normally fermented in kegs. Cask ale is the beer that finishes fermenting in the vessel it is served from, so 'fermented' points to the Cask distractor.",
+    "fix": "text -> \"What is the name for the sealed container in which beer is stored and served under CO2 pressure?\""
+  },
+  {
+    "file": "food-drink-wine-beer.json",
+    "entry": 14,
+    "question": "Beer is commonly brewed using malted barley, water, hops and yeast.",
+    "problem": "duplicate",
+    "explanation": "Same fact as wine-beer entry 28 (Parts: malt, hops, yeast besides water), and entry 14 gives entry 28's answer away.",
+    "fix": "drop entry 14"
+  },
+  {
+    "file": "food-drink-wine-beer.json",
+    "entry": 17,
+    "question": "The alcohol in wine is produced when yeast converts sugars during fermentation.",
+    "problem": "duplicate",
+    "explanation": "Same fact as wine-beer entry 3 (yeast turns sugar into alcohol) and entry 19 (fermentation), and entry 17 gives both of their answers away.",
+    "fix": "drop"
+  },
+  {
+    "file": "food-drink-wine-beer.json",
+    "entry": 18,
+    "question": "What is the name of the Spanish sparkling wine often made by the traditional method?",
+    "problem": "duplicate",
+    "explanation": "Same fact as wine-beer entry 4 (Cava is Spain's sparkling wine) and the entry 29 pair.",
+    "fix": "drop one of them"
+  },
+  {
+    "file": "food-drink-wine-beer.json",
+    "entry": 25,
+    "question": "How many grape varieties are permitted in red Châteauneuf-du-Pape under its traditional appellation rules?",
+    "problem": "ambiguous",
+    "explanation": "Châteauneuf-du-Pape is famous for its 13 permitted varieties. The figure of 18 comes from the 2009 rules counting colour variants separately (e.g. Grenache noir/blanc/gris). The list also covers whites, not only reds. 'Traditional' points to 13.",
+    "fix": "text -> \"Châteauneuf-du-Pape is famous for traditionally permitting how many grape varieties?\" answer 13, range 5-25; or keep 18 and say \"counting colour variants, under the 2009 rules\""
+  },
+  {
+    "file": "food-drink-wine-beer.json",
+    "entry": 30,
+    "question": "Match each beer style with its place of origin.",
+    "problem": "wrong",
+    "explanation": "Stout began in 18th-century London as 'stout porter'. Guinness made Irish dry stout famous, but stout as a style did not originate in Ireland.",
+    "fix": "replace the pair with \"Irish dry stout\" -> \"Dublin\", or \"Porter\" -> \"London\""
+  },
+  {
+    "file": "food-drink-world-cuisines.json",
+    "entry": 3,
+    "question": "Hummus is traditionally made primarily from which ingredient?",
+    "problem": "duplicate",
+    "explanation": "Same fact and nearly the same options as ingredients entry 2 (chickpeas in hummus).",
+    "fix": "drop one of them"
+  },
+  {
+    "file": "food-drink-world-cuisines.json",
+    "entry": 4,
+    "question": "Which herb gives classic pesto alla genovese its green colour?",
+    "problem": "duplicate",
+    "explanation": "Same fact as ingredients entry 1 (basil in pesto), in the same Food & Drink category.",
+    "fix": "drop one of them"
+  },
+  {
+    "file": "food-drink-world-cuisines.json",
+    "entry": 8,
+    "question": "Which fermented paste is central to Japanese miso soup?",
+    "problem": "misleading",
+    "explanation": "The answer, Miso, is in the question. It also duplicates ingredients entry 18 and world-cuisines entry 18.",
+    "fix": "drop, or text -> \"Which fermented soybean paste is the base of a classic Japanese breakfast soup?\""
+  },
+  {
+    "file": "food-drink-world-cuisines.json",
+    "entry": 11,
+    "question": "Which Japanese seasoning is made from fermented soybeans, salt and koji?",
+    "problem": "ambiguous",
+    "explanation": "Soybeans, salt and koji is the recipe for miso. Shoyu is also made with roasted wheat and is a brewed liquid, so the wording describes miso better than the marked answer.",
+    "fix": "text -> \"Which Japanese liquid seasoning is brewed from soybeans, roasted wheat, salt and koji?\""
+  },
+  {
+    "file": "food-drink-world-cuisines.json",
+    "entry": 15,
+    "question": "Kimchi is traditionally associated with Japanese cuisine.",
+    "problem": "duplicate",
+    "explanation": "Same fact (kimchi is Korean) as world-cuisines entry 20 (Text) and the Kimchi-South Korea pair in entry 29.",
+    "fix": "drop entry 15, or replace Kimchi in entry 29 with another dish (e.g. Bibimbap)"
+  },
+  {
+    "file": "food-drink-world-cuisines.json",
+    "entry": 18,
+    "question": "What is the name of the Japanese soup made with miso paste?",
+    "problem": "misleading",
+    "explanation": "The question names the answer. It also duplicates world-cuisines entry 8 and ingredients entry 18.",
+    "fix": "drop"
+  },
+  {
+    "file": "food-drink-world-cuisines.json",
+    "entry": 25,
+    "question": "How many millilitres are in one UK imperial pint, approximately?",
+    "problem": "duplicate",
+    "explanation": "Same question, answer (568) and range as wine-beer entry 24.",
+    "fix": "drop one of them"
+  },
+  {
+    "file": "food-drink-world-cuisines.json",
+    "entry": 27,
+    "question": "Put these cheeses in order by country of origin, A–Z.",
+    "problem": "quality",
+    "explanation": "Each item shows its country in brackets, so the task is just alphabetising four country names. It tests no cheese knowledge.",
+    "fix": "remove the bracketed countries from the items, or drop"
+  }
+]

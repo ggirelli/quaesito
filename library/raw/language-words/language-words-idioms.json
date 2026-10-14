@@ -1,0 +1,669 @@
+[
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "If someone says a plan is 'the best of both worlds', what do they mean?",
+      "answers": [
+        {
+          "text": "It combines advantages of two options",
+          "correct": true
+        },
+        {
+          "text": "It avoids making any decision"
+        },
+        {
+          "text": "It works only in theory"
+        },
+        {
+          "text": "It creates twice as much work"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "To 'break the ice' is to…",
+      "answers": [
+        {
+          "text": "Ease tension at the start of an interaction",
+          "correct": true
+        },
+        {
+          "text": "End a friendship abruptly"
+        },
+        {
+          "text": "Reveal a hidden secret"
+        },
+        {
+          "text": "Refuse to join a group"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "If you 'let the cat out of the bag', what have you done?",
+      "answers": [
+        {
+          "text": "Revealed a secret",
+          "correct": true
+        },
+        {
+          "text": "Made a costly mistake"
+        },
+        {
+          "text": "Escaped a difficult task"
+        },
+        {
+          "text": "Changed your mind"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What does 'once in a blue moon' mean?",
+      "answers": [
+        {
+          "text": "Very rarely",
+          "correct": true
+        },
+        {
+          "text": "At the start of each month"
+        },
+        {
+          "text": "Unexpectedly soon"
+        },
+        {
+          "text": "Only during winter"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "If someone is 'under the weather', they are…",
+      "answers": [
+        {
+          "text": "Feeling unwell",
+          "correct": true
+        },
+        {
+          "text": "Caught in a storm"
+        },
+        {
+          "text": "Working outdoors"
+        },
+        {
+          "text": "In a bad mood about money"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "To 'throw in the towel' means to…",
+      "answers": [
+        {
+          "text": "Give up",
+          "correct": true
+        },
+        {
+          "text": "Start a competition"
+        },
+        {
+          "text": "Hide evidence"
+        },
+        {
+          "text": "Make peace after an argument"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "If you 'bite the bullet', you…",
+      "answers": [
+        {
+          "text": "Face something difficult bravely",
+          "correct": true
+        },
+        {
+          "text": "Speak without thinking"
+        },
+        {
+          "text": "Spend money carelessly"
+        },
+        {
+          "text": "Avoid an unpleasant truth"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What does 'the writing is on the wall' suggest?",
+      "answers": [
+        {
+          "text": "A bad outcome is becoming clear",
+          "correct": true
+        },
+        {
+          "text": "A message has been forged"
+        },
+        {
+          "text": "A decision is still undecided"
+        },
+        {
+          "text": "Someone has left a note"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "If a person 'moves the goalposts', they…",
+      "answers": [
+        {
+          "text": "Change the rules unfairly",
+          "correct": true
+        },
+        {
+          "text": "Make a task easier"
+        },
+        {
+          "text": "Refuse to compete"
+        },
+        {
+          "text": "Set a clear deadline"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "To 'cut no ice' with someone means your argument…",
+      "answers": [
+        {
+          "text": "Has no influence on them",
+          "correct": true
+        },
+        {
+          "text": "Is unusually persuasive"
+        },
+        {
+          "text": "Is difficult to understand"
+        },
+        {
+          "text": "Arrives too late to matter"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "If someone 'keeps their powder dry', they…",
+      "answers": [
+        {
+          "text": "Save their resources for the right moment",
+          "correct": true
+        },
+        {
+          "text": "Refuse to take any precautions"
+        },
+        {
+          "text": "Spend money before a crisis"
+        },
+        {
+          "text": "Make their intentions obvious"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "To 'cast a pearl before swine' is to…",
+      "answers": [
+        {
+          "text": "Offer something valuable to those who cannot appreciate it",
+          "correct": true
+        },
+        {
+          "text": "Hide wealth from a rival"
+        },
+        {
+          "text": "Trade something rare for something common"
+        },
+        {
+          "text": "Praise someone who deserves blame"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "'A piece of cake' describes something easy to do."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "'A red herring' is a clue that deliberately distracts from the real issue."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "'To burn the midnight oil' means to get up unusually early."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "'To have a chip on your shoulder' means to feel resentful or easily offended."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "'To curry favour' originally refers to preparing a spicy curry for someone."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "spill the beans",
+            "spill beans"
+          ]
+        }
+      },
+      "text": "What idiom means to reveal a secret unintentionally, often using a vegetable?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "beat around the bush",
+            "beat about the bush"
+          ]
+        }
+      },
+      "text": "What idiom means to avoid the main point and talk about something irrelevant?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "face the music"
+          ]
+        }
+      },
+      "text": "What idiom means to accept the consequences of your own actions?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "blow your own trumpet",
+            "blow one's own trumpet",
+            "toot your own horn",
+            "toot one's own horn"
+          ]
+        }
+      },
+      "text": "What idiom means to praise oneself, often for one's own achievements?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 9,
+          "range": {
+            "min": 1,
+            "max": 20
+          }
+        }
+      },
+      "text": "In the idiom 'cloud nine', what number is named?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 9,
+          "range": {
+            "min": 1,
+            "max": 20
+          }
+        }
+      },
+      "text": "In the phrase 'a stitch in time saves nine', what number is named?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 7,
+          "range": {
+            "min": 1,
+            "max": 15
+          }
+        }
+      },
+      "text": "In 'at sixes and sevens', what is the larger of the two numbers named?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 9,
+          "range": {
+            "min": 1,
+            "max": 20
+          }
+        }
+      },
+      "text": "In the idiom 'dressed to the nines', what number is named?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "A bird in the hand",
+            "Is worth",
+            "Two",
+            "In the bush"
+          ]
+        }
+      },
+      "text": "Put these parts of the proverb in their usual reading order, earliest first."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "People who live in glass houses",
+            "Should not",
+            "Throw",
+            "Stones"
+          ]
+        }
+      },
+      "text": "Put these parts of the saying in their usual reading order, earliest first."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Animal in 'let the cat out of the bag'",
+              "accepted": [
+                "cat"
+              ]
+            },
+            {
+              "label": "Food in 'spill the beans'",
+              "accepted": [
+                "beans",
+                "bean"
+              ]
+            },
+            {
+              "label": "Body part in 'cost an arm and a leg'",
+              "accepted": [
+                "arm",
+                "leg",
+                "an arm and a leg"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name the missing words from these three idioms."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Piece of cake"
+              },
+              "right": {
+                "text": "Easy task"
+              }
+            },
+            {
+              "left": {
+                "text": "Cold feet"
+              },
+              "right": {
+                "text": "Nervous hesitation"
+              }
+            },
+            {
+              "left": {
+                "text": "Spill the beans"
+              },
+              "right": {
+                "text": "Reveal a secret"
+              }
+            },
+            {
+              "left": {
+                "text": "Hit the sack"
+              },
+              "right": {
+                "text": "Go to bed"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each idiom to its meaning."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Idioms",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Red herring"
+              },
+              "right": {
+                "text": "Misleading distraction"
+              }
+            },
+            {
+              "left": {
+                "text": "Pyrrhic victory"
+              },
+              "right": {
+                "text": "Win at excessive cost"
+              }
+            },
+            {
+              "left": {
+                "text": "Hobson's choice"
+              },
+              "right": {
+                "text": "Take it or leave it"
+              }
+            },
+            {
+              "left": {
+                "text": "Achilles' heel"
+              },
+              "right": {
+                "text": "Fatal weakness"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each expression to its meaning."
+    }
+  }
+]

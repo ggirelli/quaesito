@@ -1,0 +1,378 @@
+[
+  {
+    "file": "art-design-architecture.json",
+    "entry": 4,
+    "question": "What is the name for a pointed arch commonly associated with Gothic architecture?",
+    "problem": "misleading",
+    "explanation": "The question says 'pointed arch' and the answer is 'Pointed arch', so the question gives the answer away.",
+    "fix": "text: 'What type of arch is characteristic of Gothic architecture?' (keep options); or ask for the alternative term 'lancet/ogival arch'"
+  },
+  {
+    "file": "art-design-architecture.json",
+    "entry": 7,
+    "question": "Which ancient Greek building on the Acropolis was dedicated to Athena?",
+    "problem": "ambiguous",
+    "explanation": "The distractor Erechtheion was also dedicated to Athena (Athena Polias, together with Poseidon/Erechtheus), so two options are defensibly right.",
+    "fix": "text: 'Which temple on the Acropolis was dedicated to Athena Parthenos and housed Phidias's great statue of her?' or replace Erechtheion with e.g. 'The Temple of Zeus at Olympia'"
+  },
+  {
+    "file": "art-design-architecture.json",
+    "entry": 18,
+    "question": "What is the name of the famous ancient Greek temple atop the Acropolis in Athens?",
+    "problem": "duplicate",
+    "explanation": "This asks for the same answer (the Parthenon as the Acropolis temple) as entry 7.",
+    "fix": "drop, or ask something different, e.g. 'Which sculptor oversaw the Parthenon's decoration?' (Phidias)"
+  },
+  {
+    "file": "art-design-architecture.json",
+    "entry": 22,
+    "question": "How many metres tall is the Eiffel Tower, including its antenna?",
+    "problem": "outdated",
+    "explanation": "324 m was the height before March 2022, when a new DAB antenna raised the tower to 330 m.",
+    "fix": "answer 330 (range 250-400 OK); or rephrase 'As of 2026...' with time_sensitive true, since antenna changes alter the figure"
+  },
+  {
+    "file": "art-design-architecture.json",
+    "entry": 23,
+    "question": "Approximately how many metres high is the dome of Florence Cathedral, measured to the top of its lantern?",
+    "problem": "wrong",
+    "explanation": "Florence Cathedral's dome reaches about 114.5 m to the top of the lantern (the dome itself springs from about 52-55 m). 55 m is wrong.",
+    "fix": "answer 114, range min 80 max 150"
+  },
+  {
+    "file": "art-design-architecture.json",
+    "entry": 24,
+    "question": "Approximately how many metres long is the Parthenon's main building, measured along its long side?",
+    "problem": "wrong",
+    "explanation": "The Parthenon's stylobate measures about 69.5 m x 30.9 m. 160 m is more than double the real length.",
+    "fix": "answer 70, range min 40 max 100"
+  },
+  {
+    "file": "art-design-architecture.json",
+    "entry": 28,
+    "question": "Name the architect and the house built over a waterfall in Pennsylvania.",
+    "problem": "duplicate",
+    "explanation": "This asks the same fact as entry 6 (Fallingwater by Frank Lloyd Wright), and pairs entry 29 repeats it again.",
+    "fix": "drop, or replace with a different architect/building Parts question (e.g. Le Corbusier / Villa Savoye)"
+  },
+  {
+    "file": "art-design-architecture.json",
+    "entry": 29,
+    "question": "Match each architect to the building they designed.",
+    "problem": "duplicate",
+    "explanation": "Three of the four pairs repeat other entries: Pei/Louvre Pyramid (entry 1), Gaudí/Sagrada Família (entry 3) and Wright/Fallingwater (entries 6, 28).",
+    "fix": "swap in architects not asked elsewhere (e.g. Zaha Hadid/MAXXI, Frank Gehry/Guggenheim Bilbao, Le Corbusier/Villa Savoye)"
+  },
+  {
+    "file": "art-design-architecture.json",
+    "entry": 30,
+    "question": "Match each architect to the building they designed.",
+    "problem": "duplicate",
+    "explanation": "Three of the four pairs repeat other entries: Kahn/Salk (entry 11), Mies/Barcelona Pavilion (entry 9) and Venturi/Vanna Venturi House (entry 21); Gropius/Bauhaus also overlaps entries 8 and 17.",
+    "fix": "replace the repeated pairs with fresh ones (e.g. Eero Saarinen/TWA Flight Center, Alvar Aalto/Paimio Sanatorium, Oscar Niemeyer/Cathedral of Brasília)"
+  },
+  {
+    "file": "art-design-art-movements.json",
+    "entry": 8,
+    "question": "Which movement used tiny dots of pure color intended to blend in the viewer's eye?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as painting.json entry 8 (Seurat's tiny dots, Pointillism).",
+    "fix": "drop one of the two, or change this one to ask who pioneered Pointillism (Georges Seurat) and drop the painting entry"
+  },
+  {
+    "file": "art-design-art-movements.json",
+    "entry": 18,
+    "question": "What movement was named after Monet's painting Impression, Sunrise?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as the TrueFalse in entry 13, and painting.json entry 28 asks it as well.",
+    "fix": "drop, or ask e.g. 'Which critic coined the term Impressionism in 1874?' (Louis Leroy)"
+  },
+  {
+    "file": "art-design-art-movements.json",
+    "entry": 21,
+    "question": "What abstract movement did Kazimir Malevich launch with works such as Black Square?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as entry 11 (Malevich / Suprematism) and is repeated in pairs entry 30. It also gives away famous-artists.json entry 12 (who made Black Square).",
+    "fix": "drop (Malevich/Suprematism is already covered by entry 11 and pairs entry 30)"
+  },
+  {
+    "file": "art-design-art-movements.json",
+    "entry": 28,
+    "question": "Name the movement and its painter associated with grids of black lines and primary colors.",
+    "problem": "duplicate",
+    "explanation": "De Stijl and Mondrian are already asked in entry 20 (which names Mondrian) and entry 10 (grids/primary colours).",
+    "fix": "drop, or replace with a different movement/artist Parts question (e.g. Futurism / Umberto Boccioni)"
+  },
+  {
+    "file": "art-design-art-movements.json",
+    "entry": 29,
+    "question": "Match each artist to the movement they are strongly associated with.",
+    "problem": "duplicate",
+    "explanation": "All four pairs repeat single-answer entries: Monet/Impressionism (1), Picasso/Cubism (3), Matisse/Fauvism (5) and Dalí/Surrealism (famous-artists 13).",
+    "fix": "use other artists not tied to a movement elsewhere (e.g. Gustave Courbet/Realism, Andy Warhol/Pop Art, Caravaggio/Baroque, Jacques-Louis David/Neoclassicism); avoid Seurat/Pointillism, which is already asked in art-movements 8 and painting 8"
+  },
+  {
+    "file": "art-design-famous-artists.json",
+    "entry": 1,
+    "question": "Which Spanish artist co-founded Cubism with Georges Braque?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as art-movements.json entry 3 (Picasso and Braque pioneered Cubism).",
+    "fix": "drop one, or replace with a different Picasso fact, e.g. 'Which Spanish artist went through a Blue Period?' (Picasso); do not use The Persistence of Memory, which is by Dalí and already asked in painting.json entry 10"
+  },
+  {
+    "file": "art-design-famous-artists.json",
+    "entry": 3,
+    "question": "Who painted the ceiling of the Sistine Chapel?",
+    "problem": "duplicate",
+    "explanation": "This is an identical question to painting.json entry 9.",
+    "fix": "drop one of the two"
+  },
+  {
+    "file": "art-design-famous-artists.json",
+    "entry": 4,
+    "question": "Which Dutch painter created The Starry Night?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as painting.json entry 2 (and painting entry 13's TrueFalse), and it reappears in famous-artists entry 29 and painting entry 29 pairs.",
+    "fix": "drop one of the two"
+  },
+  {
+    "file": "art-design-famous-artists.json",
+    "entry": 5,
+    "question": "Which artist painted the water-lily series at his garden in Giverny?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as painting.json entry 5 (also famous-artists 14 and pairs 29).",
+    "fix": "drop one of the two"
+  },
+  {
+    "file": "art-design-famous-artists.json",
+    "entry": 6,
+    "question": "Which artist painted the ceiling frescoes of the Vatican's Raphael Rooms?",
+    "problem": "misleading",
+    "explanation": "The name 'Raphael Rooms' gives the answer away. It is also inaccurate, because some of the ceilings are by others (e.g. Perugino in the Stanza dell'Incendio, Sodoma in the Segnatura).",
+    "fix": "text: 'Who painted The School of Athens in the Vatican?' (Raphael)"
+  },
+  {
+    "file": "art-design-famous-artists.json",
+    "entry": 18,
+    "question": "Which Mexican artist painted many vivid self-portraits and is often shown wearing traditional Tehuana dress?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as entry 2 (Mexican artist known for self-portraits = Frida Kahlo).",
+    "fix": "drop one; e.g. replace with 'Which Mexican muralist was married to Frida Kahlo?' (Diego Rivera)"
+  },
+  {
+    "file": "art-design-famous-artists.json",
+    "entry": 19,
+    "question": "Who created the Japanese woodblock print The Great Wave off Kanagawa?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as the TrueFalse in entry 15.",
+    "fix": "drop one; e.g. replace entry 15 with a different Hokusai/ukiyo-e fact (e.g. 'The Great Wave is part of the series Thirty-six Views of Mount Fuji')"
+  },
+  {
+    "file": "art-design-famous-artists.json",
+    "entry": 22,
+    "question": "How many paintings of the sunflower series did Van Gogh make in Arles, in the best-known group?",
+    "problem": "ambiguous",
+    "explanation": "Van Gogh painted 4 sunflower still lifes in Arles in August 1888 and 3 repetitions in January 1889, also in Arles. Seven Arles versions is a common answer, and 'best-known group' is vague.",
+    "fix": "text: 'How many sunflower still lifes did Van Gogh paint in Arles in August 1888?' answer 4"
+  },
+  {
+    "file": "art-design-famous-artists.json",
+    "entry": 23,
+    "question": "At approximately what age, in years, did Pablo Picasso die?",
+    "problem": "wrong",
+    "explanation": "Picasso was born 25 Oct 1881 and died 8 Apr 1973, so he died aged 91, not 86.",
+    "fix": "answer 91, range min 60 max 120 (OK)"
+  },
+  {
+    "file": "art-design-famous-artists.json",
+    "entry": 25,
+    "question": "How many years old was Rembrandt when he completed The Night Watch in 1642?",
+    "problem": "ambiguous",
+    "explanation": "Rembrandt was born 15 July 1606 and the exact completion date in 1642 is unknown, so he could have been 35 or 36.",
+    "fix": "ask 'In what year was Rembrandt born?' answer 1606, range 1580-1630 (number questions score the closest guess, so an answer of 35 vs 36 cannot be accepted both ways)"
+  },
+  {
+    "file": "art-design-famous-artists.json",
+    "entry": 30,
+    "question": "Match each artist to a famous work they created.",
+    "problem": "duplicate",
+    "explanation": "All four pairs repeat other entries: Black Square (12), American Gothic (7), Garden of Earthly Delights (9) and Gentileschi/Judith (20).",
+    "fix": "use works not asked elsewhere (e.g. Caspar David Friedrich/Wanderer above the Sea of Fog, Seurat/A Sunday on La Grande Jatte); also note painting.json entry 30 repeats Grant Wood/American Gothic"
+  },
+  {
+    "file": "art-design-fashion.json",
+    "entry": 5,
+    "question": "Which fibre is obtained from silkworm cocoons?",
+    "problem": "misleading",
+    "explanation": "The word 'silkworm' gives away 'Silk'.",
+    "fix": "text: 'Which natural fibre is produced by the larvae of Bombyx mori?' or ask which country first produced silk (China)"
+  },
+  {
+    "file": "art-design-fashion.json",
+    "entry": 18,
+    "question": "Which French designer's surname became the name of a famous perfume, Chanel No. 5?",
+    "problem": "misleading",
+    "explanation": "The question names 'Chanel No. 5', which gives away the answer 'Chanel'. It also duplicates entry 1 and the pairs in entry 29.",
+    "fix": "drop, or ask 'What was Coco Chanel's real first name?' (Gabrielle)"
+  },
+  {
+    "file": "art-design-fashion.json",
+    "entry": 22,
+    "question": "What number appears in the name of Chanel's best-known perfume, Chanel No. 5?",
+    "problem": "quality",
+    "explanation": "The question states the answer ('Chanel No. 5'), so it is trivial.",
+    "fix": "drop, or ask 'In what year was Chanel No. 5 launched?' answer 1921, range 1900-1945"
+  },
+  {
+    "file": "art-design-fashion.json",
+    "entry": 23,
+    "question": "In what year did Christian Dior present his first collection, later dubbed the New Look?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as entry 6, whose question states 'New Look silhouette in 1947'. Parts entry 28 and pairs entry 29 repeat Dior/New Look/1947 again.",
+    "fix": "drop entry 23 or 28; reword entry 6 to remove '1947'"
+  },
+  {
+    "file": "art-design-fashion.json",
+    "entry": 24,
+    "question": "In what year did Yves Saint Laurent introduce Le Smoking tuxedo suit?",
+    "problem": "duplicate",
+    "explanation": "Entry 20's question text states 'Le Smoking in 1966', which gives this answer away. Pairs entry 30 repeats YSL/Le Smoking.",
+    "fix": "remove 'in 1966' from entry 20, or drop this entry"
+  },
+  {
+    "file": "art-design-painting.json",
+    "entry": 3,
+    "question": "Which pigment gives traditional ultramarine blue its name and historic source?",
+    "problem": "misleading",
+    "explanation": "Lapis lazuli is a stone, not a pigment, and it did not give ultramarine its name: 'ultramarine' means 'beyond the sea'. Lapis was only its historic source.",
+    "fix": "text: 'Which semi-precious stone was ground to make traditional ultramarine pigment?'"
+  },
+  {
+    "file": "art-design-painting.json",
+    "entry": 24,
+    "question": "How wide is Rembrandt's The Night Watch in centimetres, excluding its frame? Give the approximate figure.",
+    "problem": "wrong",
+    "explanation": "The Night Watch is about 379.5 x 453.5 cm (older figure 363 x 437 cm). 363 cm is its height in older sources, not its width.",
+    "fix": "answer 453 (or 437), range min 300 max 600"
+  },
+  {
+    "file": "art-design-painting.json",
+    "entry": 28,
+    "question": "Name the artist and the painting whose title gave Impressionism its name.",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as art-movements.json entries 13 and 18 (Impression, Sunrise / Monet).",
+    "fix": "drop, or replace with a different artist/painting Parts question (e.g. Manet / Le Déjeuner sur l'herbe)"
+  },
+  {
+    "file": "art-design-painting.json",
+    "entry": 29,
+    "question": "Match each painter to the painting they created.",
+    "problem": "duplicate",
+    "explanation": "Every pair repeats a single-answer entry: Mona Lisa (1), Starry Night (2), Girl with a Pearl Earring (7), and Munch/The Scream (famous-artists 28). It also overlaps heavily with famous-artists entry 29.",
+    "fix": "use painter/painting pairs not asked elsewhere (e.g. Turner/The Fighting Temeraire, Hopper/Nighthawks, Millais/Ophelia, Whistler/Whistler's Mother); avoid Klimt/The Kiss (asked in painting 25) and Friedrich/Wanderer (proposed for famous-artists 30)"
+  },
+  {
+    "file": "art-design-painting.json",
+    "entry": 30,
+    "question": "Match each painter to the painting they created.",
+    "problem": "duplicate",
+    "explanation": "Grant Wood/American Gothic repeats famous-artists entries 7 and 30, and Velázquez/Las Meninas repeats painting entry 21.",
+    "fix": "swap those two pairs for fresh ones (e.g. Géricault/The Raft of the Medusa, Millet/The Gleaners)"
+  },
+  {
+    "file": "art-design-photography.json",
+    "entry": 11,
+    "question": "Which photographer made the 1932 image commonly known as 'Lunch Atop a Skyscraper'?",
+    "problem": "ambiguous",
+    "explanation": "Authorship is disputed. The photo was long credited to Charles C. Ebbets, but its rights holder now lists the photographer as unknown (Thomas Kelley and William Leftwich were also present), so the marked answer is not established fact.",
+    "fix": "drop, or ask 'Lunch Atop a Skyscraper (1932) shows workers on which New York building?' (30 Rockefeller Plaza / RCA Building)"
+  },
+  {
+    "file": "art-design-photography.json",
+    "entry": 22,
+    "question": "How many millimetres wide is standard 35 mm film stock? Give millimetres.",
+    "problem": "misleading",
+    "explanation": "The question states the answer ('35 mm').",
+    "fix": "text: 'What is the width in mm of a standard 35 mm still-photo frame (the long side)?' answer 36 (36 x 24 mm), range 20-50"
+  },
+  {
+    "file": "art-design-photography.json",
+    "entry": 23,
+    "question": "In what year was the first commercially successful photographic process, the daguerreotype, announced? Give the year.",
+    "problem": "duplicate",
+    "explanation": "Entry 21 asks about 'the early photographic process announced by Louis Daguerre in 1839', which gives this answer away. Pairs entry 30 also repeats the daguerreotype.",
+    "fix": "drop, or remove '1839' from entry 21's text"
+  },
+  {
+    "file": "art-design-photography.json",
+    "entry": 24,
+    "question": "How many sides does a standard 35 mm film frame have? Give the number of sides.",
+    "problem": "quality",
+    "explanation": "Every film frame is a rectangle with 4 sides, so this question is trivial and meaningless.",
+    "fix": "drop (the suggested '36 exposures per full roll' replacement is ambiguous, since 35 mm rolls are standardly sold in 12, 24 and 36 exposures)"
+  },
+  {
+    "file": "art-design-photography.json",
+    "entry": 28,
+    "question": "Name two of the three primary exposure controls in photography.",
+    "problem": "quality",
+    "explanation": "Both parts accept the same three answers, so a player can type 'Aperture' twice and be marked fully correct.",
+    "fix": "turn it into a 3-part question with fixed labels (e.g. 'Controls light duration' = Shutter speed, 'Controls lens opening' = Aperture, 'Controls sensor sensitivity' = ISO)"
+  },
+  {
+    "file": "art-design-sculpture.json",
+    "entry": 3,
+    "question": "Which ancient civilization made the terracotta army buried near Xi'an?",
+    "problem": "quality",
+    "explanation": "Naming Xi'an makes 'Chinese' trivial against Roman, Persian and Egyptian.",
+    "fix": "ask 'The Terracotta Army was buried with which Chinese emperor?' answers Qin Shi Huang (correct), Han Wudi, Kublai Khan, Emperor Taizong of Tang"
+  },
+  {
+    "file": "art-design-sculpture.json",
+    "entry": 11,
+    "question": "Which sculptor made the 1912 abstract work Unique Forms of Continuity in Space?",
+    "problem": "wrong",
+    "explanation": "Boccioni made Unique Forms of Continuity in Space in 1913, not 1912. It is also Futurist and figurative rather than 'abstract'.",
+    "fix": "text: 'Which Futurist sculptor made the 1913 work Unique Forms of Continuity in Space?'"
+  },
+  {
+    "file": "art-design-sculpture.json",
+    "entry": 22,
+    "question": "How many bronze horses are shown on the façade of St Mark's Basilica in Venice today?",
+    "problem": "wrong",
+    "explanation": "The Horses of Saint Mark are a group of four (the originals are now inside, with replicas on the façade). There are not five.",
+    "fix": "answer 4, range min 2 max 9"
+  },
+  {
+    "file": "art-design-sculpture.json",
+    "entry": 24,
+    "question": "How many figures are in Rodin's sculpture group The Burghers of Calais?",
+    "problem": "wrong",
+    "explanation": "The Burghers of Calais shows six burghers, and entry 28 of this same file says 'six citizens'.",
+    "fix": "answer 6, range min 2 max 10"
+  },
+  {
+    "file": "art-design-sculpture.json",
+    "entry": 25,
+    "question": "Approximately how tall is the Great Sphinx of Giza in centimetres, from base to top of head?",
+    "problem": "wrong",
+    "explanation": "The Great Sphinx is about 20 m (around 2,000 cm) tall. 410 cm is far too small, and centimetres is an odd unit for this.",
+    "fix": "text: '...in metres...', answer 20, range min 10 max 40"
+  },
+  {
+    "file": "art-design-sculpture.json",
+    "entry": 29,
+    "question": "Match each sculptor to the sculpture they created.",
+    "problem": "duplicate",
+    "explanation": "Every pair repeats a single-answer entry: Michelangelo/David (1), Rodin/The Thinker (18, also 4), Degas/Little Dancer (5) and Bernini/Ecstasy of Saint Teresa (9).",
+    "fix": "use pairs not asked elsewhere (e.g. Canova/Psyche Revived by Cupid's Kiss, Giacometti/Walking Man I, Louise Bourgeois/Maman, Jeff Koons/Balloon Dog)"
+  },
+  {
+    "file": "art-design-sculpture.json",
+    "entry": 30,
+    "question": "Match each sculptor to the sculpture they created.",
+    "problem": "duplicate",
+    "explanation": "Boccioni/Unique Forms (entry 11) and Brâncuși/Bird in Space (entry 21) repeat earlier entries.",
+    "fix": "swap those two pairs for fresh ones (e.g. Henry Moore/Recumbent Figure, Duchamp/Fountain)"
+  }
+]

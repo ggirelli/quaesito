@@ -1,0 +1,425 @@
+[
+  {
+    "category": "Nature",
+    "topic": "Animal records",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which animal is the largest living species of cat?",
+      "answers": [
+        {
+          "text": "Tiger",
+          "correct": true
+        },
+        {
+          "text": "Lion"
+        },
+        {
+          "text": "Jaguar"
+        },
+        {
+          "text": "Leopard"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Animal records",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which bird has the largest wingspan of any living bird?",
+      "answers": [
+        {
+          "text": "Wandering albatross",
+          "correct": true
+        },
+        {
+          "text": "Andean condor"
+        },
+        {
+          "text": "Dalmatian pelican"
+        },
+        {
+          "text": "Bald eagle"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Animal records",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which land animal is generally considered the tallest living animal?",
+      "answers": [
+        {
+          "text": "Giraffe",
+          "correct": true
+        },
+        {
+          "text": "African elephant"
+        },
+        {
+          "text": "Ostrich"
+        },
+        {
+          "text": "Camel"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Animal records",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which mammal is famous for having the longest migration of any mammal?",
+      "answers": [
+        {
+          "text": "Humpback whale",
+          "correct": true
+        },
+        {
+          "text": "African elephant"
+        },
+        {
+          "text": "Gray wolf"
+        },
+        {
+          "text": "Polar bear"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Animal records",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which animal is the largest living rodent?",
+      "answers": [
+        {
+          "text": "Capybara",
+          "correct": true
+        },
+        {
+          "text": "Beaver"
+        },
+        {
+          "text": "Porcupine"
+        },
+        {
+          "text": "Mara"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Animal records",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which living animal has the greatest bite force measured in a laboratory study?",
+      "answers": [
+        {
+          "text": "Saltwater crocodile",
+          "correct": true
+        },
+        {
+          "text": "Hippopotamus"
+        },
+        {
+          "text": "Great white shark"
+        },
+        {
+          "text": "Spotted hyena"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Animal records",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which mammal is the fastest runner over short distances?",
+      "answers": [
+        {
+          "text": "Cheetah",
+          "correct": true
+        },
+        {
+          "text": "Pronghorn"
+        },
+        {
+          "text": "Springbok"
+        },
+        {
+          "text": "Lion"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Animal records",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which fish is commonly cited as the largest living fish species?",
+      "answers": [
+        {
+          "text": "Whale shark",
+          "correct": true
+        },
+        {
+          "text": "Basking shark"
+        },
+        {
+          "text": "Ocean sunfish"
+        },
+        {
+          "text": "Great white shark"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Animal records",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which animal is the largest living species of turtle?",
+      "answers": [
+        {
+          "text": "Leatherback sea turtle",
+          "correct": true
+        },
+        {
+          "text": "Green sea turtle"
+        },
+        {
+          "text": "Aldabra giant tortoise"
+        },
+        {
+          "text": "Loggerhead sea turtle"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Animal records",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The ostrich is the fastest bird on land.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Animal records",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "A cheetah can maintain its top speed for several minutes.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Animal records",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Greenland shark can live for several centuries.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Animal records",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the largest living species of bear?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Polar bear",
+            "Ursus maritimus"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Animal records",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "About how many heartbeats per minute can a hummingbird's heart reach during activity? Give beats per minute.",
+      "kind": {
+        "Number": {
+          "answer": 1200,
+          "range": {
+            "min": 700,
+            "max": 1800
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Animal records",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "About how many kilometres can a monarch butterfly migrate one way? Give kilometres.",
+      "kind": {
+        "Number": {
+          "answer": 4000,
+          "range": {
+            "min": 1200,
+            "max": 5200
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Animal records",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Roughly how many days can an emperor penguin fast during breeding? Give days.",
+      "kind": {
+        "Number": {
+          "answer": 120,
+          "range": {
+            "min": 80,
+            "max": 150
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Animal records",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each animal with its record.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Cheetah"
+              },
+              "right": {
+                "text": "Fastest land runner"
+              }
+            },
+            {
+              "left": {
+                "text": "Blue whale"
+              },
+              "right": {
+                "text": "Largest known animal"
+              }
+            },
+            {
+              "left": {
+                "text": "Capybara"
+              },
+              "right": {
+                "text": "Largest living rodent"
+              }
+            },
+            {
+              "left": {
+                "text": "Peregrine falcon"
+              },
+              "right": {
+                "text": "Fastest hunting dive"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Animal records",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each animal with the record it is known for.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Wandering albatross"
+              },
+              "right": {
+                "text": "Largest wingspan of a living bird"
+              }
+            },
+            {
+              "left": {
+                "text": "Greenland shark"
+              },
+              "right": {
+                "text": "Exceptional longevity"
+              }
+            },
+            {
+              "left": {
+                "text": "Leatherback turtle"
+              },
+              "right": {
+                "text": "Largest living turtle"
+              }
+            },
+            {
+              "left": {
+                "text": "Chinese giant salamander"
+              },
+              "right": {
+                "text": "Largest living amphibian"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

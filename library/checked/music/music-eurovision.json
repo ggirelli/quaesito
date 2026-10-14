@@ -1,0 +1,545 @@
+[
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which country won the first Eurovision Song Contest in 1956?",
+      "answers": [
+        {
+          "text": "Switzerland",
+          "correct": true
+        },
+        {
+          "text": "France"
+        },
+        {
+          "text": "Italy"
+        },
+        {
+          "text": "Netherlands"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Swedish group won Eurovision in 1974 with 'Waterloo'?",
+      "answers": [
+        {
+          "text": "ABBA",
+          "correct": true
+        },
+        {
+          "text": "Roxette"
+        },
+        {
+          "text": "Ace of Base"
+        },
+        {
+          "text": "The Cardigans"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who performed 'Rise Like a Phoenix' for Austria in 2014?",
+      "answers": [
+        {
+          "text": "Conchita Wurst",
+          "correct": true
+        },
+        {
+          "text": "Lena"
+        },
+        {
+          "text": "Loreen"
+        },
+        {
+          "text": "Måns Zelmerlöw"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which country did Céline Dion represent when she won Eurovision in 1988?",
+      "answers": [
+        {
+          "text": "Switzerland",
+          "correct": true
+        },
+        {
+          "text": "Canada"
+        },
+        {
+          "text": "France"
+        },
+        {
+          "text": "Luxembourg"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Eurovision winner performed 'Euphoria' in 2012?",
+      "answers": [
+        {
+          "text": "Loreen",
+          "correct": true
+        },
+        {
+          "text": "Emmelie de Forest"
+        },
+        {
+          "text": "Måns Zelmerlöw"
+        },
+        {
+          "text": "Helena Paparizou"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which country won Eurovision in 2021 with 'Zitti e buoni'?",
+      "answers": [
+        {
+          "text": "Italy",
+          "correct": true
+        },
+        {
+          "text": "Finland"
+        },
+        {
+          "text": "Iceland"
+        },
+        {
+          "text": "France"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of Ireland's 1994 Eurovision-winning song?",
+      "answers": [
+        {
+          "text": "Rock 'n' Roll Kids",
+          "correct": true
+        },
+        {
+          "text": "The Voice"
+        },
+        {
+          "text": "Why Me?"
+        },
+        {
+          "text": "In Your Eyes"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which singer won Eurovision 2007 for Serbia with 'Molitva'?",
+      "answers": [
+        {
+          "text": "Marija Šerifović",
+          "correct": true
+        },
+        {
+          "text": "Jelena Tomašević"
+        },
+        {
+          "text": "Željko Joksimović"
+        },
+        {
+          "text": "Nina Badrić"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which country won Eurovision 1993 with Niamh Kavanagh's 'In Your Eyes'?",
+      "answers": [
+        {
+          "text": "Ireland",
+          "correct": true
+        },
+        {
+          "text": "United Kingdom"
+        },
+        {
+          "text": "Norway"
+        },
+        {
+          "text": "Malta"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Eurovision winner was a duo of singers from Denmark in 2000?",
+      "answers": [
+        {
+          "text": "Olsen Brothers",
+          "correct": true
+        },
+        {
+          "text": "Jedward"
+        },
+        {
+          "text": "Bobbysocks"
+        },
+        {
+          "text": "The Herreys"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Eurovision's first contest was held in Lugano, Switzerland.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Eurovision Song Contest was first broadcast in colour in 1956.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Australia first competed in Eurovision in 2015.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Finnish hard-rock band won Eurovision in 2006?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Lordi"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who won Eurovision for Ukraine in 2004 with 'Wild Dances'?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Ruslana"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What was the title of Ukraine's winning song in Eurovision 2016?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "1944"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many countries competed in the Eurovision final in 2024?",
+      "kind": {
+        "Number": {
+          "answer": 25,
+          "range": {
+            "min": 19,
+            "max": 39
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many points did Norway receive when it won Eurovision in 2009?",
+      "kind": {
+        "Number": {
+          "answer": 387,
+          "range": {
+            "min": 300,
+            "max": 450
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did Eurovision introduce the semi-final system?",
+      "kind": {
+        "Number": {
+          "answer": 2004,
+          "range": {
+            "min": 1990,
+            "max": 2015
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these Eurovision winners in chronological order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "ABBA — Waterloo",
+            "Johnny Logan — What's Another Year",
+            "Loreen — Euphoria",
+            "Måns Zelmerlöw — Heroes"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these countries' first Eurovision wins in chronological order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Switzerland",
+            "United Kingdom",
+            "Israel",
+            "Ukraine"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the performer and winning song for Sweden's 2015 Eurovision victory.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Performer",
+              "accepted": [
+                "Måns Zelmerlöw"
+              ]
+            },
+            {
+              "label": "Song",
+              "accepted": [
+                "Heroes"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each Eurovision-winning song to its performer.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Euphoria"
+              },
+              "right": {
+                "text": "Loreen"
+              }
+            },
+            {
+              "left": {
+                "text": "Molitva"
+              },
+              "right": {
+                "text": "Marija Šerifović"
+              }
+            },
+            {
+              "left": {
+                "text": "Fairytale"
+              },
+              "right": {
+                "text": "Alexander Rybak"
+              }
+            },
+            {
+              "left": {
+                "text": "Toy"
+              },
+              "right": {
+                "text": "Netta"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each country to its Eurovision-winning song.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Finland (2006)"
+              },
+              "right": {
+                "text": "Hard Rock Hallelujah"
+              }
+            },
+            {
+              "left": {
+                "text": "Serbia (2007)"
+              },
+              "right": {
+                "text": "Molitva"
+              }
+            },
+            {
+              "left": {
+                "text": "Germany (2010)"
+              },
+              "right": {
+                "text": "Satellite"
+              }
+            },
+            {
+              "left": {
+                "text": "Portugal (2017)"
+              },
+              "right": {
+                "text": "Amar pelos dois"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,660 @@
+[
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What flag signals the end of a motor race?",
+      "answers": [
+        {
+          "text": "Chequered flag",
+          "correct": true
+        },
+        {
+          "text": "Yellow flag"
+        },
+        {
+          "text": "Red flag"
+        },
+        {
+          "text": "Green flag"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which country is home to the famous Monza racing circuit?",
+      "answers": [
+        {
+          "text": "Italy",
+          "correct": true
+        },
+        {
+          "text": "France"
+        },
+        {
+          "text": "Spain"
+        },
+        {
+          "text": "Belgium"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In Formula One, what does a pit stop usually allow a team to do?",
+      "answers": [
+        {
+          "text": "Change tyres or make repairs",
+          "correct": true
+        },
+        {
+          "text": "Add fuel during the race"
+        },
+        {
+          "text": "Change the race distance"
+        },
+        {
+          "text": "Replace the driver mid-lap"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which manufacturer is associated with the prancing horse emblem in motor racing?",
+      "answers": [
+        {
+          "text": "Ferrari",
+          "correct": true
+        },
+        {
+          "text": "Porsche"
+        },
+        {
+          "text": "Lamborghini"
+        },
+        {
+          "text": "Maserati"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What type of racing takes place on an oval track with stock cars in NASCAR?",
+      "answers": [
+        {
+          "text": "Stock-car racing",
+          "correct": true
+        },
+        {
+          "text": "Rally racing"
+        },
+        {
+          "text": "Hill-climb racing"
+        },
+        {
+          "text": "Drag racing"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which race is traditionally held on the streets of Monte Carlo?",
+      "answers": [
+        {
+          "text": "Monaco Grand Prix",
+          "correct": true
+        },
+        {
+          "text": "Italian Grand Prix"
+        },
+        {
+          "text": "British Grand Prix"
+        },
+        {
+          "text": "Canadian Grand Prix"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which endurance race is held at the Circuit de la Sarthe?",
+      "answers": [
+        {
+          "text": "24 Hours of Le Mans",
+          "correct": true
+        },
+        {
+          "text": "24 Hours of Daytona"
+        },
+        {
+          "text": "12 Hours of Sebring"
+        },
+        {
+          "text": "Bathurst 1000"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which racing series is known for the Indianapolis 500?",
+      "answers": [
+        {
+          "text": "IndyCar",
+          "correct": true
+        },
+        {
+          "text": "Formula E"
+        },
+        {
+          "text": "World Rally Championship"
+        },
+        {
+          "text": "World Endurance Championship"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In rallying, what is the person reading pace notes to the driver called?",
+      "answers": [
+        {
+          "text": "Co-driver",
+          "correct": true
+        },
+        {
+          "text": "Race engineer"
+        },
+        {
+          "text": "Pit marshal"
+        },
+        {
+          "text": "Starter"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which surface is most associated with traditional rallycross circuits?",
+      "answers": [
+        {
+          "text": "A mix of dirt and asphalt",
+          "correct": true
+        },
+        {
+          "text": "Ice only"
+        },
+        {
+          "text": "Grass only"
+        },
+        {
+          "text": "Deep sand only"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which driver won the first Formula One World Drivers' Championship in 1950?",
+      "answers": [
+        {
+          "text": "Giuseppe Farina",
+          "correct": true
+        },
+        {
+          "text": "Juan Manuel Fangio"
+        },
+        {
+          "text": "Alberto Ascari"
+        },
+        {
+          "text": "Stirling Moss"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What does the acronym HANS stand for in motor racing?",
+      "answers": [
+        {
+          "text": "Head and Neck Support",
+          "correct": true
+        },
+        {
+          "text": "Helmet and Neck Shield"
+        },
+        {
+          "text": "Head Alignment Safety"
+        },
+        {
+          "text": "Harness and Neck System"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The 24 Hours of Le Mans is an endurance race.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "A red flag in motor racing usually means the session has been stopped.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Formula One cars have traditionally used a steering wheel with buttons and controls.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In rallying, the driver normally navigates the route alone without a co-driver.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Dakar Rally began as a race from Paris to Dakar.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the surname of the German driver who won seven Formula One world titles?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Schumacher",
+            "Michael Schumacher"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Japanese manufacturer makes the motorcycle brand Hayabusa?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Suzuki"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the surname of the Brazilian driver who won three Formula One world titles?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Senna",
+            "Ayrton Senna"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which rally driver was nicknamed 'The Flying Finn' and won four WRC titles from 1986 to 1999?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Juha Kankkunen",
+            "Kankkunen"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many hours long is the 24 Hours of Le Mans race?",
+      "kind": {
+        "Number": {
+          "answer": 24,
+          "range": {
+            "min": 12,
+            "max": 36
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many kilometres long is one lap of the Circuit de Monaco, to one decimal place?",
+      "kind": {
+        "Number": {
+          "answer": 3.337,
+          "range": {
+            "min": 2.5,
+            "max": 4.5
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many wheels does a standard Formula One car have?",
+      "kind": {
+        "Number": {
+          "answer": 4,
+          "range": {
+            "min": 2,
+            "max": 7
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many kilometres long is the Indianapolis Motor Speedway oval, approximately?",
+      "kind": {
+        "Number": {
+          "answer": 4.023,
+          "range": {
+            "min": 3,
+            "max": 5
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Order these Formula One world champions by their first drivers' title, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Juan Manuel Fangio",
+            "Jack Brabham",
+            "Niki Lauda",
+            "Ayrton Senna"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Order these races by the year of their first running, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Indianapolis 500",
+            "24 Hours of Le Mans",
+            "Monaco Grand Prix",
+            "Dakar Rally"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the first- and second-place finishers at the 1950 British Grand Prix.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Winner",
+              "accepted": [
+                "Giuseppe Farina",
+                "Farina"
+              ]
+            },
+            {
+              "label": "Runner-up",
+              "accepted": [
+                "Luigi Fagioli",
+                "Fagioli"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each racing flag with its usual meaning.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Chequered"
+              },
+              "right": {
+                "text": "Race finished"
+              }
+            },
+            {
+              "left": {
+                "text": "Yellow"
+              },
+              "right": {
+                "text": "Caution"
+              }
+            },
+            {
+              "left": {
+                "text": "Red"
+              },
+              "right": {
+                "text": "Session stopped"
+              }
+            },
+            {
+              "left": {
+                "text": "Green"
+              },
+              "right": {
+                "text": "Track clear"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Motor racing",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each racing series with its best-known event or format.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "NASCAR"
+              },
+              "right": {
+                "text": "Stock-car racing"
+              }
+            },
+            {
+              "left": {
+                "text": "IndyCar"
+              },
+              "right": {
+                "text": "Indianapolis 500"
+              }
+            },
+            {
+              "left": {
+                "text": "WRC"
+              },
+              "right": {
+                "text": "Rally stages"
+              }
+            },
+            {
+              "left": {
+                "text": "WEC"
+              },
+              "right": {
+                "text": "Endurance racing"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

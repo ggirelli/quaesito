@@ -1,0 +1,650 @@
+[
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which city is home to the Sagrada Família?",
+      "answers": [
+        {
+          "text": "Barcelona",
+          "correct": true
+        },
+        {
+          "text": "Seville"
+        },
+        {
+          "text": "Valencia"
+        },
+        {
+          "text": "Granada"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The ancient Colosseum stands in which city?",
+      "answers": [
+        {
+          "text": "Athens"
+        },
+        {
+          "text": "Rome",
+          "correct": true
+        },
+        {
+          "text": "Naples"
+        },
+        {
+          "text": "Istanbul"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which landmark spans the River Thames near the Tower of London?",
+      "answers": [
+        {
+          "text": "London Bridge"
+        },
+        {
+          "text": "Millennium Bridge"
+        },
+        {
+          "text": "Tower Bridge",
+          "correct": true
+        },
+        {
+          "text": "Waterloo Bridge"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In which city would you find the Louvre Museum?",
+      "answers": [
+        {
+          "text": "Brussels"
+        },
+        {
+          "text": "Paris",
+          "correct": true
+        },
+        {
+          "text": "Lyon"
+        },
+        {
+          "text": "Geneva"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which city is famous for its canals and gondolas?",
+      "answers": [
+        {
+          "text": "Venice",
+          "correct": true
+        },
+        {
+          "text": "Florence"
+        },
+        {
+          "text": "Turin"
+        },
+        {
+          "text": "Bologna"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Christ the Redeemer statue overlooks which city?",
+      "answers": [
+        {
+          "text": "Lima"
+        },
+        {
+          "text": "Santiago"
+        },
+        {
+          "text": "Rio de Janeiro",
+          "correct": true
+        },
+        {
+          "text": "Buenos Aires"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Petra's famous rock-cut Treasury is in which country?",
+      "answers": [
+        {
+          "text": "Jordan",
+          "correct": true
+        },
+        {
+          "text": "Lebanon"
+        },
+        {
+          "text": "Egypt"
+        },
+        {
+          "text": "Oman"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which city is built around the historic Red Square?",
+      "answers": [
+        {
+          "text": "Moscow",
+          "correct": true
+        },
+        {
+          "text": "Warsaw"
+        },
+        {
+          "text": "Prague"
+        },
+        {
+          "text": "Budapest"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Hagia Sophia is a landmark in which city?",
+      "answers": [
+        {
+          "text": "Ankara"
+        },
+        {
+          "text": "Istanbul",
+          "correct": true
+        },
+        {
+          "text": "Izmir"
+        },
+        {
+          "text": "Bursa"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which architect designed the Guggenheim Museum in Bilbao?",
+      "answers": [
+        {
+          "text": "Frank Gehry",
+          "correct": true
+        },
+        {
+          "text": "Zaha Hadid"
+        },
+        {
+          "text": "Norman Foster"
+        },
+        {
+          "text": "Renzo Piano"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which city is the usual gateway to the nearby Angkor Wat temple complex?",
+      "answers": [
+        {
+          "text": "Phnom Penh"
+        },
+        {
+          "text": "Siem Reap",
+          "correct": true
+        },
+        {
+          "text": "Vientiane"
+        },
+        {
+          "text": "Yangon"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Moai statues are most associated with which island?",
+      "answers": [
+        {
+          "text": "Sicily"
+        },
+        {
+          "text": "Easter Island",
+          "correct": true
+        },
+        {
+          "text": "Crete"
+        },
+        {
+          "text": "Sardinia"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Eiffel Tower was originally intended to be a temporary structure.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Statue of Liberty was a gift from Spain to the United States.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Acropolis of Athens includes the Parthenon.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Burj Khalifa is located in Abu Dhabi.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The historic city of Timbuktu is in Mali.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the nickname of the Great Bell inside London's Elizabeth Tower?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Big Ben"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the mausoleum built by Shah Jahan in Agra?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Taj Mahal",
+            "The Taj Mahal"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Approximately how tall is the Eiffel Tower in metres, including its antenna?",
+      "kind": {
+        "Number": {
+          "answer": 330,
+          "range": {
+            "min": 280,
+            "max": 390
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many arches does the Pont du Gard's top tier have?",
+      "kind": {
+        "Number": {
+          "answer": 35,
+          "range": {
+            "min": 25,
+            "max": 48
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did the Berlin Wall fall, marking the start of its opening?",
+      "kind": {
+        "Number": {
+          "answer": 1989,
+          "range": {
+            "min": 1975,
+            "max": 2000
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many main pyramids are traditionally counted at Giza?",
+      "kind": {
+        "Number": {
+          "answer": 3,
+          "range": {
+            "min": 1,
+            "max": 7
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these landmarks in order of completion, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Great Pyramid of Giza",
+            "Parthenon",
+            "Colosseum",
+            "Eiffel Tower"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the two land areas connected by the Golden Gate Bridge.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "South end",
+              "accepted": [
+                "San Francisco"
+              ]
+            },
+            {
+              "label": "North end",
+              "accepted": [
+                "Marin County",
+                "Marin Headlands"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each landmark to the city where it stands.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Brandenburg Gate"
+              },
+              "right": {
+                "text": "Berlin"
+              }
+            },
+            {
+              "left": {
+                "text": "Atomium"
+              },
+              "right": {
+                "text": "Brussels"
+              }
+            },
+            {
+              "left": {
+                "text": "Space Needle"
+              },
+              "right": {
+                "text": "Seattle"
+              }
+            },
+            {
+              "left": {
+                "text": "CN Tower"
+              },
+              "right": {
+                "text": "Toronto"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each landmark to its city.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "La Scala opera house"
+              },
+              "right": {
+                "text": "Milan"
+              }
+            },
+            {
+              "left": {
+                "text": "Casa Batlló"
+              },
+              "right": {
+                "text": "Barcelona"
+              }
+            },
+            {
+              "left": {
+                "text": "Charles Bridge"
+              },
+              "right": {
+                "text": "Prague"
+              }
+            },
+            {
+              "left": {
+                "text": "Fushimi Inari shrine"
+              },
+              "right": {
+                "text": "Kyoto"
+              }
+            },
+            {
+              "left": {
+                "text": "Château Frontenac"
+              },
+              "right": {
+                "text": "Quebec City"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which ancient city was buried by the eruption of Mount Vesuvius in AD 79?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Pompeii",
+            "Herculaneum",
+            "Stabiae",
+            "Oplontis"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Cities & landmarks",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the large square in central Beijing?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Tiananmen Square",
+            "Tiananmen"
+          ]
+        }
+      }
+    }
+  }
+]

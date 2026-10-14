@@ -1,0 +1,664 @@
+[
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which band released the album Abbey Road?",
+      "answers": [
+        {
+          "text": "The Beatles",
+          "correct": true
+        },
+        {
+          "text": "The Rolling Stones"
+        },
+        {
+          "text": "The Kinks"
+        },
+        {
+          "text": "The Who"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which singer was known as the 'Queen of Soul'?",
+      "answers": [
+        {
+          "text": "Aretha Franklin",
+          "correct": true
+        },
+        {
+          "text": "Diana Ross"
+        },
+        {
+          "text": "Tina Turner"
+        },
+        {
+          "text": "Gladys Knight"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which band had Freddie Mercury as its lead singer?",
+      "answers": [
+        {
+          "text": "Queen",
+          "correct": true
+        },
+        {
+          "text": "The Who"
+        },
+        {
+          "text": "Genesis"
+        },
+        {
+          "text": "The Police"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which artist released the album Purple Rain?",
+      "answers": [
+        {
+          "text": "Prince",
+          "correct": true
+        },
+        {
+          "text": "David Bowie"
+        },
+        {
+          "text": "Michael Jackson"
+        },
+        {
+          "text": "Stevie Wonder"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which band recorded 'Smells Like Teen Spirit'?",
+      "answers": [
+        {
+          "text": "Nirvana",
+          "correct": true
+        },
+        {
+          "text": "Pearl Jam"
+        },
+        {
+          "text": "Soundgarden"
+        },
+        {
+          "text": "Alice in Chains"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Jamaican singer is often called the 'King of Reggae'?",
+      "answers": [
+        {
+          "text": "Bob Marley",
+          "correct": true
+        },
+        {
+          "text": "Peter Tosh"
+        },
+        {
+          "text": "Jimmy Cliff"
+        },
+        {
+          "text": "Toots Hibbert"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which band released the concept album The Dark Side of the Moon?",
+      "answers": [
+        {
+          "text": "Pink Floyd",
+          "correct": true
+        },
+        {
+          "text": "Yes"
+        },
+        {
+          "text": "King Crimson"
+        },
+        {
+          "text": "Genesis"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who was the lead singer of The Smiths?",
+      "answers": [
+        {
+          "text": "Morrissey",
+          "correct": true
+        },
+        {
+          "text": "Robert Smith"
+        },
+        {
+          "text": "Ian Curtis"
+        },
+        {
+          "text": "Brett Anderson"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which artist released the album Blue in 1971?",
+      "answers": [
+        {
+          "text": "Joni Mitchell",
+          "correct": true
+        },
+        {
+          "text": "Carole King"
+        },
+        {
+          "text": "Joan Baez"
+        },
+        {
+          "text": "Linda Ronstadt"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which band featured brothers Noel and Liam Gallagher?",
+      "answers": [
+        {
+          "text": "Oasis",
+          "correct": true
+        },
+        {
+          "text": "Blur"
+        },
+        {
+          "text": "Pulp"
+        },
+        {
+          "text": "Suede"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which German band released the influential electronic album Autobahn in 1974?",
+      "answers": [
+        {
+          "text": "Kraftwerk",
+          "correct": true
+        },
+        {
+          "text": "Tangerine Dream"
+        },
+        {
+          "text": "Can"
+        },
+        {
+          "text": "Neu!"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which musician was the lead singer of Big Brother and the Holding Company?",
+      "answers": [
+        {
+          "text": "Janis Joplin",
+          "correct": true
+        },
+        {
+          "text": "Grace Slick"
+        },
+        {
+          "text": "Mama Cass"
+        },
+        {
+          "text": "Nico"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Beach Boys originally formed in California.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "ABBA is a band from Norway.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Fleetwood Mac's album Rumours was released in 1977.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Clash were one of the major bands associated with British punk rock.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Velvet Underground's debut album was produced by Brian Eno.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which band recorded 'Dancing Queen'?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "ABBA"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which singer released the album Hounds of Love?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Kate Bush",
+            "Bush"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which band released the album London Calling?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "The Clash",
+            "Clash"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which artist released the experimental album Trout Mask Replica?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Captain Beefheart",
+            "Don Van Vliet"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many members were in the classic Beatles lineup?",
+      "kind": {
+        "Number": {
+          "answer": 4,
+          "range": {
+            "min": 2,
+            "max": 7
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did Nirvana release the album Nevermind?",
+      "kind": {
+        "Number": {
+          "answer": 1991,
+          "range": {
+            "min": 1975,
+            "max": 2005
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many studio albums did The Beatles release in the UK during their original career?",
+      "kind": {
+        "Number": {
+          "answer": 12,
+          "range": {
+            "min": 7,
+            "max": 18
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year was David Bowie's album The Rise and Fall of Ziggy Stardust and the Spiders from Mars released?",
+      "kind": {
+        "Number": {
+          "answer": 1972,
+          "range": {
+            "min": 1960,
+            "max": 1985
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these bands in order of formation, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "The Beatles",
+            "The Rolling Stones",
+            "Pink Floyd",
+            "Queen"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these albums in order of original release, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "The Beatles: Revolver",
+            "The Velvet Underground & Nico",
+            "David Bowie: Low",
+            "Radiohead: OK Computer"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the three members of the classic rock trio Rush.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Drummer",
+              "accepted": [
+                "Neil Peart"
+              ]
+            },
+            {
+              "label": "Bassist and singer",
+              "accepted": [
+                "Geddy Lee"
+              ]
+            },
+            {
+              "label": "Guitarist",
+              "accepted": [
+                "Alex Lifeson"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each artist to their band.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Robert Plant"
+              },
+              "right": {
+                "text": "Led Zeppelin"
+              }
+            },
+            {
+              "left": {
+                "text": "Sting"
+              },
+              "right": {
+                "text": "The Police"
+              }
+            },
+            {
+              "left": {
+                "text": "Debbie Harry"
+              },
+              "right": {
+                "text": "Blondie"
+              }
+            },
+            {
+              "left": {
+                "text": "Thom Yorke"
+              },
+              "right": {
+                "text": "Radiohead"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Bands & artists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each artist to the musical project they led or fronted.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Trent Reznor"
+              },
+              "right": {
+                "text": "Nine Inch Nails"
+              }
+            },
+            {
+              "left": {
+                "text": "Robert Smith"
+              },
+              "right": {
+                "text": "The Cure"
+              }
+            },
+            {
+              "left": {
+                "text": "Kim Gordon"
+              },
+              "right": {
+                "text": "Sonic Youth"
+              }
+            },
+            {
+              "left": {
+                "text": "Peter Murphy"
+              },
+              "right": {
+                "text": "Bauhaus"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

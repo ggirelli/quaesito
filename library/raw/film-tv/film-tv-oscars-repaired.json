@@ -1,0 +1,179 @@
+[
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the Oscar category that honours achievement in film music?",
+      "answers": [
+        {
+          "text": "Best Original Score",
+          "correct": true
+        },
+        {
+          "text": "Best Sound Editing"
+        },
+        {
+          "text": "Best Visual Effects"
+        },
+        {
+          "text": "Best Sound Mixing"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who directed the film that won Best Picture at the 2017 Academy Awards?",
+      "answers": [
+        {
+          "text": "Barry Jenkins",
+          "correct": true
+        },
+        {
+          "text": "Damien Chazelle"
+        },
+        {
+          "text": "Kenneth Lonergan"
+        },
+        {
+          "text": "Denis Villeneuve"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which film won Best Picture at the 1973 Academy Awards ceremony?",
+      "answers": [
+        {
+          "text": "Sounder"
+        },
+        {
+          "text": "The Godfather",
+          "correct": true
+        },
+        {
+          "text": "Cabaret"
+        },
+        {
+          "text": "Deliverance"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which film won Best Picture at the 2004 Academy Awards?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "The Lord of the Rings: The Return of the King",
+            "Return of the King",
+            "The Return of the King",
+            "Lord of the Rings: The Return of the King",
+            "LOTR: The Return of the King"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these Best Picture winners in ceremony order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "The Godfather",
+            "Rocky",
+            "Rain Man",
+            "Titanic"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these films in the order they won Best Picture, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "The Apartment",
+            "The French Connection",
+            "Amadeus",
+            "No Country for Old Men"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each film with its Best Picture-winning year.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Annie Hall"
+              },
+              "right": {
+                "text": "1978 ceremony"
+              }
+            },
+            {
+              "left": {
+                "text": "Platoon"
+              },
+              "right": {
+                "text": "1987 ceremony"
+              }
+            },
+            {
+              "left": {
+                "text": "Gladiator"
+              },
+              "right": {
+                "text": "2001 ceremony"
+              }
+            },
+            {
+              "left": {
+                "text": "The King's Speech"
+              },
+              "right": {
+                "text": "2011 ceremony"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

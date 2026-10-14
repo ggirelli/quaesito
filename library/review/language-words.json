@@ -1,0 +1,306 @@
+[
+  {
+    "file": "language-words-abbreviations.json",
+    "entry": 5,
+    "question": "What does 'ISBN' identify?",
+    "problem": "duplicate",
+    "explanation": "Entry 9 ('In publishing, what does ISBN stand for?') has the answer 'International Standard Book Number', which gives away this entry's answer (a book edition). Both entries test the same fact.",
+    "fix": "Drop entry 5, or replace it with a different identifier such as 'What does an ISSN identify?' (a serial publication)."
+  },
+  {
+    "file": "language-words-abbreviations.json",
+    "entry": 7,
+    "question": "What does 'SCUBA' stand for?",
+    "problem": "wrong",
+    "explanation": "The marked answer 'Self-Contained Underwater Gear' is wrong; SCUBA stands for Self-Contained Underwater Breathing Apparatus. The distractors are cut off at about 39 characters ('...Breathing A', '...Buoyancy Assem'), so the full expansion seems to have been truncated and then rewritten incorrectly.",
+    "fix": "Ask instead \"What does the 'B' in SCUBA stand for?\" with the answer 'Breathing' (correct) and distractors 'Buoyancy', 'Bottled', 'Ballast'. Alternatively, keep the question with the correct answer 'Self-Contained Underwater Breathing Apparatus' and make sure no option is cut off."
+  },
+  {
+    "file": "language-words-abbreviations.json",
+    "entry": 10,
+    "question": "What does 'laser' stand for?",
+    "problem": "quality",
+    "explanation": "All four options are cut off mid-word ('Light Amplification by Stimulated Emiss', 'Low-Amplitude Signal Emission and Recep', ...), so a host would see broken text. The correct expansion is Light Amplification by Stimulated Emission of Radiation.",
+    "fix": "Ask \"What does the 'S' in LASER stand for?\" with the answer 'Stimulated' and distractors 'Spectral', 'Solar', 'Signal'. Alternatively, use options short enough not to be cut off."
+  },
+  {
+    "file": "language-words-abbreviations.json",
+    "entry": 22,
+    "question": "How many letters are in the abbreviation 'NASA'?",
+    "problem": "quality",
+    "explanation": "The answer is just a count of the letters printed in the question, so it tests nothing. Entries 23 (UNESCO), 24 (UNICEF) and 25 (scuba) have the same problem. Entry 24 also calls UNICEF an 'initialism', but it is pronounced as a word, so it is an acronym.",
+    "fix": "Drop entries 22-25, or rewrite them to ask about meaning. Do not use the first reviewer's example 'How many words does NASA stand for? (4)': National Aeronautics and Space Administration has 5 words, or 4 if 'and' is not counted, so it is ambiguous. Use something like \"What does the 'A' at the end of NASA stand for?\" (Administration) instead."
+  },
+  {
+    "file": "language-words-alphabets-scripts.json",
+    "entry": 1,
+    "question": "Which script is used to write modern Greek?",
+    "problem": "misleading",
+    "explanation": "The question gives the answer away: 'modern Greek' leads straight to 'Greek alphabet'.",
+    "fix": "Rewrite as 'Which alphabet was the main model for the Cyrillic alphabet?' with the answer Greek alphabet (distractors Latin, Glagolitic, Armenian), or drop the entry. Avoid calling Greek the 'direct' ancestor of Latin, because Latin came from Greek through the Etruscan (Old Italic) alphabet."
+  },
+  {
+    "file": "language-words-alphabets-scripts.json",
+    "entry": 13,
+    "question": "The English alphabet has 26 letters.",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as alphabets entry 22 ('How many letters are in the modern English alphabet?', 26) and grammar-spelling entry 22 ('How many letters are in the English alphabet?', 26). The first reviewer gave both as entry 23, which is off by one.",
+    "fix": "Drop entry 13 here and grammar-spelling entry 22, and keep only alphabets entry 22."
+  },
+  {
+    "file": "language-words-alphabets-scripts.json",
+    "entry": 14,
+    "question": "Braille uses raised dots that can be felt with the fingers.",
+    "problem": "duplicate",
+    "explanation": "Entry 5 (Braille is read by touch), entry 14 (TrueFalse: raised dots felt with the fingers) and entry 18 (Text: the raised-dot system for blind readers) all test the same fact.",
+    "fix": "Drop entry 14. Keep entry 18 or entry 5, and replace the other with a different Braille fact, for example 'Louis Braille was French: True'. The 6-dot cell is already covered by entry 24."
+  },
+  {
+    "file": "language-words-alphabets-scripts.json",
+    "entry": 21,
+    "question": "What is the name of the ancient script used for writing Old Norse inscriptions?",
+    "problem": "misleading",
+    "explanation": "The accepted list has only 'Runes' and 'Runic script', so common correct answers such as 'Futhark', 'Younger Futhark' and 'Runic alphabet' would be marked wrong. Old Norse was written in the Younger Futhark.",
+    "fix": "Add 'Futhark', 'Younger Futhark', 'Runic alphabet' and 'Runic' to the accepted list. Do not add 'Futhorc'/'Futhork', which usually names the Anglo-Saxon runic alphabet."
+  },
+  {
+    "file": "language-words-alphabets-scripts.json",
+    "entry": 26,
+    "question": "Order these Greek letter names alphabetically by their Greek alphabet position, earliest first.",
+    "problem": "ambiguous",
+    "explanation": "'Alphabetically' can be read as English alphabetical order of the names, which gives Alpha, Beta, Delta, Gamma rather than the intended Greek order Alpha, Beta, Gamma, Delta. The entry also overlaps entry 28 (Parts: beta, gamma, delta in sequence) and entry 7 (alpha and beta).",
+    "fix": "Rewrite as 'Order these Greek letters by their position in the Greek alphabet' and use less obvious letters, for example Epsilon, Theta, Lambda, Sigma (positions 5, 8, 11, 18). Alternatively, drop entry 26 or entry 28."
+  },
+  {
+    "file": "language-words-alphabets-scripts.json",
+    "entry": 27,
+    "question": "Order these writing systems by earliest known use, earliest first.",
+    "problem": "ambiguous",
+    "explanation": "Whether cuneiform or Egyptian hieroglyphs came first is disputed. Proto-cuneiform from Uruk IV (about 3300-3200 BC) and the Abydos tomb U-j labels (about 3320-3150 BC) are roughly contemporary, and some scholars put the Egyptian writing first.",
+    "fix": "Replace Hieroglyphs with 'Phoenician alphabet', giving the order Cuneiform, Linear B (about 1450-1400 BC), Phoenician alphabet (about 1050 BC), Latin alphabet (about 7th century BC)."
+  },
+  {
+    "file": "language-words-alphabets-scripts.json",
+    "entry": 28,
+    "question": "Type the Greek letter that comes next in each sequence.",
+    "problem": "duplicate",
+    "explanation": "This tests the same alpha, beta, gamma, delta sequence as entry 26, and 'beta' is also the answer to entry 7. The first reviewer numbered this entry 29, but entry 29 is the script-to-language Pairs question.",
+    "fix": "Use different letters, for example 'Greek letter after epsilon' (zeta), 'after kappa' (lambda) and 'after rho' (sigma), or drop the entry."
+  },
+  {
+    "file": "language-words-etymology.json",
+    "entry": 1,
+    "question": "Which language gave English the word “ketchup” via a word for a fermented fish sauce?",
+    "problem": "ambiguous",
+    "explanation": "Malay is a distractor, but it is defensibly correct: many dictionaries (Merriam-Webster, older OED) derive ketchup from Malay kĕchap, which perhaps comes from Chinese (Hokkien) kê-tsiap. Entry 18 also gives the answer away by naming the Chinese word ke-tsiap.",
+    "fix": "Replace the Malay distractor with 'Portuguese', and change the correct answer text to 'Chinese (Hokkien)'."
+  },
+  {
+    "file": "language-words-etymology.json",
+    "entry": 2,
+    "question": "The word “tsunami” comes from which language?",
+    "problem": "duplicate",
+    "explanation": "This is the same question as words-from-other-languages entry 5 ('Which language gave English the word tsunami?', Japanese), and it overlaps etymology entry 29's Tsunami/Japanese pair.",
+    "fix": "Drop one of the two, for example this entry, or change it to ask the literal meaning: 'harbour wave'."
+  },
+  {
+    "file": "language-words-etymology.json",
+    "entry": 3,
+    "question": "Which language is the source of “kindergarten,” literally “children’s garden”?",
+    "problem": "duplicate",
+    "explanation": "This duplicates words-from-other-languages entry 4, which has the same answer (German) and the same distractors (Dutch, Danish, Swedish).",
+    "fix": "Drop one of the two."
+  },
+  {
+    "file": "language-words-etymology.json",
+    "entry": 4,
+    "question": "The word “robot” comes from a Czech word meaning what?",
+    "problem": "duplicate",
+    "explanation": "This duplicates words-from-other-languages entry 8 (Czech 'robota' means forced labour) and overlaps etymology entry 28 (Parts: Robota, forced labour). The first reviewer numbered the Parts entry 29.",
+    "fix": "Drop this entry or words-from-other-languages entry 8."
+  },
+  {
+    "file": "language-words-etymology.json",
+    "entry": 6,
+    "question": "“Pencil” ultimately comes from a Latin word meaning which small object?",
+    "problem": "ambiguous",
+    "explanation": "Latin penicillus literally means 'little tail', but the word itself meant a small paintbrush, so the 'Small brush' distractor is also correct as the question is worded.",
+    "fix": "Rephrase as 'What is the literal meaning of Latin penicillus, the source of “pencil”?' and replace 'Small brush' with 'Small stick'."
+  },
+  {
+    "file": "language-words-etymology.json",
+    "entry": 9,
+    "question": "Which language is the source of “bungalow,” via a term meaning “of Bengal”?",
+    "problem": "wrong",
+    "explanation": "Standard dictionaries (Merriam-Webster, Etymonline) give the source as Hindi baṅglā ('of Bengal'), and the OED also cites Gujarati bangalo. The entry marks Bengali as correct and offers Gujarati as a distractor, even though Gujarati is also attested. Words-from-other-languages entries 7 and 30 say Hindi, which contradicts this entry.",
+    "fix": "Hindi is not among the current options, so replace both Bengali and Gujarati: use the options Hindi (correct), Tamil, Malayalam, Persian. Because this also duplicates words-from-other-languages entry 7, consider dropping one of the two instead."
+  },
+  {
+    "file": "language-words-etymology.json",
+    "entry": 20,
+    "question": "What modern word for a hint comes from an older word for a ball of thread?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as entry 12 ('The word clue developed from clew, meaning what?', a ball of thread).",
+    "fix": "Drop one of entries 12 and 20."
+  },
+  {
+    "file": "language-words-etymology.json",
+    "entry": 25,
+    "question": "In what year did the surname behind “boycott” become associated with organized social exclusion?",
+    "problem": "duplicate",
+    "explanation": "Entry 19's question text already says 'shunned in 1880', which gives away this answer. Both entries test the 1880 Boycott story. The first reviewer numbered this entry 26, but in the file it is entry 25.",
+    "fix": "Remove '1880' from entry 19 (for example 'an Irish land agent shunned by tenants'), or drop entry 25."
+  },
+  {
+    "file": "language-words-etymology.json",
+    "entry": 26,
+    "question": "Put these words in order of their first recorded English use, earliest first.",
+    "problem": "wrong",
+    "explanation": "The order is wrong: kindergarten, sandwich, boycott, robot. 'Sandwich' dates from 1762 and 'kindergarten' from about 1852, so the correct order is sandwich, kindergarten, boycott (1880), robot (1920s). Entry 27 asks the same thing with the correct order. The first reviewer numbered this entry 27 and the correct one 28, both off by one.",
+    "fix": "Drop entry 26, which has the wrong order and duplicates entry 27."
+  },
+  {
+    "file": "language-words-etymology.json",
+    "entry": 29,
+    "question": "Match each English loanword to the language it came from.",
+    "problem": "wrong",
+    "explanation": "The pair Bungalow to Bengali is wrong; the standard source is Hindi baṅglā. Simply changing it to Hindi would leave two Hindi partners, because Shampoo is also matched to Hindi. The first reviewer numbered this entry 30, but in the file it is entry 29; entry 30 is the word-origin Pairs question.",
+    "fix": "Replace the Bungalow/Bengali pair with, for example, Algebra/Arabic or Sauna/Finnish."
+  },
+  {
+    "file": "language-words-grammar-spelling.json",
+    "entry": 5,
+    "question": "Which word means 'to accept' or 'receive'?",
+    "problem": "misleading",
+    "explanation": "The question contains the answer word 'accept'.",
+    "fix": "Rewrite as \"Which word means 'to receive willingly' or 'agree to'?\", keeping the answer Accept."
+  },
+  {
+    "file": "language-words-grammar-spelling.json",
+    "entry": 18,
+    "question": "Type the correctly spelled word meaning 'embarrassment' or awkwardness.",
+    "problem": "misleading",
+    "explanation": "The question prints the answer, 'embarrassment', in full.",
+    "fix": "Turn it into multiple choice: 'Which spelling is correct?' with Embarrassment (correct) and the distractors Embarassment, Embarrasment, Embarasment."
+  },
+  {
+    "file": "language-words-grammar-spelling.json",
+    "entry": 21,
+    "question": "What is the grammatical term for a word or phrase that modifies a noun?",
+    "problem": "misleading",
+    "explanation": "A phrase that modifies a noun is generally called a 'modifier' or an 'adjectival phrase', but the accepted list has only 'adjective' and 'adjectival modifier'. The first reviewer numbered this entry 22, but in the file it is entry 21.",
+    "fix": "Add 'modifier', 'adjectival phrase', 'adjective phrase' and 'adjectival' to the accepted list, or change the question to 'a word that describes a noun'."
+  },
+  {
+    "file": "language-words-grammar-spelling.json",
+    "entry": 22,
+    "question": "How many letters are in the English alphabet?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as alphabets-scripts entries 13 and 22. The first reviewer numbered this entry 23, but in the file it is entry 22; entry 23 is about the syllables in 'beautiful'.",
+    "fix": "Drop it, for example by replacing it with 'How many vowel letters are there in English (not counting Y)?' with the answer 5."
+  },
+  {
+    "file": "language-words-grammar-spelling.json",
+    "entry": 24,
+    "question": "How many letters are in the word 'queue'?",
+    "problem": "quality",
+    "explanation": "The answer is just a count of the letters printed in the question. Entry 25 ('mississippi', 11) has the same problem. The first reviewer numbered these entries 25 and 26, but in the file they are 24 and 25.",
+    "fix": "Drop entries 24 and 25, or replace them with questions that need knowledge, for example 'How many syllables are in the word \"February\" in careful standard pronunciation?' (4). The first reviewer's example ('How many consecutive vowels end the word queue?') still prints the answer in the question."
+  },
+  {
+    "file": "language-words-grammar-spelling.json",
+    "entry": 26,
+    "question": "Order these prefixes alphabetically by their spelling, earliest first.",
+    "problem": "quality",
+    "explanation": "Alphabetizing four words tests no grammar or spelling knowledge. Entry 27 (pronouns I, They, We, You) has the same problem. The first reviewer numbered these entries 27 and 28, but in the file they are 26 and 27.",
+    "fix": "Replace them with, for example, 'Order these tenses from earliest to latest time reference' (past perfect, simple past, present, future), or drop entries 26 and 27."
+  },
+  {
+    "file": "language-words-grammar-spelling.json",
+    "entry": 29,
+    "question": "Match each word or contraction to its grammatical use.",
+    "problem": "ambiguous",
+    "explanation": "'Their' and 'Your' both have the identical partner 'Possessive determiner', so the pairs cannot be matched uniquely. The first reviewer numbered this entry 30, but in the file it is entry 29.",
+    "fix": "Replace the Your pair with \"You're\" and 'You are', or with 'Its' and 'Possessive of it'."
+  },
+  {
+    "file": "language-words-idioms.json",
+    "entry": 12,
+    "question": "To 'cast a pearl before swine' is to…",
+    "problem": "quality",
+    "explanation": "The idiom is misquoted. The standard form, from Matthew 7:6, is 'cast pearls before swine'.",
+    "fix": "Change the text to \"To 'cast pearls before swine' is to…\"."
+  },
+  {
+    "file": "language-words-idioms.json",
+    "entry": 21,
+    "question": "What idiom means to praise oneself, often for one's own achievements?",
+    "problem": "misleading",
+    "explanation": "The accepted list misses the common variants 'blow your own horn' and 'blow one's own horn' (standard in US English) and 'toot your own trumpet'.",
+    "fix": "Add 'blow your own horn', \"blow one's own horn\", 'toot your own trumpet' and \"toot one's own trumpet\" to the accepted list."
+  },
+  {
+    "file": "language-words-idioms.json",
+    "entry": 22,
+    "question": "In the idiom 'cloud nine', what number is named?",
+    "problem": "misleading",
+    "explanation": "The question prints the number. Entries 23 ('a stitch in time saves nine'), 24 ('at sixes and sevens') and 25 ('dressed to the nines') have the same problem.",
+    "fix": "Blank out the number in each, for example \"Complete the idiom: 'on cloud ___'\", \"'a stitch in time saves ___'\", \"'dressed to the ___s'\" and \"'at sixes and ___'\"."
+  },
+  {
+    "file": "language-words-idioms.json",
+    "entry": 28,
+    "question": "Name the missing words from these three idioms.",
+    "problem": "misleading",
+    "explanation": "The labels print each idiom in full ('let the cat out of the bag', 'spill the beans', 'cost an arm and a leg'), so nothing is actually missing. The first reviewer numbered this entry 29, but in the file it is entry 28; entry 29 is a Pairs question.",
+    "fix": "Use blanks in the labels, for example \"Let the ___ out of the bag\", \"Spill the ___\" and \"Cost an ___ and a leg\" (accept 'arm')."
+  },
+  {
+    "file": "language-words-words-from-other-languages.json",
+    "entry": 1,
+    "question": "Which Italian word gave English the word 'pizza'?",
+    "problem": "misleading",
+    "explanation": "The answer is the same word as in the question, 'Pizza', so the question is meaningless.",
+    "fix": "Ask about a less obvious Italian loanword, such as \"Which Italian word, literally 'flask', came to mean a humiliating failure?\" (fiasco). Or ask \"The word 'pizza' comes from which language?\" with the answer Italian and the distractors Spanish, French, Portuguese. Avoid Greek and Neapolitan as distractors, because the deeper origin of pizza is uncertain (it may be from Greek or Langobardic) and Neapolitan is arguably a correct answer."
+  },
+  {
+    "file": "language-words-words-from-other-languages.json",
+    "entry": 7,
+    "question": "Which language is the source of the word 'bungalow'?",
+    "problem": "duplicate",
+    "explanation": "This asks the same fact as etymology entry 9, which gives a conflicting answer (Bengali). Hindi, the answer here, is the correct one.",
+    "fix": "Keep this entry, and drop or rewrite etymology entry 9."
+  },
+  {
+    "file": "language-words-words-from-other-languages.json",
+    "entry": 11,
+    "question": "Which language gave English the word 'boondocks', via Tagalog 'bundok'?",
+    "problem": "misleading",
+    "explanation": "The question names the answer, Tagalog.",
+    "fix": "Remove \"via Tagalog 'bundok'\", so the question reads \"Which language gave English the word 'boondocks' (from a word for 'mountain')?\"."
+  },
+  {
+    "file": "language-words-words-from-other-languages.json",
+    "entry": 20,
+    "question": "What German word means a wanderlust or strong desire to travel?",
+    "problem": "misleading",
+    "explanation": "The question contains the answer, 'wanderlust'.",
+    "fix": "Rewrite as 'What German loanword means a strong desire to travel?'."
+  },
+  {
+    "file": "language-words-words-from-other-languages.json",
+    "entry": 22,
+    "question": "How many letters are in the Japanese loanword 'sushi'?",
+    "problem": "quality",
+    "explanation": "The answer is just a count of the letters printed in the question. Entries 23 (ballet), 24 (zeitgeist) and 25 (saudade) have the same problem.",
+    "fix": "Drop entries 22-25, or replace them with real questions, for example \"Zeitgeist literally means 'spirit of the ___'?\" (time)."
+  },
+  {
+    "file": "language-words-words-from-other-languages.json",
+    "entry": 27,
+    "question": "Order these loanwords by their source language's name, alphabetically.",
+    "problem": "ambiguous",
+    "explanation": "'Ballet' came into English from French, but French took it from Italian balletto. If its source language is taken as Italian, the order becomes Kindergarten (German), Ballet (Italian), Origami (Japanese), Saudade (Portuguese).",
+    "fix": "Replace Ballet with an unambiguously French loanword such as 'Déjà vu', keeping it first in the order. Avoid 'Boutique', which French took from Old Occitan."
+  }
+]

@@ -1,0 +1,663 @@
+[
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which empire built Machu Picchu in the Andes?",
+      "answers": [
+        {
+          "text": "Inca Empire",
+          "correct": true
+        },
+        {
+          "text": "Aztec Empire"
+        },
+        {
+          "text": "Maya civilization"
+        },
+        {
+          "text": "Mongol Empire"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which dynasty built most of the Great Wall sections seen today?",
+      "answers": [
+        {
+          "text": "Ming dynasty",
+          "correct": true
+        },
+        {
+          "text": "Han dynasty"
+        },
+        {
+          "text": "Tang dynasty"
+        },
+        {
+          "text": "Qing dynasty"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which ancient empire had its capital at Persepolis?",
+      "answers": [
+        {
+          "text": "Achaemenid Persian Empire",
+          "correct": true
+        },
+        {
+          "text": "Roman Empire"
+        },
+        {
+          "text": "Maurya Empire"
+        },
+        {
+          "text": "Neo-Assyrian Empire"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which ruler is traditionally credited with founding the Mongol Empire?",
+      "answers": [
+        {
+          "text": "Genghis Khan",
+          "correct": true
+        },
+        {
+          "text": "Kublai Khan"
+        },
+        {
+          "text": "Attila the Hun"
+        },
+        {
+          "text": "Tamerlane"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which dynasty ruled Egypt during the reign of Cleopatra VII?",
+      "answers": [
+        {
+          "text": "Ptolemaic dynasty",
+          "correct": true
+        },
+        {
+          "text": "Eighteenth Dynasty"
+        },
+        {
+          "text": "Ramesside dynasty"
+        },
+        {
+          "text": "Fatimid dynasty"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which empire used the road network known as the Royal Road, especially under Darius I?",
+      "answers": [
+        {
+          "text": "Achaemenid Persian Empire",
+          "correct": true
+        },
+        {
+          "text": "Byzantine Empire"
+        },
+        {
+          "text": "Mali Empire"
+        },
+        {
+          "text": "Han Empire"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which dynasty reunified China in 581 and built an early version of the Grand Canal?",
+      "answers": [
+        {
+          "text": "Sui dynasty",
+          "correct": true
+        },
+        {
+          "text": "Song dynasty"
+        },
+        {
+          "text": "Yuan dynasty"
+        },
+        {
+          "text": "Shang dynasty"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which empire made Constantinople its capital after 330 CE?",
+      "answers": [
+        {
+          "text": "Roman Empire",
+          "correct": true
+        },
+        {
+          "text": "Ottoman Empire"
+        },
+        {
+          "text": "Safavid Empire"
+        },
+        {
+          "text": "Holy Roman Empire"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which West African empire was famed for Mansa Musa's pilgrimage to Mecca?",
+      "answers": [
+        {
+          "text": "Mali Empire",
+          "correct": true
+        },
+        {
+          "text": "Songhai Empire"
+        },
+        {
+          "text": "Ghana Empire"
+        },
+        {
+          "text": "Benin Empire"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Japanese shogunate began in 1603 under Tokugawa Ieyasu?",
+      "answers": [
+        {
+          "text": "Tokugawa shogunate",
+          "correct": true
+        },
+        {
+          "text": "Ashikaga shogunate"
+        },
+        {
+          "text": "Kamakura shogunate"
+        },
+        {
+          "text": "Meiji government"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which dynasty commissioned the Terracotta Army for its first emperor?",
+      "answers": [
+        {
+          "text": "Qin dynasty",
+          "correct": true
+        },
+        {
+          "text": "Han dynasty"
+        },
+        {
+          "text": "Zhou dynasty"
+        },
+        {
+          "text": "Ming dynasty"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which empire's rulers used the title 'basileus' in the Greek-speaking medieval state centred on Constantinople?",
+      "answers": [
+        {
+          "text": "Byzantine Empire",
+          "correct": true
+        },
+        {
+          "text": "Carolingian Empire"
+        },
+        {
+          "text": "Mughal Empire"
+        },
+        {
+          "text": "Sasanian Empire"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Ottoman Empire captured Constantinople in 1453.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Aztec capital of Tenochtitlan stood where modern Lima is located.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Mughal emperor Akbar pursued policies that included greater religious accommodation.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Roman Empire adopted Christianity as its official religion under Julius Caesar.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Khmer Empire built the temple complex of Angkor Wat.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What was the name of the dynasty that ruled China during the voyages of Zheng He?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Ming",
+            "Ming dynasty"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What title was used by the rulers of the Inca state?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Sapa Inca",
+            "Inca"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which empire was ruled by Suleiman the Magnificent?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Ottoman Empire",
+            "Ottoman"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What was the name of the last imperial dynasty of China?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Qing",
+            "Qing dynasty"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did the Western Roman Empire traditionally fall?",
+      "kind": {
+        "Number": {
+          "answer": 476,
+          "range": {
+            "min": 300,
+            "max": 700
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did the Ottoman conquest of Constantinople take place?",
+      "kind": {
+        "Number": {
+          "answer": 1453,
+          "range": {
+            "min": 1200,
+            "max": 1700
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "For about how many years did the Han dynasty rule China, from 206 BCE to 220 CE?",
+      "kind": {
+        "Number": {
+          "answer": 426,
+          "range": {
+            "min": 250,
+            "max": 600
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did the Mughal Empire begin, when Babur won at Panipat?",
+      "kind": {
+        "Number": {
+          "answer": 1526,
+          "range": {
+            "min": 1300,
+            "max": 1800
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these empires in chronological order by their founding, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Achaemenid Persian Empire",
+            "Roman Empire",
+            "Mongol Empire",
+            "Mughal Empire"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these Chinese dynasties in chronological order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Qin dynasty",
+            "Han dynasty",
+            "Tang dynasty",
+            "Ming dynasty"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the two rival powers that fought the Punic Wars.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "First power",
+              "accepted": [
+                "Rome",
+                "Roman Republic",
+                "Roman Empire"
+              ]
+            },
+            {
+              "label": "Second power",
+              "accepted": [
+                "Carthage",
+                "Carthaginian Empire",
+                "Carthaginians"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each empire with its best-known capital.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Inca Empire"
+              },
+              "right": {
+                "text": "Cusco"
+              }
+            },
+            {
+              "left": {
+                "text": "Aztec Empire"
+              },
+              "right": {
+                "text": "Tenochtitlan"
+              }
+            },
+            {
+              "left": {
+                "text": "Mali Empire"
+              },
+              "right": {
+                "text": "Niani"
+              }
+            },
+            {
+              "left": {
+                "text": "Achaemenid Persian Empire"
+              },
+              "right": {
+                "text": "Persepolis"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each ruler with the dynasty or empire they are most associated with.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Ashoka"
+              },
+              "right": {
+                "text": "Maurya Empire"
+              }
+            },
+            {
+              "left": {
+                "text": "Suleiman the Magnificent"
+              },
+              "right": {
+                "text": "Ottoman Empire"
+              }
+            },
+            {
+              "left": {
+                "text": "Akbar"
+              },
+              "right": {
+                "text": "Mughal Empire"
+              }
+            },
+            {
+              "left": {
+                "text": "Justinian I"
+              },
+              "right": {
+                "text": "Byzantine Empire"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

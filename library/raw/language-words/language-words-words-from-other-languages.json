@@ -1,0 +1,662 @@
+[
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Italian word gave English the word 'pizza'?",
+      "answers": [
+        {
+          "text": "Pizza",
+          "correct": true
+        },
+        {
+          "text": "Pitta"
+        },
+        {
+          "text": "Pasta"
+        },
+        {
+          "text": "Piadina"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The English word 'karaoke' comes from which language?",
+      "answers": [
+        {
+          "text": "Japanese",
+          "correct": true
+        },
+        {
+          "text": "Korean"
+        },
+        {
+          "text": "Chinese"
+        },
+        {
+          "text": "Thai"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which French word means a small shop selling fashionable clothes?",
+      "answers": [
+        {
+          "text": "Boutique",
+          "correct": true
+        },
+        {
+          "text": "Bistro"
+        },
+        {
+          "text": "Bureau"
+        },
+        {
+          "text": "Boulevard"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The word 'kindergarten' was borrowed from which language?",
+      "answers": [
+        {
+          "text": "German",
+          "correct": true
+        },
+        {
+          "text": "Dutch"
+        },
+        {
+          "text": "Danish"
+        },
+        {
+          "text": "Swedish"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which language gave English the word 'tsunami'?",
+      "answers": [
+        {
+          "text": "Japanese",
+          "correct": true
+        },
+        {
+          "text": "Hawaiian"
+        },
+        {
+          "text": "Indonesian"
+        },
+        {
+          "text": "Portuguese"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The word 'algebra' entered English through Arabic. What does its source term relate to?",
+      "answers": [
+        {
+          "text": "Restoration or reunion",
+          "correct": true
+        },
+        {
+          "text": "Counting with fingers"
+        },
+        {
+          "text": "A measuring cord"
+        },
+        {
+          "text": "A written contract"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which language is the source of the word 'bungalow'?",
+      "answers": [
+        {
+          "text": "Hindi",
+          "correct": true
+        },
+        {
+          "text": "Tamil"
+        },
+        {
+          "text": "Persian"
+        },
+        {
+          "text": "Malay"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The English word 'robot' was popularized by a Czech play. What does the Czech root 'robota' mean?",
+      "answers": [
+        {
+          "text": "Forced labour",
+          "correct": true
+        },
+        {
+          "text": "Artificial life"
+        },
+        {
+          "text": "Mechanical servant"
+        },
+        {
+          "text": "Clever machine"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which language is the origin of 'sauna'?",
+      "answers": [
+        {
+          "text": "Finnish",
+          "correct": true
+        },
+        {
+          "text": "Estonian"
+        },
+        {
+          "text": "Icelandic"
+        },
+        {
+          "text": "Russian"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "The word 'schadenfreude' describes pleasure at another's misfortune. Which language supplied it?",
+      "answers": [
+        {
+          "text": "German",
+          "correct": true
+        },
+        {
+          "text": "Yiddish"
+        },
+        {
+          "text": "Dutch"
+        },
+        {
+          "text": "Danish"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which language gave English the word 'boondocks', via Tagalog 'bundok'?",
+      "answers": [
+        {
+          "text": "Tagalog",
+          "correct": true
+        },
+        {
+          "text": "Malay"
+        },
+        {
+          "text": "Hawaiian"
+        },
+        {
+          "text": "Tamil"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "The word 'paparazzi' comes from Italian. What was Paparazzo in its original popular source?",
+      "answers": [
+        {
+          "text": "A photographer character",
+          "correct": true
+        },
+        {
+          "text": "A Roman emperor"
+        },
+        {
+          "text": "A newspaper editor"
+        },
+        {
+          "text": "A film director"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The English word 'café' comes from French."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The word 'safari' entered English from Swahili, ultimately from Arabic."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The English word 'tycoon' comes from Japanese."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "The word 'ketchup' is certainly derived from the English word 'catch up'."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "The word 'amok' comes from Latin."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "origami"
+          ]
+        }
+      },
+      "text": "What Japanese word for a folded paper craft is used in English?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "déjà vu",
+            "deja vu"
+          ]
+        }
+      },
+      "text": "What French word means the feeling of having already experienced the present moment?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "wanderlust"
+          ]
+        }
+      },
+      "text": "What German word means a wanderlust or strong desire to travel?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "saudade"
+          ]
+        }
+      },
+      "text": "What Portuguese word for a longing or melancholy is used in English?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 5,
+          "range": {
+            "min": 2,
+            "max": 9
+          }
+        }
+      },
+      "text": "How many letters are in the Japanese loanword 'sushi'?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 6,
+          "range": {
+            "min": 2,
+            "max": 12
+          }
+        }
+      },
+      "text": "How many letters are in the French loanword 'ballet'?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 9,
+          "range": {
+            "min": 3,
+            "max": 15
+          }
+        }
+      },
+      "text": "How many letters are in the German loanword 'zeitgeist'?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 7,
+          "range": {
+            "min": 2,
+            "max": 12
+          }
+        }
+      },
+      "text": "How many letters are in the Portuguese loanword 'saudade'?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Algebra",
+            "Sauna",
+            "Kindergarten",
+            "Tsunami"
+          ]
+        }
+      },
+      "text": "Order these loanwords by their source language's name, alphabetically."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Ballet",
+            "Kindergarten",
+            "Origami",
+            "Saudade"
+          ]
+        }
+      },
+      "text": "Order these loanwords by their source language's name, alphabetically."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Japanese folded-paper art",
+              "accepted": [
+                "origami"
+              ]
+            },
+            {
+              "label": "German joy at another's misfortune",
+              "accepted": [
+                "schadenfreude"
+              ]
+            },
+            {
+              "label": "Portuguese longing or melancholy",
+              "accepted": [
+                "saudade"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Type the borrowed word matching each clue."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Karaoke"
+              },
+              "right": {
+                "text": "Japanese"
+              }
+            },
+            {
+              "left": {
+                "text": "Ballet"
+              },
+              "right": {
+                "text": "French"
+              }
+            },
+            {
+              "left": {
+                "text": "Kindergarten"
+              },
+              "right": {
+                "text": "German"
+              }
+            },
+            {
+              "left": {
+                "text": "Sauna"
+              },
+              "right": {
+                "text": "Finnish"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each English loanword to its source language."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Words from other languages",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Bungalow"
+              },
+              "right": {
+                "text": "Hindi"
+              }
+            },
+            {
+              "left": {
+                "text": "Boondocks"
+              },
+              "right": {
+                "text": "Tagalog"
+              }
+            },
+            {
+              "left": {
+                "text": "Tycoon"
+              },
+              "right": {
+                "text": "Japanese"
+              }
+            },
+            {
+              "left": {
+                "text": "Safari"
+              },
+              "right": {
+                "text": "Swahili"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each English loanword to the language it came through."
+    }
+  }
+]

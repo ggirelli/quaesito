@@ -1,0 +1,538 @@
+[
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the main ingredient in traditional meringue?",
+      "answers": [
+        {
+          "text": "Egg whites",
+          "correct": true
+        },
+        {
+          "text": "Whipped cream"
+        },
+        {
+          "text": "Ground almonds"
+        },
+        {
+          "text": "Cream cheese"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Italian dessert is made with layers of coffee-soaked biscuits and mascarpone cream?",
+      "answers": [
+        {
+          "text": "Tiramisu",
+          "correct": true
+        },
+        {
+          "text": "Panna cotta"
+        },
+        {
+          "text": "Cannoli"
+        },
+        {
+          "text": "Zabaglione"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which sugar is commonly used to make spun-sugar decorations because it melts and hardens cleanly?",
+      "answers": [
+        {
+          "text": "Sucrose",
+          "correct": true
+        },
+        {
+          "text": "Lactose"
+        },
+        {
+          "text": "Maltose"
+        },
+        {
+          "text": "Cellulose"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which French dessert is a custard topped with a brittle caramelised sugar crust?",
+      "answers": [
+        {
+          "text": "Crème brûlée",
+          "correct": true
+        },
+        {
+          "text": "Clafoutis"
+        },
+        {
+          "text": "Mille-feuille"
+        },
+        {
+          "text": "Île flottante"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What gives traditional Turkish delight its characteristic chewy gel texture?",
+      "answers": [
+        {
+          "text": "Starch",
+          "correct": true
+        },
+        {
+          "text": "Gelatin"
+        },
+        {
+          "text": "Egg white"
+        },
+        {
+          "text": "Agar alone"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which pastry is traditionally used to make baklava?",
+      "answers": [
+        {
+          "text": "Filo pastry",
+          "correct": true
+        },
+        {
+          "text": "Choux pastry"
+        },
+        {
+          "text": "Puff pastry"
+        },
+        {
+          "text": "Shortcrust pastry"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Italian dessert is traditionally made by cooking sweetened cream and setting it with gelatin?",
+      "answers": [
+        {
+          "text": "Panna cotta",
+          "correct": true
+        },
+        {
+          "text": "Semifreddo"
+        },
+        {
+          "text": "Granita"
+        },
+        {
+          "text": "Biscotti"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Japanese sweet is traditionally made from sweetened red-bean paste set with agar?",
+      "answers": [
+        {
+          "text": "Yokan",
+          "correct": true
+        },
+        {
+          "text": "Mochi"
+        },
+        {
+          "text": "Dorayaki"
+        },
+        {
+          "text": "Taiyaki"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the Japanese sweet made from pounded glutinous rice?",
+      "answers": [
+        {
+          "text": "Mochi",
+          "correct": true
+        },
+        {
+          "text": "Dorayaki"
+        },
+        {
+          "text": "Taiyaki"
+        },
+        {
+          "text": "Yokan"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Traditional gelato is typically served at a warmer temperature than many standard ice creams.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "A classic pavlova is made with a meringue base.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The main ingredient in nougat is always chocolate.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "In confectionery, fondant and marzipan are the same mixture.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the French name for the small, colourful almond-meringue sandwich cookie?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "macaron",
+            "macarons"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "At approximately what temperature in degrees Celsius does sugar begin to caramelise?",
+      "kind": {
+        "Number": {
+          "answer": 170,
+          "range": {
+            "min": 140,
+            "max": 210
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many grams of protein are in 100 grams of pure egg white, approximately?",
+      "kind": {
+        "Number": {
+          "answer": 11,
+          "range": {
+            "min": 6,
+            "max": 18
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these stages of making caramel in order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Heat the sugar",
+            "Sugar melts",
+            "Sugar turns amber",
+            "Caramel cools and hardens"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these stages of making choux pastry in order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Heat water, butter and flour",
+            "Beat in the eggs",
+            "Pipe the dough",
+            "Bake until puffed"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the three main ingredients in a basic shortcrust pastry.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Ingredient 1",
+              "accepted": [
+                "flour",
+                "plain flour"
+              ]
+            },
+            {
+              "label": "Ingredient 2",
+              "accepted": [
+                "butter",
+                "fat",
+                "shortening",
+                "lard"
+              ]
+            },
+            {
+              "label": "Ingredient 3",
+              "accepted": [
+                "water"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each dessert with its country of origin or strongest traditional association.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Tiramisu"
+              },
+              "right": {
+                "text": "Italy"
+              }
+            },
+            {
+              "left": {
+                "text": "Baklava"
+              },
+              "right": {
+                "text": "Ottoman culinary tradition"
+              }
+            },
+            {
+              "left": {
+                "text": "Mochi"
+              },
+              "right": {
+                "text": "Japan"
+              }
+            },
+            {
+              "left": {
+                "text": "Crème brûlée"
+              },
+              "right": {
+                "text": "France"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each sweet with its main characteristic ingredient or base.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Marzipan"
+              },
+              "right": {
+                "text": "Almonds"
+              }
+            },
+            {
+              "left": {
+                "text": "Meringue"
+              },
+              "right": {
+                "text": "Whipped egg whites and sugar"
+              }
+            },
+            {
+              "left": {
+                "text": "Mochi"
+              },
+              "right": {
+                "text": "Glutinous rice"
+              }
+            },
+            {
+              "left": {
+                "text": "Panna cotta"
+              },
+              "right": {
+                "text": "Cooked cream"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which French confection is made by coating almonds in cooked sugar that crystallises around them?",
+      "answers": [
+        {
+          "text": "Pralines",
+          "correct": true
+        },
+        {
+          "text": "Marshmallows"
+        },
+        {
+          "text": "Nougat"
+        },
+        {
+          "text": "Caramels"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Sweets & desserts",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many layers of puff pastry are traditionally used in a mille-feuille?",
+      "kind": {
+        "Number": {
+          "answer": 3,
+          "range": {
+            "min": 1,
+            "max": 6
+          }
+        }
+      }
+    }
+  }
+]

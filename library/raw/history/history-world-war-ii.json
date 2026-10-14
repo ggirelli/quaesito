@@ -1,0 +1,673 @@
+[
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which country did Germany invade on 1 September 1939, starting the war in Europe?",
+      "answers": [
+        {
+          "text": "Poland",
+          "correct": true
+        },
+        {
+          "text": "Belgium"
+        },
+        {
+          "text": "Norway"
+        },
+        {
+          "text": "France"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Japanese attack brought the United States into World War II?",
+      "answers": [
+        {
+          "text": "Pearl Harbor",
+          "correct": true
+        },
+        {
+          "text": "Midway Atoll"
+        },
+        {
+          "text": "Wake Island"
+        },
+        {
+          "text": "Guam"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What was the code name for the Allied invasion of Normandy in June 1944?",
+      "answers": [
+        {
+          "text": "Operation Overlord",
+          "correct": true
+        },
+        {
+          "text": "Operation Torch"
+        },
+        {
+          "text": "Operation Market Garden"
+        },
+        {
+          "text": "Operation Barbarossa"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which British prime minister led the UK for most of the war from 1940?",
+      "answers": [
+        {
+          "text": "Winston Churchill",
+          "correct": true
+        },
+        {
+          "text": "Neville Chamberlain"
+        },
+        {
+          "text": "Clement Attlee"
+        },
+        {
+          "text": "Anthony Eden"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which German operation launched the invasion of the Soviet Union in June 1941?",
+      "answers": [
+        {
+          "text": "Operation Barbarossa",
+          "correct": true
+        },
+        {
+          "text": "Operation Sea Lion"
+        },
+        {
+          "text": "Operation Weserübung"
+        },
+        {
+          "text": "Operation Citadel"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which 1942 naval battle is widely considered a turning point in the Pacific War?",
+      "answers": [
+        {
+          "text": "Battle of Midway",
+          "correct": true
+        },
+        {
+          "text": "Battle of Coral Sea"
+        },
+        {
+          "text": "Battle of Leyte Gulf"
+        },
+        {
+          "text": "Battle of Guadalcanal"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which 1945 conference near Berlin brought Truman, Churchill and Stalin together?",
+      "answers": [
+        {
+          "text": "Potsdam Conference",
+          "correct": true
+        },
+        {
+          "text": "Yalta Conference"
+        },
+        {
+          "text": "Tehran Conference"
+        },
+        {
+          "text": "Casablanca Conference"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which resistance network helped Allied airmen and others escape occupied Europe through France and Spain?",
+      "answers": [
+        {
+          "text": "Comet Line",
+          "correct": true
+        },
+        {
+          "text": "White Rose"
+        },
+        {
+          "text": "Red Orchestra"
+        },
+        {
+          "text": "July 20 network"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which codebreaking site in England housed much of Britain's wartime work against Enigma?",
+      "answers": [
+        {
+          "text": "Bletchley Park",
+          "correct": true
+        },
+        {
+          "text": "Pine Gap"
+        },
+        {
+          "text": "Los Alamos"
+        },
+        {
+          "text": "Porton Down"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Soviet city endured a siege lasting about 872 days during World War II?",
+      "answers": [
+        {
+          "text": "Leningrad",
+          "correct": true
+        },
+        {
+          "text": "Stalingrad"
+        },
+        {
+          "text": "Moscow"
+        },
+        {
+          "text": "Sevastopol"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which German field marshal surrendered the Afrika Korps in Tunisia in May 1943?",
+      "answers": [
+        {
+          "text": "Hans-Jürgen von Arnim",
+          "correct": true
+        },
+        {
+          "text": "Erwin Rommel"
+        },
+        {
+          "text": "Albert Kesselring"
+        },
+        {
+          "text": "Gerd von Rundstedt"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What was the name of the Allied deception plan that misled Germany about the Normandy landing site?",
+      "answers": [
+        {
+          "text": "Operation Fortitude",
+          "correct": true
+        },
+        {
+          "text": "Operation Mincemeat"
+        },
+        {
+          "text": "Operation Bodyguard"
+        },
+        {
+          "text": "Operation Jubilee"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The Holocaust was the Nazi regime's systematic persecution and murder of six million Jews."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "The attack on Pearl Harbor took place in 1940."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The Battle of Britain was fought mainly in the air in 1940."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "The Soviet Union fought on Germany's side after the German invasion of June 1941."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The Warsaw Uprising of 1944 was organized by the Polish Home Army."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Anne Frank",
+            "Frank"
+          ]
+        }
+      },
+      "text": "Which Jewish teenager kept the diary published after her death as The Diary of a Young Girl?"
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Alan Turing",
+            "Turing"
+          ]
+        }
+      },
+      "text": "Which British mathematician helped break German Enigma codes at Bletchley Park?"
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Oskar Schindler",
+            "Schindler"
+          ]
+        }
+      },
+      "text": "Which German industrialist saved more than a thousand Jews by employing them in his factories?"
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Witold Pilecki",
+            "Pilecki"
+          ]
+        }
+      },
+      "text": "Which Polish resistance member deliberately entered Auschwitz to gather intelligence?"
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 1939,
+          "range": {
+            "min": 1920,
+            "max": 1950
+          }
+        }
+      },
+      "text": "In what year did World War II begin in Europe? Give the year."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 1944,
+          "range": {
+            "min": 1930,
+            "max": 1950
+          }
+        }
+      },
+      "text": "In what year did the D-Day landings take place? Give the year."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 6,
+          "range": {
+            "min": 2,
+            "max": 12
+          }
+        }
+      },
+      "text": "How many years passed between Germany's invasion of Poland in 1939 and its surrender in 1945? Give the number."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 872,
+          "range": {
+            "min": 500,
+            "max": 1200
+          }
+        }
+      },
+      "text": "Approximately how many days did the Siege of Leningrad last? Give the number of days."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Germany invades Poland",
+            "Attack on Pearl Harbor",
+            "D-Day landings",
+            "Germany surrenders"
+          ]
+        }
+      },
+      "text": "Put these events in chronological order, earliest first."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Battle of Britain",
+            "Germany invades the Soviet Union",
+            "Battle of Midway",
+            "Warsaw Uprising"
+          ]
+        }
+      },
+      "text": "Put these events in chronological order, earliest first."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Axis power",
+              "accepted": [
+                "Germany"
+              ]
+            },
+            {
+              "label": "Axis power",
+              "accepted": [
+                "Italy"
+              ]
+            },
+            {
+              "label": "Axis power",
+              "accepted": [
+                "Japan"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name the three principal Axis powers in World War II."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Pearl Harbor"
+              },
+              "right": {
+                "text": "US enters the war"
+              }
+            },
+            {
+              "left": {
+                "text": "D-Day"
+              },
+              "right": {
+                "text": "Normandy landings"
+              }
+            },
+            {
+              "left": {
+                "text": "Battle of Britain"
+              },
+              "right": {
+                "text": "Air war over the UK"
+              }
+            },
+            {
+              "left": {
+                "text": "Hiroshima"
+              },
+              "right": {
+                "text": "Atomic bomb in August 1945"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each World War II event or place with its description."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War II",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Dwight D. Eisenhower"
+              },
+              "right": {
+                "text": "Supreme Allied commander in Europe"
+              }
+            },
+            {
+              "left": {
+                "text": "Chester W. Nimitz"
+              },
+              "right": {
+                "text": "US Pacific Fleet commander"
+              }
+            },
+            {
+              "left": {
+                "text": "Bernard Montgomery"
+              },
+              "right": {
+                "text": "British commander at El Alamein"
+              }
+            },
+            {
+              "left": {
+                "text": "Georgy Zhukov"
+              },
+              "right": {
+                "text": "Soviet marshal"
+              }
+            },
+            {
+              "left": {
+                "text": "Isoroku Yamamoto"
+              },
+              "right": {
+                "text": "Japanese admiral"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each World War II military leader with the role they are known for."
+    }
+  }
+]

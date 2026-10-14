@@ -1,0 +1,661 @@
+[
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which actor played Jack in the film Titanic?",
+      "answers": [
+        {
+          "text": "Leonardo DiCaprio",
+          "correct": true
+        },
+        {
+          "text": "Brad Pitt"
+        },
+        {
+          "text": "Matt Damon"
+        },
+        {
+          "text": "Johnny Depp"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which singer is known as the Queen of Pop?",
+      "answers": [
+        {
+          "text": "Madonna",
+          "correct": true
+        },
+        {
+          "text": "Cher"
+        },
+        {
+          "text": "Celine Dion"
+        },
+        {
+          "text": "Tina Turner"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which actor played Iron Man in the Marvel Cinematic Universe?",
+      "answers": [
+        {
+          "text": "Robert Downey Jr.",
+          "correct": true
+        },
+        {
+          "text": "Chris Evans"
+        },
+        {
+          "text": "Mark Ruffalo"
+        },
+        {
+          "text": "Jeremy Renner"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which singer released the album 21?",
+      "answers": [
+        {
+          "text": "Adele",
+          "correct": true
+        },
+        {
+          "text": "Amy Winehouse"
+        },
+        {
+          "text": "Duffy"
+        },
+        {
+          "text": "Lily Allen"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which actor voiced Woody in the Toy Story films?",
+      "answers": [
+        {
+          "text": "Tom Hanks",
+          "correct": true
+        },
+        {
+          "text": "Tim Allen"
+        },
+        {
+          "text": "Billy Crystal"
+        },
+        {
+          "text": "Robin Williams"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which singer is often called the King of Rock and Roll?",
+      "answers": [
+        {
+          "text": "Elvis Presley",
+          "correct": true
+        },
+        {
+          "text": "Chuck Berry"
+        },
+        {
+          "text": "Little Richard"
+        },
+        {
+          "text": "Jerry Lee Lewis"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What was Elton John's birth name?",
+      "answers": [
+        {
+          "text": "Reginald Dwight",
+          "correct": true
+        },
+        {
+          "text": "David Jones"
+        },
+        {
+          "text": "Farrokh Bulsara"
+        },
+        {
+          "text": "Gordon Sumner"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which actor directed the film Dances with Wolves?",
+      "answers": [
+        {
+          "text": "Kevin Costner",
+          "correct": true
+        },
+        {
+          "text": "Clint Eastwood"
+        },
+        {
+          "text": "Mel Gibson"
+        },
+        {
+          "text": "Robert Redford"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which artist painted the album cover for the Beatles' Sgt. Pepper's Lonely Hearts Club Band?",
+      "answers": [
+        {
+          "text": "Peter Blake",
+          "correct": true
+        },
+        {
+          "text": "Andy Warhol"
+        },
+        {
+          "text": "Richard Hamilton"
+        },
+        {
+          "text": "David Hockney"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which actress was the first woman to win an Academy Award for Best Director?",
+      "answers": [
+        {
+          "text": "Kathryn Bigelow",
+          "correct": true
+        },
+        {
+          "text": "Jane Campion"
+        },
+        {
+          "text": "Sofia Coppola"
+        },
+        {
+          "text": "Greta Gerwig"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which musician co-founded the band Traveling Wilburys with George Harrison?",
+      "answers": [
+        {
+          "text": "Jeff Lynne",
+          "correct": true
+        },
+        {
+          "text": "Eric Clapton"
+        },
+        {
+          "text": "David Gilmour"
+        },
+        {
+          "text": "Brian Eno"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which actor played the title role in the 1976 film Taxi Driver?",
+      "answers": [
+        {
+          "text": "Robert De Niro",
+          "correct": true
+        },
+        {
+          "text": "Al Pacino"
+        },
+        {
+          "text": "Dustin Hoffman"
+        },
+        {
+          "text": "Gene Hackman"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Dolly Parton co-wrote the song 'I Will Always Love You'.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Keanu Reeves was born in Canada.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "David Bowie played the Goblin King in the film Labyrinth.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Meryl Streep made her film debut in The Devil Wears Prada.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Charlie Chaplin won a competitive Oscar for Best Actor for The Great Dictator.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the surname of singer-songwriter Taylor Swift?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Swift",
+            "Taylor Swift"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which comedian created and starred in the sitcom Seinfeld?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Jerry Seinfeld",
+            "Seinfeld"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the stage name of Stefani Germanotta?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Lady Gaga",
+            "Gaga"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which actor played the lead role in the original 1960 film Psycho?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Anthony Perkins",
+            "Perkins"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year was Elvis Presley born? Give the year.",
+      "kind": {
+        "Number": {
+          "answer": 1935,
+          "range": {
+            "min": 1925,
+            "max": 1950
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did Freddie Mercury die? Give the year.",
+      "kind": {
+        "Number": {
+          "answer": 1991,
+          "range": {
+            "min": 1980,
+            "max": 2005
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did the first Academy Awards ceremony take place? Give the year.",
+      "kind": {
+        "Number": {
+          "answer": 1929,
+          "range": {
+            "min": 1915,
+            "max": 1945
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many Academy Awards did Katharine Hepburn win competitively for acting? Give the number.",
+      "kind": {
+        "Number": {
+          "answer": 4,
+          "range": {
+            "min": 1,
+            "max": 8
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Order these performers by birth year, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Charlie Chaplin",
+            "Elvis Presley",
+            "David Bowie",
+            "Madonna"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Order these actors by the year they won their first Best Actor Oscar, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Clark Gable",
+            "Marlon Brando",
+            "Jack Nicholson",
+            "Tom Hanks"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the actors who played these two iconic roles.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Indiana Jones",
+              "accepted": [
+                "Harrison Ford",
+                "Ford"
+              ]
+            },
+            {
+              "label": "Ellen Ripley",
+              "accepted": [
+                "Sigourney Weaver",
+                "Weaver"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each celebrity with their best-known band.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Freddie Mercury"
+              },
+              "right": {
+                "text": "Queen"
+              }
+            },
+            {
+              "left": {
+                "text": "Bono"
+              },
+              "right": {
+                "text": "U2"
+              }
+            },
+            {
+              "left": {
+                "text": "Debbie Harry"
+              },
+              "right": {
+                "text": "Blondie"
+              }
+            },
+            {
+              "left": {
+                "text": "Kurt Cobain"
+              },
+              "right": {
+                "text": "Nirvana"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Celebrities",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each actor with a film they directed.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Greta Gerwig"
+              },
+              "right": {
+                "text": "Lady Bird"
+              }
+            },
+            {
+              "left": {
+                "text": "Clint Eastwood"
+              },
+              "right": {
+                "text": "Unforgiven"
+              }
+            },
+            {
+              "left": {
+                "text": "Kevin Costner"
+              },
+              "right": {
+                "text": "Dances with Wolves"
+              }
+            },
+            {
+              "left": {
+                "text": "Jordan Peele"
+              },
+              "right": {
+                "text": "Get Out"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

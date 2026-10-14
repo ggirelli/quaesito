@@ -1,0 +1,575 @@
+[
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which ancient Athenian leader is associated with the city’s Golden Age and the Parthenon?",
+      "answers": [
+        {
+          "text": "Pericles",
+          "correct": true
+        },
+        {
+          "text": "Solon"
+        },
+        {
+          "text": "Cleisthenes"
+        },
+        {
+          "text": "Themistocles"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which country’s parliament is known as the Knesset?",
+      "answers": [
+        {
+          "text": "Israel",
+          "correct": true
+        },
+        {
+          "text": "Jordan"
+        },
+        {
+          "text": "Lebanon"
+        },
+        {
+          "text": "Turkey"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who was the first woman to serve as prime minister of the United Kingdom?",
+      "answers": [
+        {
+          "text": "Margaret Thatcher",
+          "correct": true
+        },
+        {
+          "text": "Theresa May"
+        },
+        {
+          "text": "Liz Truss"
+        },
+        {
+          "text": "Barbara Castle"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Meiji Restoration transformed the government of which country?",
+      "answers": [
+        {
+          "text": "Japan",
+          "correct": true
+        },
+        {
+          "text": "China"
+        },
+        {
+          "text": "Thailand"
+        },
+        {
+          "text": "South Korea"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who became South Africa’s first president after the end of apartheid?",
+      "answers": [
+        {
+          "text": "Nelson Mandela",
+          "correct": true
+        },
+        {
+          "text": "Thabo Mbeki"
+        },
+        {
+          "text": "F. W. de Klerk"
+        },
+        {
+          "text": "Oliver Tambo"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which peace settlement ended the Thirty Years’ War in 1648?",
+      "answers": [
+        {
+          "text": "Peace of Westphalia",
+          "correct": true
+        },
+        {
+          "text": "Treaty of Utrecht"
+        },
+        {
+          "text": "Treaty of Versailles"
+        },
+        {
+          "text": "Peace of Augsburg"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who was the first chancellor of the German Empire, proclaimed in 1871?",
+      "answers": [
+        {
+          "text": "Otto von Bismarck",
+          "correct": true
+        },
+        {
+          "text": "Konrad Adenauer"
+        },
+        {
+          "text": "Helmut Kohl"
+        },
+        {
+          "text": "Paul von Hindenburg"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What was the title of the elected leader of the medieval Venetian Republic?",
+      "answers": [
+        {
+          "text": "Doge",
+          "correct": true
+        },
+        {
+          "text": "Consul"
+        },
+        {
+          "text": "Archon"
+        },
+        {
+          "text": "Vizier"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which document limited the power of England’s king in 1215?",
+      "answers": [
+        {
+          "text": "Magna Carta",
+          "correct": true
+        },
+        {
+          "text": "Petition of Right"
+        },
+        {
+          "text": "Bill of Rights"
+        },
+        {
+          "text": "Act of Settlement"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The United States Constitution was signed in 1787.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Roman Republic was governed by a hereditary emperor from its founding.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The African Union was established before the European Union.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Glorious Revolution led to the overthrow of James II of England.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The title ‘pharaoh’ was used by rulers of ancient Egypt.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What surname is shared by the brothers Fidel and Raúl, leaders of Cuba’s revolution?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Castro",
+            "Fidel Castro",
+            "Raul Castro"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who was the Indian independence leader widely known as Mahatma?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Gandhi",
+            "Mahatma Gandhi",
+            "Mohandas Gandhi",
+            "Mohandas Karamchand Gandhi"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Roman statesman crossed the Rubicon in 49 BCE?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Julius Caesar",
+            "Caesar"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year was the United Nations founded?",
+      "kind": {
+        "Number": {
+          "answer": 1945,
+          "range": {
+            "min": 1936,
+            "max": 1966
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did the French Revolution begin?",
+      "kind": {
+        "Number": {
+          "answer": 1789,
+          "range": {
+            "min": 1760,
+            "max": 1810
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many cantons make up Switzerland?",
+      "kind": {
+        "Number": {
+          "answer": 26,
+          "range": {
+            "min": 20,
+            "max": 30
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did the Berlin Wall fall?",
+      "kind": {
+        "Number": {
+          "answer": 1989,
+          "range": {
+            "min": 1970,
+            "max": 2000
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these events in chronological order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Magna Carta sealed (1215)",
+            "English Civil War begins (1642)",
+            "American Declaration of Independence (1776)",
+            "French Revolution begins (1789)"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Order these Roman political offices by the usual age at which a man could first hold them, youngest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Quaestor",
+            "Praetor",
+            "Consul",
+            "Censor"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the two chambers of the United Kingdom Parliament.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Lower chamber",
+              "accepted": [
+                "House of Commons",
+                "Commons"
+              ]
+            },
+            {
+              "label": "Upper chamber",
+              "accepted": [
+                "House of Lords",
+                "Lords"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each leader with the country they led during the Second World War.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Winston Churchill"
+              },
+              "right": {
+                "text": "United Kingdom"
+              }
+            },
+            {
+              "left": {
+                "text": "Franklin D. Roosevelt"
+              },
+              "right": {
+                "text": "United States"
+              }
+            },
+            {
+              "left": {
+                "text": "Charles de Gaulle"
+              },
+              "right": {
+                "text": "Free France"
+              }
+            },
+            {
+              "left": {
+                "text": "Joseph Stalin"
+              },
+              "right": {
+                "text": "Soviet Union"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Politics & leaders",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each political thinker with the work associated with them.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Niccolò Machiavelli"
+              },
+              "right": {
+                "text": "The Prince"
+              }
+            },
+            {
+              "left": {
+                "text": "Thomas Hobbes"
+              },
+              "right": {
+                "text": "Leviathan"
+              }
+            },
+            {
+              "left": {
+                "text": "John Locke"
+              },
+              "right": {
+                "text": "Two Treatises of Government"
+              }
+            },
+            {
+              "left": {
+                "text": "Jean-Jacques Rousseau"
+              },
+              "right": {
+                "text": "The Social Contract"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

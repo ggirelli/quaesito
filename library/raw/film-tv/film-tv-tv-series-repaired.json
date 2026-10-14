@@ -1,0 +1,198 @@
+[
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of Ross's pet monkey in Friends?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Marcel"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the candy company that is Pawnee's big local employer in Parks and Recreation?",
+      "answers": [
+        {
+          "text": "Sweetums",
+          "correct": true
+        },
+        {
+          "text": "Paunch Burger"
+        },
+        {
+          "text": "Gryzzl"
+        },
+        {
+          "text": "Dunder Mifflin"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Whose murder is investigated in Twin Peaks?",
+      "answers": [
+        {
+          "text": "Laura Palmer",
+          "correct": true
+        },
+        {
+          "text": "Audrey Horne"
+        },
+        {
+          "text": "Donna Hayward"
+        },
+        {
+          "text": "Shelly Johnson"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What was the flight number of the plane that crashes in Lost?",
+      "kind": {
+        "Number": {
+          "answer": 815,
+          "range": {
+            "min": 100,
+            "max": 999
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these sitcoms in the order their first episodes aired, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Cheers",
+            "Seinfeld",
+            "Friends",
+            "The Office (US)"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these HBO dramas in the order their first episodes aired, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Oz",
+            "The Sopranos",
+            "The Wire",
+            "Game of Thrones"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the two lead FBI agents in The X-Files.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Believer",
+              "accepted": [
+                "Fox Mulder",
+                "Mulder"
+              ]
+            },
+            {
+              "label": "Skeptic",
+              "accepted": [
+                "Dana Scully",
+                "Scully"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "TV series",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each series with its creator.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "The Sopranos"
+              },
+              "right": {
+                "text": "David Chase"
+              }
+            },
+            {
+              "left": {
+                "text": "Breaking Bad"
+              },
+              "right": {
+                "text": "Vince Gilligan"
+              }
+            },
+            {
+              "left": {
+                "text": "Fleabag"
+              },
+              "right": {
+                "text": "Phoebe Waller-Bridge"
+              }
+            },
+            {
+              "left": {
+                "text": "The Good Place"
+              },
+              "right": {
+                "text": "Michael Schur"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

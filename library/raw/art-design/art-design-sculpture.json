@@ -1,0 +1,659 @@
+[
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which sculptor created the marble statue David displayed in Florence?",
+      "answers": [
+        {
+          "text": "Michelangelo",
+          "correct": true
+        },
+        {
+          "text": "Donatello"
+        },
+        {
+          "text": "Gian Lorenzo Bernini"
+        },
+        {
+          "text": "Antonio Canova"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What material was the original Statue of Liberty's outer skin primarily made from?",
+      "answers": [
+        {
+          "text": "Copper",
+          "correct": true
+        },
+        {
+          "text": "Bronze"
+        },
+        {
+          "text": "Lead"
+        },
+        {
+          "text": "Tin"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which ancient civilization made the terracotta army buried near Xi'an?",
+      "answers": [
+        {
+          "text": "Chinese",
+          "correct": true
+        },
+        {
+          "text": "Roman"
+        },
+        {
+          "text": "Persian"
+        },
+        {
+          "text": "Egyptian"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Auguste Rodin's The Thinker was originally conceived as part of which larger work?",
+      "answers": [
+        {
+          "text": "The Gates of Hell",
+          "correct": true
+        },
+        {
+          "text": "The Burghers of Calais"
+        },
+        {
+          "text": "The Kiss"
+        },
+        {
+          "text": "The Age of Bronze"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which sculptor made the bronze statue The Little Dancer Aged Fourteen?",
+      "answers": [
+        {
+          "text": "Edgar Degas",
+          "correct": true
+        },
+        {
+          "text": "Auguste Rodin"
+        },
+        {
+          "text": "Camille Claudel"
+        },
+        {
+          "text": "Aristide Maillol"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The ancient Greek sculpture Venus de Milo depicts which goddess?",
+      "answers": [
+        {
+          "text": "Aphrodite",
+          "correct": true
+        },
+        {
+          "text": "Athena"
+        },
+        {
+          "text": "Hera"
+        },
+        {
+          "text": "Artemis"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which material is traditionally carved to make cameos?",
+      "answers": [
+        {
+          "text": "Layered shell",
+          "correct": true
+        },
+        {
+          "text": "Soft sandstone"
+        },
+        {
+          "text": "Cast iron"
+        },
+        {
+          "text": "Pine wood"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which sculptor designed the bronze statue of Perseus holding Medusa's head in Florence?",
+      "answers": [
+        {
+          "text": "Benvenuto Cellini",
+          "correct": true
+        },
+        {
+          "text": "Donatello"
+        },
+        {
+          "text": "Lorenzo Ghiberti"
+        },
+        {
+          "text": "Andrea del Verrocchio"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which sculptor created the monumental marble Ecstasy of Saint Teresa in Rome?",
+      "answers": [
+        {
+          "text": "Gian Lorenzo Bernini",
+          "correct": true
+        },
+        {
+          "text": "Michelangelo"
+        },
+        {
+          "text": "Alessandro Algardi"
+        },
+        {
+          "text": "Antonio Canova"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name for a sculpture carved in low relief, projecting only slightly from its background?",
+      "answers": [
+        {
+          "text": "Bas-relief",
+          "correct": true
+        },
+        {
+          "text": "High relief"
+        },
+        {
+          "text": "Intaglio"
+        },
+        {
+          "text": "In the round"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which sculptor made the 1912 abstract work Unique Forms of Continuity in Space?",
+      "answers": [
+        {
+          "text": "Umberto Boccioni",
+          "correct": true
+        },
+        {
+          "text": "Constantin Brâncuși"
+        },
+        {
+          "text": "Alexander Archipenko"
+        },
+        {
+          "text": "Marcel Duchamp"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which artist created the assemblage sculpture Merzbau?",
+      "answers": [
+        {
+          "text": "Kurt Schwitters",
+          "correct": true
+        },
+        {
+          "text": "Joseph Beuys"
+        },
+        {
+          "text": "Jean Tinguely"
+        },
+        {
+          "text": "Marcel Broodthaers"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The Great Sphinx of Giza has the body of a lion and a human head."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "Michelangelo's David was carved from bronze."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The Moai statues of Rapa Nui were carved mainly from volcanic tuff."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "The Venus de Milo still has both of its original arms attached."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Barbara Hepworth often used strings stretched through openings in her sculptures."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "The Thinker",
+            "Thinker"
+          ]
+        }
+      },
+      "text": "What is the title of Rodin's famous seated figure resting his chin on one hand?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "The Kiss",
+            "Kiss"
+          ]
+        }
+      },
+      "text": "What is the title of Brâncuși's sculpture series showing two figures locked in an embrace?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Cloud Gate"
+          ]
+        }
+      },
+      "text": "What is the official title of Anish Kapoor's reflective bean-shaped sculpture in Chicago?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Bird in Space"
+          ]
+        }
+      },
+      "text": "What is the English title of Brâncuși's abstract sculpture series known for its sleek, rising forms?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 5,
+          "range": {
+            "min": 2,
+            "max": 9
+          }
+        }
+      },
+      "text": "How many bronze horses are shown on the façade of St Mark's Basilica in Venice today?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 93,
+          "range": {
+            "min": 60,
+            "max": 130
+          }
+        }
+      },
+      "text": "Approximately how tall is the Statue of Liberty in metres, from ground to torch tip, including its pedestal?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 3,
+          "range": {
+            "min": 1,
+            "max": 7
+          }
+        }
+      },
+      "text": "How many figures are in Rodin's sculpture group The Burghers of Calais?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 410,
+          "range": {
+            "min": 300,
+            "max": 550
+          }
+        }
+      },
+      "text": "Approximately how tall is the Great Sphinx of Giza in centimetres, from base to top of head?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Laocoön and His Sons",
+            "Michelangelo's David",
+            "The Thinker",
+            "Unique Forms of Continuity in Space"
+          ]
+        }
+      },
+      "text": "Put these sculptures in chronological order, earliest first."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "The Dying Gaul",
+            "Perseus with the Head of Medusa",
+            "The Kiss by Rodin",
+            "Bird in Space"
+          ]
+        }
+      },
+      "text": "Put these sculptures in chronological order, earliest first."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Sculptor",
+              "accepted": [
+                "Auguste Rodin",
+                "Rodin"
+              ]
+            },
+            {
+              "label": "Work",
+              "accepted": [
+                "The Burghers of Calais",
+                "Burghers of Calais"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name the sculptor and the work depicting six citizens offering themselves during the siege of Calais."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Michelangelo"
+              },
+              "right": {
+                "text": "David"
+              }
+            },
+            {
+              "left": {
+                "text": "Auguste Rodin"
+              },
+              "right": {
+                "text": "The Thinker"
+              }
+            },
+            {
+              "left": {
+                "text": "Edgar Degas"
+              },
+              "right": {
+                "text": "Little Dancer Aged Fourteen"
+              }
+            },
+            {
+              "left": {
+                "text": "Gian Lorenzo Bernini"
+              },
+              "right": {
+                "text": "Ecstasy of Saint Teresa"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each sculptor to the sculpture they created."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Umberto Boccioni"
+              },
+              "right": {
+                "text": "Unique Forms of Continuity in Space"
+              }
+            },
+            {
+              "left": {
+                "text": "Constantin Brâncuși"
+              },
+              "right": {
+                "text": "Bird in Space"
+              }
+            },
+            {
+              "left": {
+                "text": "Barbara Hepworth"
+              },
+              "right": {
+                "text": "Pelagos"
+              }
+            },
+            {
+              "left": {
+                "text": "Alexander Calder"
+              },
+              "right": {
+                "text": "Lobster Trap and Fish Tail"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each sculptor to the sculpture they created."
+    }
+  }
+]

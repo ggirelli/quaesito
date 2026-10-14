@@ -1,0 +1,667 @@
+[
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the coffee shop where the Friends gang often meet?",
+      "answers": [
+        {
+          "text": "Central Perk",
+          "correct": true
+        },
+        {
+          "text": "Monk's Café"
+        },
+        {
+          "text": "MacLaren's Pub"
+        },
+        {
+          "text": "Café Nervosa"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the paper company in the US version of The Office?",
+      "answers": [
+        {
+          "text": "Dunder Mifflin",
+          "correct": true
+        },
+        {
+          "text": "Wernham Hogg"
+        },
+        {
+          "text": "Sterling Cooper"
+        },
+        {
+          "text": "Initech"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In Friends, what is Ross Geller's profession?",
+      "answers": [
+        {
+          "text": "Paleontologist",
+          "correct": true
+        },
+        {
+          "text": "Psychiatrist"
+        },
+        {
+          "text": "Architect"
+        },
+        {
+          "text": "Veterinarian"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which city is the main setting of Frasier?",
+      "answers": [
+        {
+          "text": "Seattle",
+          "correct": true
+        },
+        {
+          "text": "Boston"
+        },
+        {
+          "text": "Chicago"
+        },
+        {
+          "text": "Portland"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the police precinct in Brooklyn Nine-Nine?",
+      "answers": [
+        {
+          "text": "The 99th Precinct",
+          "correct": true
+        },
+        {
+          "text": "The 12th Precinct"
+        },
+        {
+          "text": "The 21st Precinct"
+        },
+        {
+          "text": "The 42nd Precinct"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the fictional town where The Simpsons live?",
+      "answers": [
+        {
+          "text": "Springfield",
+          "correct": true
+        },
+        {
+          "text": "Shelbyville"
+        },
+        {
+          "text": "Quahog"
+        },
+        {
+          "text": "South Park"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the bar where Ted and his friends gather in How I Met Your Mother?",
+      "answers": [
+        {
+          "text": "MacLaren's Pub",
+          "correct": true
+        },
+        {
+          "text": "The Drunken Clam"
+        },
+        {
+          "text": "The Regal Beagle"
+        },
+        {
+          "text": "Cheers"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In Parks and Recreation, which department does Leslie Knope work for?",
+      "answers": [
+        {
+          "text": "Parks and Recreation",
+          "correct": true
+        },
+        {
+          "text": "Public Works"
+        },
+        {
+          "text": "City Planning"
+        },
+        {
+          "text": "Community Development"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the fictional afterlife neighborhood in The Good Place?",
+      "answers": [
+        {
+          "text": "The Good Place",
+          "correct": true
+        },
+        {
+          "text": "The Happy Place"
+        },
+        {
+          "text": "The Better Place"
+        },
+        {
+          "text": "The Great Beyond"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In M*A*S*H, what is the designation of the main medical unit?",
+      "answers": [
+        {
+          "text": "4077th",
+          "correct": true
+        },
+        {
+          "text": "501st"
+        },
+        {
+          "text": "101st",
+          "correct": false
+        },
+        {
+          "text": "221B"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the town bought by the Rose family in Schitt's Creek?",
+      "answers": [
+        {
+          "text": "Schitt's Creek",
+          "correct": true
+        },
+        {
+          "text": "Elmdale"
+        },
+        {
+          "text": "Dawson City"
+        },
+        {
+          "text": "Sunnyvale"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "In 30 Rock, what is the name of the live comedy show Liz Lemon works on?",
+      "answers": [
+        {
+          "text": "TGS with Tracy Jordan",
+          "correct": true
+        },
+        {
+          "text": "The Girlie Show"
+        },
+        {
+          "text": "Saturday Night Live"
+        },
+        {
+          "text": "Late Night with Kenneth"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The US version of The Office is set in Scranton, Pennsylvania."
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Phoebe Buffay in Friends has a twin sister named Ursula."
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "In Seinfeld, George Costanza is genuinely a successful architect."
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Ted Mosby, the narrator of How I Met Your Mother, is an architect."
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "In The Big Bang Theory, Sheldon Cooper is an only child."
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Pawnee"
+          ]
+        }
+      },
+      "text": "What is the name of the fictional Indiana town in Parks and Recreation?"
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Bayside",
+            "Bayside High"
+          ]
+        }
+      },
+      "text": "What is the name of the high school in Saved by the Bell?"
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Bluth",
+            "the Bluths",
+            "Bluth family"
+          ]
+        }
+      },
+      "text": "What is the surname of the family at the center of Arrested Development?"
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Niles Crane",
+            "Niles"
+          ]
+        }
+      },
+      "text": "What is the first name of Frasier Crane's brother?"
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 10,
+          "range": {
+            "min": 7,
+            "max": 13
+          }
+        }
+      },
+      "text": "How many seasons of Friends were originally broadcast?"
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 9,
+          "range": {
+            "min": 6,
+            "max": 12
+          }
+        }
+      },
+      "text": "How many seasons of Seinfeld were originally broadcast?"
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 9,
+          "range": {
+            "min": 5,
+            "max": 12
+          }
+        }
+      },
+      "text": "How many seasons did the US version of The Office run for?"
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 11,
+          "range": {
+            "min": 7,
+            "max": 15
+          }
+        }
+      },
+      "text": "How many seasons of Cheers were originally broadcast?"
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "I Love Lucy",
+            "M*A*S*H",
+            "Cheers",
+            "Seinfeld",
+            "Friends"
+          ]
+        }
+      },
+      "text": "Put these sitcoms in order of first US broadcast, earliest first."
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "The Simpsons",
+            "Frasier",
+            "Friends",
+            "The Office (US)"
+          ]
+        }
+      },
+      "text": "Put these sitcoms in order of first US broadcast, earliest first."
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Oldest child",
+              "accepted": [
+                "Bart"
+              ]
+            },
+            {
+              "label": "Middle child",
+              "accepted": [
+                "Lisa"
+              ]
+            },
+            {
+              "label": "Youngest child",
+              "accepted": [
+                "Maggie"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name Homer and Marge Simpson's three children, from oldest to youngest."
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Michael Scott"
+              },
+              "right": {
+                "text": "The Office"
+              }
+            },
+            {
+              "left": {
+                "text": "Leslie Knope"
+              },
+              "right": {
+                "text": "Parks and Recreation"
+              }
+            },
+            {
+              "left": {
+                "text": "Jake Peralta"
+              },
+              "right": {
+                "text": "Brooklyn Nine-Nine"
+              }
+            },
+            {
+              "left": {
+                "text": "Sheldon Cooper"
+              },
+              "right": {
+                "text": "The Big Bang Theory"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each sitcom character to the show they appear in."
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Sitcoms",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Cheers"
+              },
+              "right": {
+                "text": "Boston bar"
+              }
+            },
+            {
+              "left": {
+                "text": "Frasier"
+              },
+              "right": {
+                "text": "Seattle radio station"
+              }
+            },
+            {
+              "left": {
+                "text": "The Office (US)"
+              },
+              "right": {
+                "text": "Scranton paper company"
+              }
+            },
+            {
+              "left": {
+                "text": "Parks and Recreation"
+              },
+              "right": {
+                "text": "Indiana parks department"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each sitcom to its central workplace or setting."
+    }
+  }
+]

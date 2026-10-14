@@ -1,0 +1,16 @@
+[
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "In English, haiku are usually written in three lines."
+    }
+  }
+]

@@ -1,0 +1,116 @@
+[
+  {
+    "category": "Film & TV",
+    "topic": "Directors",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these films directed by Steven Spielberg in release order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Jaws",
+            "Raiders of the Lost Ark",
+            "Jurassic Park",
+            "Saving Private Ryan"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Directors",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these Christopher Nolan films in release order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Memento",
+            "Batman Begins",
+            "Inception",
+            "Interstellar"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Directors",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the two directors of the 2007 film No Country for Old Men.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Older brother",
+              "accepted": [
+                "Joel Coen",
+                "Joel"
+              ]
+            },
+            {
+              "label": "Younger brother",
+              "accepted": [
+                "Ethan Coen",
+                "Ethan"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Directors",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each film with its director.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Get Out"
+              },
+              "right": {
+                "text": "Jordan Peele"
+              }
+            },
+            {
+              "left": {
+                "text": "The Piano"
+              },
+              "right": {
+                "text": "Jane Campion"
+              }
+            },
+            {
+              "left": {
+                "text": "Amélie"
+              },
+              "right": {
+                "text": "Jean-Pierre Jeunet"
+              }
+            },
+            {
+              "left": {
+                "text": "The Thing"
+              },
+              "right": {
+                "text": "John Carpenter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

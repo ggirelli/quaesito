@@ -1,0 +1,607 @@
+[
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who created the detective Sherlock Holmes?",
+      "answers": [
+        {
+          "text": "Arthur Conan Doyle",
+          "correct": true
+        },
+        {
+          "text": "Agatha Christie"
+        },
+        {
+          "text": "Wilkie Collins"
+        },
+        {
+          "text": "G. K. Chesterton"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of Agatha Christie's Belgian detective?",
+      "answers": [
+        {
+          "text": "Hercule Poirot",
+          "correct": true
+        },
+        {
+          "text": "Philip Marlowe"
+        },
+        {
+          "text": "Sam Spade"
+        },
+        {
+          "text": "Inspector Morse"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which fictional detective lives at 221B Baker Street?",
+      "answers": [
+        {
+          "text": "Sherlock Holmes",
+          "correct": true
+        },
+        {
+          "text": "Hercule Poirot"
+        },
+        {
+          "text": "Miss Marple"
+        },
+        {
+          "text": "Father Brown"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who wrote The Hound of the Baskervilles?",
+      "answers": [
+        {
+          "text": "Arthur Conan Doyle",
+          "correct": true
+        },
+        {
+          "text": "Edgar Allan Poe"
+        },
+        {
+          "text": "Raymond Chandler"
+        },
+        {
+          "text": "Dashiell Hammett"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the detective in Raymond Chandler's novels?",
+      "answers": [
+        {
+          "text": "Philip Marlowe",
+          "correct": true
+        },
+        {
+          "text": "Sam Spade"
+        },
+        {
+          "text": "Nero Wolfe"
+        },
+        {
+          "text": "Lew Archer"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which author created Miss Marple?",
+      "answers": [
+        {
+          "text": "Agatha Christie",
+          "correct": true
+        },
+        {
+          "text": "Dorothy L. Sayers"
+        },
+        {
+          "text": "Ngaio Marsh"
+        },
+        {
+          "text": "Patricia Highsmith"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who wrote the mystery novel The Moonstone?",
+      "answers": [
+        {
+          "text": "Wilkie Collins",
+          "correct": true
+        },
+        {
+          "text": "Charles Dickens"
+        },
+        {
+          "text": "Anthony Trollope"
+        },
+        {
+          "text": "Thomas Hardy"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In which novel does detective Sam Spade appear?",
+      "answers": [
+        {
+          "text": "The Maltese Falcon",
+          "correct": true
+        },
+        {
+          "text": "The Big Sleep"
+        },
+        {
+          "text": "The Thin Man"
+        },
+        {
+          "text": "The Moving Toyshop"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who created the fictional detective Inspector Maigret?",
+      "answers": [
+        {
+          "text": "Georges Simenon",
+          "correct": true
+        },
+        {
+          "text": "Maurice Leblanc"
+        },
+        {
+          "text": "Gaston Leroux"
+        },
+        {
+          "text": "Fred Vargas"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which author wrote The Name of the Rose?",
+      "answers": [
+        {
+          "text": "Umberto Eco",
+          "correct": true
+        },
+        {
+          "text": "Italo Calvino"
+        },
+        {
+          "text": "Primo Levi"
+        },
+        {
+          "text": "Leonardo Sciascia"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who wrote the detective novel The Daughter of Time?",
+      "answers": [
+        {
+          "text": "Josephine Tey",
+          "correct": true
+        },
+        {
+          "text": "Margery Allingham"
+        },
+        {
+          "text": "Ngaio Marsh"
+        },
+        {
+          "text": "Dorothy L. Sayers"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which writer created the detective Lord Peter Wimsey?",
+      "answers": [
+        {
+          "text": "Dorothy L. Sayers",
+          "correct": true
+        },
+        {
+          "text": "Agatha Christie"
+        },
+        {
+          "text": "Margery Allingham"
+        },
+        {
+          "text": "Josephine Tey"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Agatha Christie wrote Murder on the Orient Express."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "The detective Sam Spade was created by Raymond Chandler."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "The fictional detective Hercule Poirot is English."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Wilkie Collins's The Moonstone is often cited as an early detective novel."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Edgar Allan Poe",
+            "Poe"
+          ]
+        }
+      },
+      "text": "Who wrote the short story 'The Murders in the Rue Morgue'?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 4,
+          "range": {
+            "min": 1,
+            "max": 8
+          }
+        }
+      },
+      "text": "How many novels feature Sherlock Holmes as the central detective in Conan Doyle's canon?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 33,
+          "range": {
+            "min": 8,
+            "max": 43
+          }
+        }
+      },
+      "text": "How many novels did Agatha Christie write featuring Hercule Poirot?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 12,
+          "range": {
+            "min": 5,
+            "max": 20
+          }
+        }
+      },
+      "text": "How many novels feature Miss Marple as the main detective?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 1868,
+          "range": {
+            "min": 1840,
+            "max": 1900
+          }
+        }
+      },
+      "text": "In what year was Wilkie Collins's The Moonstone first published?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "The Moonstone",
+            "The Hound of the Baskervilles",
+            "The Maltese Falcon",
+            "The Name of the Rose"
+          ]
+        }
+      },
+      "text": "Put these mystery novels in order of first publication, earliest first."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "The Murders in the Rue Morgue",
+            "The Moonstone",
+            "The Big Sleep",
+            "The Name of the Rose"
+          ]
+        }
+      },
+      "text": "Put these detective or mystery works in order of first publication, earliest first."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Agatha Christie"
+              },
+              "right": {
+                "text": "Hercule Poirot"
+              }
+            },
+            {
+              "left": {
+                "text": "Arthur Conan Doyle"
+              },
+              "right": {
+                "text": "Sherlock Holmes"
+              }
+            },
+            {
+              "left": {
+                "text": "Dorothy L. Sayers"
+              },
+              "right": {
+                "text": "Lord Peter Wimsey"
+              }
+            },
+            {
+              "left": {
+                "text": "Georges Simenon"
+              },
+              "right": {
+                "text": "Inspector Maigret"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each author to the detective they created."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "The Maltese Falcon"
+              },
+              "right": {
+                "text": "Sam Spade"
+              }
+            },
+            {
+              "left": {
+                "text": "The Big Sleep"
+              },
+              "right": {
+                "text": "Philip Marlowe"
+              }
+            },
+            {
+              "left": {
+                "text": "The Moonstone"
+              },
+              "right": {
+                "text": "Sergeant Cuff"
+              }
+            },
+            {
+              "left": {
+                "text": "The Daughter of Time"
+              },
+              "right": {
+                "text": "Inspector Alan Grant"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each mystery novel to its detective."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Christie detective",
+              "accepted": [
+                "Hercule Poirot",
+                "Poirot",
+                "Miss Marple",
+                "Jane Marple",
+                "Marple"
+              ]
+            },
+            {
+              "label": "Doyle detective",
+              "accepted": [
+                "Sherlock Holmes",
+                "Holmes"
+              ]
+            },
+            {
+              "label": "Sayers detective",
+              "accepted": [
+                "Lord Peter Wimsey",
+                "Peter Wimsey",
+                "Wimsey"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name the famous detective associated with each of these three authors: Christie, Doyle and Sayers."
+    }
+  }
+]

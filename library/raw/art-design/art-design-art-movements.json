@@ -1,0 +1,657 @@
+[
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which art movement is Claude Monet most closely associated with?",
+      "answers": [
+        {
+          "text": "Impressionism",
+          "correct": true
+        },
+        {
+          "text": "Cubism"
+        },
+        {
+          "text": "Surrealism"
+        },
+        {
+          "text": "Futurism"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which movement is known for depicting dreams, the unconscious and unexpected juxtapositions?",
+      "answers": [
+        {
+          "text": "Surrealism",
+          "correct": true
+        },
+        {
+          "text": "Realism"
+        },
+        {
+          "text": "Neoclassicism"
+        },
+        {
+          "text": "Impressionism"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Pablo Picasso and Georges Braque helped pioneer which art movement?",
+      "answers": [
+        {
+          "text": "Cubism",
+          "correct": true
+        },
+        {
+          "text": "Fauvism"
+        },
+        {
+          "text": "Dada"
+        },
+        {
+          "text": "Art Nouveau"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which movement rejected traditional artistic values with absurd performances and anti-art gestures?",
+      "answers": [
+        {
+          "text": "Dada",
+          "correct": true
+        },
+        {
+          "text": "Rococo"
+        },
+        {
+          "text": "Romanticism"
+        },
+        {
+          "text": "Minimalism"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which movement is associated with bold, non-naturalistic colors and Henri Matisse?",
+      "answers": [
+        {
+          "text": "Fauvism",
+          "correct": true
+        },
+        {
+          "text": "Realism"
+        },
+        {
+          "text": "Baroque"
+        },
+        {
+          "text": "Constructivism"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which 19th-century movement emphasized emotion, imagination and the sublime?",
+      "answers": [
+        {
+          "text": "Romanticism",
+          "correct": true
+        },
+        {
+          "text": "Neoclassicism"
+        },
+        {
+          "text": "Impressionism"
+        },
+        {
+          "text": "Pointillism"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which movement sought to depict ordinary life and society without idealization?",
+      "answers": [
+        {
+          "text": "Realism",
+          "correct": true
+        },
+        {
+          "text": "Symbolism"
+        },
+        {
+          "text": "Rococo"
+        },
+        {
+          "text": "Mannerism"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which movement used tiny dots of pure color intended to blend in the viewer's eye?",
+      "answers": [
+        {
+          "text": "Pointillism",
+          "correct": true
+        },
+        {
+          "text": "Expressionism"
+        },
+        {
+          "text": "Futurism"
+        },
+        {
+          "text": "Precisionism"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which movement celebrated speed, machines and modern technology in early 20th-century Italy?",
+      "answers": [
+        {
+          "text": "Futurism",
+          "correct": true
+        },
+        {
+          "text": "De Stijl"
+        },
+        {
+          "text": "Arts and Crafts"
+        },
+        {
+          "text": "Symbolism"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which movement sought spiritual harmony through grids, straight lines and primary colors?",
+      "answers": [
+        {
+          "text": "De Stijl",
+          "correct": true
+        },
+        {
+          "text": "Dada"
+        },
+        {
+          "text": "Fauvism"
+        },
+        {
+          "text": "Art Nouveau"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which movement's name came from a 1915 manifesto by Kazimir Malevich?",
+      "answers": [
+        {
+          "text": "Suprematism",
+          "correct": true
+        },
+        {
+          "text": "Constructivism"
+        },
+        {
+          "text": "Vorticism"
+        },
+        {
+          "text": "Precisionism"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which movement is associated with André Breton's 1924 manifesto?",
+      "answers": [
+        {
+          "text": "Surrealism",
+          "correct": true
+        },
+        {
+          "text": "Dada"
+        },
+        {
+          "text": "Futurism"
+        },
+        {
+          "text": "Expressionism"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Impressionism took its name from Monet's painting Impression, Sunrise."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "Cubism aimed to reproduce subjects using only realistic perspective and shading."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Expressionism often distorts forms or colors to convey emotional experience."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "The Arts and Crafts movement embraced mass production as its central ideal."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Russian Constructivism promoted art and design in service of social and industrial life."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Impressionism"
+          ]
+        }
+      },
+      "text": "What movement was named after Monet's painting Impression, Sunrise?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Dada",
+            "Dadaism"
+          ]
+        }
+      },
+      "text": "What anti-art movement emerged in Zurich during the First World War?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "De Stijl"
+          ]
+        }
+      },
+      "text": "What Dutch movement, associated with Piet Mondrian, means 'The Style'?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Suprematism"
+          ]
+        }
+      },
+      "text": "What abstract movement did Kazimir Malevich launch with works such as Black Square?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 1874,
+          "range": {
+            "min": 1850,
+            "max": 1895
+          }
+        }
+      },
+      "text": "In what year did the first Impressionist exhibition open in Paris?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 1907,
+          "range": {
+            "min": 1895,
+            "max": 1920
+          }
+        }
+      },
+      "text": "In what year did Picasso paint Les Demoiselles d'Avignon, a landmark in the development of Cubism?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 1916,
+          "range": {
+            "min": 1905,
+            "max": 1930
+          }
+        }
+      },
+      "text": "In what year is the founding of Dada in Zurich commonly dated?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 1917,
+          "range": {
+            "min": 1905,
+            "max": 1930
+          }
+        }
+      },
+      "text": "In what year was the Dutch art journal De Stijl first published?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Neoclassicism",
+            "Romanticism",
+            "Realism",
+            "Impressionism"
+          ]
+        }
+      },
+      "text": "Put these movements in chronological order of emergence, earliest first."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Impressionism",
+            "Fauvism",
+            "Cubism",
+            "Surrealism"
+          ]
+        }
+      },
+      "text": "Put these movements in chronological order of emergence, earliest first."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Movement",
+              "accepted": [
+                "De Stijl"
+              ]
+            },
+            {
+              "label": "Artist",
+              "accepted": [
+                "Piet Mondrian",
+                "Mondrian"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name the movement and its painter associated with grids of black lines and primary colors."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Claude Monet"
+              },
+              "right": {
+                "text": "Impressionism"
+              }
+            },
+            {
+              "left": {
+                "text": "Pablo Picasso"
+              },
+              "right": {
+                "text": "Cubism"
+              }
+            },
+            {
+              "left": {
+                "text": "Salvador Dalí"
+              },
+              "right": {
+                "text": "Surrealism"
+              }
+            },
+            {
+              "left": {
+                "text": "Henri Matisse"
+              },
+              "right": {
+                "text": "Fauvism"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each artist to the movement they are strongly associated with."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Art movements",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Kazimir Malevich"
+              },
+              "right": {
+                "text": "Suprematism"
+              }
+            },
+            {
+              "left": {
+                "text": "Theo van Doesburg"
+              },
+              "right": {
+                "text": "De Stijl"
+              }
+            },
+            {
+              "left": {
+                "text": "Filippo Tommaso Marinetti"
+              },
+              "right": {
+                "text": "Futurism"
+              }
+            },
+            {
+              "left": {
+                "text": "André Breton"
+              },
+              "right": {
+                "text": "Surrealism"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each figure to the movement they helped define or promote."
+    }
+  }
+]

@@ -1,0 +1,490 @@
+[
+  {
+    "file": "history-ancient-world.json",
+    "entry": 8,
+    "question": "Which ancient people developed the earliest known alphabetic writing system in the eastern Mediterranean?",
+    "problem": "misleading",
+    "explanation": "The earliest known alphabetic scripts are Proto-Sinaitic/Proto-Canaanite (c. 1850-1500 BC), and Ugarit also had a cuneiform alphabet. The Phoenician alphabet came later, although it was the influential ancestor of Greek and Latin.",
+    "fix": "Reword to 'Which ancient seafaring people's alphabet became the ancestor of the Greek alphabet?' and keep Phoenicians as the answer."
+  },
+  {
+    "file": "history-ancient-world.json",
+    "entry": 22,
+    "question": "How many hills are traditionally said to make up the city of Rome?",
+    "problem": "wrong",
+    "explanation": "The answer is stored as 482 with a range of 300-650. Rome is traditionally the city of seven hills.",
+    "fix": "Set answer to 7 and range to min 1, max 15."
+  },
+  {
+    "file": "history-ancient-world.json",
+    "entry": 23,
+    "question": "How many years separated successive ancient Olympic Games?",
+    "problem": "duplicate",
+    "explanation": "This asks the same fact as entry 13 (True/False: 'The ancient Olympic Games were held every two years.'). Once one is revealed, the other is given away.",
+    "fix": "Drop one of them, or replace entry 23 with a different Olympics fact, such as a Text question on the sanctuary where the Games were held (accept Olympia)."
+  },
+  {
+    "file": "history-ancient-world.json",
+    "entry": 25,
+    "question": "How many books make up the surviving epic poem cycle of the Iliad? Give the number of books.",
+    "problem": "wrong",
+    "explanation": "This gives 14 as the answer, but the Iliad has 24 books. It also asks the same fact as entry 24, which correctly answers 24.",
+    "fix": "drop"
+  },
+  {
+    "file": "history-ancient-world.json",
+    "entry": 28,
+    "question": "Name three major ancient Greek city-states: type one for each part.",
+    "problem": "ambiguous",
+    "explanation": "Each part is graded on its own and accepts exactly one city: part 1 only Athens, part 2 only Sparta, part 3 only Corinth. A team that types Sparta first, or names Thebes or Argos, is marked wrong even though the answer is correct.",
+    "fix": "Put the same full list (Athens, Sparta, Corinth, Thebes, Argos, Syracuse, Miletus, Megara) in every part's accepted list. Note: the engine grades each part against its own accepted list and does not check for repeats, so if every part accepts the full list a team can type the same answer in every part and score full marks; a host override cannot fix this cleanly because judgements are keyed per part. If that is not acceptable, change it to a fixed-answer question (e.g. separate Text questions per city)."
+  },
+  {
+    "file": "history-cold-war.json",
+    "entry": 17,
+    "question": "The Sino-Soviet split began because China and the Soviet Union remained close allies after Stalin's death.",
+    "problem": "quality",
+    "explanation": "The statement contradicts itself: a split cannot be caused by remaining close allies. False is technically right, but the item has no real content.",
+    "fix": "Replace with 'The Sino-Soviet split worsened after Khrushchev denounced Stalin in 1956.' (True), or drop it."
+  },
+  {
+    "file": "history-cold-war.json",
+    "entry": 18,
+    "question": "What was the name of the US policy announced in 1947 to aid countries resisting communist pressure?",
+    "problem": "duplicate",
+    "explanation": "Entry 3 asks which president announced containment in his 1947 speech to Congress, which is the same Truman Doctrine event. Entry 3 nearly gives away the answer 'Truman Doctrine', which also appears as a distractor in entry 7.",
+    "fix": "Keep one of entries 3 and 18. Alternatively, reword entry 18 to ask which two countries the 1947 aid targeted (Greece and Turkey)."
+  },
+  {
+    "file": "history-cold-war.json",
+    "entry": 19,
+    "question": "What was the name of the 1957 Soviet satellite that began the space age?",
+    "problem": "duplicate",
+    "explanation": "Entry 8 names Sputnik 1 in its question, and this entry's '1957' gives away entry 23 (launch year). Inventions entry 19 asks the identical question ('first artificial satellite, launched in 1957').",
+    "fix": "Drop this entry (cold-war 19), or drop the identical inventions-through-time entry 19 and remove 'Sputnik 1' from cold-war entry 8's text."
+  },
+  {
+    "file": "history-cold-war.json",
+    "entry": 22,
+    "question": "In what year did the Berlin Wall begin to be built?",
+    "problem": "duplicate",
+    "explanation": "Entry 2 states 'divided by a wall from 1961 until 1989', which gives this answer (1961) away.",
+    "fix": "Drop entry 22, or reword entry 2 to remove the dates ('Which city was divided by a wall during the Cold War?')."
+  },
+  {
+    "file": "history-cold-war.json",
+    "entry": 24,
+    "question": "In what year did the Cuban Missile Crisis take place?",
+    "problem": "duplicate",
+    "explanation": "Entry 6 asks 'Which 1962 crisis...' and entry 21 asks for 'the Soviet deployment of nuclear missiles to Cuba in 1962', and both give this answer away. Entry 26 (the Order question) also uses the crisis.",
+    "fix": "Drop entry 24, or remove the year from both entry 6 ('Which crisis brought the US and USSR close to nuclear war over missiles in Cuba?') and entry 21 ('What was the codename for the Soviet deployment of nuclear missiles to Cuba?')."
+  },
+  {
+    "file": "history-cold-war.json",
+    "entry": 28,
+    "question": "Name the two superpowers that dominated the Cold War.",
+    "problem": "ambiguous",
+    "explanation": "Parts are graded slot by slot. A team that types 'USSR' first and 'USA' second is marked wrong on both parts.",
+    "fix": "Relabel the parts 'Western superpower' and 'Communist superpower' and keep the current accepted lists. Accepting both lists in both parts also works but lets a team type 'USA' twice for full marks."
+  },
+  {
+    "file": "history-empires-dynasties.json",
+    "entry": 8,
+    "question": "Which empire made Constantinople its capital after 330 CE?",
+    "problem": "ambiguous",
+    "explanation": "'After 330 CE' also covers 1453, when the Ottoman Empire (one of the options) made Constantinople its capital.",
+    "fix": "Reword to 'Which empire made Constantinople its capital in 330 CE?' or 'under Constantine the Great'."
+  },
+  {
+    "file": "history-empires-dynasties.json",
+    "entry": 9,
+    "question": "Which West African empire was famed for Mansa Musa's pilgrimage to Mecca?",
+    "problem": "duplicate",
+    "explanation": "This asks the same fact as Middle Ages entry 5 ('Which West African empire was ruled by Mansa Musa in the 14th century?'), and both have nearly the same options.",
+    "fix": "Drop one. For example, replace this one with a Number question on the year of Mansa Musa's hajj (1324), or drop it."
+  },
+  {
+    "file": "history-empires-dynasties.json",
+    "entry": 10,
+    "question": "Which Japanese shogunate began in 1603 under Tokugawa Ieyasu?",
+    "problem": "misleading",
+    "explanation": "The question names Tokugawa Ieyasu, which gives away the answer 'Tokugawa shogunate'.",
+    "fix": "Reword to 'Which Japanese shogunate began in 1603 and ruled from Edo until 1868?' or ask 'Who founded the shogunate established in 1603?' (Tokugawa Ieyasu)."
+  },
+  {
+    "file": "history-empires-dynasties.json",
+    "entry": 23,
+    "question": "In what year did the Ottoman conquest of Constantinople take place?",
+    "problem": "duplicate",
+    "explanation": "Entry 13 (True/False: 'The Ottoman Empire captured Constantinople in 1453.') gives this answer away. Middle Ages entry 25 asks the identical question.",
+    "fix": "Drop this entry (empires-dynasties 23; Middle Ages entry 25 covers it), and change entry 13 to a different fact or drop it."
+  },
+  {
+    "file": "history-empires-dynasties.json",
+    "entry": 24,
+    "question": "For about how many years did the Han dynasty rule China, from 206 BCE to 220 CE?",
+    "problem": "wrong",
+    "explanation": "There is no year 0, so 206 BCE to 220 CE is 425 years, not 426.",
+    "fix": "Set answer to 425."
+  },
+  {
+    "file": "history-empires-dynasties.json",
+    "entry": 28,
+    "question": "Name the two rival powers that fought the Punic Wars.",
+    "problem": "ambiguous",
+    "explanation": "Parts are graded slot by slot. 'Carthage' typed in the first part is marked wrong.",
+    "fix": "Relabel the parts 'Italian power' and 'North African power' and keep the current accepted lists. Accepting both sets in both parts also works but lets a team type 'Rome' twice for full marks."
+  },
+  {
+    "file": "history-inventions-through-time.json",
+    "entry": 2,
+    "question": "Which ancient material, made from plant stems, was used for writing in Egypt?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as ancient-world entry 4 ('main writing material used by ancient Egyptians'), with near-identical options.",
+    "fix": "Drop one of the two."
+  },
+  {
+    "file": "history-inventions-through-time.json",
+    "entry": 6,
+    "question": "Which Chinese invention used to transmit messages was first developed for military signalling?",
+    "problem": "wrong",
+    "explanation": "Gunpowder was not invented to transmit messages. Chinese alchemists discovered it, in the traditional account while seeking an elixir of immortality, around the 9th century. The question's premise is false.",
+    "fix": "Reword to 'Which Chinese invention was discovered by alchemists seeking an elixir of immortality?' and keep the answer Gunpowder."
+  },
+  {
+    "file": "history-inventions-through-time.json",
+    "entry": 9,
+    "question": "Which invention is associated with Johannes Gutenberg's 15th-century printing revolution?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as entry 1 (Gutenberg / movable-type printing press). Renaissance entries 2 and 15 also repeat it.",
+    "fix": "drop"
+  },
+  {
+    "file": "history-inventions-through-time.json",
+    "entry": 17,
+    "question": "The first public demonstration of the telegraph used Morse code.",
+    "problem": "ambiguous",
+    "explanation": "Earlier electric telegraphs did not use Morse code: Schilling (1832), Gauss-Weber (1833) and the Cooke-Wheatstone needle telegraph (1837). Morse's own early demonstrations used a numbered-codebook system, not the later Morse alphabet. 'True' is therefore defensibly wrong.",
+    "fix": "Replace with 'Samuel Morse's 1844 message \"What hath God wrought\" was sent from Washington to Baltimore.' (True)."
+  },
+  {
+    "file": "history-inventions-through-time.json",
+    "entry": 18,
+    "question": "What invention by Samuel Morse sent messages using dots and dashes?",
+    "problem": "misleading",
+    "explanation": "The question contains 'Morse', so 'Morse code' is given away. It is also unclear whether the answer is the code or the telegraph. The telegraph is already covered by entry 8 (Electric telegraph) and entry 29 (Morse to Electric telegraph).",
+    "fix": "Drop it, or ask a new fact: 'Which associate of Samuel Morse helped develop the dot-and-dash code and the telegraph apparatus?' (accept Alfred Vail, Vail)."
+  },
+  {
+    "file": "history-inventions-through-time.json",
+    "entry": 20,
+    "question": "What 18th-century device, invented by John Harrison, solved the practical longitude problem at sea?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as entry 4 ('Which invention allowed ships to determine longitude...' with answer Marine chronometer).",
+    "fix": "Change entry 4 to a different fact, or change this one to 'Who invented the marine chronometer that solved the longitude problem?' (accept John Harrison, Harrison)."
+  },
+  {
+    "file": "history-inventions-through-time.json",
+    "entry": 22,
+    "question": "In what year did the Wright brothers make their first powered flight?",
+    "problem": "duplicate",
+    "explanation": "Entry 14 (True/False: 'The first successful powered flight by the Wright brothers took place in 1903.') gives this answer away.",
+    "fix": "Drop entry 14, or change it to another fact, such as 'The Wright brothers' first powered flight took place near Kitty Hawk, North Carolina.' (True)."
+  },
+  {
+    "file": "history-inventions-through-time.json",
+    "entry": 28,
+    "question": "Name the two inventors credited with developing the first practical telephone.",
+    "problem": "ambiguous",
+    "explanation": "Thomas Watson was Bell's assistant and is not usually credited as the telephone's co-inventor. Many players will name Elisha Gray or Antonio Meucci, the famous rival claimants. Parts are also graded slot by slot.",
+    "fix": "Reword to 'Who was Bell's assistant, the recipient of the first telephone call in 1876?' as a Text question accepting Thomas Watson, Thomas A. Watson and Watson, or drop it. Entries 3 and 24 already cover Bell."
+  },
+  {
+    "file": "history-middle-ages.json",
+    "entry": 12,
+    "question": "Which ruler was crowned the first Holy Roman Emperor in 800?",
+    "problem": "ambiguous",
+    "explanation": "Many historians date the Holy Roman Empire to Otto I's coronation in 962, and Otto I is one of the options. Charlemagne was crowned 'Emperor of the Romans' in 800.",
+    "fix": "Reword to 'Which Frankish king was crowned Emperor of the Romans by Pope Leo III on Christmas Day 800?' and replace the Otto I distractor with Louis the Pious or Pepin the Short."
+  },
+  {
+    "file": "history-middle-ages.json",
+    "entry": 13,
+    "question": "The Magna Carta was sealed in 1215.",
+    "problem": "duplicate",
+    "explanation": "Entry 4 already says 'forced to agree to Magna Carta in 1215', so this True/False item gives nothing new.",
+    "fix": "Drop it, or change it to 'Magna Carta was sealed at Runnymede.' (True)."
+  },
+  {
+    "file": "history-middle-ages.json",
+    "entry": 16,
+    "question": "The Vikings were the first people to settle permanently in Iceland after 1500.",
+    "problem": "quality",
+    "explanation": "The statement makes no sense. Norse settlement of Iceland began around 874, so 'after 1500' turns it into a nonsense trick rather than a test of knowledge.",
+    "fix": "Replace with 'Norse settlers began the permanent settlement of Iceland in the 9th century.' (True)."
+  },
+  {
+    "file": "history-middle-ages.json",
+    "entry": 20,
+    "question": "What title is best known for the Mongol leader born Temüjin?",
+    "problem": "misleading",
+    "explanation": "The accepted list includes 'Temujin' and 'Temüjin', which are copied from the question itself, so a team can score by retyping the question. The question is also ungrammatical.",
+    "fix": "Remove 'Temujin' and 'Temüjin' from the accepted list, leaving Genghis Khan and Chinggis Khan (and optionally add 'Jenghiz Khan'). Reword to 'By what title is the Mongol leader born Temüjin best known?'."
+  },
+  {
+    "file": "history-middle-ages.json",
+    "entry": 24,
+    "question": "In what year was Charlemagne crowned emperor in Rome? Give the year.",
+    "problem": "duplicate",
+    "explanation": "Entry 12 states 'crowned ... in 800', which gives this answer away.",
+    "fix": "Remove 'in 800' from entry 12's text, or drop entry 24."
+  },
+  {
+    "file": "history-middle-ages.json",
+    "entry": 25,
+    "question": "In what year did Constantinople fall to the Ottoman Empire? Give the year.",
+    "problem": "duplicate",
+    "explanation": "This is identical to empires-dynasties entry 23, and empires-dynasties entry 13 also states 1453.",
+    "fix": "Keep one of the two Number questions and drop the other."
+  },
+  {
+    "file": "history-middle-ages.json",
+    "entry": 28,
+    "question": "Name three Crusader states established in the Levant after the First Crusade.",
+    "problem": "ambiguous",
+    "explanation": "There were four Crusader states. The County of Edessa is missing and would be marked wrong. Each part also accepts only one specific state, so a correct answer in a different slot fails.",
+    "fix": "Add 'County of Edessa' and 'Edessa', and accept all four states (with short forms) in every part. Note: the engine grades each part against its own accepted list and does not check for repeats, so if every part accepts the full list a team can type the same answer in every part and score full marks; a host override cannot fix this cleanly because judgements are keyed per part."
+  },
+  {
+    "file": "history-renaissance-exploration.json",
+    "entry": 2,
+    "question": "Which invention helped books spread more widely in 15th-century Europe?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as inventions-through-time entry 1 (Gutenberg / movable-type printing press), with the same answer text.",
+    "fix": "Drop one of the two."
+  },
+  {
+    "file": "history-renaissance-exploration.json",
+    "entry": 4,
+    "question": "Which Renaissance artist sculpted the statue of David now in Florence?",
+    "problem": "ambiguous",
+    "explanation": "Donatello's bronze David, one of the options, is also in Florence (Bargello), and so is Verrocchio's David.",
+    "fix": "Reword to 'Which Renaissance artist carved the colossal marble David now in Florence's Galleria dell'Accademia?'"
+  },
+  {
+    "file": "history-renaissance-exploration.json",
+    "entry": 15,
+    "question": "The printing press associated with Johannes Gutenberg used movable metal type.",
+    "problem": "duplicate",
+    "explanation": "This repeats entry 2 of this file and inventions-through-time entries 1 and 9. Gutenberg and movable type is asked four times in History.",
+    "fix": "drop"
+  },
+  {
+    "file": "history-renaissance-exploration.json",
+    "entry": 17,
+    "question": "The 1494 Treaty of Tordesillas was negotiated between Portugal and Spain.",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as entry 9 (the 1494 treaty dividing lands between Spain and Portugal). The two give each other away.",
+    "fix": "drop"
+  },
+  {
+    "file": "history-renaissance-exploration.json",
+    "entry": 22,
+    "question": "In what year did Columbus's first voyage reach the Caribbean? Give the year.",
+    "problem": "duplicate",
+    "explanation": "Entry 3 asks 'Which explorer reached the Caribbean in 1492...', which gives the answer away.",
+    "fix": "Remove '1492' from entry 3's text, or drop entry 22."
+  },
+  {
+    "file": "history-renaissance-exploration.json",
+    "entry": 25,
+    "question": "In what year was Copernicus's major work on the heliocentric model published? Give the year.",
+    "problem": "duplicate",
+    "explanation": "Entry 10 states 'published De revolutionibus orbium coelestium in 1543', which gives this answer away.",
+    "fix": "Remove 'in 1543' from entry 10's text, or drop entry 25."
+  },
+  {
+    "file": "history-renaissance-exploration.json",
+    "entry": 28,
+    "question": "Name three artists commonly grouped among the High Renaissance masters.",
+    "problem": "ambiguous",
+    "explanation": "Parts are graded slot by slot. Raphael typed in part 1 is marked wrong, and other defensible High Renaissance masters (Titian, Bramante, Giorgione) are rejected.",
+    "fix": "Reword to 'Name the three artists of the High Renaissance trinity, in any order' and accept Leonardo, Michelangelo and Raphael (all spellings) in every part. Note: the engine grades each part against its own accepted list and does not check for repeats, so if every part accepts the full list a team can type the same answer in every part and score full marks; a host override cannot fix this cleanly because judgements are keyed per part."
+  },
+  {
+    "file": "history-revolutions.json",
+    "entry": 5,
+    "question": "Which leader became the dominant figure of the Mexican Revolution and was known as Pancho Villa?",
+    "problem": "quality",
+    "explanation": "This is a hidden 'birth name' question, and 'the dominant figure' is debatable: Madero, Carranza, Obregón and Zapata are all contenders. Players will look for 'Pancho Villa' and find only Doroteo Arango.",
+    "fix": "Reword to 'What was the birth name of the Mexican revolutionary known as Pancho Villa?' and replace the distractors with invented but plausible names that do not belong to other revolutionaries (e.g. José Doroteo Ramírez, Francisco Ruiz Torres, José Arango Villa)."
+  },
+  {
+    "file": "history-revolutions.json",
+    "entry": 6,
+    "question": "Which 1848 revolution helped lead to the end of the July Monarchy in France?",
+    "problem": "misleading",
+    "explanation": "'Which 1848 revolution ... in France' gives away the answer 'French Revolution of 1848'.",
+    "fix": "Reword to 'Which French regime, headed by Louis-Philippe, was overthrown in 1848?' with answer July Monarchy and distractors Second Empire, Bourbon Restoration and Directory."
+  },
+  {
+    "file": "history-revolutions.json",
+    "entry": 11,
+    "question": "Which Russian revolutionary slogan called for peace, land and bread in 1917?",
+    "problem": "misleading",
+    "explanation": "The question contains the answer 'Peace, Land, and Bread'.",
+    "fix": "Reword to 'Which party used the 1917 slogan \"Peace, Land and Bread\"?' (Bolsheviks, with Mensheviks, Socialist Revolutionaries and Kadets as distractors)."
+  },
+  {
+    "file": "history-revolutions.json",
+    "entry": 19,
+    "question": "Which French revolutionary figure became a leading member of the Committee of Public Safety?",
+    "problem": "ambiguous",
+    "explanation": "Several people fit: Danton (in the first Committee), Saint-Just, Carnot and Couthon were all leading members.",
+    "fix": "Reword to 'Which Jacobin leader, nicknamed \"the Incorruptible\", dominated the Committee of Public Safety during the Terror?'"
+  },
+  {
+    "file": "history-revolutions.json",
+    "entry": 22,
+    "question": "In what year was the US Declaration of Independence adopted? Give the year.",
+    "problem": "duplicate",
+    "explanation": "Entry 2 asks 'Which document declared the American colonies independent ... in 1776?', which gives this answer away. Entry 9 (Common Sense 'in 1776') also hints at it.",
+    "fix": "Remove 'in 1776' from entry 2's text, or drop entry 22."
+  },
+  {
+    "file": "history-revolutions.json",
+    "entry": 23,
+    "question": "What year saw the Russian revolutions topple the tsar and bring the Bolsheviks to power?",
+    "problem": "wrong",
+    "explanation": "This gives 1789 as the answer; the Russian revolutions were in 1917. Entry 24 is the identical question with the correct answer.",
+    "fix": "drop"
+  },
+  {
+    "file": "history-revolutions.json",
+    "entry": 25,
+    "question": "In what year did Haiti declare independence from France? Give the year.",
+    "problem": "duplicate",
+    "explanation": "Entry 10 asks 'Which Haitian revolutionary leader declared Haiti independent in 1804?', which gives this answer away.",
+    "fix": "Remove 'in 1804' from entry 10's text, or drop entry 25."
+  },
+  {
+    "file": "history-revolutions.json",
+    "entry": 28,
+    "question": "Give the three words in the French revolutionary motto, Liberté, Égalité, Fraternité, in any order.",
+    "problem": "misleading",
+    "explanation": "The question text spells out the full answer. It also says 'in any order', but each part accepts only one word, so a different order is marked wrong.",
+    "fix": "Reword to 'Give the three words of the French revolutionary motto, in order.' and label the parts 'First word', 'Second word', 'Third word', keeping the current accepted lists. The motto has a fixed order, so this avoids the repeat loophole that accepting all words in every part would open."
+  },
+  {
+    "file": "history-world-war-i.json",
+    "entry": 16,
+    "question": "The Ottoman Empire fought on the Allied side throughout World War I.",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as entry 8 ('Which empire fought alongside Germany and Austria-Hungary...' with answer Ottoman Empire). Each gives the other away.",
+    "fix": "Drop it, or change it to another fact, e.g. 'The Ottoman Empire entered the war in late 1914.' (True)."
+  },
+  {
+    "file": "history-world-war-i.json",
+    "entry": 20,
+    "question": "By what nickname is British officer T. E. Lawrence widely known?",
+    "problem": "misleading",
+    "explanation": "'T. E. Lawrence' and 'TE Lawrence' are accepted, but they are the name given in the question, not the nickname.",
+    "fix": "Keep only 'Lawrence of Arabia' in the accepted list."
+  },
+  {
+    "file": "history-world-war-i.json",
+    "entry": 21,
+    "question": "Which German fighter pilot was nicknamed the Red Baron?",
+    "problem": "misleading",
+    "explanation": "'Red Baron' is in the accepted list, but it is copied from the question.",
+    "fix": "Remove 'Red Baron' from accepted. Optionally add 'von Richthofen'."
+  },
+  {
+    "file": "history-world-war-i.json",
+    "entry": 23,
+    "question": "In what year were the battles of Verdun and the Somme fought? Give the year.",
+    "problem": "duplicate",
+    "explanation": "Entry 5 ('Which battle in 1916 ...' with answer Verdun) and entry 9 ('the Somme's opening in 1916') both give 1916 away.",
+    "fix": "Remove the year from entries 5 and 9, or drop entry 23."
+  },
+  {
+    "file": "history-world-war-i.json",
+    "entry": 24,
+    "question": "How many years elapsed between the US entry into World War I and the 1918 armistice?",
+    "problem": "wrong",
+    "explanation": "The US entered the war on 6 April 1917 and the armistice was on 11 November 1918, about 1.6 years, not 4.",
+    "fix": "Ask in months instead ('About how many months ...?'): answer 19, range min 6, max 40."
+  },
+  {
+    "file": "history-world-war-i.json",
+    "entry": 25,
+    "question": "About how many months after the armistice was the Treaty of Versailles signed?",
+    "problem": "wrong",
+    "explanation": "The armistice was on 11 November 1918 and the treaty was signed on 28 June 1919, about 7.5 months, not 10.",
+    "fix": "Set answer to 8 (7 months 17 days rounds to 8) and keep the existing range 5-20."
+  },
+  {
+    "file": "history-world-war-i.json",
+    "entry": 27,
+    "question": "Put these events in chronological order, earliest first.",
+    "problem": "wrong",
+    "explanation": "The Lusitania was sunk on 7 May 1915, before Italy entered the war on 23 May 1915, but the listed order puts Italy first.",
+    "fix": "Set items to: Lusitania is sunk, Italy enters the war, United States enters the war, Armistice on the Western Front."
+  },
+  {
+    "file": "history-world-war-i.json",
+    "entry": 28,
+    "question": "Name three major Central Powers in World War I.",
+    "problem": "ambiguous",
+    "explanation": "There were four Central Powers, and Bulgaria is not accepted. Each part also accepts only one country, so correct answers in a different slot are marked wrong.",
+    "fix": "Add Bulgaria, and accept Germany, Austria-Hungary (also 'Austria'), the Ottoman Empire/Turkey and Bulgaria in every part. Note: the engine grades each part against its own accepted list and does not check for repeats, so if every part accepts the full list a team can type the same answer in every part and score full marks; a host override cannot fix this cleanly because judgements are keyed per part."
+  },
+  {
+    "file": "history-world-war-ii.json",
+    "entry": 11,
+    "question": "Which German field marshal surrendered the Afrika Korps in Tunisia in May 1943?",
+    "problem": "wrong",
+    "explanation": "Hans-Jürgen von Arnim was a Generaloberst (colonel general), never a field marshal. In May 1943 he surrendered Army Group Africa; the Afrika Korps itself was under Hans Cramer.",
+    "fix": "Reword to 'Which German general surrendered Army Group Africa in Tunisia in May 1943?' and keep von Arnim as the answer."
+  },
+  {
+    "file": "history-world-war-ii.json",
+    "entry": 12,
+    "question": "What was the name of the Allied deception plan that misled Germany about the Normandy landing site?",
+    "problem": "ambiguous",
+    "explanation": "Operation Bodyguard, one of the options, was the overall Allied deception plan for the Normandy invasion. Fortitude was the part of it that concerned the landing site. Both answers are defensible.",
+    "fix": "Replace the Bodyguard distractor with Operation Cockade or Operation Husky, or reword to 'Which part of the deception, featuring a phantom army under Patton, ...'."
+  },
+  {
+    "file": "history-world-war-ii.json",
+    "entry": 22,
+    "question": "In what year did World War II begin in Europe? Give the year.",
+    "problem": "duplicate",
+    "explanation": "Entry 1 says 'invade on 1 September 1939, starting the war in Europe', and entry 24 says 'invasion of Poland in 1939'. Both give this answer away.",
+    "fix": "Remove the dates from entries 1 and 24, or drop entry 22."
+  },
+  {
+    "file": "history-world-war-ii.json",
+    "entry": 23,
+    "question": "In what year did the D-Day landings take place? Give the year.",
+    "problem": "duplicate",
+    "explanation": "Entry 3 says 'the Allied invasion of Normandy in June 1944', which gives this answer away.",
+    "fix": "Remove 'in June 1944' from entry 3, or drop entry 23."
+  },
+  {
+    "file": "history-world-war-ii.json",
+    "entry": 25,
+    "question": "Approximately how many days did the Siege of Leningrad last? Give the number of days.",
+    "problem": "duplicate",
+    "explanation": "Entry 10 says 'a siege lasting about 872 days', which gives this answer away.",
+    "fix": "Remove 'lasting about 872 days' from entry 10 (e.g. 'Which Soviet city endured a siege from 1941 to 1944?'), or drop entry 25."
+  },
+  {
+    "file": "history-world-war-ii.json",
+    "entry": 28,
+    "question": "Name the three principal Axis powers in World War II.",
+    "problem": "ambiguous",
+    "explanation": "Each part accepts only one country (part 1 Germany, part 2 Italy, part 3 Japan), so a correct answer in a different order is marked wrong.",
+    "fix": "Accept Germany, Italy and Japan in every part. Note: the engine grades each part against its own accepted list and does not check for repeats, so if every part accepts the full list a team can type the same answer in every part and score full marks; a host override cannot fix this cleanly because judgements are keyed per part. Alternatively, relabel the parts 'Axis power led by Hitler', 'Axis power led by Mussolini', 'Axis power in Asia'."
+  }
+]

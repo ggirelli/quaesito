@@ -1,0 +1,596 @@
+[
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who formulated the three laws of motion?",
+      "answers": [
+        {
+          "text": "Isaac Newton",
+          "correct": true
+        },
+        {
+          "text": "Albert Einstein"
+        },
+        {
+          "text": "Galileo Galilei"
+        },
+        {
+          "text": "Johannes Kepler"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Marie Curie was the first woman to win a Nobel Prize.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which scientist is most closely associated with the theory of natural selection?",
+      "answers": [
+        {
+          "text": "Charles Darwin",
+          "correct": true
+        },
+        {
+          "text": "Gregor Mendel"
+        },
+        {
+          "text": "Louis Pasteur"
+        },
+        {
+          "text": "Alfred Wegener"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What surname belongs to the physicist who formulated general relativity?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Einstein",
+            "Albert Einstein"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who developed the first widely used smallpox vaccine?",
+      "answers": [
+        {
+          "text": "Edward Jenner",
+          "correct": true
+        },
+        {
+          "text": "Robert Koch"
+        },
+        {
+          "text": "Alexander Fleming"
+        },
+        {
+          "text": "Joseph Lister"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did Isaac Newton publish Principia Mathematica?",
+      "kind": {
+        "Number": {
+          "answer": 1687,
+          "range": {
+            "min": 1676,
+            "max": 1711
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Galileo invented the telescope.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which scientist discovered radioactivity in uranium salts in 1896?",
+      "answers": [
+        {
+          "text": "Henri Becquerel",
+          "correct": true
+        },
+        {
+          "text": "Ernest Rutherford"
+        },
+        {
+          "text": "Niels Bohr"
+        },
+        {
+          "text": "Max Planck"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each scientist to the field most associated with their work.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Louis Pasteur"
+              },
+              "right": {
+                "text": "Microbiology"
+              }
+            },
+            {
+              "left": {
+                "text": "Emmy Noether"
+              },
+              "right": {
+                "text": "Abstract algebra"
+              }
+            },
+            {
+              "left": {
+                "text": "Subrahmanyan Chandrasekhar"
+              },
+              "right": {
+                "text": "Stellar structure"
+              }
+            },
+            {
+              "left": {
+                "text": "Jane Goodall"
+              },
+              "right": {
+                "text": "Primatology"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who proposed the heliocentric model in a landmark 1543 book?",
+      "answers": [
+        {
+          "text": "Nicolaus Copernicus",
+          "correct": true
+        },
+        {
+          "text": "Tycho Brahe"
+        },
+        {
+          "text": "Ptolemy"
+        },
+        {
+          "text": "Johannes Kepler"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What surname belongs to the scientist who discovered penicillin?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Fleming",
+            "Alexander Fleming"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which chemist created the periodic table's influential early arrangement?",
+      "answers": [
+        {
+          "text": "Dmitri Mendeleev",
+          "correct": true
+        },
+        {
+          "text": "Antoine Lavoisier"
+        },
+        {
+          "text": "John Dalton"
+        },
+        {
+          "text": "Amedeo Avogadro"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Katherine Johnson calculated trajectories for NASA's early crewed spaceflights.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year was Charles Darwin born?",
+      "kind": {
+        "Number": {
+          "answer": 1809,
+          "range": {
+            "min": 1790,
+            "max": 1830
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who is famous for the uncertainty principle in quantum mechanics?",
+      "answers": [
+        {
+          "text": "Werner Heisenberg",
+          "correct": true
+        },
+        {
+          "text": "Erwin Schrödinger"
+        },
+        {
+          "text": "Paul Dirac"
+        },
+        {
+          "text": "Wolfgang Pauli"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these scientists in order of birth, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Isaac Newton",
+            "Benjamin Franklin",
+            "Charles Darwin",
+            "Marie Curie"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which scientist's experiments with pea plants helped establish genetics?",
+      "answers": [
+        {
+          "text": "Gregor Mendel",
+          "correct": true
+        },
+        {
+          "text": "Thomas Hunt Morgan"
+        },
+        {
+          "text": "Rosalind Franklin"
+        },
+        {
+          "text": "Barbara McClintock"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Charles Darwin published On the Origin of Species in 1859.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who first described the circulation of blood through the body in a modern scientific account?",
+      "answers": [
+        {
+          "text": "William Harvey",
+          "correct": true
+        },
+        {
+          "text": "Andreas Vesalius"
+        },
+        {
+          "text": "Galen"
+        },
+        {
+          "text": "Hippocrates"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did Marie Curie win her first Nobel Prize?",
+      "kind": {
+        "Number": {
+          "answer": 1903,
+          "range": {
+            "min": 1890,
+            "max": 1920
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which mathematician and scientist is associated with the laws of planetary motion?",
+      "answers": [
+        {
+          "text": "Johannes Kepler",
+          "correct": true
+        },
+        {
+          "text": "Edwin Hubble"
+        },
+        {
+          "text": "Edmond Halley"
+        },
+        {
+          "text": "Christiaan Huygens"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each scientist to a major concept associated with them.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Archimedes"
+              },
+              "right": {
+                "text": "Buoyancy"
+              }
+            },
+            {
+              "left": {
+                "text": "Blaise Pascal"
+              },
+              "right": {
+                "text": "Pressure in fluids"
+              }
+            },
+            {
+              "left": {
+                "text": "James Clerk Maxwell"
+              },
+              "right": {
+                "text": "Electromagnetism"
+              }
+            },
+            {
+              "left": {
+                "text": "Alan Turing"
+              },
+              "right": {
+                "text": "Computability"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which chemist is known for the law of conservation of mass and modernizing chemical nomenclature?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Lavoisier",
+            "Antoine Lavoisier"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who used X-ray diffraction images that were crucial to identifying DNA's structure?",
+      "answers": [
+        {
+          "text": "Rosalind Franklin",
+          "correct": true
+        },
+        {
+          "text": "Dorothy Hodgkin"
+        },
+        {
+          "text": "Lise Meitner"
+        },
+        {
+          "text": "Chien-Shiung Wu"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Albert Einstein won his Nobel Prize primarily for his theory of relativity.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many Nobel Prizes did Linus Pauling receive?",
+      "kind": {
+        "Number": {
+          "answer": 2,
+          "range": {
+            "min": 1,
+            "max": 5
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Famous scientists",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which scientist introduced the concept of the electromagnetic field and built an early dynamo?",
+      "answers": [
+        {
+          "text": "Michael Faraday",
+          "correct": true
+        },
+        {
+          "text": "James Clerk Maxwell"
+        },
+        {
+          "text": "André-Marie Ampère"
+        },
+        {
+          "text": "Alessandro Volta"
+        }
+      ]
+    }
+  }
+]

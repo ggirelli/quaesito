@@ -1,0 +1,659 @@
+[
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which mission first landed humans on the Moon?",
+      "answers": [
+        {
+          "text": "Apollo 11",
+          "correct": true
+        },
+        {
+          "text": "Apollo 10"
+        },
+        {
+          "text": "Apollo 12"
+        },
+        {
+          "text": "Gemini 8"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which space probe was the first to fly past Pluto?",
+      "answers": [
+        {
+          "text": "New Horizons",
+          "correct": true
+        },
+        {
+          "text": "Voyager 2"
+        },
+        {
+          "text": "Pioneer 10"
+        },
+        {
+          "text": "Cassini"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which space telescope launched in 1990 and observes primarily in visible and ultraviolet light?",
+      "answers": [
+        {
+          "text": "Hubble",
+          "correct": true
+        },
+        {
+          "text": "Kepler"
+        },
+        {
+          "text": "Spitzer"
+        },
+        {
+          "text": "Chandra"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which mission carried the first humans into space?",
+      "answers": [
+        {
+          "text": "Vostok 1",
+          "correct": true
+        },
+        {
+          "text": "Mercury-Redstone 3"
+        },
+        {
+          "text": "Apollo 8"
+        },
+        {
+          "text": "Soyuz 1"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which NASA rover landed on Mars in 2012?",
+      "answers": [
+        {
+          "text": "Curiosity",
+          "correct": true
+        },
+        {
+          "text": "Spirit"
+        },
+        {
+          "text": "Opportunity"
+        },
+        {
+          "text": "Perseverance"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which spacecraft delivered the first samples from an asteroid to Earth?",
+      "answers": [
+        {
+          "text": "Hayabusa",
+          "correct": true
+        },
+        {
+          "text": "Rosetta"
+        },
+        {
+          "text": "Dawn"
+        },
+        {
+          "text": "Galileo"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which mission first landed a spacecraft on a comet?",
+      "answers": [
+        {
+          "text": "Philae",
+          "correct": true
+        },
+        {
+          "text": "Giotto"
+        },
+        {
+          "text": "Deep Impact"
+        },
+        {
+          "text": "Stardust"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which mission first soft-landed on the far side of the Moon?",
+      "answers": [
+        {
+          "text": "Chang'e 4",
+          "correct": true
+        },
+        {
+          "text": "Luna 9"
+        },
+        {
+          "text": "Apollo 12"
+        },
+        {
+          "text": "Chandrayaan-2"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which NASA mission deliberately crashed into a comet to study its interior?",
+      "answers": [
+        {
+          "text": "Deep Impact",
+          "correct": true
+        },
+        {
+          "text": "Stardust"
+        },
+        {
+          "text": "Dawn"
+        },
+        {
+          "text": "NEAR Shoemaker"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which spacecraft entered orbit around Saturn in 2004?",
+      "answers": [
+        {
+          "text": "Cassini",
+          "correct": true
+        },
+        {
+          "text": "Juno"
+        },
+        {
+          "text": "Galileo"
+        },
+        {
+          "text": "Magellan"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which mission carried the first woman into space?",
+      "answers": [
+        {
+          "text": "Vostok 6",
+          "correct": true
+        },
+        {
+          "text": "Vostok 1"
+        },
+        {
+          "text": "Mercury-Atlas 6"
+        },
+        {
+          "text": "Soyuz 11"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which mission first returned close-up images of the nucleus of a comet?",
+      "answers": [
+        {
+          "text": "Giotto",
+          "correct": true
+        },
+        {
+          "text": "Rosetta"
+        },
+        {
+          "text": "Deep Impact"
+        },
+        {
+          "text": "Stardust"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Apollo 13 landed on the Moon successfully.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Voyager 1 carries a golden record with sounds and images from Earth.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Mars Pathfinder mission deployed the Sojourner rover.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The first artificial satellite, Sputnik 1, was launched by the United States.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Juno spacecraft studies Jupiter.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What was the name of the first artificial satellite launched into Earth orbit?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Sputnik 1",
+            "Sputnik"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of NASA's first successful Mars rover, which landed in 1997?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Sojourner"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What was the name of the first space station, launched by the Soviet Union in 1971?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Salyut 1",
+            "Salyut"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the ESA mission that landed the Philae probe on a comet?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Rosetta"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many astronauts walked on the Moon during the Apollo 11 mission?",
+      "kind": {
+        "Number": {
+          "answer": 2,
+          "range": {
+            "min": 0,
+            "max": 6
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did Voyager 1 launch?",
+      "kind": {
+        "Number": {
+          "answer": 1977,
+          "range": {
+            "min": 1965,
+            "max": 1990
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many astronauts were aboard Apollo 11 at launch?",
+      "kind": {
+        "Number": {
+          "answer": 3,
+          "range": {
+            "min": 1,
+            "max": 6
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many moons did NASA's Galileo spacecraft discover around Jupiter? Use the number accepted by modern references.",
+      "kind": {
+        "Number": {
+          "answer": 0,
+          "range": {
+            "min": -1,
+            "max": 5
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these milestones in chronological order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Sputnik 1 launch",
+            "Yuri Gagarin's spaceflight",
+            "Apollo 11 Moon landing",
+            "First Space Shuttle flight"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Order these Mars missions by their arrival at Mars, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Mariner 4",
+            "Viking 1",
+            "Mars Pathfinder",
+            "Curiosity"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the two Voyager spacecraft launched in 1977. Type each number.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "First spacecraft",
+              "accepted": [
+                "Voyager 1",
+                "1"
+              ]
+            },
+            {
+              "label": "Second spacecraft",
+              "accepted": [
+                "Voyager 2",
+                "2"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each mission with its destination.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Cassini"
+              },
+              "right": {
+                "text": "Saturn"
+              }
+            },
+            {
+              "left": {
+                "text": "Juno"
+              },
+              "right": {
+                "text": "Jupiter"
+              }
+            },
+            {
+              "left": {
+                "text": "Rosetta"
+              },
+              "right": {
+                "text": "Comet 67P"
+              }
+            },
+            {
+              "left": {
+                "text": "New Horizons"
+              },
+              "right": {
+                "text": "Pluto"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Space missions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each mission with its space agency.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Apollo"
+              },
+              "right": {
+                "text": "NASA"
+              }
+            },
+            {
+              "left": {
+                "text": "Vostok 1"
+              },
+              "right": {
+                "text": "Soviet space program"
+              }
+            },
+            {
+              "left": {
+                "text": "Chandrayaan-3"
+              },
+              "right": {
+                "text": "ISRO"
+              }
+            },
+            {
+              "left": {
+                "text": "Hayabusa2"
+              },
+              "right": {
+                "text": "JAXA"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

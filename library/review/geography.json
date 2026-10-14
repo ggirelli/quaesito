@@ -1,0 +1,282 @@
+[
+  {
+    "file": "geography-capitals.json",
+    "entry": 22,
+    "question": "How many letters are in the English name of Thailand's capital, Bangkok?",
+    "problem": "misleading",
+    "explanation": "The answer (7) comes from counting the letters of a word printed in the question, so it tests nothing.",
+    "fix": "Drop it, or replace it with a real fact, e.g. \"In what year did Bangkok become Thailand's capital?\" (1782)."
+  },
+  {
+    "file": "geography-capitals.json",
+    "entry": 23,
+    "question": "How many letters are in the English name of Ethiopia's capital, Addis Ababa, ignoring the space?",
+    "problem": "misleading",
+    "explanation": "The answer (10) comes from counting the letters of a name printed in the question.",
+    "fix": "Drop it, or replace it with a real fact, e.g. the approximate elevation of Addis Ababa (about 2,355 m, with a range of about 2,000 to 2,700)."
+  },
+  {
+    "file": "geography-cities-landmarks.json",
+    "entry": 20,
+    "question": "Which ancient city was buried by the eruption of Mount Vesuvius in AD 79?",
+    "problem": "ambiguous",
+    "explanation": "Herculaneum (and Stabiae) were also buried by the AD 79 eruption, so \"Herculaneum\" is a defensible answer that would be marked wrong.",
+    "fix": "Add \"Herculaneum\", \"Stabiae\" and \"Oplontis\" to the accepted answers, or reword to \"Which is the largest ancient Roman city buried by the eruption of Vesuvius in AD 79?\" and keep Pompeii. Do not use the proposed \"Italy's most visited archaeological site\" wording: the Colosseum has far more visitors (about 14.7 million in 2024 against Pompeii's 4.3 million)."
+  },
+  {
+    "file": "geography-cities-landmarks.json",
+    "entry": 21,
+    "question": "What is the name of the large square in central Beijing?",
+    "problem": "misleading",
+    "explanation": "The accepted list has only \"Tiananmen Square\". It misses \"Tiananmen\" and the common variant \"Tian'anmen Square\".",
+    "fix": "Add \"Tiananmen\" and \"Tian'anmen Square\" to the accepted answers."
+  },
+  {
+    "file": "geography-cities-landmarks.json",
+    "entry": 27,
+    "question": "Order these cities from west to east by approximate longitude.",
+    "problem": "duplicate",
+    "explanation": "Nearly the same as geography-capitals.json entry 27 (Lisbon, London, Berlin, ... west to east). The first three items and their order are identical.",
+    "fix": "Drop it, or use different cities (e.g. Dublin, Madrid, Rome, Istanbul)."
+  },
+  {
+    "file": "geography-countries-borders.json",
+    "entry": 9,
+    "question": "Which country borders the greatest number of countries in Europe?",
+    "problem": "ambiguous",
+    "explanation": "Read as \"has the most European neighbours\", Germany (9, all European) competes with Russia: Russia has 8 undisputed European neighbours and up to 11 if Georgia, Azerbaijan and Kazakhstan are counted. Russia only clearly wins on total neighbours (14).",
+    "fix": "Reword to \"Counting all its land neighbours, which European country borders the most countries?\" and keep Russia (14)."
+  },
+  {
+    "file": "geography-countries-borders.json",
+    "entry": 12,
+    "question": "Which country borders the fewest other countries in mainland South America?",
+    "problem": "ambiguous",
+    "explanation": "Uruguay (Brazil, Argentina) and Suriname (Guyana, Brazil; French Guiana is not a country) also border only 2 countries, tying with Ecuador (Colombia, Peru). The wording says there is a single answer.",
+    "fix": "Reword to \"Which of these countries borders the fewest other countries?\". The current options already break the tie: Ecuador 2, Chile 3, Colombia 5, Brazil 10."
+  },
+  {
+    "file": "geography-countries-borders.json",
+    "entry": 20,
+    "question": "Which country borders the United States to the south?",
+    "problem": "duplicate",
+    "explanation": "Same fact as entry 15 (the US shares a land border with Mexico).",
+    "fix": "Drop one of entries 15 and 20."
+  },
+  {
+    "file": "geography-countries-borders.json",
+    "entry": 24,
+    "question": "How many countries share a land border with China?",
+    "problem": "duplicate",
+    "explanation": "Asks the same fact as entry 4 (China borders 14 countries).",
+    "fix": "Drop entry 4 or entry 24."
+  },
+  {
+    "file": "geography-flags.json",
+    "entry": 5,
+    "question": "Which country's flag shows a yellow sun with a human face?",
+    "problem": "ambiguous",
+    "explanation": "Uruguay's flag also shows the Sun of May with a human face, so the distractor Uruguay is also correct.",
+    "fix": "Replace the Uruguay option with one that has no face, such as Kiribati or Malawi."
+  },
+  {
+    "file": "geography-flags.json",
+    "entry": 15,
+    "question": "The flag of Denmark is known as the Union Jack.",
+    "problem": "duplicate",
+    "explanation": "Asks the same fact as entry 18 (the Union Jack is the UK's flag).",
+    "fix": "Drop it, or ask a Denmark fact instead: \"Denmark's flag, the Dannebrog, is often cited as the oldest continuously used national flag.\" (true)."
+  },
+  {
+    "file": "geography-flags.json",
+    "entry": 19,
+    "question": "What country has a flag with a green cedar tree between red bands?",
+    "problem": "duplicate",
+    "explanation": "Same fact as entry 4 (cedar tree → Lebanon). Entries 28 and 29 ask it as well.",
+    "fix": "Drop entry 19."
+  },
+  {
+    "file": "geography-flags.json",
+    "entry": 21,
+    "question": "Which country’s flag features a golden Angkor Wat temple?",
+    "problem": "wrong",
+    "explanation": "The Angkor Wat on Cambodia's flag is white with black outlines, not golden.",
+    "fix": "Change \"golden\" to \"white\" in the question text."
+  },
+  {
+    "file": "geography-flags.json",
+    "entry": 27,
+    "question": "Order these countries by the number of colours in their national flags, fewest first.",
+    "problem": "ambiguous",
+    "explanation": "Japan (red, white) and Poland (white, red) both have 2 colours, so the order between them is a tie.",
+    "fix": "Replace Poland with Brazil (4 colours) and order the items Japan (2), Germany (3), Brazil (4), South Africa (6)."
+  },
+  {
+    "file": "geography-flags.json",
+    "entry": 28,
+    "question": "Name the country whose flag features each symbol.",
+    "problem": "wrong",
+    "explanation": "Papua New Guinea's flag shows a bird-of-paradise and the Southern Cross. It has no crocodile, and no current national flag shows one.",
+    "fix": "Change the part label \"Crocodile\" to \"Bird-of-paradise\" (accepted: Papua New Guinea)."
+  },
+  {
+    "file": "geography-flags.json",
+    "entry": 29,
+    "question": "Match each country to the main symbol on its national flag.",
+    "problem": "duplicate",
+    "explanation": "All five pairs repeat other entries: Canada/maple leaf (1), Lebanon/cedar (4, 19), Bhutan/dragon (6), Albania/double-headed eagle (7), Cambodia/Angkor Wat (21). Entry 28 repeats maple leaf, cedar and dragon again.",
+    "fix": "Drop it or replace the pairs with new symbols (e.g. Kenya/Maasai shield, Mexico/eagle with snake, Dominica/Sisserou parrot, Kiribati/frigatebird). If Kiribati is used as the new distractor in entry 5, pick a different country for one of the two."
+  },
+  {
+    "file": "geography-flags.json",
+    "entry": 30,
+    "question": "Match each country to a distinctive feature of its national flag.",
+    "problem": "duplicate",
+    "explanation": "All four pairs repeat other entries: Mozambique/rifle (9), Cyprus/silhouette (17), India/24-spoke wheel (11), Nepal/non-rectangular (3).",
+    "fix": "Drop it or replace the pairs with features not asked elsewhere."
+  },
+  {
+    "file": "geography-islands.json",
+    "entry": 5,
+    "question": "Which island is famous for the Moai statues of Rapa Nui?",
+    "problem": "misleading",
+    "explanation": "\"Rapa Nui\" is the native name of Easter Island, so the question gives the answer away. It also duplicates geography-cities-landmarks.json entry 12 (Moai → Easter Island).",
+    "fix": "Drop it as a duplicate of cities-landmarks entry 12, or remove \"of Rapa Nui\" from the text."
+  },
+  {
+    "file": "geography-islands.json",
+    "entry": 14,
+    "question": "Borneo is divided among three countries.",
+    "problem": "duplicate",
+    "explanation": "Same fact as entry 8 (Borneo is divided between Indonesia, Malaysia and Brunei). Entry 21 repeats it again.",
+    "fix": "Drop entry 14."
+  },
+  {
+    "file": "geography-islands.json",
+    "entry": 17,
+    "question": "Greenland is an independent sovereign country.",
+    "problem": "outdated",
+    "explanation": "The answer (false) is still correct as of October 2026, since Greenland remains an autonomous territory of the Kingdom of Denmark. However, its independence is an active political question, so the entry is time-sensitive and is not flagged as such.",
+    "fix": "Set time_sensitive to true, and optionally reword to \"As of 2026, Greenland is an independent sovereign country.\" (false)."
+  },
+  {
+    "file": "geography-islands.json",
+    "entry": 20,
+    "question": "What is the largest island of the Japanese archipelago?",
+    "problem": "duplicate",
+    "explanation": "Same fact as entry 11 (Honshu is Japan's largest island).",
+    "fix": "Drop entry 20."
+  },
+  {
+    "file": "geography-islands.json",
+    "entry": 21,
+    "question": "Which island is shared by Malaysia and Indonesia and is the world's third-largest island?",
+    "problem": "misleading",
+    "explanation": "Borneo is also shared by Brunei. \"Kalimantan\" usually names only the Indonesian part of the island in English, so it should not be accepted. This entry also duplicates entries 8 and 14.",
+    "fix": "Drop it as a duplicate of entry 8. If kept, change the text to \"shared by Malaysia, Indonesia and Brunei\" and remove \"Kalimantan\" from the accepted list."
+  },
+  {
+    "file": "geography-islands.json",
+    "entry": 28,
+    "question": "Name the island associated with each landmark or place.",
+    "problem": "duplicate",
+    "explanation": "Every part repeats another entry: Etna/Sicily (19), Reykjavík/Iceland (2), Jakarta/Java (4), Moai/Easter Island (5, and cities-landmarks 12).",
+    "fix": "Drop it, or replace the parts with facts not asked elsewhere (e.g. Mount Fuji/Honshu, Ubud/Bali, Hobart/Tasmania, Ajaccio/Corsica)."
+  },
+  {
+    "file": "geography-oceans-seas.json",
+    "entry": 16,
+    "question": "The Mediterranean Sea has no natural connection to the Atlantic Ocean.",
+    "problem": "duplicate",
+    "explanation": "Same fact as entry 8 (the Strait of Gibraltar connects the Mediterranean to the Atlantic). Entry 30 also repeats it.",
+    "fix": "Drop entry 16."
+  },
+  {
+    "file": "geography-oceans-seas.json",
+    "entry": 18,
+    "question": "What is the narrow strait linking the Black Sea to the Sea of Marmara?",
+    "problem": "misleading",
+    "explanation": "The accepted list misses the common spelling \"Bosporus\" and the name \"Istanbul Strait\".",
+    "fix": "Add \"Bosporus\", \"Bosporus Strait\" and \"Istanbul Strait\" to the accepted answers. Make the same addition to entry 28's second part (the finding said entry 29)."
+  },
+  {
+    "file": "geography-oceans-seas.json",
+    "entry": 21,
+    "question": "What is the name of the sea between Sweden and Finland?",
+    "problem": "ambiguous",
+    "explanation": "The Bothnian Sea (the southern basin of the Gulf of Bothnia) is literally a sea between Sweden and Finland, and the Åland Sea also lies between them. Answers like these would be rejected.",
+    "fix": "Reword to \"Which northern arm of the Baltic Sea lies between Sweden and Finland?\" and add \"Bothnian Sea\" to the accepted answers."
+  },
+  {
+    "file": "geography-oceans-seas.json",
+    "entry": 23,
+    "question": "How many oceans are commonly recognized in the five-ocean model?",
+    "problem": "misleading",
+    "explanation": "The question says \"five-ocean model\", so the answer is 5.",
+    "fix": "Reword to \"How many oceans does the most common modern model recognize?\" (5)."
+  },
+  {
+    "file": "geography-oceans-seas.json",
+    "entry": 28,
+    "question": "Name the two straits that connect the Mediterranean Sea to the Black Sea via the Sea of Marmara.",
+    "problem": "duplicate",
+    "explanation": "The Bosphorus part repeats entry 18, and the Dardanelles repeats the pair in entry 30.",
+    "fix": "Drop entry 18, or drop this one. If kept, add \"Bosporus\" and \"Istanbul Strait\" to the accepted answers of the second part."
+  },
+  {
+    "file": "geography-rivers-lakes.json",
+    "entry": 8,
+    "question": "Which river flows through Budapest?",
+    "problem": "duplicate",
+    "explanation": "Same fact as geography-capitals.json entry 9 (\"Which capital lies on the Danube?\" → Budapest). Rivers entry 29 repeats it as well.",
+    "fix": "Drop one of the two, or change capitals entry 9 to a different Danube capital (Bratislava or Belgrade; avoid Vienna, which rivers entry 14 already uses) and keep the distractors off the Danube."
+  },
+  {
+    "file": "geography-rivers-lakes.json",
+    "entry": 12,
+    "question": "Which lake is the largest by surface area wholly within one country, Russia?",
+    "problem": "wrong",
+    "explanation": "Lake Baikal (about 31,500 km²) lies entirely within Russia and is much larger than Lake Ladoga (about 17,700 km²), so the marked answer is wrong as worded. Ladoga is the largest lake entirely in Europe.",
+    "fix": "Change the text to \"Which is the largest lake lying entirely in Europe?\" and keep Lake Ladoga as correct. Replace the Lake Baikal distractor with Lake Vänern."
+  },
+  {
+    "file": "geography-rivers-lakes.json",
+    "entry": 17,
+    "question": "The Dead Sea is a freshwater lake.",
+    "problem": "duplicate",
+    "explanation": "Same fact as geography-oceans-seas.json entry 14 (\"The Dead Sea is actually a salt lake\").",
+    "fix": "Drop one of the two."
+  },
+  {
+    "file": "geography-rivers-lakes.json",
+    "entry": 19,
+    "question": "Which lake is famous for its vivid blue colour and lies in the Canadian Rockies?",
+    "problem": "ambiguous",
+    "explanation": "Moraine Lake, Peyto Lake and Emerald Lake are equally famous vivid-blue lakes in the Canadian Rockies.",
+    "fix": "Reword to \"Which turquoise lake in Banff National Park is named after Princess Louise, a daughter of Queen Victoria?\", accepting Lake Louise."
+  },
+  {
+    "file": "geography-rivers-lakes.json",
+    "entry": 21,
+    "question": "What is the largest lake in South America by surface area?",
+    "problem": "ambiguous",
+    "explanation": "Lake Maracaibo is a brackish tidal bay or lagoon open to the Caribbean, and many sources give Lake Titicaca as South America's largest lake. The answer is disputed.",
+    "fix": "Reword to \"What is the largest freshwater lake in South America?\" with accepted [\"Lake Titicaca\", \"Titicaca\"], or accept both Maracaibo and Titicaca. Note that rivers entry 4 already asks about Titicaca, so accepting both answers may be better."
+  },
+  {
+    "file": "geography-rivers-lakes.json",
+    "entry": 28,
+    "question": "Name the river that flows through each city.",
+    "problem": "duplicate",
+    "explanation": "All four parts repeat entries 1, 3, 18 and 6, and also entry 29.",
+    "fix": "Drop it, or replace the cities with ones not used elsewhere."
+  },
+  {
+    "file": "geography-rivers-lakes.json",
+    "entry": 29,
+    "question": "Match each river to the city it flows through.",
+    "problem": "duplicate",
+    "explanation": "All pairs repeat other entries: Seine/Paris (1), Thames/London (3), Tiber/Rome (18), Danube/Budapest (8), Tigris/Baghdad (6). Entry 28 also repeats Paris, London, Rome and Baghdad.",
+    "fix": "Drop entries 28 and 29, or rebuild them with new cities (e.g. Vltava/Prague, Neva/St Petersburg, Douro/Porto, Spree/Berlin, Hooghly/Kolkata)."
+  }
+]

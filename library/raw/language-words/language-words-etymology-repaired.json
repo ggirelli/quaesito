@@ -1,0 +1,130 @@
+[
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which language gave English the word “ketchup” via a word for a fermented fish sauce?",
+      "answers": [
+        {
+          "text": "Malay",
+          "correct": false
+        },
+        {
+          "text": "Chinese (Hokkien)",
+          "correct": true
+        },
+        {
+          "text": "Portuguese",
+          "correct": false
+        },
+        {
+          "text": "Arabic",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the literal meaning of Latin penicillus, the source of “pencil”?",
+      "answers": [
+        {
+          "text": "Little tail",
+          "correct": true
+        },
+        {
+          "text": "Small stick",
+          "correct": false
+        },
+        {
+          "text": "Thin reed",
+          "correct": false
+        },
+        {
+          "text": "Pointed stone",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which language is the source of “bungalow,” via a term meaning “of Bengal”?",
+      "answers": [
+        {
+          "text": "Hindi",
+          "correct": true
+        },
+        {
+          "text": "Tamil",
+          "correct": false
+        },
+        {
+          "text": "Malayalam",
+          "correct": false
+        },
+        {
+          "text": "Persian",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Kindergarten"
+              },
+              "right": {
+                "text": "German"
+              }
+            },
+            {
+              "left": {
+                "text": "Tsunami"
+              },
+              "right": {
+                "text": "Japanese"
+              }
+            },
+            {
+              "left": {
+                "text": "Algebra"
+              },
+              "right": {
+                "text": "Arabic"
+              }
+            },
+            {
+              "left": {
+                "text": "Shampoo"
+              },
+              "right": {
+                "text": "Hindi"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each English loanword to the language it came from."
+    }
+  }
+]

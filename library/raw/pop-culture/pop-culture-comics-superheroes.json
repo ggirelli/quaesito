@@ -1,0 +1,658 @@
+[
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is Superman's home planet?",
+      "answers": [
+        {
+          "text": "Krypton",
+          "correct": true
+        },
+        {
+          "text": "Thanagar"
+        },
+        {
+          "text": "Apokolips"
+        },
+        {
+          "text": "Xandar"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which city does Batman protect?",
+      "answers": [
+        {
+          "text": "Gotham City",
+          "correct": true
+        },
+        {
+          "text": "Metropolis"
+        },
+        {
+          "text": "Central City"
+        },
+        {
+          "text": "Star City"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of Spider-Man's aunt?",
+      "answers": [
+        {
+          "text": "May Parker",
+          "correct": true
+        },
+        {
+          "text": "June Watson"
+        },
+        {
+          "text": "Martha Kent"
+        },
+        {
+          "text": "Sarah Stacy"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which metal is bonded to Wolverine's skeleton?",
+      "answers": [
+        {
+          "text": "Adamantium",
+          "correct": true
+        },
+        {
+          "text": "Vibranium"
+        },
+        {
+          "text": "Promethium"
+        },
+        {
+          "text": "Uru"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is Wonder Woman's home island called?",
+      "answers": [
+        {
+          "text": "Themyscira",
+          "correct": true
+        },
+        {
+          "text": "Genosha"
+        },
+        {
+          "text": "Muir Island"
+        },
+        {
+          "text": "Bora Bora"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which superhero is also known as the Dark Knight?",
+      "answers": [
+        {
+          "text": "Batman",
+          "correct": true
+        },
+        {
+          "text": "Daredevil"
+        },
+        {
+          "text": "Moon Knight"
+        },
+        {
+          "text": "Black Panther"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the real name of the Marvel hero Black Panther?",
+      "answers": [
+        {
+          "text": "T'Challa",
+          "correct": true
+        },
+        {
+          "text": "M'Baku"
+        },
+        {
+          "text": "N'Jadaka"
+        },
+        {
+          "text": "T'Chaka"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which newspaper employs Clark Kent as a reporter?",
+      "answers": [
+        {
+          "text": "The Daily Planet",
+          "correct": true
+        },
+        {
+          "text": "The Daily Bugle"
+        },
+        {
+          "text": "The Gotham Gazette"
+        },
+        {
+          "text": "The Central City Citizen"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of Thor's hammer?",
+      "answers": [
+        {
+          "text": "Mjolnir",
+          "correct": true
+        },
+        {
+          "text": "Stormbreaker"
+        },
+        {
+          "text": "Gungnir"
+        },
+        {
+          "text": "Hofund"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which comic-book publisher first introduced the Fantastic Four in 1961?",
+      "answers": [
+        {
+          "text": "Marvel Comics",
+          "correct": true
+        },
+        {
+          "text": "DC Comics"
+        },
+        {
+          "text": "Image Comics"
+        },
+        {
+          "text": "Charlton Comics"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the fictional African nation ruled by Black Panther?",
+      "answers": [
+        {
+          "text": "Wakanda",
+          "correct": true
+        },
+        {
+          "text": "Genosha"
+        },
+        {
+          "text": "Zamunda"
+        },
+        {
+          "text": "Latveria"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which artist co-created the comic character Hellboy?",
+      "answers": [
+        {
+          "text": "Mike Mignola",
+          "correct": true
+        },
+        {
+          "text": "Todd McFarlane"
+        },
+        {
+          "text": "Jim Lee"
+        },
+        {
+          "text": "Frank Miller"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Flash is traditionally associated with superhuman speed.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Aquaman's main underwater kingdom is called Atlantis.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Joker first appeared in a Marvel Comics publication.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In the comics, Peter Parker was bitten by a radioactive spider.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "The comic series Peanuts was created by Jack Kirby.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of Superman's alter ego?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Clark Kent",
+            "Kent"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the kingdom where Doctor Doom rules as monarch?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Latveria"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which masked hero is lawyer Matt Murdock?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Daredevil"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the newspaper photographer who is often Spider-Man's rival?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "J. Jonah Jameson",
+            "Jonah Jameson",
+            "Jameson"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did Superman first appear in Action Comics? Give the year.",
+      "kind": {
+        "Number": {
+          "answer": 1938,
+          "range": {
+            "min": 1930,
+            "max": 1950
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did the first issue of The Fantastic Four appear? Give the year.",
+      "kind": {
+        "Number": {
+          "answer": 1961,
+          "range": {
+            "min": 1950,
+            "max": 1975
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did the first issue of Watchmen begin publication? Give the year.",
+      "kind": {
+        "Number": {
+          "answer": 1986,
+          "range": {
+            "min": 1975,
+            "max": 1995
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many issues were in the original 12-issue comic series Watchmen? Give the number of issues.",
+      "kind": {
+        "Number": {
+          "answer": 12,
+          "range": {
+            "min": 5,
+            "max": 20
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these heroes' first comic appearances in chronological order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Superman",
+            "Batman",
+            "Wonder Woman",
+            "Spider-Man"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Order these comic series by the year their first issue appeared, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Fantastic Four",
+            "X-Men",
+            "Watchmen",
+            "Hellboy"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the civilian identities of these two heroes.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Spider-Man",
+              "accepted": [
+                "Peter Parker"
+              ]
+            },
+            {
+              "label": "Iron Man",
+              "accepted": [
+                "Tony Stark"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each superhero with their usual city.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Batman"
+              },
+              "right": {
+                "text": "Gotham City"
+              }
+            },
+            {
+              "left": {
+                "text": "Superman"
+              },
+              "right": {
+                "text": "Metropolis"
+              }
+            },
+            {
+              "left": {
+                "text": "Daredevil"
+              },
+              "right": {
+                "text": "Hell's Kitchen"
+              }
+            },
+            {
+              "left": {
+                "text": "The Flash"
+              },
+              "right": {
+                "text": "Central City"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each comic creator with a character they co-created.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Stan Lee"
+              },
+              "right": {
+                "text": "Spider-Man"
+              }
+            },
+            {
+              "left": {
+                "text": "Bob Kane"
+              },
+              "right": {
+                "text": "Batman"
+              }
+            },
+            {
+              "left": {
+                "text": "Mike Mignola"
+              },
+              "right": {
+                "text": "Hellboy"
+              }
+            },
+            {
+              "left": {
+                "text": "Jerry Siegel"
+              },
+              "right": {
+                "text": "Superman"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

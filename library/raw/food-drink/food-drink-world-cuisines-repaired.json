@@ -1,0 +1,45 @@
+[
+  {
+    "category": "Food & Drink",
+    "topic": "World cuisines",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Japanese liquid seasoning is brewed from soybeans, roasted wheat, salt and koji?",
+      "answers": [
+        {
+          "text": "Shoyu",
+          "correct": true
+        },
+        {
+          "text": "Mirin"
+        },
+        {
+          "text": "Ponzu"
+        },
+        {
+          "text": "Dashi"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "World cuisines",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these cheeses in order by country of origin, A–Z.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Feta",
+            "Parmigiano Reggiano",
+            "Gouda",
+            "Manchego"
+          ]
+        }
+      }
+    }
+  }
+]

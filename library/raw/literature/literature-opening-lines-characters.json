@@ -1,0 +1,663 @@
+[
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who is the first-person narrator of Moby-Dick?",
+      "answers": [
+        {
+          "text": "Ishmael",
+          "correct": true
+        },
+        {
+          "text": "Queequeg"
+        },
+        {
+          "text": "Ahab"
+        },
+        {
+          "text": "Starbuck"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which character famously begins a novel by saying, “Call me Ishmael”?",
+      "answers": [
+        {
+          "text": "Ishmael",
+          "correct": true
+        },
+        {
+          "text": "Huck Finn"
+        },
+        {
+          "text": "Nick Carraway"
+        },
+        {
+          "text": "Holden Caulfield"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who is the protagonist of Jane Eyre?",
+      "answers": [
+        {
+          "text": "Jane Eyre",
+          "correct": true
+        },
+        {
+          "text": "Elizabeth Bennet"
+        },
+        {
+          "text": "Catherine Earnshaw"
+        },
+        {
+          "text": "Dorothea Brooke"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In The Hobbit, what is the name of the dragon guarding the treasure?",
+      "answers": [
+        {
+          "text": "Smaug",
+          "correct": true
+        },
+        {
+          "text": "Glaurung"
+        },
+        {
+          "text": "Ancalagon"
+        },
+        {
+          "text": "Fafnir"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who is the narrator of The Great Gatsby?",
+      "answers": [
+        {
+          "text": "Nick Carraway",
+          "correct": true
+        },
+        {
+          "text": "Jay Gatsby"
+        },
+        {
+          "text": "Tom Buchanan"
+        },
+        {
+          "text": "George Wilson"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which character wakes up transformed into a monstrous insect in Kafka's The Metamorphosis?",
+      "answers": [
+        {
+          "text": "Gregor Samsa",
+          "correct": true
+        },
+        {
+          "text": "Josef K."
+        },
+        {
+          "text": "Meursault"
+        },
+        {
+          "text": "Raskolnikov"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who is the central character of Camus's The Stranger?",
+      "answers": [
+        {
+          "text": "Meursault",
+          "correct": true
+        },
+        {
+          "text": "Rieux"
+        },
+        {
+          "text": "Clamence"
+        },
+        {
+          "text": "Roquentin"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which character is the young governess in Henry James's The Turn of the Screw?",
+      "answers": [
+        {
+          "text": "The unnamed governess",
+          "correct": true
+        },
+        {
+          "text": "Mrs. Grose"
+        },
+        {
+          "text": "Flora"
+        },
+        {
+          "text": "Miss Jessel"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who is the narrator of Ford Madox Ford's The Good Soldier?",
+      "answers": [
+        {
+          "text": "John Dowell",
+          "correct": true
+        },
+        {
+          "text": "Edward Ashburnham"
+        },
+        {
+          "text": "Charles Tansley"
+        },
+        {
+          "text": "Stephen Dedalus"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "In The Sound and the Fury, which Compson sibling narrates the opening section?",
+      "answers": [
+        {
+          "text": "Benjy Compson",
+          "correct": true
+        },
+        {
+          "text": "Quentin Compson"
+        },
+        {
+          "text": "Jason Compson"
+        },
+        {
+          "text": "Caddy Compson"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who narrates the opening section of Virginia Woolf's To the Lighthouse?",
+      "answers": [
+        {
+          "text": "An omniscient third-person narrator",
+          "correct": true
+        },
+        {
+          "text": "Mr. Ramsay"
+        },
+        {
+          "text": "Lily Briscoe"
+        },
+        {
+          "text": "James Ramsay"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which character opens Dostoevsky's Crime and Punishment as he leaves his lodging?",
+      "answers": [
+        {
+          "text": "Rodion Raskolnikov",
+          "correct": true
+        },
+        {
+          "text": "Dmitri Karamazov"
+        },
+        {
+          "text": "Ivan Karamazov"
+        },
+        {
+          "text": "Prince Myshkin"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The opening words of Moby-Dick are “Call me Ishmael.”"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The protagonist of Pride and Prejudice is Elizabeth Bennet."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "The narrator of The Great Gatsby is Jay Gatsby himself."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Gregor Samsa is the protagonist of The Metamorphosis."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "The opening section of The Sound and the Fury is narrated by Quentin Compson."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Ishmael"
+          ]
+        }
+      },
+      "text": "What is the surname of the narrator who says “Call me Ishmael”?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Samsa"
+          ]
+        }
+      },
+      "text": "What is the surname of the transformed salesman in Kafka's The Metamorphosis?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Jane"
+          ]
+        }
+      },
+      "text": "What is the first name of the protagonist of Jane Eyre?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Dowell"
+          ]
+        }
+      },
+      "text": "What is the surname of the narrator of The Good Soldier, John ___?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 4,
+          "range": {
+            "min": 1,
+            "max": 8
+          }
+        }
+      },
+      "text": "How many main children are there in Louisa May Alcott's March family in Little Women?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 5,
+          "range": {
+            "min": 2,
+            "max": 9
+          }
+        }
+      },
+      "text": "How many Bennet sisters are there in Pride and Prejudice?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 8,
+          "range": {
+            "min": 3,
+            "max": 12
+          }
+        }
+      },
+      "text": "How many children do the Ramsays have in To the Lighthouse?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 4,
+          "range": {
+            "min": 1,
+            "max": 8
+          }
+        }
+      },
+      "text": "How many Compson siblings are there in The Sound and the Fury?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Jane Eyre",
+            "Moby-Dick",
+            "The Great Gatsby",
+            "The Hobbit"
+          ]
+        }
+      },
+      "text": "Put these novels in order of first publication, earliest first."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "The Metamorphosis",
+            "The Great Gatsby",
+            "The Stranger",
+            "The Sound and the Fury"
+          ]
+        }
+      },
+      "text": "Put these novels in order of first publication, earliest first."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Moby-Dick narrator",
+              "accepted": [
+                "Ishmael"
+              ]
+            },
+            {
+              "label": "Great Gatsby narrator",
+              "accepted": [
+                "Nick Carraway",
+                "Nick"
+              ]
+            },
+            {
+              "label": "Good Soldier narrator",
+              "accepted": [
+                "John Dowell",
+                "Dowell"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name the narrator of each of these novels."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Gregor Samsa"
+              },
+              "right": {
+                "text": "The Metamorphosis"
+              }
+            },
+            {
+              "left": {
+                "text": "Nick Carraway"
+              },
+              "right": {
+                "text": "The Great Gatsby"
+              }
+            },
+            {
+              "left": {
+                "text": "Ishmael"
+              },
+              "right": {
+                "text": "Moby-Dick"
+              }
+            },
+            {
+              "left": {
+                "text": "Elizabeth Bennet"
+              },
+              "right": {
+                "text": "Pride and Prejudice"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each character or narrator to the novel they belong to."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Opening lines & characters",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Jane Eyre"
+              },
+              "right": {
+                "text": "Charlotte Brontë"
+              }
+            },
+            {
+              "left": {
+                "text": "Meursault"
+              },
+              "right": {
+                "text": "The Stranger"
+              }
+            },
+            {
+              "left": {
+                "text": "Benjy Compson"
+              },
+              "right": {
+                "text": "The Sound and the Fury"
+              }
+            },
+            {
+              "left": {
+                "text": "John Dowell"
+              },
+              "right": {
+                "text": "The Good Soldier"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each character to the work in which they appear, or the author of the named work."
+    }
+  }
+]

@@ -1,0 +1,190 @@
+[
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which battle became notorious for its immense casualties and use of attrition?",
+      "answers": [
+        {
+          "text": "Battle of Verdun",
+          "correct": true
+        },
+        {
+          "text": "Battle of Tannenberg"
+        },
+        {
+          "text": "Battle of Caporetto"
+        },
+        {
+          "text": "Battle of Jutland"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which British general commanded the British Expeditionary Force at the Battle of the Somme?",
+      "answers": [
+        {
+          "text": "Douglas Haig",
+          "correct": true
+        },
+        {
+          "text": "Edmund Allenby"
+        },
+        {
+          "text": "John French"
+        },
+        {
+          "text": "Herbert Plumer"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Lawrence of Arabia"
+          ]
+        }
+      },
+      "text": "By what nickname is British officer T. E. Lawrence widely known?"
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Manfred von Richthofen",
+            "Richthofen",
+            "von Richthofen"
+          ]
+        }
+      },
+      "text": "Which German fighter pilot was nicknamed the Red Baron?"
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 19,
+          "range": {
+            "min": 6,
+            "max": 40
+          }
+        }
+      },
+      "text": "About how many months elapsed between the US entry into World War I and the 1918 armistice?"
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 8,
+          "range": {
+            "min": 5,
+            "max": 20
+          }
+        }
+      },
+      "text": "About how many months after the armistice was the Treaty of Versailles signed?"
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Lusitania is sunk",
+            "Italy enters the war",
+            "United States enters the war",
+            "Armistice on the Western Front"
+          ]
+        }
+      },
+      "text": "Put these events in chronological order, earliest first."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Central Power",
+              "accepted": [
+                "Germany",
+                "Austria-Hungary",
+                "Austria Hungary",
+                "Austria",
+                "Ottoman Empire",
+                "Turkey",
+                "Bulgaria"
+              ]
+            },
+            {
+              "label": "Central Power",
+              "accepted": [
+                "Germany",
+                "Austria-Hungary",
+                "Austria Hungary",
+                "Austria",
+                "Ottoman Empire",
+                "Turkey",
+                "Bulgaria"
+              ]
+            },
+            {
+              "label": "Central Power",
+              "accepted": [
+                "Germany",
+                "Austria-Hungary",
+                "Austria Hungary",
+                "Austria",
+                "Ottoman Empire",
+                "Turkey",
+                "Bulgaria"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name three major Central Powers in World War I."
+    }
+  }
+]

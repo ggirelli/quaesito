@@ -1,0 +1,666 @@
+[
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which instrument is Louis Armstrong best known for playing?",
+      "answers": [
+        {
+          "text": "Trumpet",
+          "correct": true
+        },
+        {
+          "text": "Clarinet"
+        },
+        {
+          "text": "Trombone"
+        },
+        {
+          "text": "Saxophone"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which singer was nicknamed the 'Queen of the Blues'?",
+      "answers": [
+        {
+          "text": "Koko Taylor",
+          "correct": true
+        },
+        {
+          "text": "Billie Holiday"
+        },
+        {
+          "text": "Dinah Washington"
+        },
+        {
+          "text": "Sarah Vaughan"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which city is widely regarded as the birthplace of jazz?",
+      "answers": [
+        {
+          "text": "New Orleans",
+          "correct": true
+        },
+        {
+          "text": "Chicago"
+        },
+        {
+          "text": "Memphis"
+        },
+        {
+          "text": "Kansas City"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which instrument is most associated with jazz saxophonist Charlie Parker?",
+      "answers": [
+        {
+          "text": "Alto saxophone",
+          "correct": true
+        },
+        {
+          "text": "Tenor saxophone"
+        },
+        {
+          "text": "Trumpet"
+        },
+        {
+          "text": "Clarinet"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "B.B. King was famous for playing which instrument?",
+      "answers": [
+        {
+          "text": "Electric guitar",
+          "correct": true
+        },
+        {
+          "text": "Harmonica"
+        },
+        {
+          "text": "Piano"
+        },
+        {
+          "text": "Mandolin"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which singer recorded the jazz standard 'Summertime' with Louis Armstrong in 1957?",
+      "answers": [
+        {
+          "text": "Ella Fitzgerald",
+          "correct": true
+        },
+        {
+          "text": "Billie Holiday"
+        },
+        {
+          "text": "Nina Simone"
+        },
+        {
+          "text": "Sarah Vaughan"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which pianist led the influential Modern Jazz Quartet?",
+      "answers": [
+        {
+          "text": "John Lewis",
+          "correct": true
+        },
+        {
+          "text": "Thelonious Monk"
+        },
+        {
+          "text": "Bud Powell"
+        },
+        {
+          "text": "Oscar Peterson"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Miles Davis album features the track 'So What'?",
+      "answers": [
+        {
+          "text": "Kind of Blue",
+          "correct": true
+        },
+        {
+          "text": "Bitches Brew"
+        },
+        {
+          "text": "Sketches of Spain"
+        },
+        {
+          "text": "In a Silent Way"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which blues musician was known as the 'Father of the Delta Blues'?",
+      "answers": [
+        {
+          "text": "Charley Patton",
+          "correct": true
+        },
+        {
+          "text": "Robert Johnson"
+        },
+        {
+          "text": "Son House"
+        },
+        {
+          "text": "Muddy Waters"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which jazz style is especially associated with fast tempos and complex improvisation from the 1940s?",
+      "answers": [
+        {
+          "text": "Bebop",
+          "correct": true
+        },
+        {
+          "text": "Dixieland"
+        },
+        {
+          "text": "Cool jazz"
+        },
+        {
+          "text": "Swing"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which saxophonist composed the suite A Love Supreme?",
+      "answers": [
+        {
+          "text": "John Coltrane",
+          "correct": true
+        },
+        {
+          "text": "Wayne Shorter"
+        },
+        {
+          "text": "Sonny Rollins"
+        },
+        {
+          "text": "Ornette Coleman"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which pianist-composer wrote the jazz standard 'Round Midnight'?",
+      "answers": [
+        {
+          "text": "Thelonious Monk",
+          "correct": true
+        },
+        {
+          "text": "Duke Ellington"
+        },
+        {
+          "text": "Billy Strayhorn"
+        },
+        {
+          "text": "Tadd Dameron"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Duke Ellington led a famous jazz orchestra for decades.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "A harmonica is commonly used in blues music.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Nina Simone was only known as a jazz instrumentalist and never sang.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The blues scale commonly includes a flattened fifth, often called the blue note.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Ornette Coleman was a major figure in the development of free jazz.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which singer was known as the 'First Lady of Song'?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Ella Fitzgerald",
+            "Fitzgerald"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which blues guitarist recorded the influential song 'Cross Road Blues' in 1936?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Robert Johnson",
+            "Johnson"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which jazz trumpeter recorded the album Birth of the Cool with his nonet?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Miles Davis",
+            "Davis"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which jazz pianist was nicknamed 'The High Priest of Bebop'?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Thelonious Monk",
+            "Monk"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many beats are in one bar of a standard 12-bar blues in 4/4 time?",
+      "kind": {
+        "Number": {
+          "answer": 48,
+          "range": {
+            "min": 24,
+            "max": 72
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year was Miles Davis's album Kind of Blue first released?",
+      "kind": {
+        "Number": {
+          "answer": 1959,
+          "range": {
+            "min": 1940,
+            "max": 1975
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many strings does a standard six-string electric blues guitar have?",
+      "kind": {
+        "Number": {
+          "answer": 6,
+          "range": {
+            "min": 3,
+            "max": 10
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year was Charlie Parker born?",
+      "kind": {
+        "Number": {
+          "answer": 1920,
+          "range": {
+            "min": 1900,
+            "max": 1940
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these musicians in order of birth, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Jelly Roll Morton",
+            "Louis Armstrong",
+            "Duke Ellington",
+            "Charlie Parker"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these albums in order of original release, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Miles Davis: Kind of Blue",
+            "John Coltrane: Giant Steps",
+            "Ornette Coleman: The Shape of Jazz to Come",
+            "Miles Davis: Bitches Brew"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the three musicians often called the 'Kings of the Blues'.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Guitarist 1",
+              "accepted": [
+                "B.B. King",
+                "BB King"
+              ]
+            },
+            {
+              "label": "Guitarist 2",
+              "accepted": [
+                "Albert King"
+              ]
+            },
+            {
+              "label": "Guitarist 3",
+              "accepted": [
+                "Freddie King"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each musician to their main instrument.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Dizzy Gillespie"
+              },
+              "right": {
+                "text": "Trumpet"
+              }
+            },
+            {
+              "left": {
+                "text": "Charlie Parker"
+              },
+              "right": {
+                "text": "Alto saxophone"
+              }
+            },
+            {
+              "left": {
+                "text": "Oscar Peterson"
+              },
+              "right": {
+                "text": "Piano"
+              }
+            },
+            {
+              "left": {
+                "text": "Charles Mingus"
+              },
+              "right": {
+                "text": "Double bass"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each musician to the genre or movement they are strongly associated with.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Bessie Smith"
+              },
+              "right": {
+                "text": "Classic blues"
+              }
+            },
+            {
+              "left": {
+                "text": "Duke Ellington"
+              },
+              "right": {
+                "text": "Big-band jazz"
+              }
+            },
+            {
+              "left": {
+                "text": "Charlie Parker"
+              },
+              "right": {
+                "text": "Bebop"
+              }
+            },
+            {
+              "left": {
+                "text": "Ornette Coleman"
+              },
+              "right": {
+                "text": "Free jazz"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

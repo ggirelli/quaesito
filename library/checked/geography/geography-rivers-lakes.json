@@ -1,0 +1,506 @@
+[
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which river flows through Paris?",
+      "answers": [
+        {
+          "text": "Seine",
+          "correct": true
+        },
+        {
+          "text": "Loire"
+        },
+        {
+          "text": "Rhône"
+        },
+        {
+          "text": "Garonne"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which is the largest lake in Africa by surface area?",
+      "answers": [
+        {
+          "text": "Lake Victoria",
+          "correct": true
+        },
+        {
+          "text": "Lake Tanganyika"
+        },
+        {
+          "text": "Lake Malawi"
+        },
+        {
+          "text": "Lake Chad"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which river runs through London?",
+      "answers": [
+        {
+          "text": "Thames",
+          "correct": true
+        },
+        {
+          "text": "Severn"
+        },
+        {
+          "text": "Trent"
+        },
+        {
+          "text": "Tyne"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which lake lies between Peru and Bolivia?",
+      "answers": [
+        {
+          "text": "Lake Titicaca",
+          "correct": true
+        },
+        {
+          "text": "Lake Poopó"
+        },
+        {
+          "text": "Lake Junín"
+        },
+        {
+          "text": "Lake Argentino"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which river forms much of the border between the United States and Mexico?",
+      "answers": [
+        {
+          "text": "Rio Grande",
+          "correct": true
+        },
+        {
+          "text": "Colorado River"
+        },
+        {
+          "text": "Missouri River"
+        },
+        {
+          "text": "Columbia River"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which river flows through Baghdad?",
+      "answers": [
+        {
+          "text": "Tigris",
+          "correct": true
+        },
+        {
+          "text": "Euphrates"
+        },
+        {
+          "text": "Jordan"
+        },
+        {
+          "text": "Orontes"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which lake is the deepest in the world?",
+      "answers": [
+        {
+          "text": "Lake Baikal",
+          "correct": true
+        },
+        {
+          "text": "Lake Tanganyika"
+        },
+        {
+          "text": "Lake Superior"
+        },
+        {
+          "text": "Lake Vostok"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which African lake is shared by Tanzania, Uganda and Kenya?",
+      "answers": [
+        {
+          "text": "Lake Victoria",
+          "correct": true
+        },
+        {
+          "text": "Lake Albert"
+        },
+        {
+          "text": "Lake Kivu"
+        },
+        {
+          "text": "Lake Turkana"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which river flows through the Grand Canyon?",
+      "answers": [
+        {
+          "text": "Colorado River",
+          "correct": true
+        },
+        {
+          "text": "Snake River"
+        },
+        {
+          "text": "Rio Grande"
+        },
+        {
+          "text": "Arkansas River"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Nile flows north into the Mediterranean Sea.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Lake Superior is one of the North American Great Lakes.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Danube empties into the Black Sea.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What river flows through Rome?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Tiber"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What river runs through Cairo?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Nile"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Approximately how many kilometres long is the Nile River?",
+      "kind": {
+        "Number": {
+          "answer": 6650,
+          "range": {
+            "min": 5500,
+            "max": 7500
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Approximately how many metres deep is Lake Baikal at its deepest point?",
+      "kind": {
+        "Number": {
+          "answer": 1642,
+          "range": {
+            "min": 1200,
+            "max": 2000
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many Great Lakes are there in North America?",
+      "kind": {
+        "Number": {
+          "answer": 5,
+          "range": {
+            "min": 3,
+            "max": 8
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Approximately how many kilometres long is the Danube River?",
+      "kind": {
+        "Number": {
+          "answer": 2850,
+          "range": {
+            "min": 1940,
+            "max": 3240
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Order these rivers by approximate length, longest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Yangtze",
+            "Mekong",
+            "Rhine",
+            "Seine"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Order these lakes by surface area, largest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Lake Superior",
+            "Lake Victoria",
+            "Lake Baikal",
+            "Lake Ontario"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each lake to the country most associated with it.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Lake Baikal"
+              },
+              "right": {
+                "text": "Russia"
+              }
+            },
+            {
+              "left": {
+                "text": "Lake Titicaca"
+              },
+              "right": {
+                "text": "Peru and Bolivia"
+              }
+            },
+            {
+              "left": {
+                "text": "Lake Geneva"
+              },
+              "right": {
+                "text": "Switzerland and France"
+              }
+            },
+            {
+              "left": {
+                "text": "Lake Maracaibo"
+              },
+              "right": {
+                "text": "Venezuela"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which is the largest lake lying entirely in Europe?",
+      "answers": [
+        {
+          "text": "Lake Vänern"
+        },
+        {
+          "text": "Lake Ladoga",
+          "correct": true
+        },
+        {
+          "text": "Lake Onega"
+        },
+        {
+          "text": "Lake Khanka"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which turquoise lake in Banff National Park is named after Princess Louise, a daughter of Queen Victoria?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Lake Louise"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Rivers & lakes",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the largest freshwater lake in South America?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Lake Titicaca",
+            "Titicaca"
+          ]
+        }
+      }
+    }
+  }
+]

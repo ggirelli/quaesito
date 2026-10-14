@@ -1,0 +1,661 @@
+[
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which company built the first mass-produced hybrid car, the Prius?",
+      "answers": [
+        {
+          "text": "Toyota",
+          "correct": true
+        },
+        {
+          "text": "Honda"
+        },
+        {
+          "text": "Nissan"
+        },
+        {
+          "text": "Mitsubishi"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which rail technology uses magnetic levitation to lift trains above the track?",
+      "answers": [
+        {
+          "text": "Maglev",
+          "correct": true
+        },
+        {
+          "text": "Monorail"
+        },
+        {
+          "text": "Funicular"
+        },
+        {
+          "text": "Tram"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What does ABS help prevent during hard braking?",
+      "answers": [
+        {
+          "text": "Wheel lock-up",
+          "correct": true
+        },
+        {
+          "text": "Engine overheating"
+        },
+        {
+          "text": "Fuel leakage"
+        },
+        {
+          "text": "Tyre punctures"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which aircraft manufacturer makes the 737 passenger jet?",
+      "answers": [
+        {
+          "text": "Boeing",
+          "correct": true
+        },
+        {
+          "text": "Airbus"
+        },
+        {
+          "text": "Embraer"
+        },
+        {
+          "text": "Bombardier"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which country developed the Shinkansen high-speed rail network?",
+      "answers": [
+        {
+          "text": "Japan",
+          "correct": true
+        },
+        {
+          "text": "France"
+        },
+        {
+          "text": "Germany"
+        },
+        {
+          "text": "China"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the main purpose of a car's catalytic converter?",
+      "answers": [
+        {
+          "text": "Reduce harmful exhaust emissions",
+          "correct": true
+        },
+        {
+          "text": "Improve tyre grip"
+        },
+        {
+          "text": "Cool the engine oil"
+        },
+        {
+          "text": "Increase fuel tank capacity"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which company developed the original Vespa scooter?",
+      "answers": [
+        {
+          "text": "Piaggio",
+          "correct": true
+        },
+        {
+          "text": "Aprilia"
+        },
+        {
+          "text": "Ducati"
+        },
+        {
+          "text": "Lambretta"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which fuel is used by most modern commercial jet airliners?",
+      "answers": [
+        {
+          "text": "Jet A or Jet A-1 kerosene",
+          "correct": true
+        },
+        {
+          "text": "Compressed natural gas"
+        },
+        {
+          "text": "Ethanol"
+        },
+        {
+          "text": "Hydrogen peroxide"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the European satellite navigation system?",
+      "answers": [
+        {
+          "text": "Galileo",
+          "correct": true
+        },
+        {
+          "text": "GLONASS"
+        },
+        {
+          "text": "BeiDou"
+        },
+        {
+          "text": "NavIC"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which ship type is designed to carry standardised freight containers?",
+      "answers": [
+        {
+          "text": "Container ship",
+          "correct": true
+        },
+        {
+          "text": "Bulk carrier"
+        },
+        {
+          "text": "Oil tanker"
+        },
+        {
+          "text": "Ro-ro ferry"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which inventor is most associated with the three-point seat belt introduced by Volvo in 1959?",
+      "answers": [
+        {
+          "text": "Nils Bohlin",
+          "correct": true
+        },
+        {
+          "text": "Rudolf Diesel"
+        },
+        {
+          "text": "Karl Benz"
+        },
+        {
+          "text": "Gottlieb Daimler"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What does a vehicle's differential allow its driven wheels to do when turning?",
+      "answers": [
+        {
+          "text": "Rotate at different speeds",
+          "correct": true
+        },
+        {
+          "text": "Steer independently"
+        },
+        {
+          "text": "Change tyre pressure"
+        },
+        {
+          "text": "Brake without friction"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The first successful powered flight by the Wright brothers took place in 1903.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Channel Tunnel carries cars under the sea by allowing drivers to drive their own vehicles through it.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "A diesel engine typically ignites fuel using heat from compressed air.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Orient Express originally began its journey in London.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Regenerative braking can convert some of a vehicle's kinetic energy into electrical energy.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the surname of the German engineer who invented the diesel engine?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Diesel",
+            "Rudolf Diesel"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the high-speed train network in Japan?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Shinkansen",
+            "Bullet Train"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What three-letter code identifies London's main Heathrow airport?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "LHR"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the maritime canal linking the Mediterranean Sea and the Red Sea?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Suez Canal",
+            "Suez"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did the first powered flight by the Wright brothers take place?",
+      "kind": {
+        "Number": {
+          "answer": 1903,
+          "range": {
+            "min": 1890,
+            "max": 1920
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many wheels does a standard 18-wheel articulated truck have?",
+      "kind": {
+        "Number": {
+          "answer": 18,
+          "range": {
+            "min": 10,
+            "max": 26
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did the first Shinkansen line open to passengers?",
+      "kind": {
+        "Number": {
+          "answer": 1964,
+          "range": {
+            "min": 1950,
+            "max": 1980
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many cylinders did the original Ford Model T engine have?",
+      "kind": {
+        "Number": {
+          "answer": 4,
+          "range": {
+            "min": 2,
+            "max": 8
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Order these London transport milestones by opening year, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "London Underground",
+            "Blackwall Tunnel",
+            "Heathrow Airport",
+            "Channel Tunnel"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Order these London transport milestones by opening year, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "London Underground",
+            "Blackwall Tunnel",
+            "Heathrow Airport",
+            "Channel Tunnel"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the two countries connected by the Channel Tunnel. Type each country.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Country 1",
+              "accepted": [
+                "United Kingdom",
+                "UK",
+                "Britain",
+                "Great Britain"
+              ]
+            },
+            {
+              "label": "Country 2",
+              "accepted": [
+                "France"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each vehicle with the inventor or engineer associated with it.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Diesel engine"
+              },
+              "right": {
+                "text": "Rudolf Diesel"
+              }
+            },
+            {
+              "left": {
+                "text": "Three-point seat belt"
+              },
+              "right": {
+                "text": "Nils Bohlin"
+              }
+            },
+            {
+              "left": {
+                "text": "Benz Patent-Motorwagen"
+              },
+              "right": {
+                "text": "Karl Benz"
+              }
+            },
+            {
+              "left": {
+                "text": "First practical steam locomotive"
+              },
+              "right": {
+                "text": "George Stephenson"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Transport",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each transport system or vehicle with its country of origin.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Shinkansen"
+              },
+              "right": {
+                "text": "Japan"
+              }
+            },
+            {
+              "left": {
+                "text": "TGV"
+              },
+              "right": {
+                "text": "France"
+              }
+            },
+            {
+              "left": {
+                "text": "Vespa scooter"
+              },
+              "right": {
+                "text": "Italy"
+              }
+            },
+            {
+              "left": {
+                "text": "London Underground"
+              },
+              "right": {
+                "text": "United Kingdom"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

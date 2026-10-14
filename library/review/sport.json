@@ -1,0 +1,298 @@
+[
+  {
+    "file": "sport-basketball.json",
+    "entry": 19,
+    "question": "Which surname belongs to the Lithuanian centre who joined the NBA's Portland Trail Blazers in 1995?",
+    "problem": "wrong",
+    "explanation": "The accepted answers are \"Canada\" and \"Canadian\", which make no sense. The Lithuanian centre who joined Portland in 1995 is Arvydas Sabonis.",
+    "fix": "Set accepted to [\"Sabonis\", \"Arvydas Sabonis\"]. Entry 20 then asks the same thing, so drop entry 20 (see that finding)."
+  },
+  {
+    "file": "sport-basketball.json",
+    "entry": 20,
+    "question": "What is the surname of the Lithuanian-born NBA player known as 'The Lithuanian Lion'?",
+    "problem": "wrong",
+    "explanation": "No reliable source gives Sabonis the nickname 'The Lithuanian Lion'. His recognised nickname is 'Sabas'. Once entry 19 is fixed, this entry also asks for the same player.",
+    "fix": "Drop it. If you keep it, use 'Sabas' as the nickname and remove entry 19 instead."
+  },
+  {
+    "file": "sport-basketball.json",
+    "entry": 22,
+    "question": "How many points is a successful free throw worth?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as entry 13, the TrueFalse 'A free throw is worth one point if successful.'",
+    "fix": "Drop one of entries 13 and 22."
+  },
+  {
+    "file": "sport-basketball.json",
+    "entry": 23,
+    "question": "How many metres high is a regulation basketball hoop?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as basketball entry 14 (hoop at 3.05 m) and sport-rules-and-equipment.json entry 24 (hoop at 305 cm).",
+    "fix": "Keep one of the three and drop the other two."
+  },
+  {
+    "file": "sport-basketball.json",
+    "entry": 26,
+    "question": "Order these basketball milestones by year, earliest first.",
+    "problem": "quality",
+    "explanation": "The items are team names, not milestones, so there is no clear criterion to order by.",
+    "fix": "Do not reword it as a founding-year order, because entry 27 already asks that with Bulls and Heat in both lists. Instead change the text to 'Order these NBA franchises by the year of their first NBA championship, earliest first.' Reorder the items to Lakers (1949, as Minneapolis), Bulls (1991), Heat (2006), Mavericks (2011)."
+  },
+  {
+    "file": "sport-basketball.json",
+    "entry": 27,
+    "question": "Order these NBA teams by the year they were founded, earliest first.",
+    "problem": "ambiguous",
+    "explanation": "The Knicks and the Celtics were both founded in 1946 as charter members of the BAA, so the first two items tie.",
+    "fix": "Replace the New York Knicks with the Phoenix Suns (1968). The order becomes Boston Celtics, Chicago Bulls, Phoenix Suns, Miami Heat."
+  },
+  {
+    "file": "sport-basketball.json",
+    "entry": 28,
+    "question": "Name the two countries that played in the first FIBA Basketball World Cup final in 1950.",
+    "problem": "ambiguous",
+    "explanation": "The 1950 tournament ended with a round-robin final round, not a single final match. Argentina finished first and the USA second.",
+    "fix": "Change the text to 'Name the two countries that finished first and second at the first FIBA Basketball World Cup in 1950.' Relabel the parts 'Champion' (Argentina) and 'Runner-up' (United States)."
+  },
+  {
+    "file": "sport-cycling.json",
+    "entry": 2,
+    "question": "What is the name of the bicycle race held annually around France?",
+    "problem": "quality",
+    "explanation": "The question text practically spells out the answer, Tour de France.",
+    "fix": "Reword it, e.g. 'Which annual Grand Tour traditionally finishes on the Champs-Élysées in Paris?' ('traditionally' because the 2024 edition finished in Nice)."
+  },
+  {
+    "file": "sport-cycling.json",
+    "entry": 20,
+    "question": "What is the surname of the American cyclist who won the 1984 Olympic road race?",
+    "problem": "wrong",
+    "explanation": "Alexi Grewal won the 1984 Olympic men's road race. Greg LeMond was a professional by then and did not compete.",
+    "fix": "Set accepted to [\"Grewal\", \"Alexi Grewal\"]. Alternatively, keep LeMond and ask 'Which American won the Tour de France in 1986?'"
+  },
+  {
+    "file": "sport-cycling.json",
+    "entry": 23,
+    "question": "How many kilometres long is a standard Olympic velodrome track?",
+    "problem": "wrong",
+    "explanation": "An Olympic velodrome track is 250 metres long, not 250 kilometres. The unit in the question is wrong.",
+    "fix": "Change 'kilometres' to 'metres'."
+  },
+  {
+    "file": "sport-cycling.json",
+    "entry": 26,
+    "question": "Order these cycling disciplines by their first appearance at the Summer Olympics, earliest first.",
+    "problem": "ambiguous",
+    "explanation": "Track cycling and road cycling both first appeared at Athens 1896, so the first two items tie. Mountain biking followed in 1996 and BMX racing in 2008.",
+    "fix": "Replace road cycling with BMX freestyle (2020). The order becomes Track cycling, Mountain biking, BMX racing, BMX freestyle."
+  },
+  {
+    "file": "sport-cycling.json",
+    "entry": 29,
+    "question": "Match each cycling jersey with the race classification it traditionally represents.",
+    "problem": "ambiguous",
+    "explanation": "Two items have the same partner, 'Overall leader' (Tour yellow and Giro pink), so they can be matched either way.",
+    "fix": "Replace the Giro pink pair with 'Tour de France white' and 'Best young rider'."
+  },
+  {
+    "file": "sport-football.json",
+    "entry": 3,
+    "question": "What colour card does a referee show to send a player off?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as sport-rules-and-equipment.json entry 2 (the red card means a player is sent off).",
+    "fix": "Drop one of the two."
+  },
+  {
+    "file": "sport-football.json",
+    "entry": 14,
+    "question": "A player can be offside directly from a throw-in.",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as sport-rules-and-equipment.json entry 16 ('a player cannot be offside directly from a throw-in').",
+    "fix": "Drop one of the two."
+  },
+  {
+    "file": "sport-football.json",
+    "entry": 21,
+    "question": "Which goalkeeper captained Italy to victory at the 2006 men's World Cup?",
+    "problem": "wrong",
+    "explanation": "Fabio Cannavaro, a defender, captained Italy in 2006. Buffon was the goalkeeper but not the captain.",
+    "fix": "Change the text to 'Which goalkeeper kept goal for Italy when they won the 2006 men's World Cup?' and keep the answer Buffon."
+  },
+  {
+    "file": "sport-football.json",
+    "entry": 22,
+    "question": "How many metres is the penalty spot from the goal line?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as football entry 15, the TrueFalse 'The penalty spot is 11 metres from the goal line.'",
+    "fix": "Drop one of entries 15 and 22."
+  },
+  {
+    "file": "sport-football.json",
+    "entry": 29,
+    "question": "Match each national team with its familiar nickname.",
+    "problem": "duplicate",
+    "explanation": "The Pairs repeats football entry 7 (Italy is the Azzurri) and entry 18 (Brazil is the Seleção). The first reviewer said entry 17, but entry 17 is about corner kicks.",
+    "fix": "Replace the Italy and Brazil pairs with others, e.g. England = Three Lions and Spain = La Roja, or drop entries 7 and 18."
+  },
+  {
+    "file": "sport-motor-racing.json",
+    "entry": 5,
+    "question": "What type of racing takes place on an oval track with stock cars in NASCAR?",
+    "problem": "misleading",
+    "explanation": "The question says 'stock cars', which gives away the answer 'Stock-car racing'. The same fact is also in Pairs entry 30 (NASCAR = Stock-car racing), not entry 29 as first stated.",
+    "fix": "Reword it, e.g. 'What does the acronym NASCAR stand for?' (National Association for Stock Car Auto Racing), or drop it since Pairs entry 30 already covers the fact."
+  },
+  {
+    "file": "sport-motor-racing.json",
+    "entry": 20,
+    "question": "What is the surname of the Brazilian driver who won three Formula One world titles?",
+    "problem": "ambiguous",
+    "explanation": "Nelson Piquet, also Brazilian, won three F1 titles too (1981, 1983, 1987). (The first reviewer gave this as entry 19, which is the Hayabusa question; the entry is 20.)",
+    "fix": "Add 'who died at Imola in 1994' to the text, or add Piquet and Nelson Piquet to accepted."
+  },
+  {
+    "file": "sport-motor-racing.json",
+    "entry": 21,
+    "question": "Which rally driver was nicknamed 'The Flying Finn' and won four WRC titles from 1986 to 1999?",
+    "problem": "wrong",
+    "explanation": "Kankkunen won his four titles in 1986, 1987, 1991 and 1993, not up to 1999. Tommi Mäkinen, also called a 'Flying Finn', won four titles from 1996 to 1999, so the question fits him better. (The first reviewer gave this as entry 20; it is entry 21.)",
+    "fix": "Change the text to 'Which Finnish driver won four WRC titles between 1986 and 1993?' and keep Kankkunen."
+  },
+  {
+    "file": "sport-motor-racing.json",
+    "entry": 23,
+    "question": "How many kilometres long is one lap of the Circuit de Monaco, to one decimal place?",
+    "problem": "misleading",
+    "explanation": "The text asks for one decimal place, but the stored answer is 3.337, which has three. (The first reviewer gave this as entry 22, which is the Le Mans question; it is entry 23.)",
+    "fix": "Change answer to 3.3, or change the text to 'to three decimal places'."
+  },
+  {
+    "file": "sport-olympics.json",
+    "entry": 9,
+    "question": "Which sport made its Olympic debut at the Tokyo 2020 Games?",
+    "problem": "ambiguous",
+    "explanation": "Karate and surfing both also debuted at Tokyo 2020, along with sport climbing, yet they are marked as wrong options.",
+    "fix": "Replace karate and surfing with sports that were not new, e.g. Rugby sevens (2016) and Golf (returned 2016). Squash (debuts LA 2028) can stay."
+  },
+  {
+    "file": "sport-olympics.json",
+    "entry": 20,
+    "question": "What is the name of the Olympic sport combining fencing, swimming, riding, running and shooting?",
+    "problem": "outdated",
+    "explanation": "Modern pentathlon is replacing horse riding with an obstacle discipline from the LA 2028 Games, so the list of disciplines is out of date.",
+    "fix": "Reword to 'traditionally combined fencing, swimming, riding, running and shooting', or list obstacle racing in place of riding."
+  },
+  {
+    "file": "sport-olympics.json",
+    "entry": 21,
+    "question": "Which Ethiopian runner won Olympic 10,000 m gold in 1992 and 1996?",
+    "problem": "wrong",
+    "explanation": "Gebrselassie won the 10,000 m in 1996 (Atlanta) and 2000 (Sydney). The 1992 winner was Khalid Skah of Morocco.",
+    "fix": "Change '1992 and 1996' to '1996 and 2000'."
+  },
+  {
+    "file": "sport-olympics.json",
+    "entry": 23,
+    "question": "How many kilometres long is an Olympic marathon, to three decimal places?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as olympics entry 15, the TrueFalse 'marathon distance is 42.195 km'.",
+    "fix": "Drop one of entries 15 and 23."
+  },
+  {
+    "file": "sport-olympics.json",
+    "entry": 24,
+    "question": "How many events make up the traditional men's decathlon?",
+    "problem": "misleading",
+    "explanation": "The name decathlon ('deca' = ten) gives away the answer.",
+    "fix": "Ask something not encoded in a name, e.g. 'How many metres is the final event of the decathlon?' (1500). Do not use the heptathlon, whose name ('hepta' = seven) gives its answer away too."
+  },
+  {
+    "file": "sport-rugby-and-cricket.json",
+    "entry": 18,
+    "question": "What is the name of cricket's famous urn-shaped trophy between England and Australia?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as entry 7 ('trophy contested by England and Australia in Test cricket', answer the Ashes).",
+    "fix": "Drop one of entries 7 and 18."
+  },
+  {
+    "file": "sport-rugby-and-cricket.json",
+    "entry": 19,
+    "question": "Which New Zealand rugby player was nicknamed the 'Black Pearl'?",
+    "problem": "wrong",
+    "explanation": "'The Black Pearl' is the nickname of Ellery Hanley, a British rugby league player. It is not an established nickname for Jonah Lomu.",
+    "fix": "Change the clue to 'Which All Black winger scored four tries against England in the 1995 World Cup semi-final?' and keep Lomu."
+  },
+  {
+    "file": "sport-rugby-and-cricket.json",
+    "entry": 27,
+    "question": "Order these cricket World Cup milestones by year, earliest first.",
+    "problem": "misleading",
+    "explanation": "Each item shows its year in parentheses, so the order is given away. Also, the first Test match is not a World Cup milestone.",
+    "fix": "Remove the years from the items, and change the text to 'Order these cricket milestones by year'."
+  },
+  {
+    "file": "sport-rules-and-equipment.json",
+    "entry": 1,
+    "question": "In tennis, what is the name for a score of zero?",
+    "problem": "duplicate",
+    "explanation": "This is the same fact as sport-tennis.json entry 13, the TrueFalse \"'love' means zero\".",
+    "fix": "Drop one of the two."
+  },
+  {
+    "file": "sport-rules-and-equipment.json",
+    "entry": 21,
+    "question": "In fencing, what is the name of the flexible blade used in the foil weapon?",
+    "problem": "quality",
+    "explanation": "The question asks for the name of the foil's blade and the accepted answer is 'Foil', so it answers itself and is meaningless.",
+    "fix": "Drop it, or ask 'Which fencing weapon allows cuts with the edge of the blade?' (Sabre)."
+  },
+  {
+    "file": "sport-rules-and-equipment.json",
+    "entry": 26,
+    "question": "Order these tennis court surfaces from slowest to fastest in typical play.",
+    "problem": "wrong",
+    "explanation": "Grass is generally faster than hard court, so 'Clay, Grass, Hard court, Carpet' is wrong. Carpet speed also varies, which makes its position debatable.",
+    "fix": "Drop carpet and use the order Clay, Hard court, Grass (Order accepts 2 to 6 items), or drop the entry."
+  },
+  {
+    "file": "sport-rules-and-equipment.json",
+    "entry": 27,
+    "question": "Order these Olympic fencing weapons by their introduction to the modern Olympic programme, earliest first.",
+    "problem": "ambiguous",
+    "explanation": "Foil and sabre both debuted in 1896, so they tie. Each item also shows its year in parentheses, which gives the answer away.",
+    "fix": "Remove the years and replace one of the 1896 weapons, e.g. Foil (1896), Épée (1900), Women's foil (1924), Women's épée (1996)."
+  },
+  {
+    "file": "sport-rules-and-equipment.json",
+    "entry": 29,
+    "question": "Match each sport to its standard playing object.",
+    "problem": "ambiguous",
+    "explanation": "Field hockey and baseball both have 'Ball' as their partner, so they can be matched either way.",
+    "fix": "Replace Baseball = Ball with Curling = Stone (a table-tennis ball would still clash with field hockey's 'Ball', and a golf tee is not the object played). Note too that badminton/shuttlecock repeats entry 7."
+  },
+  {
+    "file": "sport-tennis.json",
+    "entry": 16,
+    "question": "In doubles, the tramlines are considered out during a serve.",
+    "problem": "wrong",
+    "explanation": "A serve must land in the service box, which is singles width even in doubles. So the tramlines (doubles alleys) are out on the serve and the statement is true.",
+    "fix": "Set answer to true."
+  },
+  {
+    "file": "sport-tennis.json",
+    "entry": 24,
+    "question": "How many games must a player win to take a standard set by 6 games to 0?",
+    "problem": "misleading",
+    "explanation": "The question contains its own answer ('by 6 games to 0' means 6 games).",
+    "fix": "Reword to 'What is the minimum number of games needed to win a standard set?' and keep answer 6."
+  },
+  {
+    "file": "sport-tennis.json",
+    "entry": 29,
+    "question": "Match each Grand Slam tournament with its usual playing surface.",
+    "problem": "ambiguous",
+    "explanation": "The Australian Open and the US Open both have 'Hard court' as their partner, so they can be matched either way. The pairs also repeat entries 2 and 15.",
+    "fix": "Rephrase as 'Match each Grand Slam with its city' (Melbourne, Paris, London, New York), or use hard-court types (Australian Open = GreenSet/Plexicushion, US Open = Laykold/DecoTurf)."
+  }
+]

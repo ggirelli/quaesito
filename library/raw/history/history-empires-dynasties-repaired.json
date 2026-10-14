@@ -1,0 +1,117 @@
+[
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which empire made Constantinople its capital in 330 CE?",
+      "answers": [
+        {
+          "text": "Roman Empire",
+          "correct": true
+        },
+        {
+          "text": "Ottoman Empire"
+        },
+        {
+          "text": "Safavid Empire"
+        },
+        {
+          "text": "Holy Roman Empire"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did Mansa Musa make his famous pilgrimage (hajj) to Mecca?",
+      "kind": {
+        "Number": {
+          "answer": 1324,
+          "range": {
+            "min": 1200,
+            "max": 1450
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Japanese shogunate began in 1603 and ruled from Edo until 1868?",
+      "answers": [
+        {
+          "text": "Tokugawa shogunate",
+          "correct": true
+        },
+        {
+          "text": "Ashikaga shogunate"
+        },
+        {
+          "text": "Kamakura shogunate"
+        },
+        {
+          "text": "Meiji government"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "For about how many years did the Han dynasty rule China, from 206 BCE to 220 CE?",
+      "kind": {
+        "Number": {
+          "answer": 425,
+          "range": {
+            "min": 250,
+            "max": 601
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Empires & dynasties",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the two rival powers that fought the Punic Wars.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Italian power",
+              "accepted": [
+                "Rome",
+                "Roman Republic",
+                "Roman Empire"
+              ]
+            },
+            {
+              "label": "North African power",
+              "accepted": [
+                "Carthage",
+                "Carthaginian Empire",
+                "Carthaginians"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+]

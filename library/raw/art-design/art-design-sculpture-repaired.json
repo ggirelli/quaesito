@@ -1,0 +1,198 @@
+[
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Terracotta Army was buried with which Chinese emperor?",
+      "answers": [
+        {
+          "text": "Qin Shi Huang",
+          "correct": true
+        },
+        {
+          "text": "Han Wudi"
+        },
+        {
+          "text": "Kublai Khan"
+        },
+        {
+          "text": "Emperor Taizong of Tang"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Futurist sculptor made the 1913 work Unique Forms of Continuity in Space?",
+      "answers": [
+        {
+          "text": "Umberto Boccioni",
+          "correct": true
+        },
+        {
+          "text": "Constantin Brâncuși"
+        },
+        {
+          "text": "Alexander Archipenko"
+        },
+        {
+          "text": "Marcel Duchamp"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 4,
+          "range": {
+            "min": 2,
+            "max": 9
+          }
+        }
+      },
+      "text": "How many bronze horses are shown on the façade of St Mark's Basilica in Venice today?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 6,
+          "range": {
+            "min": 2,
+            "max": 11
+          }
+        }
+      },
+      "text": "How many figures are in Rodin's sculpture group The Burghers of Calais?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 20,
+          "range": {
+            "min": 10,
+            "max": 40
+          }
+        }
+      },
+      "text": "Approximately how tall is the Great Sphinx of Giza in metres, from base to top of head?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Antonio Canova"
+              },
+              "right": {
+                "text": "Psyche Revived by Cupid's Kiss"
+              }
+            },
+            {
+              "left": {
+                "text": "Alberto Giacometti"
+              },
+              "right": {
+                "text": "Walking Man I"
+              }
+            },
+            {
+              "left": {
+                "text": "Louise Bourgeois"
+              },
+              "right": {
+                "text": "Maman"
+              }
+            },
+            {
+              "left": {
+                "text": "Jeff Koons"
+              },
+              "right": {
+                "text": "Balloon Dog"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each sculptor to the sculpture they created."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Sculpture",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Henry Moore"
+              },
+              "right": {
+                "text": "Recumbent Figure"
+              }
+            },
+            {
+              "left": {
+                "text": "Marcel Duchamp"
+              },
+              "right": {
+                "text": "Fountain"
+              }
+            },
+            {
+              "left": {
+                "text": "Auguste Rodin"
+              },
+              "right": {
+                "text": "The Thinker"
+              }
+            },
+            {
+              "left": {
+                "text": "Barbara Hepworth"
+              },
+              "right": {
+                "text": "Pelagos"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each sculptor to the sculpture they created."
+    }
+  }
+]

@@ -1,0 +1,57 @@
+[
+  {
+    "category": "Geography",
+    "topic": "Oceans & seas",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the narrow strait linking the Black Sea to the Sea of Marmara?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Bosphorus",
+            "Bosphorus Strait",
+            "Bosporus",
+            "Bosporus Strait",
+            "Istanbul Strait"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Oceans & seas",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which northern arm of the Baltic Sea lies between Sweden and Finland?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Gulf of Bothnia",
+            "Bothnian Sea"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Oceans & seas",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many oceans does the most common modern model recognize?",
+      "kind": {
+        "Number": {
+          "answer": 5,
+          "range": {
+            "min": 3,
+            "max": 8
+          }
+        }
+      }
+    }
+  }
+]

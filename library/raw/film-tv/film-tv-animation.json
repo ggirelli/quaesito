@@ -1,0 +1,658 @@
+[
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the toy cowboy in Toy Story?",
+      "answers": [
+        {
+          "text": "Buzz Lightyear"
+        },
+        {
+          "text": "Woody",
+          "correct": true
+        },
+        {
+          "text": "Jessie"
+        },
+        {
+          "text": "Andy"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Disney film features the song-free snowman Olaf?",
+      "answers": [
+        {
+          "text": "Moana"
+        },
+        {
+          "text": "Frozen",
+          "correct": true
+        },
+        {
+          "text": "Tangled"
+        },
+        {
+          "text": "Brave"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In Finding Nemo, what kind of fish is Nemo?",
+      "answers": [
+        {
+          "text": "Blue tang"
+        },
+        {
+          "text": "Clownfish",
+          "correct": true
+        },
+        {
+          "text": "Pufferfish"
+        },
+        {
+          "text": "Angelfish"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which animated series features the Simpson family?",
+      "answers": [
+        {
+          "text": "Family Guy"
+        },
+        {
+          "text": "The Simpsons",
+          "correct": true
+        },
+        {
+          "text": "South Park"
+        },
+        {
+          "text": "Futurama"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the kingdom's princess in Disney's The Little Mermaid?",
+      "answers": [
+        {
+          "text": "Belle"
+        },
+        {
+          "text": "Ariel",
+          "correct": true
+        },
+        {
+          "text": "Jasmine"
+        },
+        {
+          "text": "Aurora"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which studio created the stop-motion film Coraline?",
+      "answers": [
+        {
+          "text": "Laika",
+          "correct": true
+        },
+        {
+          "text": "Aardman"
+        },
+        {
+          "text": "Pixar"
+        },
+        {
+          "text": "Studio Ghibli"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who directed the 2001 animated film Spirited Away?",
+      "answers": [
+        {
+          "text": "Isao Takahata"
+        },
+        {
+          "text": "Hayao Miyazaki",
+          "correct": true
+        },
+        {
+          "text": "Mamoru Hosoda"
+        },
+        {
+          "text": "Satoshi Kon"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In Shrek, what kind of creature is Donkey?",
+      "answers": [
+        {
+          "text": "A talking donkey",
+          "correct": true
+        },
+        {
+          "text": "A talking horse"
+        },
+        {
+          "text": "A talking wolf"
+        },
+        {
+          "text": "A talking goat"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which 1988 Japanese animated film was directed by Katsuhiro Otomo?",
+      "answers": [
+        {
+          "text": "Akira",
+          "correct": true
+        },
+        {
+          "text": "Ghost in the Shell"
+        },
+        {
+          "text": "Perfect Blue"
+        },
+        {
+          "text": "Paprika"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which animator created the characters Wallace and Gromit?",
+      "answers": [
+        {
+          "text": "Nick Park",
+          "correct": true
+        },
+        {
+          "text": "Richard Williams"
+        },
+        {
+          "text": "Ray Harryhausen"
+        },
+        {
+          "text": "Peter Lord"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which 1937 Disney feature was the studio's first full-length animated feature?",
+      "answers": [
+        {
+          "text": "Pinocchio"
+        },
+        {
+          "text": "Snow White and the Seven Dwarfs",
+          "correct": true
+        },
+        {
+          "text": "Fantasia"
+        },
+        {
+          "text": "Dumbo"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the fictional city where Batman often operates in animated films and series?",
+      "answers": [
+        {
+          "text": "Metropolis"
+        },
+        {
+          "text": "Gotham City",
+          "correct": true
+        },
+        {
+          "text": "Central City"
+        },
+        {
+          "text": "Star City"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Mickey Mouse made his official screen debut in Steamboat Willie in 1928.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The main character in Kung Fu Panda is a tiger named Tigress.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Studio Ghibli produced the animated film My Neighbor Totoro.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The Pixar film Up begins with a young boy travelling to the moon.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "The 1926 feature The Adventures of Prince Achmed was made using silhouette animation.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the rat who cooks in Ratatouille?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Remy"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the kingdom in Disney's Tangled?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Corona"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Japanese animation director made Princess Mononoke and My Neighbor Totoro?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Hayao Miyazaki",
+            "Miyazaki"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the robot protagonist in WALL-E?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "WALL-E",
+            "Wall E",
+            "WALL E"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year was Toy Story, Pixar's first feature film, released?",
+      "kind": {
+        "Number": {
+          "answer": 1995,
+          "range": {
+            "min": 1980,
+            "max": 2015
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year did the original The Lion King animated film premiere?",
+      "kind": {
+        "Number": {
+          "answer": 1994,
+          "range": {
+            "min": 1980,
+            "max": 2010
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year was Spirited Away first released in Japan?",
+      "kind": {
+        "Number": {
+          "answer": 2001,
+          "range": {
+            "min": 1985,
+            "max": 2020
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "In what year was the French animated feature Fantastic Planet released?",
+      "kind": {
+        "Number": {
+          "answer": 1973,
+          "range": {
+            "min": 1950,
+            "max": 1995
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these Pixar films in release order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Toy Story (1995)",
+            "A Bug's Life (1998)",
+            "Monsters, Inc. (2001)",
+            "Finding Nemo (2003)"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these Studio Ghibli films in release order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Nausicaä of the Valley of the Wind (1984)",
+            "My Neighbor Totoro (1988)",
+            "Princess Mononoke (1997)",
+            "Spirited Away (2001)"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the two main characters in Disney's The Emperor's New Groove.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Emperor",
+              "accepted": [
+                "Kuzco"
+              ]
+            },
+            {
+              "label": "Peasant",
+              "accepted": [
+                "Pacha"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each animated film with its studio.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Toy Story"
+              },
+              "right": {
+                "text": "Pixar"
+              }
+            },
+            {
+              "left": {
+                "text": "Coraline"
+              },
+              "right": {
+                "text": "Laika"
+              }
+            },
+            {
+              "left": {
+                "text": "Chicken Run"
+              },
+              "right": {
+                "text": "Aardman"
+              }
+            },
+            {
+              "left": {
+                "text": "Spirited Away"
+              },
+              "right": {
+                "text": "Studio Ghibli"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Animation",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each animated character with the franchise they belong to.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Pikachu"
+              },
+              "right": {
+                "text": "Pokémon"
+              }
+            },
+            {
+              "left": {
+                "text": "Bender"
+              },
+              "right": {
+                "text": "Futurama"
+              }
+            },
+            {
+              "left": {
+                "text": "Daria Morgendorffer"
+              },
+              "right": {
+                "text": "Daria"
+              }
+            },
+            {
+              "left": {
+                "text": "Aang"
+              },
+              "right": {
+                "text": "Avatar: The Last Airbender"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

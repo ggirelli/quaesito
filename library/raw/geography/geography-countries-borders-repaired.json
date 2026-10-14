@@ -1,0 +1,50 @@
+[
+  {
+    "category": "Geography",
+    "topic": "Countries & borders",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Counting all its land neighbours, which European country borders the most countries?",
+      "answers": [
+        {
+          "text": "Russia",
+          "correct": true
+        },
+        {
+          "text": "Germany"
+        },
+        {
+          "text": "France"
+        },
+        {
+          "text": "Austria"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Geography",
+    "topic": "Countries & borders",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which of these countries borders the fewest other countries?",
+      "answers": [
+        {
+          "text": "Ecuador",
+          "correct": true
+        },
+        {
+          "text": "Chile"
+        },
+        {
+          "text": "Brazil"
+        },
+        {
+          "text": "Colombia"
+        }
+      ]
+    }
+  }
+]

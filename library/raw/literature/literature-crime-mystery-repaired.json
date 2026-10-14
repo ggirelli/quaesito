@@ -1,0 +1,42 @@
+[
+  {
+    "category": "Literature",
+    "topic": "Crime & mystery",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Christie detective",
+              "accepted": [
+                "Hercule Poirot",
+                "Poirot",
+                "Miss Marple",
+                "Jane Marple",
+                "Marple"
+              ]
+            },
+            {
+              "label": "Doyle detective",
+              "accepted": [
+                "Sherlock Holmes",
+                "Holmes"
+              ]
+            },
+            {
+              "label": "Sayers detective",
+              "accepted": [
+                "Lord Peter Wimsey",
+                "Peter Wimsey",
+                "Wimsey"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name the famous detective associated with each of these three authors: Christie, Doyle and Sayers."
+    }
+  }
+]
