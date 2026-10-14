@@ -1,3 +1,6 @@
+# docs/requirements.txt pins MkDocs below 2.0, so Material's banner warning about MkDocs 2.0 is noise
+export NO_MKDOCS_2_WARNING := "true"
+
 # List available recipes
 default:
     @just --list
