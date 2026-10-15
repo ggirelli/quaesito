@@ -1,0 +1,596 @@
+[
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 1,
+    "question": {
+      "text": "Which grape variety is most famously used to make red Burgundy wine?",
+      "answers": [
+        {
+          "text": "Pinot Noir",
+          "correct": true
+        },
+        {
+          "text": "Cabernet Sauvignon"
+        },
+        {
+          "text": "Syrah"
+        },
+        {
+          "text": "Merlot"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 1,
+    "question": {
+      "text": "Which country is the origin of Guinness stout?",
+      "answers": [
+        {
+          "text": "Ireland",
+          "correct": true
+        },
+        {
+          "text": "Scotland"
+        },
+        {
+          "text": "Belgium"
+        },
+        {
+          "text": "Germany"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 1,
+    "question": {
+      "text": "What is the main ingredient that yeast turns into alcohol during fermentation?",
+      "answers": [
+        {
+          "text": "Sugar",
+          "correct": true
+        },
+        {
+          "text": "Starch"
+        },
+        {
+          "text": "Protein"
+        },
+        {
+          "text": "Acetic acid"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 1,
+    "question": {
+      "text": "Which sparkling wine is traditionally associated with Spain?",
+      "answers": [
+        {
+          "text": "Cava",
+          "correct": true
+        },
+        {
+          "text": "Prosecco"
+        },
+        {
+          "text": "Sekt"
+        },
+        {
+          "text": "Crémant"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 3,
+    "question": {
+      "text": "Which hop-derived compounds contribute much of beer's bitterness?",
+      "answers": [
+        {
+          "text": "Alpha acids",
+          "correct": true
+        },
+        {
+          "text": "Tannins"
+        },
+        {
+          "text": "Lactic acids"
+        },
+        {
+          "text": "Pectin"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 2,
+    "question": {
+      "text": "Which German beer style is traditionally brewed with a substantial share of wheat malt?",
+      "answers": [
+        {
+          "text": "Weissbier",
+          "correct": true
+        },
+        {
+          "text": "Doppelbock"
+        },
+        {
+          "text": "Altbier"
+        },
+        {
+          "text": "Rauchbier"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 2,
+    "question": {
+      "text": "Which fortified wine is traditionally produced in Portugal's Douro Valley?",
+      "answers": [
+        {
+          "text": "Port",
+          "correct": true
+        },
+        {
+          "text": "Sherry"
+        },
+        {
+          "text": "Marsala"
+        },
+        {
+          "text": "Madeira"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 3,
+    "question": {
+      "text": "Which grape variety is the principal grape in red Barolo wine?",
+      "answers": [
+        {
+          "text": "Nebbiolo",
+          "correct": true
+        },
+        {
+          "text": "Barbera"
+        },
+        {
+          "text": "Dolcetto"
+        },
+        {
+          "text": "Sangiovese"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 3,
+    "question": {
+      "text": "Which region is especially associated with the beer style lambic?",
+      "answers": [
+        {
+          "text": "Pajottenland",
+          "correct": true
+        },
+        {
+          "text": "Bavaria"
+        },
+        {
+          "text": "Bohemia"
+        },
+        {
+          "text": "Franconia"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 3,
+    "question": {
+      "text": "In traditional Champagne production, what is the second fermentation carried out in?",
+      "answers": [
+        {
+          "text": "The bottle",
+          "correct": true
+        },
+        {
+          "text": "An open vat"
+        },
+        {
+          "text": "A wooden cask"
+        },
+        {
+          "text": "A serving keg"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 3,
+    "question": {
+      "text": "Which wine fault is commonly associated with the compound 2,4,6-trichloroanisole (TCA)?",
+      "answers": [
+        {
+          "text": "Cork taint",
+          "correct": true
+        },
+        {
+          "text": "Oxidation"
+        },
+        {
+          "text": "Volatile acidity"
+        },
+        {
+          "text": "Reduction"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 1,
+    "question": {
+      "text": "All wines are made from grapes.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 2,
+    "question": {
+      "text": "Prosecco is traditionally made using the Glera grape.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 2,
+    "question": {
+      "text": "Lagers are fermented with the same yeast species used in traditional top-fermented ales in all cases.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 2,
+    "question": {
+      "text": "What term describes the process by which yeast converts sugars into alcohol?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "fermentation",
+            "alcoholic fermentation"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 1,
+    "question": {
+      "text": "What is the name of the beer style traditionally brewed in Cologne, Germany?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "kölsch",
+            "koelsch"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 3,
+    "question": {
+      "text": "Which grape variety is used to make Sancerre's classic white wines?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "sauvignon blanc",
+            "sauvignon"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 1,
+    "question": {
+      "text": "How many 750 mL bottles are in a standard 9-litre case of wine?",
+      "kind": {
+        "Number": {
+          "answer": 12,
+          "range": {
+            "min": 6,
+            "max": 20
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 2,
+    "question": {
+      "text": "How many litres are in a standard wine bottle?",
+      "kind": {
+        "Number": {
+          "answer": 0.75,
+          "range": {
+            "min": 0.5,
+            "max": 1.2
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 2,
+    "question": {
+      "text": "How many millilitres are in an imperial pint of beer, approximately?",
+      "kind": {
+        "Number": {
+          "answer": 568,
+          "range": {
+            "min": 400,
+            "max": 700
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 1,
+    "question": {
+      "text": "Put these Champagne sweetness categories in order from driest to sweetest.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Brut nature",
+            "Brut",
+            "Demi-sec",
+            "Doux"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 2,
+    "question": {
+      "text": "Put these brewing stages in order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Malting",
+            "Mashing",
+            "Boiling the wort",
+            "Fermentation"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 2,
+    "question": {
+      "text": "Name the three main ingredients used in traditional beer brewing besides water.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Ingredient 1",
+              "accepted": [
+                "malted barley",
+                "barley malt",
+                "malt"
+              ]
+            },
+            {
+              "label": "Ingredient 2",
+              "accepted": [
+                "hops"
+              ]
+            },
+            {
+              "label": "Ingredient 3",
+              "accepted": [
+                "yeast",
+                "brewer's yeast"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 3,
+    "question": {
+      "text": "Match each wine with the country it is especially associated with.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Port"
+              },
+              "right": {
+                "text": "Portugal"
+              }
+            },
+            {
+              "left": {
+                "text": "Cava"
+              },
+              "right": {
+                "text": "Spain"
+              }
+            },
+            {
+              "left": {
+                "text": "Chianti"
+              },
+              "right": {
+                "text": "Italy"
+              }
+            },
+            {
+              "left": {
+                "text": "Sake"
+              },
+              "right": {
+                "text": "Japan"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 2,
+    "question": {
+      "text": "What is the name for the sealed container in which beer is stored and served under CO2 pressure?",
+      "answers": [
+        {
+          "text": "Keg",
+          "correct": true
+        },
+        {
+          "text": "Cask"
+        },
+        {
+          "text": "Carboy"
+        },
+        {
+          "text": "Hogshead"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 3,
+    "question": {
+      "text": "Châteauneuf-du-Pape is famous for traditionally permitting how many grape varieties?",
+      "kind": {
+        "Number": {
+          "answer": 13,
+          "range": {
+            "min": 5,
+            "max": 25
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Wine & beer",
+    "difficulty": 3,
+    "question": {
+      "text": "Match each beer style with its place of origin.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Kölsch"
+              },
+              "right": {
+                "text": "Cologne"
+              }
+            },
+            {
+              "left": {
+                "text": "Pilsner"
+              },
+              "right": {
+                "text": "Plzeň"
+              }
+            },
+            {
+              "left": {
+                "text": "Gueuze"
+              },
+              "right": {
+                "text": "Belgian lambic tradition"
+              }
+            },
+            {
+              "left": {
+                "text": "Irish dry stout"
+              },
+              "right": {
+                "text": "Dublin"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

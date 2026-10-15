@@ -1,0 +1,600 @@
+[
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 1,
+    "question": {
+      "text": "Which camera setting controls how long the sensor is exposed to light?",
+      "answers": [
+        {
+          "text": "Shutter speed",
+          "correct": true
+        },
+        {
+          "text": "White balance"
+        },
+        {
+          "text": "Focal length"
+        },
+        {
+          "text": "Color profile"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 1,
+    "question": {
+      "text": "What does a photographer usually call the opening in a lens that lets light through?",
+      "answers": [
+        {
+          "text": "Aperture",
+          "correct": true
+        },
+        {
+          "text": "Viewfinder"
+        },
+        {
+          "text": "Hot shoe"
+        },
+        {
+          "text": "Sensor"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 1,
+    "question": {
+      "text": "Which device is used to keep a camera steady during a long exposure?",
+      "answers": [
+        {
+          "text": "Tripod",
+          "correct": true
+        },
+        {
+          "text": "Reflector"
+        },
+        {
+          "text": "Light meter"
+        },
+        {
+          "text": "Lens hood"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 1,
+    "question": {
+      "text": "What is the main purpose of a camera's viewfinder?",
+      "answers": [
+        {
+          "text": "To compose the shot",
+          "correct": true
+        },
+        {
+          "text": "To store the photos"
+        },
+        {
+          "text": "To charge the battery"
+        },
+        {
+          "text": "To change the lens mount"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 1,
+    "question": {
+      "text": "Which type of photography focuses on very small subjects at close range?",
+      "answers": [
+        {
+          "text": "Macro photography",
+          "correct": true
+        },
+        {
+          "text": "Street photography"
+        },
+        {
+          "text": "Aerial photography"
+        },
+        {
+          "text": "Sports photography"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 1,
+    "question": {
+      "text": "What does a histogram help a photographer assess in an image?",
+      "answers": [
+        {
+          "text": "Tonal distribution",
+          "correct": true
+        },
+        {
+          "text": "Lens weight"
+        },
+        {
+          "text": "Camera temperature"
+        },
+        {
+          "text": "File name"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 2,
+    "question": {
+      "text": "Which lens type is designed to make distant subjects appear closer?",
+      "answers": [
+        {
+          "text": "Telephoto lens",
+          "correct": true
+        },
+        {
+          "text": "Fisheye lens"
+        },
+        {
+          "text": "Tilt-shift lens"
+        },
+        {
+          "text": "Pancake lens"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 2,
+    "question": {
+      "text": "In photography, what is bokeh?",
+      "answers": [
+        {
+          "text": "The aesthetic quality of out-of-focus areas",
+          "correct": true
+        },
+        {
+          "text": "A camera's maximum burst rate"
+        },
+        {
+          "text": "A type of film grain"
+        },
+        {
+          "text": "A lens's minimum focusing distance"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 2,
+    "question": {
+      "text": "Which process records an image by exposing film and then chemically developing it?",
+      "answers": [
+        {
+          "text": "Analog photography",
+          "correct": true
+        },
+        {
+          "text": "Computational photography"
+        },
+        {
+          "text": "Photogrammetry"
+        },
+        {
+          "text": "Thermal imaging"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 2,
+    "question": {
+      "text": "What does a polarizing filter commonly help reduce?",
+      "answers": [
+        {
+          "text": "Reflections and glare",
+          "correct": true
+        },
+        {
+          "text": "Motion blur"
+        },
+        {
+          "text": "Sensor noise"
+        },
+        {
+          "text": "Lens distortion"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 3,
+    "question": {
+      "text": "Which photographer is strongly associated with the concept of the 'decisive moment'?",
+      "answers": [
+        {
+          "text": "Henri Cartier-Bresson",
+          "correct": true
+        },
+        {
+          "text": "Man Ray"
+        },
+        {
+          "text": "Cindy Sherman"
+        },
+        {
+          "text": "Edward Weston"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 1,
+    "question": {
+      "text": "A wider aperture generally lets more light reach the camera sensor.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 1,
+    "question": {
+      "text": "A photograph can be made without a lens, using a pinhole camera.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 2,
+    "question": {
+      "text": "Increasing ISO always improves image quality by reducing noise.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 2,
+    "question": {
+      "text": "A RAW file usually preserves more image data for editing than a JPEG.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 3,
+    "question": {
+      "text": "The cyanotype process traditionally produces blue-toned images.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 1,
+    "question": {
+      "text": "What is the term for a photograph made by exposing light-sensitive paper without a camera?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Photogram"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 2,
+    "question": {
+      "text": "What is the name of the device that measures light for exposure?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Light meter",
+            "Exposure meter"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 2,
+    "question": {
+      "text": "Which photographer created the long-running portrait series 'Humans of New York'?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Brandon Stanton",
+            "Stanton"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 3,
+    "question": {
+      "text": "What is the name of the early photographic process announced by Louis Daguerre in 1839?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Daguerreotype",
+            "Daguerreotypes"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 3,
+    "question": {
+      "text": "How many hours is the exposure of 'View from the Window at Le Gras' often estimated to have been? Give hours.",
+      "kind": {
+        "Number": {
+          "answer": 8,
+          "range": {
+            "min": 1,
+            "max": 20
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 2,
+    "question": {
+      "text": "Put these photographic processes in chronological order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Camera obscura",
+            "Daguerreotype",
+            "Wet-plate collodion",
+            "35 mm film"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 3,
+    "question": {
+      "text": "Put these photographers in chronological order by birth year, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Julia Margaret Cameron",
+            "Alfred Stieglitz",
+            "Dorothea Lange",
+            "Diane Arbus"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 2,
+    "question": {
+      "text": "Match each photographer with the practice they are especially associated with.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Ansel Adams"
+              },
+              "right": {
+                "text": "Landscape photography"
+              }
+            },
+            {
+              "left": {
+                "text": "Dorothea Lange"
+              },
+              "right": {
+                "text": "Documentary photography"
+              }
+            },
+            {
+              "left": {
+                "text": "Man Ray"
+              },
+              "right": {
+                "text": "Surrealist photography"
+              }
+            },
+            {
+              "left": {
+                "text": "Cindy Sherman"
+              },
+              "right": {
+                "text": "Self-portraiture"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 3,
+    "question": {
+      "text": "Match each photographic term with its defining material or method.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Daguerreotype"
+              },
+              "right": {
+                "text": "Polished silver-plated copper"
+              }
+            },
+            {
+              "left": {
+                "text": "Cyanotype"
+              },
+              "right": {
+                "text": "Iron salts and blue pigment"
+              }
+            },
+            {
+              "left": {
+                "text": "Tintype"
+              },
+              "right": {
+                "text": "Thin metal plate"
+              }
+            },
+            {
+              "left": {
+                "text": "Photogram"
+              },
+              "right": {
+                "text": "Image made without a camera"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 3,
+    "question": {
+      "text": "Lunch Atop a Skyscraper (1932) shows workers on which New York building?",
+      "answers": [
+        {
+          "text": "30 Rockefeller Plaza (RCA Building)",
+          "correct": true
+        },
+        {
+          "text": "Empire State Building"
+        },
+        {
+          "text": "Chrysler Building"
+        },
+        {
+          "text": "Woolworth Building"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 1,
+    "question": {
+      "text": "What is the width in mm of a standard 35 mm still-photo frame (the long side)?",
+      "kind": {
+        "Number": {
+          "answer": 36,
+          "range": {
+            "min": 20,
+            "max": 50
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Photography",
+    "difficulty": 3,
+    "question": {
+      "text": "Match each exposure control to what it controls.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Controls light duration",
+              "accepted": [
+                "Shutter speed"
+              ]
+            },
+            {
+              "label": "Controls lens opening",
+              "accepted": [
+                "Aperture"
+              ]
+            },
+            {
+              "label": "Controls sensor sensitivity",
+              "accepted": [
+                "ISO"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+]

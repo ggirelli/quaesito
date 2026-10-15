@@ -1,0 +1,617 @@
+[
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 1,
+    "question": {
+      "text": "Which film won Best Picture at the 1998 Academy Awards?",
+      "answers": [
+        {
+          "text": "Titanic",
+          "correct": true
+        },
+        {
+          "text": "Good Will Hunting"
+        },
+        {
+          "text": "L.A. Confidential"
+        },
+        {
+          "text": "As Good as It Gets"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 1,
+    "question": {
+      "text": "Which actor won an Oscar for playing Forrest Gump?",
+      "answers": [
+        {
+          "text": "Tom Hanks",
+          "correct": true
+        },
+        {
+          "text": "Kevin Costner"
+        },
+        {
+          "text": "Nicolas Cage"
+        },
+        {
+          "text": "Robin Williams"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 1,
+    "question": {
+      "text": "Which animated film won the first Oscar for Best Animated Feature?",
+      "answers": [
+        {
+          "text": "Shrek",
+          "correct": true
+        },
+        {
+          "text": "Monsters, Inc."
+        },
+        {
+          "text": "Finding Nemo"
+        },
+        {
+          "text": "Ice Age"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 1,
+    "question": {
+      "text": "Who won Best Actress for La La Land?",
+      "answers": [
+        {
+          "text": "Emma Stone",
+          "correct": true
+        },
+        {
+          "text": "Natalie Portman"
+        },
+        {
+          "text": "Brie Larson"
+        },
+        {
+          "text": "Jennifer Lawrence"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 2,
+    "question": {
+      "text": "Which film won Best Picture at the 2020 Academy Awards ceremony?",
+      "answers": [
+        {
+          "text": "1917"
+        },
+        {
+          "text": "Parasite",
+          "correct": true
+        },
+        {
+          "text": "Joker"
+        },
+        {
+          "text": "Once Upon a Time in Hollywood"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 2,
+    "question": {
+      "text": "Which actor won Best Supporting Actor for The Dark Knight?",
+      "answers": [
+        {
+          "text": "Heath Ledger",
+          "correct": true
+        },
+        {
+          "text": "Javier Bardem"
+        },
+        {
+          "text": "Philip Seymour Hoffman"
+        },
+        {
+          "text": "Sean Penn"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 3,
+    "question": {
+      "text": "Which film became the first non-English-language winner of the Best Picture Oscar?",
+      "answers": [
+        {
+          "text": "Roma"
+        },
+        {
+          "text": "Parasite",
+          "correct": true
+        },
+        {
+          "text": "Crouching Tiger, Hidden Dragon"
+        },
+        {
+          "text": "Life Is Beautiful"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 3,
+    "question": {
+      "text": "Who was the first woman to win the Oscar for Best Director?",
+      "answers": [
+        {
+          "text": "Kathryn Bigelow",
+          "correct": true
+        },
+        {
+          "text": "Jane Campion"
+        },
+        {
+          "text": "Chloé Zhao"
+        },
+        {
+          "text": "Greta Gerwig"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 3,
+    "question": {
+      "text": "Which film won the Oscar for Best International Feature Film at the 2021 ceremony?",
+      "answers": [
+        {
+          "text": "Another Round",
+          "correct": true
+        },
+        {
+          "text": "Collective"
+        },
+        {
+          "text": "The Man Who Sold His Skin"
+        },
+        {
+          "text": "Quo Vadis, Aida?"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 1,
+    "question": {
+      "text": "Walt Disney won multiple competitive Academy Awards during his career.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 1,
+    "question": {
+      "text": "The film Jaws won the Oscar for Best Picture.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 2,
+    "question": {
+      "text": "Katharine Hepburn won four competitive Oscars for acting.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 2,
+    "question": {
+      "text": "The 1994 Best Picture Oscar went to Pulp Fiction.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 3,
+    "question": {
+      "text": "At the 2017 ceremony, La La Land was mistakenly announced as Best Picture before Moonlight was named the winner.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 1,
+    "question": {
+      "text": "What is the surname of the actor who won Best Actor for Philadelphia?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Hanks",
+            "Tom Hanks"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 2,
+    "question": {
+      "text": "Who won the Best Actress Oscar for Blue Jasmine?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Cate Blanchett",
+            "Blanchett"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 3,
+    "question": {
+      "text": "Which Japanese film won the 2024 Oscar for Best Animated Feature?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "The Boy and the Heron",
+            "Boy and the Heron"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 1,
+    "question": {
+      "text": "In what year did the first Academy Awards ceremony take place?",
+      "kind": {
+        "Number": {
+          "answer": 1929,
+          "range": {
+            "min": 1910,
+            "max": 1960
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 2,
+    "question": {
+      "text": "In what year did the film The Artist win Best Picture?",
+      "kind": {
+        "Number": {
+          "answer": 2012,
+          "range": {
+            "min": 1995,
+            "max": 2025
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 3,
+    "question": {
+      "text": "In what year did The Silence of the Lambs win Best Picture?",
+      "kind": {
+        "Number": {
+          "answer": 1992,
+          "range": {
+            "min": 1970,
+            "max": 2010
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 3,
+    "question": {
+      "text": "Name the two actors who won Oscars for playing the same character, Vito Corleone.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "The Godfather (1972)",
+              "accepted": [
+                "Marlon Brando",
+                "Brando"
+              ]
+            },
+            {
+              "label": "The Godfather Part II (1974)",
+              "accepted": [
+                "Robert De Niro",
+                "De Niro"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 3,
+    "question": {
+      "text": "Match each actor with the film for which they won an acting Oscar.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Louise Fletcher"
+              },
+              "right": {
+                "text": "One Flew Over the Cuckoo's Nest"
+              }
+            },
+            {
+              "left": {
+                "text": "Rami Malek"
+              },
+              "right": {
+                "text": "Bohemian Rhapsody"
+              }
+            },
+            {
+              "left": {
+                "text": "Anthony Hopkins"
+              },
+              "right": {
+                "text": "The Silence of the Lambs"
+              }
+            },
+            {
+              "left": {
+                "text": "Halle Berry"
+              },
+              "right": {
+                "text": "Monster's Ball"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 1,
+    "question": {
+      "text": "What is the name of the Oscar category that honours achievement in film music?",
+      "answers": [
+        {
+          "text": "Best Original Score",
+          "correct": true
+        },
+        {
+          "text": "Best Sound Editing"
+        },
+        {
+          "text": "Best Visual Effects"
+        },
+        {
+          "text": "Best Sound Mixing"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 2,
+    "question": {
+      "text": "Who directed the film that won Best Picture at the 2017 Academy Awards?",
+      "answers": [
+        {
+          "text": "Barry Jenkins",
+          "correct": true
+        },
+        {
+          "text": "Damien Chazelle"
+        },
+        {
+          "text": "Kenneth Lonergan"
+        },
+        {
+          "text": "Denis Villeneuve"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 3,
+    "question": {
+      "text": "Which film won Best Picture at the 1973 Academy Awards ceremony?",
+      "answers": [
+        {
+          "text": "Sounder"
+        },
+        {
+          "text": "The Godfather",
+          "correct": true
+        },
+        {
+          "text": "Cabaret"
+        },
+        {
+          "text": "Deliverance"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 2,
+    "question": {
+      "text": "Which film won Best Picture at the 2004 Academy Awards?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "The Lord of the Rings: The Return of the King",
+            "Return of the King",
+            "The Return of the King",
+            "Lord of the Rings: The Return of the King",
+            "LOTR: The Return of the King"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 2,
+    "question": {
+      "text": "Put these Best Picture winners in ceremony order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "The Godfather",
+            "Rocky",
+            "Rain Man",
+            "Titanic"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 3,
+    "question": {
+      "text": "Put these films in the order they won Best Picture, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "The Apartment",
+            "The French Connection",
+            "Amadeus",
+            "No Country for Old Men"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Film & TV",
+    "topic": "Oscars",
+    "difficulty": 2,
+    "question": {
+      "text": "Match each film with its Best Picture-winning year.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Annie Hall"
+              },
+              "right": {
+                "text": "1978 ceremony"
+              }
+            },
+            {
+              "left": {
+                "text": "Platoon"
+              },
+              "right": {
+                "text": "1987 ceremony"
+              }
+            },
+            {
+              "left": {
+                "text": "Gladiator"
+              },
+              "right": {
+                "text": "2001 ceremony"
+              }
+            },
+            {
+              "left": {
+                "text": "The King's Speech"
+              },
+              "right": {
+                "text": "2011 ceremony"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,627 @@
+[
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 1,
+    "question": {
+      "text": "Which layer of Earth's atmosphere contains most of its weather?",
+      "answers": [
+        {
+          "text": "Stratosphere"
+        },
+        {
+          "text": "Troposphere",
+          "correct": true
+        },
+        {
+          "text": "Mesosphere"
+        },
+        {
+          "text": "Thermosphere"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 1,
+    "question": {
+      "text": "What instrument measures atmospheric pressure?",
+      "answers": [
+        {
+          "text": "Hygrometer"
+        },
+        {
+          "text": "Barometer",
+          "correct": true
+        },
+        {
+          "text": "Anemometer"
+        },
+        {
+          "text": "Seismometer"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 1,
+    "question": {
+      "text": "What is molten rock called while it is still beneath Earth's surface?",
+      "answers": [
+        {
+          "text": "Lava"
+        },
+        {
+          "text": "Magma",
+          "correct": true
+        },
+        {
+          "text": "Basalt"
+        },
+        {
+          "text": "Ash"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 2,
+    "question": {
+      "text": "What process turns water vapour into liquid droplets in clouds?",
+      "answers": [
+        {
+          "text": "Evaporation"
+        },
+        {
+          "text": "Condensation",
+          "correct": true
+        },
+        {
+          "text": "Sublimation"
+        },
+        {
+          "text": "Infiltration"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 2,
+    "question": {
+      "text": "Which type of tectonic plate boundary commonly forms mid-ocean ridges?",
+      "answers": [
+        {
+          "text": "Convergent"
+        },
+        {
+          "text": "Divergent",
+          "correct": true
+        },
+        {
+          "text": "Transform"
+        },
+        {
+          "text": "Collision-only"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 2,
+    "question": {
+      "text": "What is the name for the boundary between Earth's crust and mantle?",
+      "answers": [
+        {
+          "text": "Gutenberg discontinuity"
+        },
+        {
+          "text": "Mohorovičić discontinuity",
+          "correct": true
+        },
+        {
+          "text": "Lehmann discontinuity"
+        },
+        {
+          "text": "Conrad discontinuity"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 2,
+    "question": {
+      "text": "Which gas is the largest contributor to the natural greenhouse effect?",
+      "answers": [
+        {
+          "text": "Carbon dioxide"
+        },
+        {
+          "text": "Methane"
+        },
+        {
+          "text": "Water vapour",
+          "correct": true
+        },
+        {
+          "text": "Nitrous oxide"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 3,
+    "question": {
+      "text": "What term describes the temperature at which air becomes saturated with water vapour?",
+      "answers": [
+        {
+          "text": "Dew point",
+          "correct": true
+        },
+        {
+          "text": "Heat index"
+        },
+        {
+          "text": "Wet-bulb zero"
+        },
+        {
+          "text": "Lapse rate"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 3,
+    "question": {
+      "text": "Which ocean current helps moderate the climate of western Europe?",
+      "answers": [
+        {
+          "text": "California Current"
+        },
+        {
+          "text": "Gulf Stream system",
+          "correct": true
+        },
+        {
+          "text": "Humboldt Current"
+        },
+        {
+          "text": "Labrador Current"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 3,
+    "question": {
+      "text": "What is the name of the scale used to classify tornado intensity from damage surveys?",
+      "answers": [
+        {
+          "text": "Enhanced Fujita scale",
+          "correct": true
+        },
+        {
+          "text": "Saffir–Simpson scale"
+        },
+        {
+          "text": "Beaufort scale"
+        },
+        {
+          "text": "Mercalli scale"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 3,
+    "question": {
+      "text": "Which mineral defines 10 on the Mohs hardness scale?",
+      "answers": [
+        {
+          "text": "Quartz"
+        },
+        {
+          "text": "Topaz"
+        },
+        {
+          "text": "Corundum"
+        },
+        {
+          "text": "Diamond",
+          "correct": true
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 1,
+    "question": {
+      "text": "Lightning can occur within a cloud without striking the ground.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 2,
+    "question": {
+      "text": "Earth's outer core is liquid, while its inner core is solid.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 2,
+    "question": {
+      "text": "A tsunami is usually caused by strong winds blowing across the ocean surface.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 3,
+    "question": {
+      "text": "The Coriolis effect influences the rotation direction of large-scale weather systems.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 1,
+    "question": {
+      "text": "What is the name of the sudden shaking of the ground caused by movement in Earth's crust?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Earthquake"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 2,
+    "question": {
+      "text": "What is the name of the boundary where two air masses meet?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Front",
+            "Weather front"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 3,
+    "question": {
+      "text": "What term describes the long-term average pattern of weather in a region?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Climate"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 3,
+    "question": {
+      "text": "What is the name of the point on Earth's surface directly above an earthquake's focus?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Epicentre",
+            "Epicenter"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 1,
+    "question": {
+      "text": "Approximately how many hours does Earth take to rotate once relative to the Sun?",
+      "kind": {
+        "Number": {
+          "answer": 24,
+          "range": {
+            "min": 20,
+            "max": 30
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 2,
+    "question": {
+      "text": "At about how many degrees Celsius does water boil at sea level?",
+      "kind": {
+        "Number": {
+          "answer": 100,
+          "range": {
+            "min": 85,
+            "max": 120
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 2,
+    "question": {
+      "text": "Approximately how many kilometres is Earth's equatorial diameter?",
+      "kind": {
+        "Number": {
+          "answer": 12756,
+          "range": {
+            "min": 10000,
+            "max": 15000
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 3,
+    "question": {
+      "text": "Approximately how many kilometres deep is the boundary between Earth's mantle and outer core?",
+      "kind": {
+        "Number": {
+          "answer": 2900,
+          "range": {
+            "min": 2480,
+            "max": 3880
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 2,
+    "question": {
+      "text": "Order these atmospheric layers from Earth's surface upward, lowest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Troposphere",
+            "Stratosphere",
+            "Mesosphere",
+            "Thermosphere"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 3,
+    "question": {
+      "text": "Order these rocks by increasing silica content, from lowest to highest.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Peridotite",
+            "Basalt",
+            "Andesite",
+            "Rhyolite"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 2,
+    "question": {
+      "text": "Name the two gases that make up most of Earth's dry atmosphere; type each gas.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Most abundant",
+              "accepted": [
+                "Nitrogen"
+              ]
+            },
+            {
+              "label": "Second most abundant",
+              "accepted": [
+                "Oxygen"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 3,
+    "question": {
+      "text": "Match each cloud type to its typical description.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Cirrus"
+              },
+              "right": {
+                "text": "High, wispy clouds"
+              }
+            },
+            {
+              "left": {
+                "text": "Cumulonimbus"
+              },
+              "right": {
+                "text": "Thunderstorm clouds"
+              }
+            },
+            {
+              "left": {
+                "text": "Stratus"
+              },
+              "right": {
+                "text": "Low, uniform layer"
+              }
+            },
+            {
+              "left": {
+                "text": "Cumulus"
+              },
+              "right": {
+                "text": "Puffy clouds with flat bases"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 1,
+    "question": {
+      "text": "Which scale assigns hurricanes a category from 1 to 5?",
+      "answers": [
+        {
+          "text": "Beaufort scale"
+        },
+        {
+          "text": "Saffir–Simpson scale",
+          "correct": true
+        },
+        {
+          "text": "Richter scale"
+        },
+        {
+          "text": "Fujita scale"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 1,
+    "question": {
+      "text": "Earth is closest to the Sun in early January.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 1,
+    "question": {
+      "text": "Match each instrument to what it measures.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Rain gauge"
+              },
+              "right": {
+                "text": "Precipitation"
+              }
+            },
+            {
+              "left": {
+                "text": "Thermometer"
+              },
+              "right": {
+                "text": "Temperature"
+              }
+            },
+            {
+              "left": {
+                "text": "Anemometer"
+              },
+              "right": {
+                "text": "Wind speed"
+              }
+            },
+            {
+              "left": {
+                "text": "Hygrometer"
+              },
+              "right": {
+                "text": "Humidity"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

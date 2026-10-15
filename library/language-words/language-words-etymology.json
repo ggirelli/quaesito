@@ -1,0 +1,540 @@
+[
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 1,
+    "question": {
+      "text": "Which Latin word is the origin of “aquarium”?",
+      "answers": [
+        {
+          "text": "Aqua",
+          "correct": true
+        },
+        {
+          "text": "Aquila",
+          "correct": false
+        },
+        {
+          "text": "Aequus",
+          "correct": false
+        },
+        {
+          "text": "Arbor",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 2,
+    "question": {
+      "text": "Which language gave English “shampoo,” originally referring to pressing or massaging?",
+      "answers": [
+        {
+          "text": "Hindi",
+          "correct": true
+        },
+        {
+          "text": "Persian",
+          "correct": false
+        },
+        {
+          "text": "Turkish",
+          "correct": false
+        },
+        {
+          "text": "Thai",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 2,
+    "question": {
+      "text": "The word “salary” is historically linked to the Latin word for what?",
+      "answers": [
+        {
+          "text": "Salt",
+          "correct": true
+        },
+        {
+          "text": "Silver",
+          "correct": false
+        },
+        {
+          "text": "Soldier",
+          "correct": false
+        },
+        {
+          "text": "Service",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 2,
+    "question": {
+      "text": "“Muscle” comes from Latin musculus, literally meaning what?",
+      "answers": [
+        {
+          "text": "Little mouse",
+          "correct": true
+        },
+        {
+          "text": "Small bone",
+          "correct": false
+        },
+        {
+          "text": "Strong cord",
+          "correct": false
+        },
+        {
+          "text": "Tiny warrior",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 3,
+    "question": {
+      "text": "Which Greek root in “telephone” means “far”?",
+      "answers": [
+        {
+          "text": "Tele-",
+          "correct": true
+        },
+        {
+          "text": "Phono-",
+          "correct": false
+        },
+        {
+          "text": "Auto-",
+          "correct": false
+        },
+        {
+          "text": "Chrono-",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 3,
+    "question": {
+      "text": "The word “clue” developed from the word “clew,” meaning what?",
+      "answers": [
+        {
+          "text": "A ball of thread",
+          "correct": true
+        },
+        {
+          "text": "A secret mark",
+          "correct": false
+        },
+        {
+          "text": "A locked box",
+          "correct": false
+        },
+        {
+          "text": "A map symbol",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "“Goodbye” developed from a phrase meaning “God be with ye.”"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "The word “hamburger” was originally named after ham."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "“Disaster” comes from Greek roots associated with an unfavorable star."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "“Avocado” comes from a Spanish word meaning “little pear.”"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "“Quarantine” is related to an Italian word for forty."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Ketchup",
+            "Catchup"
+          ]
+        }
+      },
+      "text": "What food condiment’s name entered English from a Chinese word often romanized as ke-tsiap?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Boycott"
+          ]
+        }
+      },
+      "text": "What verb comes from the surname of an Irish land agent shunned in 1880?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Etymology"
+          ]
+        }
+      },
+      "text": "What is the branch of linguistics that studies word origins called?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 1920,
+          "range": {
+            "min": 1800,
+            "max": 2000
+          }
+        }
+      },
+      "text": "In what year was the word “robot” introduced in Karel Čapek’s play R.U.R.?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 1839,
+          "range": {
+            "min": 1750,
+            "max": 1900
+          }
+        }
+      },
+      "text": "In what year is the earliest known printed use of “OK” commonly dated?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 1762,
+          "range": {
+            "min": 1650,
+            "max": 1850
+          }
+        }
+      },
+      "text": "In what year is “sandwich” first recorded for the food in English?"
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "sandwich",
+            "kindergarten",
+            "boycott",
+            "robot"
+          ]
+        }
+      },
+      "text": "Put these words in order of entering English, earliest first."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Word meaning “forced labour”",
+              "accepted": [
+                "Robota"
+              ]
+            },
+            {
+              "label": "Language of origin",
+              "accepted": [
+                "Czech"
+              ]
+            },
+            {
+              "label": "Play title abbreviation",
+              "accepted": [
+                "R.U.R."
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Complete the origin story of “robot”: give the source word, its language, and the play’s abbreviation."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Aquarium"
+              },
+              "right": {
+                "text": "Latin aqua, water"
+              }
+            },
+            {
+              "left": {
+                "text": "Telephone"
+              },
+              "right": {
+                "text": "Greek tele, far"
+              }
+            },
+            {
+              "left": {
+                "text": "Muscle"
+              },
+              "right": {
+                "text": "Latin musculus, little mouse"
+              }
+            },
+            {
+              "left": {
+                "text": "Disaster"
+              },
+              "right": {
+                "text": "Greek roots linked to a bad star"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each word to the origin or literal meaning behind it."
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 1,
+    "question": {
+      "text": "Which language gave English the word “ketchup” via a word for a fermented fish sauce?",
+      "answers": [
+        {
+          "text": "Malay",
+          "correct": false
+        },
+        {
+          "text": "Chinese (Hokkien)",
+          "correct": true
+        },
+        {
+          "text": "Portuguese",
+          "correct": false
+        },
+        {
+          "text": "Arabic",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 2,
+    "question": {
+      "text": "What is the literal meaning of Latin penicillus, the source of “pencil”?",
+      "answers": [
+        {
+          "text": "Little tail",
+          "correct": true
+        },
+        {
+          "text": "Small stick",
+          "correct": false
+        },
+        {
+          "text": "Thin reed",
+          "correct": false
+        },
+        {
+          "text": "Pointed stone",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 2,
+    "question": {
+      "text": "Which language is the source of “bungalow,” via a term meaning “of Bengal”?",
+      "answers": [
+        {
+          "text": "Hindi",
+          "correct": true
+        },
+        {
+          "text": "Tamil",
+          "correct": false
+        },
+        {
+          "text": "Malayalam",
+          "correct": false
+        },
+        {
+          "text": "Persian",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Language & Words",
+    "topic": "Etymology",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Kindergarten"
+              },
+              "right": {
+                "text": "German"
+              }
+            },
+            {
+              "left": {
+                "text": "Tsunami"
+              },
+              "right": {
+                "text": "Japanese"
+              }
+            },
+            {
+              "left": {
+                "text": "Algebra"
+              },
+              "right": {
+                "text": "Arabic"
+              }
+            },
+            {
+              "left": {
+                "text": "Shampoo"
+              },
+              "right": {
+                "text": "Hindi"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each English loanword to the language it came from."
+    }
+  }
+]

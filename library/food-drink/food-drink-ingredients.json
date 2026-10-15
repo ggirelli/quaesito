@@ -1,0 +1,557 @@
+[
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 1,
+    "question": {
+      "text": "Which ingredient gives pesto its characteristic green colour and herbal flavour?",
+      "answers": [
+        {
+          "text": "Basil",
+          "correct": true
+        },
+        {
+          "text": "Oregano"
+        },
+        {
+          "text": "Parsley"
+        },
+        {
+          "text": "Tarragon"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 1,
+    "question": {
+      "text": "What is the main ingredient in traditional hummus?",
+      "answers": [
+        {
+          "text": "Chickpeas",
+          "correct": true
+        },
+        {
+          "text": "Red lentils"
+        },
+        {
+          "text": "Butter beans"
+        },
+        {
+          "text": "Green peas"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 1,
+    "question": {
+      "text": "Which part of the saffron crocus is harvested to make saffron?",
+      "answers": [
+        {
+          "text": "Stigmas",
+          "correct": true
+        },
+        {
+          "text": "Petals"
+        },
+        {
+          "text": "Roots"
+        },
+        {
+          "text": "Leaves"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 1,
+    "question": {
+      "text": "Which ingredient makes bread dough rise by producing carbon dioxide?",
+      "answers": [
+        {
+          "text": "Yeast",
+          "correct": true
+        },
+        {
+          "text": "Gelatin"
+        },
+        {
+          "text": "Pectin"
+        },
+        {
+          "text": "Lecithin"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 2,
+    "question": {
+      "text": "Which compound gives chilli peppers most of their characteristic heat?",
+      "answers": [
+        {
+          "text": "Capsaicin",
+          "correct": true
+        },
+        {
+          "text": "Curcumin"
+        },
+        {
+          "text": "Piperine"
+        },
+        {
+          "text": "Allicin"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 2,
+    "question": {
+      "text": "What is tahini primarily made from?",
+      "answers": [
+        {
+          "text": "Sesame seeds",
+          "correct": true
+        },
+        {
+          "text": "Sunflower seeds"
+        },
+        {
+          "text": "Pumpkin seeds"
+        },
+        {
+          "text": "Flax seeds"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 2,
+    "question": {
+      "text": "Which part of the mustard plant is commonly used to make prepared mustard?",
+      "answers": [
+        {
+          "text": "Seeds",
+          "correct": true
+        },
+        {
+          "text": "Roots"
+        },
+        {
+          "text": "Flowers"
+        },
+        {
+          "text": "Bark"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 2,
+    "question": {
+      "text": "What gives blue cheese many of its characteristic veins?",
+      "answers": [
+        {
+          "text": "Penicillium mould",
+          "correct": true
+        },
+        {
+          "text": "Lactic acid bacteria"
+        },
+        {
+          "text": "Baker's yeast"
+        },
+        {
+          "text": "Acetic acid bacteria"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 3,
+    "question": {
+      "text": "Which compound is chiefly responsible for turmeric's intense yellow colour?",
+      "answers": [
+        {
+          "text": "Curcumin",
+          "correct": true
+        },
+        {
+          "text": "Capsaicin"
+        },
+        {
+          "text": "Anthocyanin"
+        },
+        {
+          "text": "Chlorophyll"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 3,
+    "question": {
+      "text": "Which ingredient is the main source of the gel in traditional Japanese kanten desserts?",
+      "answers": [
+        {
+          "text": "Agar",
+          "correct": true
+        },
+        {
+          "text": "Gelatin"
+        },
+        {
+          "text": "Pectin"
+        },
+        {
+          "text": "Carrageenan"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 3,
+    "question": {
+      "text": "Which seed is traditionally used to make marzipan?",
+      "answers": [
+        {
+          "text": "Almond",
+          "correct": true
+        },
+        {
+          "text": "Pistachio"
+        },
+        {
+          "text": "Hazelnut"
+        },
+        {
+          "text": "Cashew"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 3,
+    "question": {
+      "text": "Which compound is a key source of the pungent aroma released when garlic is crushed?",
+      "answers": [
+        {
+          "text": "Allicin",
+          "correct": true
+        },
+        {
+          "text": "Limonene"
+        },
+        {
+          "text": "Vanillin"
+        },
+        {
+          "text": "Menthol"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 1,
+    "question": {
+      "text": "Cocoa butter is the fat naturally found in cacao beans.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 1,
+    "question": {
+      "text": "Black pepper and white pepper can come from the same plant species.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 2,
+    "question": {
+      "text": "Saffron is made from the dried petals of a crocus.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 2,
+    "question": {
+      "text": "Tofu is made by coagulating soy milk.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 3,
+    "question": {
+      "text": "The heat of wasabi is mainly caused by capsaicin.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 2,
+    "question": {
+      "text": "Which compound gives vanilla its characteristic aroma?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "vanillin"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 2,
+    "question": {
+      "text": "How many carbon atoms are in one molecule of acetic acid?",
+      "kind": {
+        "Number": {
+          "answer": 2,
+          "range": {
+            "min": 1,
+            "max": 7
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 2,
+    "question": {
+      "text": "How many essential amino acids are required in the human diet for adults?",
+      "kind": {
+        "Number": {
+          "answer": 9,
+          "range": {
+            "min": 5,
+            "max": 16
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 3,
+    "question": {
+      "text": "How many carbon atoms are in one molecule of caffeine?",
+      "kind": {
+        "Number": {
+          "answer": 8,
+          "range": {
+            "min": 3,
+            "max": 15
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 3,
+    "question": {
+      "text": "How many kilocalories of energy does one gram of fat provide, approximately?",
+      "kind": {
+        "Number": {
+          "answer": 9,
+          "range": {
+            "min": 4,
+            "max": 13
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 1,
+    "question": {
+      "text": "Put these usual steps in wheat-flour production in order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Harvest wheat",
+            "Thresh the grain",
+            "Mill the grain",
+            "Sift the flour"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 2,
+    "question": {
+      "text": "Put these stages of chocolate production in order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Harvest cacao pods",
+            "Ferment the beans",
+            "Dry the beans",
+            "Roast the beans"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 3,
+    "question": {
+      "text": "Give the characteristic compound associated with each ingredient.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Chilli pepper",
+              "accepted": [
+                "capsaicin"
+              ]
+            },
+            {
+              "label": "Turmeric",
+              "accepted": [
+                "curcumin"
+              ]
+            },
+            {
+              "label": "Black pepper",
+              "accepted": [
+                "piperine"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 2,
+    "question": {
+      "text": "Match each ingredient with the plant part commonly used.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Cinnamon"
+              },
+              "right": {
+                "text": "Bark"
+              }
+            },
+            {
+              "left": {
+                "text": "Cloves"
+              },
+              "right": {
+                "text": "Flower buds"
+              }
+            },
+            {
+              "left": {
+                "text": "Ginger"
+              },
+              "right": {
+                "text": "Rhizome"
+              }
+            },
+            {
+              "left": {
+                "text": "Saffron"
+              },
+              "right": {
+                "text": "Stigmas"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Food & Drink",
+    "topic": "Ingredients",
+    "difficulty": 3,
+    "question": {
+      "text": "What is the name of the pungent resinous spice also known as hing?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "asafoetida",
+            "asafetida",
+            "asafoetida powder"
+          ]
+        }
+      }
+    }
+  }
+]

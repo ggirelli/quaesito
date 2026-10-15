@@ -1,0 +1,555 @@
+[
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 1,
+    "question": {
+      "text": "Which ancient civilization built the pyramids at Giza?",
+      "answers": [
+        {
+          "text": "Egyptians",
+          "correct": true
+        },
+        {
+          "text": "Sumerians"
+        },
+        {
+          "text": "Persians"
+        },
+        {
+          "text": "Phoenicians"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 1,
+    "question": {
+      "text": "In Greek mythology, which god ruled the sea?",
+      "answers": [
+        {
+          "text": "Poseidon",
+          "correct": true
+        },
+        {
+          "text": "Apollo"
+        },
+        {
+          "text": "Hermes"
+        },
+        {
+          "text": "Ares"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 1,
+    "question": {
+      "text": "What was the main writing material used by ancient Egyptians?",
+      "answers": [
+        {
+          "text": "Papyrus",
+          "correct": true
+        },
+        {
+          "text": "Parchment"
+        },
+        {
+          "text": "Bamboo"
+        },
+        {
+          "text": "Silk"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 2,
+    "question": {
+      "text": "Which ancient city was the centre of the Minoan civilization?",
+      "answers": [
+        {
+          "text": "Knossos",
+          "correct": true
+        },
+        {
+          "text": "Mycenae"
+        },
+        {
+          "text": "Troy"
+        },
+        {
+          "text": "Sparta"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 2,
+    "question": {
+      "text": "Which ruler's law code was inscribed on a famous Babylonian stele?",
+      "answers": [
+        {
+          "text": "Hammurabi",
+          "correct": true
+        },
+        {
+          "text": "Nebuchadnezzar II"
+        },
+        {
+          "text": "Sargon of Akkad"
+        },
+        {
+          "text": "Ashurbanipal"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 2,
+    "question": {
+      "text": "Which battle in 480 BC saw a small Greek force resist the Persian army at a narrow pass?",
+      "answers": [
+        {
+          "text": "Thermopylae",
+          "correct": true
+        },
+        {
+          "text": "Marathon"
+        },
+        {
+          "text": "Salamis"
+        },
+        {
+          "text": "Plataea"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 3,
+    "question": {
+      "text": "The Rosetta Stone contains the same decree in Greek and which two scripts?",
+      "answers": [
+        {
+          "text": "Demotic and hieroglyphic",
+          "correct": true
+        },
+        {
+          "text": "Cuneiform and Aramaic"
+        },
+        {
+          "text": "Linear A and Linear B"
+        },
+        {
+          "text": "Latin and hieratic"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 3,
+    "question": {
+      "text": "Which Hellenistic ruler founded the city of Antioch on the Orontes?",
+      "answers": [
+        {
+          "text": "Seleucus I Nicator",
+          "correct": true
+        },
+        {
+          "text": "Ptolemy I Soter"
+        },
+        {
+          "text": "Antigonus I Monophthalmus"
+        },
+        {
+          "text": "Lysimachus"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 3,
+    "question": {
+      "text": "Which ancient historian wrote the account known as the Anabasis?",
+      "answers": [
+        {
+          "text": "Xenophon",
+          "correct": true
+        },
+        {
+          "text": "Thucydides"
+        },
+        {
+          "text": "Polybius"
+        },
+        {
+          "text": "Diodorus Siculus"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 3,
+    "question": {
+      "text": "Which Mesopotamian city was associated with the goddess Inanna and the legendary king Gilgamesh?",
+      "answers": [
+        {
+          "text": "Uruk",
+          "correct": true
+        },
+        {
+          "text": "Mari"
+        },
+        {
+          "text": "Nineveh"
+        },
+        {
+          "text": "Lagash"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "The ancient Olympic Games were held every two years."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The Roman Colosseum was used for gladiatorial contests."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "The city of Carthage was founded by ancient Greeks."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The Library of Alexandria stood in Egypt."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "Linear B, the script used by Mycenaean Greeks, remains undeciphered."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Julius Caesar",
+            "Caesar"
+          ]
+        }
+      },
+      "text": "Which Roman general was assassinated on the Ides of March in 44 BC?"
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Hannibal",
+            "Hannibal Barca",
+            "Barca"
+          ]
+        }
+      },
+      "text": "Which Carthaginian commander famously crossed the Alps with an army including elephants?"
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Akhenaten",
+            "Akhenaton"
+          ]
+        }
+      },
+      "text": "Which Egyptian pharaoh promoted the worship of Aten and moved the royal court to Amarna?"
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Enheduanna"
+          ]
+        }
+      },
+      "text": "Which ancient Akkadian high priestess and poet is often called the earliest known author identified by name?"
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 24,
+          "range": {
+            "min": 12,
+            "max": 40
+          }
+        }
+      },
+      "text": "How many books are in the Iliad? Give the number."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Old Kingdom of Egypt",
+            "New Kingdom of Egypt",
+            "Classical Athens",
+            "Roman Empire begins"
+          ]
+        }
+      },
+      "text": "Put these periods in chronological order, earliest first."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Sumerian cuneiform emerges",
+            "Great Pyramid of Giza built",
+            "Code of Hammurabi composed",
+            "Alexander the Great dies",
+            "Julius Caesar assassinated"
+          ]
+        }
+      },
+      "text": "Put these events in chronological order, earliest first."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Zeus"
+              },
+              "right": {
+                "text": "Sky and thunder"
+              }
+            },
+            {
+              "left": {
+                "text": "Athena"
+              },
+              "right": {
+                "text": "Wisdom and strategy"
+              }
+            },
+            {
+              "left": {
+                "text": "Aphrodite"
+              },
+              "right": {
+                "text": "Love and beauty"
+              }
+            },
+            {
+              "left": {
+                "text": "Hades"
+              },
+              "right": {
+                "text": "Underworld"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each Greek god or goddess with their best-known domain."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Cyrus the Great"
+              },
+              "right": {
+                "text": "Achaemenid Persian Empire"
+              }
+            },
+            {
+              "left": {
+                "text": "Ashoka"
+              },
+              "right": {
+                "text": "Maurya Empire"
+              }
+            },
+            {
+              "left": {
+                "text": "Hatshepsut"
+              },
+              "right": {
+                "text": "Eighteenth Dynasty of Egypt"
+              }
+            },
+            {
+              "left": {
+                "text": "Pericles"
+              },
+              "right": {
+                "text": "Golden Age of Athens"
+              }
+            },
+            {
+              "left": {
+                "text": "Mithridates VI"
+              },
+              "right": {
+                "text": "Kingdom of Pontus"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each ancient ruler or leader with the state or era they are associated with."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 2,
+    "question": {
+      "text": "Which ancient seafaring people's alphabet became the ancestor of the Greek alphabet?",
+      "answers": [
+        {
+          "text": "Phoenicians",
+          "correct": true
+        },
+        {
+          "text": "Etruscans"
+        },
+        {
+          "text": "Hittites"
+        },
+        {
+          "text": "Minoans"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "Ancient world",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 7,
+          "range": {
+            "min": 1,
+            "max": 15
+          }
+        }
+      },
+      "text": "How many hills are traditionally said to make up the city of Rome?"
+    }
+  }
+]

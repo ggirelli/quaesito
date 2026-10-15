@@ -2,11 +2,12 @@
 # requires-python = ">=3.11"
 # dependencies = ["jsonschema>=4.23"]
 # ///
-"""Check the question library (library/library.json) against the quiz schema and the library rules.
+"""Check the question library (library/<category>/<category>-<topic>.json) against the quiz schema
+and the library rules.
 
 Prints errors (the entry cannot be used as is) and warnings (worth a look), and exits non-zero on
-errors. Run with `uv run tools/library/check.py [files or folders...]`; it checks
-library/library.json when given none, and any JSON array of entries otherwise (a batch to add).
+errors. Run with `uv run tools/library/check.py [files or folders...]`; it checks the whole library
+when given none, and any JSON arrays of entries otherwise (a batch to add, say).
 """
 
 import json
@@ -164,7 +165,7 @@ QUESTION = load_question_validator()
 
 
 def main(args):
-    paths = [Path(a).resolve() for a in args] or [ROOT / "library/library.json"]
+    paths = [Path(a).resolve() for a in args] or [ROOT / "library"]
     files = sorted(f for p in paths for f in ([p] if p.is_file() else p.rglob("*.json")))
     errors = warnings = total = 0
     seen = defaultdict(list)  # normalized question text -> where
@@ -181,6 +182,10 @@ def main(args):
             print(f"{rel}: error: not a JSON array")
             errors += 1
             continue
+        topics = Counter((e.get("category"), e.get("topic")) for e in entries if isinstance(e, dict))
+        if len(topics) > 1:
+            print(f"{rel}: warn: several category/topic pairs: {dict(topics)}")
+            warnings += 1
         for i, e in enumerate(entries, 1):
             total += 1
             problems = []

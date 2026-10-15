@@ -4,8 +4,8 @@ use std::sync::OnceLock;
 
 use crate::library::LibraryEntry;
 
-/// Every library question (see `library/README.md`).
-const LIBRARY: &str = include_str!("../../library/library.json");
+/// Every library question: the topic files under `library/`, combined by `build.rs`.
+const LIBRARY: &str = include_str!(concat!(env!("OUT_DIR"), "/library.json"));
 
 /// The library's questions, read on first use.
 ///

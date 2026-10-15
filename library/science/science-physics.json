@@ -1,0 +1,614 @@
+[
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 1,
+    "question": {
+      "text": "Which particle carries a negative electric charge?",
+      "answers": [
+        {
+          "text": "Proton"
+        },
+        {
+          "text": "Neutron"
+        },
+        {
+          "text": "Electron",
+          "correct": true
+        },
+        {
+          "text": "Photon"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 1,
+    "question": {
+      "text": "What is the SI unit of force?",
+      "answers": [
+        {
+          "text": "Joule"
+        },
+        {
+          "text": "Newton",
+          "correct": true
+        },
+        {
+          "text": "Watt"
+        },
+        {
+          "text": "Pascal"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 1,
+    "question": {
+      "text": "Which travels fastest in a vacuum?",
+      "answers": [
+        {
+          "text": "Sound"
+        },
+        {
+          "text": "Light",
+          "correct": true
+        },
+        {
+          "text": "Water waves"
+        },
+        {
+          "text": "Seismic waves"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 1,
+    "question": {
+      "text": "What energy does a moving object have?",
+      "answers": [
+        {
+          "text": "Thermal"
+        },
+        {
+          "text": "Chemical"
+        },
+        {
+          "text": "Kinetic",
+          "correct": true
+        },
+        {
+          "text": "Nuclear"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 1,
+    "question": {
+      "text": "Which material is usually the best electrical conductor?",
+      "answers": [
+        {
+          "text": "Copper",
+          "correct": true
+        },
+        {
+          "text": "Rubber"
+        },
+        {
+          "text": "Glass"
+        },
+        {
+          "text": "Wood"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 2,
+    "question": {
+      "text": "What is the approximate value of Earth's gravitational acceleration at its surface?",
+      "answers": [
+        {
+          "text": "1.6 m/s²"
+        },
+        {
+          "text": "3.7 m/s²"
+        },
+        {
+          "text": "9.8 m/s²",
+          "correct": true
+        },
+        {
+          "text": "24.8 m/s²"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 2,
+    "question": {
+      "text": "Which law states that pressure and volume are inversely related for a fixed amount of gas at constant temperature?",
+      "answers": [
+        {
+          "text": "Boyle's law",
+          "correct": true
+        },
+        {
+          "text": "Ohm's law"
+        },
+        {
+          "text": "Hooke's law"
+        },
+        {
+          "text": "Faraday's law"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 2,
+    "question": {
+      "text": "What is the name of the phenomenon where light changes direction entering a different medium?",
+      "answers": [
+        {
+          "text": "Diffraction"
+        },
+        {
+          "text": "Refraction",
+          "correct": true
+        },
+        {
+          "text": "Polarisation"
+        },
+        {
+          "text": "Interference"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 2,
+    "question": {
+      "text": "Which quantity is measured in teslas?",
+      "answers": [
+        {
+          "text": "Electric charge"
+        },
+        {
+          "text": "Magnetic flux density",
+          "correct": true
+        },
+        {
+          "text": "Power"
+        },
+        {
+          "text": "Resistance"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 3,
+    "question": {
+      "text": "In quantum mechanics, what principle forbids identical fermions from sharing the same quantum state?",
+      "answers": [
+        {
+          "text": "Pauli exclusion principle",
+          "correct": true
+        },
+        {
+          "text": "Equivalence principle"
+        },
+        {
+          "text": "Correspondence principle"
+        },
+        {
+          "text": "Huygens' principle"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 3,
+    "question": {
+      "text": "Which particle mediates the strong interaction between quarks?",
+      "answers": [
+        {
+          "text": "Gluon",
+          "correct": true
+        },
+        {
+          "text": "Photon"
+        },
+        {
+          "text": "W boson"
+        },
+        {
+          "text": "Higgs boson"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 3,
+    "question": {
+      "text": "What is the SI unit of catalytic activity, defined as one mole per second?",
+      "answers": [
+        {
+          "text": "Katal",
+          "correct": true
+        },
+        {
+          "text": "Becquerel"
+        },
+        {
+          "text": "Sievert"
+        },
+        {
+          "text": "Weber"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "In a vacuum, a feather and a hammer fall with the same acceleration."
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "Sound can travel through empty space without any matter."
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "A transformer works with changing magnetic fields, so ordinary transformers require alternating current."
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The electrical resistance of an ideal superconductor is zero below its critical temperature."
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "In special relativity, an object's rest mass increases as its speed approaches the speed of light."
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Ohm",
+            "Ohms",
+            "Ω"
+          ]
+        }
+      },
+      "text": "What is the SI unit of electrical resistance?"
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Doppler effect",
+            "Doppler"
+          ]
+        }
+      },
+      "text": "What is the name of the effect in which light or sound waves shift frequency due to relative motion?"
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Graviton"
+          ]
+        }
+      },
+      "text": "What is the name of the hypothetical particle proposed to mediate gravity in quantum theories?"
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Radio waves",
+            "Microwaves",
+            "Visible light",
+            "X-rays"
+          ]
+        }
+      },
+      "text": "Put these electromagnetic waves in order of increasing frequency, lowest first."
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Electron",
+            "Muon",
+            "Proton",
+            "Neutron"
+          ]
+        }
+      },
+      "text": "Put these particles in order of increasing mass, lightest first."
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Energy"
+              },
+              "right": {
+                "text": "Joule"
+              }
+            },
+            {
+              "left": {
+                "text": "Power"
+              },
+              "right": {
+                "text": "Watt"
+              }
+            },
+            {
+              "left": {
+                "text": "Force"
+              },
+              "right": {
+                "text": "Newton"
+              }
+            },
+            {
+              "left": {
+                "text": "Pressure"
+              },
+              "right": {
+                "text": "Pascal"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each physical quantity to its SI unit."
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Michael Faraday"
+              },
+              "right": {
+                "text": "Electromagnetic induction"
+              }
+            },
+            {
+              "left": {
+                "text": "James Clerk Maxwell"
+              },
+              "right": {
+                "text": "Electromagnetic equations"
+              }
+            },
+            {
+              "left": {
+                "text": "Max Planck"
+              },
+              "right": {
+                "text": "Energy quantisation"
+              }
+            },
+            {
+              "left": {
+                "text": "Erwin Schrödinger"
+              },
+              "right": {
+                "text": "Wave equation"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each scientist to the physics concept associated with their name."
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Richter scale",
+            "Richter"
+          ]
+        }
+      },
+      "text": "What is the name of the original logarithmic earthquake magnitude scale, developed in 1935 at Caltech?"
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 212,
+          "range": {
+            "min": 180,
+            "max": 240
+          }
+        }
+      },
+      "text": "At standard atmospheric pressure, what is water's boiling point in degrees Fahrenheit?"
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 9.46,
+          "range": {
+            "min": 4,
+            "max": 20
+          }
+        }
+      },
+      "text": "Approximately how many trillion kilometres are in a light-year?"
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 1.67e-27,
+          "range": {
+            "min": 1e-27,
+            "max": 2.5e-27
+          }
+        }
+      },
+      "text": "What is the approximate proton mass in kilograms, to three significant figures?"
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Positively charged",
+              "accepted": [
+                "Proton",
+                "Protons"
+              ]
+            },
+            {
+              "label": "No charge",
+              "accepted": [
+                "Neutron",
+                "Neutrons"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name the two particles found in an atomic nucleus (type each name)."
+    }
+  }
+]
