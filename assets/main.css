@@ -812,14 +812,35 @@ input.short {
 }
 
 /* The Questions tab: categories on the left, each opening onto its topics. */
+.page.library-page {
+  max-width: 1480px;
+}
+
+/* As the editor: the categories on the left, the questions in the middle under the search, the
+   other filters on the right. Narrower, and in the editor's dialog, the filters go under the
+   search. */
 .library-layout {
   display: grid;
-  grid-template-columns: minmax(12rem, 16rem) minmax(0, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: minmax(12rem, 16rem) minmax(0, 1000px) minmax(12rem, 16rem);
+  grid-template-areas:
+    ". search ."
+    "nav list filters";
+  justify-content: center;
+  gap: 1rem;
   align-items: start;
 }
 
+.library-search {
+  grid-area: search;
+}
+
+.library-search input[type="search"] {
+  width: 100%;
+  padding-left: 2.4rem !important;
+}
+
 .library-nav {
+  grid-area: nav;
   position: sticky;
   top: 5rem;
   display: flex;
@@ -829,20 +850,71 @@ input.short {
   overflow-y: auto;
 }
 
-/* In the editor's dialog, the categories stay put while the dialog scrolls. */
-.dialog .library-nav {
+.library-filters {
+  grid-area: filters;
+  position: sticky;
+  top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.library-main {
+  grid-area: list;
+}
+
+@media (max-width: 1100px) {
+  .library-layout {
+    grid-template-columns: minmax(12rem, 16rem) minmax(0, 1fr);
+    grid-template-areas:
+      "nav search"
+      "nav filters"
+      "nav list";
+  }
+
+  .library-filters {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+/* The editor's library dialog, wide enough for the same three columns. */
+.dialog.library-dialog {
+  width: min(96rem, 100%);
+}
+
+@media (min-width: 1101px) {
+  .dialog .library-layout {
+    grid-template-columns: minmax(11rem, 15rem) minmax(0, 1fr) minmax(11rem, 15rem);
+  }
+}
+
+/* In the dialog, the side columns stay put while it scrolls, and the list needs no card. */
+.dialog .library-nav,
+.dialog .library-filters {
   top: 0;
   max-height: calc(90vh - 7rem);
 }
 
-.library-main h2 {
-  margin: 0;
+.dialog .library-main {
+  padding: 0;
+  border: 0;
+  background: none;
 }
 
-/* On phones, the categories go above the questions. */
+/* On phones, everything in one column, the categories first. */
 @media (max-width: 800px) {
-  .library-layout {
+  .library-layout,
+  .dialog .library-layout {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "nav"
+      "search"
+      "filters"
+      "list";
   }
 
   .library-nav {
@@ -873,7 +945,8 @@ input.short {
 }
 
 .library-category,
-.library-topic {
+.library-topic,
+.library-option {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -895,22 +968,51 @@ input.short {
   color: var(--muted);
 }
 
-.library-category:hover,
-.library-topic:hover {
+.library-category:hover:not(:disabled),
+.library-topic:hover,
+.library-option:hover:not(:disabled) {
   background: var(--surface-2);
 }
 
 .library-category.selected,
-.library-topic.selected {
+.library-topic.selected,
+.library-option.selected {
   background: var(--accent);
   color: var(--accent-ink);
 }
 
 .library-category .count,
-.library-topic .count {
+.library-topic .count,
+.library-option .count {
   font-size: 0.8rem;
   font-weight: 500;
   opacity: 0.75;
+}
+
+/* The difficulty and answer type lists, under a small title. */
+.library-filter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 12rem;
+}
+
+.library-filter-title {
+  padding: 0 0.7rem 0.2rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.library-option {
+  font-weight: 500;
+}
+
+.library-option:disabled {
+  opacity: 0.4;
+  cursor: default;
 }
 
 .library-topics {

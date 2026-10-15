@@ -9,9 +9,9 @@ use super::ICON;
 pub fn Dialog(
     title: String,
     on_close: EventHandler<()>,
-    /// Wide enough for a list with filters, e.g. the question library.
+    /// Extra classes for the box, e.g. to size it.
     #[props(default)]
-    wide: bool,
+    class: &'static str,
     children: Element,
 ) -> Element {
     rsx! {
@@ -26,7 +26,7 @@ pub fn Dialog(
             },
             section {
                 class: "card stack panel dialog",
-                class: if wide { "wide-panel" },
+                class: "{class}",
                 role: "dialog",
                 aria_label: "{title}",
                 onclick: move |e| e.stop_propagation(),

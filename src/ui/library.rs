@@ -68,14 +68,14 @@ pub fn LibraryDialog(
     on_close: EventHandler<()>,
 ) -> Element {
     rsx! {
-        Dialog { title: "Question library", wide: true, on_close,
+        Dialog { title: "Question library", class: "library-dialog", on_close,
             LibraryBrowser { present, on_add }
         }
     }
 }
 
-/// Browses the library: the categories on the left, each opening onto its topics, and the
-/// questions they hold on the right, with a search and filters. With `on_add` (in the editor),
+/// Browses the library, laid out like the editor: the categories on the left, each opening onto
+/// its topics; the questions in the middle, under the search; the other filters on the right. With `on_add` (in the editor),
 /// questions can be added to the quiz, picked one by one or a number of them at random among
 /// those shown.
 #[component]
@@ -119,6 +119,33 @@ pub fn LibraryBrowser(
         timeless: timeless(),
     };
     let matching = filter.apply(entries);
+    // Each list's counts follow the other filters: how many questions picking that option shows.
+    let difficulties: Vec<FilterOption> = DIFFICULTIES
+        .into_iter()
+        .map(|(level, name)| FilterOption {
+            key: level.to_string(),
+            label: name.to_owned(),
+            count: LibraryFilter {
+                difficulty: Some(level),
+                ..filter.clone()
+            }
+            .apply(entries)
+            .len(),
+        })
+        .collect();
+    let kinds: Vec<FilterOption> = KINDS
+        .into_iter()
+        .map(|name| FilterOption {
+            key: name.to_owned(),
+            label: name.to_owned(),
+            count: LibraryFilter {
+                kind: Some(name),
+                ..filter.clone()
+            }
+            .apply(entries)
+            .len(),
+        })
+        .collect();
     let new: Vec<&LibraryEntry> = matching
         .iter()
         .copied()
@@ -153,14 +180,21 @@ pub fn LibraryBrowser(
     let topics = category()
         .map(|c| crate::library::topics(entries, &c))
         .unwrap_or_default();
-    let heading = match (category(), topic()) {
-        (None, _) => "All categories".to_owned(),
-        (Some(c), None) => c,
-        (Some(c), Some(t)) => format!("{c} › {t}"),
-    };
-
     rsx! {
         div { class: "library-layout",
+            label { class: "search library-search",
+                Icon { kind: IconKind::Search }
+                input {
+                    r#type: "search",
+                    placeholder: "Search questions and answers",
+                    aria_label: "Search questions and answers",
+                    value: search,
+                    oninput: move |e| {
+                        search.set(e.value());
+                        shown_count.set(PAGE);
+                    },
+                }
+            }
             nav { class: "library-nav", aria_label: "Categories",
                 button {
                     class: "library-category",
@@ -204,46 +238,37 @@ pub fn LibraryBrowser(
                     }
                 }
             }
-            section { class: "library-main stack",
-                h2 { "{heading}" }
-                div { class: "row quiz-filters",
-                    label { class: "search grow",
-                        Icon { kind: IconKind::Search }
-                        input {
-                            r#type: "search",
-                            placeholder: "Search questions and answers",
-                            aria_label: "Search questions and answers",
-                            value: search,
-                            oninput: move |e| {
-                                search.set(e.value());
-                                shown_count.set(PAGE);
-                            },
-                        }
-                    }
-                    DifficultySelect {
-                        value: difficulty(),
-                        on_change: move |level| difficulty.set(level),
-                    }
-                    select {
-                        aria_label: "Answer type",
-                        value: kind,
-                        onchange: move |e| kind.set(e.value()),
-                        option { value: "", "Any answer type" }
-                        for name in KINDS {
-                            option { value: name, "{name}" }
-                        }
-                    }
-                    label {
-                        class: "check-field",
-                        title: "Records, title holders… questions that say “As of <year>”",
-                        input {
-                            r#type: "checkbox",
-                            checked: timeless(),
-                            onchange: move |e| timeless.set(e.checked()),
-                        }
-                        span { "Leave out answers that may date" }
-                    }
+            aside { class: "library-filters", aria_label: "Filters",
+                FilterList {
+                    title: "Difficulty",
+                    options: difficulties,
+                    selected: difficulty().map(|level| level.to_string()),
+                    on_pick: move |key: Option<String>| {
+                        difficulty.set(key.and_then(|k| k.parse().ok()));
+                        shown_count.set(PAGE);
+                    },
                 }
+                FilterList {
+                    title: "Answer type",
+                    options: kinds,
+                    selected: Some(kind()).filter(|k| !k.is_empty()),
+                    on_pick: move |key: Option<String>| {
+                        kind.set(key.unwrap_or_default());
+                        shown_count.set(PAGE);
+                    },
+                }
+                label {
+                    class: "check-field",
+                    title: "Records, title holders… questions that say “As of <year>”",
+                    input {
+                        r#type: "checkbox",
+                        checked: timeless(),
+                        onchange: move |e| timeless.set(e.checked()),
+                    }
+                    span { "Leave out answers that may date" }
+                }
+            }
+            section { class: "library-main card stack",
                 div { class: "row between",
                     span { class: "muted small",
                         if matching.len() == 1 {
@@ -292,6 +317,46 @@ pub fn LibraryBrowser(
                         onclick: move |_| shown_count += PAGE,
                         "Show more"
                     }
+                }
+            }
+        }
+    }
+}
+
+/// An option of a [`FilterList`], with how many questions picking it shows.
+#[derive(Clone, PartialEq)]
+struct FilterOption {
+    key: String,
+    label: String,
+    count: usize,
+}
+
+/// A titled list of options to filter by, like the categories: picking the selected option
+/// again clears it.
+#[component]
+fn FilterList(
+    title: &'static str,
+    options: Vec<FilterOption>,
+    selected: Option<String>,
+    on_pick: EventHandler<Option<String>>,
+) -> Element {
+    rsx! {
+        div { class: "library-filter-list", role: "group", aria_label: title,
+            span { class: "library-filter-title", "{title}" }
+            for option in options {
+                button {
+                    key: "{option.key}",
+                    class: "library-option",
+                    class: if selected.as_ref() == Some(&option.key) { "selected" },
+                    aria_pressed: selected.as_ref() == Some(&option.key),
+                    disabled: option.count == 0 && selected.as_ref() != Some(&option.key),
+                    onclick: {
+                        let key = option.key.clone();
+                        let picked = selected.as_ref() == Some(&key);
+                        move |_| on_pick.call((!picked).then(|| key.clone()))
+                    },
+                    span { class: "grow", "{option.label}" }
+                    span { class: "count", "{option.count}" }
                 }
             }
         }

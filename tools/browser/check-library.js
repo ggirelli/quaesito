@@ -37,6 +37,25 @@ const L = require('./lib.js');
   expect(`Questions tab: ${music.length} Classical questions, no add buttons`,
     music.length > 0 && music.every((r) => r.includes('Music · Classical'))
       && !(await library.$('.library-list button')));
+  // The difficulty and answer type lists narrow the list; picking an option again clears it.
+  await L.clickText(library, '.library-option', 'Hard');
+  await L.clickText(library, '.library-option', 'Choices');
+  await L.sleep(300);
+  const hard = await library.$$eval('.library-list .list-row', (rs) => rs.map((r) => r.innerText));
+  expect(`lists: ${hard.length} hard Choices questions`,
+    hard.length > 0 && hard.every((r) => r.includes('Music · Classical · Hard · Choices')));
+  await library.screenshot({ path: 'out/library-admin-lists.png' });
+  await L.clickText(library, '.library-option.selected', 'Hard');
+  await L.clickText(library, '.library-option.selected', 'Choices');
+  await L.sleep(300);
+  const again = await library.$$eval('.library-list .list-row', (rs) => rs.length);
+  expect(`lists cleared: ${again} questions`, again === music.length);
+  // Laid out like the editor: categories left, search over the list, filters right.
+  const box = (sel) => library.$eval(sel, (e) => { const r = e.getBoundingClientRect(); return { l: r.left, r: r.right, t: r.top }; });
+  const [nav, search, list, filters] = [await box('.library-nav'), await box('.library-search'), await box('.library-main'), await box('.library-filters')];
+  expect('layout: categories | search over list | filters',
+    nav.r <= list.l && list.r <= filters.l && Math.abs(search.l - list.l) < 2 && search.t < list.t);
+  expect('no heading', !(await library.$('.library-layout h2')));
   await library.screenshot({ path: 'out/library-admin.png' });
   await L.clickText(library, '.admin-tabs a', 'Quizzes');
   await library.waitForFunction((t) => document.body.innerText.includes(t), {}, title);
@@ -57,8 +76,6 @@ const L = require('./lib.js');
   const rows = await editor.$$eval('.dialog .library-list .list-row', (rs) => rs.map((r) => r.innerText));
   expect(`search: ${rows.length} Astronomy questions about planets`,
     rows.length > 0 && rows.every((r) => r.includes('Science · Astronomy & space') && /planet/i.test(r)));
-  const heading = await editor.$eval('.dialog .library-main h2', (h) => h.innerText);
-  expect(`heading: ${heading}`, heading === 'Science › Astronomy & space');
   await editor.screenshot({ path: 'out/library-editor.png' });
   const first = rows[0].split('\n')[0];
   await L.clickText(editor, '.dialog .library-list .list-row button', 'Add');
@@ -68,8 +85,9 @@ const L = require('./lib.js');
   await editor.$eval('.dialog input[type=search]', (i) => i.select());
   await editor.keyboard.press('Backspace');
   await L.sleep(300);
-  const all = await editor.$eval('.dialog .library-main h2', (h) => h.innerText);
-  expect(`closing the category: ${all}, no topics`, all === 'All categories' && !(await editor.$('.library-topic')));
+  const shown = await editor.$eval('.dialog .library-main', (m) => m.innerText);
+  expect('closing the category: every question, no topics',
+    shown.includes('2719 questions match') && !(await editor.$('.library-topic')));
   const count = await editor.$('.dialog input.short-number');
   await retype(editor, count, '3');
   await L.clickText(editor, '.dialog button', 'Add at random');

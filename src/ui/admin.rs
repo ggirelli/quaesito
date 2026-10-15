@@ -56,9 +56,9 @@ pub fn AdminQuestions() -> Element {
         ClientOnly {
             AdminGate {
                 AdminHeader {}
-                main { class: "page wide stack",
+                main { class: "page library-page stack",
                     AdminTabs {}
-                    section { class: "card", LibraryBrowser {} }
+                    LibraryBrowser {}
                 }
             }
         }
