@@ -29,8 +29,8 @@ the usual points.
 ## The question library
 
 Quaesito comes with a library of about 2,700 ready-made questions in 14 categories, from art to
-technology, each rated easy, medium or hard. They were written with an AI model and fact-checked,
-but read the ones you pick before playing: a few may still be wrong or out of date.
+technology, each rated easy, medium or hard. They were written with an AI model and fact-checked
+([how](question-library.md)), but read the ones you pick before playing: a few may still be wrong.
 
 - **Browse it** on the admin page's **Questions** tab. Pick a category on the left to see only its
   questions; it opens onto its topics, which narrow the list further. Pick the category again to
