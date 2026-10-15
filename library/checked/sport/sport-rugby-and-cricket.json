@@ -3,7 +3,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many players does a rugby union team have on the field at the start?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many runs are scored when a batter hits a legal delivery over the boundary without bouncing?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country won the first men's Rugby World Cup in 1987?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In cricket, what is a batter out for zero called?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many points is a try worth in rugby union under the modern scoring system?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which country hosts the annual Boxing Day Test at the Melbourne Cricket Ground?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the trophy contested by England and Australia in Test cricket?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which position usually wears jersey number 9 in rugby union?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the cricket term for six legal deliveries by one bowler, excluding extras?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which rugby union trophy is contested by New Zealand and Australia?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which country won the inaugural ICC Men's T20 World Cup in 2007?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which rugby union club plays its home matches at Stade Ernest-Wallon?",
       "answers": [
@@ -291,7 +279,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "A cricket team normally has eleven players on the fielding side.",
       "kind": {
@@ -305,7 +292,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In rugby union, a conversion kick after a try is worth three points.",
       "kind": {
@@ -319,7 +305,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "A cricket delivery that reaches the boundary after bouncing scores four runs.",
       "kind": {
@@ -333,7 +318,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Six Nations Championship includes South Africa.",
       "kind": {
@@ -347,7 +331,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In cricket, a batter can be given out hit wicket if their bat dislodges the bails during a delivery.",
       "kind": {
@@ -361,7 +344,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the rugby union trophy awarded to the Rugby World Cup winners?",
       "kind": {
@@ -378,7 +360,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which West Indies fast bowler was known as 'Whispering Death'?",
       "kind": {
@@ -395,7 +376,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many stumps make up a standard cricket wicket?",
       "kind": {
@@ -413,7 +393,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many metres wide is a standard rugby union goal, between the posts?",
       "kind": {
@@ -431,7 +410,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many yards long is a cricket pitch between the wickets?",
       "kind": {
@@ -449,7 +427,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many minutes of playing time are in a standard rugby union match, excluding added time?",
       "kind": {
@@ -467,7 +444,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these men's Rugby World Cup champions in order, earliest first.",
       "kind": {
@@ -486,7 +462,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two teams that contested the 2019 men's Cricket World Cup final.",
       "kind": {
@@ -513,7 +488,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Match each cricket term to its meaning.",
       "kind": {
@@ -560,7 +534,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each rugby union term to its description.",
       "kind": {
@@ -607,7 +580,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which All Black winger scored four tries against England in the 1995 World Cup semi-final?",
       "kind": {
@@ -624,7 +596,6 @@
     "category": "Sport",
     "topic": "Rugby & cricket",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these cricket milestones by year, earliest first.",
       "kind": {

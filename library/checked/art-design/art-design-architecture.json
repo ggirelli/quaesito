@@ -3,7 +3,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which architect designed the glass pyramid at the Louvre in Paris?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which ancient structure in Rome was built as a temple and later used as a church?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which architect designed Barcelona's unfinished Sagrada Família basilica?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which building in India was commissioned by Shah Jahan as a mausoleum for Mumtaz Mahal?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which architect designed Fallingwater, a house built over a waterfall in Pennsylvania?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which architect co-founded the Bauhaus school in 1919?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which architect designed the Barcelona Pavilion for the 1929 International Exposition?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which architectural style is associated with flying buttresses and large stained-glass windows?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which architect designed the Salk Institute in La Jolla, California?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Who designed the 1958 Seagram Building in New York with Philip Johnson?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -257,7 +246,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -271,7 +259,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -285,7 +272,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -299,7 +285,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -313,7 +298,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -330,7 +314,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -347,7 +330,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -364,7 +346,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -382,7 +363,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -401,7 +381,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -420,7 +399,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What type of arch is characteristic of Gothic architecture?",
       "answers": [
@@ -444,7 +422,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which temple on the Acropolis was dedicated to Athena Parthenos and housed Phidias's great statue of her?",
       "answers": [
@@ -468,7 +445,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -486,7 +462,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -504,7 +479,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -522,7 +496,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -569,7 +542,6 @@
     "category": "Art & Design",
     "topic": "Architecture",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {

@@ -3,7 +3,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which cat became famous online for its permanently grumpy-looking face?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which viral video features a child saying, “Charlie bit me”?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What animal appears in the original Nyan Cat animation?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which dance craze was popularized worldwide by the song “Gangnam Style”?",
       "answers": [
@@ -102,7 +98,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which 2013 song and video sparked the “What Does the Fox Say?” meme?",
       "answers": [
@@ -126,7 +121,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which 2010s meme character is known for the caption “But that's none of my business”?",
       "answers": [
@@ -152,7 +146,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which image macro character is commonly known as “Doge”?",
       "answers": [
@@ -176,7 +169,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The “This is fine” meme comes from which webcomic?",
       "answers": [
@@ -200,7 +192,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The “Rickroll” tricks people into opening Rick Astley's music video for “Never Gonna Give You Up.”",
       "kind": {
@@ -214,7 +205,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The “Success Kid” meme originated from a professional actor posing for an advertisement.",
       "kind": {
@@ -228,7 +218,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The “Dancing Baby” is often cited as one of the early viral internet phenomena.",
       "kind": {
@@ -242,7 +231,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The “Leeroy Jenkins” moment came from a real-world football match.",
       "kind": {
@@ -256,7 +244,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The “Dramatic Chipmunk” clip actually shows a prairie dog rather than a chipmunk.",
       "kind": {
@@ -270,7 +257,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What word describes deliberately misleading online headlines designed to attract clicks?",
       "kind": {
@@ -287,7 +273,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What nickname is given to the Shiba Inu behind the original Doge meme?",
       "kind": {
@@ -303,7 +288,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was the “Gangnam Style” music video released? Give the year.",
       "kind": {
@@ -321,7 +305,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did the “Charlie Bit My Finger” video first appear online? Give the year.",
       "kind": {
@@ -339,7 +322,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did the “Dancing Baby” animation first circulate online? Give the year.",
       "kind": {
@@ -357,7 +339,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many seconds long is the commonly shared original “Dramatic Chipmunk” clip, approximately? Give seconds.",
       "kind": {
@@ -375,7 +356,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these memes by the year they first appeared online, earliest first.",
       "kind": {
@@ -394,7 +374,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Give the names of the viral video or meme associated with each clue.",
       "kind": {
@@ -422,7 +401,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Match each viral meme with its subject.",
       "kind": {
@@ -469,7 +447,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each viral moment with its source.",
       "kind": {
@@ -516,7 +493,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the meme in which an anime character misidentifies a butterfly?",
       "answers": [
@@ -540,7 +516,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which viral 2014 campaign encouraged people to dump ice water over themselves for ALS awareness?",
       "answers": [
@@ -564,7 +539,6 @@
     "category": "Pop Culture",
     "topic": "Memes & viral moments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Order these viral internet phenomena by when they first became famous, earliest first.",
       "kind": {

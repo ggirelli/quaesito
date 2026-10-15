@@ -3,7 +3,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which 1980 arcade game features a yellow character eating dots in a maze?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which company created the Mario series?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In which game series would you find the fictional land of Hyrule?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which game popularized the phrase 'Finish Him!' in fighting-game culture?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the block-building game created by Markus Persson?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which company developed the original Sonic the Hedgehog game?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which game series features the fictional sport of Quidditch?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which 1993 game helped popularize the first-person shooter genre on PC?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which studio developed the original Dark Souls?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What was the name of Nintendo's first home console released outside Japan?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which 1980 game by Atari was among the first major vector-graphics arcade hits?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The original Pokémon games first launched in Japan for the Game Boy.",
       "kind": {
@@ -281,7 +269,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The first PlayStation was originally released by Sega.",
       "kind": {
@@ -295,7 +282,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Tetris was originally created in the Soviet Union.",
       "kind": {
@@ -309,7 +295,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The arcade game Pong was released before Space Invaders.",
       "kind": {
@@ -323,7 +308,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Nintendo 64 used CDs as its standard game format.",
       "kind": {
@@ -337,7 +321,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was the original Tetris first released?",
       "kind": {
@@ -355,7 +338,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did the first Pokémon video games launch in Japan?",
       "kind": {
@@ -373,7 +355,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many bits was the original Nintendo Entertainment System's main CPU commonly described as?",
       "kind": {
@@ -391,7 +372,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these Nintendo home consoles in release order, earliest first.",
       "kind": {
@@ -410,7 +390,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these game series in order of their first release, earliest first.",
       "kind": {
@@ -429,7 +408,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two lead characters from the original arcade game Donkey Kong. Type each name.",
       "kind": {
@@ -457,7 +435,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each game with its original developer.",
       "kind": {
@@ -504,7 +481,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each Nintendo console with its launch year in Japan.",
       "kind": {
@@ -551,7 +527,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Epic Games engine debuted with a 1998 first-person shooter and now powers Fortnite?",
       "answers": [
@@ -575,7 +550,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of Mario's younger brother in Nintendo's games?",
       "kind": {
@@ -591,7 +565,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the company behind the Grand Theft Auto series?",
       "kind": {
@@ -611,7 +584,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the underground shelter the protagonist leaves at the start of the original Fallout?",
       "kind": {
@@ -628,7 +600,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the princess Link often rescues in his Nintendo series?",
       "kind": {
@@ -645,7 +616,6 @@
     "category": "Technology",
     "topic": "Video games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many lettered action buttons (excluding Start, Select and shoulder buttons) does the original SNES controller have?",
       "kind": {

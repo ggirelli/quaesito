@@ -3,7 +3,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What flag signals the end of a motor race?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country is home to the famous Monza racing circuit?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In Formula One, what does a pit stop usually allow a team to do?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which manufacturer is associated with the prancing horse emblem in motor racing?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which race is traditionally held on the streets of Monte Carlo?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which endurance race is held at the Circuit de la Sarthe?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which racing series is known for the Indianapolis 500?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In rallying, what is the person reading pace notes to the driver called?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which surface is most associated with traditional rallycross circuits?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which driver won the first Formula One World Drivers' Championship in 1950?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What does the acronym HANS stand for in motor racing?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The 24 Hours of Le Mans is an endurance race.",
       "kind": {
@@ -281,7 +269,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "A red flag in motor racing usually means the session has been stopped.",
       "kind": {
@@ -295,7 +282,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Formula One cars have traditionally used a steering wheel with buttons and controls.",
       "kind": {
@@ -309,7 +295,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In rallying, the driver normally navigates the route alone without a co-driver.",
       "kind": {
@@ -323,7 +308,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The Dakar Rally began as a race from Paris to Dakar.",
       "kind": {
@@ -337,7 +321,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the surname of the German driver who won seven Formula One world titles?",
       "kind": {
@@ -354,7 +337,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Japanese manufacturer makes the motorcycle brand Hayabusa?",
       "kind": {
@@ -370,7 +352,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many hours long is the 24 Hours of Le Mans race?",
       "kind": {
@@ -388,7 +369,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many wheels does a standard Formula One car have?",
       "kind": {
@@ -406,7 +386,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many kilometres long is the Indianapolis Motor Speedway oval, approximately?",
       "kind": {
@@ -424,7 +403,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Order these Formula One world champions by their first drivers' title, earliest first.",
       "kind": {
@@ -443,7 +421,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these races by the year of their first running, earliest first.",
       "kind": {
@@ -462,7 +439,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Name the first- and second-place finishers at the 1950 British Grand Prix.",
       "kind": {
@@ -491,7 +467,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Match each racing flag with its usual meaning.",
       "kind": {
@@ -538,7 +513,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each racing series with its best-known event or format.",
       "kind": {
@@ -585,7 +559,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What does the acronym NASCAR stand for?",
       "answers": [
@@ -609,7 +582,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the surname of the Brazilian Formula One driver who won three world titles and died at Imola in 1994?",
       "kind": {
@@ -626,7 +598,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Finnish driver won four WRC titles between 1986 and 1993?",
       "kind": {
@@ -643,7 +614,6 @@
     "category": "Sport",
     "topic": "Motor racing",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many kilometres long is one lap of the Circuit de Monaco, to three decimal places?",
       "kind": {

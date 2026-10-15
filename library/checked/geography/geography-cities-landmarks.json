@@ -3,7 +3,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which city is home to the Sagrada Família?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The ancient Colosseum stands in which city?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which landmark spans the River Thames near the Tower of London?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In which city would you find the Louvre Museum?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which city is famous for its canals and gondolas?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Christ the Redeemer statue overlooks which city?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Petra's famous rock-cut Treasury is in which country?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which city is built around the historic Red Square?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Hagia Sophia is a landmark in which city?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which architect designed the Guggenheim Museum in Bilbao?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which city is the usual gateway to the nearby Angkor Wat temple complex?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The Moai statues are most associated with which island?",
       "answers": [
@@ -291,7 +279,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Eiffel Tower was originally intended to be a temporary structure.",
       "kind": {
@@ -305,7 +292,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Statue of Liberty was a gift from Spain to the United States.",
       "kind": {
@@ -319,7 +305,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Acropolis of Athens includes the Parthenon.",
       "kind": {
@@ -333,7 +318,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Burj Khalifa is located in Abu Dhabi.",
       "kind": {
@@ -347,7 +331,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The historic city of Timbuktu is in Mali.",
       "kind": {
@@ -361,7 +344,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the nickname of the Great Bell inside London's Elizabeth Tower?",
       "kind": {
@@ -377,7 +359,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the mausoleum built by Shah Jahan in Agra?",
       "kind": {
@@ -394,7 +375,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Approximately how tall is the Eiffel Tower in metres, including its antenna?",
       "kind": {
@@ -412,7 +392,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many arches does the Pont du Gard's top tier have?",
       "kind": {
@@ -430,7 +409,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did the Berlin Wall fall, marking the start of its opening?",
       "kind": {
@@ -448,7 +426,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many main pyramids are traditionally counted at Giza?",
       "kind": {
@@ -466,7 +443,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these landmarks in order of completion, earliest first.",
       "kind": {
@@ -485,7 +461,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two land areas connected by the Golden Gate Bridge.",
       "kind": {
@@ -513,7 +488,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each landmark to the city where it stands.",
       "kind": {
@@ -560,7 +534,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each landmark to its city.",
       "kind": {
@@ -615,7 +588,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which ancient city was buried by the eruption of Mount Vesuvius in AD 79?",
       "kind": {
@@ -634,7 +606,6 @@
     "category": "Geography",
     "topic": "Cities & landmarks",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the large square in central Beijing?",
       "kind": {

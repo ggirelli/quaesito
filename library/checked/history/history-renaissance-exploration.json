@@ -3,7 +3,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which artist painted the Mona Lisa?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Portuguese explorer reached India by sea around the Cape of Good Hope in 1498?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Renaissance thinker wrote The Prince?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which city was home to the Medici family, major Renaissance patrons?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which expedition completed the first circumnavigation of the globe in 1522?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which 1494 treaty divided newly claimed lands outside Europe between Spain and Portugal?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which expedition leader conquered the Aztec capital Tenochtitlan for Spain?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -185,7 +177,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -199,7 +190,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -213,7 +203,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -230,7 +219,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -247,7 +235,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -265,7 +252,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -282,7 +268,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -300,7 +285,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -318,7 +302,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -337,7 +320,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -356,7 +338,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -403,7 +384,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -458,7 +438,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which explorer reached the Caribbean while sailing for Spain?",
       "answers": [
@@ -482,7 +461,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Renaissance artist carved the colossal marble David now in Florence's Galleria dell'Accademia?",
       "answers": [
@@ -506,7 +484,6 @@
     "category": "History",
     "topic": "Renaissance & exploration",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which astronomer published De revolutionibus orbium coelestium?",
       "answers": [

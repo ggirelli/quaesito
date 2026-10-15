@@ -42,9 +42,8 @@ but read the ones you pick before playing: a few may still be wrong or out of da
   tick the categories you want and say how many questions each gets (5 by default). You can keep
   to one difficulty, and open each category with a title slide.
 
-Answers that change over the years (records, title holders) say "As of" a year, and are marked
-*may date*: **Leave out answers that may date** skips them. Once added, a question is yours like
-any other: edit it, add a picture, or change its time limit and points.
+Once added, a question is yours like any other: edit it, add a picture, or change its time limit
+and points.
 
 ## Text with the question
 

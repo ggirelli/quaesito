@@ -3,7 +3,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many legs does an adult insect have?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which insect produces honey from flower nectar?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What do caterpillars become after metamorphosis?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which insect is known for rubbing its wings or legs together to make a chirping sound?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the hard outer covering of an insect called?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which insect communicates the location of food with a waggle dance?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which insects cultivate fungi as their main food source?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which insect group includes aphids and cicadas?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which insect has a larval stage called a wireworm?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which butterfly is famous for migrating from North America to central Mexico?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which insect order includes lacewings and antlions?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which insect uses a spring-loaded mechanism in its hind legs to catapult itself?",
       "answers": [
@@ -291,7 +279,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -305,7 +292,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -319,7 +305,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -333,7 +318,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -347,7 +331,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -361,7 +344,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -378,7 +360,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -396,7 +377,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -415,7 +395,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -433,7 +412,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Parts": {
@@ -479,7 +457,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -526,7 +503,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -544,7 +520,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -561,7 +536,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -582,7 +556,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -600,7 +573,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -618,7 +590,6 @@
     "category": "Nature",
     "topic": "Insects & bugs",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {

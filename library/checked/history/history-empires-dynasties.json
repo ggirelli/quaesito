@@ -3,7 +3,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which empire built Machu Picchu in the Andes?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which dynasty built most of the Great Wall sections seen today?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which ancient empire had its capital at Persepolis?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which ruler is traditionally credited with founding the Mongol Empire?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which dynasty ruled Egypt during the reign of Cleopatra VII?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which empire used the road network known as the Royal Road, especially under Darius I?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which dynasty reunified China in 581 and built an early version of the Grand Canal?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which dynasty commissioned the Terracotta Army for its first emperor?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which empire's rulers used the title 'basileus' in the Greek-speaking medieval state centred on Constantinople?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Ottoman Empire captured Constantinople in 1453.",
       "kind": {
@@ -233,7 +223,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Aztec capital of Tenochtitlan stood where modern Lima is located.",
       "kind": {
@@ -247,7 +236,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Mughal emperor Akbar pursued policies that included greater religious accommodation.",
       "kind": {
@@ -261,7 +249,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Roman Empire adopted Christianity as its official religion under Julius Caesar.",
       "kind": {
@@ -275,7 +262,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The Khmer Empire built the temple complex of Angkor Wat.",
       "kind": {
@@ -289,7 +275,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What was the name of the dynasty that ruled China during the voyages of Zheng He?",
       "kind": {
@@ -306,7 +291,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What title was used by the rulers of the Inca state?",
       "kind": {
@@ -323,7 +307,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which empire was ruled by Suleiman the Magnificent?",
       "kind": {
@@ -340,7 +323,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What was the name of the last imperial dynasty of China?",
       "kind": {
@@ -357,7 +339,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did the Western Roman Empire traditionally fall?",
       "kind": {
@@ -375,7 +356,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these empires in chronological order by their founding, earliest first.",
       "kind": {
@@ -394,7 +374,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these Chinese dynasties in chronological order, earliest first.",
       "kind": {
@@ -413,7 +392,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each empire with its best-known capital.",
       "kind": {
@@ -460,7 +438,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each ruler with the dynasty or empire they are most associated with.",
       "kind": {
@@ -507,7 +484,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which empire made Constantinople its capital in 330 CE?",
       "answers": [
@@ -531,7 +507,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did Mansa Musa make his famous pilgrimage (hajj) to Mecca?",
       "kind": {
@@ -549,7 +524,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Japanese shogunate began in 1603 and ruled from Edo until 1868?",
       "answers": [
@@ -573,7 +547,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "For about how many years did the Han dynasty rule China, from 206 BCE to 220 CE?",
       "kind": {
@@ -591,7 +564,6 @@
     "category": "History",
     "topic": "Empires & dynasties",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two rival powers that fought the Punic Wars.",
       "kind": {

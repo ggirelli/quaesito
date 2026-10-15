@@ -3,7 +3,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the main ingredient in traditional meringue?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Italian dessert is made with layers of coffee-soaked biscuits and mascarpone cream?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which sugar is commonly used to make spun-sugar decorations because it melts and hardens cleanly?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which French dessert is a custard topped with a brittle caramelised sugar crust?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What gives traditional Turkish delight its characteristic chewy gel texture?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which pastry is traditionally used to make baklava?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Italian dessert is traditionally made by cooking sweetened cream and setting it with gelatin?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Japanese sweet is traditionally made from sweetened red-bean paste set with agar?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the Japanese sweet made from pounded glutinous rice?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Traditional gelato is typically served at a warmer temperature than many standard ice creams.",
       "kind": {
@@ -233,7 +223,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "A classic pavlova is made with a meringue base.",
       "kind": {
@@ -247,7 +236,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The main ingredient in nougat is always chocolate.",
       "kind": {
@@ -261,7 +249,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In confectionery, fondant and marzipan are the same mixture.",
       "kind": {
@@ -275,7 +262,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the French name for the small, colourful almond-meringue sandwich cookie?",
       "kind": {
@@ -292,7 +278,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "At approximately what temperature in degrees Celsius does sugar begin to caramelise?",
       "kind": {
@@ -310,7 +295,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many grams of protein are in 100 grams of pure egg white, approximately?",
       "kind": {
@@ -328,7 +312,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Put these stages of making caramel in order, earliest first.",
       "kind": {
@@ -347,7 +330,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these stages of making choux pastry in order, earliest first.",
       "kind": {
@@ -366,7 +348,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Name the three main ingredients in a basic shortcrust pastry.",
       "kind": {
@@ -403,7 +384,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each dessert with its country of origin or strongest traditional association.",
       "kind": {
@@ -450,7 +430,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each sweet with its main characteristic ingredient or base.",
       "kind": {
@@ -497,7 +476,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which French confection is made by coating almonds in cooked sugar that crystallises around them?",
       "answers": [
@@ -521,7 +499,6 @@
     "category": "Food & Drink",
     "topic": "Sweets & desserts",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many layers of puff pastry are traditionally used in a mille-feuille?",
       "kind": {

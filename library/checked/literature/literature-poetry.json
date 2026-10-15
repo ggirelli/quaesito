@@ -3,7 +3,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who wrote the poem 'The Raven'?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who wrote 'I Wandered Lonely as a Cloud'?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which poet wrote 'The Road Not Taken'?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who wrote the epic poem The Iliad?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who wrote 'Ozymandias'?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which poet wrote 'The Waste Land'?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who wrote 'The Love Song of J. Alfred Prufrock'?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which poet wrote 'Because I could not stop for Death'?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Who wrote the long poem 'The Cantos'?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which poet wrote 'The Faerie Queene'?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Who wrote the poem sequence 'Duino Elegies'?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which ancient Roman poet wrote the Georgics?",
       "answers": [
@@ -291,7 +279,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -305,7 +292,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -319,7 +305,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -333,7 +318,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -347,7 +331,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -363,7 +346,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -380,7 +362,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -398,7 +379,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -416,7 +396,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -434,7 +413,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -452,7 +430,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -470,7 +447,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -489,7 +465,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -508,7 +483,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Parts": {
@@ -545,7 +519,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -592,7 +565,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -639,7 +611,6 @@
     "category": "Literature",
     "topic": "Poetry",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {

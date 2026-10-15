@@ -3,7 +3,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which river flows through Paris?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which is the largest lake in Africa by surface area?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which river runs through London?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which lake lies between Peru and Bolivia?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which river forms much of the border between the United States and Mexico?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which river flows through Baghdad?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which lake is the deepest in the world?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which African lake is shared by Tanzania, Uganda and Kenya?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which river flows through the Grand Canyon?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Nile flows north into the Mediterranean Sea.",
       "kind": {
@@ -233,7 +223,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Lake Superior is one of the North American Great Lakes.",
       "kind": {
@@ -247,7 +236,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Danube empties into the Black Sea.",
       "kind": {
@@ -261,7 +249,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What river flows through Rome?",
       "kind": {
@@ -277,7 +264,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What river runs through Cairo?",
       "kind": {
@@ -293,7 +279,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Approximately how many kilometres long is the Nile River?",
       "kind": {
@@ -311,7 +296,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Approximately how many metres deep is Lake Baikal at its deepest point?",
       "kind": {
@@ -329,7 +313,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many Great Lakes are there in North America?",
       "kind": {
@@ -347,7 +330,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Approximately how many kilometres long is the Danube River?",
       "kind": {
@@ -365,7 +347,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these rivers by approximate length, longest first.",
       "kind": {
@@ -384,7 +365,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these lakes by surface area, largest first.",
       "kind": {
@@ -403,7 +383,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each lake to the country most associated with it.",
       "kind": {
@@ -450,7 +429,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which is the largest lake lying entirely in Europe?",
       "answers": [
@@ -474,7 +452,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which turquoise lake in Banff National Park is named after Princess Louise, a daughter of Queen Victoria?",
       "kind": {
@@ -490,7 +467,6 @@
     "category": "Geography",
     "topic": "Rivers & lakes",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the largest freshwater lake in South America?",
       "kind": {

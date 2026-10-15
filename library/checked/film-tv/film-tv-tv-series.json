@@ -3,7 +3,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the chemistry teacher turned drug manufacturer in Breaking Bad?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which fantasy series features the continent of Westeros?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the animated family living at 742 Evergreen Terrace?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In Stranger Things, what is the name of the parallel dimension?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which actor plays the title character in the TV series House?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which British sci-fi series features the time machine called the TARDIS?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In The Sopranos, what is the name of Tony Soprano's psychiatrist?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The TV series The Crown is a science-fiction drama about a future British monarchy.",
       "kind": {
@@ -185,7 +177,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In Seinfeld, the character Kramer is Jerry's biological brother.",
       "kind": {
@@ -199,7 +190,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The original British version of The Office was created by Ricky Gervais and Stephen Merchant.",
       "kind": {
@@ -213,7 +203,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the surname of the family in Modern Family whose father is Jay?",
       "kind": {
@@ -230,7 +219,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which fictional detective lives at 221B Baker Street in the BBC series starring Benedict Cumberbatch?",
       "kind": {
@@ -247,7 +235,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did the first episode of The Simpsons air as a standalone series?",
       "kind": {
@@ -265,7 +252,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did Breaking Bad first premiere?",
       "kind": {
@@ -283,7 +269,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did the original Star Trek series first premiere?",
       "kind": {
@@ -301,7 +286,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each series with its fictional workplace.",
       "kind": {
@@ -348,7 +332,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of Ross's pet monkey in Friends?",
       "kind": {
@@ -364,7 +347,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the candy company that is Pawnee's big local employer in Parks and Recreation?",
       "answers": [
@@ -388,7 +370,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Whose murder is investigated in Twin Peaks?",
       "answers": [
@@ -412,7 +393,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What was the flight number of the plane that crashes in Lost?",
       "kind": {
@@ -430,7 +410,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these sitcoms in the order their first episodes aired, earliest first.",
       "kind": {
@@ -449,7 +428,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these HBO dramas in the order their first episodes aired, earliest first.",
       "kind": {
@@ -468,7 +446,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two lead FBI agents in The X-Files.",
       "kind": {
@@ -497,7 +474,6 @@
     "category": "Film & TV",
     "topic": "TV series",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each series with its creator.",
       "kind": {

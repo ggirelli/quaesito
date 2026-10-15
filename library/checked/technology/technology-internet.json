@@ -3,7 +3,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What does DNS translate a domain name into so computers can route traffic?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which protocol secures ordinary web traffic with encryption?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What does the 'S' in HTTPS indicate?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which organization coordinates the global allocation of IP address blocks?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which email protocol is commonly used to retrieve messages while keeping them on the server?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the main purpose of a CDN?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which protocol automatically leases IP addresses to devices on a local network?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What does BGP primarily help routers do?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which early internet service let users access remote computers through text commands?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which protocol is designed to synchronize computer clocks over networks?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What does a 404 HTTP status code mean?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which system lets a browser verify a website's identity using certificates?",
       "answers": [
@@ -291,7 +279,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The internet and the World Wide Web are exactly the same thing.",
       "kind": {
@@ -305,7 +292,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The first widely used web browser to support inline images was Mosaic.",
       "kind": {
@@ -319,7 +305,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "An IPv6 address is 128 bits long.",
       "kind": {
@@ -333,7 +318,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "SMTP is primarily used to download web pages to a browser.",
       "kind": {
@@ -347,7 +331,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "A domain name can point to more than one IP address.",
       "kind": {
@@ -361,7 +344,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the common name for unwanted bulk email?",
       "kind": {
@@ -379,7 +361,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What protocol is commonly used to securely log in to a remote computer via a command line?",
       "kind": {
@@ -396,7 +377,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many bits long is an IPv4 address?",
       "kind": {
@@ -414,7 +394,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was the first public website launched at CERN?",
       "kind": {
@@ -432,7 +411,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was the .com top-level domain first introduced?",
       "kind": {
@@ -450,7 +428,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these internet milestones in chronological order, earliest first.",
       "kind": {
@@ -469,7 +446,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each HTTP status code with its usual meaning.",
       "kind": {
@@ -516,7 +492,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What open-source web server software shares its name with a group of Native American peoples?",
       "kind": {
@@ -533,7 +508,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Order these HTTP status-code reason phrases by status code, smallest first.",
       "kind": {
@@ -552,7 +526,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What do TCP and IP stand for?",
       "kind": {
@@ -579,7 +552,6 @@
     "category": "Technology",
     "topic": "Internet",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each protocol with its main purpose.",
       "kind": {

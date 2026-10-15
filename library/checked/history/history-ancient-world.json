@@ -3,7 +3,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which ancient civilization built the pyramids at Giza?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In Greek mythology, which god ruled the sea?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What was the main writing material used by ancient Egyptians?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which ancient city was the centre of the Minoan civilization?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which ruler's law code was inscribed on a famous Babylonian stele?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which battle in 480 BC saw a small Greek force resist the Persian army at a narrow pass?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The Rosetta Stone contains the same decree in Greek and which two scripts?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Hellenistic ruler founded the city of Antioch on the Orontes?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which ancient historian wrote the account known as the Anabasis?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Mesopotamian city was associated with the goddess Inanna and the legendary king Gilgamesh?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -257,7 +246,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -271,7 +259,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -285,7 +272,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -299,7 +285,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -313,7 +298,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -330,7 +314,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -348,7 +331,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -365,7 +347,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -381,7 +362,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -399,7 +379,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -418,7 +397,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -438,7 +416,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -485,7 +462,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -540,7 +516,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which ancient seafaring people's alphabet became the ancestor of the Greek alphabet?",
       "answers": [
@@ -564,7 +539,6 @@
     "category": "History",
     "topic": "Ancient world",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {

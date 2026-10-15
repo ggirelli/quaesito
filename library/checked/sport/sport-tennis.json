@@ -3,7 +3,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the score called when a player wins a point at 40–40 in tennis?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the surface traditionally associated with Wimbledon?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many points must a player usually win to take a standard tiebreak at 6–6?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which piece of equipment is hit with the racket during a tennis match?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the term for a serve that the receiver cannot touch with the racket?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Grand Slam tournament is played at Roland-Garros?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the team competition for men's national tennis teams?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Grand Slam tournament is played on outdoor hard courts in New York?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In tennis, what is a 'bagel' score?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which country did tennis player Steffi Graf represent?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Grand Slam tournament first introduced a roof over its Centre Court in 2009?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which shot is hit before the ball bounces on the player's side?",
       "answers": [
@@ -291,7 +279,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In tennis scoring, 'love' means zero.",
       "kind": {
@@ -305,7 +292,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "A tennis singles court is wider than a doubles court.",
       "kind": {
@@ -319,7 +305,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The French Open is played on clay courts.",
       "kind": {
@@ -333,7 +318,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "A player may win a point if a legal shot bounces twice on the opponent's side before being returned.",
       "kind": {
@@ -347,7 +331,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the surname of the Swiss player who won 20 men's Grand Slam singles titles?",
       "kind": {
@@ -364,7 +347,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the annual international women's team tennis competition formerly called the Fed Cup?",
       "kind": {
@@ -381,7 +363,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Serbian player is nicknamed Nole?",
       "kind": {
@@ -398,7 +379,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Australian won the men's singles title at Wimbledon in 1987?",
       "kind": {
@@ -415,7 +395,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many points does a player need to win a standard game from 0–0, without deuce?",
       "kind": {
@@ -433,7 +412,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many metres long is a tennis court, from baseline to baseline?",
       "kind": {
@@ -451,7 +429,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many centimetres above the ground is the net at the posts in singles tennis?",
       "kind": {
@@ -469,7 +446,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Order these Grand Slam tournaments by the usual calendar order in which they are played, earliest first.",
       "kind": {
@@ -488,7 +464,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these players by the year they first won the men's singles title at Wimbledon, earliest first.",
       "kind": {
@@ -507,7 +482,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two players who contested the longest match in Wimbledon history, in 2010.",
       "kind": {
@@ -536,7 +510,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each tennis term to its meaning.",
       "kind": {
@@ -583,7 +556,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In doubles, the tramlines are considered out during a serve.",
       "kind": {
@@ -597,7 +569,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the minimum number of games needed to win a standard set?",
       "kind": {
@@ -615,7 +586,6 @@
     "category": "Sport",
     "topic": "Tennis",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Match each Grand Slam tournament with its host city.",
       "kind": {

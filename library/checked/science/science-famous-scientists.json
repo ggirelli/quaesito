@@ -3,7 +3,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who formulated the three laws of motion?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Marie Curie was the first woman to win a Nobel Prize.",
       "kind": {
@@ -41,7 +39,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which scientist is most closely associated with the theory of natural selection?",
       "answers": [
@@ -65,7 +62,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What surname belongs to the physicist who formulated general relativity?",
       "kind": {
@@ -82,7 +78,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who developed the first widely used smallpox vaccine?",
       "answers": [
@@ -106,7 +101,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did Isaac Newton publish Principia Mathematica?",
       "kind": {
@@ -124,7 +118,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Galileo invented the telescope.",
       "kind": {
@@ -138,7 +131,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which scientist discovered radioactivity in uranium salts in 1896?",
       "answers": [
@@ -162,7 +154,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each scientist to the field most associated with their work.",
       "kind": {
@@ -209,7 +200,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who proposed the heliocentric model in a landmark 1543 book?",
       "answers": [
@@ -233,7 +223,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What surname belongs to the scientist who discovered penicillin?",
       "kind": {
@@ -250,7 +239,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which chemist created the periodic table's influential early arrangement?",
       "answers": [
@@ -274,7 +262,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Katherine Johnson calculated trajectories for NASA's early crewed spaceflights.",
       "kind": {
@@ -288,7 +275,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was Charles Darwin born?",
       "kind": {
@@ -306,7 +292,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Who is famous for the uncertainty principle in quantum mechanics?",
       "answers": [
@@ -330,7 +315,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these scientists in order of birth, earliest first.",
       "kind": {
@@ -349,7 +333,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which scientist's experiments with pea plants helped establish genetics?",
       "answers": [
@@ -373,7 +356,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Charles Darwin published On the Origin of Species in 1859.",
       "kind": {
@@ -387,7 +369,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Who first described the circulation of blood through the body in a modern scientific account?",
       "answers": [
@@ -411,7 +392,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did Marie Curie win her first Nobel Prize?",
       "kind": {
@@ -429,7 +409,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which mathematician and scientist is associated with the laws of planetary motion?",
       "answers": [
@@ -453,7 +432,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each scientist to a major concept associated with them.",
       "kind": {
@@ -500,7 +478,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which chemist is known for the law of conservation of mass and modernizing chemical nomenclature?",
       "kind": {
@@ -517,7 +494,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who used X-ray diffraction images that were crucial to identifying DNA's structure?",
       "answers": [
@@ -541,7 +517,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Albert Einstein won his Nobel Prize primarily for his theory of relativity.",
       "kind": {
@@ -555,7 +530,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many Nobel Prizes did Linus Pauling receive?",
       "kind": {
@@ -573,7 +547,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which scientist introduced the concept of the electromagnetic field and built an early dynamo?",
       "answers": [
@@ -597,7 +570,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who is the astronomer known for showing that the universe is expanding?",
       "kind": {
@@ -616,7 +588,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these milestones in chronological order, earliest first.",
       "kind": {
@@ -635,7 +606,6 @@
     "category": "Science",
     "topic": "Famous scientists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two scientists credited with discovering the structure of DNA.",
       "kind": {

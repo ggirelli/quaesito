@@ -3,7 +3,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which band released the album Abbey Road?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which singer was known as the 'Queen of Soul'?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which band had Freddie Mercury as its lead singer?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which artist released the album Purple Rain?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which band recorded 'Smells Like Teen Spirit'?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Jamaican singer is often called the 'King of Reggae'?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which band released the concept album The Dark Side of the Moon?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who was the lead singer of The Smiths?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which artist released the album Blue in 1971?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which band featured brothers Noel and Liam Gallagher?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which German band released the influential electronic album Autobahn in 1974?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which musician was the lead singer of Big Brother and the Holding Company?",
       "answers": [
@@ -291,7 +279,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Beach Boys originally formed in California.",
       "kind": {
@@ -305,7 +292,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "ABBA is a band from Norway.",
       "kind": {
@@ -319,7 +305,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Fleetwood Mac's album Rumours was released in 1977.",
       "kind": {
@@ -333,7 +318,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Clash were one of the major bands associated with British punk rock.",
       "kind": {
@@ -347,7 +331,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The Velvet Underground's debut album was produced by Brian Eno.",
       "kind": {
@@ -361,7 +344,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which band recorded 'Dancing Queen'?",
       "kind": {
@@ -377,7 +359,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which singer released the album Hounds of Love?",
       "kind": {
@@ -394,7 +375,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which band released the album London Calling?",
       "kind": {
@@ -411,7 +391,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which artist released the experimental album Trout Mask Replica?",
       "kind": {
@@ -428,7 +407,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many members were in the classic Beatles lineup?",
       "kind": {
@@ -446,7 +424,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did Nirvana release the album Nevermind?",
       "kind": {
@@ -464,7 +441,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many studio albums did The Beatles release in the UK during their original career?",
       "kind": {
@@ -482,7 +458,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was David Bowie's album The Rise and Fall of Ziggy Stardust and the Spiders from Mars released?",
       "kind": {
@@ -500,7 +475,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these bands in order of formation, earliest first.",
       "kind": {
@@ -519,7 +493,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these albums in order of original release, earliest first.",
       "kind": {
@@ -538,7 +511,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Name the three members of the classic rock trio Rush.",
       "kind": {
@@ -571,7 +543,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each artist to their band.",
       "kind": {
@@ -618,7 +589,6 @@
     "category": "Music",
     "topic": "Bands & artists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each artist to the musical project they led or fronted.",
       "kind": {

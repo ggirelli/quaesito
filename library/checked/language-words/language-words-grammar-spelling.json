@@ -3,7 +3,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which spelling is correct in standard English?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which sentence uses 'their' correctly?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which word is the plural of 'criterion'?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which is the correct past tense of 'teach'?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which sentence uses the subjunctive correctly in formal English?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which is the standard spelling in British English?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which sentence uses 'fewer' in the conventional count-noun sense?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which word is commonly used as the adverb meaning 'in a careful manner'?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which sentence correctly uses 'whom' as the object of a preposition?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which is the correct plural of 'phenomenon'?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which sentence has a correctly placed restrictive clause?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -281,7 +269,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -295,7 +282,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -309,7 +295,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -323,7 +308,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -337,7 +321,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -353,7 +336,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -369,7 +351,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -387,7 +368,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -405,7 +385,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Parts": {
@@ -438,7 +417,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -485,7 +463,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which word means 'to receive willingly' or 'agree to'?",
       "answers": [
@@ -509,7 +486,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which spelling is correct?",
       "answers": [
@@ -536,7 +512,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -557,7 +532,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -576,7 +550,6 @@
     "category": "Language & Words",
     "topic": "Grammar & spelling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {

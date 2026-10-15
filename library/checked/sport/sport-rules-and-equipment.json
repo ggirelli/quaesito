@@ -3,7 +3,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which colour card usually means a player is sent off in association football?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In baseball, how many strikes usually make an out?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which piece of equipment protects a fencer's face?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In golf, what is the term for one stroke under par on a hole?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In volleyball, how many times may a team touch the ball before returning it, excluding a block?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which object is hit in badminton?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In association football, what is the minimum number of players a team must have to continue a match?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In table tennis, how many points usually win a game, provided the lead is at least two?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In basketball, what is the diameter of the hoop closest to?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In fencing, which weapon targets the whole body and permits hits with the point only?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In cricket, what is the term for a delivery that passes the batter without bouncing and outside reach?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In standard archery, the bullseye is at the centre of the target.",
       "kind": {
@@ -281,7 +269,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In golf, a hole-in-one means the ball is holed in two strokes.",
       "kind": {
@@ -295,7 +282,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In volleyball, a serve that touches the net and lands legally in the opponent's court is allowed.",
       "kind": {
@@ -309,7 +295,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In association football, a player cannot be offside directly from a throw-in.",
       "kind": {
@@ -323,7 +308,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In rugby union, a penalty kick at goal is worth three points.",
       "kind": {
@@ -337,7 +321,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the padded piece of equipment worn on a boxer's hands called?",
       "kind": {
@@ -356,7 +339,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the padded glove-like piece of equipment used by a baseball catcher called?",
       "kind": {
@@ -374,7 +356,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the protective headgear worn by a cricket batter?",
       "kind": {
@@ -391,7 +372,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many players from one team are on court in standard indoor volleyball?",
       "kind": {
@@ -409,7 +389,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many metres long is a standard Olympic swimming pool?",
       "kind": {
@@ -427,7 +406,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many centimetres high is a standard men's basketball hoop?",
       "kind": {
@@ -445,7 +423,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many millimetres in diameter is a regulation table-tennis ball?",
       "kind": {
@@ -463,7 +440,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two pieces of equipment used to protect a cricket batter's legs and hands.",
       "kind": {
@@ -493,7 +469,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each athletics event to its implement.",
       "kind": {
@@ -540,7 +515,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Order these tennis court surfaces from slowest to fastest in typical play.",
       "kind": {
@@ -558,7 +532,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these Olympic fencing events by their introduction to the modern Olympic programme, earliest first.",
       "kind": {
@@ -577,7 +550,6 @@
     "category": "Sport",
     "topic": "Rules & equipment",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Match each sport to its standard playing object.",
       "kind": {

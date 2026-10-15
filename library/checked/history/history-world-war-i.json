@@ -3,7 +3,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which event directly triggered the July Crisis of 1914?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country was invaded by Germany through Belgium in August 1914?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What name was commonly used for the Western Front's fortified fighting positions?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which ship was sunk by a German submarine in 1915, helping turn opinion against Germany in the US?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which country joined the Allied side in 1915 after initially declaring neutrality?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which 1917 telegram proposed a German-Mexican alliance against the United States?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which empire fought alongside Germany and Austria-Hungary for most of World War I?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which treaty formally ended the state of war between Germany and the Allied powers in 1919?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which battle in 1914 saw German forces defeat Russia in East Prussia?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which French marshal became the Supreme Allied Commander on the Western Front in 1918?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -257,7 +246,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -271,7 +259,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -285,7 +272,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -299,7 +285,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -316,7 +301,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -332,7 +316,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -350,7 +333,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -369,7 +351,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -416,7 +397,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -471,7 +451,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which battle became notorious for its immense casualties and use of attrition?",
       "answers": [
@@ -495,7 +474,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which British general commanded the British Expeditionary Force at the Battle of the Somme?",
       "answers": [
@@ -519,7 +497,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -535,7 +512,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -553,7 +529,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -571,7 +546,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -589,7 +563,6 @@
     "category": "History",
     "topic": "World War I",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {

@@ -21,7 +21,7 @@ from referencing import Registry, Resource
 
 ROOT = Path(__file__).resolve().parents[2]
 SCHEMA = ROOT / "docs/schema/quiz-1.json"
-ENTRY_KEYS = {"category", "topic", "difficulty", "time_sensitive", "question"}
+ENTRY_KEYS = {"category", "topic", "difficulty", "question"}
 # Fields a text-only library question must leave out: the library has no media, and per-question
 # timing and scoring are the host's choice.
 FORBIDDEN = {"image", "audio", "image_reveal", "image_hold_secs", "multiplier", "time_limit_secs", "bonus"}
@@ -139,8 +139,6 @@ def check_entry(e, problems):
         err(f"replaces {e['replaces']!r} is not an entry number")
     if e.get("difficulty") not in (1, 2, 3):
         err(f"difficulty {e.get('difficulty')!r}")
-    if not isinstance(e.get("time_sensitive"), bool):
-        err("time_sensitive is not true or false")
     q = e.get("question")
     if not isinstance(q, dict):
         return err("no question")

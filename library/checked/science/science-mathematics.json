@@ -3,7 +3,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name for a number that can be written as a ratio of two integers?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Every prime number is odd.",
       "kind": {
@@ -41,7 +39,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which constant is the ratio of a circle's circumference to its diameter?",
       "answers": [
@@ -65,7 +62,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the constant approximately equal to 2.71828?",
       "kind": {
@@ -83,7 +79,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which mathematician is associated with the theorem about right-angled triangles?",
       "answers": [
@@ -107,7 +102,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many degrees are in the interior-angle sum of a convex pentagon?",
       "kind": {
@@ -125,7 +119,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The sum of the interior angles of a triangle in Euclidean geometry is 180 degrees.",
       "kind": {
@@ -139,7 +132,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the value of 0! (zero factorial)?",
       "answers": [
@@ -163,7 +155,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each symbol to its usual mathematical name.",
       "kind": {
@@ -210,7 +201,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which branch of mathematics studies limits, derivatives and integrals?",
       "answers": [
@@ -234,7 +224,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the mathematical term for a statement accepted without proof as a starting point?",
       "kind": {
@@ -251,7 +240,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of a polygon with eight sides?",
       "answers": [
@@ -275,7 +263,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "A square is also a rectangle.",
       "kind": {
@@ -289,7 +276,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the smallest positive integer divisible by every integer from 1 through 10?",
       "kind": {
@@ -307,7 +293,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which number system uses base 2?",
       "answers": [
@@ -331,7 +316,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these numbers in ascending order, smallest first.",
       "kind": {
@@ -350,7 +334,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which mathematician proved the incompleteness theorems?",
       "answers": [
@@ -374,7 +357,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the branch of mathematics focused on prime numbers and integer properties?",
       "kind": {
@@ -390,7 +372,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The number pi is irrational.",
       "kind": {
@@ -404,7 +385,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the smallest prime number greater than 100?",
       "answers": [
@@ -428,7 +408,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many faces does a regular icosahedron have?",
       "kind": {
@@ -446,7 +425,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which field studies properties preserved under continuous deformation?",
       "answers": [
@@ -470,7 +448,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each mathematician to a concept or result associated with them.",
       "kind": {
@@ -517,7 +494,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which mathematician's last name names the diagonal argument used to show real numbers are uncountable?",
       "kind": {
@@ -534,7 +510,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which ancient Greek mathematician wrote the Elements, a foundational geometry text?",
       "answers": [
@@ -558,7 +533,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The square root of 2 is a rational number.",
       "kind": {
@@ -572,7 +546,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many distinct subsets does a set with 5 elements have, including the empty set?",
       "kind": {
@@ -590,7 +563,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name for a number equal to the sum of its proper positive divisors?",
       "answers": [
@@ -614,7 +586,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these mathematicians in order of birth, earliest first.",
       "kind": {
@@ -633,7 +604,6 @@
     "category": "Science",
     "topic": "Mathematics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Give the two integer solutions to x² = 9.",
       "kind": {

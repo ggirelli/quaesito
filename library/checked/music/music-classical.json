@@ -3,7 +3,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which composer wrote the famous Eine kleine Nachtmusik?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which instrument is most closely associated with Niccolò Paganini?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which composer continued composing after becoming profoundly deaf?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which instrument family does the oboe belong to?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who composed the ballet The Nutcracker?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which composer wrote the oratorio Messiah?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which city is most associated with the premiere of Stravinsky's The Rite of Spring in 1913?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which composer created the opera The Magic Flute?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which composer is strongly associated with the musical style known as Impressionism?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Who composed the opera Wozzeck?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which composer wrote the orchestral work The Unanswered Question?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which French composer wrote the opera Pelléas et Mélisande?",
       "answers": [
@@ -291,7 +279,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Johann Sebastian Bach had 20 children.",
       "kind": {
@@ -305,7 +292,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "A standard modern concert grand piano has 88 keys.",
       "kind": {
@@ -319,7 +305,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Antonio Vivaldi was born in Spain.",
       "kind": {
@@ -333,7 +318,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Maurice Ravel orchestrated Mussorgsky's piano suite Pictures at an Exhibition.",
       "kind": {
@@ -347,7 +331,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who composed the orchestral suite The Planets?",
       "kind": {
@@ -364,7 +347,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who composed the opera Carmen?",
       "kind": {
@@ -381,7 +363,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who composed the repetitive orchestral piece Boléro?",
       "kind": {
@@ -398,7 +379,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many Brandenburg Concertos did J. S. Bach compose?",
       "kind": {
@@ -416,7 +396,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many symphonies did Beethoven complete?",
       "kind": {
@@ -434,7 +413,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How old was Mozart, in years, when he died?",
       "kind": {
@@ -452,7 +430,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these composers in order of birth, earliest first.",
       "kind": {
@@ -471,7 +448,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these works in order of first performance, earliest first.",
       "kind": {
@@ -490,7 +466,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each composer to the work.",
       "kind": {
@@ -537,7 +512,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each composer to the opera.",
       "kind": {
@@ -584,7 +558,6 @@
     "category": "Music",
     "topic": "Classical",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Name the Tchaikovsky ballet that premiered in each year.",
       "kind": {

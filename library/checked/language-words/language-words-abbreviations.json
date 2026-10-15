@@ -3,7 +3,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What does the abbreviation 'ASAP' stand for?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In texting, what does 'BTW' usually mean?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What does 'DIY' stand for?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "On a map, what does 'N' usually indicate?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In computing, what does 'URL' stand for?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What does 'RADAR' stand for?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In publishing, what does 'ISBN' stand for?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In legal citations, what does 'et al.' abbreviate?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What does the Latin abbreviation 'i.e.' mean?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -233,7 +223,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -247,7 +236,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -261,7 +249,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -275,7 +262,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -289,7 +275,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -306,7 +291,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -322,7 +306,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -338,7 +321,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -354,7 +336,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -372,7 +353,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -390,7 +370,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -408,7 +387,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -427,7 +405,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -446,7 +423,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Parts": {
@@ -481,7 +457,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -528,7 +503,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -575,7 +549,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What does the 'B' in SCUBA stand for?",
       "answers": [
@@ -602,7 +575,6 @@
     "category": "Language & Words",
     "topic": "Abbreviations",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What does the 'S' in LASER stand for?",
       "answers": [

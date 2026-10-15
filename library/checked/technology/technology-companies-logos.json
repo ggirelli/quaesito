@@ -3,7 +3,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which company's logo features a bitten apple?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which sportswear brand uses a three-stripe mark?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which company uses a red play-button symbol in its logo?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which carmaker's emblem features four interlocking rings?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which fast-food chain is known for its golden arches?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which company's logo is a multicoloured letter G?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which company is represented by a blue bird in its former logo?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which company adopted the 'swoosh' logo, designed by Carolyn Davidson?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Mercedes-Benz three-pointed star is associated with land, sea and air.",
       "kind": {
@@ -209,7 +200,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Starbucks logo has always shown a plain green coffee cup.",
       "kind": {
@@ -223,7 +213,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Shell logo uses a stylized scallop shell.",
       "kind": {
@@ -237,7 +226,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The BMW logo is officially a spinning propeller.",
       "kind": {
@@ -251,7 +239,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The FedEx logo contains an arrow formed by negative space between letters.",
       "kind": {
@@ -265,7 +252,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Japanese company is identified by a logo of three red diamonds?",
       "kind": {
@@ -282,7 +268,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What company uses a small crocodile as its clothing logo?",
       "kind": {
@@ -298,7 +283,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which company has a multicoloured peacock logo associated with its television network?",
       "kind": {
@@ -315,7 +299,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was the Nike swoosh logo created?",
       "kind": {
@@ -333,7 +316,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many points does the Mercedes-Benz star have?",
       "kind": {
@@ -351,7 +333,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was the first version of the Apple logo, showing Isaac Newton, created?",
       "kind": {
@@ -369,7 +350,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these companies by founding year, earliest first.",
       "kind": {
@@ -388,7 +368,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each company with its familiar brand colour.",
       "kind": {
@@ -435,7 +414,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which brand uses a leaping cat as its main logo mark?",
       "answers": [
@@ -459,7 +437,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which web browser used a blue lowercase 'e' with a swirl as its logo?",
       "answers": [
@@ -483,7 +460,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which US retailer's logo is a red-and-white bullseye?",
       "answers": [
@@ -507,7 +483,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Italian car brand uses a prancing horse (the Cavallino Rampante) as its emblem?",
       "kind": {
@@ -523,7 +498,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these companies by founding year, earliest first.",
       "kind": {
@@ -542,7 +516,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Name the Dassler brothers who founded Adidas and Puma after splitting their shoe company. Type each first name.",
       "kind": {
@@ -575,7 +548,6 @@
     "category": "Technology",
     "topic": "Companies & logos",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Match each company with the symbol in its logo.",
       "kind": {

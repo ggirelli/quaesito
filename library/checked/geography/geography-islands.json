@@ -3,7 +3,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which is the world's largest island, excluding continents?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which island is home to the city of Reykjavík?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which island is shared by Haiti and the Dominican Republic?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Indonesian island is home to Jakarta?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which is the largest island in the Mediterranean Sea?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which island belongs to Portugal and is known for its namesake wine?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which island is divided between Indonesia, Malaysia and Brunei?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which island lies between mainland Italy and North Africa and belongs to Italy?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which island group includes Tahiti?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which island is the largest in Japan?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which island is home to the Scottish capital, Edinburgh?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Madagascar lies off the southeastern coast of Africa.",
       "kind": {
@@ -281,7 +269,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Cyprus is located in the Atlantic Ocean.",
       "kind": {
@@ -295,7 +282,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Tasmania is part of Australia.",
       "kind": {
@@ -309,7 +295,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the largest island in the Caribbean?",
       "kind": {
@@ -325,7 +310,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which island is home to Mount Etna?",
       "kind": {
@@ -341,7 +325,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Approximately how many square kilometres is Greenland's area?",
       "kind": {
@@ -359,7 +342,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many main islands make up Japan's traditional count of major islands?",
       "kind": {
@@ -377,7 +359,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Approximately how many kilometres long is Madagascar from north to south?",
       "kind": {
@@ -395,7 +376,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many main islands are traditionally counted in the Hawaiian island chain?",
       "kind": {
@@ -413,7 +393,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these islands by area, largest first.",
       "kind": {
@@ -432,7 +411,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these Mediterranean islands by area, largest first.",
       "kind": {
@@ -451,7 +429,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each island to the country or territory it belongs to.",
       "kind": {
@@ -506,7 +483,6 @@
     "category": "Geography",
     "topic": "Islands",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each island to the body of water nearest it.",
       "kind": {

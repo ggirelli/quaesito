@@ -3,7 +3,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country is completely surrounded by South Africa?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which two countries share the longest international land border?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country borders both Germany and Spain?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which country borders the most other countries in South America?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which African country borders both the Atlantic Ocean and the Mediterranean Sea?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country shares a land border with Denmark?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which country borders both the Caspian Sea and the Persian Gulf?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which country has a land border with North Korea?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country borders both India and China and is landlocked?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Portugal shares a land border with Spain.",
       "kind": {
@@ -233,7 +223,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Norway shares a land border with Denmark.",
       "kind": {
@@ -247,7 +236,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The United States shares a land border with Mexico.",
       "kind": {
@@ -261,7 +249,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Thailand shares a land border with Vietnam.",
       "kind": {
@@ -275,7 +262,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Bolivia has a coastline on the Pacific Ocean today.",
       "kind": {
@@ -289,7 +275,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which country lies between France and Spain in the Pyrenees?",
       "kind": {
@@ -305,7 +290,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Name the only country that borders both the Black Sea and the Caspian Sea.",
       "kind": {
@@ -321,7 +305,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the only South American country whose official language is Dutch?",
       "kind": {
@@ -337,7 +320,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many countries share a land border with Germany?",
       "kind": {
@@ -355,7 +337,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many countries share a land border with Brazil?",
       "kind": {
@@ -373,7 +354,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many countries make up the United Kingdom?",
       "kind": {
@@ -391,7 +371,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these countries by number of land neighbours, largest first.",
       "kind": {
@@ -410,7 +389,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these countries from west to east by their westernmost mainland longitude.",
       "kind": {
@@ -430,7 +408,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Name the country that borders each of these countries.",
       "kind": {
@@ -472,7 +449,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each country to a country it shares a land border with.",
       "kind": {
@@ -527,7 +503,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each country to a country it shares a land border with.",
       "kind": {
@@ -574,7 +549,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Counting all its land neighbours, which European country borders the most countries?",
       "answers": [
@@ -598,7 +572,6 @@
     "category": "Geography",
     "topic": "Countries & borders",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which of these countries borders the fewest other countries?",
       "answers": [

@@ -3,7 +3,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country won the first Eurovision Song Contest in 1956?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Swedish group won Eurovision in 1974 with 'Waterloo'?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who performed 'Rise Like a Phoenix' for Austria in 2014?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country did Céline Dion represent when she won Eurovision in 1988?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Eurovision winner performed 'Euphoria' in 2012?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country won Eurovision in 2021 with 'Zitti e buoni'?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of Ireland's 1994 Eurovision-winning song?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which singer won Eurovision 2007 for Serbia with 'Molitva'?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which country won Eurovision 1993 with Niamh Kavanagh's 'In Your Eyes'?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Eurovision winner was a duo of singers from Denmark in 2000?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Eurovision's first contest was held in Lugano, Switzerland.",
       "kind": {
@@ -257,7 +246,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Eurovision Song Contest was first broadcast in colour in 1956.",
       "kind": {
@@ -271,7 +259,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Australia first competed in Eurovision in 2015.",
       "kind": {
@@ -285,7 +272,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Finnish hard-rock band won Eurovision in 2006?",
       "kind": {
@@ -301,7 +287,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who won Eurovision for Ukraine in 2004 with 'Wild Dances'?",
       "kind": {
@@ -317,7 +302,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What was the title of Ukraine's winning song in Eurovision 2016?",
       "kind": {
@@ -333,7 +317,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many countries competed in the Eurovision final in 2024?",
       "kind": {
@@ -351,7 +334,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many points did Norway receive when it won Eurovision in 2009?",
       "kind": {
@@ -369,7 +351,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did Eurovision introduce the semi-final system?",
       "kind": {
@@ -387,7 +368,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these Eurovision winners in chronological order, earliest first.",
       "kind": {
@@ -406,7 +386,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these countries' first Eurovision wins in chronological order, earliest first.",
       "kind": {
@@ -425,7 +404,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Name the performer and winning song for Sweden's 2015 Eurovision victory.",
       "kind": {
@@ -452,7 +430,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each Eurovision-winning song to its performer.",
       "kind": {
@@ -499,7 +476,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country made its Eurovision debut in 2015 with 'Tonight Again'?",
       "answers": [
@@ -523,7 +499,6 @@
     "category": "Music",
     "topic": "Eurovision",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each country to its Eurovision-winning song.",
       "kind": {

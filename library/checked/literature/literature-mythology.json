@@ -3,7 +3,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In Greek myth, who is the king of the gods?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Greek hero killed the Minotaur?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who flew too close to the Sun with wings made by Daedalus?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In Norse mythology, what is Thor's hammer called?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Roman god is the counterpart of the Greek Zeus?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who guides the dead to the underworld in Greek mythology?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Greek figure was condemned to roll a boulder uphill forever?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who stole fire from the gods and gave it to humanity in Greek myth?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Egyptian god is commonly depicted with a jackal's head?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In the Epic of Gilgamesh, who is created from clay to challenge Gilgamesh?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Norse figure guards the rainbow bridge Bifröst?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which nymph is turned into a laurel tree while fleeing Apollo?",
       "answers": [
@@ -291,7 +279,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -305,7 +292,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -319,7 +305,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -333,7 +318,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -347,7 +331,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -361,7 +344,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -377,7 +359,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -393,7 +374,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -409,7 +389,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -426,7 +405,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -444,7 +422,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -462,7 +439,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -480,7 +456,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -499,7 +474,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -546,7 +520,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -593,7 +566,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -611,7 +583,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -630,7 +601,6 @@
     "category": "Literature",
     "topic": "Mythology",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Parts": {

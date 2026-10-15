@@ -3,7 +3,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which animal is the largest living species of cat?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which bird has the largest wingspan of any living bird?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which land animal is generally considered the tallest living animal?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which mammal is famous for having the longest migration of any mammal?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which animal is the largest living rodent?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which living animal has the greatest bite force measured in a laboratory study?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which mammal is the fastest runner over short distances?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which fish is commonly cited as the largest living fish species?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which animal is the largest living species of turtle?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The ostrich is the fastest bird on land.",
       "kind": {
@@ -233,7 +223,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "A cheetah can maintain its top speed for several minutes.",
       "kind": {
@@ -247,7 +236,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The Greenland shark can live for several centuries.",
       "kind": {
@@ -261,7 +249,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the largest living species of bear?",
       "kind": {
@@ -278,7 +265,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "About how many heartbeats per minute can a hummingbird's heart reach during activity? Give beats per minute.",
       "kind": {
@@ -296,7 +282,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "About how many kilometres can a monarch butterfly migrate one way? Give kilometres.",
       "kind": {
@@ -314,7 +299,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Roughly how many days can an emperor penguin fast during breeding? Give days.",
       "kind": {
@@ -332,7 +316,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each animal with its record.",
       "kind": {
@@ -379,7 +362,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each animal with the record it is known for.",
       "kind": {
@@ -426,7 +408,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which bird is often cited as the heaviest living bird capable of flight?",
       "answers": [
@@ -450,7 +431,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which rabbit breed is famous for having the longest ears?",
       "kind": {
@@ -468,7 +448,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the largest living species of salamander?",
       "kind": {
@@ -487,7 +466,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Order these living animals by typical maximum adult mass, largest first.",
       "kind": {
@@ -506,7 +484,6 @@
     "category": "Nature",
     "topic": "Animal records",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these animals by approximate top running speed on land, fastest first.",
       "kind": {

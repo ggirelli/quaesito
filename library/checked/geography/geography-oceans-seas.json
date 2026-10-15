@@ -3,7 +3,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which ocean is the largest by surface area?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which sea lies between Europe and Africa?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Great Barrier Reef lies in which body of water?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which ocean borders the east coast of the United States?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which sea separates the Arabian Peninsula from northeast Africa?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which ocean surrounds the Maldives?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Mariana Trench is in which ocean?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which sea is connected to the Atlantic by the Strait of Gibraltar?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which ocean lies between Africa and Australia?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The Sargasso Sea is unusual because it is bounded mainly by what?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which sea is known for exceptionally high salinity and lies between Iran and Arabia?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The Drake Passage lies between South America and which region?",
       "answers": [
@@ -291,7 +279,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Atlantic Ocean is generally smaller than the Indian Ocean.",
       "kind": {
@@ -305,7 +292,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Dead Sea is actually a salt lake, not an ocean-connected sea.",
       "kind": {
@@ -319,7 +305,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Baltic Sea has relatively low salinity compared with most oceans.",
       "kind": {
@@ -333,7 +318,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Arctic Ocean is the smallest of the five commonly recognized oceans.",
       "kind": {
@@ -347,7 +331,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What ocean lies around the North Pole?",
       "kind": {
@@ -364,7 +347,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which sea is bordered by Israel, Jordan, and the Palestinian territories?",
       "kind": {
@@ -380,7 +362,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Approximately how deep is the Mariana Trench's deepest known point, in kilometres?",
       "kind": {
@@ -398,7 +379,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "About how many kilometres wide is the English Channel at its narrowest point?",
       "kind": {
@@ -416,7 +396,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Approximately how many kilometres long is the Red Sea from north to south?",
       "kind": {
@@ -434,7 +413,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Order these oceans by surface area, largest first.",
       "kind": {
@@ -453,7 +431,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these bodies of water from west to east by their main basins.",
       "kind": {
@@ -472,7 +449,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each sea to the ocean it borders or connects with most directly.",
       "kind": {
@@ -519,7 +495,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each strait to the bodies of water it connects.",
       "kind": {
@@ -574,7 +549,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the narrow strait linking the Black Sea to the Sea of Marmara?",
       "kind": {
@@ -594,7 +568,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which northern arm of the Baltic Sea lies between Sweden and Finland?",
       "kind": {
@@ -611,7 +584,6 @@
     "category": "Geography",
     "topic": "Oceans & seas",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many oceans does the most common modern model recognize?",
       "kind": {

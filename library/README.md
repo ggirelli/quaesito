@@ -33,13 +33,11 @@ schema ([`docs/schema/quiz-1.json`](../docs/schema/quiz-1.json)), so it can be c
   "category": "Science",
   "topic": "Astronomy",
   "difficulty": 2,
-  "time_sensitive": false,
   "question": { "text": "...", "answers": [{ "text": "...", "correct": true }, { "text": "..." }] }
 }
 ```
 
 - `difficulty`: 1 most adults know it, 2 keen quizzers, 3 experts.
-- `time_sensitive`: the answer may change over the years (records, holders); phrased "As of <year>".
 - Kinds used: multiple choice (no `kind`), `TrueFalse`, `Text`, `Number`, `Order`, `Parts`, `Pairs`.
   No pictures, audio, `Pin` or `Slide`, and no per-question timing or scoring fields.
 

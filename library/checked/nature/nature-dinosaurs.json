@@ -3,7 +3,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which dinosaur is famous for the three horns on its head shield?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which dinosaur had a large sail-like structure on its back?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What did herbivorous dinosaurs mainly eat?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which dinosaur is known for the plates along its back and spikes on its tail?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which dinosaur group includes Triceratops and Styracosaurus?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What are two leading hypotheses for the function of Stegosaurus's back plates?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which feathered Jurassic animal is a classic early example in discussions of bird evolution?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which group of dinosaurs includes the long-necked Diplodocus and Apatosaurus?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the geologic period when non-avian dinosaurs became extinct?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which feathered dinosaur is known from fossils showing four wings?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which dinosaur genus has a name meaning 'different lizard'?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -281,7 +269,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -295,7 +282,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -309,7 +295,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -323,7 +308,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -337,7 +321,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -353,7 +336,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -369,7 +351,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -386,7 +367,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -404,7 +384,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -422,7 +401,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -440,7 +418,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -487,7 +464,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -534,7 +510,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the leading hypothesis for the function of Parasaurolophus's hollow head crest?",
       "answers": [
@@ -558,7 +533,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -576,7 +550,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -594,7 +567,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -613,7 +585,6 @@
     "category": "Nature",
     "topic": "Dinosaurs",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Parts": {

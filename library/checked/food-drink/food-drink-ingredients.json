@@ -3,7 +3,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which ingredient gives pesto its characteristic green colour and herbal flavour?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the main ingredient in traditional hummus?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which part of the saffron crocus is harvested to make saffron?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which ingredient makes bread dough rise by producing carbon dioxide?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which compound gives chilli peppers most of their characteristic heat?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is tahini primarily made from?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which part of the mustard plant is commonly used to make prepared mustard?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What gives blue cheese many of its characteristic veins?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which compound is chiefly responsible for turmeric's intense yellow colour?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which ingredient is the main source of the gel in traditional Japanese kanten desserts?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which seed is traditionally used to make marzipan?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which compound is a key source of the pungent aroma released when garlic is crushed?",
       "answers": [
@@ -291,7 +279,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Cocoa butter is the fat naturally found in cacao beans.",
       "kind": {
@@ -305,7 +292,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Black pepper and white pepper can come from the same plant species.",
       "kind": {
@@ -319,7 +305,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Saffron is made from the dried petals of a crocus.",
       "kind": {
@@ -333,7 +318,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Tofu is made by coagulating soy milk.",
       "kind": {
@@ -347,7 +331,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The heat of wasabi is mainly caused by capsaicin.",
       "kind": {
@@ -361,7 +344,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which compound gives vanilla its characteristic aroma?",
       "kind": {
@@ -377,7 +359,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many carbon atoms are in one molecule of acetic acid?",
       "kind": {
@@ -395,7 +376,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many essential amino acids are required in the human diet for adults?",
       "kind": {
@@ -413,7 +393,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many carbon atoms are in one molecule of caffeine?",
       "kind": {
@@ -431,7 +410,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many kilocalories of energy does one gram of fat provide, approximately?",
       "kind": {
@@ -449,7 +427,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Put these usual steps in wheat-flour production in order, earliest first.",
       "kind": {
@@ -468,7 +445,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these stages of chocolate production in order, earliest first.",
       "kind": {
@@ -487,7 +463,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Give the characteristic compound associated with each ingredient.",
       "kind": {
@@ -520,7 +495,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each ingredient with the plant part commonly used.",
       "kind": {
@@ -567,7 +541,6 @@
     "category": "Food & Drink",
     "topic": "Ingredients",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the pungent resinous spice also known as hing?",
       "kind": {

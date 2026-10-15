@@ -3,7 +3,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who wrote Pride and Prejudice?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who wrote The Great Gatsby?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Russian author wrote War and Peace?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who wrote Beloved?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which author wrote The Handmaid's Tale?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who wrote The Master and Margarita?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Who wrote The Man Without Qualities?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which author wrote The Book of Disquiet?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Who wrote the novel The Recognitions?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which author wrote The Tale of Genji?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -257,7 +246,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -271,7 +259,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -285,7 +272,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -299,7 +285,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -313,7 +298,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -331,7 +315,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -348,7 +331,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -365,7 +347,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -382,7 +363,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -400,7 +380,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -418,7 +397,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -437,7 +415,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -456,7 +433,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Parts": {
@@ -493,7 +469,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -540,7 +515,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -587,7 +561,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -605,7 +578,6 @@
     "category": "Literature",
     "topic": "Authors",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {

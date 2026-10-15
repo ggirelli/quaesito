@@ -3,7 +3,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which organ pumps blood around the human body?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which vitamin can the skin produce when exposed to sunlight?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which part of the eye controls how much light enters?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which organs primarily filter waste from the blood to make urine?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which blood type is known as the universal red-cell donor when Rh factor is considered?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which structure connects muscles to bones?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which part of the brain is most directly involved in balance and coordination?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the flap that helps keep food out of the windpipe during swallowing?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which cells in the pancreas produce insulin?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which cranial nerve is primarily responsible for the sense of smell?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which blood vessel carries oxygenated blood from the lungs to the heart?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which kidney structure is the main site of blood filtration at the start of urine formation?",
       "answers": [
@@ -291,7 +279,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The smallest bones in the human body are found in the middle ear.",
       "kind": {
@@ -305,7 +292,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Red blood cells normally contain a nucleus in healthy adult humans.",
       "kind": {
@@ -319,7 +305,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The diaphragm contracts and moves downward during normal inhalation.",
       "kind": {
@@ -333,7 +318,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The liver receives blood from both the hepatic artery and the hepatic portal vein.",
       "kind": {
@@ -347,7 +331,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the common name for the patella?",
       "kind": {
@@ -364,7 +347,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the pigment in red blood cells that binds oxygen?",
       "kind": {
@@ -381,7 +363,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the membrane surrounding the lungs?",
       "kind": {
@@ -397,7 +378,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the body's largest artery?",
       "kind": {
@@ -413,7 +393,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many teeth does a typical adult human have, including wisdom teeth?",
       "kind": {
@@ -431,7 +410,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the typical resting heart rate of an adult, in beats per minute, near the midpoint of the usual range?",
       "kind": {
@@ -449,7 +427,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Approximately how many litres of blood does a typical adult human have?",
       "kind": {
@@ -467,7 +444,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Order these blood vessels by blood flow from the heart toward body tissues, earliest first.",
       "kind": {
@@ -486,7 +462,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these structures along the path of swallowed food, from first to last.",
       "kind": {
@@ -505,7 +480,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each hormone to its main effect.",
       "kind": {
@@ -552,7 +526,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The adult human body normally has 12 pairs of ribs.",
       "kind": {
@@ -566,7 +539,6 @@
     "category": "Science",
     "topic": "Human body",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two chambers of the heart that receive blood; type each chamber.",
       "kind": {

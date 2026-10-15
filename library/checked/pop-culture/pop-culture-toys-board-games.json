@@ -3,7 +3,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which board game asks players to solve a murder at a country house? ",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the small plastic people introduced by LEGO in 1978?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In which game do players try to remove wooden blocks without toppling a tower?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which company created the original Play-Doh as a wallpaper cleaner?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which board game uses armies and territories to pursue world domination?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What shape is the classic board in the game Chinese Checkers?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which toy was invented by Richard James after he noticed a spring walking down a shelf?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which board game features a plastic surgeon removing body parts with tweezers?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which company is most associated with the original Barbie doll, launched in 1959?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In Scrabble, what does a player use to form words on the board?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which classic toy lets you draw using two knobs that control a stylus inside a screen?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The original Monopoly game was published commercially in 1935.",
       "kind": {
@@ -281,7 +269,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "A standard Rubik’s Cube has eight faces, each with a different colour.",
       "kind": {
@@ -295,7 +282,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The game Connect Four was first released by LEGO.",
       "kind": {
@@ -309,7 +295,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The first LEGO bricks with the modern tube-and-stud design appeared in 1958.",
       "kind": {
@@ -323,7 +308,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In Battleship, players can see their opponent’s fleet before firing.",
       "kind": {
@@ -337,7 +321,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What toy brand is known for interlocking plastic bricks?",
       "kind": {
@@ -353,7 +336,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many squares are on a standard chessboard? Give the number of squares.",
       "kind": {
@@ -371,7 +353,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many spaces are on the classic US Monopoly board? Give the number of spaces.",
       "kind": {
@@ -389,7 +370,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these toys in order of introduction, earliest first.",
       "kind": {
@@ -408,7 +388,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each toy to the person most associated with its invention.",
       "kind": {
@@ -455,7 +434,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which 1978 electronic game has four coloured buttons that light up in sequences players must repeat?",
       "answers": [
@@ -479,7 +457,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many wooden blocks are in a standard Jenga set? Give the number of blocks.",
       "kind": {
@@ -497,7 +474,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many tiles (including blanks) are in the standard English-language Scrabble set? Give the number of tiles.",
       "kind": {
@@ -515,7 +491,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these board games in order of first commercial release, earliest first.",
       "kind": {
@@ -534,7 +509,6 @@
     "category": "Pop Culture",
     "topic": "Toys & board games",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each board game to its inventor or original designer.",
       "kind": {

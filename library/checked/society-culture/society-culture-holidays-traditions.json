@@ -3,7 +3,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which plant is traditionally associated with kissing at Christmas?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What are the small oil lamps lit during Diwali commonly called?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which flowers are central to Japan's springtime hanami tradition?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "During which Jewish festival is a special candleholder lit over eight nights?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is traditionally hidden inside a Greek New Year's cake, the vasilopita?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which holiday is celebrated with a decorated tree in many parts of the world?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the pre-Lenten celebration famous for parades in Rio de Janeiro?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In Thailand, which festival is famous for water-splashing celebrations in April?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the traditional name for Scotland's New Year's Eve celebration?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which festival marks the Persian New Year around the spring equinox?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Mexican holiday traditionally includes visits to family graves and offerings for deceased loved ones?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In the UK, Boxing Day falls on 26 December.",
       "kind": {
@@ -281,7 +269,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Jewish festival of Hanukkah lasts for twelve nights.",
       "kind": {
@@ -295,7 +282,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Kwanzaa is celebrated over seven days, beginning on 26 December.",
       "kind": {
@@ -309,7 +295,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Hindu festival of Holi is traditionally associated with throwing coloured powders.",
       "kind": {
@@ -323,7 +308,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Midsummer is celebrated in Sweden only on 21 June every year.",
       "kind": {
@@ -337,7 +321,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the Islamic month of fasting?",
       "kind": {
@@ -354,7 +337,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the Jewish New Year?",
       "kind": {
@@ -371,7 +353,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many animals are in the traditional Chinese zodiac cycle?",
       "kind": {
@@ -389,7 +370,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Including the helper candle, how many candles are on a Hanukkah hanukkiah?",
       "kind": {
@@ -407,7 +387,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many principles, known as the Nguzo Saba, are celebrated during Kwanzaa?",
       "kind": {
@@ -425,7 +404,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Put these fixed-date holidays in calendar order, earliest first.",
       "kind": {
@@ -444,7 +422,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these seasonal festivals in approximate calendar order in the Northern Hemisphere, earliest first.",
       "kind": {
@@ -463,7 +440,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each celebration with the country most strongly associated with its modern tradition.",
       "kind": {
@@ -518,7 +494,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each holiday with the item or custom most associated with it.",
       "kind": {
@@ -573,7 +548,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the Japanese name for the first shrine or temple visit of the New Year?",
       "answers": [
@@ -597,7 +571,6 @@
     "category": "Society & Culture",
     "topic": "Holidays & traditions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Name the three gifts traditionally brought to Jesus by the Magi.",
       "kind": {

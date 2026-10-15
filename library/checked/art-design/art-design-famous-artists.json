@@ -3,7 +3,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Mexican artist is known for self-portraits and works reflecting her own life and pain?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which artist painted American Gothic, featuring a farmer and a woman holding a pitchfork?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which artist created the cut-paper work Jazz late in his life?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who painted The Garden of Earthly Delights?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which artist is associated with the drip-painting technique and Abstract Expressionism?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Italian painter is often credited with pioneering the technique of chiaroscuro in Renaissance painting?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which artist created the 1915 painting Black Square?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -185,7 +177,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -199,7 +190,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -213,7 +203,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -227,7 +216,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -241,7 +229,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -258,7 +245,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -274,7 +260,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -292,7 +277,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -311,7 +295,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -330,7 +313,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Parts": {
@@ -359,7 +341,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -406,7 +387,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Spanish artist went through a Blue Period?",
       "answers": [
@@ -430,7 +410,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who painted The School of Athens in the Vatican?",
       "answers": [
@@ -454,7 +433,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -472,7 +450,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -490,7 +467,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -508,7 +484,6 @@
     "category": "Art & Design",
     "topic": "Famous artists",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {

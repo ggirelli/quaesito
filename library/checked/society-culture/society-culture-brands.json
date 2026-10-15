@@ -3,7 +3,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which company makes the PlayStation video game consoles?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which sportswear brand uses a swoosh as its logo?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which brand is famous for its interlocking double-C logo?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which company owns the Android mobile operating system?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which fast-food chain is associated with the slogan 'I'm lovin' it'?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which car brand uses a four-ring emblem?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which company created the Barbie doll?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which brand's name comes from the initials of its founder, Ingvar Kamprad, and his family farm and village?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Japanese brand takes its name from the Latin phrase 'a sound mind in a sound body'?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which company was originally called 'Blue Ribbon Sports'?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The LEGO name is derived from the Danish words 'leg godt', meaning 'play well'.",
       "kind": {
@@ -257,7 +246,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The first Apple computer was called the Macintosh.",
       "kind": {
@@ -271,7 +259,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The company that makes Oreo cookies is Mondelez International.",
       "kind": {
@@ -285,7 +272,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The automobile brand Volvo was founded in Germany.",
       "kind": {
@@ -299,7 +285,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which brand makes the Galaxy line of smartphones?",
       "kind": {
@@ -315,7 +300,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which soft drink brand is known for its red-and-white script logo?",
       "kind": {
@@ -332,7 +316,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was the LEGO Group founded?",
       "kind": {
@@ -350,7 +333,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was the first McDonald's restaurant opened by Richard and Maurice McDonald?",
       "kind": {
@@ -368,7 +350,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many stripes are on the Adidas logo commonly known as the Performance logo?",
       "kind": {
@@ -386,7 +367,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these technology brands in order of founding year, earliest first.",
       "kind": {
@@ -405,7 +385,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these fashion brands in order of founding year, earliest first.",
       "kind": {
@@ -424,7 +403,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each brand with the product it is especially known for.",
       "kind": {
@@ -479,7 +457,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each brand with its country of origin.",
       "kind": {
@@ -534,7 +511,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which brand name became a generic word for a vacuum flask?",
       "answers": [
@@ -558,7 +534,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which fashion designer founded the house famous for the No. 5 perfume and the little black dress?",
       "answers": [
@@ -582,7 +557,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Japanese watch brand was founded by Kintaro Hattori, taking its name from his Seikosha clock factory?",
       "kind": {
@@ -598,7 +572,6 @@
     "category": "Society & Culture",
     "topic": "Brands",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What German words do the letters B, M and W in BMW stand for?",
       "kind": {

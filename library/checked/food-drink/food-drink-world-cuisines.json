@@ -3,7 +3,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country is the birthplace of sushi as we commonly know it today?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which grain is used to make traditional Italian risotto?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country is most associated with the dish paella?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which spice gives many traditional biryanis their golden colour?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In Ethiopian cuisine, what is injera traditionally made from?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Mexican sauce is traditionally made with chocolate among its ingredients?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Indonesian ingredient gives rendang much of its rich, aromatic base?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Georgian bread is traditionally shaped around cheese and often topped with egg?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Tacos are a traditional food of Mexico.",
       "kind": {
@@ -209,7 +200,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Traditional Greek tzatziki is usually made with yoghurt and cucumber.",
       "kind": {
@@ -223,7 +213,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Couscous is a staple food associated with North African cuisines.",
       "kind": {
@@ -237,7 +226,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The main ingredient in Japanese soba noodles is buckwheat.",
       "kind": {
@@ -251,7 +239,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the thin, flaky pastry used in many Greek dishes such as spanakopita?",
       "kind": {
@@ -270,7 +257,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the spicy Korean fermented vegetable dish, often made with cabbage?",
       "kind": {
@@ -286,7 +272,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the Peruvian citrus-marinated raw fish dish?",
       "kind": {
@@ -304,7 +289,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "A Japanese go, a traditional sake measure, is how many millilitres?",
       "kind": {
@@ -322,7 +306,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many millilitres are in one US customary cup, approximately?",
       "kind": {
@@ -340,7 +323,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "A traditional Japanese shō is how many millilitres, approximately?",
       "kind": {
@@ -358,7 +340,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these pasta shapes in order of their usual width, narrowest first.",
       "kind": {
@@ -377,7 +358,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Name the country associated with each dish.",
       "kind": {
@@ -417,7 +397,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each cuisine staple to the country most associated with it.",
       "kind": {
@@ -464,7 +443,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each sauce or condiment to its cuisine of origin.",
       "kind": {
@@ -519,7 +497,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Japanese liquid seasoning is brewed from soybeans, roasted wheat, salt and koji?",
       "answers": [
@@ -543,7 +520,6 @@
     "category": "Food & Drink",
     "topic": "World cuisines",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these cheeses in order by country of origin, A–Z.",
       "kind": {

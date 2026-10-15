@@ -3,7 +3,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country's capital is Ljubljana?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the capital of Morocco?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which capital stands on the River Liffey?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the capital of South Korea?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which city is the capital of Kazakhstan?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the capital of Bhutan?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which country's capital is Yamoussoukro?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the capital of Belize?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which capital lies on the Danube?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the capital of Mongolia?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which country's capital is Ngerulmud?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the capital of Suriname?",
       "answers": [
@@ -291,7 +279,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Canberra, not Sydney, is Australia's capital.",
       "kind": {
@@ -305,7 +292,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The capital of Turkey is Istanbul.",
       "kind": {
@@ -319,7 +305,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Nairobi is the capital of Kenya.",
       "kind": {
@@ -333,7 +318,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The capital of Switzerland is Geneva.",
       "kind": {
@@ -347,7 +331,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "La Paz is the sole constitutional capital of Bolivia.",
       "kind": {
@@ -361,7 +344,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the capital of Iceland?",
       "kind": {
@@ -377,7 +359,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Name the capital of Madagascar.",
       "kind": {
@@ -394,7 +375,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the capital of Peru?",
       "kind": {
@@ -410,7 +390,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which city is the capital of Latvia?",
       "kind": {
@@ -426,7 +405,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did Brasília officially become Brazil's capital?",
       "kind": {
@@ -444,7 +422,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Approximately how many kilometres north of the equator is Singapore's city centre?",
       "kind": {
@@ -462,7 +439,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these capitals from north to south by latitude.",
       "kind": {
@@ -482,7 +458,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these capitals from west to east by longitude.",
       "kind": {
@@ -502,7 +477,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Give the capital of each country listed.",
       "kind": {
@@ -541,7 +515,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each country to its capital.",
       "kind": {
@@ -596,7 +569,6 @@
     "category": "Geography",
     "topic": "Capitals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each country to its capital.",
       "kind": {

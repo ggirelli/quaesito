@@ -3,7 +3,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What does the 'S' in USB stand for?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which connector is commonly used for modern wired headphones and is reversible?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which device uses e-ink to imitate the appearance of ink on paper?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which company makes the Kindle e-reader?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the main purpose of a power bank?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which company developed the original Game Boy handheld console?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What does NFC allow devices to do over a very short distance?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which display technology uses organic light-emitting diodes?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What kind of sensor detects device rotation and angular velocity?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which connector was designed by Apple and introduced with the iPhone 5 in 2012?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The original Sony Walkman played compact discs.",
       "kind": {
@@ -257,7 +246,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "A QR code can store information in two dimensions.",
       "kind": {
@@ -271,7 +259,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Bluetooth was named after a 10th-century Scandinavian king.",
       "kind": {
@@ -285,7 +272,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The first iPhone included a removable battery designed for user swapping.",
       "kind": {
@@ -299,7 +285,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "An accelerometer can measure changes in motion and acceleration.",
       "kind": {
@@ -313,7 +298,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the common name for a device that converts digital audio into an analog signal for headphones?",
       "kind": {
@@ -330,7 +314,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What brand name did Nintendo use for its motion-sensing game controller system for the Wii?",
       "kind": {
@@ -347,7 +330,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the short name for a small camera designed to be worn or mounted during action sports?",
       "kind": {
@@ -364,7 +346,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many megapixels did the first iPhone's rear camera have?",
       "kind": {
@@ -382,7 +363,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did Apple introduce the iPod?",
       "kind": {
@@ -400,7 +380,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many pins did the original Apple iPod dock connector have?",
       "kind": {
@@ -418,7 +397,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these Apple portable devices in order of first release, earliest first.",
       "kind": {
@@ -437,7 +415,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two common sensors in a phone used to detect orientation and rotation. Type each sensor.",
       "kind": {
@@ -464,7 +441,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each port or connector with its common use.",
       "kind": {
@@ -511,7 +487,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which company introduced the Walkman portable cassette player?",
       "answers": [
@@ -535,7 +510,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which company made the 1990 Model 1, often called the first commercially sold digital camera?",
       "answers": [
@@ -559,7 +533,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the common IEC name for the connector on the power cable that plugs into a desktop PC?",
       "kind": {
@@ -583,7 +556,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these removable storage formats by introduction, earliest first.",
       "kind": {
@@ -602,7 +574,6 @@
     "category": "Technology",
     "topic": "Gadgets",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Match each gadget with its best-known original maker.",
       "kind": {

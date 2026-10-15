@@ -3,7 +3,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which film won Best Picture at the 1998 Academy Awards?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which actor won an Oscar for playing Forrest Gump?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which animated film won the first Oscar for Best Animated Feature?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who won Best Actress for La La Land?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which film won Best Picture at the 2020 Academy Awards ceremony?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which actor won Best Supporting Actor for The Dark Knight?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which film became the first non-English-language winner of the Best Picture Oscar?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Who was the first woman to win the Oscar for Best Director?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which film won the Oscar for Best International Feature Film at the 2021 ceremony?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Walt Disney won multiple competitive Academy Awards during his career.",
       "kind": {
@@ -233,7 +223,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The film Jaws won the Oscar for Best Picture.",
       "kind": {
@@ -247,7 +236,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Katharine Hepburn won four competitive Oscars for acting.",
       "kind": {
@@ -261,7 +249,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The 1994 Best Picture Oscar went to Pulp Fiction.",
       "kind": {
@@ -275,7 +262,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "At the 2017 ceremony, La La Land was mistakenly announced as Best Picture before Moonlight was named the winner.",
       "kind": {
@@ -289,7 +275,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the surname of the actor who won Best Actor for Philadelphia?",
       "kind": {
@@ -306,7 +291,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who won the Best Actress Oscar for Blue Jasmine?",
       "kind": {
@@ -323,7 +307,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Japanese film won the 2024 Oscar for Best Animated Feature?",
       "kind": {
@@ -340,7 +323,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did the first Academy Awards ceremony take place?",
       "kind": {
@@ -358,7 +340,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did the film The Artist win Best Picture?",
       "kind": {
@@ -376,7 +357,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did The Silence of the Lambs win Best Picture?",
       "kind": {
@@ -394,7 +374,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two actors who won Oscars for playing the same character, Vito Corleone.",
       "kind": {
@@ -423,7 +402,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each actor with the film for which they won an acting Oscar.",
       "kind": {
@@ -470,7 +448,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the Oscar category that honours achievement in film music?",
       "answers": [
@@ -494,7 +471,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who directed the film that won Best Picture at the 2017 Academy Awards?",
       "answers": [
@@ -518,7 +494,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which film won Best Picture at the 1973 Academy Awards ceremony?",
       "answers": [
@@ -542,7 +517,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which film won Best Picture at the 2004 Academy Awards?",
       "kind": {
@@ -562,7 +536,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these Best Picture winners in ceremony order, earliest first.",
       "kind": {
@@ -581,7 +554,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these films in the order they won Best Picture, earliest first.",
       "kind": {
@@ -600,7 +572,6 @@
     "category": "Film & TV",
     "topic": "Oscars",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each film with its Best Picture-winning year.",
       "kind": {

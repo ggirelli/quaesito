@@ -3,7 +3,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which cheese is traditionally used in a Greek salad?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which cheese is famous for its stretchy texture on a pizza?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which cheese is traditionally associated with the Swiss dish fondue?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which cheese is known for its blue veins and strong flavour?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which cheese is traditionally used in a tiramisu's creamy filling?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which cheese is made from the whey left over during cheesemaking?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which cheese is traditionally made using the larvae of cheese flies during fermentation?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Italian cheese is commonly formed into a pouch and filled with cream and stracciatella?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Cheddar originated in England.",
       "kind": {
@@ -209,7 +200,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Halloumi is known for holding its shape when grilled.",
       "kind": {
@@ -223,7 +213,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Traditional Parmigiano Reggiano is made from goat's milk.",
       "kind": {
@@ -237,7 +226,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Brie is a blue-veined cheese.",
       "kind": {
@@ -251,7 +239,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The holes in Emmental cheese are associated with gas produced by bacteria during ripening.",
       "kind": {
@@ -265,7 +252,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "About how many litres of milk are needed to make 1 kilogram of cheese, on average?",
       "kind": {
@@ -283,7 +269,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many months is Parmigiano Reggiano aged at minimum before sale?",
       "kind": {
@@ -301,7 +286,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many grams of protein are in 100 grams of typical hard Parmesan cheese, approximately?",
       "kind": {
@@ -319,7 +303,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Put these cheeses in order of their usual moisture content, highest first.",
       "kind": {
@@ -338,7 +321,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these stages of traditional hard-cheese production in order, earliest first.",
       "kind": {
@@ -357,7 +339,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each cheese with the country it is especially associated with.",
       "kind": {
@@ -404,7 +385,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each cheese with its characteristic production or serving feature.",
       "kind": {
@@ -451,7 +431,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Italian cheese from Emilia-Romagna and Marche is aged in sealed underground pits?",
       "answers": [
@@ -475,7 +454,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which fresh, unaged cheese is cubed and cooked with spinach in a classic North Indian dish?",
       "answers": [
@@ -499,7 +477,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Campanian cheese with PDO status is made from water-buffalo milk?",
       "answers": [
@@ -523,7 +500,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which French blue cheese must be matured in the Combalou caves?",
       "answers": [
@@ -547,7 +523,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which brined Greek cheese has PDO status and is traditionally made from sheep's milk (or sheep's with some goat's milk)?",
       "kind": {
@@ -564,7 +539,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What fresh Italian cheese has a name meaning 'twice cooked'?",
       "kind": {
@@ -581,7 +555,6 @@
     "category": "Food & Drink",
     "topic": "Cheese",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many litres of milk are needed to make approximately 1 kilogram of Parmigiano Reggiano?",
       "kind": {

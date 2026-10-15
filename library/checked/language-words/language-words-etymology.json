@@ -3,7 +3,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Latin word is the origin of “aquarium”?",
       "answers": [
@@ -30,7 +29,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which language gave English “shampoo,” originally referring to pressing or massaging?",
       "answers": [
@@ -57,7 +55,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The word “salary” is historically linked to the Latin word for what?",
       "answers": [
@@ -84,7 +81,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "“Muscle” comes from Latin musculus, literally meaning what?",
       "answers": [
@@ -111,7 +107,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Greek root in “telephone” means “far”?",
       "answers": [
@@ -138,7 +133,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The word “clue” developed from the word “clew,” meaning what?",
       "answers": [
@@ -165,7 +159,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -179,7 +172,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -193,7 +185,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -207,7 +198,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -221,7 +211,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -235,7 +224,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -252,7 +240,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -268,7 +255,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -284,7 +270,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -302,7 +287,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -320,7 +304,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -338,7 +321,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -357,7 +339,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Parts": {
@@ -390,7 +371,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -437,7 +417,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which language gave English the word “ketchup” via a word for a fermented fish sauce?",
       "answers": [
@@ -464,7 +443,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the literal meaning of Latin penicillus, the source of “pencil”?",
       "answers": [
@@ -491,7 +469,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which language is the source of “bungalow,” via a term meaning “of Bengal”?",
       "answers": [
@@ -518,7 +495,6 @@
     "category": "Language & Words",
     "topic": "Etymology",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {

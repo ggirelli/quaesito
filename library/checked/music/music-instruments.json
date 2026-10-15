@@ -3,7 +3,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which instrument has 88 keys on a standard modern model?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which brass instrument usually has the lowest range in a concert band?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which instrument is played by blowing across a hole rather than into a mouthpiece?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which instrument typically has four strings tuned G, D, A and E?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which woodwind instrument uses a double reed and is pitched in F?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which instrument's sound is produced by striking strings with small hammers?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which instrument is central to the Indonesian gamelan ensemble and consists of tuned metal keys?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which orchestral instrument commonly uses a slide to change pitch?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which instrument is a member of the viol family and is held between the legs?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which instrument is the lowest member of the standard orchestral woodwind family?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "A saxophone is usually made of brass but classified as a woodwind instrument.",
       "kind": {
@@ -257,7 +246,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "A standard ukulele usually has six strings.",
       "kind": {
@@ -271,7 +259,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "A piccolo sounds an octave lower than a concert flute.",
       "kind": {
@@ -285,7 +272,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The theorbo is a long-necked plucked string instrument used in early music.",
       "kind": {
@@ -299,7 +285,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the small hand-held percussion instrument with jingling metal discs called?",
       "kind": {
@@ -316,7 +301,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which bowed string instrument is larger than a violin but smaller than a cello?",
       "kind": {
@@ -333,7 +317,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the Japanese three-stringed instrument played with a large plectrum called?",
       "kind": {
@@ -350,7 +333,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many valves does a standard modern orchestral trumpet usually have?",
       "kind": {
@@ -368,7 +350,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many strings does a standard concert harp have?",
       "kind": {
@@ -386,7 +367,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Order these bowed string instruments from highest to lowest typical pitch range.",
       "kind": {
@@ -405,7 +385,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these saxophones from highest to lowest typical pitch range.",
       "kind": {
@@ -424,7 +403,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each instrument to its instrument family.",
       "kind": {
@@ -471,7 +449,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each instrument to the country or tradition it is strongly associated with.",
       "kind": {
@@ -518,7 +495,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which percussion instrument is made of a set of tuned metal bars?",
       "answers": [
@@ -542,7 +518,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which type of bagpipe is played in Scottish pipe bands?",
       "answers": [
@@ -566,7 +541,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The oboe normally gives the orchestra its tuning A.",
       "kind": {
@@ -580,7 +554,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which compact, conical-bore cousin of the trumpet is the lead melody instrument of British brass bands?",
       "kind": {
@@ -597,7 +570,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many strings does a standard bass guitar have?",
       "kind": {
@@ -615,7 +587,6 @@
     "category": "Music",
     "topic": "Instruments",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Name these drum-kit instruments.",
       "kind": {

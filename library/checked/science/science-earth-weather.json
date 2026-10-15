@@ -3,7 +3,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which layer of Earth's atmosphere contains most of its weather?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What instrument measures atmospheric pressure?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is molten rock called while it is still beneath Earth's surface?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What process turns water vapour into liquid droplets in clouds?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which type of tectonic plate boundary commonly forms mid-ocean ridges?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name for the boundary between Earth's crust and mantle?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which gas is the largest contributor to the natural greenhouse effect?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What term describes the temperature at which air becomes saturated with water vapour?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which ocean current helps moderate the climate of western Europe?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the scale used to classify tornado intensity from damage surveys?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which mineral defines 10 on the Mohs hardness scale?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Lightning can occur within a cloud without striking the ground.",
       "kind": {
@@ -281,7 +269,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Earth's outer core is liquid, while its inner core is solid.",
       "kind": {
@@ -295,7 +282,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "A tsunami is usually caused by strong winds blowing across the ocean surface.",
       "kind": {
@@ -309,7 +295,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The Coriolis effect influences the rotation direction of large-scale weather systems.",
       "kind": {
@@ -323,7 +308,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the sudden shaking of the ground caused by movement in Earth's crust?",
       "kind": {
@@ -339,7 +323,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the boundary where two air masses meet?",
       "kind": {
@@ -356,7 +339,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What term describes the long-term average pattern of weather in a region?",
       "kind": {
@@ -372,7 +354,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the point on Earth's surface directly above an earthquake's focus?",
       "kind": {
@@ -389,7 +370,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Approximately how many hours does Earth take to rotate once relative to the Sun?",
       "kind": {
@@ -407,7 +387,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "At about how many degrees Celsius does water boil at sea level?",
       "kind": {
@@ -425,7 +404,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Approximately how many kilometres is Earth's equatorial diameter?",
       "kind": {
@@ -443,7 +421,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Approximately how many kilometres deep is the boundary between Earth's mantle and outer core?",
       "kind": {
@@ -461,7 +438,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Order these atmospheric layers from Earth's surface upward, lowest first.",
       "kind": {
@@ -480,7 +456,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these rocks by increasing silica content, from lowest to highest.",
       "kind": {
@@ -499,7 +474,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two gases that make up most of Earth's dry atmosphere; type each gas.",
       "kind": {
@@ -526,7 +500,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each cloud type to its typical description.",
       "kind": {
@@ -573,7 +546,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which scale assigns hurricanes a category from 1 to 5?",
       "answers": [
@@ -597,7 +569,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Earth is closest to the Sun in early January.",
       "kind": {
@@ -611,7 +582,6 @@
     "category": "Science",
     "topic": "Earth & weather",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Match each instrument to what it measures.",
       "kind": {

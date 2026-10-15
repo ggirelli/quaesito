@@ -3,7 +3,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which invention made Gutenberg famous for transforming book production in Europe?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who is widely credited with inventing the practical telephone in the 1870s?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which invention allowed ships to determine longitude more reliably at sea?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which device did James Watt substantially improve, helping power the Industrial Revolution?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which invention by Eli Whitney is associated with separating cotton fibres from seeds?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which technology made long-distance text communication possible over wires in the 19th century?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which invention replaced vacuum tubes in many computer circuits?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which engineer developed the first successful practical incandescent light bulb system in the late 19th century?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which device, patented by Hedy Lamarr and George Antheil, helped inspire later spread-spectrum techniques?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The wheel was invented before written records began in many parts of the world.",
       "kind": {
@@ -233,7 +223,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Johannes Gutenberg invented paper itself in 15th-century Germany.",
       "kind": {
@@ -247,7 +236,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The first commercial microwave oven was introduced before the first artificial satellite was launched.",
       "kind": {
@@ -261,7 +249,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What was the name of the first artificial satellite, launched in 1957?",
       "kind": {
@@ -278,7 +265,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What invention by Karl Benz is commonly regarded as the first practical petrol-powered automobile?",
       "kind": {
@@ -296,7 +282,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was the first successful transatlantic wireless signal sent by Marconi?",
       "kind": {
@@ -314,7 +299,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was the first patent for a practical telephone granted to Alexander Graham Bell?",
       "kind": {
@@ -332,7 +316,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was the first working transistor demonstrated at Bell Labs?",
       "kind": {
@@ -350,7 +333,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these inventions in chronological order, earliest first.",
       "kind": {
@@ -369,7 +351,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these communication technologies in chronological order, earliest first.",
       "kind": {
@@ -388,7 +369,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Match each inventor with the invention they are best known for.",
       "kind": {
@@ -435,7 +415,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each technology with its key purpose.",
       "kind": {
@@ -482,7 +461,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which early photographic process was announced in France in 1839?",
       "answers": [
@@ -506,7 +484,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Chinese invention was discovered by alchemists seeking an elixir of immortality?",
       "answers": [
@@ -530,7 +507,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Samuel Morse's 1844 message \"What hath God wrought\" was sent from Washington to Baltimore.",
       "kind": {
@@ -544,7 +520,6 @@
     "category": "History",
     "topic": "Inventions through time",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who was Bell's assistant, the recipient of the first telephone call in 1876?",
       "kind": {

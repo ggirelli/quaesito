@@ -3,7 +3,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which character is known for saying, “Elementary, my dear Watson”?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who says, “Why so serious?” in The Dark Knight?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which character says, “There's no place like home” in The Wizard of Oz?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Star Wars character is associated with the line, “I am your father”?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who says, “You can't handle the truth!” in A Few Good Men?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which character says, “Here's looking at you, kid” in Casablanca?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In The Princess Bride, which character repeatedly says, “As you wish”?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Who says, “I have always depended on the kindness of strangers” in A Streetcar Named Desire?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which character says, “I drink your milkshake” in There Will Be Blood?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -233,7 +223,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -247,7 +236,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -261,7 +249,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -275,7 +262,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -292,7 +278,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -309,7 +294,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -326,7 +310,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -344,7 +327,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -362,7 +344,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -380,7 +361,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -399,7 +379,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -418,7 +397,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -465,7 +443,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -512,7 +489,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which actor delivers the line \"I'll be back\" in The Terminator?",
       "answers": [
@@ -536,7 +512,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In Star Wars (1977), which character says \"Hey, Luke... may the Force be with you\" before the Death Star attack?",
       "answers": [
@@ -560,7 +535,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which two characters say, \"I feel the need—the need for speed!\" in Top Gun?",
       "answers": [
@@ -584,7 +558,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the boy who befriends the alien in E.T. the Extra-Terrestrial?",
       "kind": {
@@ -601,7 +574,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which of the seven dwarfs in Disney's Snow White does not speak?",
       "kind": {
@@ -617,7 +589,6 @@
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Parts": {

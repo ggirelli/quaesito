@@ -3,7 +3,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which camera setting controls how long the sensor is exposed to light?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What does a photographer usually call the opening in a lens that lets light through?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which device is used to keep a camera steady during a long exposure?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the main purpose of a camera's viewfinder?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which type of photography focuses on very small subjects at close range?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What does a histogram help a photographer assess in an image?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which lens type is designed to make distant subjects appear closer?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In photography, what is bokeh?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which process records an image by exposing film and then chemically developing it?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What does a polarizing filter commonly help reduce?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which photographer is strongly associated with the concept of the 'decisive moment'?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "A wider aperture generally lets more light reach the camera sensor.",
       "kind": {
@@ -281,7 +269,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "A photograph can be made without a lens, using a pinhole camera.",
       "kind": {
@@ -295,7 +282,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Increasing ISO always improves image quality by reducing noise.",
       "kind": {
@@ -309,7 +295,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "A RAW file usually preserves more image data for editing than a JPEG.",
       "kind": {
@@ -323,7 +308,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The cyanotype process traditionally produces blue-toned images.",
       "kind": {
@@ -337,7 +321,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the term for a photograph made by exposing light-sensitive paper without a camera?",
       "kind": {
@@ -353,7 +336,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the device that measures light for exposure?",
       "kind": {
@@ -370,7 +352,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which photographer created the long-running portrait series 'Humans of New York'?",
       "kind": {
@@ -387,7 +368,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the early photographic process announced by Louis Daguerre in 1839?",
       "kind": {
@@ -404,7 +384,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many hours is the exposure of 'View from the Window at Le Gras' often estimated to have been? Give hours.",
       "kind": {
@@ -422,7 +401,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these photographic processes in chronological order, earliest first.",
       "kind": {
@@ -441,7 +419,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these photographers in chronological order by birth year, earliest first.",
       "kind": {
@@ -460,7 +437,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each photographer with the practice they are especially associated with.",
       "kind": {
@@ -507,7 +483,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each photographic term with its defining material or method.",
       "kind": {
@@ -554,7 +529,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Lunch Atop a Skyscraper (1932) shows workers on which New York building?",
       "answers": [
@@ -578,7 +552,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the width in mm of a standard 35 mm still-photo frame (the long side)?",
       "kind": {
@@ -596,7 +569,6 @@
     "category": "Art & Design",
     "topic": "Photography",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each exposure control to what it controls.",
       "kind": {

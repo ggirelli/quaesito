@@ -3,7 +3,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who created the banana artwork for The Velvet Underground & Nico?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Pink Floyd album cover shows a prism splitting light?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Whose face appears with a lightning bolt on the cover of Aladdin Sane?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who designed the collage cover of Sgt. Pepper's Lonely Hearts Club Band?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which album cover features a baby swimming toward a dollar bill on a hook?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which album cover famously features a working zipper on its sleeve?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The cover photograph for Nevermind was taken by Kirk Weddle.",
       "kind": {
@@ -161,7 +154,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Beatles' White Album originally had a colorful illustrated front cover.",
       "kind": {
@@ -175,7 +167,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The cover of Sticky Fingers was designed by Andy Warhol.",
       "kind": {
@@ -189,7 +180,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Elvis Presley's debut album cover shows him holding a guitar.",
       "kind": {
@@ -203,7 +193,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The cover of London Calling was inspired by Elvis Presley's debut album cover.",
       "kind": {
@@ -217,7 +206,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who designed the cover art for Nirvana's In Utero?",
       "kind": {
@@ -234,7 +222,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the title of the Beatles' plain white 1968 double album?",
       "kind": {
@@ -252,7 +239,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which band released the 1971 album Sticky Fingers?",
       "kind": {
@@ -269,7 +255,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was The Beatles' Abbey Road album released?",
       "kind": {
@@ -287,7 +272,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many tracks are on the original UK release of The Beatles' White Album?",
       "kind": {
@@ -305,7 +289,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these Beatles albums in release order, earliest first.",
       "kind": {
@@ -324,7 +307,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these album covers in release order, earliest first.",
       "kind": {
@@ -343,7 +325,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Name the artist and album shown on the famous banana cover.",
       "kind": {
@@ -373,7 +354,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each album to the artist or band behind it.",
       "kind": {
@@ -420,7 +400,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each famous cover image to its album.",
       "kind": {
@@ -467,7 +446,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which band's 1976 debut album cover shows four members in leather jackets leaning against a brick wall?",
       "answers": [
@@ -491,7 +469,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which 1986 Beastie Boys debut album was released on Def Jam?",
       "answers": [
@@ -515,7 +492,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Beatles album was first released in the UK with a gatefold sleeve?",
       "answers": [
@@ -539,7 +515,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which album cover is famous for Barry Godber's painting of a screaming face in extreme close-up?",
       "answers": [
@@ -563,7 +538,6 @@
     "category": "Music",
     "topic": "Album covers & firsts",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did Curved Air release Air Conditioning, often cited as the first picture-disc LP?",
       "kind": {

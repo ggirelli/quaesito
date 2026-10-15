@@ -3,7 +3,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which religion traditionally observes Ramadan as a month of fasting?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Diwali is often known by what nickname?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which city is home to the Western Wall, a sacred Jewish site?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the Christian feast celebrating the resurrection of Jesus called?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Vesak commemorates key events in the life of which religious figure?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Hajj pilgrimage is made to which city?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Japanese festival is associated with welcoming ancestral spirits back home?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In Judaism, what is the weekly day of rest called?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Torah is a central sacred text in Judaism.",
       "kind": {
@@ -209,7 +200,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Buddhism originated in ancient Japan.",
       "kind": {
@@ -223,7 +213,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Eid al-Fitr marks the end of Ramadan.",
       "kind": {
@@ -237,7 +226,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Shinto is traditionally associated with Japan.",
       "kind": {
@@ -251,7 +239,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the Jewish festival of lights called?",
       "kind": {
@@ -268,7 +255,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the Sikh scripture regarded as the eternal Guru?",
       "kind": {
@@ -285,7 +271,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many books are in the standard Protestant Bible?",
       "kind": {
@@ -303,7 +288,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many pillars of Islam are traditionally recognised?",
       "kind": {
@@ -321,7 +305,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many days are in the traditional Thai Songkran festival period?",
       "kind": {
@@ -339,7 +322,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these Passover Seder stages from first to last: Kadesh, Maggid, Shulchan Orech, Nirtzah.",
       "kind": {
@@ -358,7 +340,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each festival with the religion most closely associated with it.",
       "kind": {
@@ -405,7 +386,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each term with its meaning or association.",
       "kind": {
@@ -452,7 +432,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is a gurdwara?",
       "answers": [
@@ -476,7 +455,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Lent traditionally lasts 40 days, excluding Sundays in many Western Christian traditions.",
       "kind": {
@@ -490,7 +468,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the Sanskrit term for the innermost sanctum of a Hindu temple, where the main deity is housed?",
       "kind": {
@@ -507,7 +484,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these in order within the Christian liturgical year, which begins with Advent.",
       "kind": {
@@ -526,7 +502,6 @@
     "category": "Society & Culture",
     "topic": "Religions & festivals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two main branches of Islam. Type each name.",
       "kind": {

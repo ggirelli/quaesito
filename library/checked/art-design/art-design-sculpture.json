@@ -3,7 +3,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which sculptor created the marble statue David displayed in Florence?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What material was the original Statue of Liberty's outer skin primarily made from?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Auguste Rodin's The Thinker was originally conceived as part of which larger work?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which sculptor made the bronze statue The Little Dancer Aged Fourteen?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The ancient Greek sculpture Venus de Milo depicts which goddess?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which material is traditionally carved to make cameos?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which sculptor designed the bronze statue of Perseus holding Medusa's head in Florence?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which sculptor created the monumental marble Ecstasy of Saint Teresa in Rome?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name for a sculpture carved in low relief, projecting only slightly from its background?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which artist created the assemblage sculpture Merzbau?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -257,7 +246,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -271,7 +259,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -285,7 +272,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -299,7 +285,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -313,7 +298,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -330,7 +314,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -347,7 +330,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -363,7 +345,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -379,7 +360,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -397,7 +377,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -416,7 +395,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -435,7 +413,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Parts": {
@@ -464,7 +441,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Terracotta Army was buried with which Chinese emperor?",
       "answers": [
@@ -488,7 +464,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Futurist sculptor made the 1913 work Unique Forms of Continuity in Space?",
       "answers": [
@@ -512,7 +487,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -530,7 +504,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -548,7 +521,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -566,7 +538,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -613,7 +584,6 @@
     "category": "Art & Design",
     "topic": "Sculpture",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {

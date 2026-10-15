@@ -91,7 +91,6 @@ pub fn LibraryBrowser(
     let mut topic = use_signal(|| None::<String>);
     let mut difficulty = use_signal(|| None::<u8>);
     let mut kind = use_signal(String::new);
-    let mut timeless = use_signal(|| false);
     let mut shown_count = use_signal(|| PAGE);
     let mut random_count = use_signal(|| 10usize);
 
@@ -116,7 +115,6 @@ pub fn LibraryBrowser(
         topic: topic(),
         difficulty: difficulty(),
         kind: KINDS.into_iter().find(|k| *k == kind()),
-        timeless: timeless(),
     };
     let matching = filter.apply(entries);
     // Each list's counts follow the other filters: how many questions picking that option shows.
@@ -257,16 +255,6 @@ pub fn LibraryBrowser(
                         shown_count.set(PAGE);
                     },
                 }
-                label {
-                    class: "check-field",
-                    title: "Records, title holders… questions that say “As of <year>”",
-                    input {
-                        r#type: "checkbox",
-                        checked: timeless(),
-                        onchange: move |e| timeless.set(e.checked()),
-                    }
-                    span { "Leave out answers that may date" }
-                }
             }
             section { class: "library-main card stack",
                 div { class: "row between",
@@ -381,9 +369,6 @@ fn LibraryRow(
                 span { class: "small library-answer", "✓ {entry.answer()}" }
                 span { class: "muted small",
                     "{entry.category} · {entry.topic} · {entry.difficulty_name()} · {entry.kind_name()}"
-                    if entry.time_sensitive {
-                        " · may date"
-                    }
                 }
             }
             if in_quiz {
@@ -405,7 +390,6 @@ pub struct RandomQuiz {
     /// Every category with its number of questions to pick (0 leaves it out).
     pub counts: Vec<(String, usize)>,
     pub difficulty: Option<u8>,
-    pub timeless: bool,
     pub round_slides: bool,
 }
 
@@ -417,7 +401,6 @@ impl RandomQuiz {
             &self.counts,
             &LibraryFilter {
                 difficulty: self.difficulty,
-                timeless: self.timeless,
                 ..LibraryFilter::default()
             },
             self.round_slides,
@@ -436,7 +419,6 @@ pub fn RandomQuizFields(
     let current = choice();
     let filter = LibraryFilter {
         difficulty: current.difficulty,
-        timeless: current.timeless,
         ..LibraryFilter::default()
     };
     let entries = entries.read();
@@ -475,14 +457,6 @@ pub fn RandomQuizFields(
                 DifficultySelect {
                     value: current.difficulty,
                     on_change: move |level| choice.with_mut(|c| c.difficulty = level),
-                }
-                label { class: "check-field",
-                    input {
-                        r#type: "checkbox",
-                        checked: current.timeless,
-                        onchange: move |e| choice.with_mut(|c| c.timeless = e.checked()),
-                    }
-                    span { "Leave out answers that may date" }
                 }
             }
             ul { class: "list random-categories",

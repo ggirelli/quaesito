@@ -3,7 +3,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which ancient Athenian leader is associated with the city’s Golden Age and the Parthenon?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country’s parliament is known as the Knesset?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who was the first woman to serve as prime minister of the United Kingdom?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Meiji Restoration transformed the government of which country?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who became South Africa’s first president after the end of apartheid?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which peace settlement ended the Thirty Years’ War in 1648?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who was the first chancellor of the German Empire, proclaimed in 1871?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What was the title of the elected leader of the medieval Venetian Republic?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which document limited the power of England’s king in 1215?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The United States Constitution was signed in 1787.",
       "kind": {
@@ -233,7 +223,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Roman Republic was governed by a hereditary emperor from its founding.",
       "kind": {
@@ -247,7 +236,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The African Union was established before the European Union.",
       "kind": {
@@ -261,7 +249,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Glorious Revolution led to the overthrow of James II of England.",
       "kind": {
@@ -275,7 +262,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The title ‘pharaoh’ was used by rulers of ancient Egypt.",
       "kind": {
@@ -289,7 +275,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What surname is shared by the brothers Fidel and Raúl, leaders of Cuba’s revolution?",
       "kind": {
@@ -307,7 +292,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who was the Indian independence leader widely known as Mahatma?",
       "kind": {
@@ -326,7 +310,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Roman statesman crossed the Rubicon in 49 BCE?",
       "kind": {
@@ -343,7 +326,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was the United Nations founded?",
       "kind": {
@@ -361,7 +343,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did the French Revolution begin?",
       "kind": {
@@ -379,7 +360,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many cantons make up Switzerland?",
       "kind": {
@@ -397,7 +377,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did the Berlin Wall fall?",
       "kind": {
@@ -415,7 +394,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these events in chronological order, earliest first.",
       "kind": {
@@ -434,7 +412,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these Roman political offices by the usual age at which a man could first hold them, youngest first.",
       "kind": {
@@ -453,7 +430,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two chambers of the United Kingdom Parliament.",
       "kind": {
@@ -482,7 +458,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each leader with the country they led during the Second World War.",
       "kind": {
@@ -529,7 +504,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each political thinker with the work associated with them.",
       "kind": {
@@ -576,7 +550,6 @@
     "category": "Society & Culture",
     "topic": "Politics & leaders",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which South American liberator, known as 'El Libertador', gave his name to Bolivia?",
       "kind": {

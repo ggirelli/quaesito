@@ -3,7 +3,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which planet is known as the Red Planet?",
       "answers": [
@@ -30,7 +29,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is at the centre of our Solar System?",
       "answers": [
@@ -57,7 +55,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which planet has the most prominent ring system?",
       "answers": [
@@ -84,7 +81,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the galaxy that contains our Solar System?",
       "answers": [
@@ -111,7 +107,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which planet has a day longer than its year?",
       "answers": [
@@ -138,7 +133,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the largest moon in the Solar System?",
       "answers": [
@@ -165,7 +159,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which planet has the Great Red Spot?",
       "answers": [
@@ -192,7 +185,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which element makes up most of the Sun by mass?",
       "answers": [
@@ -219,7 +211,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which mission first returned samples from an asteroid to Earth?",
       "answers": [
@@ -246,7 +237,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the boundary around a black hole beyond which light cannot escape called?",
       "answers": [
@@ -273,7 +263,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which planet has the shortest orbital period around the Sun?",
       "answers": [
@@ -300,7 +289,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What type of galaxy is the Milky Way?",
       "answers": [
@@ -327,7 +315,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Moon produces most of the light we see from it by reflecting sunlight.",
       "kind": {
@@ -341,7 +328,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Jupiter is smaller than Earth.",
       "kind": {
@@ -355,7 +341,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "A light-year measures distance, not time.",
       "kind": {
@@ -369,7 +354,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The seasons on Earth are mainly caused by changes in its distance from the Sun.",
       "kind": {
@@ -383,7 +367,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Neutron stars can be remnants of massive stars that have exploded as supernovae.",
       "kind": {
@@ -397,7 +380,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the star closest to Earth?",
       "kind": {
@@ -414,7 +396,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who was the first human to travel into space?",
       "kind": {
@@ -431,7 +412,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "About how many minutes does sunlight take to reach Earth?",
       "kind": {
@@ -449,7 +429,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Approximately how many kilometres per second is the speed of light in a vacuum?",
       "kind": {
@@ -467,7 +446,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Put these planets in order of distance from the Sun, nearest first.",
       "kind": {
@@ -487,7 +465,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these milestones in chronological order, earliest first.",
       "kind": {
@@ -507,7 +484,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each spacecraft with the object it is best known for exploring.",
       "kind": {
@@ -562,7 +538,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each space telescope with the kind of astronomy it was designed to observe.",
       "kind": {
@@ -617,7 +592,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which planet has the moons Phobos and Deimos?",
       "kind": {
@@ -633,7 +607,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the nearest large spiral galaxy to the Milky Way?",
       "kind": {
@@ -650,7 +623,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many Earth days does the Moon take to orbit Earth relative to the distant stars (sidereal month), approximately?",
       "kind": {
@@ -668,7 +640,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the average distance from Earth to the Sun, in millions of kilometres?",
       "kind": {
@@ -686,7 +657,6 @@
     "category": "Science",
     "topic": "Astronomy & space",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Name the four largest moons of Jupiter in order of distance from Jupiter, closest first.",
       "kind": {

@@ -3,7 +3,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which revolution began with the storming of the Bastille in 1789?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Russian ruler was overthrown during the February Revolution of 1917?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Caribbean colony became independent after the Haitian Revolution?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Chinese revolution in 1911 led to the end of the Qing dynasty?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which 1688 event replaced James II with William and Mary in England?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which revolutionary leader wrote the pamphlet Common Sense in 1776?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which revolution began in 1979 and overthrew Iran's Shah Mohammad Reza Pahlavi?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -185,7 +177,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -199,7 +190,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -213,7 +203,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -227,7 +216,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -241,7 +229,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -258,7 +245,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -275,7 +261,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -292,7 +277,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -310,7 +294,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -329,7 +312,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -348,7 +330,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -395,7 +376,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -450,7 +430,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which document declared the American colonies independent from Britain?",
       "answers": [
@@ -474,7 +453,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What was the birth name of the Mexican revolutionary known as Pancho Villa?",
       "answers": [
@@ -498,7 +476,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which French regime, headed by Louis-Philippe, was overthrown in 1848?",
       "answers": [
@@ -522,7 +499,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Haitian revolutionary leader declared Haiti independent?",
       "answers": [
@@ -546,7 +522,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which party used the 1917 slogan \"Peace, Land and Bread\"?",
       "answers": [
@@ -570,7 +545,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -587,7 +561,6 @@
     "category": "History",
     "topic": "Revolutions",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Parts": {

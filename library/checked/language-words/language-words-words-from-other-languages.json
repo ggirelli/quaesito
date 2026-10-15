@@ -3,7 +3,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The English word 'karaoke' comes from which language?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which French word means a small shop selling fashionable clothes?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The word 'kindergarten' was borrowed from which language?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which language gave English the word 'tsunami'?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The word 'algebra' entered English through Arabic. What does its source term relate to?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The English word 'robot' was popularized by a Czech play. What does the Czech root 'robota' mean?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which language is the origin of 'sauna'?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The word 'schadenfreude' describes pleasure at another's misfortune. Which language supplied it?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The word 'paparazzi' comes from Italian. What was Paparazzo in its original popular source?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -233,7 +223,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -247,7 +236,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -261,7 +249,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -275,7 +262,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -289,7 +275,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -305,7 +290,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -321,7 +305,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -337,7 +320,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -355,7 +337,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -373,7 +354,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -391,7 +371,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -410,7 +389,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Parts": {
@@ -443,7 +421,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -490,7 +467,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -537,7 +513,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Italian word, literally 'flask', came to mean a humiliating failure?",
       "answers": [
@@ -564,7 +539,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which language gave English the word 'boondocks' (from a word for 'mountain')?",
       "answers": [
@@ -588,7 +562,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -604,7 +577,6 @@
     "category": "Language & Words",
     "topic": "Words from other languages",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {

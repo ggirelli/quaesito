@@ -3,7 +3,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which colour jersey is worn by the overall leader of the Tour de France?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In cycling, what does a peloton refer to?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which part of a bicycle transfers pedalling power to the rear wheel on a typical geared bike?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which cycling discipline is raced on steep, rough trails and obstacles?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which race is nicknamed 'The Hell of the North'?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Italian Grand Tour is traditionally held in May?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name for a race against the clock where riders start separately?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which track cycling event features riders following a motorbike-paced derny before sprinting?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which country is associated with the one-day race Tour of Flanders?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which French climb is famed for its barren summit and frequent Tour de France appearances?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the track cycling event in which two riders start on opposite sides and chase each other?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Tour de France is a multi-stage race.",
       "kind": {
@@ -281,7 +269,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "A bicycle with no gears is commonly called a fixed-gear bike in every case.",
       "kind": {
@@ -295,7 +282,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Giro d'Italia's overall leader traditionally wears a pink jersey.",
       "kind": {
@@ -309,7 +295,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In a standard road race, drafting behind another rider generally increases air resistance.",
       "kind": {
@@ -323,7 +308,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Paris–Roubaix is famous for sections of rough cobblestone roads.",
       "kind": {
@@ -337,7 +321,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the surname of the Belgian cyclist nicknamed 'The Cannibal'?",
       "kind": {
@@ -354,7 +337,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Spanish rider won the Tour de France five times between 1991 and 1995?",
       "kind": {
@@ -371,7 +353,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which British cyclist won the men's Tour de France in 2012?",
       "kind": {
@@ -388,7 +369,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many wheels does a standard bicycle have?",
       "kind": {
@@ -406,7 +386,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many riders from one team normally start a men's Tour de France team time trial under modern rules?",
       "kind": {
@@ -424,7 +403,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many kilometres long is the men's road race at the 2024 Olympic Games?",
       "kind": {
@@ -442,7 +420,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these races by the year of their first edition, earliest first.",
       "kind": {
@@ -461,7 +438,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two riders who finished first and second in the men's road race at the 2024 Olympics.",
       "kind": {
@@ -490,7 +466,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which annual Grand Tour traditionally finishes on the Champs-Élysées in Paris?",
       "answers": [
@@ -514,7 +489,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the surname of the American cyclist who won the 1984 Olympic road race?",
       "kind": {
@@ -531,7 +505,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many metres long is a standard Olympic velodrome track?",
       "kind": {
@@ -549,7 +522,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Order these cycling disciplines by their first appearance at the Summer Olympics, earliest first.",
       "kind": {
@@ -568,7 +540,6 @@
     "category": "Sport",
     "topic": "Cycling",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Match each cycling jersey with the race classification it traditionally represents.",
       "kind": {

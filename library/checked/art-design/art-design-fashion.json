@@ -3,7 +3,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which designer is famous for the little black dress and Chanel No. 5?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which luxury fashion house uses a double-G monogram as its logo?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name for a traditional Scottish woollen fabric with a crisscross pattern?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which footwear brand is known for its red-lacquered soles?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the term for a temporary fashion show presenting a designer's collection?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Japanese designer founded the fashion label Comme des Garçons?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which fabric is traditionally made by weaving the fibres of the flax plant?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the pleated skirt associated with traditional Japanese dress?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which designer created the 1960s Mondrian collection of color-block dresses?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which British designer is associated with the punk fashion of the 1970s and the shop SEX?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -257,7 +246,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -271,7 +259,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -285,7 +272,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -299,7 +285,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -313,7 +298,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -330,7 +314,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -347,7 +330,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -365,7 +347,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -384,7 +365,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -403,7 +383,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Parts": {
@@ -431,7 +410,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -478,7 +456,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -525,7 +502,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which natural fibre is produced by the larvae of Bombyx mori?",
       "answers": [
@@ -549,7 +525,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -565,7 +540,6 @@
     "category": "Art & Design",
     "topic": "Fashion",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {

@@ -3,7 +3,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which spirit is the base of a classic margarita?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which cocktail is traditionally made with vodka, tomato juice and savoury seasonings?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which citrus fruit is central to a classic daiquiri?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the main spirit in a mojito?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which liqueur gives a classic Negroni much of its bitter orange character?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which cocktail traditionally combines gin, lemon juice, sugar and soda water?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which fortified wine is a key ingredient in a classic martini?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Italian bitter liqueur is traditionally used in a Paper Plane cocktail?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which cocktail is traditionally made with equal parts gin, green Chartreuse, maraschino liqueur and lime juice?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which classic cocktail includes rye whiskey, sweet vermouth and Angostura bitters?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which liqueur is the defining orange component of a Sidecar in many classic recipes?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "A classic mojito includes mint.",
       "kind": {
@@ -281,7 +269,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "A traditional martini is made with tequila as its base spirit.",
       "kind": {
@@ -295,7 +282,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "A Negroni traditionally contains gin, Campari and sweet vermouth.",
       "kind": {
@@ -309,7 +295,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "A classic daiquiri normally contains cream.",
       "kind": {
@@ -323,7 +308,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What cocktail combines tequila, orange liqueur and lime juice?",
       "kind": {
@@ -340,7 +324,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What cocktail is made with bourbon or rye, sugar, bitters and a twist of citrus?",
       "kind": {
@@ -359,7 +342,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many millilitres are in a US fluid ounce, approximately?",
       "kind": {
@@ -377,7 +359,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many 25 mL measures are in a 750 mL bottle of spirits?",
       "kind": {
@@ -395,7 +376,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Name the three ingredients in a classic Negroni besides ice and garnish.",
       "kind": {
@@ -430,7 +410,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each cocktail with its defining base spirit.",
       "kind": {
@@ -477,7 +456,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each liqueur with the cocktail most closely associated with it.",
       "kind": {
@@ -524,7 +502,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Besides rum, which two-word ingredient is blended with pineapple juice in a Piña Colada?",
       "answers": [
@@ -548,7 +525,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What New Orleans cocktail, named after a brand of cognac, is made with rye whiskey (or cognac), Peychaud's bitters and an absinthe rinse?",
       "kind": {
@@ -565,7 +541,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Put these steps for building a classic mojito in order, earliest first.",
       "kind": {
@@ -584,7 +559,6 @@
     "category": "Food & Drink",
     "topic": "Cocktails",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these cocktails in order of their earliest widely documented appearance, earliest first.",
       "kind": {

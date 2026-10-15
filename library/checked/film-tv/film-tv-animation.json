@@ -3,7 +3,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the toy cowboy in Toy Story?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In Finding Nemo, what kind of fish is Nemo?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which studio created the stop-motion film Coraline?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who directed the 2001 animated film Spirited Away?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which 1988 Japanese animated film was directed by Katsuhiro Otomo?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which animator created the characters Wallace and Gromit?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which 1937 Disney feature was the studio's first full-length animated feature?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the fictional city where Batman often operates in animated films and series?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Mickey Mouse made his official screen debut in Steamboat Willie in 1928.",
       "kind": {
@@ -209,7 +200,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The main character in Kung Fu Panda is a tiger named Tigress.",
       "kind": {
@@ -223,7 +213,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Studio Ghibli produced the animated film My Neighbor Totoro.",
       "kind": {
@@ -237,7 +226,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Pixar film Up begins with a young boy travelling to the moon.",
       "kind": {
@@ -251,7 +239,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The 1926 feature The Adventures of Prince Achmed was made using silhouette animation.",
       "kind": {
@@ -265,7 +252,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the rat who cooks in Ratatouille?",
       "kind": {
@@ -281,7 +267,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the kingdom in Disney's Tangled?",
       "kind": {
@@ -297,7 +282,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Japanese animation director made Princess Mononoke and My Neighbor Totoro?",
       "kind": {
@@ -314,7 +298,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was Toy Story, Pixar's first feature film, released?",
       "kind": {
@@ -332,7 +315,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did the original The Lion King animated film premiere?",
       "kind": {
@@ -350,7 +332,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was Spirited Away first released in Japan?",
       "kind": {
@@ -368,7 +349,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was the French animated feature Fantastic Planet released?",
       "kind": {
@@ -386,7 +366,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two main characters in Disney's The Emperor's New Groove.",
       "kind": {
@@ -413,7 +392,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each animated film with its studio.",
       "kind": {
@@ -460,7 +438,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Disney film features the talking snowman Olaf?",
       "answers": [
@@ -484,7 +461,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which animated series is set in the town of Quahog?",
       "answers": [
@@ -508,7 +484,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In Shrek, which actor voices Donkey?",
       "answers": [
@@ -532,7 +507,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the sleek probe robot WALL-E falls in love with?",
       "kind": {
@@ -548,7 +522,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these Pixar films in release order, earliest first.",
       "kind": {
@@ -567,7 +540,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these Studio Ghibli films in release order, earliest first.",
       "kind": {
@@ -586,7 +558,6 @@
     "category": "Film & TV",
     "topic": "Animation",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each animated character with the franchise they belong to.",
       "kind": {

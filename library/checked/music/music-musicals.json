@@ -3,7 +3,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who composed the music for the stage musical Les Misérables?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which musical is set at Rydell High School?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which musical features the characters Elphaba and Glinda?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which musical is based on the songs of ABBA?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who wrote the music and lyrics for Sweeney Todd?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which musical follows Eva Perón's rise in Argentina?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which musical is set largely in a Berlin nightclub in the early 1930s?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which musical centers on rival street gangs in New York and reimagines Romeo and Juliet?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which composer wrote the music for the musical Sunday in the Park with George?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The musical The Lion King features music by Elton John and lyrics by Tim Rice.",
       "kind": {
@@ -233,7 +223,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The stage musical Annie is based on a comic strip.",
       "kind": {
@@ -247,7 +236,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The original Broadway production of The Phantom of the Opera opened before Cats.",
       "kind": {
@@ -261,7 +249,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who composed the music for The Phantom of the Opera?",
       "kind": {
@@ -279,7 +266,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many children does Captain von Trapp have in The Sound of Music?",
       "kind": {
@@ -297,7 +283,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did the original Broadway production of A Chorus Line open?",
       "kind": {
@@ -315,7 +300,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these musicals in order of their original Broadway opening, earliest first.",
       "kind": {
@@ -334,7 +318,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these Stephen Sondheim musicals in order of their Broadway opening, earliest first.",
       "kind": {
@@ -353,7 +336,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each musical to its composer.",
       "kind": {
@@ -400,7 +382,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Andrew Lloyd Webber musical features the song \"Memory\"?",
       "answers": [
@@ -424,7 +405,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Lin-Manuel Miranda musical tells the story of a US Founding Father who was the first Secretary of the Treasury?",
       "answers": [
@@ -448,7 +428,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Kander and Ebb musical follows murderesses Roxie Hart and Velma Kelly?",
       "answers": [
@@ -472,7 +451,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Andrew Lloyd Webber composed the music for Evita.",
       "kind": {
@@ -486,7 +464,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which musical features the songs \"Edelweiss\" and \"Do-Re-Mi\"?",
       "kind": {
@@ -503,7 +480,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who composed the music and lyrics for Falsettos?",
       "kind": {
@@ -520,7 +496,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many minutes are in a non-leap year, as asked in Rent's song 'Seasons of Love'?",
       "kind": {
@@ -538,7 +513,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Name Dorothy's three companions.",
       "kind": {
@@ -575,7 +549,6 @@
     "category": "Music",
     "topic": "Musicals",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each musical to its source or inspiration.",
       "kind": {

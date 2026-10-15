@@ -3,7 +3,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who wrote Don Quixote?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who is traditionally credited as the author of The Odyssey?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of Captain Ahab's ship in Moby-Dick?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which German writer wrote Faust?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Who wrote Things Fall Apart?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which poet wrote The Divine Comedy?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -161,7 +154,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -175,7 +167,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -189,7 +180,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -203,7 +193,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -217,7 +206,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -234,7 +222,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -251,7 +238,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -268,7 +254,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -286,7 +271,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -305,7 +289,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -324,7 +307,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -371,7 +353,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -418,7 +399,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the family name of the protagonist Elizabeth in Pride and Prejudice?",
       "answers": [
@@ -442,7 +422,6 @@
     "category": "Literature",
     "topic": "Classics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Parts": {

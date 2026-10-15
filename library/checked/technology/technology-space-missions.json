@@ -3,7 +3,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which mission first landed humans on the Moon?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which space probe was the first to fly past Pluto?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which space telescope launched in 1990 and observes primarily in visible and ultraviolet light?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which NASA rover landed on Mars in 2012?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which spacecraft delivered the first samples from an asteroid to Earth?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which mission first soft-landed on the far side of the Moon?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which NASA mission deliberately crashed into a comet to study its interior?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which spacecraft entered orbit around Saturn in 2004?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which mission carried the first woman into space?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which mission first returned close-up images of the nucleus of a comet?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Apollo 13 landed on the Moon successfully.",
       "kind": {
@@ -257,7 +246,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Voyager 1 carries a golden record with sounds and images from Earth.",
       "kind": {
@@ -271,7 +259,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Mars Pathfinder mission deployed the Sojourner rover.",
       "kind": {
@@ -285,7 +272,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Juno spacecraft studies Jupiter.",
       "kind": {
@@ -299,7 +285,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What was the name of the first space station, launched by the Soviet Union in 1971?",
       "kind": {
@@ -316,7 +301,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many astronauts walked on the Moon during the Apollo 11 mission?",
       "kind": {
@@ -334,7 +318,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did Voyager 1 launch?",
       "kind": {
@@ -352,7 +335,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many astronauts were aboard Apollo 11 at launch?",
       "kind": {
@@ -370,7 +352,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these milestones in chronological order, earliest first.",
       "kind": {
@@ -389,7 +370,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these Mars missions by their arrival at Mars, earliest first.",
       "kind": {
@@ -408,7 +388,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each mission with its space agency.",
       "kind": {
@@ -455,7 +434,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which mission carried the first human into space?",
       "answers": [
@@ -479,7 +457,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which lander made the first landing on a comet, in 2014?",
       "answers": [
@@ -503,7 +480,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The first artificial satellite was launched by the United States.",
       "kind": {
@@ -517,7 +493,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which ESA mission orbited comet 67P/Churyumov-Gerasimenko?",
       "kind": {
@@ -533,7 +508,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What was the first confirmed moon of an asteroid, discovered by the Galileo spacecraft?",
       "kind": {
@@ -549,7 +523,6 @@
     "category": "Technology",
     "topic": "Space missions",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each mission with its destination.",
       "kind": {

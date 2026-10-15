@@ -3,7 +3,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many players from each team are on the court in standard basketball?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many points is a successful shot from beyond the three-point line worth?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is it called when a player takes too many steps without dribbling?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which league is widely regarded as the top professional basketball league in the United States?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the area near the basket often called the 'paint'?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which country won the first Olympic men's basketball tournament in 1936?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which NBA team plays its home games at Madison Square Garden?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the violation called when a dribbler stops, holds the ball, then starts dribbling again?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which basketball position is traditionally responsible for directing the team's offence?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which international governing body oversees basketball worldwide?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which team drafted Kobe Bryant before trading him to the Los Angeles Lakers in 1996?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which country hosted the first FIBA Basketball World Cup in 1950?",
       "answers": [
@@ -291,7 +279,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "A free throw is worth one point if successful.",
       "kind": {
@@ -305,7 +292,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "A basketball hoop is 3.05 metres above the playing floor in standard regulation play.",
       "kind": {
@@ -319,7 +305,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In standard FIBA rules, a team has 24 seconds to attempt a shot after gaining possession.",
       "kind": {
@@ -333,7 +318,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "A player may score a field goal directly from a throw-in without another player touching the ball.",
       "kind": {
@@ -347,7 +331,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The NBA three-point line is the same distance from the basket at every point along the arc.",
       "kind": {
@@ -361,7 +344,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the surname of the basketball player nicknamed 'His Airness'?",
       "kind": {
@@ -378,7 +360,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which coach led the Chicago Bulls to six NBA championships in the 1990s?",
       "kind": {
@@ -395,7 +376,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many metres long is a standard FIBA basketball court?",
       "kind": {
@@ -413,7 +393,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many centimetres in diameter is a regulation men's basketball, approximately?",
       "kind": {
@@ -431,7 +410,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Match each basketball violation or call with its meaning.",
       "kind": {
@@ -478,7 +456,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each NBA team with its home city.",
       "kind": {
@@ -525,7 +502,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which surname belongs to the Lithuanian centre who joined the NBA's Portland Trail Blazers in 1995?",
       "kind": {
@@ -542,7 +518,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Order these NBA franchises by the year of their first NBA championship, earliest first.",
       "kind": {
@@ -561,7 +536,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these NBA teams by the year they were founded, earliest first.",
       "kind": {
@@ -580,7 +554,6 @@
     "category": "Sport",
     "topic": "Basketball",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two countries that finished first and second at the first FIBA Basketball World Cup in 1950.",
       "kind": {

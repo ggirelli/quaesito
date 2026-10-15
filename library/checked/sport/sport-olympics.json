@@ -3,7 +3,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which city hosted the first modern Olympic Games in 1896?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What do the five Olympic rings represent?",
       "answers": [
@@ -54,7 +52,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which sport features the events pommel horse and rings?",
       "answers": [
@@ -78,7 +75,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In which sport would an athlete perform a clean and jerk?",
       "answers": [
@@ -104,7 +100,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which metal is awarded for first place in an Olympic event?",
       "answers": [
@@ -128,7 +123,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which country hosted the 1964 Summer Olympics?",
       "answers": [
@@ -152,7 +146,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which event combines cross-country skiing and rifle shooting?",
       "answers": [
@@ -176,7 +169,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which athlete lit the cauldron at the 1992 Barcelona Olympics?",
       "answers": [
@@ -200,7 +192,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which city hosted the first Winter Olympic Games in 1924?",
       "answers": [
@@ -224,7 +215,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which country won the first Olympic women's football tournament, in 1996?",
       "answers": [
@@ -248,7 +238,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "At which Olympics did the modern pentathlon first appear?",
       "answers": [
@@ -272,7 +261,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Olympic flame is traditionally lit in Olympia, Greece, before the Summer Games.",
       "kind": {
@@ -286,7 +274,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Olympic Games have always been held every four years without interruption since 1896.",
       "kind": {
@@ -300,7 +287,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The marathon distance at the Olympics is 42.195 kilometres.",
       "kind": {
@@ -314,7 +300,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Olympic motto includes the words 'Faster, Higher, Stronger'.",
       "kind": {
@@ -328,7 +313,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The ancient Olympic Games included a combat sport called pankration.",
       "kind": {
@@ -342,7 +326,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the surname of the Jamaican sprinter who won 100 m gold at three consecutive Summer Olympics?",
       "kind": {
@@ -359,7 +342,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which city hosted the 2000 Summer Olympics?",
       "kind": {
@@ -375,7 +357,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many rings are on the Olympic flag?",
       "kind": {
@@ -393,7 +374,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many minutes long is each period of a standard Olympic ice hockey game, excluding stoppages?",
       "kind": {
@@ -411,7 +391,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Order these cities by the year they first hosted the Summer Olympics, earliest first.",
       "kind": {
@@ -430,7 +409,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these sports by their debut at the Summer Olympics, earliest first.",
       "kind": {
@@ -449,7 +427,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which two cities hosted events at the 1956 Summer Olympics?",
       "kind": {
@@ -476,7 +453,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each Olympic host city to the year it hosted the Summer Games.",
       "kind": {
@@ -523,7 +499,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which sport made its Olympic debut at the Tokyo 2020 Games?",
       "answers": [
@@ -549,7 +524,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Olympic sport traditionally combined fencing, swimming, riding, running and shooting?",
       "kind": {
@@ -566,7 +540,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Ethiopian runner won Olympic 10,000 m gold in 1996 and 2000?",
       "kind": {
@@ -583,7 +556,6 @@
     "category": "Sport",
     "topic": "Olympics",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many metres is the final event of the decathlon?",
       "kind": {

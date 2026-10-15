@@ -3,7 +3,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which instrument is Louis Armstrong best known for playing?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which city is widely regarded as the birthplace of jazz?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which instrument is most associated with jazz saxophonist Charlie Parker?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "B.B. King was famous for playing which instrument?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which singer recorded the jazz standard 'Summertime' with Louis Armstrong in 1957?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which pianist led the influential Modern Jazz Quartet?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Miles Davis album features the track 'So What'?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which blues musician was known as the 'Father of the Delta Blues'?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which jazz style is especially associated with fast tempos and complex improvisation from the 1940s?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which saxophonist composed the suite A Love Supreme?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which pianist-composer wrote the jazz standard 'Round Midnight'?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Duke Ellington led a famous jazz orchestra for decades.",
       "kind": {
@@ -281,7 +269,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "A harmonica is commonly used in blues music.",
       "kind": {
@@ -295,7 +282,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Nina Simone was only known as a jazz instrumentalist and never sang.",
       "kind": {
@@ -309,7 +295,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The blues scale commonly includes a flattened fifth, often called the blue note.",
       "kind": {
@@ -323,7 +308,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Ornette Coleman was a major figure in the development of free jazz.",
       "kind": {
@@ -337,7 +321,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which singer was known as the 'First Lady of Song'?",
       "kind": {
@@ -354,7 +337,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which blues guitarist recorded the influential song 'Cross Road Blues' in 1936?",
       "kind": {
@@ -371,7 +353,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which jazz trumpeter recorded the album Birth of the Cool with his nonet?",
       "kind": {
@@ -388,7 +369,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which jazz pianist was nicknamed 'The High Priest of Bebop'?",
       "kind": {
@@ -405,7 +385,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was Miles Davis's album Kind of Blue first released?",
       "kind": {
@@ -423,7 +402,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was Charlie Parker born?",
       "kind": {
@@ -441,7 +419,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each musician to their main instrument.",
       "kind": {
@@ -488,7 +465,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each musician to the genre or movement they are strongly associated with.",
       "kind": {
@@ -535,7 +511,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which singer was nicknamed the 'Queen of the Blues'?",
       "answers": [
@@ -559,7 +534,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many beats are in one full chorus of a standard 12-bar blues in 4/4 time?",
       "kind": {
@@ -577,7 +551,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many strings does a standard electric guitar have?",
       "kind": {
@@ -595,7 +568,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these musicians in order of birth, earliest first.",
       "kind": {
@@ -614,7 +586,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these albums in order of original release, earliest first.",
       "kind": {
@@ -633,7 +604,6 @@
     "category": "Music",
     "topic": "Jazz & blues",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Name the three musicians often called the 'Kings of the Blues'.",
       "kind": {

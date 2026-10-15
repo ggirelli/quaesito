@@ -3,7 +3,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which fast-food chain uses the slogan “I'm lovin' it”?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which brand is associated with the slogan “Just Do It”?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which soft drink brand features a polar bear in many of its adverts?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which brand uses a green mermaid as its logo?",
       "answers": [
@@ -100,7 +96,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which company introduced the advertising character Tony the Tiger?",
       "answers": [
@@ -124,7 +119,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which advertising agency created the “Think Small” campaign for Volkswagen?",
       "answers": [
@@ -148,7 +142,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which artist painted the iconic “I Want You” US Army recruitment poster?",
       "answers": [
@@ -172,7 +165,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which 1980s advertising character urged people to “Where's the beef?”",
       "answers": [
@@ -196,7 +188,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Pillsbury Doughboy is a mascot for a brand of flour and baking products.",
       "kind": {
@@ -210,7 +201,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The “Marlboro Man” was created to advertise a brand of chewing gum.",
       "kind": {
@@ -224,7 +214,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The “Got Milk?” campaign promoted milk consumption in the United States.",
       "kind": {
@@ -238,7 +227,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The famous “Think Small” Volkswagen campaign was designed to make the Beetle seem larger and more luxurious.",
       "kind": {
@@ -252,7 +240,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was the first Coca-Cola served? Give the year.",
       "kind": {
@@ -270,7 +257,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did Nike introduce its “Just Do It” slogan? Give the year.",
       "kind": {
@@ -288,7 +274,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did the “Got Milk?” advertising campaign launch in California? Give the year.",
       "kind": {
@@ -306,7 +291,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was the Volkswagen “Think Small” campaign first published? Give the year.",
       "kind": {
@@ -324,7 +308,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Order these slogans by the year they were introduced, earliest first.",
       "kind": {
@@ -343,7 +326,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these advertising mascots by the decade they were introduced, earliest first.",
       "kind": {
@@ -362,7 +344,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Name the brands associated with these advertising slogans.",
       "kind": {
@@ -395,7 +376,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Match each advertising mascot with the brand it represents.",
       "kind": {
@@ -442,7 +422,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each famous campaign with the brand it promoted.",
       "kind": {
@@ -489,7 +468,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Bibendum, a mascot made of white tyres, represents which company?",
       "answers": [
@@ -513,7 +491,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which chocolate bar's long-running slogan is “Have a break, have a ...”?",
       "answers": [
@@ -537,7 +514,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which cosmetics brand uses the slogan “Because you're worth it”?",
       "answers": [
@@ -561,7 +537,6 @@
     "category": "Pop Culture",
     "topic": "Advertising",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "A drumming pink bunny that 'keeps going and going' advertises which battery brand?",
       "answers": [

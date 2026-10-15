@@ -3,7 +3,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which company built the first mass-produced hybrid car, the Prius?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What does ABS help prevent during hard braking?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which aircraft manufacturer makes the 737 passenger jet?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country developed the Shinkansen high-speed rail network?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the main purpose of a car's catalytic converter?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which company developed the original Vespa scooter?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which fuel is used by most modern commercial jet airliners?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the European satellite navigation system?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which inventor is most associated with the three-point seat belt introduced by Volvo in 1959?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What does a vehicle's differential allow its driven wheels to do when turning?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The first successful powered flight by the Wright brothers took place in 1903.",
       "kind": {
@@ -257,7 +246,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Channel Tunnel carries cars under the sea by allowing drivers to drive their own vehicles through it.",
       "kind": {
@@ -271,7 +259,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "A diesel engine typically ignites fuel using heat from compressed air.",
       "kind": {
@@ -285,7 +272,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Orient Express originally began its journey in London.",
       "kind": {
@@ -299,7 +285,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Regenerative braking can convert some of a vehicle's kinetic energy into electrical energy.",
       "kind": {
@@ -313,7 +298,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What three-letter code identifies London's main Heathrow airport?",
       "kind": {
@@ -329,7 +313,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the maritime canal linking the Mediterranean Sea and the Red Sea?",
       "kind": {
@@ -346,7 +329,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did the first Shinkansen line open to passengers?",
       "kind": {
@@ -364,7 +346,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many cylinders did the original Ford Model T engine have?",
       "kind": {
@@ -382,7 +363,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these London transport milestones by opening year, earliest first.",
       "kind": {
@@ -401,7 +381,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each vehicle with the inventor or engineer associated with it.",
       "kind": {
@@ -448,7 +427,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each transport system or vehicle with its country of origin.",
       "kind": {
@@ -495,7 +473,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which rail technology uses magnets to float trains above the track without wheels touching?",
       "answers": [
@@ -519,7 +496,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What type of ship carries cargo in standard 20- and 40-foot boxes measured in TEU?",
       "answers": [
@@ -543,7 +519,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many wheels does a standard US 'big rig' semi-trailer truck have?",
       "kind": {
@@ -561,7 +536,6 @@
     "category": "Technology",
     "topic": "Transport",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two countries connected by the Channel Tunnel. Type each country.",
       "kind": {

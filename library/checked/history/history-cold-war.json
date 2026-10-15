@@ -3,7 +3,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which 1949 alliance was formed to provide collective defence against the Soviet bloc?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which city was divided by a wall from 1961 until 1989?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which US president announced the policy of containment in a 1947 speech to Congress?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What was the name of the 1948–49 effort to supply West Berlin by air?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Soviet leader introduced glasnost and perestroika?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which 1962 crisis brought the US and USSR close to nuclear war over missiles in Cuba?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which US-funded programme helped rebuild Western European economies after World War II?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country was the first to launch an artificial satellite, Sputnik 1?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which conflict began in 1950 when North Korean forces crossed the 38th parallel?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which 1975 agreement affirmed European borders and promoted cooperation on security and human rights?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Soviet operation crushed the Hungarian uprising in 1956?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which 1987 treaty eliminated an entire class of US and Soviet ground-launched nuclear missiles?",
       "answers": [
@@ -291,7 +279,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Warsaw Pact was established before NATO.",
       "kind": {
@@ -305,7 +292,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The Berlin Wall opened in November 1989.",
       "kind": {
@@ -319,7 +305,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Soviet Union and the United States fought each other directly in a declared war during the Cold War.",
       "kind": {
@@ -333,7 +318,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The Bay of Pigs invasion was an unsuccessful attempt to overthrow Fidel Castro's government.",
       "kind": {
@@ -347,7 +331,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which 1980s Polish trade union became a major anti-communist movement?",
       "kind": {
@@ -364,7 +347,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What was the codename for the Soviet deployment of nuclear missiles to Cuba in 1962?",
       "kind": {
@@ -381,7 +363,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In what year did the Soviet Union launch Sputnik 1?",
       "kind": {
@@ -399,7 +380,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In what year was the Soviet Union formally dissolved?",
       "kind": {
@@ -417,7 +397,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these events in chronological order, earliest first.",
       "kind": {
@@ -436,7 +415,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Put these Soviet leaders in the order they first became leader of the USSR, earliest first.",
       "kind": {
@@ -455,7 +433,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Match each Cold War event with the city most closely associated with it.",
       "kind": {
@@ -502,7 +479,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each term with its meaning.",
       "kind": {
@@ -549,7 +525,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The Sino-Soviet split worsened after Khrushchev denounced Stalin in 1956.",
       "kind": {
@@ -563,7 +538,6 @@
     "category": "History",
     "topic": "Cold War",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two superpowers that dominated the Cold War.",
       "kind": {

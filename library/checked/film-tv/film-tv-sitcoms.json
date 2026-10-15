@@ -3,7 +3,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the coffee shop where the Friends gang often meet?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the paper company in the US version of The Office?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "In Friends, what is Ross Geller's profession?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which city is the main setting of Frasier?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the fictional town where The Simpsons live?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the bar where Ted and his friends gather in How I Met Your Mother?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In M*A*S*H, what is the designation of the main medical unit?",
       "answers": [
@@ -172,7 +165,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -186,7 +178,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -200,7 +191,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -214,7 +204,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -228,7 +217,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -242,7 +230,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -258,7 +245,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -275,7 +261,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -293,7 +278,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -310,7 +294,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -328,7 +311,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -346,7 +328,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -364,7 +345,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {
@@ -382,7 +362,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -402,7 +381,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -421,7 +399,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Parts": {
@@ -454,7 +431,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -501,7 +477,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Who is the captain of the precinct in Brooklyn Nine-Nine?",
       "answers": [
@@ -525,7 +500,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "In Parks and Recreation, who is Leslie Knope's boss, the government-hating parks director?",
       "answers": [
@@ -549,7 +523,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the all-knowing informational assistant in The Good Place?",
       "answers": [
@@ -573,7 +546,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the motel where the Rose family lives in Schitt's Creek?",
       "answers": [
@@ -597,7 +569,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In 30 Rock, what is the name of the live comedy show Liz Lemon works on?",
       "answers": [
@@ -621,7 +592,6 @@
     "category": "Film & TV",
     "topic": "Sitcoms",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each sitcom to its central workplace or setting.",
       "kind": {

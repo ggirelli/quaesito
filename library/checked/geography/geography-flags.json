@@ -3,7 +3,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country's flag features a red maple leaf?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country has a white cross on a red square flag?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country's flag is the only national flag that is not rectangular or square?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which country has a cedar tree on its flag?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which country has a dragon on its national flag?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which country's flag features a black double-headed eagle?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which country's flag has a white crescent and five stars in its upper-left corner?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which country’s flag includes a depiction of a rifle?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which country's flag has five diagonal bands of blue, yellow, red, white and green?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which country's flag features a blue wheel with 24 spokes?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country's flag has a white star and crescent on a red field?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The flag of Japan has a red circle on a white background.",
       "kind": {
@@ -281,7 +269,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "The flag of Austria has three horizontal stripes: red, white and red.",
       "kind": {
@@ -295,7 +282,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The flag of Brazil features a blue globe with stars inside a yellow diamond.",
       "kind": {
@@ -309,7 +295,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The flag of Cyprus depicts the island in copper-coloured silhouette.",
       "kind": {
@@ -323,7 +308,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country's flag is called the Union Jack?",
       "kind": {
@@ -342,7 +326,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country’s flag is nicknamed the Stars and Stripes?",
       "kind": {
@@ -361,7 +344,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many stars appear on the flag of the United States?",
       "kind": {
@@ -379,7 +361,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many points does the star on the flag of Israel have?",
       "kind": {
@@ -397,7 +378,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many stars appear on the flag of China?",
       "kind": {
@@ -415,7 +395,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "How many rays does the sun on the flag of Argentina have?",
       "kind": {
@@ -433,7 +412,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these flags by number of stars, fewest first (Brazil has 27).",
       "kind": {
@@ -452,7 +430,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which country's flag shows a yellow sun with a human face?",
       "answers": [
@@ -476,7 +453,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which country’s flag features a white Angkor Wat temple?",
       "kind": {
@@ -492,7 +468,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these countries by the number of colours in their national flags, fewest first.",
       "kind": {
@@ -511,7 +486,6 @@
     "category": "Geography",
     "topic": "Flags",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Name the country whose flag features each symbol.",
       "kind": {

@@ -17,10 +17,6 @@ pub struct LibraryEntry {
     pub topic: String,
     /// 1: most adults know it, 2: keen quizzers, 3: experts.
     pub difficulty: u8,
-    /// The answer may change over the years (records, title holders); the question then says
-    /// "As of <year>".
-    #[serde(default)]
-    pub time_sensitive: bool,
     pub question: Question,
 }
 
@@ -110,8 +106,6 @@ pub struct LibraryFilter {
     pub difficulty: Option<u8>,
     /// One of [`KINDS`].
     pub kind: Option<&'static str>,
-    /// Leave out questions whose answer may change over the years.
-    pub timeless: bool,
 }
 
 impl LibraryFilter {
@@ -125,7 +119,6 @@ impl LibraryFilter {
             .filter(|e| self.topic.as_ref().is_none_or(|t| *t == e.topic))
             .filter(|e| self.difficulty.is_none_or(|d| d == e.difficulty))
             .filter(|e| self.kind.is_none_or(|k| k == e.kind_name()))
-            .filter(|e| !(self.timeless && e.time_sensitive))
             .filter(|e| {
                 words.is_empty()
                     || search::contains_all(
@@ -233,7 +226,6 @@ mod tests {
             category: category.into(),
             topic: "Topic".into(),
             difficulty,
-            time_sensitive: false,
             question: Question {
                 text: text.into(),
                 kind,

@@ -3,7 +3,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many players does each team start with on the pitch in association football?",
       "answers": [
@@ -30,7 +29,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country won the first men's FIFA World Cup, in 1930?",
       "answers": [
@@ -57,7 +55,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which body governs international association football?",
       "answers": [
@@ -84,7 +81,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which part of the body may a goalkeeper use inside their own penalty area, subject to the rules?",
       "answers": [
@@ -111,7 +107,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which club plays its home matches at Anfield?",
       "answers": [
@@ -138,7 +133,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which nation is known as the Azzurri in football?",
       "answers": [
@@ -165,7 +159,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is awarded when a defender commits a direct-free-kick offence inside their own penalty area?",
       "answers": [
@@ -192,7 +185,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which club won the first edition of the European Cup in 1956?",
       "answers": [
@@ -219,7 +211,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which country hosted the 1966 men's FIFA World Cup?",
       "answers": [
@@ -246,7 +237,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which country won the inaugural UEFA European Championship final tournament in 1960?",
       "answers": [
@@ -273,7 +263,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "The Bosman ruling of 1995 is most closely associated with which change in European football?",
       "answers": [
@@ -300,7 +289,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "A standard football match has two halves of 45 minutes, before added time.",
       "kind": {
@@ -314,7 +302,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "The penalty spot is 11 metres from the goal line.",
       "kind": {
@@ -328,7 +315,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "A goalkeeper may handle a deliberate kick to them by a teammate, provided it stays inside the penalty area.",
       "kind": {
@@ -342,7 +328,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In association football, a goal can be scored directly from a corner kick.",
       "kind": {
@@ -356,7 +341,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the nickname of the Brazilian men's national football team, often translated as 'The Selection'?",
       "kind": {
@@ -373,7 +357,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which Argentine footballer was nicknamed 'El Pibe de Oro'?",
       "kind": {
@@ -390,7 +373,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which English club is nicknamed the Gunners?",
       "kind": {
@@ -407,7 +389,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How wide, in metres, is a standard full-size football goal between the inside edges of its posts?",
       "kind": {
@@ -425,7 +406,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many minutes of extra time are normally played in total in a knockout match that goes to extra time?",
       "kind": {
@@ -443,7 +423,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What is the radius, in metres, of the centre circle on a regulation football pitch?",
       "kind": {
@@ -461,7 +440,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these men's FIFA World Cup winners in order of their first title, earliest first.",
       "kind": {
@@ -480,7 +458,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Order these UEFA European Championship winners by the year of their first title, earliest first.",
       "kind": {
@@ -499,7 +476,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Name the two clubs that contested the first FA Cup final in 1872.",
       "kind": {
@@ -528,7 +504,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each domestic cup competition to its country.",
       "kind": {
@@ -575,7 +550,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which goalkeeper kept goal for Italy when they won the 2006 men's World Cup?",
       "kind": {
@@ -592,7 +566,6 @@
     "category": "Sport",
     "topic": "Football",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Match each national team with its familiar nickname.",
       "kind": {

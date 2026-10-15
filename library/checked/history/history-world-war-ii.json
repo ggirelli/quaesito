@@ -3,7 +3,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which Japanese attack brought the United States into World War II?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which British prime minister led the UK for most of the war from 1940?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which German operation launched the invasion of the Soviet Union in June 1941?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which 1942 naval battle is widely considered a turning point in the Pacific War?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which 1945 conference near Berlin brought Truman, Churchill and Stalin together?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which resistance network helped Allied airmen and others escape occupied Europe through France and Spain?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which codebreaking site in England housed much of Britain's wartime work against Enigma?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -185,7 +177,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -199,7 +190,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -213,7 +203,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -227,7 +216,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "TrueFalse": {
@@ -241,7 +229,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -258,7 +245,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -275,7 +261,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -292,7 +277,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Text": {
@@ -309,7 +293,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -328,7 +311,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Order": {
@@ -347,7 +329,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -394,7 +375,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Pairs": {
@@ -449,7 +429,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country did Germany invade, starting the war in Europe?",
       "answers": [
@@ -473,7 +452,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What was the code name for the Allied invasion of Normandy?",
       "answers": [
@@ -497,7 +475,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which Soviet city endured a siege from 1941 to 1944 during World War II?",
       "answers": [
@@ -521,7 +498,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which German general surrendered Army Group Africa in Tunisia in May 1943?",
       "answers": [
@@ -545,7 +521,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "What was the name of the Allied deception plan that misled Germany about the Normandy landing site?",
       "answers": [
@@ -569,7 +544,6 @@
     "category": "History",
     "topic": "World War II",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "kind": {
         "Number": {

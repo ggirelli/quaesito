@@ -3,7 +3,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which grape variety is most famously used to make red Burgundy wine?",
       "answers": [
@@ -27,7 +26,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which country is the origin of Guinness stout?",
       "answers": [
@@ -51,7 +49,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the main ingredient that yeast turns into alcohol during fermentation?",
       "answers": [
@@ -75,7 +72,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Which sparkling wine is traditionally associated with Spain?",
       "answers": [
@@ -99,7 +95,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which hop-derived compounds contribute much of beer's bitterness?",
       "answers": [
@@ -123,7 +118,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which German beer style is traditionally brewed with a substantial share of wheat malt?",
       "answers": [
@@ -147,7 +141,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Which fortified wine is traditionally produced in Portugal's Douro Valley?",
       "answers": [
@@ -171,7 +164,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which grape variety is the principal grape in red Barolo wine?",
       "answers": [
@@ -195,7 +187,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which region is especially associated with the beer style lambic?",
       "answers": [
@@ -219,7 +210,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "In traditional Champagne production, what is the second fermentation carried out in?",
       "answers": [
@@ -243,7 +233,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which wine fault is commonly associated with the compound 2,4,6-trichloroanisole (TCA)?",
       "answers": [
@@ -267,7 +256,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "All wines are made from grapes.",
       "kind": {
@@ -281,7 +269,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Prosecco is traditionally made using the Glera grape.",
       "kind": {
@@ -295,7 +282,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Lagers are fermented with the same yeast species used in traditional top-fermented ales in all cases.",
       "kind": {
@@ -309,7 +295,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What term describes the process by which yeast converts sugars into alcohol?",
       "kind": {
@@ -326,7 +311,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name of the beer style traditionally brewed in Cologne, Germany?",
       "kind": {
@@ -343,7 +327,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Which grape variety is used to make Sancerre's classic white wines?",
       "kind": {
@@ -360,7 +343,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "How many 750 mL bottles are in a standard 9-litre case of wine?",
       "kind": {
@@ -378,7 +360,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many litres are in a standard wine bottle?",
       "kind": {
@@ -396,7 +377,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "How many millilitres are in an imperial pint of beer, approximately?",
       "kind": {
@@ -414,7 +394,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 1,
-    "time_sensitive": false,
     "question": {
       "text": "Put these Champagne sweetness categories in order from driest to sweetest.",
       "kind": {
@@ -433,7 +412,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Put these brewing stages in order, earliest first.",
       "kind": {
@@ -452,7 +430,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "Name the three main ingredients used in traditional beer brewing besides water.",
       "kind": {
@@ -488,7 +465,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each wine with the country it is especially associated with.",
       "kind": {
@@ -535,7 +511,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 2,
-    "time_sensitive": false,
     "question": {
       "text": "What is the name for the sealed container in which beer is stored and served under CO2 pressure?",
       "answers": [
@@ -559,7 +534,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Châteauneuf-du-Pape is famous for traditionally permitting how many grape varieties?",
       "kind": {
@@ -577,7 +551,6 @@
     "category": "Food & Drink",
     "topic": "Wine & beer",
     "difficulty": 3,
-    "time_sensitive": false,
     "question": {
       "text": "Match each beer style with its place of origin.",
       "kind": {
