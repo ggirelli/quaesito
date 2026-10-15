@@ -105,6 +105,8 @@ pub struct LibraryFilter {
     /// Words to find in the question, its answer, topic or category.
     pub search: String,
     pub category: Option<String>,
+    /// A topic of the category.
+    pub topic: Option<String>,
     pub difficulty: Option<u8>,
     /// One of [`KINDS`].
     pub kind: Option<&'static str>,
@@ -120,6 +122,7 @@ impl LibraryFilter {
         entries
             .iter()
             .filter(|e| self.category.as_ref().is_none_or(|c| *c == e.category))
+            .filter(|e| self.topic.as_ref().is_none_or(|t| *t == e.topic))
             .filter(|e| self.difficulty.is_none_or(|d| d == e.difficulty))
             .filter(|e| self.kind.is_none_or(|k| k == e.kind_name()))
             .filter(|e| !(self.timeless && e.time_sensitive))
@@ -148,6 +151,20 @@ pub fn categories(entries: &[LibraryEntry]) -> Vec<(String, usize)> {
         match found.iter_mut().find(|(name, _)| *name == entry.category) {
             Some((_, count)) => *count += 1,
             None => found.push((entry.category.clone(), 1)),
+        }
+    }
+    found.sort();
+    found
+}
+
+/// The topics of `category` with their number of questions, by name.
+#[must_use]
+pub fn topics(entries: &[LibraryEntry], category: &str) -> Vec<(String, usize)> {
+    let mut found: Vec<(String, usize)> = Vec::new();
+    for entry in entries.iter().filter(|e| e.category == category) {
+        match found.iter_mut().find(|(name, _)| *name == entry.topic) {
+            Some((_, count)) => *count += 1,
+            None => found.push((entry.topic.clone(), 1)),
         }
     }
     found.sort();
@@ -303,11 +320,23 @@ mod tests {
     }
 
     #[test]
-    fn categories_are_counted_by_name() {
+    fn categories_and_their_topics_are_counted_by_name() {
+        let mut all = library();
+        all[1].topic = "Europe".into();
         assert_eq!(
-            categories(&library()),
+            categories(&all),
             [("Geography".to_owned(), 2), ("History".to_owned(), 1)]
         );
+        assert_eq!(
+            topics(&all, "Geography"),
+            [("Europe".to_owned(), 1), ("Topic".to_owned(), 1)]
+        );
+        let europe = LibraryFilter {
+            category: Some("Geography".into()),
+            topic: Some("Europe".into()),
+            ..LibraryFilter::default()
+        };
+        assert_eq!(europe.apply(&all), [&all[1]]);
     }
 
     #[test]

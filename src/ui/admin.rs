@@ -4,7 +4,7 @@ use dioxus::prelude::*;
 
 use super::{
     Route, client,
-    library::{RandomQuiz, RandomQuizFields, use_library},
+    library::{LibraryBrowser, RandomQuiz, RandomQuizFields, use_library},
     transfer::{self, IMPORT_INPUT, TransferStatus, Transfers},
     widgets::{
         Brand, ClientOnly, Dialog, ErrorBox, HelpLink, Icon, IconKind, Spinner, ThemeToggle,
@@ -45,6 +45,40 @@ pub fn Admin() -> Element {
     rsx! {
         ClientOnly {
             AdminGate { Dashboard {} }
+        }
+    }
+}
+
+/// The admin page's Questions tab: the question library, to browse and review.
+#[component]
+pub fn AdminQuestions() -> Element {
+    rsx! {
+        ClientOnly {
+            AdminGate {
+                AdminHeader {}
+                main { class: "page wide stack",
+                    AdminTabs {}
+                    section { class: "card", LibraryBrowser {} }
+                }
+            }
+        }
+    }
+}
+
+/// The admin page's tabs: the quizzes, and the question library.
+#[component]
+fn AdminTabs() -> Element {
+    let route: Route = use_route();
+    rsx! {
+        nav { class: "segmented admin-tabs", aria_label: "Admin sections",
+            for (to , name) in [(Route::Admin {}, "Quizzes"), (Route::AdminQuestions {}, "Questions")] {
+                Link {
+                    class: if route == to { "selected" },
+                    aria_current: if route == to { "page" },
+                    to: to.clone(),
+                    "{name}"
+                }
+            }
         }
     }
 }
@@ -201,6 +235,7 @@ fn Dashboard() -> Element {
     rsx! {
         AdminHeader {}
         main { class: "page wide stack",
+            AdminTabs {}
             ErrorBox { error: error() }
             LiveGames { on_error: move |e| error.set(Some(e)) }
             section { class: "card stack",

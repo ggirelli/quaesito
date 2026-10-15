@@ -1,5 +1,5 @@
-//! The question library in the admin pages: browsing it from the editor, and picking the
-//! categories of a random quiz.
+//! The question library in the admin pages: browsing it on its own tab of the admin page or from
+//! the editor, and picking the categories of a random quiz.
 
 use std::collections::HashSet;
 
@@ -59,8 +59,7 @@ fn DifficultySelect(value: Option<u8>, on_change: EventHandler<Option<u8>>) -> E
     }
 }
 
-/// Browses the library from the editor and adds questions to the quiz: picked one by one, or a
-/// number of them at random among those shown.
+/// The editor's window onto the library, to add questions to the quiz.
 #[component]
 pub fn LibraryDialog(
     /// The texts of the questions already in the quiz.
@@ -68,9 +67,28 @@ pub fn LibraryDialog(
     on_add: EventHandler<Vec<Question>>,
     on_close: EventHandler<()>,
 ) -> Element {
+    rsx! {
+        Dialog { title: "Question library", wide: true, on_close,
+            LibraryBrowser { present, on_add }
+        }
+    }
+}
+
+/// Browses the library: the categories on the left, each opening onto its topics, and the
+/// questions they hold on the right, with a search and filters. With `on_add` (in the editor),
+/// questions can be added to the quiz, picked one by one or a number of them at random among
+/// those shown.
+#[component]
+pub fn LibraryBrowser(
+    /// The texts of the questions already in the quiz.
+    #[props(default)]
+    present: Vec<String>,
+    on_add: Option<EventHandler<Vec<Question>>>,
+) -> Element {
     let library = use_library(|| true);
     let mut search = use_signal(String::new);
-    let mut category = use_signal(String::new);
+    let mut category = use_signal(|| None::<String>);
+    let mut topic = use_signal(|| None::<String>);
     let mut difficulty = use_signal(|| None::<u8>);
     let mut kind = use_signal(String::new);
     let mut timeless = use_signal(|| false);
@@ -82,21 +100,20 @@ pub fn LibraryDialog(
         Some(Some(Ok(entries))) => entries,
         Some(Some(Err(err))) => {
             return rsx! {
-                Dialog { title: "Question library", on_close,
-                    ErrorBox { error: Some(message(err)) }
-                }
+                ErrorBox { error: Some(message(err)) }
             };
         }
         _ => {
             return rsx! {
-                Dialog { title: "Question library", on_close, Spinner {} }
+                Spinner {}
             };
         }
     };
     let present: HashSet<&str> = present.iter().map(String::as_str).collect();
     let filter = LibraryFilter {
         search: search(),
-        category: Some(category()).filter(|c| !c.is_empty()),
+        category: category(),
+        topic: topic(),
         difficulty: difficulty(),
         kind: KINDS.into_iter().find(|k| *k == kind()),
         timeless: timeless(),
@@ -111,118 +128,183 @@ pub fn LibraryDialog(
     let add_random = {
         let questions: Vec<Question> = new.iter().map(|e| e.question.clone()).collect();
         move |_| {
-            let picked = crate::library::sample(&questions, picks, client::random_below);
-            on_add.call(picked);
+            if let Some(on_add) = on_add {
+                on_add.call(crate::library::sample(
+                    &questions,
+                    picks,
+                    client::random_below,
+                ));
+            }
         }
     };
+    // Picking a category opens its topics; picking it again closes them and shows everything.
+    let mut pick_category = move |name: Option<String>| {
+        let name = if name == *category.peek() { None } else { name };
+        category.set(name);
+        topic.set(None);
+        shown_count.set(PAGE);
+    };
+    let mut pick_topic = move |name: String| {
+        let name = Some(name).filter(|n| Some(n) != topic.peek().as_ref());
+        topic.set(name);
+        shown_count.set(PAGE);
+    };
     let categories = crate::library::categories(entries);
+    let topics = category()
+        .map(|c| crate::library::topics(entries, &c))
+        .unwrap_or_default();
+    let heading = match (category(), topic()) {
+        (None, _) => "All categories".to_owned(),
+        (Some(c), None) => c,
+        (Some(c), Some(t)) => format!("{c} › {t}"),
+    };
 
     rsx! {
-        Dialog { title: "Question library", wide: true, on_close,
-            div { class: "row quiz-filters",
-                label { class: "search grow",
-                    Icon { kind: IconKind::Search }
-                    input {
-                        r#type: "search",
-                        placeholder: "Search questions and answers",
-                        aria_label: "Search questions and answers",
-                        value: search,
-                        oninput: move |e| {
-                            search.set(e.value());
-                            shown_count.set(PAGE);
-                        },
-                    }
-                }
-                select {
-                    aria_label: "Category",
-                    value: category,
-                    onchange: move |e| {
-                        category.set(e.value());
-                        shown_count.set(PAGE);
-                    },
-                    option { value: "", "All categories" }
-                    for (name , count) in categories {
-                        option { value: "{name}", "{name} ({count})" }
-                    }
-                }
-                DifficultySelect {
-                    value: difficulty(),
-                    on_change: move |level| difficulty.set(level),
-                }
-                select {
-                    aria_label: "Answer type",
-                    value: kind,
-                    onchange: move |e| kind.set(e.value()),
-                    option { value: "", "Any answer type" }
-                    for name in KINDS {
-                        option { value: name, "{name}" }
-                    }
-                }
-                label {
-                    class: "check-field",
-                    title: "Records, title holders… questions that say “As of <year>”",
-                    input {
-                        r#type: "checkbox",
-                        checked: timeless(),
-                        onchange: move |e| timeless.set(e.checked()),
-                    }
-                    span { "Leave out answers that may date" }
-                }
-            }
-            div { class: "row between",
-                span { class: "muted small",
-                    if matching.len() == 1 {
-                        "1 question matches"
-                    } else {
-                        "{matching.len()} questions match"
-                    }
-                    if matching.len() > new.len() {
-                        ", {matching.len() - new.len()} already in the quiz"
-                    }
-                }
-                div { class: "row",
-                    input {
-                        class: "short-number",
-                        r#type: "number",
-                        min: "1",
-                        max: "{new.len().max(1)}",
-                        aria_label: "How many questions to add at random",
-                        value: "{random_count}",
-                        oninput: move |e| random_count.set(e.value().parse().unwrap_or(0)),
-                    }
-                    button {
-                        class: "button",
-                        disabled: picks == 0,
-                        title: "Add this many of the questions shown, picked at random",
-                        onclick: add_random,
-                        "🎲 Add at random"
-                    }
-                }
-            }
-            ul { class: "list library-list",
-                for (index , entry) in matching.iter().take(shown_count()).enumerate() {
-                    LibraryRow {
-                        key: "{index}",
-                        entry: (*entry).clone(),
-                        in_quiz: present.contains(entry.question.text.as_str()),
-                        on_add,
-                    }
-                }
-            }
-            if matching.len() > shown_count() {
+        div { class: "library-layout",
+            nav { class: "library-nav", aria_label: "Categories",
                 button {
-                    class: "button ghost",
-                    onclick: move |_| shown_count += PAGE,
-                    "Show more"
+                    class: "library-category",
+                    class: if category().is_none() { "selected" },
+                    aria_pressed: category().is_none(),
+                    onclick: move |_| pick_category(None),
+                    span { class: "grow", "All categories" }
+                    span { class: "count", "{entries.len()}" }
+                }
+                for (name , count) in categories {
+                    div { key: "{name}", class: "library-group",
+                        button {
+                            class: "library-category",
+                            class: if category().as_deref() == Some(name.as_str()) { "selected" },
+                            aria_expanded: category().as_deref() == Some(name.as_str()),
+                            onclick: {
+                                let name = name.clone();
+                                move |_| pick_category(Some(name.clone()))
+                            },
+                            span { class: "grow", "{name}" }
+                            span { class: "count", "{count}" }
+                        }
+                        if category().as_deref() == Some(name.as_str()) {
+                            div { class: "library-topics",
+                                for (name , count) in topics.clone() {
+                                    button {
+                                        key: "{name}",
+                                        class: "library-topic",
+                                        class: if topic().as_deref() == Some(name.as_str()) { "selected" },
+                                        aria_pressed: topic().as_deref() == Some(name.as_str()),
+                                        onclick: {
+                                            let name = name.clone();
+                                            move |_| pick_topic(name.clone())
+                                        },
+                                        span { class: "grow", "{name}" }
+                                        span { class: "count", "{count}" }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            section { class: "library-main stack",
+                h2 { "{heading}" }
+                div { class: "row quiz-filters",
+                    label { class: "search grow",
+                        Icon { kind: IconKind::Search }
+                        input {
+                            r#type: "search",
+                            placeholder: "Search questions and answers",
+                            aria_label: "Search questions and answers",
+                            value: search,
+                            oninput: move |e| {
+                                search.set(e.value());
+                                shown_count.set(PAGE);
+                            },
+                        }
+                    }
+                    DifficultySelect {
+                        value: difficulty(),
+                        on_change: move |level| difficulty.set(level),
+                    }
+                    select {
+                        aria_label: "Answer type",
+                        value: kind,
+                        onchange: move |e| kind.set(e.value()),
+                        option { value: "", "Any answer type" }
+                        for name in KINDS {
+                            option { value: name, "{name}" }
+                        }
+                    }
+                    label {
+                        class: "check-field",
+                        title: "Records, title holders… questions that say “As of <year>”",
+                        input {
+                            r#type: "checkbox",
+                            checked: timeless(),
+                            onchange: move |e| timeless.set(e.checked()),
+                        }
+                        span { "Leave out answers that may date" }
+                    }
+                }
+                div { class: "row between",
+                    span { class: "muted small",
+                        if matching.len() == 1 {
+                            "1 question matches"
+                        } else {
+                            "{matching.len()} questions match"
+                        }
+                        if matching.len() > new.len() {
+                            ", {matching.len() - new.len()} already in the quiz"
+                        }
+                    }
+                    if on_add.is_some() {
+                        div { class: "row",
+                            input {
+                                class: "short-number",
+                                r#type: "number",
+                                min: "1",
+                                max: "{new.len().max(1)}",
+                                aria_label: "How many questions to add at random",
+                                value: "{random_count}",
+                                oninput: move |e| random_count.set(e.value().parse().unwrap_or(0)),
+                            }
+                            button {
+                                class: "button",
+                                disabled: picks == 0,
+                                title: "Add this many of the questions shown, picked at random",
+                                onclick: add_random,
+                                "🎲 Add at random"
+                            }
+                        }
+                    }
+                }
+                ul { class: "list library-list",
+                    for (index , entry) in matching.iter().take(shown_count()).enumerate() {
+                        LibraryRow {
+                            key: "{index}",
+                            entry: (*entry).clone(),
+                            in_quiz: present.contains(entry.question.text.as_str()),
+                            on_add,
+                        }
+                    }
+                }
+                if matching.len() > shown_count() {
+                    button {
+                        class: "button ghost",
+                        onclick: move |_| shown_count += PAGE,
+                        "Show more"
+                    }
                 }
             }
         }
     }
 }
 
-/// One library question with its answer, and a button to add it.
+/// One library question with its answer, and a button to add it (with `on_add`).
 #[component]
-fn LibraryRow(entry: LibraryEntry, in_quiz: bool, on_add: EventHandler<Vec<Question>>) -> Element {
+fn LibraryRow(
+    entry: LibraryEntry,
+    in_quiz: bool,
+    on_add: Option<EventHandler<Vec<Question>>>,
+) -> Element {
     let question = entry.question.clone();
     rsx! {
         li { class: "list-row",
@@ -241,7 +323,7 @@ fn LibraryRow(entry: LibraryEntry, in_quiz: bool, on_add: EventHandler<Vec<Quest
             }
             if in_quiz {
                 span { class: "muted small", "✓ In the quiz" }
-            } else {
+            } else if let Some(on_add) = on_add {
                 button {
                     class: "button",
                     onclick: move |_| on_add.call(vec![question.clone()]),

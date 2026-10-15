@@ -808,6 +808,116 @@ input.short {
     flex-wrap: wrap;
     justify-content: center;
   }
+
+}
+
+/* The Questions tab: categories on the left, each opening onto its topics. */
+.library-layout {
+  display: grid;
+  grid-template-columns: minmax(12rem, 16rem) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.library-nav {
+  position: sticky;
+  top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
+}
+
+/* In the editor's dialog, the categories stay put while the dialog scrolls. */
+.dialog .library-nav {
+  top: 0;
+  max-height: calc(90vh - 7rem);
+}
+
+.library-main h2 {
+  margin: 0;
+}
+
+/* On phones, the categories go above the questions. */
+@media (max-width: 800px) {
+  .library-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .library-nav {
+    position: static;
+    max-height: 40vh;
+  }
+}
+
+/* The admin page's Quizzes and Questions tabs. */
+.admin-tabs {
+  align-self: center;
+  width: min(24rem, 100%);
+}
+
+.admin-tabs a {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 8px;
+  color: var(--muted);
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+}
+
+.admin-tabs a.selected {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.library-category,
+.library-topic {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.45rem 0.7rem;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--fg);
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.library-topic {
+  padding: 0.3rem 0.7rem 0.3rem 1.4rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.library-category:hover,
+.library-topic:hover {
+  background: var(--surface-2);
+}
+
+.library-category.selected,
+.library-topic.selected {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.library-category .count,
+.library-topic .count {
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+.library-topics {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  margin: 0.15rem 0 0.4rem;
 }
 
 /* ---------- Answer badges ---------- */

@@ -24,23 +24,52 @@ const L = require('./lib.js');
     return L.api('/api/admin/quiz/get', { token: ctx.token, id });
   };
 
-  // The editor: browse, filter, add one, then add three at random.
+  // The admin page's Questions tab: browse by category and topic, without adding.
+  const library = await L.openAdmin(ctx, '/admin');
+  await L.clickText(library, '.admin-tabs a', 'Questions');
+  await library.waitForSelector('.library-nav .library-category');
+  expect('Questions tab: own address', library.url().endsWith('/admin/questions'));
+  await L.clickText(library, '.library-category', 'Music');
+  await library.waitForSelector('.library-topic');
+  await L.clickText(library, '.library-topic', 'Classical');
+  await L.sleep(300);
+  const music = await library.$$eval('.library-list .list-row', (rs) => rs.map((r) => r.innerText));
+  expect(`Questions tab: ${music.length} Classical questions, no add buttons`,
+    music.length > 0 && music.every((r) => r.includes('Music · Classical'))
+      && !(await library.$('.library-list button')));
+  await library.screenshot({ path: 'out/library-admin.png' });
+  await L.clickText(library, '.admin-tabs a', 'Quizzes');
+  await library.waitForFunction((t) => document.body.innerText.includes(t), {}, title);
+
+  // The editor's library dialog: pick a category and one of its topics, search, add one, then
+  // add three at random.
   const editor = await L.openAdmin(ctx, `/admin/quiz/${ctx.id}`);
   await editor.waitForSelector('button.add-library');
   await editor.click('button.add-library');
-  await editor.waitForSelector('.dialog .list-row');
-  await editor.select('select[aria-label="Category"]', 'Science');
+  await editor.waitForSelector('.dialog .library-category');
+  await L.clickText(editor, '.dialog .library-category', 'Science');
+  await editor.waitForSelector('.dialog .library-topic');
+  const topics = await editor.$$eval('.dialog .library-topic', (ts) => ts.map((t) => t.innerText));
+  expect(`Science topics: ${topics.length}`, topics.length > 3 && topics.some((t) => t.includes('Astronomy & space')));
+  await L.clickText(editor, '.dialog .library-topic', 'Astronomy & space');
   await editor.type('.dialog input[type=search]', 'planet');
   await L.sleep(300);
-  const rows = await editor.$$eval('.dialog .list-row', (rs) => rs.map((r) => r.innerText));
-  expect(`search: ${rows.length} Science questions about planets`,
-    rows.length > 0 && rows.every((r) => r.includes('Science') && /planet/i.test(r)));
+  const rows = await editor.$$eval('.dialog .library-list .list-row', (rs) => rs.map((r) => r.innerText));
+  expect(`search: ${rows.length} Astronomy questions about planets`,
+    rows.length > 0 && rows.every((r) => r.includes('Science · Astronomy & space') && /planet/i.test(r)));
+  const heading = await editor.$eval('.dialog .library-main h2', (h) => h.innerText);
+  expect(`heading: ${heading}`, heading === 'Science › Astronomy & space');
   await editor.screenshot({ path: 'out/library-editor.png' });
   const first = rows[0].split('\n')[0];
-  await L.clickText(editor, '.dialog .list-row button', 'Add');
-  await editor.waitForFunction(() => document.querySelector('.dialog .list-row').innerText.includes('In the quiz'));
+  await L.clickText(editor, '.dialog .library-list .list-row button', 'Add');
+  await editor.waitForFunction(() => document.querySelector('.dialog .library-list .list-row').innerText.includes('In the quiz'));
+  // Picking the category again closes it and shows every question.
+  await L.clickText(editor, '.dialog .library-category', 'Science');
   await editor.$eval('.dialog input[type=search]', (i) => i.select());
   await editor.keyboard.press('Backspace');
+  await L.sleep(300);
+  const all = await editor.$eval('.dialog .library-main h2', (h) => h.innerText);
+  expect(`closing the category: ${all}, no topics`, all === 'All categories' && !(await editor.$('.library-topic')));
   const count = await editor.$('.dialog input.short-number');
   await retype(editor, count, '3');
   await L.clickText(editor, '.dialog button', 'Add at random');

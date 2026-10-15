@@ -32,10 +32,12 @@ Quaesito comes with a library of about 2,700 ready-made questions in 14 categori
 technology, each rated easy, medium or hard. They were written with an AI model and fact-checked,
 but read the ones you pick before playing: a few may still be wrong or out of date.
 
-- **In the editor**, press **＋ From the library**. Search questions and answers, and filter by
-  category, difficulty and answer type. **＋ Add** adds one question at the end of the quiz;
-  🎲 **Add at random** adds as many of the questions shown as you ask for. Questions already in
-  the quiz are marked, and never added twice at random.
+- **Browse it** on the admin page's **Questions** tab. Pick a category on the left to see only its
+  questions; it opens onto its topics, which narrow the list further. Pick the category again to
+  close it. Search questions and answers, and filter by difficulty and answer type.
+- **In the editor**, press **＋ From the library** to browse it the same way. **＋ Add** adds one
+  question at the end of the quiz; 🎲 **Add at random** adds as many of the questions shown as
+  you ask for. Questions already in the quiz are marked, and never added twice at random.
 - **For a whole quiz**, tick **Fill it with random questions from the library** when creating it,
   tick the categories you want and say how many questions each gets (5 by default). You can keep
   to one difficulty, and open each category with a title slide.
