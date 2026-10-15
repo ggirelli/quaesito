@@ -12,6 +12,10 @@ All notable changes to quaesito are listed here. The format follows
   **Questions** tab browses them by category and topic, with search and filters. The editor's **＋ From the library**
   adds them one by one or at random, and a new quiz can be filled with random questions from the categories you
   tick.
+- Teams pick a background for their picture: one of six colours or five gradients, shown behind their initial and
+  through the transparent parts of a cut-out picture, on phones and the big screen.
+- Starting a game can turn off team pictures (**Teams can add a picture**): phones then offer no upload, and teams
+  show their initial on the background they pick.
 - Donations are now also welcome on [GitHub Sponsors](https://github.com/sponsors/ggirelli).
 
 ## [0.4.0] - 2026-10-13

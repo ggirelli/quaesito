@@ -2,8 +2,11 @@
 
 Press **▶ Start** next to a quiz, choose how many teams may join, and start. Tick **Shuffle the
 answers** to play the multiple-choice answers in a new order, for this game only: the saved quiz
-keeps its own. Put the big screen on the TV, full screen with ++f11++. Teams scan the QR code, or open the address shown and type
-the game code, then pick a name and a picture.
+keeps its own. Untick **Teams can add a picture** to keep uploads off the big screen: teams then
+show their initial. Put the big screen on the TV, full screen with ++f11++. Teams scan the QR code, or open the address shown and type
+the game code, then pick a name, a picture and a background for it: a colour or a gradient, which
+shows behind their initial and through the see-through parts of a cut-out picture (a PNG with a
+transparent background).
 
 !!! info "How many can play"
     Each team plays from **one phone**, with as many players gathered around it as you like. A

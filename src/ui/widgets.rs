@@ -167,10 +167,22 @@ pub fn media_url(name: &str) -> String {
     format!("/media/{name}")
 }
 
-/// A team's avatar, or its initial when it has none.
+/// The class giving a team's picture the background it picked (`.backdrop-0` to `.backdrop-10`
+/// in the stylesheet: the answer colours, flat, then in pairs), if any. A class rather than an
+/// inline style: switching an inline style straight to another value left it empty on every other
+/// change.
+#[must_use]
+pub fn backdrop_class(backdrop: Option<u8>) -> String {
+    backdrop
+        .filter(|b| *b < crate::protocol::BACKDROP_COUNT)
+        .map(|b| format!("backdrop-{b}"))
+        .unwrap_or_default()
+}
+
+/// A team's avatar, or its initial when it has none, on the background it picked.
 #[component]
 pub fn TeamAvatar(team: crate::protocol::TeamInfo, #[props(default)] class: String) -> Element {
-    let class = format!("avatar {class}");
+    let class = format!("avatar {class} {}", backdrop_class(team.backdrop));
     if let Some(avatar) = &team.avatar {
         return rsx! {
             img { class, src: media_url(avatar), alt: "" }

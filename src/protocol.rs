@@ -15,6 +15,13 @@ pub const DEFAULT_MAX_TEAMS: usize = 50;
 /// cannot flood a game, but this one is far beyond what a Wi-Fi network holds.
 pub const MAX_TEAMS_CEILING: usize = 10_000;
 
+fn yes() -> bool {
+    true
+}
+
+/// How many backgrounds a team can pick for its picture (`.backdrop-<n>` in the stylesheet).
+pub const BACKDROP_COUNT: u8 = 11;
+
 /// A team as shown on screens.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct TeamInfo {
@@ -22,6 +29,9 @@ pub struct TeamInfo {
     pub name: String,
     /// Media name of the uploaded avatar, if any.
     pub avatar: Option<String>,
+    /// The background the team picked for its picture (or initial), below [`BACKDROP_COUNT`].
+    #[serde(default)]
+    pub backdrop: Option<u8>,
     /// Whether the team leader's phone is currently connected.
     pub connected: bool,
 }
@@ -387,14 +397,14 @@ pub enum JokerState {
 pub enum PlayerPhase {
     Lobby {
         teams: usize,
+        /// Whether teams may upload a picture in this game.
+        #[serde(default = "yes")]
+        pictures: bool,
     },
     /// The big screen shows a slide.
     Slide,
     /// The next question has a soundtrack and opens when the host starts it.
-    Ready {
-        index: usize,
-        total: usize,
-    },
+    Ready { index: usize, total: usize },
     Question {
         index: usize,
         total: usize,
@@ -443,10 +453,7 @@ pub enum PlayerPhase {
         correct: Vec<usize>,
     },
     /// The big screen shows the standings at a results slide.
-    Standings {
-        rank: usize,
-        teams: usize,
-    },
+    Standings { rank: usize, teams: usize },
     Podium {
         /// Own position, once revealed.
         rank: Option<usize>,

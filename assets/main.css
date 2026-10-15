@@ -2595,6 +2595,53 @@ button.joker {
   cursor: pointer;
 }
 
+/* The backgrounds a team picks for its picture, as round swatches; the first is none. */
+.backdrop-picker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 20rem;
+}
+
+.backdrop-swatch {
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.backdrop-swatch.default {
+  background: var(--accent);
+}
+
+/* The backgrounds a team can pick (`BACKDROP_COUNT` in protocol.rs): the answer colours, flat,
+   then in pairs. Also on avatars, over their default accent. */
+.backdrop-0 { background: var(--a0); }
+.backdrop-1 { background: var(--a1); }
+.backdrop-2 { background: var(--a2); }
+.backdrop-3 { background: var(--a3); }
+.backdrop-4 { background: var(--a4); }
+.backdrop-5 { background: var(--a5); }
+.backdrop-6 { background: linear-gradient(135deg, var(--a0), var(--a2)); }
+.backdrop-7 { background: linear-gradient(135deg, var(--a1), var(--a4)); }
+.backdrop-8 { background: linear-gradient(135deg, var(--a3), var(--a2)); }
+.backdrop-9 { background: linear-gradient(135deg, var(--a5), var(--a1)); }
+.backdrop-10 { background: linear-gradient(135deg, var(--a4), var(--a0)); }
+
+.backdrop-swatch.selected {
+  outline: 3px solid var(--fg);
+  outline-offset: 2px;
+}
+
+.backdrop-hint {
+  max-width: 20rem;
+  margin: 0;
+  text-align: center;
+}
+
 .code-input {
   font-family: ui-monospace, monospace;
   font-size: 2rem !important;

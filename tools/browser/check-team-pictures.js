@@ -1,0 +1,114 @@
+// Team pictures: a game can turn them off; teams pick a background, which shows behind their
+// initial and through the transparent parts of their picture, on the phone and the big screen.
+//   tools/browser/run.sh check-team-pictures.js
+const fs = require('fs');
+const path = require('path');
+const zlib = require('zlib');
+const L = require('./lib.js');
+
+/** A PNG of a white disc on a transparent background (a cut-out). */
+function cutout(file) {
+  const size = 64;
+  const raw = Buffer.alloc(size * (size * 4 + 1));
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      const o = y * (size * 4 + 1) + 1 + x * 4;
+      const inside = (x - 32) ** 2 + (y - 32) ** 2 < 20 ** 2;
+      raw.writeUInt32BE(inside ? 0xffffffff : 0, o);
+    }
+  }
+  const crcTable = [...Array(256)].map((_, n) => {
+    let c = n;
+    for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+    return c >>> 0;
+  });
+  const crc = (buf) => (buf.reduce((c, b) => crcTable[(c ^ b) & 0xff] ^ (c >>> 8), 0xffffffff) ^ 0xffffffff) >>> 0;
+  const chunk = (type, data) => {
+    const body = Buffer.concat([Buffer.from(type), data]);
+    const out = Buffer.alloc(8);
+    out.writeUInt32BE(data.length, 0);
+    const tail = Buffer.alloc(4);
+    tail.writeUInt32BE(crc(body), 0);
+    return Buffer.concat([out.subarray(0, 4), body, tail]);
+  };
+  const header = Buffer.alloc(13);
+  header.writeUInt32BE(size, 0);
+  header.writeUInt32BE(size, 4);
+  header.set([8, 6, 0, 0, 0], 8); // 8-bit RGBA
+  fs.writeFileSync(file, Buffer.concat([
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+    chunk('IHDR', header), chunk('IDAT', zlib.deflateSync(raw)), chunk('IEND', Buffer.alloc(0)),
+  ]));
+}
+
+(async () => {
+  const ctx = await L.setup({ title: `Team pictures ${Date.now()}`, questions: [L.choice('One?')] });
+  let ok = true;
+  const expect = (what, good) => {
+    console.log(what, good ? 'ok' : 'WRONG');
+    ok = ok && good;
+  };
+  const picture = path.join(__dirname, 'out/cutout.png');
+  fs.mkdirSync(path.dirname(picture), { recursive: true });
+  cutout(picture);
+
+  // A game with pictures: upload a cut-out and pick a gradient background.
+  const code = await L.api('/api/admin/session/start', { token: ctx.token, quiz_id: ctx.id });
+  const host = await L.openHost(ctx, code);
+  const owls = await L.openPhone(ctx, code, 'Owls');
+  await (await owls.$('.avatar-picker input[type=file]')).uploadFile(picture);
+  await owls.waitForSelector('img.avatar.large');
+  const swatches = await owls.$$('.backdrop-swatch');
+  expect(`swatches: ${swatches.length}`, swatches.length === 12);
+  await swatches[8].click(); // the 7th background: the first gradient
+  await owls.waitForFunction(() => getComputedStyle(document.querySelector('img.avatar.large')).backgroundImage.includes('gradient'));
+  const shown = await host.waitForFunction(() => {
+    const img = [...document.querySelectorAll('img.avatar')].find((i) => getComputedStyle(i).backgroundImage.includes('gradient'));
+    return img && img.src.includes('/media/');
+  }, { timeout: 10000 }).then(() => true, () => false);
+  expect('big screen: picture on its gradient', shown);
+  // The cut-out keeps its transparency, so the background shows through.
+  const alpha = await host.evaluate(async () => {
+    const img = document.querySelector('img.avatar');
+    const bitmap = await createImageBitmap(await (await fetch(img.src)).blob());
+    const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
+    const c = canvas.getContext('2d');
+    c.drawImage(bitmap, 0, 0);
+    return c.getImageData(1, 1, 1, 1).data[3];
+  });
+  expect(`stored picture keeps transparency (corner alpha ${alpha})`, alpha === 0);
+  // Every background applies, click after click, on the phone and on the big screen.
+  const look = (e) => { const s = getComputedStyle(e); return s.backgroundColor + s.backgroundImage; };
+  for (let i = 1; i < swatches.length; i++) {
+    await (await owls.$$('.backdrop-swatch'))[i].click();
+    const want = await owls.$$eval('.backdrop-swatch', (s, i, look) => new Function('e', `return (${look})(e)`)(s[i]), i, look.toString());
+    const phone = await owls.waitForFunction((w, look) => new Function('e', `return (${look})(e)`)(document.querySelector('img.avatar.large')) === w, { timeout: 5000 }, want, look.toString()).then(() => true, () => false);
+    const big = await host.waitForFunction((w, look) => [...document.querySelectorAll('img.avatar')].some((a) => new Function('e', `return (${look})(e)`)(a) === w), { timeout: 5000 }, want, look.toString()).then(() => true, () => false);
+    expect(`background ${i}`, phone && big);
+  }
+  await owls.screenshot({ path: 'out/team-pictures-phone.png' });
+  await host.screenshot({ path: 'out/team-pictures-host.png' });
+
+  // A game without pictures: no upload on phones, and the server refuses one; backgrounds stay.
+  const plain = await L.api('/api/admin/session/start', {
+    token: ctx.token, quiz_id: ctx.id, team_pictures: false,
+  });
+  const cats = await L.openPhone(ctx, plain, 'Cats');
+  expect('no pictures: no upload', !(await cats.$('.avatar-picker')));
+  await (await cats.$$('.backdrop-swatch'))[2].click();
+  await cats.waitForFunction(() => /backdrop-\d/.test(document.querySelector('span.avatar.large').className));
+  expect('no pictures: initial on its background', true);
+  await cats.screenshot({ path: 'out/team-pictures-off.png' });
+  const admin = await L.openAdmin(ctx, '/admin');
+  await admin.evaluate(() => {
+    [...document.querySelectorAll('button[title="Start a live game"]')][0].click();
+  });
+  await admin.waitForSelector('.dialog');
+  const option = await L.text(admin);
+  expect('start dialog: picture option, on', option.includes('Teams can add a picture')
+    && await admin.$$eval('.dialog .check-field input', (is) => is[1].checked));
+
+  console.log('ERRORS', ctx.errors.length ? ctx.errors : 'none');
+  await ctx.browser.close();
+  if (!ok || ctx.errors.length) process.exit(1);
+})().catch((e) => { console.error('FAILED', e); process.exit(1); });

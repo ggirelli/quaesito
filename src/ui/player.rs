@@ -7,15 +7,16 @@ use super::{
     live::{ConnectionBanner, Live, countdown_ms, use_clock, use_live},
     widgets::{
         ANSWER_STYLES, AnswerBadge, AnswerShape, Brand, ClientOnly, DOT, ErrorBox, MapPin,
-        PairItemContent, PinMap, Spinner, TeamAvatar, media_url, message, pair_letter,
+        PairItemContent, PinMap, Spinner, TeamAvatar, backdrop_class, media_url, message,
+        pair_letter,
     },
 };
 use crate::{
-    api::{check_ticket, game_info, join_game, player_socket, upload_avatar},
+    api::{check_ticket, game_info, join_game, player_socket, set_team_backdrop, upload_avatar},
     model::{MAX_TEXT_ANSWER_CHARS, NumberRange, PhoneDisplay, Point},
     protocol::{
-        AnswerOutcome, InputKind, JokerState, MAX_NAME_CHARS, PairColumns, PlayerCommand,
-        PlayerPhase, PlayerView, Response, TeamInfo,
+        AnswerOutcome, BACKDROP_COUNT, InputKind, JokerState, MAX_NAME_CHARS, PairColumns,
+        PlayerCommand, PlayerPhase, PlayerView, Response, TeamInfo,
     },
 };
 
@@ -278,8 +279,8 @@ fn PlayerGame(code: String, token: String, on_gone: EventHandler<()>) -> Element
 #[component]
 fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) -> Element {
     match view.phase {
-        PlayerPhase::Lobby { teams } => rsx! {
-            LobbyView { code, token, team: view.team.clone(), teams }
+        PlayerPhase::Lobby { teams, pictures } => rsx! {
+            LobbyView { code, token, team: view.team.clone(), teams, pictures }
         },
         PlayerPhase::Slide => rsx! {
             main { class: "player-main",
@@ -545,7 +546,14 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
 }
 
 #[component]
-fn LobbyView(code: String, token: String, team: TeamInfo, teams: usize) -> Element {
+fn LobbyView(
+    code: String,
+    token: String,
+    team: TeamInfo,
+    teams: usize,
+    /// Whether the game takes team pictures.
+    pictures: bool,
+) -> Element {
     let code = use_signal(|| code);
     let token = use_signal(|| token);
     let mut uploading = use_signal(|| false);
@@ -561,24 +569,66 @@ fn LobbyView(code: String, token: String, team: TeamInfo, teams: usize) -> Eleme
         }
         uploading.set(false);
     };
+    let pick = move |backdrop: Option<u8>| async move {
+        error.set(None);
+        if let Err(err) = set_team_backdrop(code(), token(), backdrop).await {
+            error.set(Some(message(&err)));
+        }
+    };
     rsx! {
         main { class: "player-main",
-            label { class: "avatar-picker",
-                TeamAvatar { team: team.clone(), class: "large" }
-                span { class: "button ghost",
-                    if uploading() {
-                        "Uploading…"
-                    } else if team.avatar.is_some() {
-                        "Change team picture"
-                    } else {
-                        "Add a team picture"
+            if pictures {
+                label { class: "avatar-picker",
+                    TeamAvatar { team: team.clone(), class: "large" }
+                    span { class: "button ghost",
+                        if uploading() {
+                            "Uploading…"
+                        } else if team.avatar.is_some() {
+                            "Change team picture"
+                        } else {
+                            "Add a team picture"
+                        }
+                    }
+                    input {
+                        r#type: "file",
+                        accept: "image/*",
+                        class: "visually-hidden",
+                        onchange: upload,
                     }
                 }
-                input {
-                    r#type: "file",
-                    accept: "image/*",
-                    class: "visually-hidden",
-                    onchange: upload,
+            } else {
+                TeamAvatar { team: team.clone(), class: "large" }
+            }
+            div {
+                class: "backdrop-picker",
+                role: "group",
+                aria_label: "Background of your team picture",
+                button {
+                    class: "backdrop-swatch default",
+                    class: if team.backdrop.is_none() { "selected" },
+                    aria_pressed: team.backdrop.is_none(),
+                    title: "No background",
+                    onclick: move |_| pick(None),
+                }
+                for index in 0..BACKDROP_COUNT {
+                    {
+                        rsx! {
+                            button {
+                                class: "backdrop-swatch {backdrop_class(Some(index))}",
+                                class: if team.backdrop == Some(index) { "selected" },
+                                aria_pressed: team.backdrop == Some(index),
+                                title: "Background {index + 1}",
+                                onclick: move |_| pick(Some(index)),
+                            }
+                        }
+                    }
+                }
+            }
+            p { class: "muted small backdrop-hint",
+                if pictures {
+                    "Pick a background: it shows behind your initial, and through a picture with a transparent background (a cut-out)."
+                } else {
+                    "Pick a background for your team."
                 }
             }
             ErrorBox { error: error() }
