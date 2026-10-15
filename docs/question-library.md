@@ -63,6 +63,21 @@ just test                               # every question must also be playable
 - the same question twice; near-identical wording is a warning, usually harmless ("What is the
   capital of …")
 
+## Fixing questions from the app
+
+The **edit** link on a library question saves the change on that server only, in the data folder's
+`library-edits.json`. To bring those edits into the library itself, run from the repository:
+
+```sh
+just library-apply-edits                          # reads data/library-edits.json
+just library-apply-edits path/to/library-edits.json
+```
+
+It replaces each edited question (and its difficulty) in its topic file, keeping the file's layout
+so `git diff` shows only what changed, then checks the library. Edits the library cannot hold
+(pictures, sounds, time limits, points, pin questions) are reported and left out. Running it
+again changes nothing.
+
 ## Adding questions
 
 Attach `docs/schema/quiz-1.json` to a conversation with an AI model, paste the prompt below and fill

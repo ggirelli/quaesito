@@ -3,6 +3,7 @@
 use std::{collections::BTreeMap, path::PathBuf, sync::OnceLock};
 
 use anyhow::Context;
+use serde::{Deserialize, Serialize};
 use tokio::sync::Mutex;
 
 use crate::{
@@ -40,10 +41,25 @@ fn id_of(entry: &LibraryEntry) -> String {
     format!("{hash:016x}")
 }
 
+/// An edit as kept in `library-edits.json`: with where the question came from, so
+/// `tools/library/apply-edits.py` can find it in the library's topic files.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+struct StoredEdit {
+    #[serde(default)]
+    category: String,
+    #[serde(default)]
+    topic: String,
+    /// The question's text as bundled.
+    #[serde(default)]
+    text: String,
+    #[serde(flatten)]
+    edit: LibraryEdit,
+}
+
 /// This server's edits to library questions, by id, kept in one JSON file.
 pub struct LibraryEdits {
     path: PathBuf,
-    edits: Mutex<BTreeMap<String, LibraryEdit>>,
+    edits: Mutex<BTreeMap<String, StoredEdit>>,
 }
 
 impl LibraryEdits {
@@ -80,7 +96,15 @@ impl LibraryEdits {
     pub async fn save(&self, id: &str, edit: LibraryEdit) -> anyhow::Result<LibraryEntry> {
         let entry = find(id)?;
         let mut edits = self.edits.lock().await;
-        edits.insert(id.to_owned(), edit);
+        edits.insert(
+            id.to_owned(),
+            StoredEdit {
+                category: entry.category.clone(),
+                topic: entry.topic.clone(),
+                text: entry.question.text.clone(),
+                edit,
+            },
+        );
         self.write(&edits).await?;
         Ok(apply(entry, edits.get(id)))
     }
@@ -102,11 +126,11 @@ impl LibraryEdits {
     pub async fn media(&self) -> Vec<String> {
         let edits = self.edits.lock().await;
         let mut quiz = Quiz::new(String::new(), String::new());
-        quiz.questions = edits.values().map(|e| e.question.clone()).collect();
+        quiz.questions = edits.values().map(|e| e.edit.question.clone()).collect();
         quiz.media()
     }
 
-    async fn write(&self, edits: &BTreeMap<String, LibraryEdit>) -> anyhow::Result<()> {
+    async fn write(&self, edits: &BTreeMap<String, StoredEdit>) -> anyhow::Result<()> {
         let tmp = self.path.with_extension("json.tmp");
         tokio::fs::write(&tmp, serde_json::to_vec_pretty(edits)?).await?;
         tokio::fs::rename(&tmp, &self.path).await?;
@@ -121,9 +145,9 @@ fn find(id: &str) -> anyhow::Result<&'static LibraryEntry> {
         .context("This library question does not exist.")
 }
 
-fn apply(entry: &LibraryEntry, edit: Option<&LibraryEdit>) -> LibraryEntry {
+fn apply(entry: &LibraryEntry, edit: Option<&StoredEdit>) -> LibraryEntry {
     let mut entry = entry.clone();
-    if let Some(edit) = edit {
+    if let Some(StoredEdit { edit, .. }) = edit {
         entry.difficulty = edit.difficulty;
         entry.question = edit.question.clone();
         entry.edited = true;
@@ -185,7 +209,12 @@ mod tests {
         assert!(edited.edited && edited.difficulty == 3 && edited.id == original.id);
         assert!(edits.save("nope", edit).await.is_err());
 
-        // A restart reads the edits back.
+        // A restart reads the edits back; the file says where each question came from.
+        let saved = tokio::fs::read_to_string(&path).await.unwrap();
+        assert!(saved.contains(&format!(
+            "\"text\": {}",
+            serde_json::to_string(&original.question.text).unwrap()
+        )));
         let edits = LibraryEdits::open(path).await.unwrap();
         assert_eq!(edits.entries().await[0].question.text, "Edited?");
         assert_eq!(edits.media().await, ["picture.webp"]);
