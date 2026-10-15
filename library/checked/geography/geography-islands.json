@@ -548,19 +548,5 @@
         }
       }
     }
-  },
-  {
-    "category": "Geography",
-    "topic": "Islands",
-    "difficulty": 2,
-    "time_sensitive": true,
-    "question": {
-      "text": "Greenland is an independent sovereign country.",
-      "kind": {
-        "TrueFalse": {
-          "answer": false
-        }
-      }
-    }
   }
 ]

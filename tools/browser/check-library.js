@@ -86,8 +86,9 @@ const L = require('./lib.js');
   await editor.keyboard.press('Backspace');
   await L.sleep(300);
   const shown = await editor.$eval('.dialog .library-main', (m) => m.innerText);
-  expect('closing the category: every question, no topics',
-    shown.includes('2719 questions match') && !(await editor.$('.library-topic')));
+  const total = await editor.$eval('.dialog .library-category .count', (c) => c.innerText);
+  expect(`closing the category: all ${total} questions, no topics`,
+    shown.includes(`${total} questions match`) && !(await editor.$('.library-topic')));
   const count = await editor.$('.dialog input.short-number');
   await retype(editor, count, '3');
   await L.clickText(editor, '.dialog button', 'Add at random');
