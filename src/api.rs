@@ -437,6 +437,25 @@ pub async fn upload_avatar(
     Ok(name)
 }
 
+/// Gives a team one of the ready-made pictures ([`crate::protocol::MASCOTS`]), or none.
+#[post("/api/game/mascot")]
+pub async fn set_team_mascot(
+    code: String,
+    token: String,
+    mascot: Option<String>,
+) -> ServerFnResult<()> {
+    let session = crate::server::state()
+        .sessions
+        .get(&code)
+        .ok_or_else(|| ServerFnError::new("No game with this code is running."))?;
+    let team = session
+        .read(|g| g.team_for_token(&token))
+        .ok_or_else(|| ServerFnError::new("Unknown team."))?;
+    session
+        .update(|g, _| g.set_mascot(team, mascot))
+        .map_err(|refusal| ServerFnError::new(refusal.0))
+}
+
 /// Sets the background of a team's picture (`None` for the default); see
 /// [`crate::protocol::BACKDROP_COUNT`].
 #[post("/api/game/backdrop")]

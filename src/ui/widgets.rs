@@ -179,6 +179,35 @@ pub fn backdrop_class(backdrop: Option<u8>) -> String {
         .unwrap_or_default()
 }
 
+/// The ready-made team pictures, in the order of [`crate::protocol::MASCOTS`].
+pub const MASCOT_PICTURES: [Asset; 16] = [
+    asset!("/assets/teams/owl.png"),
+    asset!("/assets/teams/fox.png"),
+    asset!("/assets/teams/cat.png"),
+    asset!("/assets/teams/dog.png"),
+    asset!("/assets/teams/bear.png"),
+    asset!("/assets/teams/penguin.png"),
+    asset!("/assets/teams/frog.png"),
+    asset!("/assets/teams/octopus.png"),
+    asset!("/assets/teams/robot.png"),
+    asset!("/assets/teams/alien.png"),
+    asset!("/assets/teams/ghost.png"),
+    asset!("/assets/teams/dragon.png"),
+    asset!("/assets/teams/unicorn.png"),
+    asset!("/assets/teams/sloth.png"),
+    asset!("/assets/teams/llama.png"),
+    asset!("/assets/teams/panda.png"),
+];
+
+/// The ready-made picture called `name`, if there is one.
+#[must_use]
+pub fn mascot_picture(name: &str) -> Option<Asset> {
+    crate::protocol::MASCOTS
+        .iter()
+        .position(|m| *m == name)
+        .map(|i| MASCOT_PICTURES[i])
+}
+
 /// A team's avatar, or its initial when it has none, on the background it picked.
 #[component]
 pub fn TeamAvatar(team: crate::protocol::TeamInfo, #[props(default)] class: String) -> Element {
@@ -186,6 +215,11 @@ pub fn TeamAvatar(team: crate::protocol::TeamInfo, #[props(default)] class: Stri
     if let Some(avatar) = &team.avatar {
         return rsx! {
             img { class, src: media_url(avatar), alt: "" }
+        };
+    }
+    if let Some(picture) = team.mascot.as_deref().and_then(mascot_picture) {
+        return rsx! {
+            img { class, src: picture, alt: "" }
         };
     }
     let initial: String = team

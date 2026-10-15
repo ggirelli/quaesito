@@ -6,16 +6,19 @@ use super::{
     Route, client,
     live::{ConnectionBanner, Live, countdown_ms, use_clock, use_live},
     widgets::{
-        ANSWER_STYLES, AnswerBadge, AnswerShape, Brand, ClientOnly, DOT, ErrorBox, MapPin,
-        PairItemContent, PinMap, Spinner, TeamAvatar, backdrop_class, media_url, message,
+        ANSWER_STYLES, AnswerBadge, AnswerShape, Brand, ClientOnly, DOT, ErrorBox, MASCOT_PICTURES,
+        MapPin, PairItemContent, PinMap, Spinner, TeamAvatar, backdrop_class, media_url, message,
         pair_letter,
     },
 };
 use crate::{
-    api::{check_ticket, game_info, join_game, player_socket, set_team_backdrop, upload_avatar},
+    api::{
+        check_ticket, game_info, join_game, player_socket, set_team_backdrop, set_team_mascot,
+        upload_avatar,
+    },
     model::{MAX_TEXT_ANSWER_CHARS, NumberRange, PhoneDisplay, Point},
     protocol::{
-        AnswerOutcome, BACKDROP_COUNT, InputKind, JokerState, MAX_NAME_CHARS, PairColumns,
+        AnswerOutcome, BACKDROP_COUNT, InputKind, JokerState, MASCOTS, MAX_NAME_CHARS, PairColumns,
         PlayerCommand, PlayerPhase, PlayerView, Response, TeamInfo,
     },
 };
@@ -575,6 +578,13 @@ fn LobbyView(
             error.set(Some(message(&err)));
         }
     };
+    let pick_mascot = move |mascot: Option<String>| async move {
+        error.set(None);
+        if let Err(err) = set_team_mascot(code(), token(), mascot).await {
+            error.set(Some(message(&err)));
+        }
+    };
+    let backdrop = backdrop_class(team.backdrop);
     rsx! {
         main { class: "player-main",
             if pictures {
@@ -598,6 +608,26 @@ fn LobbyView(
                 }
             } else {
                 TeamAvatar { team: team.clone(), class: "large" }
+            }
+            div {
+                class: "mascot-picker",
+                role: "group",
+                aria_label: if pictures { "Or pick one of ours" } else { "Pick a team picture" },
+                for (name , picture) in MASCOTS.iter().zip(MASCOT_PICTURES) {
+                    {
+                        let chosen = team.mascot.as_deref() == Some(*name);
+                        rsx! {
+                            button {
+                                class: "mascot-choice",
+                                class: if chosen { "selected" },
+                                aria_pressed: chosen,
+                                title: "{name}",
+                                onclick: move |_| pick_mascot((!chosen).then(|| (*name).to_owned())),
+                                img { class: "avatar {backdrop}", src: picture, alt: "{name}" }
+                            }
+                        }
+                    }
+                }
             }
             div {
                 class: "backdrop-picker",
@@ -626,9 +656,9 @@ fn LobbyView(
             }
             p { class: "muted small backdrop-hint",
                 if pictures {
-                    "Pick a background: it shows behind your initial, and through a picture with a transparent background (a cut-out)."
+                    "Upload a picture or pick one of ours, then a background: it shows behind your initial, and through the see-through parts of a picture."
                 } else {
-                    "Pick a background for your team."
+                    "Pick a picture and a background for your team."
                 }
             }
             ErrorBox { error: error() }

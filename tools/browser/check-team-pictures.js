@@ -86,6 +86,11 @@ function cutout(file) {
     const big = await host.waitForFunction((w, look) => [...document.querySelectorAll('img.avatar')].some((a) => new Function('e', `return (${look})(e)`)(a) === w), { timeout: 5000 }, want, look.toString()).then(() => true, () => false);
     expect(`background ${i}`, phone && big);
   }
+  // A ready-made picture replaces the upload, on the phone and the big screen.
+  await (await owls.$$('.mascot-choice'))[0].click(); // owl
+  const mascot = await host.waitForFunction(() => [...document.querySelectorAll('img.avatar')].some((i) => /owl/.test(i.src)), { timeout: 5000 }).then(() => true, () => false);
+  const phoneMascot = await owls.waitForFunction(() => /owl/.test(document.querySelector('.avatar.large').src || ''), { timeout: 5000 }).then(() => true, () => false);
+  expect(`mascots: ${(await owls.$$('.mascot-choice')).length}, the owl on both screens`, mascot && phoneMascot);
   await owls.screenshot({ path: 'out/team-pictures-phone.png' });
   await host.screenshot({ path: 'out/team-pictures-host.png' });
 
@@ -98,6 +103,12 @@ function cutout(file) {
   await (await cats.$$('.backdrop-swatch'))[2].click();
   await cats.waitForFunction(() => /backdrop-\d/.test(document.querySelector('span.avatar.large').className));
   expect('no pictures: initial on its background', true);
+  // Ready-made pictures stay available without uploads; picking one again drops it.
+  await (await cats.$$('.mascot-choice'))[2].click(); // cat
+  await cats.waitForFunction(() => /cat/.test(document.querySelector('.avatar.large').src || ''));
+  await (await cats.$$('.mascot-choice'))[2].click();
+  const back = await cats.waitForFunction(() => document.querySelector('.avatar.large').tagName === 'SPAN', { timeout: 5000 }).then(() => true, () => false);
+  expect('no pictures: a mascot, then back to the initial', back);
   await cats.screenshot({ path: 'out/team-pictures-off.png' });
   const admin = await L.openAdmin(ctx, '/admin');
   await admin.evaluate(() => {

@@ -38,9 +38,10 @@ use crate::{
     },
     protocol::{
         AnswerOutcome, BACKDROP_COUNT, DEFAULT_MAX_TEAMS, Fastest, GameResults, Grade, Guess,
-        HostPhase, HostView, InputKind, JokerState, Judgement, MAX_NAME_CHARS, MAX_TEAMS_CEILING,
-        PairColumns, PartReveal, PinGuess, PlayerPhase, PlayerView, QuestionInfo, Response,
-        ResultRow, Reveal, RoundResult, SlideInfo, StandingRow, TeamInfo, TextGroup, Upcoming,
+        HostPhase, HostView, InputKind, JokerState, Judgement, MASCOTS, MAX_NAME_CHARS,
+        MAX_TEAMS_CEILING, PairColumns, PartReveal, PinGuess, PlayerPhase, PlayerView,
+        QuestionInfo, Response, ResultRow, Reveal, RoundResult, SlideInfo, StandingRow, TeamInfo,
+        TextGroup, Upcoming,
     },
     scoring::{self, Tally},
 };
@@ -146,6 +147,9 @@ struct Team {
     id: u32,
     name: String,
     avatar: Option<String>,
+    /// The ready-made picture picked instead of uploading one (see [`MASCOTS`]).
+    #[serde(default)]
+    mascot: Option<String>,
     /// The background picked for the picture, by index (see [`BACKDROP_COUNT`]).
     #[serde(default)]
     backdrop: Option<u8>,
@@ -261,6 +265,7 @@ impl Game {
                     id: t.id,
                     name: t.name.clone(),
                     avatar: t.avatar.clone(),
+                    mascot: t.mascot.clone(),
                     backdrop: t.backdrop,
                     token: t.token.clone(),
                     connections: 0,
@@ -422,6 +427,7 @@ impl Game {
             id,
             name,
             avatar: None,
+            mascot: None,
             backdrop: None,
             token,
             connections: 0,
@@ -524,6 +530,25 @@ impl Game {
         }
         if let Some(t) = self.team_mut(team) {
             t.avatar = Some(avatar);
+            t.mascot = None;
+        }
+        Ok(())
+    }
+
+    /// Gives a team a ready-made picture (`None` for none), in place of an uploaded one. Allowed
+    /// even when the game takes no uploads.
+    ///
+    /// # Errors
+    /// Refuses a picture that does not exist.
+    pub fn set_mascot(&mut self, team: u32, mascot: Option<String>) -> Result<(), Refusal> {
+        if mascot.as_deref().is_some_and(|m| !MASCOTS.contains(&m)) {
+            return Err(Refusal("There is no such picture."));
+        }
+        if let Some(t) = self.team_mut(team) {
+            if mascot.is_some() {
+                t.avatar = None;
+            }
+            t.mascot = mascot;
         }
         Ok(())
     }
@@ -1939,6 +1964,7 @@ impl Team {
             id: self.id,
             name: self.name.clone(),
             avatar: self.avatar.clone(),
+            mascot: self.mascot.clone(),
             backdrop: self.backdrop,
             connected: self.connections > 0,
         }
@@ -2212,6 +2238,14 @@ mod tests {
             (team.avatar, team.backdrop)
         );
 
+        // A ready-made picture replaces the upload, and an upload replaces it.
+        assert!(g.set_mascot(owls, Some("kraken".to_owned())).is_err());
+        g.set_mascot(owls, Some("owl".to_owned())).unwrap();
+        let team = g.player_view(owls, t0).unwrap().team;
+        assert_eq!((team.avatar, team.mascot.as_deref()), (None, Some("owl")));
+        g.set_avatar(owls, "owls.png".to_owned()).unwrap();
+        assert_eq!(g.player_view(owls, t0).unwrap().team.mascot, None);
+
         // Without pictures, uploads are refused and pictures dropped; backdrops stay.
         g.set_pictures(false);
         assert!(g.set_avatar(owls, "again.png".to_owned()).is_err());
@@ -2226,6 +2260,13 @@ mod tests {
         ));
         let restored = Game::restore(g.snapshot(t0), t0);
         assert!(!restored.pictures());
+        // Ready-made pictures stay allowed, and survive a restart.
+        g.set_mascot(owls, Some("fox".to_owned())).unwrap();
+        let restored = Game::restore(g.snapshot(t0), t0)
+            .player_view(owls, t0)
+            .unwrap()
+            .team;
+        assert_eq!(restored.mascot.as_deref(), Some("fox"));
     }
 
     #[test]

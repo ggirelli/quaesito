@@ -19,6 +19,12 @@ fn yes() -> bool {
     true
 }
 
+/// The ready-made team pictures (`assets/teams/<name>.png`), in the order phones list them.
+pub const MASCOTS: [&str; 16] = [
+    "owl", "fox", "cat", "dog", "bear", "penguin", "frog", "octopus", "robot", "alien", "ghost",
+    "dragon", "unicorn", "sloth", "llama", "panda",
+];
+
 /// How many backgrounds a team can pick for its picture (`.backdrop-<n>` in the stylesheet).
 pub const BACKDROP_COUNT: u8 = 11;
 
@@ -29,6 +35,9 @@ pub struct TeamInfo {
     pub name: String,
     /// Media name of the uploaded avatar, if any.
     pub avatar: Option<String>,
+    /// The ready-made picture the team picked instead, one of [`MASCOTS`].
+    #[serde(default)]
+    pub mascot: Option<String>,
     /// The background the team picked for its picture (or initial), below [`BACKDROP_COUNT`].
     #[serde(default)]
     pub backdrop: Option<u8>,

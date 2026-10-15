@@ -2595,6 +2595,31 @@ button.joker {
   cursor: pointer;
 }
 
+/* The ready-made team pictures, on the team's background; picking the chosen one again drops it. */
+.mascot-picker {
+  display: grid;
+  grid-template-columns: repeat(4, 3.4rem);
+  gap: 0.5rem;
+}
+
+.mascot-choice {
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+}
+
+.mascot-choice .avatar {
+  width: 3.4rem;
+  height: 3.4rem;
+}
+
+.mascot-choice.selected {
+  outline: 3px solid var(--fg);
+  outline-offset: 2px;
+}
+
 /* The backgrounds a team picks for its picture, as round swatches; the first is none. */
 .backdrop-picker {
   display: flex;
