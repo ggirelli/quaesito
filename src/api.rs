@@ -13,6 +13,7 @@ use dioxus::{
 };
 
 use crate::{
+    library::LibraryEntry,
     model::{Quiz, QuizSummary, ValidationIssue},
     protocol::{
         GameResults, HostCommand, HostView, JoinTicket, PlayerCommand, PlayerView, SessionSummary,
@@ -102,6 +103,13 @@ pub async fn duplicate_quiz(token: String, id: String) -> ServerFnResult<String>
     quiz.title = format!("{} (copy)", quiz.title);
     state.quizzes.save(&quiz).await?;
     Ok(quiz.id)
+}
+
+/// Every question of the library, to browse and pick from in the browser.
+#[post("/api/admin/library")]
+pub async fn question_library(token: String) -> ServerFnResult<Vec<LibraryEntry>> {
+    crate::server::state().auth.require(&token)?;
+    Ok(crate::server::library::entries().to_vec())
 }
 
 /// Uploads a picture (for an answer or a part) and returns its media name.

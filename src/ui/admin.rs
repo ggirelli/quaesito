@@ -4,6 +4,7 @@ use dioxus::prelude::*;
 
 use super::{
     Route, client,
+    library::{RandomQuiz, RandomQuizFields, use_library},
     transfer::{self, IMPORT_INPUT, TransferStatus, Transfers},
     widgets::{
         Brand, ClientOnly, Dialog, ErrorBox, HelpLink, Icon, IconKind, Spinner, ThemeToggle,
@@ -11,11 +12,13 @@ use super::{
     },
 };
 use crate::api::{
-    admin_check, admin_login, create_quiz, delete_quiz, duplicate_quiz, end_session, list_quizzes,
-    list_sessions, start_session, start_test,
+    admin_check, admin_login, create_quiz, delete_quiz, duplicate_quiz, end_session, get_quiz,
+    list_quizzes, list_sessions, save_quiz, start_session, start_test,
 };
-use crate::model::{ImportOutcome, ImportWarning, QuizSummary};
+use crate::library::LibraryEntry;
+use crate::model::{ImportOutcome, ImportWarning, Question, QuizSummary};
 use crate::protocol::{DEFAULT_MAX_TEAMS, MAX_TEAMS_CEILING};
+use crate::search;
 
 const TOKEN_KEY: &str = "quaesito.admin";
 
@@ -356,17 +359,14 @@ impl QuizSort {
 /// The quizzes whose title contains every word of `search` (ignoring case and accents), in
 /// `sort` order; ties go by name.
 fn sorted_matches(list: &[QuizSummary], search: &str, sort: QuizSort) -> Vec<QuizSummary> {
-    let words: Vec<String> = search.split_whitespace().map(fold).collect();
+    let words = search::words(search);
     let mut shown: Vec<QuizSummary> = list
         .iter()
-        .filter(|q| {
-            let title = fold(&q.title);
-            words.iter().all(|w| title.contains(w.as_str()))
-        })
+        .filter(|q| search::contains_all(&q.title, &words))
         .cloned()
         .collect();
     shown.sort_by(|a, b| {
-        let by_name = fold(&a.title).cmp(&fold(&b.title));
+        let by_name = search::fold(&a.title).cmp(&search::fold(&b.title));
         match sort {
             QuizSort::Name => by_name,
             QuizSort::Edited => b.edited.cmp(&a.edited).then(by_name),
@@ -375,23 +375,6 @@ fn sorted_matches(list: &[QuizSummary], search: &str, sort: QuizSort) -> Vec<Qui
         }
     });
     shown
-}
-
-/// Lower case without accents, for searching and sorting by name.
-fn fold(text: &str) -> String {
-    text.chars()
-        .flat_map(char::to_lowercase)
-        .map(|c| match c {
-            'à' | 'á' | 'â' | 'ã' | 'ä' | 'å' => 'a',
-            'è' | 'é' | 'ê' | 'ë' => 'e',
-            'ì' | 'í' | 'î' | 'ï' => 'i',
-            'ò' | 'ó' | 'ô' | 'õ' | 'ö' => 'o',
-            'ù' | 'ú' | 'û' | 'ü' => 'u',
-            'ç' => 'c',
-            'ñ' => 'n',
-            other => other,
-        })
-        .collect()
 }
 
 /// How long ago `then` was, from `now` (both in seconds since 1970): "just now", "5 min ago"…
@@ -422,19 +405,48 @@ fn ago(now: f64, then: u64) -> String {
     }
 }
 
-/// Asks for the new quiz's title, creates it and opens it in the editor.
+/// Asks for the new quiz's title, creates it and opens it in the editor. The quiz starts empty,
+/// or with questions picked at random from the library.
 #[component]
 fn CreateDialog(on_close: EventHandler<()>) -> Element {
     let token: AdminToken = use_context();
     let mut title = use_signal(String::new);
     let mut error = use_signal(|| None::<String>);
+    let mut from_library = use_signal(|| false);
+    let library = use_library(move || *from_library.read());
+    let mut entries = use_signal(Vec::<LibraryEntry>::new);
+    use_effect(move || {
+        if let Some(Some(Ok(loaded))) = &*library.read() {
+            entries.set(loaded.clone());
+        }
+    });
+    let choice = use_signal(RandomQuiz::default);
     let create = move |evt: FormEvent| async move {
         evt.prevent_default();
         if title().trim().is_empty() {
             error.set(Some("Give the new quiz a title.".to_owned()));
             return;
         }
-        match create_quiz(token.get(), title()).await {
+        let questions = if from_library() {
+            let picked = choice.peek().pick(&entries.peek());
+            if picked.iter().all(Question::is_slide) {
+                error.set(Some("Pick at least one category.".to_owned()));
+                return;
+            }
+            picked
+        } else {
+            Vec::new()
+        };
+        let result = async {
+            let id = create_quiz(token.get(), title()).await?;
+            if !questions.is_empty() {
+                let mut quiz = get_quiz(token.get(), id.clone()).await?;
+                quiz.questions = questions;
+                save_quiz(token.get(), quiz).await?;
+            }
+            Ok::<_, ServerFnError>(id)
+        };
+        match result.await {
             Ok(id) => {
                 navigator().push(Route::Editor { id });
             }
@@ -453,6 +465,27 @@ fn CreateDialog(on_close: EventHandler<()>) -> Element {
                         oninput: move |e| title.set(e.value()),
                         onmounted: move |e| async move {
                             let _ = e.set_focus(true).await;
+                        },
+                    }
+                }
+                label { class: "check-field",
+                    input {
+                        r#type: "checkbox",
+                        checked: from_library(),
+                        onchange: move |e| from_library.set(e.checked()),
+                    }
+                    span { "Fill it with random questions from the library" }
+                }
+                if from_library() {
+                    match &*library.read() {
+                        Some(Some(Err(err))) => rsx! {
+                            ErrorBox { error: Some(message(err)) }
+                        },
+                        Some(Some(Ok(_))) => rsx! {
+                            RandomQuizFields { entries, choice }
+                        },
+                        _ => rsx! {
+                            Spinner {}
                         },
                     }
                 }

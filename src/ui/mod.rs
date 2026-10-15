@@ -5,6 +5,7 @@ pub mod client;
 mod editor;
 mod home;
 mod host;
+mod library;
 mod live;
 mod player;
 mod sfx;

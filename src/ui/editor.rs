@@ -6,6 +6,7 @@ use super::{
     Route,
     admin::{AdminGate, AdminHeader, AdminToken},
     client,
+    library::LibraryDialog,
     widgets::{
         AnswerBadge, ClientOnly, ErrorBox, Icon, IconKind, MapPin, PinMap, STAR, Spinner,
         media_url, message,
@@ -197,6 +198,7 @@ fn EditorForm(quiz: Quiz) -> Element {
         .as_ref()
         .is_some_and(|(revision, _)| *revision == (draft.revision)());
 
+    let mut browsing = use_signal(|| false);
     let mut test_error = use_signal(|| None::<String>);
     let nav = navigator();
     // Save the latest edits first, so the test plays what is on screen. `from` starts the test
@@ -271,6 +273,12 @@ fn EditorForm(quiz: Quiz) -> Element {
                     onclick: move |_| draft.edit(|q| q.questions.push(Question::slide())),
                     "＋ Add slide"
                 }
+                button {
+                    class: "button add-library",
+                    title: "Pick ready-made questions from the question library",
+                    onclick: move |_| browsing.set(true),
+                    "＋ From the library"
+                }
                 if quiz.settings.reveal == RevealMode::AtEnd {
                     button {
                         class: "button add-slide",
@@ -290,6 +298,13 @@ fn EditorForm(quiz: Quiz) -> Element {
                         question: quiz.questions[index].clone(),
                         default_limit: quiz.settings.default_time_limit_secs,
                     }
+                }
+            }
+            if browsing() {
+                LibraryDialog {
+                    present: quiz.questions.iter().map(|q| q.text.clone()).collect::<Vec<_>>(),
+                    on_add: move |questions: Vec<Question>| draft.edit(|q| q.questions.extend(questions)),
+                    on_close: move |()| browsing.set(false),
                 }
             }
             aside { class: "editor-side editor-shuffle",

@@ -6,7 +6,14 @@ use super::ICON;
 
 /// A pop-up box over the page, closed with its Close button, Escape or a click outside it.
 #[component]
-pub fn Dialog(title: String, on_close: EventHandler<()>, children: Element) -> Element {
+pub fn Dialog(
+    title: String,
+    on_close: EventHandler<()>,
+    /// Wide enough for a list with filters, e.g. the question library.
+    #[props(default)]
+    wide: bool,
+    children: Element,
+) -> Element {
     rsx! {
         div {
             class: "overlay",
@@ -19,6 +26,7 @@ pub fn Dialog(title: String, on_close: EventHandler<()>, children: Element) -> E
             },
             section {
                 class: "card stack panel dialog",
+                class: if wide { "wide-panel" },
                 role: "dialog",
                 aria_label: "{title}",
                 onclick: move |e| e.stop_propagation(),

@@ -427,6 +427,25 @@ button.corner-link {
   padding-left: 2.4rem;
 }
 
+/* The question library: how many questions to add, and each question's passage and answer. */
+input.short-number {
+  width: 5.5rem !important;
+  flex: none;
+}
+
+.library-passage {
+  white-space: pre-line;
+  font-style: italic;
+}
+
+.library-answer {
+  color: var(--ok-text);
+}
+
+.random-categories .list-row {
+  padding: 0.45rem 0;
+}
+
 /* A number question's answer and range in the editor. */
 .number-edit {
   flex-wrap: wrap;

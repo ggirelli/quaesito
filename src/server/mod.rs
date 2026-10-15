@@ -5,6 +5,7 @@ pub mod bundle;
 pub mod demo;
 pub mod docs;
 pub mod engine;
+pub mod library;
 pub mod live;
 pub mod matching;
 pub mod media;

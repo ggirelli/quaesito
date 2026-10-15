@@ -26,6 +26,24 @@ Each question has an **answer type** (see [question types](question-types.md)), 
 (the quiz's default unless you set one) and a **points** multiplier: a ×2 question earns twice
 the usual points.
 
+## The question library
+
+Quaesito comes with a library of about 2,700 ready-made questions in 14 categories, from art to
+technology, each rated easy, medium or hard. They were written with an AI model and fact-checked,
+but read the ones you pick before playing: a few may still be wrong or out of date.
+
+- **In the editor**, press **＋ From the library**. Search questions and answers, and filter by
+  category, difficulty and answer type. **＋ Add** adds one question at the end of the quiz;
+  🎲 **Add at random** adds as many of the questions shown as you ask for. Questions already in
+  the quiz are marked, and never added twice at random.
+- **For a whole quiz**, tick **Fill it with random questions from the library** when creating it,
+  tick the categories you want and say how many questions each gets (5 by default). You can keep
+  to one difficulty, and open each category with a title slide.
+
+Answers that change over the years (records, title holders) say "As of" a year, and are marked
+*may date*: **Leave out answers that may date** skips them. Once added, a question is yours like
+any other: edit it, add a picture, or change its time limit and points.
+
 ## Text with the question
 
 Under the question, an optional box takes text to show with it, line breaks kept: the lyrics for
