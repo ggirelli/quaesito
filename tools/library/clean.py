@@ -8,7 +8,8 @@ Drops every entry with a finding in library/review/<category>.json, every entry 
 error for, and repeats of a question already kept. Repairs in <batch>-repaired.json files join their
 batch, and replace the entry named by their `replaces` field or, without one, an entry a fix only
 mentioned ("remove the year from entry 10") that they closely resemble. Then fixes what needs no judgement: repeated accepted spellings, and Number ranges with the
-answer in their exact middle. Run with `uv run tools/library/clean.py`.
+answer in their exact middle. Also writes every kept entry to library/library.json, which the app
+bundles. Run with `uv run tools/library/clean.py`.
 """
 
 import json
@@ -20,6 +21,8 @@ from pathlib import Path
 from check import ROOT, check_entry, content, kind_of, norm, same_key
 
 RAW, REVIEW, CHECKED = ROOT / "library/raw", ROOT / "library/review", ROOT / "library/checked"
+# Every checked entry in one file, bundled into the app.
+BUNDLE = ROOT / "library/library.json"
 
 
 def dedupe(accepted):
@@ -88,6 +91,7 @@ def main():
                     mentioned.setdefault(x["file"], set()).add(int(n))
     seen = set()
     kept = dropped = 0
+    bundle = []
     for f in sorted(RAW.rglob("*.json")):
         if f.stem.endswith("-repaired"):
             continue
@@ -118,6 +122,10 @@ def main():
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n")
         kept += len(out)
+        bundle += out
+    # One entry per line keeps diffs readable.
+    lines = ",\n".join(json.dumps(e, ensure_ascii=False, separators=(",", ":")) for e in bundle)
+    BUNDLE.write_text(f"[\n{lines}\n]\n")
     print(f"kept {kept}, dropped {dropped}")
 
 
