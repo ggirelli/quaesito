@@ -1,12 +1,12 @@
 # Question library
 
-A bank of ready-made quiz questions that hosts will be able to pick from in the editor, instead of
-writing every question themselves. Questions were generated with ChatGPT from a prompt and the quiz
+A bank of ready-made quiz questions that hosts pick from in the editor (**＋ From the library**), or
+fill a new quiz with at random, instead of writing every question themselves. Questions were generated with ChatGPT from a prompt and the quiz
 schema, then checked by script and fact-checked by Claude.
 
-**Status (2026-10-15): all 14 categories repaired and checked**, committed locally on the
-`question-library` bookmark (not pushed), checked out in the jj workspace `.workspaces/library`. The
-app does not use the library yet; see [Next steps](#next-steps).
+**Status (2026-10-15): all 14 categories repaired and checked, and used by the app** (see the user
+guide's [Building a quiz](../docs/building-a-quiz.md#the-question-library)). Work happens on the
+`question-library` bookmark, checked out in the jj workspace `.workspaces/library`.
 
 ## Layout
 
@@ -15,10 +15,12 @@ library/
 ├── raw/<category>/<category>-<topic>.json            ChatGPT batches, 30 entries each, as generated
 ├── raw/<category>/<category>-<topic>-repaired.json   ChatGPT repairs of reviewed entries
 ├── review/<category>.json                            confirmed fact-check findings, one per entry
-└── checked/<category>/<category>-<topic>.json        the clean library, built by tools/library/clean.py
+├── checked/<category>/<category>-<topic>.json        the clean library, built by tools/library/clean.py
+└── library.json                                      all of checked/ in one file, bundled into the app
 ```
 
-Never edit `checked/` by hand: it is rebuilt from `raw/` and `review/`. Fix things in a
+Never edit `checked/` or `library.json` by hand: they are rebuilt from `raw/` and `review/`, and a
+test fails when `library.json` is stale. Fix things in a
 `-repaired.json` file (or in the scripts) and rebuild.
 
 ## Entry format
@@ -103,13 +105,11 @@ such as "What is the capital of ...", none a real repeat).
 
 ## Next steps
 
-1. **Push** the `question-library` bookmark and open a PR to main. Its first commit (ignoring
-   `__pycache__/` and `.workspaces/`) could go to main on its own first.
+1. **Review** the questions by hand: the maintainer is reading them in the app. Fixes go in
+   `-repaired.json` files or as `drop` findings in `review/`, then rebuild.
 2. **Library schema**: a small `docs/schema/library-1.json` for entries, whose `question` refers to
    `quiz-1.json#/$defs/Question`.
-3. **Editor panel** ("Add from library"): filter by category, difficulty and kind, search, add one by
-   one or "10 medium history questions"; remember questions already played. The app bundles one file
-   combined from `checked/`.
+3. **Remember questions already played**, so random picks prefer fresh ones.
 4. Optional app change: grade Parts so that an answer repeated in another part counts once. Then
    "name three, in any order" questions become possible and the check could be relaxed.
 
