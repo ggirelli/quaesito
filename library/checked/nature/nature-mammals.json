@@ -579,5 +579,43 @@
       },
       "text": "Match each mammal with the usual name for its young."
     }
+  },
+  {
+    "category": "Nature",
+    "topic": "Mammals",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which mammal's upper canine teeth grow into long, downward-pointing tusks seen in both sexes?",
+      "answers": [
+        {
+          "text": "Walrus",
+          "correct": true
+        },
+        {
+          "text": "Hippopotamus"
+        },
+        {
+          "text": "Wild boar"
+        },
+        {
+          "text": "Water buffalo"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Mammals",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "A blue whale's heart can weigh more than 150 kilograms."
+    }
   }
 ]

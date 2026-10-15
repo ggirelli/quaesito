@@ -5,30 +5,6 @@
     "difficulty": 1,
     "time_sensitive": false,
     "question": {
-      "text": "Which company introduced the Walkman portable cassette player in 1979?",
-      "answers": [
-        {
-          "text": "Sony",
-          "correct": true
-        },
-        {
-          "text": "Panasonic"
-        },
-        {
-          "text": "Philips"
-        },
-        {
-          "text": "Aiwa"
-        }
-      ]
-    }
-  },
-  {
-    "category": "Technology",
-    "topic": "Gadgets",
-    "difficulty": 1,
-    "time_sensitive": false,
-    "question": {
       "text": "What does the 'S' in USB stand for?",
       "answers": [
         {
@@ -524,6 +500,144 @@
               },
               "right": {
                 "text": "Analog audio"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which company introduced the Walkman portable cassette player?",
+      "answers": [
+        {
+          "text": "Sony",
+          "correct": true
+        },
+        {
+          "text": "Panasonic"
+        },
+        {
+          "text": "Philips"
+        },
+        {
+          "text": "Aiwa"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which company made the 1990 Model 1, often called the first commercially sold digital camera?",
+      "answers": [
+        {
+          "text": "Dycam",
+          "correct": true
+        },
+        {
+          "text": "Kodak"
+        },
+        {
+          "text": "Canon"
+        },
+        {
+          "text": "Casio"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the common IEC name for the connector on the power cable that plugs into a desktop PC?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "IEC C13",
+            "C13",
+            "IEC 60320 C13",
+            "C14",
+            "IEC C14",
+            "IEC",
+            "IEC connector",
+            "kettle lead",
+            "kettle plug"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Order these removable storage formats by introduction, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Floppy disk",
+            "CD-R",
+            "USB flash drive",
+            "microSD card"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Gadgets",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each gadget with its best-known original maker.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "BlackBerry"
+              },
+              "right": {
+                "text": "Research In Motion"
+              }
+            },
+            {
+              "left": {
+                "text": "Tamagotchi"
+              },
+              "right": {
+                "text": "Bandai"
+              }
+            },
+            {
+              "left": {
+                "text": "Roomba"
+              },
+              "right": {
+                "text": "iRobot"
+              }
+            },
+            {
+              "left": {
+                "text": "PalmPilot"
+              },
+              "right": {
+                "text": "Palm"
               }
             }
           ]

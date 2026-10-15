@@ -1,0 +1,80 @@
+[
+  {
+    "category": "Science",
+    "replaces": 2,
+    "topic": "Chemistry & elements",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which noble gas is the most abundant in Earth's atmosphere?",
+      "answers": [
+        {
+          "text": "Neon"
+        },
+        {
+          "text": "Argon",
+          "correct": true
+        },
+        {
+          "text": "Helium"
+        },
+        {
+          "text": "Krypton"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "replaces": 12,
+    "topic": "Chemistry & elements",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which element's most stable isotope has a half-life so long it is often treated as effectively stable in basic chemistry?",
+      "answers": [
+        {
+          "text": "Bismuth",
+          "correct": true
+        },
+        {
+          "text": "Platinum"
+        },
+        {
+          "text": "Gold"
+        },
+        {
+          "text": "Aluminium"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "replaces": 28,
+    "topic": "Chemistry & elements",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the two elements in pure water, identified by how many atoms of each are in a molecule.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Two atoms per molecule",
+              "accepted": [
+                "Hydrogen"
+              ]
+            },
+            {
+              "label": "One atom per molecule",
+              "accepted": [
+                "Oxygen"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+]

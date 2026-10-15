@@ -595,5 +595,63 @@
       },
       "text": "Match each plant structure with its main function."
     }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the science of dating events using tree growth rings called?",
+      "answers": [
+        {
+          "text": "Dendrochronology",
+          "correct": true
+        },
+        {
+          "text": "Palynology"
+        },
+        {
+          "text": "Phenology"
+        },
+        {
+          "text": "Mycology"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Sequoiadendron"
+          ]
+        }
+      },
+      "text": "What genus includes the giant sequoia, one of California's iconic trees?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Plants & trees",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 1,
+          "range": {
+            "min": 0,
+            "max": 5
+          }
+        }
+      },
+      "text": "How many cotyledons, or seed leaves, does a typical monocot seedling have?"
+    }
   }
 ]

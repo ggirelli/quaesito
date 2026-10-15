@@ -529,5 +529,106 @@
         }
       }
     }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which brand name became a generic word for a vacuum flask?",
+      "answers": [
+        {
+          "text": "Thermos",
+          "correct": true
+        },
+        {
+          "text": "Yeti"
+        },
+        {
+          "text": "Coleman"
+        },
+        {
+          "text": "Igloo"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which fashion designer founded the house famous for the No. 5 perfume and the little black dress?",
+      "answers": [
+        {
+          "text": "Coco Chanel",
+          "correct": true
+        },
+        {
+          "text": "Hubert de Givenchy"
+        },
+        {
+          "text": "Cristóbal Balenciaga"
+        },
+        {
+          "text": "Christian Dior"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Japanese watch brand was founded by Kintaro Hattori, taking its name from his Seikosha clock factory?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Seiko"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Brands",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What German words do the letters B, M and W in BMW stand for?",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "B",
+              "accepted": [
+                "Bayerische",
+                "Bavarian"
+              ]
+            },
+            {
+              "label": "M",
+              "accepted": [
+                "Motoren",
+                "Motor",
+                "Motors"
+              ]
+            },
+            {
+              "label": "W",
+              "accepted": [
+                "Werke",
+                "Works"
+              ]
+            }
+          ]
+        }
+      }
+    }
   }
 ]

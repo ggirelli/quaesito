@@ -1,0 +1,68 @@
+[
+  {
+    "category": "Sport",
+    "replaces": 21,
+    "topic": "Football",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which goalkeeper kept goal for Italy when they won the 2006 men's World Cup?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Gianluigi Buffon",
+            "Buffon"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "replaces": 29,
+    "topic": "Football",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each national team with its familiar nickname.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "England"
+              },
+              "right": {
+                "text": "Three Lions"
+              }
+            },
+            {
+              "left": {
+                "text": "Netherlands"
+              },
+              "right": {
+                "text": "Oranje"
+              }
+            },
+            {
+              "left": {
+                "text": "Argentina"
+              },
+              "right": {
+                "text": "La Albiceleste"
+              }
+            },
+            {
+              "left": {
+                "text": "Spain"
+              },
+              "right": {
+                "text": "La Roja"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

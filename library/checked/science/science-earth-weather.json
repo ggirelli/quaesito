@@ -568,5 +568,90 @@
         }
       }
     }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which scale assigns hurricanes a category from 1 to 5?",
+      "answers": [
+        {
+          "text": "Beaufort scale"
+        },
+        {
+          "text": "Saffir–Simpson scale",
+          "correct": true
+        },
+        {
+          "text": "Richter scale"
+        },
+        {
+          "text": "Fujita scale"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Earth is closest to the Sun in early January.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Earth & weather",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each instrument to what it measures.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Rain gauge"
+              },
+              "right": {
+                "text": "Precipitation"
+              }
+            },
+            {
+              "left": {
+                "text": "Thermometer"
+              },
+              "right": {
+                "text": "Temperature"
+              }
+            },
+            {
+              "left": {
+                "text": "Anemometer"
+              },
+              "right": {
+                "text": "Wind speed"
+              }
+            },
+            {
+              "left": {
+                "text": "Hygrometer"
+              },
+              "right": {
+                "text": "Humidity"
+              }
+            }
+          ]
+        }
+      }
+    }
   }
 ]

@@ -498,6 +498,30 @@
   {
     "category": "Music",
     "topic": "Eurovision",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which country made its Eurovision debut in 2015 with 'Tonight Again'?",
+      "answers": [
+        {
+          "text": "Australia",
+          "correct": true
+        },
+        {
+          "text": "Georgia"
+        },
+        {
+          "text": "Azerbaijan"
+        },
+        {
+          "text": "Armenia"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Eurovision",
     "difficulty": 3,
     "time_sensitive": false,
     "question": {
@@ -531,10 +555,10 @@
             },
             {
               "left": {
-                "text": "Portugal (2017)"
+                "text": "Netherlands (2019)"
               },
               "right": {
-                "text": "Amar pelos dois"
+                "text": "Arcade"
               }
             }
           ]

@@ -513,5 +513,138 @@
         }
       }
     }
+  },
+  {
+    "category": "Music",
+    "topic": "Instruments",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which percussion instrument is made of a set of tuned metal bars?",
+      "answers": [
+        {
+          "text": "Glockenspiel",
+          "correct": true
+        },
+        {
+          "text": "Xylophone"
+        },
+        {
+          "text": "Marimba"
+        },
+        {
+          "text": "Timpani"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Instruments",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which type of bagpipe is played in Scottish pipe bands?",
+      "answers": [
+        {
+          "text": "Great Highland bagpipe",
+          "correct": true
+        },
+        {
+          "text": "Uilleann pipes"
+        },
+        {
+          "text": "Northumbrian pipes"
+        },
+        {
+          "text": "Galician gaita"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Instruments",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The oboe normally gives the orchestra its tuning A.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Instruments",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which compact, conical-bore cousin of the trumpet is the lead melody instrument of British brass bands?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Cornet",
+            "The cornet"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Instruments",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many strings does a standard bass guitar have?",
+      "kind": {
+        "Number": {
+          "answer": 4,
+          "range": {
+            "min": 2,
+            "max": 7
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Instruments",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name these drum-kit instruments.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Drum played with a foot pedal",
+              "accepted": [
+                "Bass drum",
+                "Kick drum"
+              ]
+            },
+            {
+              "label": "Drum with wires under its bottom head",
+              "accepted": [
+                "Snare drum",
+                "Snare"
+              ]
+            },
+            {
+              "label": "Pair of cymbals closed with a foot pedal",
+              "accepted": [
+                "Hi-hat",
+                "Hi hat"
+              ]
+            }
+          ]
+        }
+      }
+    }
   }
 ]

@@ -447,5 +447,109 @@
         }
       }
     }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Religions & festivals",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is a gurdwara?",
+      "answers": [
+        {
+          "text": "A Sikh temple",
+          "correct": true
+        },
+        {
+          "text": "A Buddhist monastery"
+        },
+        {
+          "text": "A Jewish school"
+        },
+        {
+          "text": "A Shinto shrine"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Religions & festivals",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Lent traditionally lasts 40 days, excluding Sundays in many Western Christian traditions.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Religions & festivals",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the Sanskrit term for the innermost sanctum of a Hindu temple, where the main deity is housed?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Garbhagriha",
+            "Garbha griha"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Religions & festivals",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these in order within the Christian liturgical year, which begins with Advent.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Advent",
+            "Christmas",
+            "Lent",
+            "Easter"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Religions & festivals",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the two main branches of Islam. Type each name.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Larger branch",
+              "accepted": [
+                "Sunni",
+                "Sunni Islam"
+              ]
+            },
+            {
+              "label": "Smaller branch",
+              "accepted": [
+                "Shia",
+                "Shiite",
+                "Shia Islam"
+              ]
+            }
+          ]
+        }
+      }
+    }
   }
 ]

@@ -1,0 +1,170 @@
+[
+  {
+    "category": "Science",
+    "replaces": 4,
+    "topic": "Biology",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which blood cells help defend the body against infections?",
+      "answers": [
+        {
+          "text": "Red blood cells"
+        },
+        {
+          "text": "White blood cells",
+          "correct": true
+        },
+        {
+          "text": "Platelets"
+        },
+        {
+          "text": "Epithelial cells"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "replaces": 28,
+    "topic": "Biology",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the two main products of aerobic cellular respiration.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "The gas",
+              "accepted": [
+                "Carbon dioxide",
+                "CO2",
+                "CO₂"
+              ]
+            },
+            {
+              "label": "The liquid",
+              "accepted": [
+                "Water",
+                "H2O",
+                "H₂O"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "replaces": 30,
+    "topic": "Biology",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each scientist to the biological idea associated with their work.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Robert Hooke"
+              },
+              "right": {
+                "text": "Cells named"
+              }
+            },
+            {
+              "left": {
+                "text": "Carl Linnaeus"
+              },
+              "right": {
+                "text": "Binomial nomenclature"
+              }
+            },
+            {
+              "left": {
+                "text": "Louis Pasteur"
+              },
+              "right": {
+                "text": "Germ theory"
+              }
+            },
+            {
+              "left": {
+                "text": "Barbara McClintock"
+              },
+              "right": {
+                "text": "Transposons"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "replaces": 13,
+    "topic": "Biology",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Viruses are made of cells.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "replaces": 29,
+    "topic": "Biology",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each plant organ to its main function.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Root"
+              },
+              "right": {
+                "text": "Absorbs water"
+              }
+            },
+            {
+              "left": {
+                "text": "Leaf"
+              },
+              "right": {
+                "text": "Photosynthesis"
+              }
+            },
+            {
+              "left": {
+                "text": "Flower"
+              },
+              "right": {
+                "text": "Reproduction"
+              }
+            },
+            {
+              "left": {
+                "text": "Stem"
+              },
+              "right": {
+                "text": "Transports water and nutrients"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

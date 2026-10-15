@@ -530,5 +530,136 @@
         }
       }
     }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which singer was nicknamed the 'Queen of the Blues'?",
+      "answers": [
+        {
+          "text": "Koko Taylor",
+          "correct": true
+        },
+        {
+          "text": "Billie Holiday"
+        },
+        {
+          "text": "Ella Fitzgerald"
+        },
+        {
+          "text": "Sarah Vaughan"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many beats are in one full chorus of a standard 12-bar blues in 4/4 time?",
+      "kind": {
+        "Number": {
+          "answer": 48,
+          "range": {
+            "min": 20,
+            "max": 72
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many strings does a standard electric guitar have?",
+      "kind": {
+        "Number": {
+          "answer": 6,
+          "range": {
+            "min": 3,
+            "max": 10
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these musicians in order of birth, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Jelly Roll Morton",
+            "Duke Ellington",
+            "Louis Armstrong",
+            "Charlie Parker"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these albums in order of original release, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Miles Davis: Kind of Blue",
+            "Ornette Coleman: The Shape of Jazz to Come",
+            "John Coltrane: Giant Steps",
+            "Miles Davis: Bitches Brew"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "topic": "Jazz & blues",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the three musicians often called the 'Kings of the Blues'.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Played a guitar named Lucille",
+              "accepted": [
+                "B.B. King"
+              ]
+            },
+            {
+              "label": "Flying V, 'Born Under a Bad Sign'",
+              "accepted": [
+                "Albert King"
+              ]
+            },
+            {
+              "label": "'Hide Away' instrumental",
+              "accepted": [
+                "Freddie King"
+              ]
+            }
+          ]
+        }
+      }
+    }
   }
 ]

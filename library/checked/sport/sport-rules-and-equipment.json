@@ -535,5 +535,89 @@
         }
       }
     }
+  },
+  {
+    "category": "Sport",
+    "topic": "Rules & equipment",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Order these tennis court surfaces from slowest to fastest in typical play.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Clay",
+            "Hard court",
+            "Grass"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Rules & equipment",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Order these Olympic fencing events by their introduction to the modern Olympic programme, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Foil",
+            "Épée",
+            "Women's foil",
+            "Women's épée"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "topic": "Rules & equipment",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each sport to its standard playing object.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Badminton"
+              },
+              "right": {
+                "text": "Shuttlecock"
+              }
+            },
+            {
+              "left": {
+                "text": "Ice hockey"
+              },
+              "right": {
+                "text": "Puck"
+              }
+            },
+            {
+              "left": {
+                "text": "Field hockey"
+              },
+              "right": {
+                "text": "Ball"
+              }
+            },
+            {
+              "left": {
+                "text": "Curling"
+              },
+              "right": {
+                "text": "Stone"
+              }
+            }
+          ]
+        }
+      }
+    }
   }
 ]

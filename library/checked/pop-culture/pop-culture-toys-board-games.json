@@ -450,5 +450,148 @@
         }
       }
     }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Toys & board games",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which 1978 electronic game has four coloured buttons that light up in sequences players must repeat?",
+      "answers": [
+        {
+          "text": "Simon",
+          "correct": true
+        },
+        {
+          "text": "Bop It"
+        },
+        {
+          "text": "Speak & Spell"
+        },
+        {
+          "text": "Merlin"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Toys & board games",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which puzzle, invented in Hungary in 1974 by an architecture professor, is now the world's best-selling puzzle toy?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Rubik's Cube",
+            "Rubik Cube"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Toys & board games",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many wooden blocks are in a standard Jenga set? Give the number of blocks.",
+      "kind": {
+        "Number": {
+          "answer": 54,
+          "range": {
+            "min": 35,
+            "max": 75
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Toys & board games",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many tiles (including blanks) are in the standard English-language Scrabble set? Give the number of tiles.",
+      "kind": {
+        "Number": {
+          "answer": 100,
+          "range": {
+            "min": 70,
+            "max": 140
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Toys & board games",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Put these board games in order of first commercial release, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Monopoly",
+            "Cluedo",
+            "Risk",
+            "Trivial Pursuit"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Toys & board games",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each board game to its inventor or original designer.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Trivial Pursuit"
+              },
+              "right": {
+                "text": "Chris Haney and Scott Abbott"
+              }
+            },
+            {
+              "left": {
+                "text": "Cluedo"
+              },
+              "right": {
+                "text": "Anthony E. Pratt"
+              }
+            },
+            {
+              "left": {
+                "text": "Risk"
+              },
+              "right": {
+                "text": "Albert Lamorisse"
+              }
+            },
+            {
+              "left": {
+                "text": "Mastermind"
+              },
+              "right": {
+                "text": "Mordecai Meirowitz"
+              }
+            }
+          ]
+        }
+      }
+    }
   }
 ]

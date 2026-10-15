@@ -527,10 +527,94 @@
   {
     "category": "Pop Culture",
     "topic": "Comics & superheroes",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the real name of the Marvel hero Black Panther?",
+      "answers": [
+        {
+          "text": "T'Challa",
+          "correct": true
+        },
+        {
+          "text": "M'Baku"
+        },
+        {
+          "text": "W'Kabi"
+        },
+        {
+          "text": "Zuri"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
     "difficulty": 3,
     "time_sensitive": false,
     "question": {
-      "text": "Match each comic creator with a character they co-created.",
+      "text": "Which artist created the comic character Hellboy?",
+      "answers": [
+        {
+          "text": "Mike Mignola",
+          "correct": true
+        },
+        {
+          "text": "Todd McFarlane"
+        },
+        {
+          "text": "Jim Lee"
+        },
+        {
+          "text": "Frank Miller"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the Daily Bugle publisher who constantly attacks Spider-Man in print?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "J. Jonah Jameson",
+            "Jonah Jameson",
+            "Jameson"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many issues were in the original Watchmen comic series? Give the number of issues.",
+      "kind": {
+        "Number": {
+          "answer": 12,
+          "range": {
+            "min": 5,
+            "max": 20
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Comics & superheroes",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each comic creator with a character they created or co-created.",
       "kind": {
         "Pairs": {
           "pairs": [

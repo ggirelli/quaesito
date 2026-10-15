@@ -579,5 +579,40 @@
         }
       }
     }
+  },
+  {
+    "category": "Music",
+    "topic": "Classical",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the Tchaikovsky ballet that premiered in each year.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Ballet of 1877",
+              "accepted": [
+                "Swan Lake"
+              ]
+            },
+            {
+              "label": "Ballet of 1890",
+              "accepted": [
+                "The Sleeping Beauty",
+                "Sleeping Beauty"
+              ]
+            },
+            {
+              "label": "Ballet of 1892",
+              "accepted": [
+                "The Nutcracker",
+                "Nutcracker"
+              ]
+            }
+          ]
+        }
+      }
+    }
   }
 ]

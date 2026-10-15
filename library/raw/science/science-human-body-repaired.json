@@ -1,0 +1,47 @@
+[
+  {
+    "category": "Science",
+    "replaces": 13,
+    "topic": "Human body",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "The adult human body normally has 12 pairs of ribs.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "replaces": 28,
+    "topic": "Human body",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the two chambers of the heart that receive blood; type each chamber.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Right side",
+              "accepted": [
+                "Right atrium",
+                "Right auricle"
+              ]
+            },
+            {
+              "label": "Left side",
+              "accepted": [
+                "Left atrium",
+                "Left auricle"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+]

@@ -269,20 +269,6 @@
     "difficulty": 1,
     "time_sensitive": false,
     "question": {
-      "text": "Adult humans normally have 206 bones in the skeleton.",
-      "kind": {
-        "TrueFalse": {
-          "answer": true
-        }
-      }
-    }
-  },
-  {
-    "category": "Science",
-    "topic": "Biology",
-    "difficulty": 1,
-    "time_sensitive": false,
-    "question": {
       "text": "All bacteria cause disease in humans.",
       "kind": {
         "TrueFalse": {
@@ -514,40 +500,154 @@
     "difficulty": 1,
     "time_sensitive": false,
     "question": {
-      "text": "Match each organ to its main function.",
+      "text": "Which blood cells help defend the body against infections?",
+      "answers": [
+        {
+          "text": "Red blood cells"
+        },
+        {
+          "text": "White blood cells",
+          "correct": true
+        },
+        {
+          "text": "Platelets"
+        },
+        {
+          "text": "Epithelial cells"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Biology",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the two main products of aerobic cellular respiration.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "The gas",
+              "accepted": [
+                "Carbon dioxide",
+                "CO2"
+              ]
+            },
+            {
+              "label": "The liquid",
+              "accepted": [
+                "Water",
+                "H2O"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Biology",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each scientist to the biological idea associated with their work.",
       "kind": {
         "Pairs": {
           "pairs": [
             {
               "left": {
-                "text": "Lungs"
+                "text": "Robert Hooke"
               },
               "right": {
-                "text": "Gas exchange"
+                "text": "Cells named"
               }
             },
             {
               "left": {
-                "text": "Kidneys"
+                "text": "Carl Linnaeus"
               },
               "right": {
-                "text": "Filter blood"
+                "text": "Binomial nomenclature"
               }
             },
             {
               "left": {
-                "text": "Stomach"
+                "text": "Louis Pasteur"
               },
               "right": {
-                "text": "Begin protein digestion"
+                "text": "Germ theory"
               }
             },
             {
               "left": {
-                "text": "Small intestine"
+                "text": "Barbara McClintock"
               },
               "right": {
-                "text": "Absorb most nutrients"
+                "text": "Transposons"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Biology",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Viruses are made of cells.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Biology",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each plant organ to its main function.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Root"
+              },
+              "right": {
+                "text": "Absorbs water"
+              }
+            },
+            {
+              "left": {
+                "text": "Leaf"
+              },
+              "right": {
+                "text": "Photosynthesis"
+              }
+            },
+            {
+              "left": {
+                "text": "Flower"
+              },
+              "right": {
+                "text": "Reproduction"
+              }
+            },
+            {
+              "left": {
+                "text": "Stem"
+              },
+              "right": {
+                "text": "Transports water and nutrients"
               }
             }
           ]

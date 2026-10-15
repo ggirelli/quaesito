@@ -1,0 +1,115 @@
+[
+  {
+    "category": "Science",
+    "replaces": 19,
+    "topic": "Astonomy & space",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which planet has the moons Phobos and Deimos?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Mars"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "replaces": 21,
+    "topic": "Astonomy & space",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the nearest large spiral galaxy to the Milky Way?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Andromeda",
+            "Andromeda Galaxy"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "replaces": 23,
+    "topic": "Astonomy & space",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many Earth days does the Moon take to orbit Earth relative to the distant stars (sidereal month), approximately?",
+      "kind": {
+        "Number": {
+          "answer": 27.3,
+          "range": {
+            "min": 20,
+            "max": 40
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "replaces": 24,
+    "topic": "Astonomy & space",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the average distance from Earth to the Sun, in millions of kilometres?",
+      "kind": {
+        "Number": {
+          "answer": 149.6,
+          "range": {
+            "min": 100,
+            "max": 200
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "replaces": 28,
+    "topic": "Astonomy & space",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the four largest moons of Jupiter in order of distance from Jupiter, closest first.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Closest",
+              "accepted": [
+                "Io"
+              ]
+            },
+            {
+              "label": "Second closest",
+              "accepted": [
+                "Europa"
+              ]
+            },
+            {
+              "label": "Third closest",
+              "accepted": [
+                "Ganymede"
+              ]
+            },
+            {
+              "label": "Farthest",
+              "accepted": [
+                "Callisto"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+]

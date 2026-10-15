@@ -521,5 +521,144 @@
       },
       "text": "Match each insect with its distinctive feature."
     }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Ladybug",
+            "Lady beetle",
+            "Ladybug beetle"
+          ]
+        }
+      },
+      "text": "What is the common North American name for a ladybird?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Mantis",
+            "Praying mantis"
+          ]
+        }
+      },
+      "text": "Which predatory insect has raptorial front legs, and its female sometimes eats the male after mating?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Silkworm",
+            "Silkworm moth larva",
+            "Silk moth",
+            "Domestic silk moth",
+            "Silkworm moth",
+            "Bombyx mori"
+          ]
+        }
+      },
+      "text": "The caterpillar of which moth is used to produce commercial silk?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 17,
+          "range": {
+            "min": 10,
+            "max": 25
+          }
+        }
+      },
+      "text": "How many years do the longest-lived periodical cicadas spend underground before emerging?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 1500,
+          "range": {
+            "min": 800,
+            "max": 2500
+          }
+        }
+      },
+      "text": "About how many eggs can a queen honeybee lay per day at peak production?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Insects & bugs",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Honeybee"
+              },
+              "right": {
+                "text": "Makes honey"
+              }
+            },
+            {
+              "left": {
+                "text": "Butterfly"
+              },
+              "right": {
+                "text": "Tastes with its feet"
+              }
+            },
+            {
+              "left": {
+                "text": "Cricket"
+              },
+              "right": {
+                "text": "Chirping sound"
+              }
+            },
+            {
+              "left": {
+                "text": "Ant"
+              },
+              "right": {
+                "text": "Follows pheromone trails"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each insect with a characteristic."
+    }
   }
 ]

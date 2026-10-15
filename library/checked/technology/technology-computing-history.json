@@ -552,5 +552,110 @@
         }
       }
     }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "The first .com domain name ever registered was symbolics.com.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What was the name of the electromechanical device used at Bletchley Park to help break Enigma?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Bombe",
+            "The Bombe"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the two Bell Labs physicists who built the first point-contact transistor in 1947. Type each surname.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Theoretical physicist",
+              "accepted": [
+                "Bardeen"
+              ]
+            },
+            {
+              "label": "Experimental physicist",
+              "accepted": [
+                "Brattain"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each milestone with its year.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "First IBM PC"
+              },
+              "right": {
+                "text": "1981"
+              }
+            },
+            {
+              "left": {
+                "text": "First iPhone"
+              },
+              "right": {
+                "text": "2007"
+              }
+            },
+            {
+              "left": {
+                "text": "World Wide Web made public"
+              },
+              "right": {
+                "text": "1991"
+              }
+            },
+            {
+              "left": {
+                "text": "First Macintosh"
+              },
+              "right": {
+                "text": "1984"
+              }
+            }
+          ]
+        }
+      }
+    }
   }
 ]

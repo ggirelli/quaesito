@@ -1,0 +1,120 @@
+[
+  {
+    "category": "Technology",
+    "replaces": 11,
+    "topic": "Video games",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Epic Games engine debuted with a 1998 first-person shooter and now powers Fortnite?",
+      "answers": [
+        {
+          "text": "Unreal Engine",
+          "correct": true
+        },
+        {
+          "text": "Unity"
+        },
+        {
+          "text": "id Tech"
+        },
+        {
+          "text": "CryEngine"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "replaces": 18,
+    "topic": "Video games",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of Mario's younger brother in Nintendo's games?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Luigi"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "replaces": 19,
+    "topic": "Video games",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the company behind the Grand Theft Auto series?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Rockstar",
+            "Rockstar Games",
+            "Rockstar North",
+            "DMA Design",
+            "Take-Two Interactive"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "replaces": 20,
+    "topic": "Video games",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the underground shelter the protagonist leaves at the start of the original Fallout?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Vault 13",
+            "13"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "replaces": 21,
+    "topic": "Video games",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the name of the princess Link often rescues in his Nintendo series?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Zelda",
+            "Princess Zelda"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "replaces": 23,
+    "topic": "Video games",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many lettered action buttons (excluding Start, Select and shoulder buttons) does the original SNES controller have?",
+      "kind": {
+        "Number": {
+          "answer": 4,
+          "range": {
+            "min": 2,
+            "max": 8
+          }
+        }
+      }
+    }
+  }
+]

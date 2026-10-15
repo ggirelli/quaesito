@@ -1,0 +1,103 @@
+[
+  {
+    "category": "Technology",
+    "replaces": 2,
+    "topic": "Transport",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which rail technology uses magnets to float trains above the track without wheels touching?",
+      "answers": [
+        {
+          "text": "Maglev",
+          "correct": true
+        },
+        {
+          "text": "Monorail"
+        },
+        {
+          "text": "Funicular"
+        },
+        {
+          "text": "Tram"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "replaces": 10,
+    "topic": "Transport",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "What type of ship carries cargo in standard 20- and 40-foot boxes measured in TEU?",
+      "answers": [
+        {
+          "text": "Container ship",
+          "correct": true
+        },
+        {
+          "text": "Bulk carrier"
+        },
+        {
+          "text": "Oil tanker"
+        },
+        {
+          "text": "Ro-ro ferry"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "replaces": 23,
+    "topic": "Transport",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many wheels does a standard US 'big rig' semi-trailer truck have?",
+      "kind": {
+        "Number": {
+          "answer": 18,
+          "range": {
+            "min": 10,
+            "max": 28
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "replaces": 28,
+    "topic": "Transport",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the two countries connected by the Channel Tunnel. Type each country.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Northern end",
+              "accepted": [
+                "United Kingdom",
+                "UK",
+                "Britain",
+                "Great Britain",
+                "England"
+              ]
+            },
+            {
+              "label": "Southern end",
+              "accepted": [
+                "France"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+]

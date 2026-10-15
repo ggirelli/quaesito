@@ -1,0 +1,61 @@
+[
+  {
+    "category": "Society & Culture",
+    "replaces": 11,
+    "topic": "Holidays & traditions",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the Japanese name for the first shrine or temple visit of the New Year?",
+      "answers": [
+        {
+          "text": "Hatsumode",
+          "correct": true
+        },
+        {
+          "text": "Hanami"
+        },
+        {
+          "text": "Momijigari"
+        },
+        {
+          "text": "Bon odori"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "replaces": 28,
+    "topic": "Holidays & traditions",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name the three gifts traditionally brought to Jesus by the Magi.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Precious metal",
+              "accepted": [
+                "Gold"
+              ]
+            },
+            {
+              "label": "Resin burned as incense",
+              "accepted": [
+                "Frankincense"
+              ]
+            },
+            {
+              "label": "Resin used for embalming",
+              "accepted": [
+                "Myrrh"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+]

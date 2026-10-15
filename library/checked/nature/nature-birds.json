@@ -372,5 +372,278 @@
       },
       "text": "Match each bird with its best-known feature."
     }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which feature of an owl's flight feathers helps make its flight nearly silent?",
+      "answers": [
+        {
+          "text": "Comb-like serrated edges",
+          "correct": true
+        },
+        {
+          "text": "Waterproof oil coating"
+        },
+        {
+          "text": "Extra-stiff shafts"
+        },
+        {
+          "text": "Metallic sheen"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which bird is the only extant member of its family and is native to New Caledonia?",
+      "answers": [
+        {
+          "text": "Hoatzin"
+        },
+        {
+          "text": "Kagu",
+          "correct": true
+        },
+        {
+          "text": "Secretarybird"
+        },
+        {
+          "text": "Shoebill"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which bird can drink seawater and excrete excess salt through glands above its eyes?",
+      "answers": [
+        {
+          "text": "Wandering albatross",
+          "correct": true
+        },
+        {
+          "text": "Pigeon"
+        },
+        {
+          "text": "Crow"
+        },
+        {
+          "text": "Pheasant"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which large bird lays dark green, avocado-coloured eggs?",
+      "answers": [
+        {
+          "text": "Emu",
+          "correct": true
+        },
+        {
+          "text": "Ostrich"
+        },
+        {
+          "text": "Kiwi"
+        },
+        {
+          "text": "Penguin"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Shoebill",
+            "Shoebill stork"
+          ]
+        }
+      },
+      "text": "Which large African wading bird, also called the whalehead, stands motionless in papyrus swamps to catch lungfish?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 2,
+          "range": {
+            "min": 1,
+            "max": 5
+          }
+        }
+      },
+      "text": "How many toes does an ostrich have on each foot?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 10,
+          "range": {
+            "min": 4,
+            "max": 14
+          }
+        }
+      },
+      "text": "How many primary flight feathers does a typical pigeon have on each wing?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 21,
+          "range": {
+            "min": 14,
+            "max": 29
+          }
+        }
+      },
+      "text": "How many days does a chicken egg typically take to hatch, from incubation start?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 115,
+          "range": {
+            "min": 94,
+            "max": 165
+          }
+        }
+      },
+      "text": "About how many centimetres long can an emperor penguin grow?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "African savanna",
+              "accepted": [
+                "Ostrich"
+              ]
+            },
+            {
+              "label": "Australian outback",
+              "accepted": [
+                "Emu"
+              ]
+            },
+            {
+              "label": "New Zealand",
+              "accepted": [
+                "Kiwi",
+                "Kiwis"
+              ]
+            },
+            {
+              "label": "Australia/New Guinea rainforest",
+              "accepted": [
+                "Cassowary",
+                "Cassowaries"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name the flightless bird associated with each region: African savanna, Australian outback, New Zealand, and Australia/New Guinea rainforest."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Duck"
+              },
+              "right": {
+                "text": "Webbed feet"
+              }
+            },
+            {
+              "left": {
+                "text": "Eagle"
+              },
+              "right": {
+                "text": "Powerful talons"
+              }
+            },
+            {
+              "left": {
+                "text": "Heron"
+              },
+              "right": {
+                "text": "Long spear-like bill"
+              }
+            },
+            {
+              "left": {
+                "text": "Parrot"
+              },
+              "right": {
+                "text": "Zygodactyl feet"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each bird group with a characteristic adaptation."
+    }
   }
 ]

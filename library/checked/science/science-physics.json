@@ -539,5 +539,105 @@
       },
       "text": "Match each scientist to the physics concept associated with their name."
     }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Richter scale",
+            "Richter"
+          ]
+        }
+      },
+      "text": "What is the name of the original logarithmic earthquake magnitude scale, developed in 1935 at Caltech?"
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 212,
+          "range": {
+            "min": 180,
+            "max": 240
+          }
+        }
+      },
+      "text": "At standard atmospheric pressure, what is water's boiling point in degrees Fahrenheit?"
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 9.46,
+          "range": {
+            "min": 4,
+            "max": 20
+          }
+        }
+      },
+      "text": "Approximately how many trillion kilometres are in a light-year?"
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 1.67e-27,
+          "range": {
+            "min": 1e-27,
+            "max": 2.5e-27
+          }
+        }
+      },
+      "text": "What is the approximate proton mass in kilograms, to three significant figures?"
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Physics",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Positively charged",
+              "accepted": [
+                "Proton",
+                "Protons"
+              ]
+            },
+            {
+              "label": "No charge",
+              "accepted": [
+                "Neutron",
+                "Neutrons"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name the two particles found in an atomic nucleus (type each name)."
+    }
   }
 ]

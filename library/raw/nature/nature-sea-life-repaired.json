@@ -1,0 +1,90 @@
+[
+  {
+    "category": "Nature",
+    "replaces": 18,
+    "topic": "Sea life",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Clownfish",
+            "Clown fish",
+            "Anemonefish",
+            "Clown anemonefish",
+            "Orange clownfish"
+          ]
+        }
+      },
+      "text": "What common name is given to the orange reef fish associated with anemones in Finding Nemo?"
+    }
+  },
+  {
+    "category": "Nature",
+    "replaces": 25,
+    "topic": "Sea life",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 200,
+          "range": {
+            "min": 50,
+            "max": 400
+          }
+        }
+      },
+      "text": "At roughly how many metres below sea level does sunlight become too faint for photosynthesis?"
+    }
+  },
+  {
+    "category": "Nature",
+    "replaces": 30,
+    "topic": "Sea life",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Sea star"
+              },
+              "right": {
+                "text": "Can regrow lost arms"
+              }
+            },
+            {
+              "left": {
+                "text": "Chiton"
+              },
+              "right": {
+                "text": "Eight shell plates"
+              }
+            },
+            {
+              "left": {
+                "text": "Anglerfish"
+              },
+              "right": {
+                "text": "Bioluminescent lure"
+              }
+            },
+            {
+              "left": {
+                "text": "Sea cucumber"
+              },
+              "right": {
+                "text": "Echinoderm with soft body"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each sea animal with its distinctive feature."
+    }
+  }
+]

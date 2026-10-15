@@ -1,0 +1,84 @@
+[
+  {
+    "category": "Sport",
+    "replaces": 16,
+    "topic": "Tennis",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "In doubles, the tramlines are considered out during a serve.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "replaces": 24,
+    "topic": "Tennis",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "What is the minimum number of games needed to win a standard set?",
+      "kind": {
+        "Number": {
+          "answer": 6,
+          "range": {
+            "min": 3,
+            "max": 10
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Sport",
+    "replaces": 29,
+    "topic": "Tennis",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each Grand Slam tournament with its host city.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Wimbledon"
+              },
+              "right": {
+                "text": "London"
+              }
+            },
+            {
+              "left": {
+                "text": "French Open"
+              },
+              "right": {
+                "text": "Paris"
+              }
+            },
+            {
+              "left": {
+                "text": "Australian Open"
+              },
+              "right": {
+                "text": "Melbourne"
+              }
+            },
+            {
+              "left": {
+                "text": "US Open"
+              },
+              "right": {
+                "text": "New York"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

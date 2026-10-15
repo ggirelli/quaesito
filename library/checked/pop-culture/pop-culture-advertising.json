@@ -484,5 +484,101 @@
         }
       }
     }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Advertising",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Bibendum, a mascot made of white tyres, represents which company?",
+      "answers": [
+        {
+          "text": "Michelin",
+          "correct": true
+        },
+        {
+          "text": "Goodyear"
+        },
+        {
+          "text": "Pirelli"
+        },
+        {
+          "text": "Bridgestone"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Advertising",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which chocolate bar's long-running slogan is “Have a break, have a ...”?",
+      "answers": [
+        {
+          "text": "KitKat",
+          "correct": true
+        },
+        {
+          "text": "Twix"
+        },
+        {
+          "text": "Mars"
+        },
+        {
+          "text": "Snickers"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Advertising",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which cosmetics brand uses the slogan “Because you're worth it”?",
+      "answers": [
+        {
+          "text": "L'Oréal",
+          "correct": true
+        },
+        {
+          "text": "Maybelline"
+        },
+        {
+          "text": "Revlon"
+        },
+        {
+          "text": "Olay"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Advertising",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "A drumming pink bunny that 'keeps going and going' advertises which battery brand?",
+      "answers": [
+        {
+          "text": "Energizer",
+          "correct": true
+        },
+        {
+          "text": "Duracell"
+        },
+        {
+          "text": "Panasonic"
+        },
+        {
+          "text": "Varta"
+        }
+      ]
+    }
   }
 ]

@@ -1,0 +1,233 @@
+[
+  {
+    "category": "Music",
+    "replaces": 2,
+    "topic": "Musicals",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Andrew Lloyd Webber musical features the song \"Memory\"?",
+      "answers": [
+        {
+          "text": "Cats",
+          "correct": true
+        },
+        {
+          "text": "Starlight Express"
+        },
+        {
+          "text": "The Lion King"
+        },
+        {
+          "text": "Annie"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "replaces": 4,
+    "topic": "Musicals",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Lin-Manuel Miranda musical tells the story of a US Founding Father who was the first Secretary of the Treasury?",
+      "answers": [
+        {
+          "text": "Hamilton",
+          "correct": true
+        },
+        {
+          "text": "1776"
+        },
+        {
+          "text": "Evita"
+        },
+        {
+          "text": "Ragtime"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "replaces": 12,
+    "topic": "Musicals",
+    "difficulty": 3,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which Kander and Ebb musical follows murderesses Roxie Hart and Velma Kelly?",
+      "answers": [
+        {
+          "text": "Chicago",
+          "correct": true
+        },
+        {
+          "text": "Kiss of the Spider Woman"
+        },
+        {
+          "text": "The Visit"
+        },
+        {
+          "text": "Follies"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Music",
+    "replaces": 16,
+    "topic": "Musicals",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Andrew Lloyd Webber composed the music for Evita.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "replaces": 18,
+    "topic": "Musicals",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Which musical features the songs \"Edelweiss\" and \"Do-Re-Mi\"?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "The Sound of Music",
+            "Sound of Music"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "replaces": 20,
+    "topic": "Musicals",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Who composed the music and lyrics for Falsettos?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "William Finn",
+            "Finn"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "replaces": 23,
+    "topic": "Musicals",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "How many minutes are in a non-leap year, as asked in Rent's song 'Seasons of Love'?",
+      "kind": {
+        "Number": {
+          "answer": 525600,
+          "range": {
+            "min": 100000,
+            "max": 900000
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "replaces": 28,
+    "topic": "Musicals",
+    "difficulty": 1,
+    "time_sensitive": false,
+    "question": {
+      "text": "Name Dorothy's three companions.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Wants a brain",
+              "accepted": [
+                "Scarecrow",
+                "The Scarecrow"
+              ]
+            },
+            {
+              "label": "Wants a heart",
+              "accepted": [
+                "Tin Man",
+                "The Tin Man",
+                "Tin Woodman"
+              ]
+            },
+            {
+              "label": "Wants courage",
+              "accepted": [
+                "Cowardly Lion",
+                "Lion"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Music",
+    "replaces": 29,
+    "topic": "Musicals",
+    "difficulty": 2,
+    "time_sensitive": false,
+    "question": {
+      "text": "Match each musical to its source or inspiration.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Mamma Mia!"
+              },
+              "right": {
+                "text": "ABBA songs"
+              }
+            },
+            {
+              "left": {
+                "text": "Miss Saigon"
+              },
+              "right": {
+                "text": "Madama Butterfly"
+              }
+            },
+            {
+              "left": {
+                "text": "West Side Story"
+              },
+              "right": {
+                "text": "Romeo and Juliet"
+              }
+            },
+            {
+              "left": {
+                "text": "The Lion King"
+              },
+              "right": {
+                "text": "Hamlet"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]
