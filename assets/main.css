@@ -442,6 +442,17 @@ input.short-number {
   color: var(--ok-text);
 }
 
+/* A multiple-choice question's options, the wrong ones in grey. */
+.library-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.9rem;
+}
+
+.library-wrong {
+  color: var(--muted);
+}
+
 .random-categories .list-row {
   padding: 0.45rem 0;
 }

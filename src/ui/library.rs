@@ -13,7 +13,7 @@ use super::{
 use crate::{
     api::question_library,
     library::{DIFFICULTIES, KINDS, LibraryEntry, LibraryFilter},
-    model::Question,
+    model::{Question, QuestionKind},
 };
 
 /// Questions shown at first, and added by each "Show more".
@@ -366,7 +366,29 @@ fn LibraryRow(
                 if !entry.question.passage.is_empty() {
                     span { class: "small library-passage", "{entry.question.passage}" }
                 }
-                span { class: "small library-answer", "✓ {entry.answer()}" }
+                match &entry.question.kind {
+                    // Every option in its place: the right ones ticked, the others crossed out.
+                    QuestionKind::Choice => rsx! {
+                        span { class: "small library-options",
+                            for answer in entry.question.answers.iter() {
+                                if answer.correct {
+                                    span { class: "library-answer", "✓ {answer.text}" }
+                                } else {
+                                    span { class: "library-wrong", "✗ {answer.text}" }
+                                }
+                            }
+                        }
+                    },
+                    QuestionKind::Number { range: Some(range), .. } => rsx! {
+                        span { class: "small",
+                            span { class: "library-answer", "✓ {entry.answer()}" }
+                            span { class: "muted", " · range {range.min} to {range.max}" }
+                        }
+                    },
+                    _ => rsx! {
+                        span { class: "small library-answer", "✓ {entry.answer()}" }
+                    },
+                }
                 span { class: "muted small",
                     "{entry.category} · {entry.topic} · {entry.difficulty_name()} · {entry.kind_name()}"
                 }

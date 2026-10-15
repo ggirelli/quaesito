@@ -45,11 +45,22 @@ const L = require('./lib.js');
   expect(`lists: ${hard.length} hard Choices questions`,
     hard.length > 0 && hard.every((r) => r.includes('Music · Classical · Hard · Choices')));
   await library.screenshot({ path: 'out/library-admin-lists.png' });
+  const options = await library.$eval('.library-list .list-row', (r) => ({
+    right: r.querySelectorAll('.library-options .library-answer').length,
+    wrong: r.querySelectorAll('.library-options .library-wrong').length,
+  }));
+  expect(`choices: ${options.right} right, ${options.wrong} wrong`, options.right === 1 && options.wrong === 3);
   await L.clickText(library, '.library-option.selected', 'Hard');
   await L.clickText(library, '.library-option.selected', 'Choices');
   await L.sleep(300);
   const again = await library.$$eval('.library-list .list-row', (rs) => rs.length);
   expect(`lists cleared: ${again} questions`, again === music.length);
+  // Number questions show their range.
+  await L.clickText(library, '.library-option', 'Number');
+  await L.sleep(300);
+  const number = await library.$eval('.library-list .list-row', (r) => r.innerText);
+  expect(`number: ${number.split('\n')[1]}`, /✓ [\d.]+ · range [\d.]+ to [\d.]+/.test(number));
+  await L.clickText(library, '.library-option.selected', 'Number');
   // Laid out like the editor: categories left, search over the list, filters right.
   const box = (sel) => library.$eval(sel, (e) => { const r = e.getBoundingClientRect(); return { l: r.left, r: r.right, t: r.top }; });
   const [nav, search, list, filters] = [await box('.library-nav'), await box('.library-search'), await box('.library-main'), await box('.library-filters')];
