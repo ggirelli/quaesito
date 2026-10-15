@@ -4,7 +4,7 @@ use std::sync::OnceLock;
 
 use crate::library::LibraryEntry;
 
-/// Every checked library question, combined by `tools/library/clean.py`.
+/// Every library question (see `library/README.md`).
 const LIBRARY: &str = include_str!("../../library/library.json");
 
 /// The library's questions, read on first use.
@@ -18,8 +18,6 @@ pub fn entries() -> &'static [LibraryEntry] {
 
 #[cfg(test)]
 mod tests {
-    use std::path::Path;
-
     use super::*;
     use crate::model::{QuestionKind, Quiz};
 
@@ -43,36 +41,5 @@ mod tests {
             );
             assert!(q.image.is_none() && q.audio.is_none(), "{}", q.text);
         }
-    }
-
-    /// `library/library.json` holds exactly the entries of `library/checked`, as
-    /// `tools/library/clean.py` writes them.
-    #[test]
-    fn the_bundled_library_matches_the_checked_files() {
-        fn files(dir: &Path, found: &mut Vec<std::path::PathBuf>) {
-            for entry in std::fs::read_dir(dir).unwrap() {
-                let path = entry.unwrap().path();
-                if path.is_dir() {
-                    files(&path, found);
-                } else if path.extension().is_some_and(|e| e == "json") {
-                    found.push(path);
-                }
-            }
-        }
-        let checked = Path::new(env!("CARGO_MANIFEST_DIR")).join("library/checked");
-        let mut paths = Vec::new();
-        files(&checked, &mut paths);
-        paths.sort();
-        let mut expected: Vec<serde_json::Value> = Vec::new();
-        for path in paths {
-            let batch: Vec<serde_json::Value> =
-                serde_json::from_str(&std::fs::read_to_string(path).unwrap()).unwrap();
-            expected.extend(batch);
-        }
-        let bundled: Vec<serde_json::Value> = serde_json::from_str(LIBRARY).unwrap();
-        assert!(
-            bundled == expected,
-            "library/library.json is stale: run `uv run tools/library/clean.py`"
-        );
     }
 }

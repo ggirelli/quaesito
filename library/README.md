@@ -1,57 +1,31 @@
 # Question library
 
-A bank of ready-made quiz questions that hosts pick from in the editor (**＋ From the library**), or
-fill a new quiz with at random, instead of writing every question themselves. Questions were generated with ChatGPT from a prompt and the quiz
-schema, then checked by script and fact-checked by Claude.
+Ready-made quiz questions that hosts browse on the admin page's **Questions** tab, add from the
+editor (**＋ From the library**), or fill a new quiz with at random. See the user guide's
+[Building a quiz](../docs/building-a-quiz.md#the-question-library).
 
-**Status (2026-10-15): all 14 categories repaired and checked, and used by the app** (see the user
-guide's [Building a quiz](../docs/building-a-quiz.md#the-question-library)). Work happens on the
-`question-library` bookmark, checked out in the jj workspace `.workspaces/library`.
+`library.json` is the library: the server bundles it at build time (`src/server/library.rs`), and
+nothing else in this folder ships. Edit it directly, then check it:
 
-## Layout
-
-```text
-library/
-├── raw/<category>/<category>-<topic>.json            ChatGPT batches, 30 entries each, as generated
-├── raw/<category>/<category>-<topic>-repaired.json   ChatGPT repairs of reviewed entries
-├── review/<category>.json                            confirmed fact-check findings, one per entry
-├── checked/<category>/<category>-<topic>.json        the clean library, built by tools/library/clean.py
-└── library.json                                      all of checked/ in one file, bundled into the app
+```sh
+uv run tools/library/check.py                  # must report 0 errors
+just test                                      # every question must also be playable
 ```
-
-Never edit `checked/` or `library.json` by hand: they are rebuilt from `raw/` and `review/`, and a
-test fails when `library.json` is stale. Fix things in a
-`-repaired.json` file (or in the scripts) and rebuild.
 
 ## Entry format
 
-Each file is a JSON array of entries. `question` is exactly a `Question` from the published quiz
-schema ([`docs/schema/quiz-1.json`](../docs/schema/quiz-1.json)), so it can be copied into a quiz as is.
+A JSON array with one entry per line (easy to diff and grep). `question` is exactly a `Question`
+from the published quiz schema ([`docs/schema/quiz-1.json`](../docs/schema/quiz-1.json)), so it can
+be copied into a quiz as is.
 
 ```json
-{
-  "category": "Science",
-  "topic": "Astronomy",
-  "difficulty": 2,
-  "question": { "text": "...", "answers": [{ "text": "...", "correct": true }, { "text": "..." }] }
-}
+{"category":"Science","topic":"Astronomy & space","difficulty":2,"question":{"text":"...","answers":[{"text":"...","correct":true},{"text":"..."}]}}
 ```
 
 - `difficulty`: 1 most adults know it, 2 keen quizzers, 3 experts.
 - Kinds used: multiple choice (no `kind`), `TrueFalse`, `Text`, `Number`, `Order`, `Parts`, `Pairs`.
-  No pictures, audio, `Pin` or `Slide`, and no per-question timing or scoring fields.
-
-There are 14 categories and 99 topics (folders under `raw/`).
-
-## Scripts
-
-Both are self-contained [uv](https://docs.astral.sh/uv/) scripts; run them from the repository root.
-
-```sh
-uv run tools/library/clean.py                       # rebuild checked/ from raw/ and review/
-uv run tools/library/check.py library/checked      # must report 0 errors
-uv run tools/library/check.py library/raw/x/y.json # check single files, e.g. a new repair
-```
+  No pictures, audio, `Pin` or `Slide`, no per-question timing or scoring fields, and no facts that
+  may change over the years.
 
 **`check.py`** validates every question against the quiz schema and the library rules, and reports
 errors (unusable) and warnings (worth a look):
@@ -61,62 +35,24 @@ errors (unusable) and warnings (worth a look):
 - Order 2–6 distinct items, Pairs 2–6 distinct items per side, Parts 2–8 parts
 - **no two Parts accepting the same answer**: each part is graded on its own, so a team could type one
   answer in every part and score full marks ("name three Axis powers, any order" is rejected)
-- exact duplicates across the whole library (Order/Pairs/Parts compared by their items, not just
-  their often generic text); near-duplicate texts are warnings, mostly harmless shared wording
+- exact duplicates; near-duplicate texts are warnings, mostly harmless shared wording ("What is the
+  capital of …")
 
-**`clean.py`** builds `checked/`:
+## How it was made
 
-1. Drops every raw entry that has a finding in `review/` (repairs replace them, see below).
-2. Adds the entries of each `-repaired.json` file to its batch. A repair replaces the entry named in
-   its `replaces` field. Older repairs have none: fixes often say "remove the year from entry 10",
-   so ChatGPT returned a rewrite of an entry that was not itself flagged, and when a repair closely
-   resembles an entry a fix mentions, it replaces that entry. `replaces` is removed from `checked/`.
-3. Drops anything `check.py` reports as an error, and later copies of a question already kept.
-4. Tidies what needs no judgement: removes repeated accepted spellings, and moves Number ranges
-   whose answer sits in the exact middle (teams would learn to guess the midpoint).
+2,970 questions in 99 topic batches across 14 categories were generated with ChatGPT (prompt below),
+checked by script, and fact-checked by Claude with a second pass trying to refute each finding.
+599 (20%) had a confirmed problem; ChatGPT repaired most of them, Claude checked every repair, and
+the rest were dropped, as were repeats and questions whose answers may change. The batches,
+findings, repairs and scripts are in the git history (before the commit that left only
+`library.json` here).
 
-## History so far
+## Adding questions
 
-1. **Generated** 99 batches × 30 = 2,970 entries with ChatGPT (prompt below).
-2. **Checked by script:** all valid against the schema; a few broken Pairs and ranges, duplicates.
-3. **Fact-checked** by Claude: one reviewer agent per category, then a second agent per category
-   trying to refute each finding (about 2.2M tokens, most of a Claude quota). 599 entries (20%) had
-   a confirmed problem: 215 duplicates, 138 misleading (answer given away, wrong unit, missing
-   spellings), 107 ambiguous, 87 wrong answers, 49 poor quality, 3 outdated. Typed answers, Number
-   and Parts questions were the weakest (about a third to a half flagged), multiple choice and
-   true/false the best (10–14%). The findings are in `review/`, each with an explanation and a fix.
-4. **Repaired** with ChatGPT for 7 of 14 categories (art-design, film-tv, food-drink, geography,
-   history, language-words, literature). Claude reviewed every repair against its fix: most were
-   right; it fixed 4 entries by hand and taught `clean.py` and `check.py` about the problems found
-   (rewrites of unflagged entries, "any order" Parts).
-5. **Repaired** the other 7 categories with ChatGPT, using the prompt with `replaces`. Claude read
-   every repair against its fix (2026-10-15): nearly all were right. ChatGPT skipped five batches
-   (music-album-covers-firsts, music-classical, sport-basketball, sport-cycling, sport-football), so
-   Claude wrote those 17 repairs from their fixes. Claude also fixed 4 repairs by hand (a Parts
-   question whose two "Sauropod" slots took different names, an Order question whose text listed
-   the items in order, a 16-digit Number answer, an off-topic Galileo question), dropped one repair
-   that repeated a film-tv question, and added `drop` findings for 4 repeats across categories
-   (Pompeii, the Arnolfini Portrait, Wakanda, the first Oscars ceremony).
-
-Current `checked/`: **2,719 entries, 0 errors**, 49 warnings (37 near-duplicates, all shared wording
-such as "What is the capital of ...", none a real repeat).
-
-## Next steps
-
-1. **Review** the questions by hand: the maintainer is reading them in the app. Fixes go in
-   `-repaired.json` files or as `drop` findings in `review/`, then rebuild.
-2. **Library schema**: a small `docs/schema/library-1.json` for entries, whose `question` refers to
-   `quiz-1.json#/$defs/Question`.
-3. **Remember questions already played**, so random picks prefer fresh ones.
-4. Optional app change: grade Parts so that an answer repeated in another part counts once. Then
-   "name three, in any order" questions become possible and the check could be relaxed.
-
-## Prompts
-
-### Generating a batch
-
-Attach `docs/schema/quiz-1.json`, paste this, and fill in the batch at the end. Ask for Number and
-typed-answer questions in a separate request if quality matters: those were the most error-prone.
+Attach `docs/schema/quiz-1.json`, paste this prompt and fill in the batch at the end. Ask for Number
+and typed-answer questions in a separate request if quality matters: those were the most
+error-prone. Check the result with `uv run tools/library/check.py <batch>.json`, have it
+fact-checked, then append its entries to `library.json` and check that again.
 
 ````text
 You are writing trivia questions for Quaesito, a pub-quiz app played on a TV with phones as
@@ -130,7 +66,6 @@ Each element is a library entry:
   "category": "<given below>",
   "topic": "<given below>",
   "difficulty": 1 | 2 | 3,          // 1 = most adults know it, 2 = keen quizzers, 3 = experts
-  "time_sensitive": true | false,   // true if the answer could change in future years
   "question": { ...a Question from quiz-1.json... }
 }
 
@@ -169,8 +104,8 @@ STYLE
 ACCURACY (most important)
 - Use only well-established facts you are confident about. If unsure, drop the question
   rather than guess.
-- Avoid facts that change (records, populations, "current" holders, counts that grow).
-  If one is unavoidable, write "As of <year>, ..." and set "time_sensitive": true.
+- Never use facts that may change (records, populations, "current" holders, counts that
+  grow, borders and sovereignty in dispute).
 - Before returning, check each entry again: is the marked answer right, and is no other
   answer also right? Fix or remove any that fail.
 - No two entries may ask the same thing, even reworded.
@@ -184,38 +119,12 @@ This batch:
 - avoid repeating these existing questions: <paste question texts from earlier batches, or "none">
 ````
 
-### Repairing reviewed entries
 
-Attach the category's batch files from `raw/<category>/` and `review/<category>.json`. Compared with
-the version used for the first 7 categories, this one asks for a `replaces` field, which `clean.py`
-uses to know which entry a repair rewrites (without it, it guesses by resemblance), and forbids the
-"any order" Parts loophole.
+## Next steps
 
-````text
-The attached JSON files are batches of quiz questions (arrays of library entries, each wrapping a
-"question" in Quaesito's quiz format). The review file lists problems a fact-check found: each item
-names a batch "file", a 1-based "entry" number, the "problem", an "explanation" with the correct
-facts, and a "fix".
-
-For every review item whose fix is NOT "drop":
-- Take that entry from its batch file and apply the fix exactly as described, using the corrected
-  facts from the explanation. Change nothing else in the entry.
-- If the fix offers alternatives, pick the first.
-- If the fix asks to change a different entry of the batch ("remove the year from entry 10"),
-  return that entry rewritten instead.
-- If applying the fix would make the question repeat another question in the same batch, skip it.
-- When you change a question's subject, update its wrong answers to match (wrong answers must be
-  the same kind of thing as the right one).
-- Keep every rule of the original format: a multiple-choice question has exactly 4 answers with one
-  "correct": true; Number answers lie strictly inside their range and not in its exact middle;
-  Pairs items are all different on each side; no two Parts accept the same answer (never accept
-  every answer in every part); no image, audio or timing fields.
-- Add a "replaces" field to each returned entry, next to "category": the 1-based number of the
-  batch entry it rewrites.
-
-Skip review items whose fix is "drop", or that begin with "drop" and give no alternative.
-
-Return one JSON file per batch file that had repairs, named like the batch with "-repaired" added
-(e.g. science-physics-repaired.json), holding only the repaired entries, as a JSON array in the
-same entry format. No commentary.
-````
+- **Review** the questions by hand (in progress), fixing `library.json` directly.
+- **Library schema**: a small `docs/schema/library-1.json` for entries, whose `question` refers to
+  `quiz-1.json#/$defs/Question`.
+- **Remember questions already played**, so random picks prefer fresh ones.
+- Optional app change: grade Parts so that an answer repeated in another part counts once. Then
+  "name three, in any order" questions become possible and the check could be relaxed.
