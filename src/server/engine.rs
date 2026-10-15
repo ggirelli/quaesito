@@ -514,6 +514,12 @@ impl Game {
         }
     }
 
+    /// Whether the game is still waiting in the lobby.
+    #[must_use]
+    pub fn in_lobby(&self) -> bool {
+        matches!(self.phase, Phase::Lobby)
+    }
+
     /// Whether teams may upload a picture.
     #[must_use]
     pub fn pictures(&self) -> bool {
@@ -1030,6 +1036,7 @@ impl Game {
             code: self.code.clone(),
             teams: self.teams.iter().map(Team::info).collect(),
             max_teams: self.max_teams,
+            pictures: self.pictures,
             paused: self.paused_at.is_some(),
             speed_points: self.quiz.settings.points == PointsMode::Speed,
             auto_advance_ms: match self.phase {

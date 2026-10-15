@@ -274,6 +274,8 @@ pub struct HostView {
     pub teams: Vec<TeamInfo>,
     /// The most teams that can join.
     pub max_teams: usize,
+    /// Whether teams may upload a picture.
+    pub pictures: bool,
     /// Time until the quiz moves on by itself, when auto-advance is on (and not paused).
     pub auto_advance_ms: Option<u64>,
     /// The host paused the clock.
@@ -360,6 +362,8 @@ pub enum HostCommand {
     RenameTeam { team: u32, name: String },
     /// Remove a team from the game.
     RemoveTeam { team: u32 },
+    /// Let teams upload a picture, or not; turning it off drops the pictures uploaded so far.
+    SetPictures(bool),
 }
 
 /// How a team did on one question.

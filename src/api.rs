@@ -437,6 +437,26 @@ pub async fn upload_avatar(
     Ok(name)
 }
 
+/// Renames a team from its own phone, while the game waits in the lobby. Names taken by
+/// another team (ignoring case) are refused.
+#[post("/api/game/rename")]
+pub async fn rename_my_team(code: String, token: String, name: String) -> ServerFnResult<()> {
+    let session = crate::server::state()
+        .sessions
+        .get(&code)
+        .ok_or_else(|| ServerFnError::new("No game with this code is running."))?;
+    let (team, lobby) = session.read(|g| (g.team_for_token(&token), g.in_lobby()));
+    let team = team.ok_or_else(|| ServerFnError::new("Unknown team."))?;
+    if !lobby {
+        return Err(ServerFnError::new(
+            "The quiz has started: ask the host to rename your team.",
+        ));
+    }
+    session
+        .update(|g, _| g.rename_team(team, &name))
+        .map_err(|refusal| ServerFnError::new(refusal.0))
+}
+
 /// Gives a team one of the ready-made pictures ([`crate::protocol::MASCOTS`]), or none.
 #[post("/api/game/mascot")]
 pub async fn set_team_mascot(

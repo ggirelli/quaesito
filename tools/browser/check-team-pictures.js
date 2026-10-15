@@ -44,6 +44,13 @@ function cutout(file) {
 (async () => {
   const ctx = await L.setup({ title: `Team pictures ${Date.now()}`, questions: [L.choice('One?')] });
   let ok = true;
+  const retype = async (page, field, value) => {
+    await field.focus();
+    await page.keyboard.down('Control');
+    await page.keyboard.press('a');
+    await page.keyboard.up('Control');
+    await field.type(value);
+  };
   const expect = (what, good) => {
     console.log(what, good ? 'ok' : 'WRONG');
     ok = ok && good;
@@ -56,6 +63,21 @@ function cutout(file) {
   const code = await L.api('/api/admin/session/start', { token: ctx.token, quiz_id: ctx.id });
   const host = await L.openHost(ctx, code);
   const owls = await L.openPhone(ctx, code, 'Owls');
+  // "You're in!" comes first; the team picture is folded away until opened.
+  const order = await owls.evaluate(() => {
+    const title = [...document.querySelectorAll('h1')].find((h) => h.innerText.includes("You're in"));
+    const look = document.querySelector('details.team-look');
+    return !!title && !!look && !look.open && !!(title.compareDocumentPosition(look) & Node.DOCUMENT_POSITION_FOLLOWING);
+  });
+  expect('phone: "You\'re in!" first, picture folded', order);
+  await owls.click('details.team-look summary');
+  // The mascots are centred as a group.
+  const centred = await owls.evaluate(() => {
+    const cs = [...document.querySelectorAll('.mascot-choice')].map((c) => c.getBoundingClientRect());
+    const left = Math.min(...cs.map((r) => r.left)), right = Math.max(...cs.map((r) => r.right));
+    return Math.abs(left - (window.innerWidth - right)) < 4;
+  });
+  expect('mascots centred', centred);
   await (await owls.$('.avatar-picker input[type=file]')).uploadFile(picture);
   await owls.waitForSelector('img.avatar.large');
   const swatches = await owls.$$('.backdrop-swatch');
@@ -99,6 +121,7 @@ function cutout(file) {
     token: ctx.token, quiz_id: ctx.id, team_pictures: false,
   });
   const cats = await L.openPhone(ctx, plain, 'Cats');
+  await cats.click('details.team-look summary');
   expect('no pictures: no upload', !(await cats.$('.avatar-picker')));
   await (await cats.$$('.backdrop-swatch'))[2].click();
   await cats.waitForFunction(() => /backdrop-\d/.test(document.querySelector('span.avatar.large').className));
@@ -110,6 +133,40 @@ function cutout(file) {
   const back = await cats.waitForFunction(() => document.querySelector('.avatar.large').tagName === 'SPAN', { timeout: 5000 }).then(() => true, () => false);
   expect('no pictures: a mascot, then back to the initial', back);
   await cats.screenshot({ path: 'out/team-pictures-off.png' });
+  // The big screen's Teams panel turns uploads off mid-game: pictures go, mascots stay.
+  // A file input fires no change for the same file twice: upload a copy.
+  const copy = picture.replace('.png', '-2.png');
+  fs.copyFileSync(picture, copy);
+  await (await owls.$('.avatar-picker input[type=file]')).uploadFile(copy);
+  await owls.waitForSelector('.avatar.large[src*="/media/"]');
+  // Teams rename themselves in the lobby; a name another team has is refused.
+  await L.openPhone(ctx, code, 'Bats');
+  const nameField = await owls.$('.team-name-field input');
+  await retype(owls, nameField, 'bats');
+  await owls.keyboard.press('Enter');
+  await nameField.evaluate((i) => i.blur());
+  const refused = await owls.waitForFunction(() => document.body.innerText.includes('Another team already has that name.'), { timeout: 5000 }).then(() => true, () => false);
+  const reset = await owls.$eval('.team-name-field input', (i) => i.value);
+  expect(`rename: taken name refused, field back to "${reset}"`, refused && reset === 'Owls');
+  // The refusal is an error response, which the browser logs: expected here.
+  const refusal = ctx.errors.findIndex((e) => e.startsWith('Owls') && e.includes('status of 500'));
+  if (refusal >= 0) ctx.errors.splice(refusal, 1);
+  await retype(owls, await owls.$('.team-name-field input'), 'Night Owls');
+  await (await owls.$('.team-name-field input')).evaluate((i) => i.blur());
+  const renamed = await host.waitForFunction(() => document.body.innerText.includes('Night Owls'), { timeout: 5000 }).then(() => true, () => false);
+  expect('rename: the big screen shows the new name', renamed);
+  // "Done" folds the team picture away again.
+  await L.clickText(owls, 'details.team-look button', 'Done');
+  const folded = await owls.waitForFunction(() => !document.querySelector('details.team-look').open, { timeout: 3000 }).then(() => true, () => false);
+  expect('done: picture folded away', folded);
+  await owls.screenshot({ path: 'out/team-pictures-folded.png' });
+  await L.clickText(host, 'button', 'Teams (');
+  await host.waitForSelector('.panel .check-field input');
+  expect('teams panel: uploads on', await host.$eval('.panel .check-field input', (i) => i.checked));
+  await host.click('.panel .check-field input');
+  const off = await owls.waitForFunction(() => !document.querySelector('.avatar-picker') && document.querySelector('.avatar.large').tagName === 'SPAN', { timeout: 5000 }).then(() => true, () => false);
+  expect('teams panel: uploads off, the picture gone from the phone', off);
+  await host.screenshot({ path: 'out/team-pictures-panel.png' });
   const admin = await L.openAdmin(ctx, '/admin');
   await admin.evaluate(() => {
     [...document.querySelectorAll('button[title="Start a live game"]')][0].click();
