@@ -205,6 +205,20 @@ pub enum IconKind {
     Search,
     Sun,
     Moon,
+    // The question library's categories (Music is above).
+    PenTool,
+    Film,
+    Coffee,
+    Globe,
+    Clock,
+    Type,
+    Book,
+    Leaf,
+    Star,
+    Flask,
+    Users,
+    Trophy,
+    Cpu,
 }
 
 /// Where this device remembers the chosen colour theme ("light"; dark when unset).
@@ -342,6 +356,85 @@ pub fn Icon(kind: IconKind) -> Element {
         },
         IconKind::Moon => rsx! {
             path { d: "M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" }
+        },
+        IconKind::PenTool => rsx! {
+            path { d: "M12 19l7-7 3 3-7 7-3-3z" }
+            path { d: "M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" }
+            path { d: "M2 2l7.586 7.586" }
+            circle { cx: 11, cy: 11, r: 2 }
+        },
+        IconKind::Film => rsx! {
+            rect { x: 2, y: 2, width: 20, height: 20, rx: 2.18, ry: 2.18 }
+            line { x1: 7, y1: 2, x2: 7, y2: 22 }
+            line { x1: 17, y1: 2, x2: 17, y2: 22 }
+            line { x1: 2, y1: 12, x2: 22, y2: 12 }
+            line { x1: 2, y1: 7, x2: 7, y2: 7 }
+            line { x1: 2, y1: 17, x2: 7, y2: 17 }
+            line { x1: 17, y1: 17, x2: 22, y2: 17 }
+            line { x1: 17, y1: 7, x2: 22, y2: 7 }
+        },
+        IconKind::Coffee => rsx! {
+            path { d: "M18 8h1a4 4 0 0 1 0 8h-1" }
+            path { d: "M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" }
+            line { x1: 6, y1: 1, x2: 6, y2: 4 }
+            line { x1: 10, y1: 1, x2: 10, y2: 4 }
+            line { x1: 14, y1: 1, x2: 14, y2: 4 }
+        },
+        IconKind::Globe => rsx! {
+            circle { cx: 12, cy: 12, r: 10 }
+            line { x1: 2, y1: 12, x2: 22, y2: 12 }
+            path { d: "M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" }
+        },
+        IconKind::Clock => rsx! {
+            circle { cx: 12, cy: 12, r: 10 }
+            polyline { points: "12 6 12 12 16 14" }
+        },
+        IconKind::Type => rsx! {
+            polyline { points: "4 7 4 4 20 4 20 7" }
+            line { x1: 9, y1: 20, x2: 15, y2: 20 }
+            line { x1: 12, y1: 4, x2: 12, y2: 20 }
+        },
+        IconKind::Book => rsx! {
+            path { d: "M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" }
+            path { d: "M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" }
+        },
+        IconKind::Leaf => rsx! {
+            path { d: "M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" }
+            path { d: "M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" }
+        },
+        IconKind::Star => rsx! {
+            polygon { points: "12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" }
+        },
+        IconKind::Flask => rsx! {
+            path { d: "M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2" }
+            path { d: "M8.5 2h7" }
+            path { d: "M7 16h10" }
+        },
+        IconKind::Users => rsx! {
+            path { d: "M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" }
+            circle { cx: 9, cy: 7, r: 4 }
+            path { d: "M23 21v-2a4 4 0 0 0-3-3.87" }
+            path { d: "M16 3.13a4 4 0 0 1 0 7.75" }
+        },
+        IconKind::Trophy => rsx! {
+            path { d: "M6 9H4.5a2.5 2.5 0 0 1 0-5H6" }
+            path { d: "M18 9h1.5a2.5 2.5 0 0 0 0-5H18" }
+            path { d: "M4 22h16" }
+            path { d: "M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" }
+            path { d: "M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" }
+            path { d: "M18 2H6v7a6 6 0 0 0 12 0V2Z" }
+        },
+        IconKind::Cpu => rsx! {
+            rect { x: 4, y: 4, width: 16, height: 16, rx: 2, ry: 2 }
+            rect { x: 9, y: 9, width: 6, height: 6 }
+            line { x1: 9, y1: 1, x2: 9, y2: 4 }
+            line { x1: 15, y1: 1, x2: 15, y2: 4 }
+            line { x1: 9, y1: 20, x2: 9, y2: 23 }
+            line { x1: 15, y1: 20, x2: 15, y2: 23 }
+            line { x1: 20, y1: 9, x2: 23, y2: 9 }
+            line { x1: 20, y1: 14, x2: 23, y2: 14 }
+            line { x1: 1, y1: 9, x2: 4, y2: 9 }
+            line { x1: 1, y1: 14, x2: 4, y2: 14 }
         },
     };
     rsx! {

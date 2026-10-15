@@ -16,6 +16,36 @@ use crate::{
     model::{Question, QuestionKind},
 };
 
+/// Each category's icon and colour, shown in the lists and as a stripe beside its questions.
+pub fn category_look(category: &str) -> (IconKind, &'static str) {
+    match category {
+        "Art & Design" => (IconKind::PenTool, "#ef4444"),
+        "Film & TV" => (IconKind::Film, "#a855f7"),
+        "Food & Drink" => (IconKind::Coffee, "#f97316"),
+        "Geography" => (IconKind::Globe, "#0d9488"),
+        "History" => (IconKind::Clock, "#a16207"),
+        "Language & Words" => (IconKind::Type, "#84cc16"),
+        "Literature" => (IconKind::Book, "#6366f1"),
+        "Music" => (IconKind::Music, "#ec4899"),
+        "Nature" => (IconKind::Leaf, "#22c55e"),
+        "Pop Culture" => (IconKind::Star, "#eab308"),
+        "Science" => (IconKind::Flask, "#06b6d4"),
+        "Society & Culture" => (IconKind::Users, "#d946ef"),
+        "Sport" => (IconKind::Trophy, "#2563eb"),
+        "Technology" => (IconKind::Cpu, "#64748b"),
+        _ => (IconKind::Help, "#94a3b8"),
+    }
+}
+
+/// A category's icon, in its colour.
+#[component]
+pub fn CategoryIcon(category: String) -> Element {
+    let (kind, color) = category_look(&category);
+    rsx! {
+        span { class: "category-icon", style: "color: {color}", Icon { kind } }
+    }
+}
+
 /// Questions shown at first, and added by each "Show more".
 const PAGE: usize = 40;
 /// Questions a category gets when ticked for a random quiz.
@@ -212,6 +242,7 @@ pub fn LibraryBrowser(
                                 let name = name.clone();
                                 move |_| pick_category(Some(name.clone()))
                             },
+                            CategoryIcon { category: name.clone() }
                             span { class: "grow", "{name}" }
                             span { class: "count", "{count}" }
                         }
@@ -359,8 +390,9 @@ fn LibraryRow(
     on_add: Option<EventHandler<Vec<Question>>>,
 ) -> Element {
     let question = entry.question.clone();
+    let (icon, color) = category_look(&entry.category);
     rsx! {
-        li { class: "list-row",
+        li { class: "list-row library-row", style: "--category: {color}",
             div { class: "grow stack-tight",
                 span { class: "strong", "{entry.question.text}" }
                 if !entry.question.passage.is_empty() {
@@ -389,7 +421,8 @@ fn LibraryRow(
                         span { class: "small library-answer", "✓ {entry.answer()}" }
                     },
                 }
-                span { class: "muted small",
+                span { class: "muted small library-meta",
+                    span { class: "category-icon", Icon { kind: icon } }
                     "{entry.category} · {entry.topic} · {entry.difficulty_name()} · {entry.kind_name()}"
                 }
             }
@@ -499,6 +532,7 @@ pub fn RandomQuizFields(
                                     }
                                 },
                             }
+                            CategoryIcon { category: name.clone() }
                             span { "{name}" }
                             span { class: "muted small", "({count})" }
                         }

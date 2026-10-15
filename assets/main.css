@@ -442,6 +442,42 @@ input.short-number {
   color: var(--ok-text);
 }
 
+/* Each question has a stripe in its category's colour; categories show their icon. */
+.list-row.library-row {
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--category);
+}
+
+/* On the Questions page the list's panel has no side padding: the rows run edge to edge, their
+   stripe over the panel's left border. */
+.card.library-main {
+  padding-inline: 0;
+}
+
+.card.library-main > :not(.library-list) {
+  margin-inline: 1.25rem;
+}
+
+.card.library-main .list-row.library-row {
+  margin-left: -1px;
+  padding-left: calc(1.25rem - 2px);
+  padding-right: 1.25rem;
+}
+
+.category-icon {
+  display: inline-flex;
+  flex: none;
+}
+
+.library-meta .category-icon {
+  margin-right: 0.35rem;
+  vertical-align: -0.15em;
+}
+
+.library-category.selected .category-icon {
+  color: inherit !important;
+}
+
 /* A multiple-choice question's options, the wrong ones in grey. */
 .library-options {
   display: flex;
