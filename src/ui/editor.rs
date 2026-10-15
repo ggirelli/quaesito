@@ -160,6 +160,31 @@ fn too_large(file: &dioxus::html::FileData, max: Option<u64>, what: &str) -> Opt
     })
 }
 
+/// An error when a picture or video is larger than the server takes.
+fn media_too_large(file: &dioxus::html::FileData, limits: Limits) -> Option<String> {
+    let limits = limits.get();
+    if file.content_type().is_some_and(|t| t.starts_with("video/")) {
+        too_large(file, limits.map(|l| l.video), "video")
+    } else {
+        too_large(file, limits.map(|l| l.picture), "picture")
+    }
+}
+
+/// Upload button title: what pictures and videos the server takes.
+fn media_limits_title(limits: Limits) -> String {
+    match limits.get() {
+        Some(l) => format!(
+            "Pictures up to {} MB; videos (MP4, WebM, MOV) up to {} MB",
+            UploadLimits::megabytes(l.picture),
+            UploadLimits::megabytes(l.video),
+        ),
+        None => "A picture, or a video (MP4, WebM, MOV)".to_owned(),
+    }
+}
+
+/// Accepted by picture-or-video uploads.
+const MEDIA_ACCEPT: &str = "image/*,video/mp4,video/webm,video/quicktime";
+
 #[derive(Clone, Copy, PartialEq)]
 enum SaveState {
     Saved,
@@ -634,6 +659,99 @@ fn BonusEditor(question: usize, bonus: Option<Bonus>) -> Element {
     }
 }
 
+/// What the big screen shows only once the answer is revealed: a text, a picture or a video.
+#[component]
+fn ExplanationEditor(question: usize, text: String, image: Option<String>) -> Element {
+    let draft: Draft = use_context();
+    let token: AdminToken = use_context();
+    let limits: Limits = use_context();
+    let mut opened = use_signal(|| false);
+    let mut uploading = use_signal(|| false);
+    let mut upload_error = use_signal(|| None::<String>);
+    let upload = move |evt: FormEvent| async move {
+        let Some(file) = evt.files().into_iter().next() else {
+            return;
+        };
+        if let Some(error) = media_too_large(&file, limits) {
+            upload_error.set(Some(error));
+            return;
+        }
+        uploading.set(true);
+        upload_error.set(None);
+        match upload_question_media(token.get(), file.into()).await {
+            Ok(name) => draft.edit_question(question, |q| q.explanation_image = Some(name)),
+            Err(err) => upload_error.set(Some(message(&err))),
+        }
+        uploading.set(false);
+    };
+    if text.is_empty() && image.is_none() && !opened() {
+        return rsx! {
+            button {
+                class: "button ghost add-bonus",
+                title: "An explanation, a fun fact or a picture, shown on the big screen with the answer",
+                onclick: move |_| opened.set(true),
+                "＋ Add something to show with the answer"
+            }
+        };
+    }
+    rsx! {
+        fieldset { class: "bonus-edit stack",
+            legend { "Shown with the answer" }
+            textarea {
+                class: "question-passage-input",
+                placeholder: "An explanation, a fun fact… (optional)",
+                rows: 2,
+                value: "{text}",
+                oninput: move |e| draft.edit_question(question, |q| q.explanation = e.value()),
+            }
+            div { class: "question-media row",
+                if let Some(image) = &image {
+                    if is_video(image) {
+                        video {
+                            class: "thumb",
+                            src: media_url(image),
+                            preload: "metadata",
+                            muted: true,
+                            controls: true,
+                        }
+                    } else {
+                        img { class: "thumb", src: media_url(image), alt: "Picture shown with the answer" }
+                    }
+                    button {
+                        class: "button ghost",
+                        onclick: move |_| draft.edit_question(question, |q| q.explanation_image = None),
+                        if is_video(image) { "Remove video" } else { "Remove picture" }
+                    }
+                } else {
+                    label { class: "button ghost",
+                        title: media_limits_title(limits),
+                        if uploading() { "Uploading…" } else { "＋ Add picture or video" }
+                        input {
+                            r#type: "file",
+                            accept: MEDIA_ACCEPT,
+                            class: "visually-hidden",
+                            onchange: upload,
+                        }
+                    }
+                }
+                span { class: "grow" }
+                button {
+                    class: "button ghost",
+                    onclick: move |_| {
+                        opened.set(false);
+                        draft.edit_question(question, |q| {
+                            q.explanation.clear();
+                            q.explanation_image = None;
+                        });
+                    },
+                    "Remove"
+                }
+            }
+            ErrorBox { error: upload_error() }
+        }
+    }
+}
+
 /// A segmented choice between a few options, each with an explanation.
 #[component]
 fn Choice(
@@ -708,13 +826,7 @@ fn QuestionCard(
         let Some(file) = evt.files().into_iter().next() else {
             return;
         };
-        let video = file.content_type().is_some_and(|t| t.starts_with("video/"));
-        let error = if video {
-            too_large(&file, limits.get().map(|l| l.video), "video")
-        } else {
-            too_large(&file, limits.get().map(|l| l.picture), "picture")
-        };
-        if let Some(error) = error {
+        if let Some(error) = media_too_large(&file, limits) {
             upload_error.set(Some(error));
             return;
         }
@@ -934,18 +1046,11 @@ fn QuestionCard(
                     } else {
                         label {
                             class: "button ghost",
-                            title: match limits.get() {
-                                Some(l) => format!(
-                                    "Pictures up to {} MB; videos (MP4, WebM, MOV) up to {} MB",
-                                    UploadLimits::megabytes(l.picture),
-                                    UploadLimits::megabytes(l.video),
-                                ),
-                                None => "A picture, or a video (MP4, WebM, MOV)".to_owned(),
-                            },
+                            title: media_limits_title(limits),
                             if uploading() { "Uploading…" } else { "＋ Add picture or video" }
                             input {
                                 r#type: "file",
-                                accept: "image/*,video/mp4,video/webm,video/quicktime",
+                                accept: MEDIA_ACCEPT,
                                 class: "visually-hidden",
                                 onchange: upload,
                             }
@@ -1104,6 +1209,11 @@ fn QuestionCard(
                 }
                 if question.takes_bonus() {
                     BonusEditor { question: index, bonus: question.bonus.clone() }
+                }
+                ExplanationEditor {
+                    question: index,
+                    text: question.explanation.clone(),
+                    image: question.explanation_image.clone(),
                 }
             }
         }

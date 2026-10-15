@@ -37,8 +37,8 @@ use crate::{
         RevealMode,
     },
     protocol::{
-        AnswerOutcome, BACKDROP_COUNT, DEFAULT_MAX_TEAMS, Fastest, GameResults, Grade, Guess,
-        HostPhase, HostView, InputKind, JokerState, Judgement, MASCOTS, MAX_NAME_CHARS,
+        AnswerOutcome, BACKDROP_COUNT, DEFAULT_MAX_TEAMS, Explanation, Fastest, GameResults, Grade,
+        Guess, HostPhase, HostView, InputKind, JokerState, Judgement, MASCOTS, MAX_NAME_CHARS,
         MAX_TEAMS_CEILING, PairColumns, PartReveal, PinGuess, PlayerPhase, PlayerView,
         QuestionInfo, Response, ResultRow, Reveal, RoundResult, SlideInfo, StandingRow, TeamInfo,
         TextGroup, Upcoming,
@@ -990,6 +990,7 @@ impl Game {
                     fastest: revealing.then(|| self.fastest(index)).flatten(),
                     standings: revealing.then(|| self.standings_after(index)),
                     bonus: revealing.then(|| self.bonus_reveal(index)).flatten(),
+                    explanation: revealing.then(|| self.explanation(index)).flatten(),
                     then: self.upcoming_after(index),
                 }
             }
@@ -1003,6 +1004,7 @@ impl Game {
                 reveal: self.reveal(index),
                 fastest: self.fastest(index),
                 bonus: self.bonus_reveal(index),
+                explanation: self.explanation(index),
                 then: if self
                     .first_question_in(index + 1, self.part_end(index))
                     .is_some()
@@ -1408,6 +1410,16 @@ impl Game {
             passage: question.passage.trim().to_owned(),
             pairs: self.pair_columns(index),
         }
+    }
+
+    /// What question `index` shows with its answer, if anything.
+    fn explanation(&self, index: usize) -> Option<Explanation> {
+        let question = &self.quiz.questions[index];
+        let text = question.explanation.trim();
+        (!text.is_empty() || question.explanation_image.is_some()).then(|| Explanation {
+            text: text.to_owned(),
+            image: question.explanation_image.clone(),
+        })
     }
 
     /// Question `index`'s bonus question, if it has one it can carry.
@@ -2195,6 +2207,8 @@ mod tests {
             ],
             bonus: None,
             passage: String::new(),
+            explanation: String::new(),
+            explanation_image: None,
         };
         Quiz {
             settings,
@@ -3117,6 +3131,56 @@ mod tests {
         ));
         g.next(t0).unwrap(); // podium
         assert!(matches!(g.host_view(t0).phase, HostPhase::Podium { .. }));
+    }
+
+    #[test]
+    fn explanations_wait_for_the_answer() {
+        let t0 = Instant::now();
+        let explained = |reveal| {
+            let mut quiz = quiz(QuizSettings {
+                reveal,
+                ..QuizSettings::default()
+            });
+            quiz.questions[0].explanation = " Saturn has 274.\n".to_owned();
+            quiz.questions[0].explanation_image = Some("rings.jpg".to_owned());
+            quiz.questions[1].explanation = "  ".to_owned();
+            let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+            join(&mut g, "Owls");
+            g
+        };
+        let shown = Some(Explanation {
+            text: "Saturn has 274.".to_owned(),
+            image: Some("rings.jpg".to_owned()),
+        });
+
+        let mut g = explained(RevealMode::AfterEachQuestion);
+        g.next(t0).unwrap(); // question one
+        g.next(t0).unwrap(); // close early
+        let HostPhase::Closed { explanation, .. } = g.host_view(t0).phase else {
+            panic!("not closed");
+        };
+        assert_eq!(explanation, shown);
+        g.next(t0).unwrap(); // question two
+        g.next(t0).unwrap(); // close early
+        let HostPhase::Closed { explanation, .. } = g.host_view(t0).phase else {
+            panic!("not closed");
+        };
+        assert_eq!(explanation, None, "blank text and no picture");
+
+        let mut g = explained(RevealMode::AtEnd);
+        g.next(t0).unwrap(); // question one
+        g.next(t0).unwrap(); // close early
+        let HostPhase::Closed { explanation, .. } = g.host_view(t0).phase else {
+            panic!("not closed");
+        };
+        assert_eq!(explanation, None, "the answer is not revealed yet");
+        g.next(t0).unwrap(); // question two
+        g.next(t0).unwrap(); // close early
+        g.next(t0).unwrap(); // review one
+        let HostPhase::Review { explanation, .. } = g.host_view(t0).phase else {
+            panic!("not reviewing");
+        };
+        assert_eq!(explanation, shown);
     }
 
     /// Where the big screen is, in short: "Q1" (open), "C1" (closed), "S1", "R1" (review),

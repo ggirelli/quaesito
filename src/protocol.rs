@@ -141,6 +141,15 @@ pub struct QuestionInfo {
     pub pairs: Option<PairColumns>,
 }
 
+/// What the big screen adds once a question's answer is revealed: an explanation, a fun fact…
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct Explanation {
+    /// Line breaks kept; may be empty when there is a picture.
+    pub text: String,
+    /// A picture or video.
+    pub image: Option<String>,
+}
+
 /// A slide as shown on the big screen; any part may be empty.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct SlideInfo {
@@ -310,6 +319,8 @@ pub enum HostPhase {
         standings: Option<Vec<StandingRow>>,
         /// The bonus question's answers, when revealing and the question has one.
         bonus: Option<PartReveal>,
+        /// When revealing and the question has one.
+        explanation: Option<Explanation>,
         then: Upcoming,
     },
     /// A slide between questions.
@@ -330,6 +341,7 @@ pub enum HostPhase {
         fastest: Option<Fastest>,
         /// The bonus question's answers, if the question has one.
         bonus: Option<PartReveal>,
+        explanation: Option<Explanation>,
         then: Upcoming,
     },
     /// Final ranking, revealed from 3rd to 1st. `standings` only holds rows revealed so far.

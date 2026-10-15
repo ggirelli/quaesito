@@ -82,6 +82,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 73  | Question library: about 2,700 ready-made questions to browse by category, add while editing, or fill a new quiz at random          | ✅ done |
 | 74  | Ready-made team pictures: 16 cut-out mascots to pick instead of uploading (also when uploads are off)                              | ✅ done |
 | 75  | Phone lobby: “You’re in!” first, name and picture folded away (teams rename themselves); Teams panel toggles uploads               | ✅ done |
+| 76  | Text, picture or video shown with the answer only (explanation, fun fact); quiz file format 2                                      | ✅ done |
 
 ## Notes
 

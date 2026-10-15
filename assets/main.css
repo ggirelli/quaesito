@@ -1730,6 +1730,35 @@ table.results {
   color: var(--accent-text);
 }
 
+/* What a question shows with its answer: an explanation, a fun fact, a picture. */
+.explanation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5vw;
+  margin: 0 auto;
+  max-width: 60rem;
+  padding: 0.8em 1.2em;
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.explanation-image {
+  max-height: 24vh;
+  max-width: 40%;
+  min-height: 0;
+  border-radius: var(--radius);
+  object-fit: contain;
+}
+
+.explanation-text {
+  margin: 0;
+  font-size: 1.3em;
+  line-height: 1.4;
+  white-space: pre-line;
+}
+
 /* A results slide: the standings under the slide's title. */
 .results-slide .standings {
   width: min(40rem, 90vw);

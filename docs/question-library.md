@@ -80,7 +80,7 @@ again changes nothing.
 
 ## Adding questions
 
-Attach `docs/schema/quiz-1.json` to a conversation with an AI model, paste the prompt below and fill
+Attach `docs/schema/quiz-2.json` to a conversation with an AI model, paste the prompt below and fill
 in the batch at the end. Ask for number and typed-answer questions separately if quality matters:
 they were the most error-prone. Check the result with `check.py`, fact-check it, then save it as a
 topic file (or add its entries to one) and check the library again.

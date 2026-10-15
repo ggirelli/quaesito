@@ -18,7 +18,7 @@ use crate::{
     api::{end_session, game_results, host_socket, join_origin},
     model::{ImageReveal, Pair, Point},
     protocol::{
-        Fastest, Grade, Guess, HostCommand, HostPhase, HostView, InputKind, Judgement,
+        Explanation, Fastest, Grade, Guess, HostCommand, HostPhase, HostView, InputKind, Judgement,
         MAX_NAME_CHARS, PairColumns, PartReveal, PinGuess, QuestionInfo, Reveal, SlideInfo,
         StandingRow, TeamInfo, TextGroup, Upcoming,
     },
@@ -183,7 +183,7 @@ fn HostScreen(code: String) -> Element {
                             paused,
                         }
                     },
-                    HostPhase::Closed { question, answered, reveal, fastest, standings, bonus, .. } => rsx! {
+                    HostPhase::Closed { question, answered, reveal, fastest, standings, bonus, explanation, .. } => rsx! {
                         ClosedSlide {
                             question: question.clone(),
                             answered: *answered,
@@ -192,6 +192,7 @@ fn HostScreen(code: String) -> Element {
                             fastest: fastest.clone(),
                             standings: standings.clone(),
                             bonus: bonus.clone(),
+                            explanation: explanation.clone(),
                         }
                     },
                     HostPhase::Slide { slide, .. } => rsx! {
@@ -205,7 +206,7 @@ fn HostScreen(code: String) -> Element {
                             Standings { rows: standings.iter().take(RESULTS_SHOWN).cloned().collect::<Vec<_>>() }
                         }
                     },
-                    HostPhase::Review { question, answered, reveal, fastest, bonus, .. } => rsx! {
+                    HostPhase::Review { question, answered, reveal, fastest, bonus, explanation, .. } => rsx! {
                         ReviewSlide {
                             question: question.clone(),
                             answered: *answered,
@@ -213,6 +214,7 @@ fn HostScreen(code: String) -> Element {
                             reveal: reveal.clone(),
                             fastest: fastest.clone(),
                             bonus: bonus.clone(),
+                            explanation: explanation.clone(),
                         }
                     },
                     HostPhase::Podium { standings, finished } => rsx! {
@@ -1398,6 +1400,7 @@ fn ClosedSlide(
     fastest: Option<Fastest>,
     standings: Option<Vec<StandingRow>>,
     bonus: Option<PartReveal>,
+    explanation: Option<Explanation>,
 ) -> Element {
     match (reveal, standings) {
         (Some(reveal), Some(standings)) => rsx! {
@@ -1413,6 +1416,7 @@ fn ClosedSlide(
                     RevealBody { question: question.clone(), reveal }
                     BonusReveal { question: question.index, bonus }
                     FastestNote { fastest }
+                    ExplanationNote { explanation }
                 }
                 Standings { rows: standings.into_iter().take(STANDINGS_SHOWN).collect::<Vec<_>>() }
             }
@@ -1437,6 +1441,7 @@ fn ReviewSlide(
     reveal: Reveal,
     fastest: Option<Fastest>,
     bonus: Option<PartReveal>,
+    explanation: Option<Explanation>,
 ) -> Element {
     rsx! {
         QuestionHeader { question: question.clone(),
@@ -1453,6 +1458,25 @@ fn ReviewSlide(
         RevealBody { question: question.clone(), reveal }
         BonusReveal { question: question.index, bonus }
         FastestNote { fastest }
+        ExplanationNote { explanation }
+    }
+}
+
+/// What the question shows with its answer: an explanation, a fun fact, a picture…
+#[component]
+fn ExplanationNote(explanation: Option<Explanation>) -> Element {
+    let Some(explanation) = explanation else {
+        return rsx! {};
+    };
+    rsx! {
+        aside { class: "explanation",
+            if let Some(image) = &explanation.image {
+                QuestionMedia { name: image.clone(), class: "explanation-image", autoplay: true }
+            }
+            if !explanation.text.is_empty() {
+                p { class: "explanation-text", "{explanation.text}" }
+            }
+        }
     }
 }
 
