@@ -2695,6 +2695,32 @@ button.joker {
 .backdrop-9 { background: linear-gradient(135deg, var(--a5), var(--a1)); }
 .backdrop-10 { background: linear-gradient(135deg, var(--a4), var(--a0)); }
 
+/* The ready-made pictures were drawn for the sky-blue background: on any other, their colours turn
+   by as much as the background's hue differs from sky blue (the middle of a gradient's two
+   colours), so they keep the same contrast. The default background is the amber accent. */
+.avatar.mascot {
+  overflow: hidden;
+}
+
+.mascot-art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: hue-rotate(-156deg);
+}
+
+.backdrop-0 > .mascot-art { filter: hue-rotate(60deg); }
+.backdrop-1 > .mascot-art { filter: hue-rotate(-25deg); }
+.backdrop-2 > .mascot-art { filter: hue-rotate(127deg); }
+.backdrop-3 > .mascot-art { filter: hue-rotate(-171deg); }
+.backdrop-4 > .mascot-art { filter: hue-rotate(0deg); }
+.backdrop-5 > .mascot-art { filter: hue-rotate(-116deg); }
+.backdrop-6 > .mascot-art { filter: hue-rotate(94deg); }
+.backdrop-7 > .mascot-art { filter: hue-rotate(-13deg); }
+.backdrop-8 > .mascot-art { filter: hue-rotate(158deg); }
+.backdrop-9 > .mascot-art { filter: hue-rotate(-70deg); }
+.backdrop-10 > .mascot-art { filter: hue-rotate(30deg); }
+
 .backdrop-swatch.selected {
   outline: 3px solid var(--fg);
   outline-offset: 2px;

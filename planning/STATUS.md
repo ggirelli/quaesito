@@ -90,7 +90,8 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 - `src/server/matching.rs`: normalisation of typed answers (case, accents, punctuation, spacing).
 - `src/server/store.rs`: one JSON file per quiz, atomic writes, path-safe ids.
 - `src/server/media.rs`: picture re-encoding (questions → JPEG ≤1600×1200, avatars → 256² PNG keeping transparency), `GET /media/{name}`.
-- Team pictures: an upload (unless the game turns uploads off) or one of 16 ready-made mascots (`assets/teams/`, made by `tools/assets/team-mascots.py`), on a background the team picks (`.backdrop-<n>` classes; inline styles flickered).
+- Team pictures: an upload (unless the game turns uploads off) or one of 16 ready-made mascots (`assets/teams/`, made by `tools/assets/team-mascots.py`), on a background the team picks (`.backdrop-<n>` classes; inline styles flickered). Mascots were drawn for
+  the sky-blue background; on others a `hue-rotate()` per background class keeps the same contrast.
 - `src/server/mod.rs`: global state initialised from `QUAESITO_DATA_DIR` (default `./data`).
 - `src/server/auth.rs`: admin password from `QUAESITO_ADMIN_PASSWORD` (generated and logged if unset), in-memory bearer tokens.
 - `src/api.rs`: server functions for login, quiz CRUD, duplicate, JSON import and picture upload.

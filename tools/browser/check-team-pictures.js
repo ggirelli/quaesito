@@ -110,8 +110,17 @@ function cutout(file) {
   }
   // A ready-made picture replaces the upload, on the phone and the big screen.
   await (await owls.$$('.mascot-choice'))[0].click(); // owl
-  const mascot = await host.waitForFunction(() => [...document.querySelectorAll('img.avatar')].some((i) => /owl/.test(i.src)), { timeout: 5000 }).then(() => true, () => false);
-  const phoneMascot = await owls.waitForFunction(() => /owl/.test(document.querySelector('.avatar.large').src || ''), { timeout: 5000 }).then(() => true, () => false);
+  const mascot = await host.waitForFunction(() => [...document.querySelectorAll('.avatar.mascot img')].some((i) => /owl/.test(i.src)), { timeout: 5000 }).then(() => true, () => false);
+  const phoneMascot = await owls.waitForFunction(() => /owl/.test(document.querySelector('.avatar.large img')?.src || ''), { timeout: 5000 }).then(() => true, () => false);
+  // Its colours turn with the background: unchanged on sky blue, turned on violet.
+  const filters = async () => owls.$eval('.avatar.large .mascot-art', (i) => getComputedStyle(i).filter);
+  await (await owls.$$('.backdrop-swatch'))[5].click(); // sky blue
+  await owls.waitForFunction(() => document.querySelector('.avatar.large').classList.contains('backdrop-4'));
+  const sky = await filters();
+  await (await owls.$$('.backdrop-swatch'))[1].click(); // violet
+  await owls.waitForFunction(() => document.querySelector('.avatar.large').classList.contains('backdrop-0'));
+  const violet = await filters();
+  expect(`mascot hue: ${sky} on sky blue, ${violet} on violet`, sky === 'hue-rotate(0deg)' && violet === 'hue-rotate(60deg)');
   expect(`mascots: ${(await owls.$$('.mascot-choice')).length}, the owl on both screens`, mascot && phoneMascot);
   await owls.screenshot({ path: 'out/team-pictures-phone.png' });
   await host.screenshot({ path: 'out/team-pictures-host.png' });
@@ -128,9 +137,9 @@ function cutout(file) {
   expect('no pictures: initial on its background', true);
   // Ready-made pictures stay available without uploads; picking one again drops it.
   await (await cats.$$('.mascot-choice'))[2].click(); // cat
-  await cats.waitForFunction(() => /cat/.test(document.querySelector('.avatar.large').src || ''));
+  await cats.waitForFunction(() => /cat/.test(document.querySelector('.avatar.large img')?.src || ''));
   await (await cats.$$('.mascot-choice'))[2].click();
-  const back = await cats.waitForFunction(() => document.querySelector('.avatar.large').tagName === 'SPAN', { timeout: 5000 }).then(() => true, () => false);
+  const back = await cats.waitForFunction(() => !document.querySelector('.avatar.large img'), { timeout: 5000 }).then(() => true, () => false);
   expect('no pictures: a mascot, then back to the initial', back);
   await cats.screenshot({ path: 'out/team-pictures-off.png' });
   // The big screen's Teams panel turns uploads off mid-game: pictures go, mascots stay.
@@ -164,7 +173,7 @@ function cutout(file) {
   await host.waitForSelector('.panel .check-field input');
   expect('teams panel: uploads on', await host.$eval('.panel .check-field input', (i) => i.checked));
   await host.click('.panel .check-field input');
-  const off = await owls.waitForFunction(() => !document.querySelector('.avatar-picker') && document.querySelector('.avatar.large').tagName === 'SPAN', { timeout: 5000 }).then(() => true, () => false);
+  const off = await owls.waitForFunction(() => !document.querySelector('.avatar-picker') && !document.querySelector('.avatar.large img'), { timeout: 5000 }).then(() => true, () => false);
   expect('teams panel: uploads off, the picture gone from the phone', off);
   await host.screenshot({ path: 'out/team-pictures-panel.png' });
   const admin = await L.openAdmin(ctx, '/admin');

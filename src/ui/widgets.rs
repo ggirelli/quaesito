@@ -208,6 +208,17 @@ pub fn mascot_picture(name: &str) -> Option<Asset> {
         .map(|i| MASCOT_PICTURES[i])
 }
 
+/// A ready-made picture in its round frame (`class` holds `avatar` and the background): its colours
+/// turn with the background, which a filter on the frame itself would also turn.
+#[component]
+pub fn MascotArt(class: String, picture: Asset, #[props(default)] alt: String) -> Element {
+    rsx! {
+        span { class: "{class} mascot",
+            img { class: "mascot-art", src: picture, alt }
+        }
+    }
+}
+
 /// A team's avatar, or its initial when it has none, on the background it picked.
 #[component]
 pub fn TeamAvatar(team: crate::protocol::TeamInfo, #[props(default)] class: String) -> Element {
@@ -219,7 +230,7 @@ pub fn TeamAvatar(team: crate::protocol::TeamInfo, #[props(default)] class: Stri
     }
     if let Some(picture) = team.mascot.as_deref().and_then(mascot_picture) {
         return rsx! {
-            img { class, src: picture, alt: "" }
+            MascotArt { class, picture }
         };
     }
     let initial: String = team

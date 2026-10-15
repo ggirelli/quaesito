@@ -7,8 +7,8 @@ use super::{
     live::{ConnectionBanner, Live, countdown_ms, use_clock, use_live},
     widgets::{
         ANSWER_STYLES, AnswerBadge, AnswerShape, Brand, ClientOnly, DOT, ErrorBox, MASCOT_PICTURES,
-        MapPin, PairItemContent, PinMap, Spinner, TeamAvatar, backdrop_class, media_url, message,
-        pair_letter,
+        MapPin, MascotArt, PairItemContent, PinMap, Spinner, TeamAvatar, backdrop_class, media_url,
+        message, pair_letter,
     },
 };
 use crate::{
@@ -648,7 +648,7 @@ fn LobbyView(
                                     aria_pressed: chosen,
                                     title: "{name}",
                                     onclick: move |_| pick_mascot((!chosen).then(|| (*name).to_owned())),
-                                    img { class: "avatar {backdrop}", src: picture, alt: "{name}" }
+                                    MascotArt { class: "avatar {backdrop}", picture, alt: "{name}" }
                                 }
                             }
                         }

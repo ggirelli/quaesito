@@ -14,7 +14,8 @@ All notable changes to quaesito are listed here. The format follows
   tick.
 - Teams pick a background for their picture: one of six colours or five gradients, shown behind their initial and
   through the transparent parts of a cut-out picture, on phones and the big screen.
-- 16 ready-made team pictures (an owl, a fox, a robot…): teams pick one instead of uploading their own.
+- 16 ready-made team pictures (an owl, a fox, a robot…): teams pick one instead of uploading their own. Their colours
+  turn with the background the team picks, keeping the contrast they were drawn with.
 - Starting a game can turn off uploaded team pictures (**Teams can add a picture**), and so can the big screen's
   **Teams** panel during the game: teams then pick a ready-made picture or show their initial, on the background
   they pick.
