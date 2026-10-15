@@ -286,5 +286,21 @@
     "problem": "ambiguous",
     "explanation": "The original Game of Life (The Checkered Game of Life, 1860) was designed by Milton Bradley. Reuben Klamer (with Bill Markham) designed the 1960 version, so 'original designer' is debatable. Scrabble and Cluedo also repeat Parts entry 28, and Scrabble repeats entry 20.",
     "fix": "Replace the Game of Life pair with \"Mastermind\" / \"Mordecai Meirowitz\" and the Scrabble pair with \"Trivial Pursuit\" / \"Chris Haney and Scott Abbott\". Do not use Monopoly / Charles Darrow: under 'original designer' Lizzie Magie (The Landlord's Game) is defensible."
+  },
+  {
+    "file": "pop-culture-celebrities.json",
+    "entry": 24,
+    "question": "In what year did the first Academy Awards ceremony take place? Give the year.",
+    "problem": "duplicate",
+    "explanation": "Asks the same fact as a question in film-tv-oscars.json.",
+    "fix": "Drop."
+  },
+  {
+    "file": "pop-culture-comics-superheroes.json",
+    "entry": 11,
+    "question": "What is the name of the fictional African nation ruled by Black Panther?",
+    "problem": "duplicate",
+    "explanation": "Asks the same fact as a question in film-tv-blockbusters.json.",
+    "fix": "Drop."
   }
 ]

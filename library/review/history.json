@@ -486,5 +486,21 @@
     "problem": "ambiguous",
     "explanation": "Each part accepts only one country (part 1 Germany, part 2 Italy, part 3 Japan), so a correct answer in a different order is marked wrong.",
     "fix": "Accept Germany, Italy and Japan in every part. Note: the engine grades each part against its own accepted list and does not check for repeats, so if every part accepts the full list a team can type the same answer in every part and score full marks; a host override cannot fix this cleanly because judgements are keyed per part. Alternatively, relabel the parts 'Axis power led by Hitler', 'Axis power led by Mussolini', 'Axis power in Asia'."
+  },
+  {
+    "file": "history-renaissance-exploration.json",
+    "entry": 11,
+    "question": "Which artist painted The Arnolfini Portrait?",
+    "problem": "duplicate",
+    "explanation": "Asks the same fact as a question in art-design-painting.json.",
+    "fix": "Drop."
+  },
+  {
+    "file": "history-ancient-world.json",
+    "entry": 2,
+    "question": "Which city was buried by the eruption of Mount Vesuvius in AD 79?",
+    "problem": "duplicate",
+    "explanation": "Asks the same fact as a question in geography-cities-landmarks.json.",
+    "fix": "Drop."
   }
 ]

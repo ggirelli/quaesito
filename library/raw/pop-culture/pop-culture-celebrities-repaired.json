@@ -26,31 +26,6 @@
   },
   {
     "category": "Pop Culture",
-    "replaces": 10,
-    "topic": "Celebrities",
-    "difficulty": 3,
-    "time_sensitive": false,
-    "question": {
-      "text": "Who was the first woman to win the Academy Award for Best Director?",
-      "answers": [
-        {
-          "text": "Kathryn Bigelow",
-          "correct": true
-        },
-        {
-          "text": "Jane Campion"
-        },
-        {
-          "text": "Sofia Coppola"
-        },
-        {
-          "text": "Greta Gerwig"
-        }
-      ]
-    }
-  },
-  {
-    "category": "Pop Culture",
     "replaces": 13,
     "topic": "Celebrities",
     "difficulty": 1,

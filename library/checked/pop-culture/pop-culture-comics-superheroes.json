@@ -218,30 +218,6 @@
   {
     "category": "Pop Culture",
     "topic": "Comics & superheroes",
-    "difficulty": 3,
-    "time_sensitive": false,
-    "question": {
-      "text": "What is the name of the fictional African nation ruled by Black Panther?",
-      "answers": [
-        {
-          "text": "Wakanda",
-          "correct": true
-        },
-        {
-          "text": "Genosha"
-        },
-        {
-          "text": "Zamunda"
-        },
-        {
-          "text": "Latveria"
-        }
-      ]
-    }
-  },
-  {
-    "category": "Pop Culture",
-    "topic": "Comics & superheroes",
     "difficulty": 1,
     "time_sensitive": false,
     "question": {

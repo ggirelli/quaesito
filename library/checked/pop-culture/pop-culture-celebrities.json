@@ -333,24 +333,6 @@
     "difficulty": 3,
     "time_sensitive": false,
     "question": {
-      "text": "In what year did the first Academy Awards ceremony take place? Give the year.",
-      "kind": {
-        "Number": {
-          "answer": 1929,
-          "range": {
-            "min": 1915,
-            "max": 1945
-          }
-        }
-      }
-    }
-  },
-  {
-    "category": "Pop Culture",
-    "topic": "Celebrities",
-    "difficulty": 3,
-    "time_sensitive": false,
-    "question": {
       "text": "How many Academy Awards did Katharine Hepburn win competitively for acting? Give the number.",
       "kind": {
         "Number": {
@@ -497,30 +479,6 @@
         },
         {
           "text": "David Hockney"
-        }
-      ]
-    }
-  },
-  {
-    "category": "Pop Culture",
-    "topic": "Celebrities",
-    "difficulty": 3,
-    "time_sensitive": false,
-    "question": {
-      "text": "Who was the first woman to win the Academy Award for Best Director?",
-      "answers": [
-        {
-          "text": "Kathryn Bigelow",
-          "correct": true
-        },
-        {
-          "text": "Jane Campion"
-        },
-        {
-          "text": "Sofia Coppola"
-        },
-        {
-          "text": "Greta Gerwig"
         }
       ]
     }

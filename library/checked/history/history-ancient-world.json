@@ -29,30 +29,6 @@
     "difficulty": 1,
     "time_sensitive": false,
     "question": {
-      "text": "Which city was buried by the eruption of Mount Vesuvius in AD 79?",
-      "answers": [
-        {
-          "text": "Pompeii",
-          "correct": true
-        },
-        {
-          "text": "Carthage"
-        },
-        {
-          "text": "Athens"
-        },
-        {
-          "text": "Alexandria"
-        }
-      ]
-    }
-  },
-  {
-    "category": "History",
-    "topic": "Ancient world",
-    "difficulty": 1,
-    "time_sensitive": false,
-    "question": {
       "text": "In Greek mythology, which god ruled the sea?",
       "answers": [
         {

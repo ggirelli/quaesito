@@ -149,30 +149,6 @@
     "difficulty": 3,
     "time_sensitive": false,
     "question": {
-      "text": "Which artist painted The Arnolfini Portrait?",
-      "answers": [
-        {
-          "text": "Jan van Eyck",
-          "correct": true
-        },
-        {
-          "text": "Rogier van der Weyden"
-        },
-        {
-          "text": "Hans Holbein the Younger"
-        },
-        {
-          "text": "Albrecht Dürer"
-        }
-      ]
-    }
-  },
-  {
-    "category": "History",
-    "topic": "Renaissance & exploration",
-    "difficulty": 3,
-    "time_sensitive": false,
-    "question": {
       "text": "Which expedition leader conquered the Aztec capital Tenochtitlan for Spain?",
       "answers": [
         {
