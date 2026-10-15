@@ -2641,6 +2641,11 @@ button.joker {
 }
 
 .mascot-choice {
+  /* A flex box exactly the size of the mascot: as inline content it left room for text below,
+     which stretched the selection ring into an oval. */
+  display: flex;
+  width: 3.4rem;
+  height: 3.4rem;
   padding: 0;
   border: 0;
   border-radius: 50%;

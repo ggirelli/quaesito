@@ -78,6 +78,12 @@ function cutout(file) {
     return Math.abs(left - (window.innerWidth - right)) < 4;
   });
   expect('mascots centred', centred);
+  // Each mascot button is square, so its selection ring is a circle.
+  const square = await owls.$$eval('.mascot-choice', (bs) => bs.every((b) => {
+    const r = b.getBoundingClientRect();
+    return Math.abs(r.width - r.height) < 0.5;
+  }));
+  expect('mascot buttons square', square);
   await (await owls.$('.avatar-picker input[type=file]')).uploadFile(picture);
   await owls.waitForSelector('img.avatar.large');
   const swatches = await owls.$$('.backdrop-swatch');
