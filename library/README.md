@@ -4,9 +4,9 @@ A bank of ready-made quiz questions that hosts will be able to pick from in the 
 writing every question themselves. Questions were generated with ChatGPT from a prompt and the quiz
 schema, then checked by script and fact-checked by Claude.
 
-**Status (2026-10-14): work in progress**, committed locally on the `question-library` bookmark (not
-pushed), checked out in the jj workspace `.workspaces/library`. The app does not use the library
-yet; see [Next steps](#next-steps).
+**Status (2026-10-15): all 14 categories repaired and checked**, committed locally on the
+`question-library` bookmark (not pushed), checked out in the jj workspace `.workspaces/library`. The
+app does not use the library yet; see [Next steps](#next-steps).
 
 ## Layout
 
@@ -89,28 +89,28 @@ errors (unusable) and warnings (worth a look):
    history, language-words, literature). Claude reviewed every repair against its fix: most were
    right; it fixed 4 entries by hand and taught `clean.py` and `check.py` about the problems found
    (rewrites of unflagged entries, "any order" Parts).
+5. **Repaired** the other 7 categories with ChatGPT, using the prompt with `replaces`. Claude read
+   every repair against its fix (2026-10-15): nearly all were right. ChatGPT skipped five batches
+   (music-album-covers-firsts, music-classical, sport-basketball, sport-cycling, sport-football), so
+   Claude wrote those 17 repairs from their fixes. Claude also fixed 4 repairs by hand (a Parts
+   question whose two "Sauropod" slots took different names, an Order question whose text listed
+   the items in order, a 16-digit Number answer, an off-topic Galileo question), dropped one repair
+   that repeated a film-tv question, and added `drop` findings for 4 repeats across categories
+   (Pompeii, the Arnolfini Portrait, Wakanda, the first Oscars ceremony).
 
-Current `checked/`: **2,540 entries, 0 errors**, 45 warnings (38 near-duplicates, of which only one is
-a real repeat: Pompeii in both geography-cities-landmarks and history-ancient-world).
+Current `checked/`: **2,719 entries, 0 errors**, 49 warnings (37 near-duplicates, all shared wording
+such as "What is the capital of ...", none a real repeat).
 
 ## Next steps
 
-1. **Repair the remaining 7 categories** with ChatGPT: music, nature, pop-culture, science,
-   society-culture, sport, technology (about 180 fixes). For each, attach the category's files from
-   `raw/<category>/` and `review/<category>.json`, and paste the repair prompt below. Save the
-   results next to their batches as `<batch>-repaired.json`.
-2. **Check the repairs**, rebuild and check the library:
-   `uv run tools/library/check.py library/raw/<category>/*-repaired.json`, then the two commands in
-   [Scripts](#scripts). Ideally have Claude read the repairs against their fixes as was done for the
-   first 7 categories: a script lists each repair next to its fix cheaply (no agents needed).
-3. **Push** the `question-library` bookmark and open a PR to main. Its first commit (ignoring
+1. **Push** the `question-library` bookmark and open a PR to main. Its first commit (ignoring
    `__pycache__/` and `.workspaces/`) could go to main on its own first.
-4. **Library schema**: a small `docs/schema/library-1.json` for entries, whose `question` refers to
+2. **Library schema**: a small `docs/schema/library-1.json` for entries, whose `question` refers to
    `quiz-1.json#/$defs/Question`.
-5. **Editor panel** ("Add from library"): filter by category, difficulty and kind, search, add one by
+3. **Editor panel** ("Add from library"): filter by category, difficulty and kind, search, add one by
    one or "10 medium history questions"; remember questions already played. The app bundles one file
    combined from `checked/`.
-6. Optional app change: grade Parts so that an answer repeated in another part counts once. Then
+4. Optional app change: grade Parts so that an answer repeated in another part counts once. Then
    "name three, in any order" questions become possible and the check could be relaxed.
 
 ## Prompts
