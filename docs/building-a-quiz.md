@@ -34,7 +34,7 @@ but read the ones you pick before playing: a few may still be wrong or out of da
 
 - **Browse it** on the admin page's **Questions** tab. Pick a category on the left to see only its
   questions; it opens onto its topics, which narrow the list further. Pick the category again to
-  close it. Search questions and answers, and filter by difficulty and answer type.
+  close it. Search questions and answers, and filter by difficulty and question type.
 - **In the editor**, press **＋ From the library** to browse it the same way. **＋ Add** adds one
   question at the end of the quiz; 🎲 **Add at random** adds as many of the questions shown as
   you ask for. Questions already in the quiz are marked, and never added twice at random.

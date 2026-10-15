@@ -37,7 +37,7 @@ const L = require('./lib.js');
   expect(`Questions tab: ${music.length} Classical questions, no add buttons`,
     music.length > 0 && music.every((r) => r.includes('Music · Classical'))
       && !(await library.$('.library-list button')));
-  // The difficulty and answer type lists narrow the list; picking an option again clears it.
+  // The difficulty and question type lists narrow the list; picking an option again clears it.
   await L.clickText(library, '.library-option', 'Hard');
   await L.clickText(library, '.library-option', 'Choices');
   await L.sleep(300);

@@ -249,7 +249,7 @@ pub fn LibraryBrowser(
                     },
                 }
                 FilterList {
-                    title: "Answer type",
+                    title: "Question type",
                     options: kinds,
                     selected: Some(kind()).filter(|k| !k.is_empty()),
                     on_pick: move |key: Option<String>| {
