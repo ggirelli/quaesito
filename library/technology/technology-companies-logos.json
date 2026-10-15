@@ -1,0 +1,593 @@
+[
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 1,
+    "question": {
+      "text": "Which company's logo features a bitten apple?",
+      "answers": [
+        {
+          "text": "Apple",
+          "correct": true
+        },
+        {
+          "text": "BlackBerry"
+        },
+        {
+          "text": "Dell"
+        },
+        {
+          "text": "Nokia"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 1,
+    "question": {
+      "text": "Which sportswear brand uses a three-stripe mark?",
+      "answers": [
+        {
+          "text": "Adidas",
+          "correct": true
+        },
+        {
+          "text": "Puma"
+        },
+        {
+          "text": "Reebok"
+        },
+        {
+          "text": "Fila"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 1,
+    "question": {
+      "text": "Which company uses a red play-button symbol in its logo?",
+      "answers": [
+        {
+          "text": "YouTube",
+          "correct": true
+        },
+        {
+          "text": "Netflix"
+        },
+        {
+          "text": "Twitch"
+        },
+        {
+          "text": "Vimeo"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 1,
+    "question": {
+      "text": "Which carmaker's emblem features four interlocking rings?",
+      "answers": [
+        {
+          "text": "Audi",
+          "correct": true
+        },
+        {
+          "text": "BMW"
+        },
+        {
+          "text": "Mercedes-Benz"
+        },
+        {
+          "text": "Volvo"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 1,
+    "question": {
+      "text": "Which fast-food chain is known for its golden arches?",
+      "answers": [
+        {
+          "text": "McDonald's",
+          "correct": true
+        },
+        {
+          "text": "Burger King"
+        },
+        {
+          "text": "Wendy's"
+        },
+        {
+          "text": "KFC"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 1,
+    "question": {
+      "text": "Which company's logo is a multicoloured letter G?",
+      "answers": [
+        {
+          "text": "Google",
+          "correct": true
+        },
+        {
+          "text": "IBM"
+        },
+        {
+          "text": "Intel"
+        },
+        {
+          "text": "Oracle"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 2,
+    "question": {
+      "text": "Which company is represented by a blue bird in its former logo?",
+      "answers": [
+        {
+          "text": "Twitter",
+          "correct": true
+        },
+        {
+          "text": "LinkedIn"
+        },
+        {
+          "text": "Tumblr"
+        },
+        {
+          "text": "Pinterest"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 3,
+    "question": {
+      "text": "Which company adopted the 'swoosh' logo, designed by Carolyn Davidson?",
+      "answers": [
+        {
+          "text": "Nike",
+          "correct": true
+        },
+        {
+          "text": "Reebok"
+        },
+        {
+          "text": "Converse"
+        },
+        {
+          "text": "Under Armour"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 2,
+    "question": {
+      "text": "The Mercedes-Benz three-pointed star is associated with land, sea and air.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 1,
+    "question": {
+      "text": "The Starbucks logo has always shown a plain green coffee cup.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 1,
+    "question": {
+      "text": "The Shell logo uses a stylized scallop shell.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 2,
+    "question": {
+      "text": "The BMW logo is officially a spinning propeller.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 2,
+    "question": {
+      "text": "The FedEx logo contains an arrow formed by negative space between letters.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 2,
+    "question": {
+      "text": "Which Japanese company is identified by a logo of three red diamonds?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Mitsubishi",
+            "Mitsubishi Corporation"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 1,
+    "question": {
+      "text": "What company uses a small crocodile as its clothing logo?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Lacoste"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 2,
+    "question": {
+      "text": "Which company has a multicoloured peacock logo associated with its television network?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "NBC",
+            "National Broadcasting Company"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 3,
+    "question": {
+      "text": "In what year was the Nike swoosh logo created?",
+      "kind": {
+        "Number": {
+          "answer": 1971,
+          "range": {
+            "min": 1960,
+            "max": 1985
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 1,
+    "question": {
+      "text": "How many points does the Mercedes-Benz star have?",
+      "kind": {
+        "Number": {
+          "answer": 3,
+          "range": {
+            "min": 1,
+            "max": 6
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 3,
+    "question": {
+      "text": "In what year was the first version of the Apple logo, showing Isaac Newton, created?",
+      "kind": {
+        "Number": {
+          "answer": 1976,
+          "range": {
+            "min": 1965,
+            "max": 1990
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 3,
+    "question": {
+      "text": "Order these companies by founding year, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Nokia",
+            "Nintendo",
+            "Samsung",
+            "Sony"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 2,
+    "question": {
+      "text": "Match each company with its familiar brand colour.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "UPS"
+              },
+              "right": {
+                "text": "Brown"
+              }
+            },
+            {
+              "left": {
+                "text": "John Deere"
+              },
+              "right": {
+                "text": "Green and yellow"
+              }
+            },
+            {
+              "left": {
+                "text": "Kodak"
+              },
+              "right": {
+                "text": "Yellow and red"
+              }
+            },
+            {
+              "left": {
+                "text": "Tiffany & Co."
+              },
+              "right": {
+                "text": "Robin's-egg blue"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 1,
+    "question": {
+      "text": "Which brand uses a leaping cat as its main logo mark?",
+      "answers": [
+        {
+          "text": "Puma",
+          "correct": true
+        },
+        {
+          "text": "Reebok"
+        },
+        {
+          "text": "Lacoste"
+        },
+        {
+          "text": "Maserati"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 2,
+    "question": {
+      "text": "Which web browser used a blue lowercase 'e' with a swirl as its logo?",
+      "answers": [
+        {
+          "text": "Internet Explorer",
+          "correct": true
+        },
+        {
+          "text": "Firefox"
+        },
+        {
+          "text": "Opera"
+        },
+        {
+          "text": "Safari"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 1,
+    "question": {
+      "text": "Which US retailer's logo is a red-and-white bullseye?",
+      "answers": [
+        {
+          "text": "Target",
+          "correct": true
+        },
+        {
+          "text": "Walmart"
+        },
+        {
+          "text": "Best Buy"
+        },
+        {
+          "text": "The Home Depot"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 1,
+    "question": {
+      "text": "Which Italian car brand uses a prancing horse (the Cavallino Rampante) as its emblem?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Ferrari"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 3,
+    "question": {
+      "text": "Order these companies by founding year, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Ford",
+            "General Motors",
+            "IBM",
+            "Toyota"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 3,
+    "question": {
+      "text": "Name the Dassler brothers who founded Adidas and Puma after splitting their shoe company. Type each first name.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Adidas founder",
+              "accepted": [
+                "Adolf",
+                "Adi",
+                "Adolf Dassler",
+                "Adi Dassler"
+              ]
+            },
+            {
+              "label": "Puma founder",
+              "accepted": [
+                "Rudolf",
+                "Rudi",
+                "Rudolf Dassler",
+                "Rudi Dassler"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Companies & logos",
+    "difficulty": 1,
+    "question": {
+      "text": "Match each company with the symbol in its logo.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Lamborghini"
+              },
+              "right": {
+                "text": "Bull"
+              }
+            },
+            {
+              "left": {
+                "text": "Peugeot"
+              },
+              "right": {
+                "text": "Lion"
+              }
+            },
+            {
+              "left": {
+                "text": "Alfa Romeo"
+              },
+              "right": {
+                "text": "Serpent"
+              }
+            },
+            {
+              "left": {
+                "text": "Chevrolet"
+              },
+              "right": {
+                "text": "Bowtie"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

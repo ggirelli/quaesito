@@ -6,16 +6,18 @@ use super::{
     Route,
     admin::{AdminGate, AdminHeader, AdminToken},
     client,
+    library::LibraryDialog,
     widgets::{
-        AnswerBadge, ClientOnly, ErrorBox, Icon, IconKind, MapPin, PinMap, STAR, Spinner,
+        AnswerBadge, ClientOnly, Dialog, ErrorBox, Icon, IconKind, MapPin, PinMap, STAR, Spinner,
         media_url, message,
     },
 };
 use crate::{
     api::{
-        get_quiz, save_quiz, start_test, upload_limits, upload_question_audio,
-        upload_question_image, upload_question_media,
+        edit_library_question, get_quiz, revert_library_question, save_quiz, start_test,
+        upload_limits, upload_question_audio, upload_question_image, upload_question_media,
     },
+    library::{LibraryEdit, LibraryEntry},
     model::{
         AdvanceMode, Answer, BONUS_PERCENTS, Bonus, ImageReveal, MAX_ANSWERS, MAX_MULTIPLIER,
         MAX_PARTS, MAX_TIME_LIMIT_SECS, MIN_ANSWERS, MIN_PARTS, MIN_TIME_LIMIT_SECS, MultiScoring,
@@ -197,6 +199,7 @@ fn EditorForm(quiz: Quiz) -> Element {
         .as_ref()
         .is_some_and(|(revision, _)| *revision == (draft.revision)());
 
+    let mut browsing = use_signal(|| false);
     let mut test_error = use_signal(|| None::<String>);
     let nav = navigator();
     // Save the latest edits first, so the test plays what is on screen. `from` starts the test
@@ -271,6 +274,12 @@ fn EditorForm(quiz: Quiz) -> Element {
                     onclick: move |_| draft.edit(|q| q.questions.push(Question::slide())),
                     "＋ Add slide"
                 }
+                button {
+                    class: "button add-library",
+                    title: "Pick ready-made questions from the question library",
+                    onclick: move |_| browsing.set(true),
+                    "＋ From the library"
+                }
                 if quiz.settings.reveal == RevealMode::AtEnd {
                     button {
                         class: "button add-slide",
@@ -292,6 +301,13 @@ fn EditorForm(quiz: Quiz) -> Element {
                     }
                 }
             }
+            if browsing() {
+                LibraryDialog {
+                    present: quiz.questions.iter().map(|q| q.text.clone()).collect::<Vec<_>>(),
+                    on_add: move |questions: Vec<Question>| draft.edit(|q| q.questions.extend(questions)),
+                    on_close: move |()| browsing.set(false),
+                }
+            }
             aside { class: "editor-side editor-shuffle",
                 button {
                     class: "button ghost shuffle",
@@ -309,6 +325,100 @@ fn EditorForm(quiz: Quiz) -> Element {
                 }
                 if can_undo {
                     button { class: "button ghost", onclick: undo_shuffle, "↶ Undo shuffle" }
+                }
+            }
+        }
+    }
+}
+
+/// Edits a library question in a pop-up, with the editor's question card. Saving keeps the change
+/// on this server; an edited question can go back to how the library has it.
+#[component]
+pub fn LibraryQuestionEditor(
+    entry: LibraryEntry,
+    on_saved: EventHandler<LibraryEntry>,
+    on_close: EventHandler<()>,
+) -> Element {
+    let token: AdminToken = use_context();
+    let draft = Draft {
+        quiz: use_signal(|| {
+            let mut quiz = Quiz::new(String::new(), "Library".to_owned());
+            quiz.questions = vec![entry.question.clone()];
+            quiz
+        }),
+        revision: use_signal(|| 0),
+    };
+    use_context_provider(|| draft);
+    let limits = use_resource(move || async move { upload_limits(token.get()).await.ok() });
+    use_context_provider(|| Limits(limits));
+    use_context_provider(|| TestFrom(EventHandler::new(|_| {})));
+    let mut difficulty = use_signal(|| entry.difficulty);
+    let mut error = use_signal(|| None::<String>);
+
+    let id = entry.id.clone();
+    let save = move |_| {
+        let id = id.clone();
+        async move {
+            let edit = LibraryEdit {
+                difficulty: difficulty(),
+                question: draft.quiz.peek().questions[0].clone(),
+            };
+            match edit_library_question(token.get(), id, edit).await {
+                Ok(saved) => on_saved.call(saved),
+                Err(err) => error.set(Some(message(&err))),
+            }
+        }
+    };
+    let id = entry.id.clone();
+    let revert = move |_| {
+        let id = id.clone();
+        async move {
+            match revert_library_question(token.get(), id).await {
+                Ok(original) => on_saved.call(original),
+                Err(err) => error.set(Some(message(&err))),
+            }
+        }
+    };
+
+    let quiz = draft.quiz.read();
+    let issues = quiz.validate();
+    let defaults = QuizSettings::default();
+    rsx! {
+        Dialog { title: "Edit library question", class: "edit-library-dialog", on_close,
+            Choice {
+                label: "Difficulty",
+                options: vec![
+                    ("Easy", "Most adults know the answer."),
+                    ("Medium", "Keen quizzers know it."),
+                    ("Hard", "For experts."),
+                ],
+                selected: usize::from(difficulty().clamp(1, 3) - 1),
+                on_select: move |i: usize| difficulty.set(u8::try_from(i + 1).unwrap_or(1)),
+            }
+            QuestionCard {
+                index: 0,
+                label: "{entry.category} · {entry.topic}",
+                count: 1,
+                question: quiz.questions[0].clone(),
+                default_limit: defaults.default_time_limit_secs,
+                standalone: true,
+            }
+            Issues { issues: issues.clone() }
+            ErrorBox { error: error() }
+            p { class: "muted small",
+                "Changes are kept on this server only; the library that comes with Quaesito stays as it is."
+            }
+            div { class: "row between",
+                if entry.edited {
+                    button { class: "button ghost", onclick: revert, "↶ Back to the original" }
+                } else {
+                    span {}
+                }
+                button {
+                    class: "button primary",
+                    disabled: !issues.is_empty(),
+                    onclick: save,
+                    "Save"
                 }
             }
         }
@@ -574,6 +684,9 @@ fn QuestionCard(
     count: usize,
     question: Question,
     default_limit: u32,
+    /// Edited on its own (a library question): no moving, testing, copying or deleting.
+    #[props(default)]
+    standalone: bool,
 ) -> Element {
     let draft: Draft = use_context();
     let test_from: TestFrom = use_context();
@@ -637,6 +750,7 @@ fn QuestionCard(
             class: if slide { "card stack question slide-card" } else { "card stack question" },
             div { class: "row between",
                 h3 { "{label}" }
+                if !standalone {
                 div { class: "row actions",
                     button {
                         class: "button ghost icon",
@@ -710,6 +824,7 @@ fn QuestionCard(
                         }),
                         Icon { kind: IconKind::Trash }
                     }
+                }
                 }
             }
             if let QuestionKind::Slide { title, results } = &question.kind {

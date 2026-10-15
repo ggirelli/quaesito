@@ -8,6 +8,10 @@ All notable changes to quaesito are listed here. The format follows
 
 ### Added
 
+- A question library: about 2,700 ready-made questions in 14 categories, rated easy, medium or hard. The admin page's new
+  **Questions** tab browses them by category and topic, with search and filters. The editor's **＋ From the library**
+  adds them one by one or at random, and a new quiz can be filled with random questions from the categories you
+  tick.
 - Donations are now also welcome on [GitHub Sponsors](https://github.com/sponsors/ggirelli).
 
 ## [0.4.0] - 2026-10-13

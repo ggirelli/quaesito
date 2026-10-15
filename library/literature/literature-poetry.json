@@ -1,0 +1,623 @@
+[
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 1,
+    "question": {
+      "text": "Who wrote the poem 'The Raven'?",
+      "answers": [
+        {
+          "text": "Edgar Allan Poe",
+          "correct": true
+        },
+        {
+          "text": "Walt Whitman"
+        },
+        {
+          "text": "Robert Frost"
+        },
+        {
+          "text": "Henry Wadsworth Longfellow"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 1,
+    "question": {
+      "text": "Who wrote 'I Wandered Lonely as a Cloud'?",
+      "answers": [
+        {
+          "text": "William Wordsworth",
+          "correct": true
+        },
+        {
+          "text": "John Keats"
+        },
+        {
+          "text": "Lord Byron"
+        },
+        {
+          "text": "Percy Bysshe Shelley"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 1,
+    "question": {
+      "text": "Which poet wrote 'The Road Not Taken'?",
+      "answers": [
+        {
+          "text": "Robert Frost",
+          "correct": true
+        },
+        {
+          "text": "Emily Dickinson"
+        },
+        {
+          "text": "Walt Whitman"
+        },
+        {
+          "text": "T. S. Eliot"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 1,
+    "question": {
+      "text": "Who wrote the epic poem The Iliad?",
+      "answers": [
+        {
+          "text": "Homer",
+          "correct": true
+        },
+        {
+          "text": "Virgil"
+        },
+        {
+          "text": "Ovid"
+        },
+        {
+          "text": "Hesiod"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 2,
+    "question": {
+      "text": "Who wrote 'Ozymandias'?",
+      "answers": [
+        {
+          "text": "Percy Bysshe Shelley",
+          "correct": true
+        },
+        {
+          "text": "John Keats"
+        },
+        {
+          "text": "William Blake"
+        },
+        {
+          "text": "Lord Byron"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 2,
+    "question": {
+      "text": "Which poet wrote 'The Waste Land'?",
+      "answers": [
+        {
+          "text": "T. S. Eliot",
+          "correct": true
+        },
+        {
+          "text": "W. H. Auden"
+        },
+        {
+          "text": "Ezra Pound"
+        },
+        {
+          "text": "Dylan Thomas"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 2,
+    "question": {
+      "text": "Who wrote 'The Love Song of J. Alfred Prufrock'?",
+      "answers": [
+        {
+          "text": "T. S. Eliot",
+          "correct": true
+        },
+        {
+          "text": "Wallace Stevens"
+        },
+        {
+          "text": "Robert Lowell"
+        },
+        {
+          "text": "William Carlos Williams"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 2,
+    "question": {
+      "text": "Which poet wrote 'Because I could not stop for Death'?",
+      "answers": [
+        {
+          "text": "Emily Dickinson",
+          "correct": true
+        },
+        {
+          "text": "Sylvia Plath"
+        },
+        {
+          "text": "Elizabeth Barrett Browning"
+        },
+        {
+          "text": "Christina Rossetti"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 3,
+    "question": {
+      "text": "Who wrote the long poem 'The Cantos'?",
+      "answers": [
+        {
+          "text": "Ezra Pound",
+          "correct": true
+        },
+        {
+          "text": "W. B. Yeats"
+        },
+        {
+          "text": "D. H. Lawrence"
+        },
+        {
+          "text": "Hart Crane"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 3,
+    "question": {
+      "text": "Which poet wrote 'The Faerie Queene'?",
+      "answers": [
+        {
+          "text": "Edmund Spenser",
+          "correct": true
+        },
+        {
+          "text": "John Milton"
+        },
+        {
+          "text": "Philip Sidney"
+        },
+        {
+          "text": "Geoffrey Chaucer"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 3,
+    "question": {
+      "text": "Who wrote the poem sequence 'Duino Elegies'?",
+      "answers": [
+        {
+          "text": "Rainer Maria Rilke",
+          "correct": true
+        },
+        {
+          "text": "Paul Celan"
+        },
+        {
+          "text": "Stefan George"
+        },
+        {
+          "text": "Hugo von Hofmannsthal"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 3,
+    "question": {
+      "text": "Which ancient Roman poet wrote the Georgics?",
+      "answers": [
+        {
+          "text": "Virgil",
+          "correct": true
+        },
+        {
+          "text": "Ovid"
+        },
+        {
+          "text": "Horace"
+        },
+        {
+          "text": "Catullus"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "William Shakespeare wrote the sonnet sequence commonly called the Fair Youth sonnets."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "The Divine Comedy was originally written in Latin."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "John Milton wrote Paradise Lost in blank verse."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The ancient Greek poet Sappho came from the island of Lesbos."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Paradise Lost"
+          ]
+        }
+      },
+      "text": "What is the title of John Milton's epic about the Fall of Man?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Walt Whitman",
+            "Whitman"
+          ]
+        }
+      },
+      "text": "Which poet is known for the collection Leaves of Grass?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Ferdowsi",
+            "Firdawsi",
+            "Abul-Qasem Ferdowsi"
+          ]
+        }
+      },
+      "text": "Who wrote the Persian epic poem Shahnameh?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 14,
+          "range": {
+            "min": 5,
+            "max": 24
+          }
+        }
+      },
+      "text": "How many lines are in a traditional English-language sonnet?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 12,
+          "range": {
+            "min": 7,
+            "max": 23
+          }
+        }
+      },
+      "text": "How many books make up Virgil's Aeneid?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 5,
+          "range": {
+            "min": 2,
+            "max": 9
+          }
+        }
+      },
+      "text": "How many lines does a limerick have?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 3,
+          "range": {
+            "min": 1,
+            "max": 6
+          }
+        }
+      },
+      "text": "How many books are in Dante's Divine Comedy?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Beowulf",
+            "The Divine Comedy",
+            "Paradise Lost",
+            "The Waste Land"
+          ]
+        }
+      },
+      "text": "Put these long poems in order of composition era, earliest first."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "The Iliad",
+            "The Aeneid",
+            "The Divine Comedy",
+            "Paradise Lost"
+          ]
+        }
+      },
+      "text": "Put these epics in order of composition era, earliest first."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Poet of 'The Raven'",
+              "accepted": [
+                "Edgar Allan Poe",
+                "Poe"
+              ]
+            },
+            {
+              "label": "Poet of 'Ozymandias'",
+              "accepted": [
+                "Percy Bysshe Shelley",
+                "P. B. Shelley",
+                "Shelley"
+              ]
+            },
+            {
+              "label": "Poet of 'The Waste Land'",
+              "accepted": [
+                "T. S. Eliot",
+                "Eliot"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name the poet of each of these three poems."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "William Wordsworth"
+              },
+              "right": {
+                "text": "I Wandered Lonely as a Cloud"
+              }
+            },
+            {
+              "left": {
+                "text": "Edgar Allan Poe"
+              },
+              "right": {
+                "text": "The Raven"
+              }
+            },
+            {
+              "left": {
+                "text": "Robert Frost"
+              },
+              "right": {
+                "text": "The Road Not Taken"
+              }
+            },
+            {
+              "left": {
+                "text": "John Milton"
+              },
+              "right": {
+                "text": "Paradise Lost"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each poet to the work they wrote."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Virgil"
+              },
+              "right": {
+                "text": "Georgics"
+              }
+            },
+            {
+              "left": {
+                "text": "Ovid"
+              },
+              "right": {
+                "text": "Metamorphoses"
+              }
+            },
+            {
+              "left": {
+                "text": "Homer"
+              },
+              "right": {
+                "text": "The Odyssey"
+              }
+            },
+            {
+              "left": {
+                "text": "Dante Alighieri"
+              },
+              "right": {
+                "text": "The Divine Comedy"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each poet to their famous classical work."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Poetry",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "In English, haiku are usually written in three lines."
+    }
+  }
+]

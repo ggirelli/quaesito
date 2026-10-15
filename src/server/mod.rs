@@ -5,6 +5,7 @@ pub mod bundle;
 pub mod demo;
 pub mod docs;
 pub mod engine;
+pub mod library;
 pub mod live;
 pub mod matching;
 pub mod media;
@@ -36,6 +37,8 @@ pub struct AppState {
     pub quizzes: QuizStore,
     pub media: MediaStore,
     pub sessions: Sessions,
+    /// This server's edits to the question library.
+    pub library_edits: library::LibraryEdits,
     /// The largest uploads accepted.
     pub limits: crate::protocol::UploadLimits,
 }
@@ -65,6 +68,7 @@ pub async fn init() -> anyhow::Result<()> {
         quizzes: QuizStore::open(data_dir.join("quizzes")).await?,
         media: MediaStore::open(data_dir.join("media")).await?,
         sessions: Sessions::open(data_dir.join("games")).await?,
+        library_edits: library::LibraryEdits::open(data_dir.join("library-edits.json")).await?,
         limits: media::limits_from_env(),
     };
     if let Err(err) = demo::add_once(&data_dir, &state.quizzes, &state.media).await {
@@ -107,7 +111,7 @@ const MEDIA_GRACE: Duration = Duration::from_hours(24);
 /// How often unused uploads are looked for.
 const MEDIA_CLEANUP_EVERY: Duration = Duration::from_hours(24);
 
-/// Deletes uploads no quiz or live game uses, now and then daily.
+/// Deletes uploads no quiz, live game or edited library question uses, now and then daily.
 async fn clean_up_media() {
     loop {
         let state = state();
@@ -117,6 +121,7 @@ async fn clean_up_media() {
                     .iter()
                     .flat_map(Quiz::media)
                     .chain(state.sessions.media())
+                    .chain(state.library_edits.media().await)
                     .collect();
                 match state.media.collect_garbage(&used, MEDIA_GRACE).await {
                     Ok(0) => {}

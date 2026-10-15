@@ -1,0 +1,556 @@
+[
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 1,
+    "question": {
+      "text": "Which cat became famous online for its permanently grumpy-looking face?",
+      "answers": [
+        {
+          "text": "Grumpy Cat",
+          "correct": true
+        },
+        {
+          "text": "Keyboard Cat"
+        },
+        {
+          "text": "Lil Bub"
+        },
+        {
+          "text": "Nyan Cat"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 1,
+    "question": {
+      "text": "Which viral video features a child saying, “Charlie bit me”?",
+      "answers": [
+        {
+          "text": "Charlie Bit My Finger",
+          "correct": true
+        },
+        {
+          "text": "David After Dentist"
+        },
+        {
+          "text": "Evolution of Dance"
+        },
+        {
+          "text": "Leave Britney Alone"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 1,
+    "question": {
+      "text": "What animal appears in the original Nyan Cat animation?",
+      "answers": [
+        {
+          "text": "A cat with a Pop-Tart body",
+          "correct": true
+        },
+        {
+          "text": "A dog in a hot dog bun"
+        },
+        {
+          "text": "A rabbit in a carrot suit"
+        },
+        {
+          "text": "A hamster on a cracker"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 1,
+    "question": {
+      "text": "Which dance craze was popularized worldwide by the song “Gangnam Style”?",
+      "answers": [
+        {
+          "text": "The horse-riding dance",
+          "correct": true
+        },
+        {
+          "text": "The floss",
+          "correct": false
+        },
+        {
+          "text": "The moonwalk",
+          "correct": false
+        },
+        {
+          "text": "The dab",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 2,
+    "question": {
+      "text": "Which 2013 song and video sparked the “What Does the Fox Say?” meme?",
+      "answers": [
+        {
+          "text": "The Fox by Ylvis",
+          "correct": true
+        },
+        {
+          "text": "The Badger Song by MrWeebl"
+        },
+        {
+          "text": "Chocolate Rain by Tay Zonday"
+        },
+        {
+          "text": "Friday by Rebecca Black"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 2,
+    "question": {
+      "text": "Which 2010s meme character is known for the caption “But that's none of my business”?",
+      "answers": [
+        {
+          "text": "Kermit sipping tea",
+          "correct": true
+        },
+        {
+          "text": "Pepe the Frog"
+        },
+        {
+          "text": "Doge",
+          "correct": false
+        },
+        {
+          "text": "Wojak",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 3,
+    "question": {
+      "text": "Which image macro character is commonly known as “Doge”?",
+      "answers": [
+        {
+          "text": "A Shiba Inu dog",
+          "correct": true
+        },
+        {
+          "text": "A Pomeranian dog"
+        },
+        {
+          "text": "A corgi"
+        },
+        {
+          "text": "A Japanese Akita"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 3,
+    "question": {
+      "text": "The “This is fine” meme comes from which webcomic?",
+      "answers": [
+        {
+          "text": "Gunshow",
+          "correct": true
+        },
+        {
+          "text": "xkcd"
+        },
+        {
+          "text": "The Oatmeal"
+        },
+        {
+          "text": "Cyanide & Happiness"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 1,
+    "question": {
+      "text": "The “Rickroll” tricks people into opening Rick Astley's music video for “Never Gonna Give You Up.”",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 1,
+    "question": {
+      "text": "The “Success Kid” meme originated from a professional actor posing for an advertisement.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 2,
+    "question": {
+      "text": "The “Dancing Baby” is often cited as one of the early viral internet phenomena.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 2,
+    "question": {
+      "text": "The “Leeroy Jenkins” moment came from a real-world football match.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 3,
+    "question": {
+      "text": "The “Dramatic Chipmunk” clip actually shows a prairie dog rather than a chipmunk.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 2,
+    "question": {
+      "text": "What word describes deliberately misleading online headlines designed to attract clicks?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Clickbait",
+            "Click bait"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 3,
+    "question": {
+      "text": "What nickname is given to the Shiba Inu behind the original Doge meme?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Kabosu"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 1,
+    "question": {
+      "text": "In what year was the “Gangnam Style” music video released? Give the year.",
+      "kind": {
+        "Number": {
+          "answer": 2012,
+          "range": {
+            "min": 2005,
+            "max": 2020
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 2,
+    "question": {
+      "text": "In what year did the “Charlie Bit My Finger” video first appear online? Give the year.",
+      "kind": {
+        "Number": {
+          "answer": 2007,
+          "range": {
+            "min": 2000,
+            "max": 2015
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 3,
+    "question": {
+      "text": "In what year did the “Dancing Baby” animation first circulate online? Give the year.",
+      "kind": {
+        "Number": {
+          "answer": 1996,
+          "range": {
+            "min": 1990,
+            "max": 2005
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 3,
+    "question": {
+      "text": "How many seconds long is the commonly shared original “Dramatic Chipmunk” clip, approximately? Give seconds.",
+      "kind": {
+        "Number": {
+          "answer": 5,
+          "range": {
+            "min": 1,
+            "max": 12
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 3,
+    "question": {
+      "text": "Order these memes by the year they first appeared online, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Dancing Baby",
+            "All Your Base Are Belong to Us",
+            "Nyan Cat",
+            "Distracted Boyfriend"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 2,
+    "question": {
+      "text": "Give the names of the viral video or meme associated with each clue.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Rick Astley bait-and-switch",
+              "accepted": [
+                "Rickroll",
+                "Rickrolling"
+              ]
+            },
+            {
+              "label": "Dog in a burning room",
+              "accepted": [
+                "This Is Fine"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 1,
+    "question": {
+      "text": "Match each viral meme with its subject.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Nyan Cat"
+              },
+              "right": {
+                "text": "Pop-Tart cat"
+              }
+            },
+            {
+              "left": {
+                "text": "Doge"
+              },
+              "right": {
+                "text": "Shiba Inu"
+              }
+            },
+            {
+              "left": {
+                "text": "Grumpy Cat"
+              },
+              "right": {
+                "text": "Frowning cat"
+              }
+            },
+            {
+              "left": {
+                "text": "Keyboard Cat"
+              },
+              "right": {
+                "text": "Cat playing keyboard"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 3,
+    "question": {
+      "text": "Match each viral moment with its source.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "This Is Fine"
+              },
+              "right": {
+                "text": "Gunshow comic"
+              }
+            },
+            {
+              "left": {
+                "text": "Leeroy Jenkins"
+              },
+              "right": {
+                "text": "World of Warcraft video"
+              }
+            },
+            {
+              "left": {
+                "text": "Gangnam Style"
+              },
+              "right": {
+                "text": "PSY music video"
+              }
+            },
+            {
+              "left": {
+                "text": "Ice Bucket Challenge"
+              },
+              "right": {
+                "text": "ALS awareness campaign"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 1,
+    "question": {
+      "text": "What is the name of the meme in which an anime character misidentifies a butterfly?",
+      "answers": [
+        {
+          "text": "Is This a Pigeon?",
+          "correct": true
+        },
+        {
+          "text": "Confused Math Lady"
+        },
+        {
+          "text": "Expanding Brain"
+        },
+        {
+          "text": "Surprised Pikachu"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 3,
+    "question": {
+      "text": "Which viral 2014 campaign encouraged people to dump ice water over themselves for ALS awareness?",
+      "answers": [
+        {
+          "text": "Ice Bucket Challenge",
+          "correct": true
+        },
+        {
+          "text": "No-Shave November"
+        },
+        {
+          "text": "Planking Challenge"
+        },
+        {
+          "text": "Cinnamon Challenge"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Pop Culture",
+    "topic": "Memes & viral moments",
+    "difficulty": 2,
+    "question": {
+      "text": "Order these viral internet phenomena by when they first became famous, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Dancing Baby",
+            "Leeroy Jenkins",
+            "Rickrolling",
+            "Gangnam Style"
+          ]
+        }
+      }
+    }
+  }
+]

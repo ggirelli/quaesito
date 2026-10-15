@@ -1,0 +1,592 @@
+[
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 1,
+    "question": {
+      "text": "Who wrote The Lord of the Rings?",
+      "answers": [
+        {
+          "text": "J. R. R. Tolkien",
+          "correct": true
+        },
+        {
+          "text": "C. S. Lewis"
+        },
+        {
+          "text": "Ursula K. Le Guin"
+        },
+        {
+          "text": "Terry Pratchett"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 1,
+    "question": {
+      "text": "What is the name of the desert planet in Frank Herbert's Dune?",
+      "answers": [
+        {
+          "text": "Arrakis",
+          "correct": true
+        },
+        {
+          "text": "Tatooine"
+        },
+        {
+          "text": "Krypton"
+        },
+        {
+          "text": "Trantor"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 1,
+    "question": {
+      "text": "In The Wizard of Oz, what is the name of Dorothy's dog?",
+      "answers": [
+        {
+          "text": "Toto",
+          "correct": true
+        },
+        {
+          "text": "Max"
+        },
+        {
+          "text": "Bingo"
+        },
+        {
+          "text": "Patch"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 2,
+    "question": {
+      "text": "What is the name of the spaceship in Douglas Adams's The Hitchhiker's Guide to the Galaxy?",
+      "answers": [
+        {
+          "text": "Heart of Gold",
+          "correct": true
+        },
+        {
+          "text": "Rocinante"
+        },
+        {
+          "text": "Nostromo"
+        },
+        {
+          "text": "Millennium Falcon"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 2,
+    "question": {
+      "text": "Who wrote The Left Hand of Darkness?",
+      "answers": [
+        {
+          "text": "Ursula K. Le Guin",
+          "correct": true
+        },
+        {
+          "text": "Octavia E. Butler"
+        },
+        {
+          "text": "Joanna Russ"
+        },
+        {
+          "text": "Margaret Atwood"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 2,
+    "question": {
+      "text": "In George Orwell's Nineteen Eighty-Four, what is the ruling Party's slogan about war?",
+      "answers": [
+        {
+          "text": "War is Peace",
+          "correct": true
+        },
+        {
+          "text": "Freedom is Slavery"
+        },
+        {
+          "text": "Ignorance is Strength"
+        },
+        {
+          "text": "Work Makes Free"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 2,
+    "question": {
+      "text": "Which author created Discworld?",
+      "answers": [
+        {
+          "text": "Terry Pratchett",
+          "correct": true
+        },
+        {
+          "text": "Douglas Adams"
+        },
+        {
+          "text": "Neil Gaiman"
+        },
+        {
+          "text": "Piers Anthony"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 3,
+    "question": {
+      "text": "Who wrote the science-fiction novel Solaris?",
+      "answers": [
+        {
+          "text": "Stanisław Lem",
+          "correct": true
+        },
+        {
+          "text": "Arkady Strugatsky"
+        },
+        {
+          "text": "Yevgeny Zamyatin"
+        },
+        {
+          "text": "Andrei Platonov"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 3,
+    "question": {
+      "text": "In Gene Wolfe's Book of the New Sun, what is the protagonist's name?",
+      "answers": [
+        {
+          "text": "Severian",
+          "correct": true
+        },
+        {
+          "text": "Ged"
+        },
+        {
+          "text": "Corwin"
+        },
+        {
+          "text": "Paul Atreides"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 3,
+    "question": {
+      "text": "Which writer created the fantasy land of Earthsea?",
+      "answers": [
+        {
+          "text": "Ursula K. Le Guin",
+          "correct": true
+        },
+        {
+          "text": "Robin Hobb"
+        },
+        {
+          "text": "Patricia A. McKillip"
+        },
+        {
+          "text": "M. John Harrison"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 3,
+    "question": {
+      "text": "Who wrote the novel The City & the City?",
+      "answers": [
+        {
+          "text": "China Miéville",
+          "correct": true
+        },
+        {
+          "text": "Iain M. Banks"
+        },
+        {
+          "text": "M. John Harrison"
+        },
+        {
+          "text": "Alastair Reynolds"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "In The Hobbit, Bilbo Baggins is a hobbit from the Shire."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "In Dune, the spice melange is found primarily on the planet Caladan."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The robot laws are a central concept in Isaac Asimov's fiction."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "The novel Brave New World was written by George Orwell."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Gandalf"
+          ]
+        }
+      },
+      "text": "What is the name of the wizard who mentors Frodo in The Lord of the Rings?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Ursula K. Le Guin",
+            "Le Guin"
+          ]
+        }
+      },
+      "text": "Who wrote the novel The Dispossessed?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 3,
+          "range": {
+            "min": 1,
+            "max": 7
+          }
+        }
+      },
+      "text": "How many laws of robotics did Isaac Asimov originally formulate?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 6,
+          "range": {
+            "min": 0,
+            "max": 8
+          }
+        }
+      },
+      "text": "How many novels are in Frank Herbert's original Dune series, ending with Chapterhouse: Dune?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "The Hobbit",
+            "The Fellowship of the Ring",
+            "The Two Towers",
+            "The Return of the King"
+          ]
+        }
+      },
+      "text": "Put these Tolkien books in publication order, earliest first."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Frankenstein",
+            "Twenty Thousand Leagues Under the Seas",
+            "The Time Machine",
+            "Dune"
+          ]
+        }
+      },
+      "text": "Put these science-fiction novels in first-publication order, earliest first."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Author of Dune",
+              "accepted": [
+                "Frank Herbert",
+                "Herbert"
+              ]
+            },
+            {
+              "label": "Author of Foundation",
+              "accepted": [
+                "Isaac Asimov",
+                "Asimov"
+              ]
+            },
+            {
+              "label": "Author of Neuromancer",
+              "accepted": [
+                "William Gibson",
+                "Gibson"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name the author of each of these landmark science-fiction novels."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Frodo Baggins"
+              },
+              "right": {
+                "text": "The Lord of the Rings"
+              }
+            },
+            {
+              "left": {
+                "text": "Paul Atreides"
+              },
+              "right": {
+                "text": "Dune"
+              }
+            },
+            {
+              "left": {
+                "text": "Winston Smith"
+              },
+              "right": {
+                "text": "Nineteen Eighty-Four"
+              }
+            },
+            {
+              "left": {
+                "text": "Ender Wiggin"
+              },
+              "right": {
+                "text": "Ender's Game"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each character to the novel in which they appear."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Isaac Asimov"
+              },
+              "right": {
+                "text": "Foundation"
+              }
+            },
+            {
+              "left": {
+                "text": "Ursula K. Le Guin"
+              },
+              "right": {
+                "text": "Earthsea"
+              }
+            },
+            {
+              "left": {
+                "text": "Stanisław Lem"
+              },
+              "right": {
+                "text": "Solaris"
+              }
+            },
+            {
+              "left": {
+                "text": "Frank Herbert"
+              },
+              "right": {
+                "text": "Dune"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each author to a series or novel they created."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 1,
+    "question": {
+      "text": "Which author created the robot R. Daneel Olivaw?",
+      "answers": [
+        {
+          "text": "Isaac Asimov",
+          "correct": true
+        },
+        {
+          "text": "Arthur C. Clarke"
+        },
+        {
+          "text": "Philip K. Dick"
+        },
+        {
+          "text": "Ray Bradbury"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 3,
+          "range": {
+            "min": 1,
+            "max": 7
+          }
+        }
+      },
+      "text": "In how many volumes was The Lord of the Rings originally published?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Fantasy & sci-fi",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 5,
+          "range": {
+            "min": 2,
+            "max": 10
+          }
+        }
+      },
+      "text": "How many novels are in Le Guin's Earthsea cycle?"
+    }
+  }
+]

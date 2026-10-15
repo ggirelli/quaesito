@@ -46,6 +46,10 @@ test:
 schema:
     QUAESITO_WRITE_SCHEMA=1 cargo test --no-default-features --features server --locked the_published_schema_is_current
 
+# Copy the question edits saved in the app (data/library-edits.json) into the library's topic files
+library-apply-edits edits="data/library-edits.json":
+    uv run tools/library/apply-edits.py {{edits}}
+
 # Check advisories, licenses, bans and sources
 deny:
     cargo deny --locked check

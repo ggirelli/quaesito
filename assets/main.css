@@ -427,6 +427,104 @@ button.corner-link {
   padding-left: 2.4rem;
 }
 
+/* The question library: how many questions to add, and each question's passage and answer. */
+input.short-number {
+  width: 5.5rem !important;
+  flex: none;
+}
+
+.library-passage {
+  white-space: pre-line;
+  font-style: italic;
+}
+
+.library-answer {
+  color: var(--ok-text);
+}
+
+/* Each question has a stripe in its category's colour; categories show their icon. */
+.list-row.library-row {
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--category);
+}
+
+/* On the Questions page the list's panel has no side padding: the rows run edge to edge, their
+   stripe over the panel's left border. */
+.card.library-main {
+  padding-inline: 0;
+}
+
+.card.library-main > :not(.library-list) {
+  margin-inline: 1.25rem;
+}
+
+.card.library-main .list-row.library-row {
+  margin-left: -1px;
+  padding-left: calc(1.25rem - 2px);
+  padding-right: 1.25rem;
+}
+
+.category-icon {
+  display: inline-flex;
+  flex: none;
+}
+
+.library-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0 1rem;
+}
+
+.library-meta .category-icon {
+  margin-right: 0.35rem;
+  vertical-align: -0.15em;
+}
+
+.library-category.selected .category-icon {
+  color: inherit !important;
+}
+
+/* A button that reads as a link, e.g. a library question's "edit". */
+.link-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent-text);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.library-row-actions {
+  display: flex;
+  align-items: center;
+}
+
+.library-edited {
+  color: var(--accent-text);
+}
+
+/* The pop-up editing a library question. */
+.dialog.edit-library-dialog {
+  width: min(52rem, 100%);
+}
+
+/* A multiple-choice question's options, the wrong ones in grey. */
+.library-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.9rem;
+}
+
+.library-wrong {
+  color: var(--muted);
+}
+
+.random-categories .list-row {
+  padding: 0.45rem 0;
+}
+
 /* A number question's answer and range in the editor. */
 .number-edit {
   flex-wrap: wrap;
@@ -789,6 +887,218 @@ input.short {
     flex-wrap: wrap;
     justify-content: center;
   }
+
+}
+
+/* The Questions tab: categories on the left, each opening onto its topics. */
+.page.library-page {
+  max-width: 1480px;
+}
+
+/* As the editor: the categories on the left, the questions in the middle under the search, the
+   other filters on the right. Narrower, and in the editor's dialog, the filters go under the
+   search. */
+.library-layout {
+  display: grid;
+  grid-template-columns: minmax(12rem, 16rem) minmax(0, 1000px) minmax(12rem, 16rem);
+  grid-template-areas:
+    ". search ."
+    "nav list filters";
+  justify-content: center;
+  gap: 1rem;
+  align-items: start;
+}
+
+.library-search {
+  grid-area: search;
+}
+
+.library-search input[type="search"] {
+  width: 100%;
+  padding-left: 2.4rem !important;
+}
+
+.library-nav {
+  grid-area: nav;
+  position: sticky;
+  top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
+}
+
+.library-filters {
+  grid-area: filters;
+  position: sticky;
+  top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.library-main {
+  grid-area: list;
+}
+
+@media (max-width: 1100px) {
+  .library-layout {
+    grid-template-columns: minmax(12rem, 16rem) minmax(0, 1fr);
+    grid-template-areas:
+      "nav search"
+      "nav filters"
+      "nav list";
+  }
+
+  .library-filters {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+/* The editor's library dialog, wide enough for the same three columns. */
+.dialog.library-dialog {
+  width: min(96rem, 100%);
+}
+
+@media (min-width: 1101px) {
+  .dialog .library-layout {
+    grid-template-columns: minmax(11rem, 15rem) minmax(0, 1fr) minmax(11rem, 15rem);
+  }
+}
+
+/* In the dialog, the side columns stay put while it scrolls, and the list needs no card. */
+.dialog .library-nav,
+.dialog .library-filters {
+  top: 0;
+  max-height: calc(90vh - 7rem);
+}
+
+.dialog .library-main {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+/* On phones, everything in one column, the categories first. */
+@media (max-width: 800px) {
+  .library-layout,
+  .dialog .library-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "nav"
+      "search"
+      "filters"
+      "list";
+  }
+
+  .library-nav {
+    position: static;
+    max-height: 40vh;
+  }
+}
+
+/* The admin page's Quizzes and Questions tabs. */
+.admin-tabs {
+  align-self: center;
+  width: min(24rem, 100%);
+}
+
+.admin-tabs a {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 8px;
+  color: var(--muted);
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+}
+
+.admin-tabs a.selected {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.library-category,
+.library-topic,
+.library-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.45rem 0.7rem;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--fg);
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.library-topic {
+  padding: 0.3rem 0.7rem 0.3rem 1.4rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.library-category:hover:not(:disabled),
+.library-topic:hover,
+.library-option:hover:not(:disabled) {
+  background: var(--surface-2);
+}
+
+.library-category.selected,
+.library-topic.selected,
+.library-option.selected {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.library-category .count,
+.library-topic .count,
+.library-option .count {
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+/* The difficulty and answer type lists, under a small title. */
+.library-filter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 12rem;
+}
+
+.library-filter-title {
+  padding: 0 0.7rem 0.2rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.library-option {
+  font-weight: 500;
+}
+
+.library-option:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.library-topics {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  margin: 0.15rem 0 0.4rem;
 }
 
 /* ---------- Answer badges ---------- */

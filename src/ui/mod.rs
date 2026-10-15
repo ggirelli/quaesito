@@ -5,6 +5,7 @@ pub mod client;
 mod editor;
 mod home;
 mod host;
+mod library;
 mod live;
 mod player;
 mod sfx;
@@ -15,7 +16,7 @@ mod widgets;
 use dioxus::prelude::*;
 
 use self::{
-    admin::Admin,
+    admin::{Admin, AdminQuestions},
     editor::Editor,
     home::Home,
     host::Host,
@@ -44,6 +45,8 @@ pub enum Route {
     Join { code: String, ticket: String },
     #[route("/admin")]
     Admin {},
+    #[route("/admin/questions")]
+    AdminQuestions {},
     #[route("/admin/quiz/:id")]
     Editor { id: String },
     #[route("/admin/test/:code")]

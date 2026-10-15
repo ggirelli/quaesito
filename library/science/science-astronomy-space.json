@@ -1,0 +1,694 @@
+[
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 1,
+    "question": {
+      "text": "Which planet is known as the Red Planet?",
+      "answers": [
+        {
+          "text": "Mars",
+          "correct": true
+        },
+        {
+          "text": "Venus",
+          "correct": false
+        },
+        {
+          "text": "Mercury",
+          "correct": false
+        },
+        {
+          "text": "Jupiter",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 1,
+    "question": {
+      "text": "What is at the centre of our Solar System?",
+      "answers": [
+        {
+          "text": "The Sun",
+          "correct": true
+        },
+        {
+          "text": "Earth",
+          "correct": false
+        },
+        {
+          "text": "Jupiter",
+          "correct": false
+        },
+        {
+          "text": "The Moon",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 1,
+    "question": {
+      "text": "Which planet has the most prominent ring system?",
+      "answers": [
+        {
+          "text": "Saturn",
+          "correct": true
+        },
+        {
+          "text": "Neptune",
+          "correct": false
+        },
+        {
+          "text": "Mars",
+          "correct": false
+        },
+        {
+          "text": "Venus",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 1,
+    "question": {
+      "text": "What is the name of the galaxy that contains our Solar System?",
+      "answers": [
+        {
+          "text": "Milky Way",
+          "correct": true
+        },
+        {
+          "text": "Andromeda Galaxy",
+          "correct": false
+        },
+        {
+          "text": "Whirlpool Galaxy",
+          "correct": false
+        },
+        {
+          "text": "Sombrero Galaxy",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 2,
+    "question": {
+      "text": "Which planet has a day longer than its year?",
+      "answers": [
+        {
+          "text": "Venus",
+          "correct": true
+        },
+        {
+          "text": "Mars",
+          "correct": false
+        },
+        {
+          "text": "Jupiter",
+          "correct": false
+        },
+        {
+          "text": "Neptune",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 2,
+    "question": {
+      "text": "What is the largest moon in the Solar System?",
+      "answers": [
+        {
+          "text": "Ganymede",
+          "correct": true
+        },
+        {
+          "text": "Titan",
+          "correct": false
+        },
+        {
+          "text": "Callisto",
+          "correct": false
+        },
+        {
+          "text": "Earth's Moon",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 2,
+    "question": {
+      "text": "Which planet has the Great Red Spot?",
+      "answers": [
+        {
+          "text": "Jupiter",
+          "correct": true
+        },
+        {
+          "text": "Saturn",
+          "correct": false
+        },
+        {
+          "text": "Uranus",
+          "correct": false
+        },
+        {
+          "text": "Neptune",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 2,
+    "question": {
+      "text": "Which element makes up most of the Sun by mass?",
+      "answers": [
+        {
+          "text": "Hydrogen",
+          "correct": true
+        },
+        {
+          "text": "Helium",
+          "correct": false
+        },
+        {
+          "text": "Oxygen",
+          "correct": false
+        },
+        {
+          "text": "Carbon",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 3,
+    "question": {
+      "text": "Which mission first returned samples from an asteroid to Earth?",
+      "answers": [
+        {
+          "text": "Hayabusa",
+          "correct": true
+        },
+        {
+          "text": "OSIRIS-REx",
+          "correct": false
+        },
+        {
+          "text": "Dawn",
+          "correct": false
+        },
+        {
+          "text": "Rosetta",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 3,
+    "question": {
+      "text": "What is the boundary around a black hole beyond which light cannot escape called?",
+      "answers": [
+        {
+          "text": "Event horizon",
+          "correct": true
+        },
+        {
+          "text": "Accretion disk",
+          "correct": false
+        },
+        {
+          "text": "Photon sphere",
+          "correct": false
+        },
+        {
+          "text": "Singularity",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 3,
+    "question": {
+      "text": "Which planet has the shortest orbital period around the Sun?",
+      "answers": [
+        {
+          "text": "Mercury",
+          "correct": true
+        },
+        {
+          "text": "Venus",
+          "correct": false
+        },
+        {
+          "text": "Earth",
+          "correct": false
+        },
+        {
+          "text": "Mars",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 3,
+    "question": {
+      "text": "What type of galaxy is the Milky Way?",
+      "answers": [
+        {
+          "text": "Barred spiral",
+          "correct": true
+        },
+        {
+          "text": "Elliptical",
+          "correct": false
+        },
+        {
+          "text": "Irregular",
+          "correct": false
+        },
+        {
+          "text": "Lenticular",
+          "correct": false
+        }
+      ]
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 1,
+    "question": {
+      "text": "The Moon produces most of the light we see from it by reflecting sunlight.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 1,
+    "question": {
+      "text": "Jupiter is smaller than Earth.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 2,
+    "question": {
+      "text": "A light-year measures distance, not time.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 2,
+    "question": {
+      "text": "The seasons on Earth are mainly caused by changes in its distance from the Sun.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 3,
+    "question": {
+      "text": "Neutron stars can be remnants of massive stars that have exploded as supernovae.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 1,
+    "question": {
+      "text": "What is the name of the star closest to Earth?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Sun",
+            "The Sun"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 2,
+    "question": {
+      "text": "Who was the first human to travel into space?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Yuri Gagarin",
+            "Gagarin"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 1,
+    "question": {
+      "text": "About how many minutes does sunlight take to reach Earth?",
+      "kind": {
+        "Number": {
+          "answer": 8,
+          "range": {
+            "min": 6,
+            "max": 12
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 3,
+    "question": {
+      "text": "Approximately how many kilometres per second is the speed of light in a vacuum?",
+      "kind": {
+        "Number": {
+          "answer": 299792,
+          "range": {
+            "min": 250000,
+            "max": 340000
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 1,
+    "question": {
+      "text": "Put these planets in order of distance from the Sun, nearest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Mercury",
+            "Venus",
+            "Earth",
+            "Mars",
+            "Jupiter"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 3,
+    "question": {
+      "text": "Put these milestones in chronological order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Sputnik 1 launched",
+            "Yuri Gagarin orbits Earth",
+            "Apollo 11 lands on the Moon",
+            "First Space Shuttle flight",
+            "First permanent ISS crew arrives"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 2,
+    "question": {
+      "text": "Match each spacecraft with the object it is best known for exploring.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Juno"
+              },
+              "right": {
+                "text": "Jupiter"
+              }
+            },
+            {
+              "left": {
+                "text": "Cassini"
+              },
+              "right": {
+                "text": "Saturn"
+              }
+            },
+            {
+              "left": {
+                "text": "New Horizons"
+              },
+              "right": {
+                "text": "Pluto"
+              }
+            },
+            {
+              "left": {
+                "text": "Rosetta"
+              },
+              "right": {
+                "text": "Comet 67P"
+              }
+            },
+            {
+              "left": {
+                "text": "Dawn"
+              },
+              "right": {
+                "text": "Vesta and Ceres"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 3,
+    "question": {
+      "text": "Match each space telescope with the kind of astronomy it was designed to observe.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Chandra"
+              },
+              "right": {
+                "text": "X-rays"
+              }
+            },
+            {
+              "left": {
+                "text": "Fermi"
+              },
+              "right": {
+                "text": "Gamma rays"
+              }
+            },
+            {
+              "left": {
+                "text": "Spitzer"
+              },
+              "right": {
+                "text": "Infrared"
+              }
+            },
+            {
+              "left": {
+                "text": "Hubble"
+              },
+              "right": {
+                "text": "Visible and ultraviolet"
+              }
+            },
+            {
+              "left": {
+                "text": "Kepler"
+              },
+              "right": {
+                "text": "Exoplanets by transit"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 1,
+    "question": {
+      "text": "Which planet has the moons Phobos and Deimos?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Mars"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 3,
+    "question": {
+      "text": "What is the nearest large spiral galaxy to the Milky Way?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Andromeda",
+            "Andromeda Galaxy"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 2,
+    "question": {
+      "text": "How many Earth days does the Moon take to orbit Earth relative to the distant stars (sidereal month), approximately?",
+      "kind": {
+        "Number": {
+          "answer": 27.3,
+          "range": {
+            "min": 20,
+            "max": 40
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 2,
+    "question": {
+      "text": "What is the average distance from Earth to the Sun, in millions of kilometres?",
+      "kind": {
+        "Number": {
+          "answer": 149.6,
+          "range": {
+            "min": 79.6,
+            "max": 179.6
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Science",
+    "topic": "Astronomy & space",
+    "difficulty": 2,
+    "question": {
+      "text": "Name the four largest moons of Jupiter in order of distance from Jupiter, closest first.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Closest",
+              "accepted": [
+                "Io"
+              ]
+            },
+            {
+              "label": "Second closest",
+              "accepted": [
+                "Europa"
+              ]
+            },
+            {
+              "label": "Third closest",
+              "accepted": [
+                "Ganymede"
+              ]
+            },
+            {
+              "label": "Farthest",
+              "accepted": [
+                "Callisto"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+]

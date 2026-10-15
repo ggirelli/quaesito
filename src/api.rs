@@ -13,6 +13,7 @@ use dioxus::{
 };
 
 use crate::{
+    library::{LibraryEdit, LibraryEntry},
     model::{Quiz, QuizSummary, ValidationIssue},
     protocol::{
         GameResults, HostCommand, HostView, JoinTicket, PlayerCommand, PlayerView, SessionSummary,
@@ -102,6 +103,42 @@ pub async fn duplicate_quiz(token: String, id: String) -> ServerFnResult<String>
     quiz.title = format!("{} (copy)", quiz.title);
     state.quizzes.save(&quiz).await?;
     Ok(quiz.id)
+}
+
+/// Every question of the library, with this server's edits, to browse and pick from.
+#[post("/api/admin/library")]
+pub async fn question_library(token: String) -> ServerFnResult<Vec<LibraryEntry>> {
+    let state = crate::server::state();
+    state.auth.require(&token)?;
+    Ok(state.library_edits.entries().await)
+}
+
+/// Saves this server's edit of library question `id`, if it is playable, and returns it.
+#[post("/api/admin/library/edit")]
+pub async fn edit_library_question(
+    token: String,
+    id: String,
+    edit: LibraryEdit,
+) -> ServerFnResult<LibraryEntry> {
+    let state = crate::server::state();
+    state.auth.require(&token)?;
+    let mut quiz = Quiz::new(String::new(), "Library".to_owned());
+    quiz.questions = vec![edit.question.clone()];
+    if let Some(issue) = quiz.validate().into_iter().next() {
+        return Err(ServerFnError::new(issue.message));
+    }
+    if !(1..=3).contains(&edit.difficulty) {
+        return Err(ServerFnError::new("Pick a difficulty."));
+    }
+    Ok(state.library_edits.save(&id, edit).await?)
+}
+
+/// Drops this server's edit of library question `id` and returns the question as it came.
+#[post("/api/admin/library/revert")]
+pub async fn revert_library_question(token: String, id: String) -> ServerFnResult<LibraryEntry> {
+    let state = crate::server::state();
+    state.auth.require(&token)?;
+    Ok(state.library_edits.revert(&id).await?)
 }
 
 /// Uploads a picture (for an answer or a part) and returns its media name.

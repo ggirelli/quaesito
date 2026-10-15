@@ -18,3 +18,9 @@
 
 # MkDocs plugin caches (fonts downloaded by the privacy plugin).
 /.cache
+
+# Python bytecode (library tools).
+__pycache__/
+
+# Local jj workspaces.
+/.workspaces/

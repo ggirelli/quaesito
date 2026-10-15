@@ -1,0 +1,632 @@
+[
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 1,
+    "question": {
+      "text": "Which currency is used in Japan?",
+      "answers": [
+        {
+          "text": "Yen",
+          "correct": true
+        },
+        {
+          "text": "Won"
+        },
+        {
+          "text": "Yuan"
+        },
+        {
+          "text": "Baht"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 1,
+    "question": {
+      "text": "What is the basic unit of currency in the United Kingdom?",
+      "answers": [
+        {
+          "text": "Pound sterling",
+          "correct": true
+        },
+        {
+          "text": "Euro"
+        },
+        {
+          "text": "Swiss franc"
+        },
+        {
+          "text": "Danish krone"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 1,
+    "question": {
+      "text": "Which currency is used in Switzerland?",
+      "answers": [
+        {
+          "text": "Swiss franc",
+          "correct": true
+        },
+        {
+          "text": "Euro"
+        },
+        {
+          "text": "Krona"
+        },
+        {
+          "text": "Zloty"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 1,
+    "question": {
+      "text": "Which country uses the forint?",
+      "answers": [
+        {
+          "text": "Hungary",
+          "correct": true
+        },
+        {
+          "text": "Romania"
+        },
+        {
+          "text": "Bulgaria"
+        },
+        {
+          "text": "Croatia"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 1,
+    "question": {
+      "text": "The rand is the currency of which country?",
+      "answers": [
+        {
+          "text": "South Africa",
+          "correct": true
+        },
+        {
+          "text": "Kenya"
+        },
+        {
+          "text": "Nigeria"
+        },
+        {
+          "text": "Morocco"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 2,
+    "question": {
+      "text": "Which currency is known as the renminbi’s basic unit?",
+      "answers": [
+        {
+          "text": "Yuan",
+          "correct": true
+        },
+        {
+          "text": "Yen"
+        },
+        {
+          "text": "Won"
+        },
+        {
+          "text": "Ringgit"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 2,
+    "question": {
+      "text": "Which of these currencies is named after a historical weight of silver?",
+      "answers": [
+        {
+          "text": "Pound sterling",
+          "correct": true
+        },
+        {
+          "text": "Yen"
+        },
+        {
+          "text": "Rupee"
+        },
+        {
+          "text": "Euro"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 2,
+    "question": {
+      "text": "Which country’s currency is the lek?",
+      "answers": [
+        {
+          "text": "Albania",
+          "correct": true
+        },
+        {
+          "text": "Armenia"
+        },
+        {
+          "text": "Georgia"
+        },
+        {
+          "text": "Moldova"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 2,
+    "question": {
+      "text": "Which currency is used in Vietnam?",
+      "answers": [
+        {
+          "text": "Dong",
+          "correct": true
+        },
+        {
+          "text": "Kip"
+        },
+        {
+          "text": "Riel"
+        },
+        {
+          "text": "Kyat"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 2,
+    "question": {
+      "text": "Which country uses the pula?",
+      "answers": [
+        {
+          "text": "Botswana",
+          "correct": true
+        },
+        {
+          "text": "Namibia"
+        },
+        {
+          "text": "Zambia"
+        },
+        {
+          "text": "Lesotho"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 1,
+    "question": {
+      "text": "Which currency is used in Poland?",
+      "answers": [
+        {
+          "text": "Zloty",
+          "correct": true
+        },
+        {
+          "text": "Forint"
+        },
+        {
+          "text": "Leu"
+        },
+        {
+          "text": "Krona"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 3,
+    "question": {
+      "text": "Which of these currencies is used in Paraguay?",
+      "answers": [
+        {
+          "text": "Guaraní",
+          "correct": true
+        },
+        {
+          "text": "Bolívar"
+        },
+        {
+          "text": "Sol"
+        },
+        {
+          "text": "Peso"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 1,
+    "question": {
+      "text": "The euro is used by every member state of the European Union.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 2,
+    "question": {
+      "text": "The Japanese yen is subdivided into 100 sen in everyday modern use.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 2,
+    "question": {
+      "text": "The Swiss franc is also the official currency of Liechtenstein.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 1,
+    "question": {
+      "text": "The Indian rupee is used as the official currency of Bangladesh.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 3,
+    "question": {
+      "text": "The word “dollar” ultimately derives from the name of a Bohemian silver coin, the thaler.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 1,
+    "question": {
+      "text": "What is the official currency of Iceland?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Icelandic króna",
+            "Krona"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 1,
+    "question": {
+      "text": "What currency is used in South Korea?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "South Korean won",
+            "Korean won",
+            "Won"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 2,
+    "question": {
+      "text": "What is the currency of Laos?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Lao kip",
+            "Kip"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 2,
+    "question": {
+      "text": "What currency is used in the Czech Republic?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Czech koruna",
+            "Koruna"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 1,
+    "question": {
+      "text": "How many minor units called pence make up one pound sterling?",
+      "kind": {
+        "Number": {
+          "answer": 100,
+          "range": {
+            "min": 70,
+            "max": 170
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 1,
+    "question": {
+      "text": "In what year did euro banknotes and coins enter circulation?",
+      "kind": {
+        "Number": {
+          "answer": 2002,
+          "range": {
+            "min": 1990,
+            "max": 2010
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 2,
+    "question": {
+      "text": "How many Swiss centimes make up one Swiss franc?",
+      "kind": {
+        "Number": {
+          "answer": 100,
+          "range": {
+            "min": 44,
+            "max": 124
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 2,
+    "question": {
+      "text": "In what year was the euro introduced as an accounting currency?",
+      "kind": {
+        "Number": {
+          "answer": 1999,
+          "range": {
+            "min": 1985,
+            "max": 2010
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 3,
+    "question": {
+      "text": "Put these currencies in order by the year their modern banknotes first entered circulation, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "British pound banknotes (1694)",
+            "US dollar (1862)",
+            "Japanese yen (1872)",
+            "Euro banknotes (2002)"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 3,
+    "question": {
+      "text": "Order these currencies by the year they were introduced, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Indian rupee (1540)",
+            "US dollar (1792)",
+            "Japanese yen (1871)",
+            "Euro (1999)"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 3,
+    "question": {
+      "text": "Name the two currencies used by the countries that share the island of Hispaniola.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Haiti",
+              "accepted": [
+                "Haitian gourde",
+                "Gourde"
+              ]
+            },
+            {
+              "label": "Dominican Republic",
+              "accepted": [
+                "Dominican peso",
+                "Peso"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 3,
+    "question": {
+      "text": "Match each currency symbol with the currency it represents.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "¥"
+              },
+              "right": {
+                "text": "Japanese yen"
+              }
+            },
+            {
+              "left": {
+                "text": "£"
+              },
+              "right": {
+                "text": "Pound sterling"
+              }
+            },
+            {
+              "left": {
+                "text": "₩"
+              },
+              "right": {
+                "text": "South Korean won"
+              }
+            },
+            {
+              "left": {
+                "text": "₺"
+              },
+              "right": {
+                "text": "Turkish lira"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Society & Culture",
+    "topic": "Currencies",
+    "difficulty": 2,
+    "question": {
+      "text": "Match each currency with the country where it is the official currency.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Lari"
+              },
+              "right": {
+                "text": "Georgia"
+              }
+            },
+            {
+              "left": {
+                "text": "Tenge"
+              },
+              "right": {
+                "text": "Kazakhstan"
+              }
+            },
+            {
+              "left": {
+                "text": "Ringgit"
+              },
+              "right": {
+                "text": "Malaysia"
+              }
+            },
+            {
+              "left": {
+                "text": "Dram"
+              },
+              "right": {
+                "text": "Armenia"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

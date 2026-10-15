@@ -1,0 +1,620 @@
+[
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 1,
+    "question": {
+      "text": "Which bird is the only one known to fly backwards in sustained flight?",
+      "answers": [
+        {
+          "text": "Hummingbird",
+          "correct": true
+        },
+        {
+          "text": "Swift"
+        },
+        {
+          "text": "Kingfisher"
+        },
+        {
+          "text": "Woodpecker"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 1,
+    "question": {
+      "text": "What is the largest living bird by height and weight?",
+      "answers": [
+        {
+          "text": "Ostrich",
+          "correct": true
+        },
+        {
+          "text": "Emu"
+        },
+        {
+          "text": "Southern cassowary"
+        },
+        {
+          "text": "Greater rhea"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 1,
+    "question": {
+      "text": "Which bird is famous for mimicking a wide range of sounds, including chainsaws?",
+      "answers": [
+        {
+          "text": "Lyrebird",
+          "correct": true
+        },
+        {
+          "text": "Puffin"
+        },
+        {
+          "text": "Heron"
+        },
+        {
+          "text": "Albatross"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 1,
+    "question": {
+      "text": "What do penguins use their wings for underwater?",
+      "answers": [
+        {
+          "text": "Propulsion",
+          "correct": true
+        },
+        {
+          "text": "Steering only"
+        },
+        {
+          "text": "Storing food"
+        },
+        {
+          "text": "Keeping eggs warm"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 2,
+    "question": {
+      "text": "Which bird is known for storing prey by impaling it on thorns?",
+      "answers": [
+        {
+          "text": "Loggerhead shrike",
+          "correct": true
+        },
+        {
+          "text": "Common kestrel"
+        },
+        {
+          "text": "Eurasian jay"
+        },
+        {
+          "text": "Barn owl"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 2,
+    "question": {
+      "text": "Which bird's chicks famously leap from cliffs before they can fly?",
+      "answers": [
+        {
+          "text": "Brent goose"
+        },
+        {
+          "text": "Barnacle goose",
+          "correct": true
+        },
+        {
+          "text": "Mute swan"
+        },
+        {
+          "text": "Whooper swan"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 3,
+    "question": {
+      "text": "Which bird has a tongue wrapped around its skull to help it extend far out of the beak?",
+      "answers": [
+        {
+          "text": "Woodpecker",
+          "correct": true
+        },
+        {
+          "text": "Flamingo"
+        },
+        {
+          "text": "Pelican"
+        },
+        {
+          "text": "Cormorant"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "A group of flamingos is often called a flamboyance."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "All penguin species live in the Arctic."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Owls can turn their heads far around, but not a full 360 degrees."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "A kiwi's nostrils are located at the base of its beak."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The hoatzin chick has functional claws on its wings."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Robin",
+            "European robin"
+          ]
+        }
+      },
+      "text": "Which small bird is a familiar symbol of Christmas in Britain?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Peregrine falcon",
+            "Peregrine"
+          ]
+        }
+      },
+      "text": "Which falcon is renowned for reaching extreme speeds during its hunting dive?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Kiwi",
+            "Kiwis"
+          ]
+        }
+      },
+      "text": "What flightless bird is a national symbol of New Zealand?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Egg laid",
+            "Incubation",
+            "Hatching",
+            "Fledging"
+          ]
+        }
+      },
+      "text": "Put these stages in a typical bird's development, earliest first."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Chicken",
+            "Duck",
+            "Ostrich",
+            "Albatross"
+          ]
+        }
+      },
+      "text": "Order these birds by typical incubation period, shortest first."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Ostrich"
+              },
+              "right": {
+                "text": "Largest living bird"
+              }
+            },
+            {
+              "left": {
+                "text": "Hummingbird"
+              },
+              "right": {
+                "text": "Can fly backwards"
+              }
+            },
+            {
+              "left": {
+                "text": "Woodpecker"
+              },
+              "right": {
+                "text": "Drums on tree trunks"
+              }
+            },
+            {
+              "left": {
+                "text": "Penguin"
+              },
+              "right": {
+                "text": "Wings used as flippers"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each bird with its best-known feature."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 2,
+    "question": {
+      "text": "Which feature of an owl's flight feathers helps make its flight nearly silent?",
+      "answers": [
+        {
+          "text": "Comb-like serrated edges",
+          "correct": true
+        },
+        {
+          "text": "Waterproof oil coating"
+        },
+        {
+          "text": "Extra-stiff shafts"
+        },
+        {
+          "text": "Metallic sheen"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 3,
+    "question": {
+      "text": "Which bird is the only extant member of its family and is native to New Caledonia?",
+      "answers": [
+        {
+          "text": "Hoatzin"
+        },
+        {
+          "text": "Kagu",
+          "correct": true
+        },
+        {
+          "text": "Secretarybird"
+        },
+        {
+          "text": "Shoebill"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 3,
+    "question": {
+      "text": "Which bird can drink seawater and excrete excess salt through glands above its eyes?",
+      "answers": [
+        {
+          "text": "Wandering albatross",
+          "correct": true
+        },
+        {
+          "text": "Pigeon"
+        },
+        {
+          "text": "Crow"
+        },
+        {
+          "text": "Pheasant"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 3,
+    "question": {
+      "text": "Which large bird lays dark green, avocado-coloured eggs?",
+      "answers": [
+        {
+          "text": "Emu",
+          "correct": true
+        },
+        {
+          "text": "Ostrich"
+        },
+        {
+          "text": "Kiwi"
+        },
+        {
+          "text": "Penguin"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Shoebill",
+            "Shoebill stork"
+          ]
+        }
+      },
+      "text": "Which large African wading bird, also called the whalehead, stands motionless in papyrus swamps to catch lungfish?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 2,
+          "range": {
+            "min": 1,
+            "max": 5
+          }
+        }
+      },
+      "text": "How many toes does an ostrich have on each foot?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 10,
+          "range": {
+            "min": 4,
+            "max": 14
+          }
+        }
+      },
+      "text": "How many primary flight feathers does a typical pigeon have on each wing?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 21,
+          "range": {
+            "min": 14,
+            "max": 29
+          }
+        }
+      },
+      "text": "How many days does a chicken egg typically take to hatch, from incubation start?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 115,
+          "range": {
+            "min": 94,
+            "max": 165
+          }
+        }
+      },
+      "text": "About how many centimetres long can an emperor penguin grow?"
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "African savanna",
+              "accepted": [
+                "Ostrich"
+              ]
+            },
+            {
+              "label": "Australian outback",
+              "accepted": [
+                "Emu"
+              ]
+            },
+            {
+              "label": "New Zealand",
+              "accepted": [
+                "Kiwi",
+                "Kiwis"
+              ]
+            },
+            {
+              "label": "Australia/New Guinea rainforest",
+              "accepted": [
+                "Cassowary",
+                "Cassowaries"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name the flightless bird associated with each region: African savanna, Australian outback, New Zealand, and Australia/New Guinea rainforest."
+    }
+  },
+  {
+    "category": "Nature",
+    "topic": "Birds",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Duck"
+              },
+              "right": {
+                "text": "Webbed feet"
+              }
+            },
+            {
+              "left": {
+                "text": "Eagle"
+              },
+              "right": {
+                "text": "Powerful talons"
+              }
+            },
+            {
+              "left": {
+                "text": "Heron"
+              },
+              "right": {
+                "text": "Long spear-like bill"
+              }
+            },
+            {
+              "left": {
+                "text": "Parrot"
+              },
+              "right": {
+                "text": "Zygodactyl feet"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each bird group with a characteristic adaptation."
+    }
+  }
+]

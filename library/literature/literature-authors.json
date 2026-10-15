@@ -1,0 +1,594 @@
+[
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 1,
+    "question": {
+      "text": "Who wrote Pride and Prejudice?",
+      "answers": [
+        {
+          "text": "Jane Austen",
+          "correct": true
+        },
+        {
+          "text": "Charlotte Brontë"
+        },
+        {
+          "text": "George Eliot"
+        },
+        {
+          "text": "Mary Shelley"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 1,
+    "question": {
+      "text": "Who wrote The Great Gatsby?",
+      "answers": [
+        {
+          "text": "F. Scott Fitzgerald",
+          "correct": true
+        },
+        {
+          "text": "Ernest Hemingway"
+        },
+        {
+          "text": "John Steinbeck"
+        },
+        {
+          "text": "William Faulkner"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 1,
+    "question": {
+      "text": "Which Russian author wrote War and Peace?",
+      "answers": [
+        {
+          "text": "Leo Tolstoy",
+          "correct": true
+        },
+        {
+          "text": "Fyodor Dostoevsky"
+        },
+        {
+          "text": "Anton Chekhov"
+        },
+        {
+          "text": "Ivan Turgenev"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 2,
+    "question": {
+      "text": "Who wrote Beloved?",
+      "answers": [
+        {
+          "text": "Toni Morrison",
+          "correct": true
+        },
+        {
+          "text": "Alice Walker"
+        },
+        {
+          "text": "Maya Angelou"
+        },
+        {
+          "text": "Zora Neale Hurston"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 2,
+    "question": {
+      "text": "Which author wrote The Handmaid's Tale?",
+      "answers": [
+        {
+          "text": "Margaret Atwood",
+          "correct": true
+        },
+        {
+          "text": "Ursula K. Le Guin"
+        },
+        {
+          "text": "Doris Lessing"
+        },
+        {
+          "text": "Angela Carter"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 2,
+    "question": {
+      "text": "Who wrote The Master and Margarita?",
+      "answers": [
+        {
+          "text": "Mikhail Bulgakov",
+          "correct": true
+        },
+        {
+          "text": "Boris Pasternak"
+        },
+        {
+          "text": "Vladimir Nabokov"
+        },
+        {
+          "text": "Aleksandr Solzhenitsyn"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 3,
+    "question": {
+      "text": "Who wrote The Man Without Qualities?",
+      "answers": [
+        {
+          "text": "Robert Musil",
+          "correct": true
+        },
+        {
+          "text": "Hermann Broch"
+        },
+        {
+          "text": "Thomas Mann"
+        },
+        {
+          "text": "Franz Kafka"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 3,
+    "question": {
+      "text": "Which author wrote The Book of Disquiet?",
+      "answers": [
+        {
+          "text": "Fernando Pessoa",
+          "correct": true
+        },
+        {
+          "text": "José Saramago"
+        },
+        {
+          "text": "Jorge Luis Borges"
+        },
+        {
+          "text": "Miguel de Unamuno"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 3,
+    "question": {
+      "text": "Who wrote the novel The Recognitions?",
+      "answers": [
+        {
+          "text": "William Gaddis",
+          "correct": true
+        },
+        {
+          "text": "Thomas Pynchon"
+        },
+        {
+          "text": "John Barth"
+        },
+        {
+          "text": "Don DeLillo"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 3,
+    "question": {
+      "text": "Which author wrote The Tale of Genji?",
+      "answers": [
+        {
+          "text": "Murasaki Shikibu",
+          "correct": true
+        },
+        {
+          "text": "Sei Shōnagon"
+        },
+        {
+          "text": "Yoshida Kenkō"
+        },
+        {
+          "text": "Matsuo Bashō"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Mary Shelley wrote Frankenstein."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Gabriel García Márquez wrote One Hundred Years of Solitude."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "James Joyce wrote the novel Middlemarch."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Franz Kafka wrote The Trial."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The author George Eliot was the pen name of Mary Ann Evans."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "J. R. R. Tolkien",
+            "JRR Tolkien",
+            "Tolkien"
+          ]
+        }
+      },
+      "text": "Who wrote The Hobbit?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Alice Walker",
+            "Walker"
+          ]
+        }
+      },
+      "text": "Which author wrote The Color Purple?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Albert Camus",
+            "Camus"
+          ]
+        }
+      },
+      "text": "Who wrote the novel The Stranger, originally titled L'Étranger?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Günter Grass",
+            "Grass"
+          ]
+        }
+      },
+      "text": "Who wrote the novel The Tin Drum?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 1818,
+          "range": {
+            "min": 1790,
+            "max": 1850
+          }
+        }
+      },
+      "text": "In what year was Mary Shelley's Frankenstein first published?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 7,
+          "range": {
+            "min": 2,
+            "max": 13
+          }
+        }
+      },
+      "text": "How many novels are in Marcel Proust's In Search of Lost Time?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Don Quixote",
+            "Pride and Prejudice",
+            "Jane Eyre",
+            "The Great Gatsby"
+          ]
+        }
+      },
+      "text": "Put these novels in order of first publication, earliest first."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "The Tale of Genji",
+            "Don Quixote",
+            "Frankenstein",
+            "The Trial"
+          ]
+        }
+      },
+      "text": "Put these novels in order of first publication or completion, earliest first."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Author of Middlemarch",
+              "accepted": [
+                "George Eliot",
+                "Mary Ann Evans",
+                "Evans"
+              ]
+            },
+            {
+              "label": "Author of Frankenstein",
+              "accepted": [
+                "Mary Shelley",
+                "Shelley"
+              ]
+            },
+            {
+              "label": "Author of The Trial",
+              "accepted": [
+                "Franz Kafka",
+                "Kafka"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name the author of each of these three novels."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Jane Austen"
+              },
+              "right": {
+                "text": "Pride and Prejudice"
+              }
+            },
+            {
+              "left": {
+                "text": "Mary Shelley"
+              },
+              "right": {
+                "text": "Frankenstein"
+              }
+            },
+            {
+              "left": {
+                "text": "F. Scott Fitzgerald"
+              },
+              "right": {
+                "text": "The Great Gatsby"
+              }
+            },
+            {
+              "left": {
+                "text": "George Orwell"
+              },
+              "right": {
+                "text": "Nineteen Eighty-Four"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each author to one of their best-known novels."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Murasaki Shikibu"
+              },
+              "right": {
+                "text": "The Tale of Genji"
+              }
+            },
+            {
+              "left": {
+                "text": "Fernando Pessoa"
+              },
+              "right": {
+                "text": "The Book of Disquiet"
+              }
+            },
+            {
+              "left": {
+                "text": "William Gaddis"
+              },
+              "right": {
+                "text": "The Recognitions"
+              }
+            },
+            {
+              "left": {
+                "text": "Robert Musil"
+              },
+              "right": {
+                "text": "The Man Without Qualities"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each author to the work they wrote."
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 4,
+          "range": {
+            "min": 2,
+            "max": 11
+          }
+        }
+      },
+      "text": "How many novels did Jane Austen complete and publish during her lifetime?"
+    }
+  },
+  {
+    "category": "Literature",
+    "topic": "Authors",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 11,
+          "range": {
+            "min": 8,
+            "max": 13
+          }
+        }
+      },
+      "text": "In which century was The Tale of Genji written?"
+    }
+  }
+]

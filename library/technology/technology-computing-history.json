@@ -1,0 +1,631 @@
+[
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 1,
+    "question": {
+      "text": "Which machine is widely regarded as the first general-purpose electronic digital computer?",
+      "answers": [
+        {
+          "text": "ENIAC",
+          "correct": true
+        },
+        {
+          "text": "UNIVAC I"
+        },
+        {
+          "text": "Colossus"
+        },
+        {
+          "text": "IBM 701"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 1,
+    "question": {
+      "text": "What did the 'bug' in the famous 1947 computer logbook turn out to be?",
+      "answers": [
+        {
+          "text": "A moth",
+          "correct": true
+        },
+        {
+          "text": "A faulty valve"
+        },
+        {
+          "text": "A spider"
+        },
+        {
+          "text": "A loose wire"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 1,
+    "question": {
+      "text": "Which company introduced the Macintosh in 1984?",
+      "answers": [
+        {
+          "text": "Apple",
+          "correct": true
+        },
+        {
+          "text": "IBM"
+        },
+        {
+          "text": "Commodore"
+        },
+        {
+          "text": "Atari"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 2,
+    "question": {
+      "text": "What was the name of the first commercially successful electronic spreadsheet?",
+      "answers": [
+        {
+          "text": "VisiCalc",
+          "correct": true
+        },
+        {
+          "text": "Lotus 1-2-3"
+        },
+        {
+          "text": "Microsoft Excel"
+        },
+        {
+          "text": "Quattro Pro"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 2,
+    "question": {
+      "text": "Which programming language was named after a French mathematician?",
+      "answers": [
+        {
+          "text": "Pascal",
+          "correct": true
+        },
+        {
+          "text": "Ada"
+        },
+        {
+          "text": "COBOL"
+        },
+        {
+          "text": "BASIC"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 2,
+    "question": {
+      "text": "What was the original purpose of ARPANET?",
+      "answers": [
+        {
+          "text": "Connect research computers",
+          "correct": true
+        },
+        {
+          "text": "Send television broadcasts"
+        },
+        {
+          "text": "Control satellites"
+        },
+        {
+          "text": "Host online shopping"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 2,
+    "question": {
+      "text": "Which company created the UNIX operating system at Bell Labs?",
+      "answers": [
+        {
+          "text": "AT&T",
+          "correct": true
+        },
+        {
+          "text": "Xerox"
+        },
+        {
+          "text": "IBM"
+        },
+        {
+          "text": "Digital Equipment"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 1,
+    "question": {
+      "text": "Which storage medium did the original IBM PC use as a common removable option?",
+      "answers": [
+        {
+          "text": "5.25-inch floppy disk",
+          "correct": true
+        },
+        {
+          "text": "Blu-ray disc"
+        },
+        {
+          "text": "Zip disk"
+        },
+        {
+          "text": "SD card"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 3,
+    "question": {
+      "text": "Who designed the first widely recognized graphical web browser, Mosaic, with a team at NCSA?",
+      "answers": [
+        {
+          "text": "Marc Andreessen",
+          "correct": true
+        },
+        {
+          "text": "Tim Berners-Lee"
+        },
+        {
+          "text": "Vint Cerf"
+        },
+        {
+          "text": "Larry Wall"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 3,
+    "question": {
+      "text": "Which machine used a punched-card system to process the 1890 US census?",
+      "answers": [
+        {
+          "text": "Hollerith tabulator",
+          "correct": true
+        },
+        {
+          "text": "Difference Engine"
+        },
+        {
+          "text": "Analytical Engine"
+        },
+        {
+          "text": "ENIAC"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 3,
+    "question": {
+      "text": "What was the name of the 1970s microprocessor that powered many early home computers, including the Apple II?",
+      "answers": [
+        {
+          "text": "MOS 6502",
+          "correct": true
+        },
+        {
+          "text": "Intel 8086"
+        },
+        {
+          "text": "Zilog Z8000"
+        },
+        {
+          "text": "Motorola 68000"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 3,
+    "question": {
+      "text": "Which file system was introduced with Windows NT and is still widely used by Windows?",
+      "answers": [
+        {
+          "text": "NTFS",
+          "correct": true
+        },
+        {
+          "text": "FAT12"
+        },
+        {
+          "text": "HFS+"
+        },
+        {
+          "text": "ext2"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 1,
+    "question": {
+      "text": "The original World Wide Web was invented at Xerox PARC.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 2,
+    "question": {
+      "text": "The first version of Python was released in the early 1990s.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 2,
+    "question": {
+      "text": "The IBM PC launched with a 32-bit processor.",
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 1,
+    "question": {
+      "text": "The Linux kernel was first released publicly in 1991.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 2,
+    "question": {
+      "text": "What is the two-word name for the observation that chip transistor counts roughly double every two years?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Moore's law"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 3,
+    "question": {
+      "text": "What was the name of the first web server and browser software created by Tim Berners-Lee?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "WorldWideWeb",
+            "World Wide Web",
+            "Nexus"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 2,
+    "question": {
+      "text": "Which company developed the BASIC-based home computer known as the TRS-80?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Tandy",
+            "Tandy Corporation",
+            "RadioShack",
+            "Radio Shack"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 1,
+    "question": {
+      "text": "In what year was the IBM PC Model 5150 introduced?",
+      "kind": {
+        "Number": {
+          "answer": 1981,
+          "range": {
+            "min": 1970,
+            "max": 1995
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 2,
+    "question": {
+      "text": "In what year was the first email sent between two computers on ARPANET?",
+      "kind": {
+        "Number": {
+          "answer": 1971,
+          "range": {
+            "min": 1960,
+            "max": 1985
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 3,
+    "question": {
+      "text": "How many kilobytes of RAM did the original 1984 Macintosh have?",
+      "kind": {
+        "Number": {
+          "answer": 128,
+          "range": {
+            "min": 64,
+            "max": 512
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 2,
+    "question": {
+      "text": "In what year did the first version of the Java programming language become publicly available?",
+      "kind": {
+        "Number": {
+          "answer": 1995,
+          "range": {
+            "min": 1986,
+            "max": 2016
+          }
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 3,
+    "question": {
+      "text": "Put these milestones in chronological order, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "UNIX created",
+            "C language developed",
+            "ARPANET adopts TCP/IP",
+            "World Wide Web proposed"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 3,
+    "question": {
+      "text": "Order these storage formats by introduction, earliest first.",
+      "kind": {
+        "Order": {
+          "items": [
+            "Punch card",
+            "Magnetic tape",
+            "Floppy disk",
+            "CD-ROM"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 2,
+    "question": {
+      "text": "Match each programming language with the person most closely associated with its creation.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "C"
+              },
+              "right": {
+                "text": "Dennis Ritchie"
+              }
+            },
+            {
+              "left": {
+                "text": "Python"
+              },
+              "right": {
+                "text": "Guido van Rossum"
+              }
+            },
+            {
+              "left": {
+                "text": "Java"
+              },
+              "right": {
+                "text": "James Gosling"
+              }
+            },
+            {
+              "left": {
+                "text": "Ruby"
+              },
+              "right": {
+                "text": "Yukihiro Matsumoto"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 2,
+    "question": {
+      "text": "The first .com domain name ever registered was symbolics.com.",
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 3,
+    "question": {
+      "text": "What was the name of the electromechanical device used at Bletchley Park to help break Enigma?",
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Bombe",
+            "The Bombe"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 3,
+    "question": {
+      "text": "Name the two Bell Labs physicists who built the first point-contact transistor in 1947. Type each surname.",
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Theoretical physicist",
+              "accepted": [
+                "Bardeen"
+              ]
+            },
+            {
+              "label": "Experimental physicist",
+              "accepted": [
+                "Brattain"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "category": "Technology",
+    "topic": "Computing history",
+    "difficulty": 2,
+    "question": {
+      "text": "Match each milestone with its year.",
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "First IBM PC"
+              },
+              "right": {
+                "text": "1981"
+              }
+            },
+            {
+              "left": {
+                "text": "First iPhone"
+              },
+              "right": {
+                "text": "2007"
+              }
+            },
+            {
+              "left": {
+                "text": "World Wide Web made public"
+              },
+              "right": {
+                "text": "1991"
+              }
+            },
+            {
+              "left": {
+                "text": "First Macintosh"
+              },
+              "right": {
+                "text": "1984"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,556 @@
+[
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 1,
+    "question": {
+      "text": "Which designer is famous for the little black dress and Chanel No. 5?",
+      "answers": [
+        {
+          "text": "Coco Chanel",
+          "correct": true
+        },
+        {
+          "text": "Elsa Schiaparelli"
+        },
+        {
+          "text": "Madeleine Vionnet"
+        },
+        {
+          "text": "Jeanne Lanvin"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 1,
+    "question": {
+      "text": "Which luxury fashion house uses a double-G monogram as its logo?",
+      "answers": [
+        {
+          "text": "Gucci",
+          "correct": true
+        },
+        {
+          "text": "Prada"
+        },
+        {
+          "text": "Fendi"
+        },
+        {
+          "text": "Versace"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 1,
+    "question": {
+      "text": "What is the name for a traditional Scottish woollen fabric with a crisscross pattern?",
+      "answers": [
+        {
+          "text": "Tartan",
+          "correct": true
+        },
+        {
+          "text": "Tweed"
+        },
+        {
+          "text": "Gingham"
+        },
+        {
+          "text": "Houndstooth"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 1,
+    "question": {
+      "text": "Which footwear brand is known for its red-lacquered soles?",
+      "answers": [
+        {
+          "text": "Christian Louboutin",
+          "correct": true
+        },
+        {
+          "text": "Jimmy Choo"
+        },
+        {
+          "text": "Manolo Blahnik"
+        },
+        {
+          "text": "Salvatore Ferragamo"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 2,
+    "question": {
+      "text": "What is the term for a temporary fashion show presenting a designer's collection?",
+      "answers": [
+        {
+          "text": "Runway show",
+          "correct": true
+        },
+        {
+          "text": "Trunk fitting"
+        },
+        {
+          "text": "Sample sale"
+        },
+        {
+          "text": "Style clinic"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 2,
+    "question": {
+      "text": "Which Japanese designer founded the fashion label Comme des Garçons?",
+      "answers": [
+        {
+          "text": "Rei Kawakubo",
+          "correct": true
+        },
+        {
+          "text": "Yohji Yamamoto"
+        },
+        {
+          "text": "Issey Miyake"
+        },
+        {
+          "text": "Kenzo Takada"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 2,
+    "question": {
+      "text": "Which fabric is traditionally made by weaving the fibres of the flax plant?",
+      "answers": [
+        {
+          "text": "Linen",
+          "correct": true
+        },
+        {
+          "text": "Satin"
+        },
+        {
+          "text": "Velvet"
+        },
+        {
+          "text": "Chiffon"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 2,
+    "question": {
+      "text": "What is the name of the pleated skirt associated with traditional Japanese dress?",
+      "answers": [
+        {
+          "text": "Hakama",
+          "correct": true
+        },
+        {
+          "text": "Kimono"
+        },
+        {
+          "text": "Obi"
+        },
+        {
+          "text": "Haori"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 3,
+    "question": {
+      "text": "Which designer created the 1960s Mondrian collection of color-block dresses?",
+      "answers": [
+        {
+          "text": "Yves Saint Laurent",
+          "correct": true
+        },
+        {
+          "text": "André Courrèges"
+        },
+        {
+          "text": "Pierre Cardin"
+        },
+        {
+          "text": "Paco Rabanne"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 3,
+    "question": {
+      "text": "Which British designer is associated with the punk fashion of the 1970s and the shop SEX?",
+      "answers": [
+        {
+          "text": "Vivienne Westwood",
+          "correct": true
+        },
+        {
+          "text": "Mary Quant"
+        },
+        {
+          "text": "Zandra Rhodes"
+        },
+        {
+          "text": "Katharine Hamnett"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Denim takes its name from the French phrase serge de Nîmes."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "Cashmere wool comes from sheep."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "A haute couture house must meet specific criteria set by France's fashion industry regulator."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "The wrap dress was invented by Coco Chanel in the 1920s."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "Madeleine Vionnet was known for using bias-cut fabric to create fluid draping."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Mary Quant",
+            "Quant"
+          ]
+        }
+      },
+      "text": "Which British designer is strongly associated with popularizing the miniskirt in the 1960s?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Paul Poiret",
+            "Poiret"
+          ]
+        }
+      },
+      "text": "Which French designer helped free women's fashion from corsets in the early 20th century?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 1858,
+          "range": {
+            "min": 1820,
+            "max": 1875
+          }
+        }
+      },
+      "text": "In what year did Charles Frederick Worth establish his fashion house in Paris?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Charles Frederick Worth",
+            "Coco Chanel",
+            "Christian Dior",
+            "Yves Saint Laurent"
+          ]
+        }
+      },
+      "text": "Put these designers in chronological order by birth, earliest first."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Paul Poiret",
+            "Elsa Schiaparelli",
+            "Rei Kawakubo",
+            "Alexander McQueen"
+          ]
+        }
+      },
+      "text": "Put these designers in chronological order by birth, earliest first."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Parts": {
+          "parts": [
+            {
+              "label": "Designer",
+              "accepted": [
+                "Christian Dior",
+                "Dior"
+              ]
+            },
+            {
+              "label": "Look",
+              "accepted": [
+                "New Look"
+              ]
+            }
+          ]
+        }
+      },
+      "text": "Name the designer and the silhouette label associated with his celebrated 1947 collection."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Coco Chanel"
+              },
+              "right": {
+                "text": "Chanel No. 5"
+              }
+            },
+            {
+              "left": {
+                "text": "Christian Dior"
+              },
+              "right": {
+                "text": "New Look"
+              }
+            },
+            {
+              "left": {
+                "text": "Rei Kawakubo"
+              },
+              "right": {
+                "text": "Comme des Garçons"
+              }
+            },
+            {
+              "left": {
+                "text": "Vivienne Westwood"
+              },
+              "right": {
+                "text": "Punk fashion"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each designer to the fashion or label they are associated with."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Madeleine Vionnet"
+              },
+              "right": {
+                "text": "Bias cut"
+              }
+            },
+            {
+              "left": {
+                "text": "Yves Saint Laurent"
+              },
+              "right": {
+                "text": "Le Smoking"
+              }
+            },
+            {
+              "left": {
+                "text": "Paul Poiret"
+              },
+              "right": {
+                "text": "Early corset-free fashion"
+              }
+            },
+            {
+              "left": {
+                "text": "Charles Frederick Worth"
+              },
+              "right": {
+                "text": "Modern haute couture pioneer"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each fashion figure to their best-known contribution."
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 1,
+    "question": {
+      "text": "Which natural fibre is produced by the larvae of Bombyx mori?",
+      "answers": [
+        {
+          "text": "Silk",
+          "correct": true
+        },
+        {
+          "text": "Linen"
+        },
+        {
+          "text": "Wool"
+        },
+        {
+          "text": "Hemp"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Gabrielle"
+          ]
+        }
+      },
+      "text": "What was Coco Chanel's real first name?"
+    }
+  },
+  {
+    "category": "Art & Design",
+    "topic": "Fashion",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 1921,
+          "range": {
+            "min": 1900,
+            "max": 1945
+          }
+        }
+      },
+      "text": "In what year was Chanel No. 5 launched?"
+    }
+  }
+]

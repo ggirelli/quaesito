@@ -1,0 +1,580 @@
+[
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 1,
+    "question": {
+      "text": "Which event directly triggered the July Crisis of 1914?",
+      "answers": [
+        {
+          "text": "Franz Ferdinand's assassination",
+          "correct": true
+        },
+        {
+          "text": "Sinking of the Lusitania"
+        },
+        {
+          "text": "German invasion of Belgium"
+        },
+        {
+          "text": "Russian Revolution"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 1,
+    "question": {
+      "text": "Which country was invaded by Germany through Belgium in August 1914?",
+      "answers": [
+        {
+          "text": "France",
+          "correct": true
+        },
+        {
+          "text": "Italy"
+        },
+        {
+          "text": "Serbia"
+        },
+        {
+          "text": "Denmark"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 1,
+    "question": {
+      "text": "What name was commonly used for the Western Front's fortified fighting positions?",
+      "answers": [
+        {
+          "text": "Trenches",
+          "correct": true
+        },
+        {
+          "text": "Palisades"
+        },
+        {
+          "text": "Redoubts"
+        },
+        {
+          "text": "Moats"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 1,
+    "question": {
+      "text": "Which ship was sunk by a German submarine in 1915, helping turn opinion against Germany in the US?",
+      "answers": [
+        {
+          "text": "Lusitania",
+          "correct": true
+        },
+        {
+          "text": "Titanic"
+        },
+        {
+          "text": "Britannic"
+        },
+        {
+          "text": "Olympic"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 2,
+    "question": {
+      "text": "Which country joined the Allied side in 1915 after initially declaring neutrality?",
+      "answers": [
+        {
+          "text": "Italy",
+          "correct": true
+        },
+        {
+          "text": "Bulgaria"
+        },
+        {
+          "text": "Ottoman Empire"
+        },
+        {
+          "text": "Romania"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 2,
+    "question": {
+      "text": "Which 1917 telegram proposed a German-Mexican alliance against the United States?",
+      "answers": [
+        {
+          "text": "Zimmermann Telegram",
+          "correct": true
+        },
+        {
+          "text": "Ems Dispatch"
+        },
+        {
+          "text": "Hossbach Memorandum"
+        },
+        {
+          "text": "Long Telegram"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 2,
+    "question": {
+      "text": "Which empire fought alongside Germany and Austria-Hungary for most of World War I?",
+      "answers": [
+        {
+          "text": "Ottoman Empire",
+          "correct": true
+        },
+        {
+          "text": "Russian Empire"
+        },
+        {
+          "text": "British Empire"
+        },
+        {
+          "text": "French Empire"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 3,
+    "question": {
+      "text": "Which treaty formally ended the state of war between Germany and the Allied powers in 1919?",
+      "answers": [
+        {
+          "text": "Treaty of Versailles",
+          "correct": true
+        },
+        {
+          "text": "Treaty of Brest-Litovsk"
+        },
+        {
+          "text": "Treaty of Saint-Germain"
+        },
+        {
+          "text": "Treaty of Sèvres"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 3,
+    "question": {
+      "text": "Which battle in 1914 saw German forces defeat Russia in East Prussia?",
+      "answers": [
+        {
+          "text": "Battle of Tannenberg",
+          "correct": true
+        },
+        {
+          "text": "Battle of the Marne"
+        },
+        {
+          "text": "Battle of Gallipoli"
+        },
+        {
+          "text": "Battle of Passchendaele"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 3,
+    "question": {
+      "text": "Which French marshal became the Supreme Allied Commander on the Western Front in 1918?",
+      "answers": [
+        {
+          "text": "Ferdinand Foch",
+          "correct": true
+        },
+        {
+          "text": "Joseph Joffre"
+        },
+        {
+          "text": "Philippe Pétain"
+        },
+        {
+          "text": "Robert Nivelle"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "World War I ended with an armistice on 11 November 1918."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": false
+        }
+      },
+      "text": "The United States entered World War I in 1914."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The Battle of Jutland was the largest naval battle of World War I."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "TrueFalse": {
+          "answer": true
+        }
+      },
+      "text": "The Treaty of Brest-Litovsk took Russia out of the war against the Central Powers."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Woodrow Wilson",
+            "Wilson"
+          ]
+        }
+      },
+      "text": "Who was president of the United States when it entered World War I?"
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Mata Hari"
+          ]
+        }
+      },
+      "text": "What was the stage name of the Dutch dancer executed by France for espionage in 1917?"
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 1914,
+          "range": {
+            "min": 1900,
+            "max": 1930
+          }
+        }
+      },
+      "text": "In what year did World War I begin? Give the year."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Assassination at Sarajevo",
+            "Battle of the Marne",
+            "Battle of Verdun begins",
+            "Armistice on the Western Front"
+          ]
+        }
+      },
+      "text": "Put these events in chronological order, earliest first."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 1,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Western Front"
+              },
+              "right": {
+                "text": "France and Belgium"
+              }
+            },
+            {
+              "left": {
+                "text": "Eastern Front"
+              },
+              "right": {
+                "text": "Germany and Russia's borderlands"
+              }
+            },
+            {
+              "left": {
+                "text": "Gallipoli campaign"
+              },
+              "right": {
+                "text": "Dardanelles"
+              }
+            },
+            {
+              "left": {
+                "text": "Battle of Jutland"
+              },
+              "right": {
+                "text": "North Sea"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each World War I front or campaign with its main location."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            {
+              "left": {
+                "text": "Erich Ludendorff"
+              },
+              "right": {
+                "text": "German general"
+              }
+            },
+            {
+              "left": {
+                "text": "Edith Cavell"
+              },
+              "right": {
+                "text": "British nurse executed in Belgium"
+              }
+            },
+            {
+              "left": {
+                "text": "Mustafa Kemal"
+              },
+              "right": {
+                "text": "Ottoman commander at Gallipoli"
+              }
+            },
+            {
+              "left": {
+                "text": "John J. Pershing"
+              },
+              "right": {
+                "text": "Commander of US forces in Europe"
+              }
+            },
+            {
+              "left": {
+                "text": "Georges Clemenceau"
+              },
+              "right": {
+                "text": "French prime minister"
+              }
+            }
+          ]
+        }
+      },
+      "text": "Match each World War I figure with the role they are known for."
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 2,
+    "question": {
+      "text": "Which battle became notorious for its immense casualties and use of attrition?",
+      "answers": [
+        {
+          "text": "Battle of Verdun",
+          "correct": true
+        },
+        {
+          "text": "Battle of Tannenberg"
+        },
+        {
+          "text": "Battle of Caporetto"
+        },
+        {
+          "text": "Battle of Jutland"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 3,
+    "question": {
+      "text": "Which British general commanded the British Expeditionary Force at the Battle of the Somme?",
+      "answers": [
+        {
+          "text": "Douglas Haig",
+          "correct": true
+        },
+        {
+          "text": "Edmund Allenby"
+        },
+        {
+          "text": "John French"
+        },
+        {
+          "text": "Herbert Plumer"
+        }
+      ]
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Lawrence of Arabia"
+          ]
+        }
+      },
+      "text": "By what nickname is British officer T. E. Lawrence widely known?"
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Text": {
+          "accepted": [
+            "Manfred von Richthofen",
+            "Richthofen",
+            "von Richthofen"
+          ]
+        }
+      },
+      "text": "Which German fighter pilot was nicknamed the Red Baron?"
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 2,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 19,
+          "range": {
+            "min": 6,
+            "max": 40
+          }
+        }
+      },
+      "text": "About how many months elapsed between the US entry into World War I and the 1918 armistice?"
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Number": {
+          "answer": 8,
+          "range": {
+            "min": 5,
+            "max": 20
+          }
+        }
+      },
+      "text": "About how many months after the armistice was the Treaty of Versailles signed?"
+    }
+  },
+  {
+    "category": "History",
+    "topic": "World War I",
+    "difficulty": 3,
+    "question": {
+      "kind": {
+        "Order": {
+          "items": [
+            "Lusitania is sunk",
+            "Italy enters the war",
+            "United States enters the war",
+            "Armistice on the Western Front"
+          ]
+        }
+      },
+      "text": "Put these events in chronological order, earliest first."
+    }
+  }
+]
