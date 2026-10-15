@@ -79,7 +79,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 70  | Release 0.4.0 (`v0.4.0` tag: downloads built by CI)                                                                                | ✅ done |
 | 71  | Starting a game: option to turn off custom team pictures                                                                           | ✅ done |
 | 72  | Custom team pictures with a transparent background, combined with a flat colour or gradient background of the team’s choice        | ✅ done |
-| 73  | Question library: about 2,700 ready-made questions to browse by category, add while editing, or fill a new quiz at random          | ⏳ todo |
+| 73  | Question library: about 2,700 ready-made questions to browse by category, add while editing, or fill a new quiz at random          | ✅ done |
 
 ## Notes
 

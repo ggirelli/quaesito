@@ -81,8 +81,7 @@ exist I will add them to the phone's lobby, next to the backgrounds.
 
   Mascots, one image each (file name first): `owl` a wise owl with round glasses, `fox` a sly fox
   with a quiz card, `cat` a smug cat with a tiny crown, `dog` an eager dog with a buzzer, `bear` a sleepy bear with a mug, `penguin` a penguin in a bow tie, `frog` a grinning frog with a pencil,
-  `octopus` an octopus juggling question marks, `robot` a friendly retro robot, `alien` a
-  three-eyed alien, `ghost` a cheeky ghost, `dragon` a small dragon puffing a spark, `unicorn` a
+  `octopus` an octopus juggling question marks, `robot` a friendly retro robot, `alien` a   three-eyed alien, `ghost` a cheeky ghost, `dragon` a small dragon puffing a spark, `unicorn` a
   unicorn with a rainbow mane, `sloth` a sloth hanging on to a trophy, `llama` a llama in
   sunglasses, `panda` a panda holding a light bulb.
 
