@@ -51,40 +51,6 @@ natural.
   With Eleven v3, add a tag at the start of a line to steer it, for example
   `[excited] Welcome to quaesito! …` or `[playful] Easy peasy!`.
 
-### Ready-made team pictures (optional)
-
-Teams can upload a picture and pick a background for it (a flat answer colour or a gradient of two),
-which shows through the picture's transparent parts. A set of ready-made cut-outs would let teams
-pick a picture without uploading one, which matters most when a game turns uploads off. Once they
-exist I will add them to the phone's lobby, next to the backgrounds.
-
-- **Files:** `assets/teams/<name>.png`, one per mascot below: 512×512, **transparent background**,
-  the character centred and filling about 80% of the square, nothing touching the edges (the
-  picture is shown in a circle).
-- **Used by:** the phone's lobby (`src/ui/player.rs`) and every screen showing teams.
-- **Tool:** an image generator that exports transparent PNGs (ChatGPT image generation with
-  "transparent background", or remove the background afterwards).
-- **Prompt** (one image per mascot; keep the same conversation so the style stays consistent):
-
-  ```
-  A cheerful cartoon mascot for a pub-quiz team, as a sticker-style cut-out on a fully
-  transparent background (PNG, no backdrop, no shadow on the ground). Flat, friendly vector style
-  with clean shapes, a thick deep indigo (#14121F) outline and soft off-white (#F4F1FF)
-  highlights, matching an app whose brand colour is amber (#FFB703). Head and shoulders only,
-  facing the viewer, centred in a square, filling about 80% of it, nothing cut off at the edges.
-  Mostly off-white and amber with one accent from: violet #8B5CF6, teal #14B8A6, magenta
-  #E0479E, orange #FB923C, sky blue #38BDF8, lime #A3E635. It must read clearly at 48 pixels
-  wide, on any of those colours as a background. No text.
-
-  Mascot: <one of the list below>
-  ```
-
-  Mascots, one image each (file name first): `owl` a wise owl with round glasses, `fox` a sly fox
-  with a quiz card, `cat` a smug cat with a tiny crown, `dog` an eager dog with a buzzer, `bear` a sleepy bear with a mug, `penguin` a penguin in a bow tie, `frog` a grinning frog with a pencil,
-  `octopus` an octopus juggling question marks, `robot` a friendly retro robot, `alien` a   three-eyed alien, `ghost` a cheeky ghost, `dragon` a small dragon puffing a spark, `unicorn` a
-  unicorn with a rainbow mane, `sloth` a sloth hanging on to a trophy, `llama` a llama in
-  sunglasses, `panda` a panda holding a light bulb.
-
 ### Recorded sound effects (optional)
 
 The big screen synthesises its sound effects in the browser (`assets/js/sfx.js`), so nothing is
@@ -107,6 +73,11 @@ missing. Recorded effects would sound richer; if you add them I will play them i
 
 ## Done
 
+- `assets/teams/<name>.png`: 16 ready-made team pictures (owl, fox, cat, dog, bear, penguin, frog,
+  octopus, robot, alien, ghost, dragon, unicorn, sloth, llama, panda), 256×256 cut-outs made by
+  `uv run tools/assets/team-mascots.py` from the 1254×1254 originals (kept locally in
+  `assets/teams/originals/`, git-ignored). The script removes the checkerboard some generators draw
+  in place of transparency, and centres each mascot with room for its round frame.
 - `assets/brand/icon.png`: the app icon (1254×1254 source). The app uses `icon-192.png`, a cropped
   192×192 copy, as favicon and logo mark.
 - `assets/brand/logo-{dark,light}.{png,svg}`: logo with word mark (README header).
