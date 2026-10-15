@@ -46,6 +46,10 @@ technology, each rated easy, medium or hard. They were written with an AI model 
 Once added, a question is yours like any other: edit it, add a picture, or change its time limit
 and points.
 
+To fix or change a question in the library itself, use its **edit** link: the question opens in a
+pop-up like the editor's, with its difficulty. Your changes are kept on this server only and the
+question is marked *edited*; **Back to the original** undoes them.
+
 ## Text with the question
 
 Under the question, an optional box takes text to show with it, line breaks kept: the lyrics for

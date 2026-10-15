@@ -8,6 +8,7 @@ use dioxus::prelude::*;
 use super::{
     admin::AdminToken,
     client,
+    editor::LibraryQuestionEditor,
     widgets::{Dialog, ErrorBox, Icon, IconKind, Spinner, message},
 };
 use crate::{
@@ -115,13 +116,15 @@ pub fn LibraryBrowser(
     present: Vec<String>,
     on_add: Option<EventHandler<Vec<Question>>>,
 ) -> Element {
-    let library = use_library(|| true);
+    let mut library = use_library(|| true);
     let mut search = use_signal(String::new);
     let mut category = use_signal(|| None::<String>);
     let mut topic = use_signal(|| None::<String>);
     let mut difficulty = use_signal(|| None::<u8>);
     let mut kind = use_signal(String::new);
     let mut sort = use_signal(LibrarySort::default);
+    // The question being edited in a pop-up.
+    let mut editing = use_signal(|| None::<LibraryEntry>);
     let mut shown_count = use_signal(|| PAGE);
     let mut random_count = use_signal(|| 10usize);
 
@@ -211,6 +214,18 @@ pub fn LibraryBrowser(
         .map(|c| crate::library::topics(entries, &c))
         .unwrap_or_default();
     rsx! {
+        if let Some(entry) = editing() {
+            LibraryQuestionEditor {
+                key: "{entry.id}",
+                entry,
+                // Reload, so the list and its counts show the change.
+                on_saved: move |_| {
+                    editing.set(None);
+                    library.restart();
+                },
+                on_close: move |()| editing.set(None),
+            }
+        }
         div { class: "library-layout",
             label { class: "search library-search",
                 Icon { kind: IconKind::Search }
@@ -347,6 +362,7 @@ pub fn LibraryBrowser(
                             entry: (*entry).clone(),
                             in_quiz: present.contains(entry.question.text.as_str()),
                             on_add,
+                            on_edit: move |entry| editing.set(Some(entry)),
                         }
                     }
                 }
@@ -408,12 +424,33 @@ fn LibraryRow(
     entry: LibraryEntry,
     in_quiz: bool,
     on_add: Option<EventHandler<Vec<Question>>>,
+    on_edit: EventHandler<LibraryEntry>,
 ) -> Element {
     let question = entry.question.clone();
+    let edited = entry.clone();
     let (icon, color) = category_look(&entry.category);
     rsx! {
         li { class: "list-row library-row", style: "--category: {color}",
             div { class: "grow stack-tight",
+                div { class: "muted small library-meta",
+                    span {
+                        span { class: "category-icon", Icon { kind: icon } }
+                        "{entry.category} · {entry.topic}"
+                        if entry.edited {
+                            span { class: "library-edited", " · edited" }
+                        }
+                    }
+                    span { class: "library-meta-kind",
+                        "{entry.difficulty_name()} · {entry.kind_name()} · "
+                        button {
+                            class: "link-button",
+                            title: "Edit this question",
+                            aria_label: "Edit this question",
+                            onclick: move |_| on_edit.call(edited.clone()),
+                            "edit"
+                        }
+                    }
+                }
                 span { class: "strong", "{entry.question.text}" }
                 if !entry.question.passage.is_empty() {
                     span { class: "small library-passage", "{entry.question.passage}" }
@@ -441,18 +478,16 @@ fn LibraryRow(
                         span { class: "small library-answer", "✓ {entry.answer()}" }
                     },
                 }
-                span { class: "muted small library-meta",
-                    span { class: "category-icon", Icon { kind: icon } }
-                    "{entry.category} · {entry.topic} · {entry.difficulty_name()} · {entry.kind_name()}"
-                }
             }
-            if in_quiz {
-                span { class: "muted small", "✓ In the quiz" }
-            } else if let Some(on_add) = on_add {
-                button {
-                    class: "button",
-                    onclick: move |_| on_add.call(vec![question.clone()]),
-                    "＋ Add"
+            div { class: "library-row-actions",
+                if in_quiz {
+                    span { class: "muted small", "✓ In the quiz" }
+                } else if let Some(on_add) = on_add {
+                    button {
+                        class: "button",
+                        onclick: move |_| on_add.call(vec![question.clone()]),
+                        "＋ Add"
+                    }
                 }
             }
         }

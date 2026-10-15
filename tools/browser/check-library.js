@@ -36,14 +36,14 @@ const L = require('./lib.js');
   const music = await library.$$eval('.library-list .list-row', (rs) => rs.map((r) => r.innerText));
   expect(`Questions tab: ${music.length} Classical questions, no add buttons`,
     music.length > 0 && music.every((r) => r.includes('Music · Classical'))
-      && !(await library.$('.library-list button')));
+      && !(await library.$$eval('.library-list button', (bs) => bs.some((b) => b.innerText.includes('Add')))));
   // The difficulty and question type lists narrow the list; picking an option again clears it.
   await L.clickText(library, '.library-option', 'Hard');
   await L.clickText(library, '.library-option', 'Choices');
   await L.sleep(300);
   const hard = await library.$$eval('.library-list .list-row', (rs) => rs.map((r) => r.innerText));
   expect(`lists: ${hard.length} hard Choices questions`,
-    hard.length > 0 && hard.every((r) => r.includes('Music · Classical · Hard · Choices')));
+    hard.length > 0 && hard.every((r) => r.includes('Music · Classical') && r.includes('Hard · Choices')));
   await library.screenshot({ path: 'out/library-admin-lists.png' });
   const options = await library.$eval('.library-list .list-row', (r) => ({
     right: r.querySelectorAll('.library-options .library-answer').length,
@@ -58,7 +58,7 @@ const L = require('./lib.js');
   // Sorting: hardest last by difficulty, and A–Z by text.
   await L.clickText(library, '.library-option', 'Difficulty');
   await L.sleep(300);
-  const levels = await library.$$eval('.library-list .library-meta', (ms) => ms.map((m) => m.innerText.split(' · ')[2]));
+  const levels = await library.$$eval('.library-list .library-meta-kind', (ms) => ms.map((m) => m.innerText.split(' · ')[0]));
   const rank = { Easy: 1, Medium: 2, Hard: 3 };
   expect('sort by difficulty', levels.every((l, i) => i === 0 || rank[levels[i - 1]] <= rank[l]));
   await L.clickText(library, '.library-option', 'A–Z');
@@ -66,6 +66,34 @@ const L = require('./lib.js');
   const az = await library.$$eval('.library-list .list-row .strong', (ts) => ts.map((t) => t.innerText.toLowerCase()));
   expect('sort A–Z', az.every((t, i) => i === 0 || az[i - 1].localeCompare(t) <= 0));
   await L.clickText(library, '.library-option', 'Category');
+  // Editing a question from its "edit" link: the pop-up saves it on this server, marks it edited, and can revert it.
+  const before = await library.$eval('.library-list .list-row .strong', (t) => t.innerText);
+  await library.click('.library-list .list-row button[aria-label="Edit this question"]');
+  await library.waitForSelector('.edit-library-dialog textarea');
+  const hasMoves = await library.$('.edit-library-dialog button[title="Move up"]');
+  expect('edit pop-up: no move buttons', !hasMoves);
+  await L.clickText(library, '.edit-library-dialog .segmented button', 'Hard');
+  const text = await library.$('.edit-library-dialog textarea');
+  await retype(library, text, 'Edited: ' + before);
+  await library.screenshot({ path: 'out/library-edit.png' });
+  await L.clickText(library, '.edit-library-dialog button', 'Save');
+  await library.waitForFunction(() => !document.querySelector('.edit-library-dialog'));
+  await library.waitForFunction((t) => document.body.innerText.includes(t), {}, 'Edited: ' + before);
+  const row = await library.$eval('.library-list .list-row', (r) => r.innerText);
+  expect('edited: saved, hard, tagged', row.includes('Edited: ' + before) && row.includes('Hard') && row.includes('edited'));
+  await library.reload({ waitUntil: 'networkidle0' });
+  await library.waitForSelector('.library-category');
+  await L.clickText(library, '.library-category', 'Music');
+  await L.clickText(library, '.library-topic', 'Classical');
+  await library.waitForFunction((t) => document.body.innerText.includes(t), {}, 'Edited: ' + before);
+  expect('edited: kept after a reload', true);
+  const editButton = await library.$$eval('.library-list .list-row', (rs, t) => rs.findIndex((r) => r.innerText.includes(t)), 'Edited: ' + before);
+  await (await library.$$('.library-list .list-row button[aria-label="Edit this question"]'))[editButton].click();
+  await library.waitForSelector('.edit-library-dialog');
+  await L.clickText(library, '.edit-library-dialog button', 'Back to the original');
+  await library.waitForFunction(() => !document.querySelector('.edit-library-dialog'));
+  await library.waitForFunction((t) => !document.body.innerText.includes(t), {}, 'Edited: ' + before);
+  expect('reverted', true);
   // Number questions show their range.
   await L.clickText(library, '.library-option', 'Number');
   await L.sleep(300);
@@ -99,7 +127,7 @@ const L = require('./lib.js');
   expect(`search: ${rows.length} Astronomy questions about planets`,
     rows.length > 0 && rows.every((r) => r.includes('Science · Astronomy & space') && /planet/i.test(r)));
   await editor.screenshot({ path: 'out/library-editor.png' });
-  const first = rows[0].split('\n')[0];
+  const first = await editor.$eval('.dialog .library-list .list-row .strong', (t) => t.innerText);
   await L.clickText(editor, '.dialog .library-list .list-row button', 'Add');
   await editor.waitForFunction(() => document.querySelector('.dialog .library-list .list-row').innerText.includes('In the quiz'));
   // Picking the category again closes it and shows every question.

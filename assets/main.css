@@ -469,6 +469,13 @@ input.short-number {
   flex: none;
 }
 
+.library-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0 1rem;
+}
+
 .library-meta .category-icon {
   margin-right: 0.35rem;
   vertical-align: -0.15em;
@@ -476,6 +483,31 @@ input.short-number {
 
 .library-category.selected .category-icon {
   color: inherit !important;
+}
+
+/* A button that reads as a link, e.g. a library question's "edit". */
+.link-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent-text);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.library-row-actions {
+  display: flex;
+  align-items: center;
+}
+
+.library-edited {
+  color: var(--accent-text);
+}
+
+/* The pop-up editing a library question. */
+.dialog.edit-library-dialog {
+  width: min(52rem, 100%);
 }
 
 /* A multiple-choice question's options, the wrong ones in grey. */

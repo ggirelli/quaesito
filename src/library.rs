@@ -13,9 +13,22 @@ use crate::{
 /// One question of the library, with what it is about and how hard it is.
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct LibraryEntry {
+    /// Set by the server from the bundled question, to name it in edits.
+    #[serde(default, skip_serializing_if = "String::is_empty")]
+    pub id: String,
+    /// Whether this server's admin edited the question.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub edited: bool,
     pub category: String,
     pub topic: String,
     /// 1: most adults know it, 2: keen quizzers, 3: experts.
+    pub difficulty: u8,
+    pub question: Question,
+}
+
+/// What an admin may change in a library question.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+pub struct LibraryEdit {
     pub difficulty: u8,
     pub question: Question,
 }
@@ -263,6 +276,8 @@ mod tests {
 
     fn entry(category: &str, text: &str, difficulty: u8, kind: QuestionKind) -> LibraryEntry {
         LibraryEntry {
+            id: String::new(),
+            edited: false,
             category: category.into(),
             topic: "Topic".into(),
             difficulty,
