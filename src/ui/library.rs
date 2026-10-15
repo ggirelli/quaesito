@@ -12,7 +12,7 @@ use super::{
 };
 use crate::{
     api::question_library,
-    library::{DIFFICULTIES, KINDS, LibraryEntry, LibraryFilter},
+    library::{DIFFICULTIES, KINDS, LibraryEntry, LibraryFilter, LibrarySort},
     model::{Question, QuestionKind},
 };
 
@@ -121,6 +121,7 @@ pub fn LibraryBrowser(
     let mut topic = use_signal(|| None::<String>);
     let mut difficulty = use_signal(|| None::<u8>);
     let mut kind = use_signal(String::new);
+    let mut sort = use_signal(LibrarySort::default);
     let mut shown_count = use_signal(|| PAGE);
     let mut random_count = use_signal(|| 10usize);
 
@@ -146,7 +147,8 @@ pub fn LibraryBrowser(
         difficulty: difficulty(),
         kind: KINDS.into_iter().find(|k| *k == kind()),
     };
-    let matching = filter.apply(entries);
+    let mut matching = filter.apply(entries);
+    sort().apply(&mut matching);
     // Each list's counts follow the other filters: how many questions picking that option shows.
     let difficulties: Vec<FilterOption> = DIFFICULTIES
         .into_iter()
@@ -285,6 +287,24 @@ pub fn LibraryBrowser(
                         kind.set(key.unwrap_or_default());
                         shown_count.set(PAGE);
                     },
+                }
+                div {
+                    class: "library-filter-list",
+                    role: "group",
+                    aria_label: "Sort by",
+                    span { class: "library-filter-title", "Sort by" }
+                    for order in LibrarySort::ALL {
+                        button {
+                            class: "library-option",
+                            class: if sort() == order { "selected" },
+                            aria_pressed: sort() == order,
+                            onclick: move |_| {
+                                sort.set(order);
+                                shown_count.set(PAGE);
+                            },
+                            span { class: "grow", "{order.label()}" }
+                        }
+                    }
                 }
             }
             section { class: "library-main card stack",

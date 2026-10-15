@@ -55,6 +55,17 @@ const L = require('./lib.js');
   await L.sleep(300);
   const again = await library.$$eval('.library-list .list-row', (rs) => rs.length);
   expect(`lists cleared: ${again} questions`, again === music.length);
+  // Sorting: hardest last by difficulty, and A–Z by text.
+  await L.clickText(library, '.library-option', 'Difficulty');
+  await L.sleep(300);
+  const levels = await library.$$eval('.library-list .library-meta', (ms) => ms.map((m) => m.innerText.split(' · ')[2]));
+  const rank = { Easy: 1, Medium: 2, Hard: 3 };
+  expect('sort by difficulty', levels.every((l, i) => i === 0 || rank[levels[i - 1]] <= rank[l]));
+  await L.clickText(library, '.library-option', 'A–Z');
+  await L.sleep(300);
+  const az = await library.$$eval('.library-list .list-row .strong', (ts) => ts.map((t) => t.innerText.toLowerCase()));
+  expect('sort A–Z', az.every((t, i) => i === 0 || az[i - 1].localeCompare(t) <= 0));
+  await L.clickText(library, '.library-option', 'Category');
   // Number questions show their range.
   await L.clickText(library, '.library-option', 'Number');
   await L.sleep(300);

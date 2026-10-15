@@ -136,6 +136,46 @@ impl LibraryFilter {
     }
 }
 
+/// How the questions shown are ordered.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum LibrarySort {
+    /// The library's own order: by category, then topic.
+    #[default]
+    Category,
+    /// Easy first.
+    Difficulty,
+    /// By answer type, in the order of [`KINDS`].
+    Kind,
+    /// By question text, ignoring case and accents.
+    Text,
+}
+
+impl LibrarySort {
+    pub const ALL: [Self; 4] = [Self::Category, Self::Difficulty, Self::Kind, Self::Text];
+
+    #[must_use]
+    pub fn label(self) -> &'static str {
+        match self {
+            Self::Category => "Category",
+            Self::Difficulty => "Difficulty",
+            Self::Kind => "Question type",
+            Self::Text => "A–Z",
+        }
+    }
+
+    /// Orders `entries`; ties keep the library's order.
+    pub fn apply(self, entries: &mut [&LibraryEntry]) {
+        match self {
+            Self::Category => {}
+            Self::Difficulty => entries.sort_by_key(|e| e.difficulty),
+            Self::Kind => {
+                entries.sort_by_key(|e| KINDS.iter().position(|k| *k == e.kind_name()));
+            }
+            Self::Text => entries.sort_by_cached_key(|e| search::fold(&e.question.text)),
+        }
+    }
+}
+
 /// Every category with its number of questions, by name.
 #[must_use]
 pub fn categories(entries: &[LibraryEntry]) -> Vec<(String, usize)> {
@@ -299,6 +339,24 @@ mod tests {
             }),
             ["Capital of France?"]
         );
+    }
+
+    #[test]
+    fn sorting_orders_what_is_shown_and_keeps_ties_in_place() {
+        let all = library();
+        // Shown in reverse: "Year…" (2, Number), "Rome…" (2, True/false), "Capital…" (1, Choices).
+        let texts = |sort: LibrarySort| -> Vec<char> {
+            let mut shown: Vec<&LibraryEntry> = all.iter().rev().collect();
+            sort.apply(&mut shown);
+            shown
+                .iter()
+                .map(|e| e.question.text.chars().next().unwrap())
+                .collect()
+        };
+        assert_eq!(texts(LibrarySort::Category), ['Y', 'R', 'C']);
+        assert_eq!(texts(LibrarySort::Difficulty), ['C', 'Y', 'R']);
+        assert_eq!(texts(LibrarySort::Kind), ['C', 'R', 'Y']);
+        assert_eq!(texts(LibrarySort::Text), ['C', 'R', 'Y']);
     }
 
     #[test]
