@@ -73,6 +73,11 @@ missing. Recorded effects would sound richer; if you add them I will play them i
 
 ## Done
 
+- `assets/teams/<name>.png`: 16 ready-made team pictures (owl, fox, cat, dog, bear, penguin, frog,
+  octopus, robot, alien, ghost, dragon, unicorn, sloth, llama, panda), 256×256 cut-outs made by
+  `uv run tools/assets/team-mascots.py` from the 1254×1254 originals (kept locally in
+  `assets/teams/originals/`, git-ignored). The script removes the checkerboard some generators draw
+  in place of transparency, and centres each mascot with room for its round frame.
 - `assets/brand/icon.png`: the app icon (1254×1254 source). The app uses `icon-192.png`, a cropped
   192×192 copy, as favicon and logo mark.
 - `assets/brand/logo-{dark,light}.{png,svg}`: logo with word mark (README header).

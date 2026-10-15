@@ -158,6 +158,7 @@ fn HostScreen(code: String) -> Element {
             if show_teams() {
                 TeamsPanel {
                     teams: view.teams.clone(),
+                    pictures: view.pictures,
                     on_close: move |()| show_teams.set(false),
                 }
             }
@@ -447,7 +448,14 @@ fn file_stem(title: &str) -> String {
 
 /// The host's team manager: rename or remove teams.
 #[component]
-fn TeamsPanel(teams: Vec<TeamInfo>, on_close: EventHandler<()>) -> Element {
+fn TeamsPanel(teams: Vec<TeamInfo>, pictures: bool, on_close: EventHandler<()>) -> Element {
+    let live: Live<HostCommand, HostView> = use_context();
+    let set_pictures = move |e: FormEvent| async move {
+        let _ = live
+            .socket
+            .send(HostCommand::SetPictures(e.checked()))
+            .await;
+    };
     rsx! {
         div {
             class: "overlay",
@@ -467,6 +475,21 @@ fn TeamsPanel(teams: Vec<TeamInfo>, on_close: EventHandler<()>) -> Element {
                 div { class: "row between",
                     h2 { "Teams" }
                     button { class: "button ghost", onclick: move |_| on_close.call(()), "Close" }
+                }
+                label { class: "check-field",
+                    input {
+                        r#type: "checkbox",
+                        checked: pictures,
+                        onchange: set_pictures,
+                    }
+                    span { "Teams can add a picture" }
+                }
+                p { class: "muted small",
+                    if pictures {
+                        "Untick to stop uploads and remove the pictures teams uploaded. Ready-made pictures and backgrounds stay."
+                    } else {
+                        "Teams pick a ready-made picture or show their initial, on the background they choose."
+                    }
                 }
                 if teams.is_empty() {
                     p { class: "muted", "No team has joined yet." }

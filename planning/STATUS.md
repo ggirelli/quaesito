@@ -77,9 +77,11 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 68  | Versioned quiz file format with a published JSON Schema; import asks before leaving out unknown question kinds                     | ✅ done |
 | 69  | Import and export progress bar; imported pictures processed in parallel                                                            | ✅ done |
 | 70  | Release 0.4.0 (`v0.4.0` tag: downloads built by CI)                                                                                | ✅ done |
-| 71  | Starting a game: option to turn off custom team pictures                                                                           | ⏳ todo |
-| 72  | Custom team pictures with a transparent background, combined with a flat colour or gradient background of the team’s choice        | ⏳ todo |
-| 73  | Question library: about 2,700 ready-made questions to browse by category, add while editing, or fill a new quiz at random          | ⏳ todo |
+| 71  | Starting a game: option to turn off custom team pictures                                                                           | ✅ done |
+| 72  | Custom team pictures with a transparent background, combined with a flat colour or gradient background of the team’s choice        | ✅ done |
+| 73  | Question library: about 2,700 ready-made questions to browse by category, add while editing, or fill a new quiz at random          | ✅ done |
+| 74  | Ready-made team pictures: 16 cut-out mascots to pick instead of uploading (also when uploads are off)                              | ✅ done |
+| 75  | Phone lobby: “You’re in!” first, name and picture folded away (teams rename themselves); Teams panel toggles uploads               | ✅ done |
 
 ## Notes
 
@@ -87,7 +89,9 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 - `src/scoring.rs`: speed-weighted points, all-or-nothing/partial correctness, judged typed answers, ranking.
 - `src/server/matching.rs`: normalisation of typed answers (case, accents, punctuation, spacing).
 - `src/server/store.rs`: one JSON file per quiz, atomic writes, path-safe ids.
-- `src/server/media.rs`: picture re-encoding (questions → JPEG ≤1600×1200, avatars → 256² PNG), `GET /media/{name}`.
+- `src/server/media.rs`: picture re-encoding (questions → JPEG ≤1600×1200, avatars → 256² PNG keeping transparency), `GET /media/{name}`.
+- Team pictures: an upload (unless the game turns uploads off) or one of 16 ready-made mascots (`assets/teams/`, made by `tools/assets/team-mascots.py`), on a background the team picks (`.backdrop-<n>` classes; inline styles flickered). Mascots were drawn for
+  the sky-blue background; on others a `hue-rotate()` per background class keeps the same contrast.
 - `src/server/mod.rs`: global state initialised from `QUAESITO_DATA_DIR` (default `./data`).
 - `src/server/auth.rs`: admin password from `QUAESITO_ADMIN_PASSWORD` (generated and logged if unset), in-memory bearer tokens.
 - `src/api.rs`: server functions for login, quiz CRUD, duplicate, JSON import and picture upload.
@@ -106,7 +110,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 - `src/ui/live.rs`: `use_live` hook keeping a WebSocket alive with reconnection; countdowns run on the client from the last server snapshot.
 - `src/ui/host.rs`: `/host/:code` big screen: lobby with client-side QR code, timed questions, reveals with pick counts, standings, podium 3→2→1. Advance with the button, →, PageDown or N (presentation clickers).
 - Admin dashboard: start a quiz, list live games, reopen or end them.
-- `src/ui/player.rs`: `/join` and `/join/:code` phone flow: team name, optional team picture (in the lobby), reconnect token per game in `localStorage`, tap-to-answer (single) or select-and-submit (multi), results, final rank.
+- `src/ui/player.rs`: `/join` and `/join/:code` phone flow: team name, optional team picture and background (folded away in the lobby), reconnect token per game in `localStorage`, tap-to-answer (single) or select-and-submit (multi), results, final rank.
 - Soundtracks (step 13): `Question.audio`, `POST /api/admin/audio`, `Phase::Ready` in the engine (skipped for questions without music, never auto-advanced), `Soundtrack` component on the host footer without player controls (so the music can only start together with the clock) and an animated indicator while it plays; it starts on the host's "next" key/click, which also satisfies browser autoplay rules.
 - End-to-end checked in headless Chrome (host + two phones) for both settings extremes: reveal after each/at end, manual/auto advance, all-or-nothing/partial, buttons-only/full text.
 

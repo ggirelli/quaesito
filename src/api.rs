@@ -202,13 +202,15 @@ pub async fn upload_question_audio(token: String, file: FileStream) -> ServerFnR
 /// Starts a live session for a quiz and returns its join code. `max_teams` is the most teams
 /// that can join ([`crate::protocol::DEFAULT_MAX_TEAMS`] when left out). With
 /// `shuffle_answers`, the answers of each multiple-choice question are shuffled for this game
-/// only: the saved quiz keeps its order.
+/// only: the saved quiz keeps its order. With `team_pictures` false, teams cannot upload a
+/// picture (they still pick a background for their initial).
 #[post("/api/admin/session/start")]
 pub async fn start_session(
     token: String,
     quiz_id: String,
     max_teams: Option<usize>,
     shuffle_answers: Option<bool>,
+    team_pictures: Option<bool>,
 ) -> ServerFnResult<String> {
     let state = crate::server::state();
     state.auth.require(&token)?;
@@ -225,6 +227,7 @@ pub async fn start_session(
         .create(
             quiz,
             max_teams.unwrap_or(crate::protocol::DEFAULT_MAX_TEAMS),
+            team_pictures.unwrap_or(true),
         )
         .map_err(|refusal| ServerFnError::new(refusal.0))
 }
@@ -418,16 +421,79 @@ pub async fn upload_avatar(
         .sessions
         .get(&code)
         .ok_or_else(|| ServerFnError::new("No game with this code is running."))?;
-    let team = session
-        .read(|g| g.team_for_token(&token))
-        .ok_or_else(|| ServerFnError::new("Unknown team."))?;
+    let (team, pictures) = session.read(|g| (g.team_for_token(&token), g.pictures()));
+    let team = team.ok_or_else(|| ServerFnError::new("Unknown team."))?;
+    if !pictures {
+        return Err(ServerFnError::new("This game does not take team pictures."));
+    }
     let bytes = crate::server::media::read_upload(file, state.limits.picture).await?;
     let name = state
         .media
         .store(bytes, crate::server::media::ImageKind::Avatar)
         .await?;
-    session.update(|g, _| g.set_avatar(team, name.clone()));
+    session
+        .update(|g, _| g.set_avatar(team, name.clone()))
+        .map_err(|refusal| ServerFnError::new(refusal.0))?;
     Ok(name)
+}
+
+/// Renames a team from its own phone, while the game waits in the lobby. Names taken by
+/// another team (ignoring case) are refused.
+#[post("/api/game/rename")]
+pub async fn rename_my_team(code: String, token: String, name: String) -> ServerFnResult<()> {
+    let session = crate::server::state()
+        .sessions
+        .get(&code)
+        .ok_or_else(|| ServerFnError::new("No game with this code is running."))?;
+    let (team, lobby) = session.read(|g| (g.team_for_token(&token), g.in_lobby()));
+    let team = team.ok_or_else(|| ServerFnError::new("Unknown team."))?;
+    if !lobby {
+        return Err(ServerFnError::new(
+            "The quiz has started: ask the host to rename your team.",
+        ));
+    }
+    session
+        .update(|g, _| g.rename_team(team, &name))
+        .map_err(|refusal| ServerFnError::new(refusal.0))
+}
+
+/// Gives a team one of the ready-made pictures ([`crate::protocol::MASCOTS`]), or none.
+#[post("/api/game/mascot")]
+pub async fn set_team_mascot(
+    code: String,
+    token: String,
+    mascot: Option<String>,
+) -> ServerFnResult<()> {
+    let session = crate::server::state()
+        .sessions
+        .get(&code)
+        .ok_or_else(|| ServerFnError::new("No game with this code is running."))?;
+    let team = session
+        .read(|g| g.team_for_token(&token))
+        .ok_or_else(|| ServerFnError::new("Unknown team."))?;
+    session
+        .update(|g, _| g.set_mascot(team, mascot))
+        .map_err(|refusal| ServerFnError::new(refusal.0))
+}
+
+/// Sets the background of a team's picture (`None` for the default); see
+/// [`crate::protocol::BACKDROP_COUNT`].
+#[post("/api/game/backdrop")]
+pub async fn set_team_backdrop(
+    code: String,
+    token: String,
+    backdrop: Option<u8>,
+) -> ServerFnResult<()> {
+    let session = crate::server::state()
+        .sessions
+        .get(&code)
+        .ok_or_else(|| ServerFnError::new("No game with this code is running."))?;
+    let team = session
+        .read(|g| g.team_for_token(&token))
+        .ok_or_else(|| ServerFnError::new("Unknown team."))?;
+    session
+        .update(|g, _| g.set_backdrop(team, backdrop))
+        .map_err(|refusal| ServerFnError::new(refusal.0))
 }
 
 /// Live updates for the host screen.

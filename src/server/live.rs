@@ -51,6 +51,9 @@ pub async fn host(mut socket: TypedWebsocket<HostCommand, HostView>, session: Ar
                 Ok(HostCommand::RemoveTeam { team }) => {
                     let _ = session.update(|g, now| g.remove_team(team, now));
                 }
+                Ok(HostCommand::SetPictures(pictures)) => {
+                    session.update(|g, _| g.set_pictures(pictures));
+                }
                 Err(_) => return,
             },
         }

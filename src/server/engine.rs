@@ -37,16 +37,21 @@ use crate::{
         RevealMode,
     },
     protocol::{
-        AnswerOutcome, DEFAULT_MAX_TEAMS, Fastest, GameResults, Grade, Guess, HostPhase, HostView,
-        InputKind, JokerState, Judgement, MAX_NAME_CHARS, MAX_TEAMS_CEILING, PairColumns,
-        PartReveal, PinGuess, PlayerPhase, PlayerView, QuestionInfo, Response, ResultRow, Reveal,
-        RoundResult, SlideInfo, StandingRow, TeamInfo, TextGroup, Upcoming,
+        AnswerOutcome, BACKDROP_COUNT, DEFAULT_MAX_TEAMS, Fastest, GameResults, Grade, Guess,
+        HostPhase, HostView, InputKind, JokerState, Judgement, MASCOTS, MAX_NAME_CHARS,
+        MAX_TEAMS_CEILING, PairColumns, PartReveal, PinGuess, PlayerPhase, PlayerView,
+        QuestionInfo, Response, ResultRow, Reveal, RoundResult, SlideInfo, StandingRow, TeamInfo,
+        TextGroup, Upcoming,
     },
     scoring::{self, Tally},
 };
 
 fn default_max_teams() -> usize {
     DEFAULT_MAX_TEAMS
+}
+
+fn yes() -> bool {
+    true
 }
 
 /// Auto-advance pause after a question when its answers are shown.
@@ -69,6 +74,9 @@ pub struct Snapshot {
     /// The most teams that can join.
     #[serde(default = "default_max_teams")]
     max_teams: usize,
+    /// Whether teams may upload a picture.
+    #[serde(default = "yes")]
+    pictures: bool,
     phase: SavedPhase,
     judgements: Vec<HashMap<String, Judgement>>,
     played: Vec<bool>,
@@ -119,6 +127,8 @@ pub struct Game {
     next_team_id: u32,
     /// The most teams that can join.
     max_teams: usize,
+    /// Whether teams may upload a picture.
+    pictures: bool,
     phase: Phase,
     /// Per question: the judge's amendments to typed answers, by normalised text.
     judgements: Vec<HashMap<String, Judgement>>,
@@ -137,6 +147,12 @@ struct Team {
     id: u32,
     name: String,
     avatar: Option<String>,
+    /// The ready-made picture picked instead of uploading one (see [`MASCOTS`]).
+    #[serde(default)]
+    mascot: Option<String>,
+    /// The background picked for the picture, by index (see [`BACKDROP_COUNT`]).
+    #[serde(default)]
+    backdrop: Option<u8>,
     token: String,
     /// Live phone connections; phones reconnect after a restart.
     #[serde(skip)]
@@ -226,6 +242,7 @@ impl Game {
             teams: Vec::new(),
             next_team_id: 1,
             max_teams: DEFAULT_MAX_TEAMS,
+            pictures: true,
             phase: Phase::Lobby,
             judgements: vec![HashMap::new(); quiz_len],
             played: vec![false; quiz_len],
@@ -248,6 +265,8 @@ impl Game {
                     id: t.id,
                     name: t.name.clone(),
                     avatar: t.avatar.clone(),
+                    mascot: t.mascot.clone(),
+                    backdrop: t.backdrop,
                     token: t.token.clone(),
                     connections: 0,
                     submissions: t
@@ -266,6 +285,7 @@ impl Game {
                 .collect(),
             next_team_id: self.next_team_id,
             max_teams: self.max_teams,
+            pictures: self.pictures,
             phase: match self.phase {
                 Phase::Lobby => SavedPhase::Lobby,
                 Phase::Ready { index } => SavedPhase::Ready { index },
@@ -320,6 +340,7 @@ impl Game {
             teams: snapshot.teams,
             next_team_id: snapshot.next_team_id,
             max_teams: snapshot.max_teams,
+            pictures: snapshot.pictures,
             phase,
             judgements: snapshot.judgements,
             played: snapshot.played,
@@ -406,6 +427,8 @@ impl Game {
             id,
             name,
             avatar: None,
+            mascot: None,
+            backdrop: None,
             token,
             connections: 0,
             submissions: (0..self.quiz.questions.len()).map(|_| None).collect(),
@@ -480,11 +503,74 @@ impl Game {
         self.teams.iter().find(|t| t.token == token).map(|t| t.id)
     }
 
+    /// Lets teams upload a picture, or not (they still pick a background for their initial).
+    /// Turning pictures off also drops those already uploaded.
+    pub fn set_pictures(&mut self, pictures: bool) {
+        self.pictures = pictures;
+        if !pictures {
+            for team in &mut self.teams {
+                team.avatar = None;
+            }
+        }
+    }
+
+    /// Whether the game is still waiting in the lobby.
+    #[must_use]
+    pub fn in_lobby(&self) -> bool {
+        matches!(self.phase, Phase::Lobby)
+    }
+
+    /// Whether teams may upload a picture.
+    #[must_use]
+    pub fn pictures(&self) -> bool {
+        self.pictures
+    }
+
     /// Sets a team's avatar.
-    pub fn set_avatar(&mut self, team: u32, avatar: String) {
+    ///
+    /// # Errors
+    /// Refuses when the game takes no pictures.
+    pub fn set_avatar(&mut self, team: u32, avatar: String) -> Result<(), Refusal> {
+        if !self.pictures {
+            return Err(Refusal("This game does not take team pictures."));
+        }
         if let Some(t) = self.team_mut(team) {
             t.avatar = Some(avatar);
+            t.mascot = None;
         }
+        Ok(())
+    }
+
+    /// Gives a team a ready-made picture (`None` for none), in place of an uploaded one. Allowed
+    /// even when the game takes no uploads.
+    ///
+    /// # Errors
+    /// Refuses a picture that does not exist.
+    pub fn set_mascot(&mut self, team: u32, mascot: Option<String>) -> Result<(), Refusal> {
+        if mascot.as_deref().is_some_and(|m| !MASCOTS.contains(&m)) {
+            return Err(Refusal("There is no such picture."));
+        }
+        if let Some(t) = self.team_mut(team) {
+            if mascot.is_some() {
+                t.avatar = None;
+            }
+            t.mascot = mascot;
+        }
+        Ok(())
+    }
+
+    /// Sets the background of a team's picture (`None` for the default).
+    ///
+    /// # Errors
+    /// Refuses a background that does not exist.
+    pub fn set_backdrop(&mut self, team: u32, backdrop: Option<u8>) -> Result<(), Refusal> {
+        if backdrop.is_some_and(|b| b >= BACKDROP_COUNT) {
+            return Err(Refusal("There is no such background."));
+        }
+        if let Some(t) = self.team_mut(team) {
+            t.backdrop = backdrop;
+        }
+        Ok(())
     }
 
     /// Tracks a team leader's phone connecting (`true`) or disconnecting.
@@ -950,6 +1036,7 @@ impl Game {
             code: self.code.clone(),
             teams: self.teams.iter().map(Team::info).collect(),
             max_teams: self.max_teams,
+            pictures: self.pictures,
             paused: self.paused_at.is_some(),
             speed_points: self.quiz.settings.points == PointsMode::Speed,
             auto_advance_ms: match self.phase {
@@ -1017,6 +1104,7 @@ impl Game {
         let phase = match self.phase {
             Phase::Lobby => PlayerPhase::Lobby {
                 teams: self.teams.len(),
+                pictures: self.pictures,
             },
             Phase::Ready { index } => PlayerPhase::Ready {
                 index: number(index),
@@ -1883,6 +1971,8 @@ impl Team {
             id: self.id,
             name: self.name.clone(),
             avatar: self.avatar.clone(),
+            mascot: self.mascot.clone(),
+            backdrop: self.backdrop,
             connected: self.connections > 0,
         }
     }
@@ -2129,6 +2219,61 @@ mod tests {
 
     fn pick(selected: &[usize]) -> Response {
         Response::Choice(selected.to_vec())
+    }
+
+    #[test]
+    fn team_pictures_can_be_turned_off_and_backdrops_picked() {
+        let t0 = Instant::now();
+        let mut g = game(QuizSettings::default());
+        let owls = join(&mut g, "Owls");
+        g.set_avatar(owls, "owls.png".to_owned()).unwrap();
+        g.set_backdrop(owls, Some(3)).unwrap();
+        assert!(g.set_backdrop(owls, Some(BACKDROP_COUNT)).is_err());
+        let team = g.player_view(owls, t0).unwrap().team;
+        assert_eq!(
+            (team.avatar.as_deref(), team.backdrop),
+            (Some("owls.png"), Some(3))
+        );
+
+        // Both survive a restart.
+        let restored = Game::restore(g.snapshot(t0), t0)
+            .player_view(owls, t0)
+            .unwrap()
+            .team;
+        assert_eq!(
+            (restored.avatar, restored.backdrop),
+            (team.avatar, team.backdrop)
+        );
+
+        // A ready-made picture replaces the upload, and an upload replaces it.
+        assert!(g.set_mascot(owls, Some("kraken".to_owned())).is_err());
+        g.set_mascot(owls, Some("owl".to_owned())).unwrap();
+        let team = g.player_view(owls, t0).unwrap().team;
+        assert_eq!((team.avatar, team.mascot.as_deref()), (None, Some("owl")));
+        g.set_avatar(owls, "owls.png".to_owned()).unwrap();
+        assert_eq!(g.player_view(owls, t0).unwrap().team.mascot, None);
+
+        // Without pictures, uploads are refused and pictures dropped; backdrops stay.
+        g.set_pictures(false);
+        assert!(g.set_avatar(owls, "again.png".to_owned()).is_err());
+        let view = g.player_view(owls, t0).unwrap();
+        assert_eq!((view.team.avatar, view.team.backdrop), (None, Some(3)));
+        assert!(matches!(
+            view.phase,
+            PlayerPhase::Lobby {
+                pictures: false,
+                ..
+            }
+        ));
+        let restored = Game::restore(g.snapshot(t0), t0);
+        assert!(!restored.pictures());
+        // Ready-made pictures stay allowed, and survive a restart.
+        g.set_mascot(owls, Some("fox".to_owned())).unwrap();
+        let restored = Game::restore(g.snapshot(t0), t0)
+            .player_view(owls, t0)
+            .unwrap()
+            .team;
+        assert_eq!(restored.mascot.as_deref(), Some("fox"));
     }
 
     #[test]

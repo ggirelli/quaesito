@@ -593,6 +593,7 @@ fn StartDialog(id: String, on_close: EventHandler<()>) -> Element {
     let token: AdminToken = use_context();
     let mut max_teams = use_signal(|| DEFAULT_MAX_TEAMS.to_string());
     let mut shuffle_answers = use_signal(|| false);
+    let mut team_pictures = use_signal(|| true);
     let mut error = use_signal(|| None::<String>);
     let start = move |evt: FormEvent| {
         evt.prevent_default();
@@ -604,7 +605,15 @@ fn StartDialog(id: String, on_close: EventHandler<()>) -> Element {
                 )));
                 return;
             };
-            match start_session(token.get(), id, Some(limit), Some(shuffle_answers())).await {
+            match start_session(
+                token.get(),
+                id,
+                Some(limit),
+                Some(shuffle_answers()),
+                Some(team_pictures()),
+            )
+            .await
+            {
                 Ok(code) => {
                     navigator().push(Route::Host { code });
                 }
@@ -642,6 +651,19 @@ fn StartDialog(id: String, on_close: EventHandler<()>) -> Element {
                     "The big screen shows each multiple-choice question's answers in a new order, "
                     "for this game only: the saved quiz keeps its order. Phones always list the "
                     "answers in their own order."
+                }
+                label { class: "check-field",
+                    input {
+                        r#type: "checkbox",
+                        checked: team_pictures(),
+                        onchange: move |e| team_pictures.set(e.checked()),
+                    }
+                    span { "Teams can add a picture" }
+                }
+                p { class: "muted small",
+                    "Teams upload a picture from their phone in the lobby. Turn it off to keep "
+                    "the big screen free of surprises: teams then show their initial on the "
+                    "background they pick."
                 }
                 ErrorBox { error: error() }
                 button { r#type: "submit", class: "button primary big", "▶ Start" }

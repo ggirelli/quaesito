@@ -6,16 +6,20 @@ use super::{
     Route, client,
     live::{ConnectionBanner, Live, countdown_ms, use_clock, use_live},
     widgets::{
-        ANSWER_STYLES, AnswerBadge, AnswerShape, Brand, ClientOnly, DOT, ErrorBox, MapPin,
-        PairItemContent, PinMap, Spinner, TeamAvatar, media_url, message, pair_letter,
+        ANSWER_STYLES, AnswerBadge, AnswerShape, Brand, ClientOnly, DOT, ErrorBox, MASCOT_PICTURES,
+        MapPin, MascotArt, PairItemContent, PinMap, Spinner, TeamAvatar, backdrop_class, media_url,
+        message, pair_letter,
     },
 };
 use crate::{
-    api::{check_ticket, game_info, join_game, player_socket, upload_avatar},
+    api::{
+        check_ticket, game_info, join_game, player_socket, rename_my_team, set_team_backdrop,
+        set_team_mascot, upload_avatar,
+    },
     model::{MAX_TEXT_ANSWER_CHARS, NumberRange, PhoneDisplay, Point},
     protocol::{
-        AnswerOutcome, InputKind, JokerState, MAX_NAME_CHARS, PairColumns, PlayerCommand,
-        PlayerPhase, PlayerView, Response, TeamInfo,
+        AnswerOutcome, BACKDROP_COUNT, InputKind, JokerState, MASCOTS, MAX_NAME_CHARS, PairColumns,
+        PlayerCommand, PlayerPhase, PlayerView, Response, TeamInfo,
     },
 };
 
@@ -278,8 +282,8 @@ fn PlayerGame(code: String, token: String, on_gone: EventHandler<()>) -> Element
 #[component]
 fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) -> Element {
     match view.phase {
-        PlayerPhase::Lobby { teams } => rsx! {
-            LobbyView { code, token, team: view.team.clone(), teams }
+        PlayerPhase::Lobby { teams, pictures } => rsx! {
+            LobbyView { code, token, team: view.team.clone(), teams, pictures }
         },
         PlayerPhase::Slide => rsx! {
             main { class: "player-main",
@@ -545,7 +549,14 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
 }
 
 #[component]
-fn LobbyView(code: String, token: String, team: TeamInfo, teams: usize) -> Element {
+fn LobbyView(
+    code: String,
+    token: String,
+    team: TeamInfo,
+    teams: usize,
+    /// Whether the game takes team pictures.
+    pictures: bool,
+) -> Element {
     let code = use_signal(|| code);
     let token = use_signal(|| token);
     let mut uploading = use_signal(|| false);
@@ -561,33 +572,132 @@ fn LobbyView(code: String, token: String, team: TeamInfo, teams: usize) -> Eleme
         }
         uploading.set(false);
     };
+    let pick = move |backdrop: Option<u8>| async move {
+        error.set(None);
+        if let Err(err) = set_team_backdrop(code(), token(), backdrop).await {
+            error.set(Some(message(&err)));
+        }
+    };
+    let pick_mascot = move |mascot: Option<String>| async move {
+        error.set(None);
+        if let Err(err) = set_team_mascot(code(), token(), mascot).await {
+            error.set(Some(message(&err)));
+        }
+    };
+    // Bumped when a new name is refused, so the field shows the team's name again.
+    let mut refusals = use_signal(|| 0u32);
+    let rename = move |e: FormEvent| async move {
+        error.set(None);
+        if let Err(err) = rename_my_team(code(), token(), e.value()).await {
+            error.set(Some(message(&err)));
+            refusals += 1;
+        }
+    };
+    let backdrop = backdrop_class(team.backdrop);
     rsx! {
         main { class: "player-main",
-            label { class: "avatar-picker",
-                TeamAvatar { team: team.clone(), class: "large" }
-                span { class: "button ghost",
-                    if uploading() {
-                        "Uploading…"
-                    } else if team.avatar.is_some() {
-                        "Change team picture"
-                    } else {
-                        "Add a team picture"
-                    }
-                }
-                input {
-                    r#type: "file",
-                    accept: "image/*",
-                    class: "visually-hidden",
-                    onchange: upload,
-                }
-            }
-            ErrorBox { error: error() }
             h1 { class: "status-title", "You're in!" }
             p { class: "muted",
                 if teams == 1 { "1 team has joined." } else { "{teams} teams have joined." }
                 br {}
                 "Watch the big screen, the quiz starts soon."
             }
+            // The team's look, folded away until opened.
+            details { class: "team-look",
+                summary {
+                    TeamAvatar { team: team.clone(), class: "large" }
+                    span { class: "button ghost", "Change your name or picture" }
+                }
+                label { class: "field team-name-field",
+                    span { "Team name" }
+                    input {
+                        key: "{team.name}-{refusals}",
+                        value: "{team.name}",
+                        maxlength: MAX_NAME_CHARS,
+                        onchange: rename,
+                    }
+                }
+                if pictures {
+                    label { class: "avatar-picker",
+                        span { class: "button ghost",
+                            if uploading() {
+                                "Uploading…"
+                            } else {
+                                "Upload your own picture"
+                            }
+                        }
+                        input {
+                            r#type: "file",
+                            accept: "image/*",
+                            class: "visually-hidden",
+                            onchange: upload,
+                        }
+                    }
+                }
+                div {
+                    class: "mascot-picker",
+                    role: "group",
+                    aria_label: if pictures { "Or pick one of ours" } else { "Pick a team picture" },
+                    for (name , picture) in MASCOTS.iter().zip(MASCOT_PICTURES) {
+                        {
+                            let chosen = team.mascot.as_deref() == Some(*name);
+                            rsx! {
+                                button {
+                                    class: "mascot-choice",
+                                    class: if chosen { "selected" },
+                                    aria_pressed: chosen,
+                                    title: "{name}",
+                                    onclick: move |_| pick_mascot((!chosen).then(|| (*name).to_owned())),
+                                    MascotArt { class: "avatar {backdrop}", picture, alt: "{name}" }
+                                }
+                            }
+                        }
+                    }
+                }
+                div {
+                    class: "backdrop-picker",
+                    role: "group",
+                    aria_label: "Background of your team picture",
+                    button {
+                        class: "backdrop-swatch default",
+                        class: if team.backdrop.is_none() { "selected" },
+                        aria_pressed: team.backdrop.is_none(),
+                        title: "No background",
+                        onclick: move |_| pick(None),
+                    }
+                    for index in 0..BACKDROP_COUNT {
+                        {
+                            rsx! {
+                                button {
+                                    class: "backdrop-swatch {backdrop_class(Some(index))}",
+                                    class: if team.backdrop == Some(index) { "selected" },
+                                    aria_pressed: team.backdrop == Some(index),
+                                    title: "Background {index + 1}",
+                                    onclick: move |_| pick(Some(index)),
+                                }
+                            }
+                        }
+                    }
+                }
+                p { class: "muted small backdrop-hint",
+                    if pictures {
+                        "Upload a picture or pick one of ours, then a background: it shows behind your initial, and through the see-through parts of a picture."
+                    } else {
+                        "Pick a picture and a background for your team."
+                    }
+                }
+                button {
+                    class: "button primary",
+                    // Fold the team picture away again.
+                    onclick: move |_| {
+                        document::eval(
+                            "document.querySelector('details.team-look')?.removeAttribute('open')",
+                        );
+                    },
+                    "✓ Done"
+                }
+            }
+            ErrorBox { error: error() }
         }
     }
 }

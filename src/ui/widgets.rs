@@ -167,13 +167,70 @@ pub fn media_url(name: &str) -> String {
     format!("/media/{name}")
 }
 
-/// A team's avatar, or its initial when it has none.
+/// The class giving a team's picture the background it picked (`.backdrop-0` to `.backdrop-10`
+/// in the stylesheet: the answer colours, flat, then in pairs), if any. A class rather than an
+/// inline style: switching an inline style straight to another value left it empty on every other
+/// change.
+#[must_use]
+pub fn backdrop_class(backdrop: Option<u8>) -> String {
+    backdrop
+        .filter(|b| *b < crate::protocol::BACKDROP_COUNT)
+        .map(|b| format!("backdrop-{b}"))
+        .unwrap_or_default()
+}
+
+/// The ready-made team pictures, in the order of [`crate::protocol::MASCOTS`].
+pub const MASCOT_PICTURES: [Asset; 16] = [
+    asset!("/assets/teams/owl.png"),
+    asset!("/assets/teams/fox.png"),
+    asset!("/assets/teams/cat.png"),
+    asset!("/assets/teams/dog.png"),
+    asset!("/assets/teams/bear.png"),
+    asset!("/assets/teams/penguin.png"),
+    asset!("/assets/teams/frog.png"),
+    asset!("/assets/teams/octopus.png"),
+    asset!("/assets/teams/robot.png"),
+    asset!("/assets/teams/alien.png"),
+    asset!("/assets/teams/ghost.png"),
+    asset!("/assets/teams/dragon.png"),
+    asset!("/assets/teams/unicorn.png"),
+    asset!("/assets/teams/sloth.png"),
+    asset!("/assets/teams/llama.png"),
+    asset!("/assets/teams/panda.png"),
+];
+
+/// The ready-made picture called `name`, if there is one.
+#[must_use]
+pub fn mascot_picture(name: &str) -> Option<Asset> {
+    crate::protocol::MASCOTS
+        .iter()
+        .position(|m| *m == name)
+        .map(|i| MASCOT_PICTURES[i])
+}
+
+/// A ready-made picture in its round frame (`class` holds `avatar` and the background): its colours
+/// turn with the background, which a filter on the frame itself would also turn.
+#[component]
+pub fn MascotArt(class: String, picture: Asset, #[props(default)] alt: String) -> Element {
+    rsx! {
+        span { class: "{class} mascot",
+            img { class: "mascot-art", src: picture, alt }
+        }
+    }
+}
+
+/// A team's avatar, or its initial when it has none, on the background it picked.
 #[component]
 pub fn TeamAvatar(team: crate::protocol::TeamInfo, #[props(default)] class: String) -> Element {
-    let class = format!("avatar {class}");
+    let class = format!("avatar {class} {}", backdrop_class(team.backdrop));
     if let Some(avatar) = &team.avatar {
         return rsx! {
             img { class, src: media_url(avatar), alt: "" }
+        };
+    }
+    if let Some(picture) = team.mascot.as_deref().and_then(mascot_picture) {
+        return rsx! {
+            MascotArt { class, picture }
         };
     }
     let initial: String = team

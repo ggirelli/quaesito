@@ -12,6 +12,19 @@ All notable changes to quaesito are listed here. The format follows
   **Questions** tab browses them by category and topic, with search and filters. The editor's **＋ From the library**
   adds them one by one or at random, and a new quiz can be filled with random questions from the categories you
   tick.
+- Teams pick a background for their picture: one of six colours or five gradients, shown behind their initial and
+  through the transparent parts of a cut-out picture, on phones and the big screen.
+- 16 ready-made team pictures (an owl, a fox, a robot…): teams pick one instead of uploading their own. Their colours
+  turn with the background the team picks, keeping the contrast they were drawn with.
+- Starting a game can turn off uploaded team pictures (**Teams can add a picture**), and so can the big screen's
+  **Teams** panel during the game: teams then pick a ready-made picture or show their initial, on the background
+  they pick.
+
+### Changed
+
+- Phones show "You're in!" first when waiting for the quiz to start; the team's name, picture and background are
+  folded away under **Change your name or picture**, and **Done** folds them again. Teams can rename themselves there
+  until the quiz starts (not to a name another team has).
 - Donations are now also welcome on [GitHub Sponsors](https://github.com/sponsors/ggirelli).
 
 ## [0.4.0] - 2026-10-13

@@ -2595,6 +2595,148 @@ button.joker {
   cursor: pointer;
 }
 
+/* The ready-made team pictures, on the team's background; picking the chosen one again drops it. */
+.mascot-picker {
+  display: grid;
+  grid-template-columns: repeat(4, 3.4rem);
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.team-name-field {
+  width: min(20rem, 100%);
+  margin-inline: auto;
+}
+
+/* The phone's team picture, folded under its avatar until opened. */
+.team-look {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.team-look > summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+  cursor: pointer;
+}
+
+.team-look > summary::-webkit-details-marker {
+  display: none;
+}
+
+.team-look[open] > summary .button {
+  display: none;
+}
+
+.team-look[open] {
+  gap: 1rem;
+}
+
+.team-look[open] > :not(summary) {
+  margin-top: 1rem;
+}
+
+.mascot-choice {
+  /* A flex box exactly the size of the mascot: as inline content it left room for text below,
+     which stretched the selection ring into an oval. */
+  display: flex;
+  width: 3.4rem;
+  height: 3.4rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+}
+
+.mascot-choice .avatar {
+  width: 3.4rem;
+  height: 3.4rem;
+}
+
+.mascot-choice.selected {
+  outline: 3px solid var(--fg);
+  outline-offset: 2px;
+}
+
+/* The backgrounds a team picks for its picture, as round swatches; the first is none. */
+.backdrop-picker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 20rem;
+  margin-inline: auto;
+}
+
+.backdrop-swatch {
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.backdrop-swatch.default {
+  background: var(--accent);
+}
+
+/* The backgrounds a team can pick (`BACKDROP_COUNT` in protocol.rs): the answer colours, flat,
+   then in pairs. Also on avatars, over their default accent. */
+.backdrop-0 { background: var(--a0); }
+.backdrop-1 { background: var(--a1); }
+.backdrop-2 { background: var(--a2); }
+.backdrop-3 { background: var(--a3); }
+.backdrop-4 { background: var(--a4); }
+.backdrop-5 { background: var(--a5); }
+.backdrop-6 { background: linear-gradient(135deg, var(--a0), var(--a2)); }
+.backdrop-7 { background: linear-gradient(135deg, var(--a1), var(--a4)); }
+.backdrop-8 { background: linear-gradient(135deg, var(--a3), var(--a2)); }
+.backdrop-9 { background: linear-gradient(135deg, var(--a5), var(--a1)); }
+.backdrop-10 { background: linear-gradient(135deg, var(--a4), var(--a0)); }
+
+/* The ready-made pictures were drawn for the sky-blue background: on any other, their colours turn
+   by as much as the background's hue differs from sky blue (the middle of a gradient's two
+   colours), so they keep the same contrast. The default background is the amber accent. */
+.avatar.mascot {
+  overflow: hidden;
+}
+
+.mascot-art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: hue-rotate(-156deg);
+}
+
+.backdrop-0 > .mascot-art { filter: hue-rotate(60deg); }
+.backdrop-1 > .mascot-art { filter: hue-rotate(-25deg); }
+.backdrop-2 > .mascot-art { filter: hue-rotate(127deg); }
+.backdrop-3 > .mascot-art { filter: hue-rotate(-171deg); }
+.backdrop-4 > .mascot-art { filter: hue-rotate(0deg); }
+.backdrop-5 > .mascot-art { filter: hue-rotate(-116deg); }
+.backdrop-6 > .mascot-art { filter: hue-rotate(94deg); }
+.backdrop-7 > .mascot-art { filter: hue-rotate(-13deg); }
+.backdrop-8 > .mascot-art { filter: hue-rotate(158deg); }
+.backdrop-9 > .mascot-art { filter: hue-rotate(-70deg); }
+.backdrop-10 > .mascot-art { filter: hue-rotate(30deg); }
+
+.backdrop-swatch.selected {
+  outline: 3px solid var(--fg);
+  outline-offset: 2px;
+}
+
+.backdrop-hint {
+  max-width: 20rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
 .code-input {
   font-family: ui-monospace, monospace;
   font-size: 2rem !important;

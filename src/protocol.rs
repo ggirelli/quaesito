@@ -15,6 +15,19 @@ pub const DEFAULT_MAX_TEAMS: usize = 50;
 /// cannot flood a game, but this one is far beyond what a Wi-Fi network holds.
 pub const MAX_TEAMS_CEILING: usize = 10_000;
 
+fn yes() -> bool {
+    true
+}
+
+/// The ready-made team pictures (`assets/teams/<name>.png`), in the order phones list them.
+pub const MASCOTS: [&str; 16] = [
+    "owl", "fox", "cat", "dog", "bear", "penguin", "frog", "octopus", "robot", "alien", "ghost",
+    "dragon", "unicorn", "sloth", "llama", "panda",
+];
+
+/// How many backgrounds a team can pick for its picture (`.backdrop-<n>` in the stylesheet).
+pub const BACKDROP_COUNT: u8 = 11;
+
 /// A team as shown on screens.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct TeamInfo {
@@ -22,6 +35,12 @@ pub struct TeamInfo {
     pub name: String,
     /// Media name of the uploaded avatar, if any.
     pub avatar: Option<String>,
+    /// The ready-made picture the team picked instead, one of [`MASCOTS`].
+    #[serde(default)]
+    pub mascot: Option<String>,
+    /// The background the team picked for its picture (or initial), below [`BACKDROP_COUNT`].
+    #[serde(default)]
+    pub backdrop: Option<u8>,
     /// Whether the team leader's phone is currently connected.
     pub connected: bool,
 }
@@ -255,6 +274,8 @@ pub struct HostView {
     pub teams: Vec<TeamInfo>,
     /// The most teams that can join.
     pub max_teams: usize,
+    /// Whether teams may upload a picture.
+    pub pictures: bool,
     /// Time until the quiz moves on by itself, when auto-advance is on (and not paused).
     pub auto_advance_ms: Option<u64>,
     /// The host paused the clock.
@@ -341,6 +362,8 @@ pub enum HostCommand {
     RenameTeam { team: u32, name: String },
     /// Remove a team from the game.
     RemoveTeam { team: u32 },
+    /// Let teams upload a picture, or not; turning it off drops the pictures uploaded so far.
+    SetPictures(bool),
 }
 
 /// How a team did on one question.
@@ -387,14 +410,14 @@ pub enum JokerState {
 pub enum PlayerPhase {
     Lobby {
         teams: usize,
+        /// Whether teams may upload a picture in this game.
+        #[serde(default = "yes")]
+        pictures: bool,
     },
     /// The big screen shows a slide.
     Slide,
     /// The next question has a soundtrack and opens when the host starts it.
-    Ready {
-        index: usize,
-        total: usize,
-    },
+    Ready { index: usize, total: usize },
     Question {
         index: usize,
         total: usize,
@@ -443,10 +466,7 @@ pub enum PlayerPhase {
         correct: Vec<usize>,
     },
     /// The big screen shows the standings at a results slide.
-    Standings {
-        rank: usize,
-        teams: usize,
-    },
+    Standings { rank: usize, teams: usize },
     Podium {
         /// Own position, once revealed.
         rank: Option<usize>,
