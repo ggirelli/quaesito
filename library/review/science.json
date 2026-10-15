@@ -1,6 +1,6 @@
 [
   {
-    "file": "science-astonomy-space.json",
+    "file": "science-astronomy-space.json",
     "entry": 19,
     "question": "Which planet is nicknamed the Red Planet?",
     "problem": "duplicate",
@@ -8,7 +8,7 @@
     "fix": "Drop entry 19, or replace it with a different Text question (e.g. 'Which planet has the moons Phobos and Deimos?' accepted: Mars)."
   },
   {
-    "file": "science-astonomy-space.json",
+    "file": "science-astronomy-space.json",
     "entry": 21,
     "question": "What galaxy is our Solar System part of?",
     "problem": "duplicate",
@@ -16,7 +16,7 @@
     "fix": "Drop entry 21, or replace it (e.g. 'What is the nearest large spiral galaxy to the Milky Way?' accepted: Andromeda, Andromeda Galaxy)."
   },
   {
-    "file": "science-astonomy-space.json",
+    "file": "science-astronomy-space.json",
     "entry": 23,
     "question": "How many Earth days does the Moon take to orbit Earth, approximately?",
     "problem": "ambiguous",
@@ -24,7 +24,7 @@
     "fix": "Specify 'relative to the distant stars (sidereal month)' and keep 27.3. Alternatively, ask for the phase cycle and use 29.5."
   },
   {
-    "file": "science-astonomy-space.json",
+    "file": "science-astronomy-space.json",
     "entry": 24,
     "question": "What is the average distance from Earth to the Sun, in millions of kilometres?",
     "problem": "misleading",
@@ -32,7 +32,7 @@
     "fix": "Set range to min 100, max 200 (keep answer 149.6)."
   },
   {
-    "file": "science-astonomy-space.json",
+    "file": "science-astronomy-space.json",
     "entry": 28,
     "question": "Name the four largest moons of Jupiter, discovered by Galileo.",
     "problem": "ambiguous",
@@ -100,7 +100,7 @@
     "entry": 14,
     "question": "The seasons are mainly caused by Earth's changing distance from the Sun.",
     "problem": "duplicate",
-    "explanation": "This is the same statement as science-astonomy-space.json entry 16, with the same answer (false).",
+    "explanation": "This is the same statement as science-astronomy-space.json entry 16, with the same answer (false).",
     "fix": "Drop one. For example, replace the earth one with 'Earth is closest to the Sun in early January' (true)."
   },
   {
@@ -188,7 +188,7 @@
     "entry": 23,
     "question": "Approximately how many kilometres per second is the speed of light in a vacuum?",
     "problem": "duplicate",
-    "explanation": "The question text is identical to science-astonomy-space.json entry 25. The two answers also differ slightly (300000 vs 299792).",
+    "explanation": "The question text is identical to science-astronomy-space.json entry 25. The two answers also differ slightly (300000 vs 299792).",
     "fix": "Drop one of the two (e.g. keep the physics one), or change one to a different quantity such as the speed of sound in air (~343 m/s)."
   },
   {
@@ -196,7 +196,7 @@
     "entry": 24,
     "question": "How many metres are in one astronomical unit, approximately?",
     "problem": "duplicate",
-    "explanation": "This is the same fact as science-astonomy-space.json entry 24, which asks for the Earth–Sun average distance (1 AU) in millions of km.",
+    "explanation": "This is the same fact as science-astronomy-space.json entry 24, which asks for the Earth–Sun average distance (1 AU) in millions of km.",
     "fix": "Drop one of the two, or replace this one with another quantity (e.g. metres in a light-year, ~9.46e15)."
   },
   {

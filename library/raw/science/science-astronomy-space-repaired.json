@@ -2,7 +2,7 @@
   {
     "category": "Science",
     "replaces": 19,
-    "topic": "Astonomy & space",
+    "topic": "Astronomy & space",
     "difficulty": 1,
     "time_sensitive": false,
     "question": {
@@ -19,7 +19,7 @@
   {
     "category": "Science",
     "replaces": 21,
-    "topic": "Astonomy & space",
+    "topic": "Astronomy & space",
     "difficulty": 3,
     "time_sensitive": false,
     "question": {
@@ -37,7 +37,7 @@
   {
     "category": "Science",
     "replaces": 23,
-    "topic": "Astonomy & space",
+    "topic": "Astronomy & space",
     "difficulty": 2,
     "time_sensitive": false,
     "question": {
@@ -56,7 +56,7 @@
   {
     "category": "Science",
     "replaces": 24,
-    "topic": "Astonomy & space",
+    "topic": "Astronomy & space",
     "difficulty": 2,
     "time_sensitive": false,
     "question": {
@@ -75,7 +75,7 @@
   {
     "category": "Science",
     "replaces": 28,
-    "topic": "Astonomy & space",
+    "topic": "Astronomy & space",
     "difficulty": 2,
     "time_sensitive": false,
     "question": {
