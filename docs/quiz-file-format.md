@@ -19,12 +19,12 @@ keeps the rest.
 ## The schema
 
 The format is described by a [JSON Schema](https://json-schema.org/):
-[`quiz-1.json`](schema/quiz-1.json). Exports point to it from their first line:
+[`quiz-2.json`](schema/quiz-2.json). Exports point to it from their first line:
 
 ```json
 {
-  "$schema": "https://ggirelli.github.io/quaesito/schema/quiz-1.json",
-  "format": 1,
+  "$schema": "https://ggirelli.github.io/quaesito/schema/quiz-2.json",
+  "format": 2,
   "id": "4d1f…",
   "title": "Movie night",
   "settings": { "reveal": "AtEnd", "points": "Flat" },
@@ -38,7 +38,8 @@ The format is described by a [JSON Schema](https://json-schema.org/):
     },
     {
       "text": "Who directed Jaws?",
-      "kind": { "Text": { "accepted": ["Steven Spielberg", "Spielberg"] } }
+      "kind": { "Text": { "accepted": ["Steven Spielberg", "Spielberg"] } },
+      "explanation": "He was 26 when he shot it."
     },
     { "text": "", "kind": { "Slide": { "title": "Half time!" } } }
   ]
@@ -59,7 +60,12 @@ for example a multiple-choice question without a right answer: the editor lists 
 `format` says which version of the format a file is written in. Files without it, such as exports
 from Quaesito 0.3 and earlier, are version 1. The number goes up whenever a newer Quaesito adds
 something an older one would misread or lose, such as a new kind of question, and the schema of each
-version stays published next to the others.
+version stays published next to the others:
+
+| Format | Since | What it added |
+| ------ | ----- | ------------- |
+| [1](schema/quiz-1.json) | 0.4 | the first published format |
+| [2](schema/quiz-2.json) | 0.5 | what a question shows with its answer (`explanation`, `explanation_image`) |
 
 When you import a quiz made with a newer version, Quaesito asks before importing it and says what
 it cannot read. Questions of kinds it does not know would be left out; **Import without them**

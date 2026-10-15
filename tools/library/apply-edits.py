@@ -25,6 +25,7 @@ LIBRARY = ROOT / "library"
 # What the library leaves out: no media, and per-question timing and scoring are the host's choice.
 UNFIT = {
     "image": "a picture",
+    "explanation_image": "a picture shown with its answer",
     "audio": "a soundtrack",
     "time_limit_secs": "its own time limit",
     "multiplier": "its own points",

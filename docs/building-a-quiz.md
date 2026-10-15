@@ -56,6 +56,13 @@ Under the question, an optional box takes text to show with it, line breaks kept
 "name the song", a quote for "who said it?", a riddle. The big screen shows it under the question,
 and so do phones when they show the full question.
 
+## Shown with the answer
+
+**＋ Add something to show with the answer** takes a text, a picture or a video that stays hidden
+until the answer is revealed: why the answer is right, a fun fact, the painting the question was
+about. The big screen shows it under the answers, after each question or in the walk through the
+answers, depending on when the quiz [reveals answers](quiz-settings.md). Phones do not show it.
+
 ## Pictures
 
 Add a picture to any question. For a guessing game, choose how it appears while the clock runs:

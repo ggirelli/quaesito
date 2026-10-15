@@ -12,7 +12,7 @@ pub fn is_video(name: &str) -> bool {
 
 /// Version of the exported quiz file format. Raise it whenever an older version would misread
 /// or lose something in a newer file: a new question kind, setting value or field.
-pub const QUIZ_FORMAT: u32 = 1;
+pub const QUIZ_FORMAT: u32 = 2;
 
 /// Fewest answers a question may offer.
 pub const MIN_ANSWERS: usize = 2;
@@ -175,6 +175,7 @@ impl Quiz {
         let mut names = Vec::new();
         for question in &self.questions {
             names.extend(question.image.iter().cloned());
+            names.extend(question.explanation_image.iter().cloned());
             names.extend(question.audio.iter().cloned());
             names.extend(question.answers.iter().filter_map(|a| a.image.clone()));
             match &question.kind {
@@ -203,6 +204,7 @@ impl Quiz {
         };
         for question in &mut self.questions {
             apply(&mut question.image);
+            apply(&mut question.explanation_image);
             apply(&mut question.audio);
             for answer in &mut question.answers {
                 apply(&mut answer.image);
@@ -372,6 +374,12 @@ pub struct Question {
         schemars(description = "A typed bonus question, answered together with this one.")
     )]
     pub bonus: Option<Bonus>,
+    /// Shown on the big screen only once the answer is revealed: an explanation, a fun fact…
+    #[serde(default, skip_serializing_if = "String::is_empty")]
+    pub explanation: String,
+    /// Name of an uploaded picture or video shown with the [`Question::explanation`].
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub explanation_image: Option<String>,
 }
 
 /// A bonus question: teams type its answer together with the main answer, and the judge can
@@ -1051,6 +1059,8 @@ mod tests {
             answers: vec![answer("Jupiter", false), answer("Saturn", true)],
             bonus: None,
             passage: String::new(),
+            explanation: String::new(),
+            explanation_image: None,
         }
     }
 
@@ -1316,6 +1326,7 @@ mod tests {
         quiz.questions[0].image = Some("q.jpg".to_owned());
         quiz.questions[0].audio = Some("s.mp3".to_owned());
         quiz.questions[0].answers[1].image = Some("a.jpg".to_owned());
+        quiz.questions[0].explanation_image = Some("e.mp4".to_owned());
         quiz.questions.push(Question {
             image: Some("q.jpg".to_owned()),
             ..Question::slide()
@@ -1327,11 +1338,20 @@ mod tests {
             kind: QuestionKind::Pairs { pairs },
             ..Question::default()
         });
-        assert_eq!(quiz.media(), ["a.jpg", "l.jpg", "q.jpg", "r.jpg", "s.mp3"]);
+        assert_eq!(
+            quiz.media(),
+            ["a.jpg", "e.mp4", "l.jpg", "q.jpg", "r.jpg", "s.mp3"]
+        );
         quiz.rename_media(|name| (name != "s.mp3").then(|| format!("new-{name}")));
         assert_eq!(
             quiz.media(),
-            ["new-a.jpg", "new-l.jpg", "new-q.jpg", "new-r.jpg"]
+            [
+                "new-a.jpg",
+                "new-e.mp4",
+                "new-l.jpg",
+                "new-q.jpg",
+                "new-r.jpg"
+            ]
         );
         assert_eq!(quiz.questions[0].audio, None);
     }

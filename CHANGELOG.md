@@ -19,6 +19,9 @@ All notable changes to quaesito are listed here. The format follows
 - Starting a game can turn off uploaded team pictures (**Teams can add a picture**), and so can the big screen's
   **Teams** panel during the game: teams then pick a ready-made picture or show their initial, on the background
   they pick.
+- Questions can hold a text, a picture or a video that the big screen shows only with the answer: an explanation, a
+  fun fact (**＋ Add something to show with the answer** in the editor). Quiz files move to format 2 for it; older
+  versions ask before importing them and would leave it out.
 
 ### Changed
 
