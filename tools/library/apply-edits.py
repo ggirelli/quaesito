@@ -17,6 +17,7 @@ data/library-edits.json).
 
 import json
 import sys
+from difflib import SequenceMatcher
 from pathlib import Path
 
 from check import ROOT, main as check
@@ -82,50 +83,54 @@ def main(args):
         print(f"no edits at {edits_path}")
         return 1
     edits = json.loads(edits_path.read_text())
-    files = {}  # path -> entries, loaded on demand
+    files = {path: json.loads(path.read_text()) for path in sorted(LIBRARY.rglob("*.json"))}
+    changed = set()
+    claimed = set()  # (path, index) already taken by an edit, when several questions share a text
     applied = unchanged = skipped = 0
     for id_, edit in edits.items():
         where = f"{edit.get('category')} › {edit.get('topic')}: {edit.get('text')!r}"
-        found = None
-        for path in sorted(LIBRARY.rglob("*.json")):
-            entries = files.get(path) or json.loads(path.read_text())
-            for i, entry in enumerate(entries):
-                if (entry["category"], entry["topic"], entry["question"]["text"]) == (
-                    edit.get("category"), edit.get("topic"), edit.get("text")):
-                    found = (path, entries, i)
-                    break
-            if found:
-                break
         question = edit["question"]
         why = problems(question)
         if why:
             print(f"skipped {where}: it {', '.join(why)}")
             skipped += 1
             continue
-        if not found:
+        key = (edit.get("category"), edit.get("topic"), edit.get("text"))
+        candidates = [(path, i) for path, entries in files.items() for i, entry in enumerate(entries)
+                      if (entry["category"], entry["topic"], entry["question"]["text"]) == key
+                      and (path, i) not in claimed]
+        if not candidates:
             # Applied before (with a new text), or the question left the library.
             if any(e["question"] == tidy(question) and e["category"] == edit.get("category")
-                   for path in LIBRARY.rglob("*.json")
-                   for e in files.get(path) or json.loads(path.read_text())):
+                   for entries in files.values() for e in entries):
                 unchanged += 1
             else:
                 print(f"not found {where}")
                 skipped += 1
             continue
-        path, entries, i = found
+        # Several questions can share a text (e.g. "Put these in order"): take the one this edit
+        # already matches, else the most similar one.
+        target = json.dumps(tidy(question), sort_keys=True)
+        path, i = max(candidates, key=lambda c: (
+            files[c[0]][c[1]]["question"] == tidy(question),
+            SequenceMatcher(None, json.dumps(files[c[0]][c[1]]["question"], sort_keys=True),
+                            target).ratio()))
+        claimed.add((path, i))
+        entries = files[path]
         new = dict(entries[i], difficulty=edit["difficulty"])
         new["question"] = in_order_of(tidy(question), entries[i]["question"])
         if new == entries[i]:
             unchanged += 1
             continue
         entries[i] = new
-        files[path] = entries
+        changed.add(path)
         applied += 1
         print(f"applied {where}")
-    for path, entries in files.items():
+    for path in changed:
+        entries = files[path]
         path.write_text(json.dumps(entries, indent=2, ensure_ascii=False) + "\n")
     print(f"\n{applied} applied, {unchanged} already there, {skipped} skipped, "
-          f"{len(files)} files changed\n")
+          f"{len(changed)} files changed\n")
     return check([]) or (1 if skipped else 0)
 
 
