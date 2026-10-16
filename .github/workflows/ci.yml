@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   pull_request:
+    # Draft PRs run nothing; marking one ready for review runs the checks.
+    types: [opened, synchronize, reopened, ready_for_review]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -14,6 +16,7 @@ env:
 
 jobs:
   fmt:
+    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -24,6 +27,7 @@ jobs:
       - run: just fmt-check
 
   clippy:
+    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -36,6 +40,7 @@ jobs:
       - run: just clippy
 
   test:
+    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -45,6 +50,7 @@ jobs:
       - run: just test
 
   deny:
+    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5

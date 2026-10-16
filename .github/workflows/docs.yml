@@ -5,6 +5,8 @@ on:
   push:
     branches: [main]
   pull_request:
+    # Draft PRs run nothing; marking one ready for review runs the checks.
+    types: [opened, synchronize, reopened, ready_for_review]
   workflow_dispatch:
 
 permissions:
@@ -16,6 +18,7 @@ concurrency:
 
 jobs:
   build:
+    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
