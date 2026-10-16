@@ -170,7 +170,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The Crown is a historical biographical drama series that chronicles the life and reign of Queen Elizabeth II from her wedding in 1947 through the early 21st century."
     }
   },
   {
@@ -183,7 +184,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Cosmo Kramer is not Jerry Seinfeld's biological brother; he is Jerry's eccentric, iconic neighbor across the hall."
     }
   },
   {
@@ -421,7 +423,8 @@
             "The Office (US)"
           ]
         }
-      }
+      },
+      "explanation": "Cheers – 1982 (September 30)\nSeinfeld – 1989 (July 5)\nFriends – 1994 (September 22)\nThe Office (US) – 2005 (March 24)"
     }
   },
   {
@@ -439,7 +442,8 @@
             "Game of Thrones"
           ]
         }
-      }
+      },
+      "explanation": "Oz – 1997 (July 12)\nThe Sopranos – 1999 (January 10)\nThe Wire – 2002 (June 2)\nGame of Thrones – 2011 (April 17)"
     }
   },
   {
@@ -467,7 +471,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 2
     }
   },
   {

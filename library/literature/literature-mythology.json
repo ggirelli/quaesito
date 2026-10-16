@@ -627,6 +627,7 @@
           ]
         }
       },
+      "multiplier": 3,
       "text": "Name the god described in each label."
     }
   }

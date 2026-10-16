@@ -229,7 +229,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "It was directed by Todd Phillips."
     }
   },
   {
@@ -255,7 +256,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "It was directed by Jon Favreau."
     }
   },
   {
@@ -430,7 +432,8 @@
             "Saving Private Ryan"
           ]
         }
-      }
+      },
+      "explanation": "Jaws – 1975\nRaiders of the Lost Ark – 1981\nJurassic Park – 1993\nSaving Private Ryan – 1998"
     }
   },
   {
@@ -448,7 +451,8 @@
             "Interstellar"
           ]
         }
-      }
+      },
+      "explanation": "Memento – 2000\nBatman Begins – 2005\nInception – 2010\nInterstellar – 2014"
     }
   },
   {
@@ -476,7 +480,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 2
     }
   },
   {

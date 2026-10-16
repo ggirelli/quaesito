@@ -168,10 +168,10 @@
       "text": "Which Italian neorealist film follows a father searching for his stolen bicycle?",
       "answers": [
         {
-          "text": "Rome, Open City"
+          "text": "Roma città aperta"
         },
         {
-          "text": "Bicycle Thieves",
+          "text": "Ladri di biciclette",
           "correct": true
         },
         {
@@ -206,7 +206,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "It was directed by James Whale."
     }
   },
   {
@@ -219,7 +220,8 @@
         "TrueFalse": {
           "answer": true
         }
-      }
+      },
+      "explanation": "Gone with the wind, 1939 - Casablanca, 1942"
     }
   },
   {
@@ -310,7 +312,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 2
     }
   },
   {
@@ -471,7 +474,8 @@
             "M"
           ]
         }
-      }
+      },
+      "explanation": "The Cabinet of Dr. Caligari (Das Cabinet des Dr. Caligari) – 1920\nNosferatu (Nosferatu, eine Symphonie des Grauens) – 1922\nMetropolis – 1927\nM – 1931"
     }
   },
   {
@@ -489,7 +493,8 @@
             "Rear Window"
           ]
         }
-      }
+      },
+      "explanation": "The 39 Steps – 1935\nRebecca – 1940\nNotorious – 1946\nRear Window – 1954"
     }
   },
   {

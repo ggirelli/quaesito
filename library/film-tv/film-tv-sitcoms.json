@@ -197,7 +197,8 @@
           "answer": false
         }
       },
-      "text": "In Seinfeld, George Costanza is genuinely a successful architect."
+      "text": "In Seinfeld, George Costanza is genuinely a successful architect.",
+      "explanation": "George Costanza is not genuinely an architect. \"Architect\" is his go-to fake career throughout Seinfeld, often using the alias Art Vandelay."
     }
   },
   {
@@ -223,7 +224,8 @@
           "answer": false
         }
       },
-      "text": "In The Big Bang Theory, Sheldon Cooper is an only child."
+      "text": "In The Big Bang Theory, Sheldon Cooper is an only child.",
+      "explanation": "Sheldon Cooper is not an only child. He has a twin sister named Missy (Melissa Cooper) and an older brother named George Jr. (Georgie Cooper)."
     }
   },
   {
@@ -374,7 +376,8 @@
           ]
         }
       },
-      "text": "Put these sitcoms in order of first US broadcast, earliest first."
+      "text": "Put these sitcoms in order of first US broadcast, earliest first.",
+      "explanation": "I Love Lucy – 1951\nM*A*S*H – 1972\nCheers – 1982\nSeinfeld – 1989\nFriends – 1994"
     }
   },
   {
@@ -392,7 +395,8 @@
           ]
         }
       },
-      "text": "Put these sitcoms in order of first US broadcast, earliest first."
+      "text": "Put these sitcoms in order of first US broadcast, earliest first.",
+      "explanation": "The Simpsons – 1989\nFrasier – 1993\nFriends – 1994\nThe Office (US) – 2005"
     }
   },
   {
@@ -424,7 +428,8 @@
           ]
         }
       },
-      "text": "Name Homer and Marge Simpson's three children, from oldest to youngest."
+      "text": "Name Homer and Marge Simpson's three children, from oldest to youngest.",
+      "multiplier": 3
     }
   },
   {

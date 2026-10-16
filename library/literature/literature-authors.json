@@ -462,6 +462,7 @@
           ]
         }
       },
+      "multiplier": 3,
       "text": "Name the author of each of these three novels."
     }
   },

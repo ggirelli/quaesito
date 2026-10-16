@@ -437,6 +437,7 @@
           ]
         }
       },
+      "multiplier": 3,
       "text": "Name the author of each of these landmark science-fiction novels."
     }
   },

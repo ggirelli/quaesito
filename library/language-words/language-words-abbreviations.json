@@ -450,6 +450,7 @@
           ]
         }
       },
+      "multiplier": 3,
       "text": "Type the expanded phrase for each abbreviation."
     }
   },

@@ -9,7 +9,7 @@ The app's "edit" link on a library question saves the change on that server only
 so they can be reviewed with `git diff` and committed, then checks the library with check.py.
 
 Each edit names the question's category, topic and text as they were, and replaces that question
-(and its difficulty). Edits the library cannot hold (pictures, sounds, time limits, points, pin
+(and its difficulty). Edits the library cannot hold (pictures, sounds, time limits, bonuses, pin
 questions or slides) are reported and left out. Applying the same edits twice changes nothing.
 Run with `uv run tools/library/apply-edits.py [path/to/library-edits.json]` (default:
 data/library-edits.json).
@@ -23,14 +23,13 @@ from pathlib import Path
 from check import ROOT, main as check
 
 LIBRARY = ROOT / "library"
-# What the library leaves out: no media, and per-question timing and scoring are the host's choice.
+# What the library leaves out: no media, and per-question timing and bonuses are the host's choice.
 UNFIT = {
     "image": "a picture",
     "explanation_image": "a picture shown with its answer",
     "explanation_audio": "a soundtrack played with its answer",
     "audio": "a soundtrack",
     "time_limit_secs": "its own time limit",
-    "multiplier": "its own points",
     "bonus": "a bonus question",
 }
 

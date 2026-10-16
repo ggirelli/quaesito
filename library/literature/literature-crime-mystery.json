@@ -575,6 +575,7 @@
           ]
         }
       },
+      "multiplier": 3,
       "text": "Name the famous detective associated with each of these three authors: Christie, Doyle and Sayers."
     }
   }

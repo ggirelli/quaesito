@@ -575,6 +575,7 @@
           ]
         }
       },
+      "multiplier": 3,
       "text": "Type the Greek letter that comes after each letter."
     }
   }

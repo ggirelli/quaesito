@@ -41,8 +41,9 @@ combines them when it is built, so a change reaches the app with the next build.
   copied into a quiz as is.
 - `difficulty`: 1 most adults know it, 2 keen quizzers, 3 experts.
 - Answer types used: multiple choice, true/false, typed answer, number, order, several answers and
-  pairs. No pictures, sound, pins or slides, no time limits or points, and no facts that may change
-  over the years.
+  pairs. No pictures, sound, pins or slides, no time limits or bonuses, and no facts that may change
+  over the years. A several-answers question is worth ×K points, K being its number of answers;
+  every other question is worth ×1.
 
 ## Checking the library
 
@@ -75,7 +76,7 @@ just library-apply-edits path/to/library-edits.json
 
 It replaces each edited question (and its difficulty) in its topic file, keeping the file's layout
 so `git diff` shows only what changed, then checks the library. Edits the library cannot hold
-(pictures, sounds, time limits, points, pin questions) are reported and left out. Running it
+(pictures, sounds, time limits, bonuses, pin questions) are reported and left out. Running it
 again changes nothing.
 
 ## Adding questions
@@ -103,7 +104,7 @@ topic file (or add its entries to one) and check the library again.
     }
 
     QUESTION TYPES (use only these; never use Pin or Slide, never set image, audio,
-    image_reveal, image_hold_secs, multiplier, time_limit_secs or bonus)
+    image_reveal, image_hold_secs, time_limit_secs or bonus; set multiplier only as below)
     - Multiple choice: omit "kind". Exactly 4 "answers", exactly one with "correct": true
       (leave "correct" out of the others). Distractors are plausible, the same kind of
       thing as the right answer, and of similar length. Never "all/none of the above".
@@ -121,7 +122,7 @@ topic file (or add its entries to one) and check the library again.
       and no two items may be tied. Items must not reveal the order (no years in them).
     - Several answers: "kind": {"Parts": {"parts": [{"label": "...", "accepted": [...]}, ...]}},
       2–5 parts. Each label says what to type ("Title", "Year", "1st", ...), and no two
-      parts may accept the same answer.
+      parts may accept the same answer. Set "multiplier" to the number of parts.
     - Pairs: "kind": {"Pairs": {"pairs": [{"left": {"text": "..."}, "right": {"text": "..."}}, ...]}},
       4–6 pairs, text only, listed matched, each left item with exactly one possible partner.
 

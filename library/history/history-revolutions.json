@@ -589,6 +589,7 @@
           ]
         }
       },
+      "multiplier": 3,
       "text": "Give the three words of the French revolutionary motto, in order."
     }
   }

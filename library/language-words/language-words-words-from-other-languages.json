@@ -414,6 +414,7 @@
           ]
         }
       },
+      "multiplier": 3,
       "text": "Type the borrowed word matching each clue."
     }
   },
