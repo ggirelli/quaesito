@@ -252,7 +252,8 @@
           "answer": false
         }
       },
-      "text": "Cashmere wool comes from sheep."
+      "text": "Cashmere wool comes from sheep.",
+      "explanation": "Kashmir wool comes from goats, not sheep."
     }
   },
   {
@@ -278,7 +279,8 @@
           "answer": false
         }
       },
-      "text": "The wrap dress was invented by Coco Chanel in the 1920s."
+      "text": "The wrap dress was invented by Coco Chanel in the 1920s.",
+      "explanation": "Coco Chanel popularized the little black dress in 1926, but she didn't invent the dress itself."
     }
   },
   {

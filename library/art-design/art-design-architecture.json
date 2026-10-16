@@ -119,7 +119,7 @@
     "topic": "Architecture",
     "difficulty": 2,
     "question": {
-      "text": "Which architect co-founded the Bauhaus school in 1919?",
+      "text": "Which architect founded the Bauhaus school in 1919?",
       "answers": [
         {
           "text": "Walter Gropius",
@@ -142,7 +142,7 @@
     "topic": "Architecture",
     "difficulty": 2,
     "question": {
-      "text": "Which architect designed the Barcelona Pavilion for the 1929 International Exposition?",
+      "text": "Which architects designed the Barcelona Pavilion for the 1929 International Exposition?",
       "answers": [
         {
           "text": "Ludwig Mies van der Rohe",
@@ -152,7 +152,8 @@
           "text": "Walter Gropius"
         },
         {
-          "text": "Le Corbusier"
+          "text": "Lilly Reich",
+          "correct": true
         },
         {
           "text": "Marcel Breuer"
@@ -221,7 +222,8 @@
           "text": "Gordon Bunshaft"
         },
         {
-          "text": "Minoru Yamasaki"
+          "text": "Philip Johnson",
+          "correct": true
         },
         {
           "text": "Skidmore, Owings & Merrill"
@@ -252,7 +254,8 @@
           "answer": false
         }
       },
-      "text": "The Colosseum in Rome was built primarily from marble blocks."
+      "text": "The Colosseum in Rome was built primarily from marble blocks.",
+      "explanation": "The Colosseum was built primarily from travertine limestone, tuff, and concrete, not marble."
     }
   },
   {
@@ -278,7 +281,8 @@
           "answer": false
         }
       },
-      "text": "Frank Lloyd Wright designed the Sydney Opera House."
+      "text": "Frank Lloyd Wright designed the Sydney Opera House.",
+      "explanation": "It was designed by Jørn Utzon."
     }
   },
   {
@@ -572,10 +576,10 @@
             },
             {
               "left": {
-                "text": "Norman Foster"
+                "text": "I. M. Pei"
               },
               "right": {
-                "text": "Reichstag Dome"
+                "text": "Louver Pyramid"
               }
             }
           ]

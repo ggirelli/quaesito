@@ -252,7 +252,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "It was actually directed by Steven Spielberg."
     }
   },
   {
@@ -278,7 +279,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The planet name is Pandora."
     }
   },
   {

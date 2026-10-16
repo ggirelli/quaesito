@@ -183,7 +183,8 @@
           "answer": false
         }
       },
-      "text": "Georgia O’Keeffe is best known for painting the water lilies at Giverny."
+      "text": "Georgia O’Keeffe is best known for painting the water lilies at Giverny.",
+      "explanation": "Georgia O'Keeffe is known for her close-up flowers and Southwestern landscapes."
     }
   },
   {
@@ -209,7 +210,8 @@
           "answer": false
         }
       },
-      "text": "Édouard Manet painted the famous portrait Girl with a Pearl Earring."
+      "text": "Édouard Manet painted the famous portrait Girl with a Pearl Earring.",
+      "explanation": "Girl with a Pearl Earring is by Johannes Vermeer, not Édouard Manet."
     }
   },
   {
@@ -414,11 +416,11 @@
       "text": "Who painted The School of Athens in the Vatican?",
       "answers": [
         {
-          "text": "Raphael",
+          "text": "Raffaello",
           "correct": true
         },
         {
-          "text": "Titian"
+          "text": "Tiziano"
         },
         {
           "text": "Caravaggio"
