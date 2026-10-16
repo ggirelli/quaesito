@@ -71,8 +71,11 @@ def check_kind(q, problems):
         elif len(answers) != 4:
             warn(f"{len(answers)} answers instead of 4")
         correct = sum(bool(a.get("correct")) for a in answers)
-        if correct != 1:
-            err(f"{correct} correct answers instead of 1")
+        # Teams may pick several answers, so a question can have more than one right.
+        if correct == 0:
+            err("no correct answer")
+        elif correct == len(answers):
+            err("every answer is correct")
         if len({same_key(t) for t in texts}) != len(texts):
             err("two answers are the same")
         if any(not t.strip() for t in texts):
