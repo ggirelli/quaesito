@@ -275,7 +275,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Mediterranean Sea."
     }
   },
   {
@@ -352,7 +353,8 @@
             "max": 7
           }
         }
-      }
+      },
+      "explanation": "Honshu, Hokkaido, Kyushu, and Shikoku"
     }
   },
   {
@@ -386,7 +388,8 @@
             "max": 12
           }
         }
-      }
+      },
+      "explanation": "Hawaiʻi, Maui, Kahoʻolawe, Lānaʻi, Molokaʻi, Oʻahu, Kauaʻi, and Niʻihau"
     }
   },
   {
@@ -404,7 +407,8 @@
             "Madagascar"
           ]
         }
-      }
+      },
+      "explanation": "Greenland, about 2,166,000 km²\nNew Guinea, about 785,000 km²\nBorneo, about 748,000 km²\nMadagascar, about 587,000 km²"
     }
   },
   {
@@ -422,7 +426,8 @@
             "Crete"
           ]
         }
-      }
+      },
+      "explanation": "Sicily, about 25,700 km²\nSardinia, about 24,100 km²\nCyprus, about 9,250 km²\nCrete, about 8,340 km²"
     }
   },
   {

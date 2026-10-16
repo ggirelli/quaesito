@@ -242,7 +242,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Nut is the main thing, usually almonds or pistachios, depending on the style of nougat."
     }
   },
   {
@@ -255,7 +256,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Fondant is mainly made from sugar and water, while marzipan is made primarily from ground almonds and sugar."
     }
   },
   {
@@ -403,7 +405,7 @@
                 "text": "Baklava"
               },
               "right": {
-                "text": "Ottoman culinary tradition"
+                "text": "Greece or Turkey"
               }
             },
             {

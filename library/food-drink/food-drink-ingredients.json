@@ -311,7 +311,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "False. It’s made from the dried stigmas, not the petals."
     }
   },
   {
@@ -337,7 +338,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Wasabi’s heat comes mainly from allyl isothiocyanate, not capsaicin."
     }
   },
   {

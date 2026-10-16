@@ -358,7 +358,8 @@
             "Seine"
           ]
         }
-      }
+      },
+      "explanation": "1. Yangtze, about 6,300 kilometres\n2. Mekong, about 4,350 kilometres\n3. Rhine, about 1,230 kilometres\n4. Seine, about 775 kilometres"
     }
   },
   {
@@ -376,7 +377,8 @@
             "Lake Ontario"
           ]
         }
-      }
+      },
+      "explanation": "1. Lake Superior, about 82,100 km²\n2. Lake Victoria, about 68,800 km²\n3. Lake Baikal, about 31,700 km²\n4. Lake Ontario, about 19,000 km²"
     }
   },
   {
@@ -453,7 +455,7 @@
     "topic": "Rivers & lakes",
     "difficulty": 2,
     "question": {
-      "text": "Which turquoise lake in Banff National Park is named after Princess Louise, a daughter of Queen Victoria?",
+      "text": "Which turquoise lake in Banff National Park is named after a daughter of Queen Victoria?",
       "kind": {
         "Text": {
           "accepted": [

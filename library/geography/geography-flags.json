@@ -65,7 +65,8 @@
         {
           "text": "Maldives"
         }
-      ]
+      ],
+      "explanation": "It’s made of two stacked triangular pennants."
     }
   },
   {
@@ -413,7 +414,7 @@
     "topic": "Flags",
     "difficulty": 3,
     "question": {
-      "text": "Order these flags by number of stars, fewest first (Brazil has 27).",
+      "text": "Order these flags by number of stars, fewest first.",
       "kind": {
         "Order": {
           "items": [
@@ -423,7 +424,8 @@
             "United States"
           ]
         }
-      }
+      },
+      "explanation": "China 5\nEuropean Union 12\nBrazil 27\nUnited States 50"
     }
   },
   {
@@ -479,7 +481,8 @@
             "South Africa"
           ]
         }
-      }
+      },
+      "explanation": "Japan, 2: white and red\nGermany, 3: black, red, and gold\nBrazil, 4: green, yellow, blue, and white\nSouth Africa, 6: black, green, yellow, white, red, and blue"
     }
   },
   {
