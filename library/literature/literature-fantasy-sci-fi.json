@@ -275,7 +275,8 @@
           "answer": false
         }
       },
-      "text": "In Dune, the spice melange is found primarily on the planet Caladan."
+      "text": "In Dune, the spice melange is found primarily on the planet Caladan.",
+      "explanation": "False. The spice melange is found primarily on Arrakis, also known as Dune, not Caladan."
     }
   },
   {
@@ -301,7 +302,8 @@
           "answer": false
         }
       },
-      "text": "The novel Brave New World was written by George Orwell."
+      "text": "The novel Brave New World was written by George Orwell.",
+      "explanation": "False. Brave New World was written by Aldous Huxley and published in 1932. George Orwell wrote Nineteen Eighty-Four, published in 1949."
     }
   },
   {
@@ -384,7 +386,8 @@
           ]
         }
       },
-      "text": "Put these Tolkien books in publication order, earliest first."
+      "text": "Put these Tolkien books in publication order, earliest first.",
+      "explanation": "The Hobbit — 1937\nThe Fellowship of the Ring — 1954\nThe Two Towers — 1954\nThe Return of the King — 1955"
     }
   },
   {
@@ -402,7 +405,8 @@
           ]
         }
       },
-      "text": "Put these science-fiction novels in first-publication order, earliest first."
+      "text": "Put these science-fiction novels in first-publication order, earliest first.",
+      "explanation": "Frankenstein — 1818, by Mary Shelley\nTwenty Thousand Leagues Under the Seas — 1869–1870 (serialised; published as a book in 1871), by Jules Verne\nThe Time Machine — 1895, by H. G. Wells\nDune — 1965, by Frank Herbert"
     }
   },
   {

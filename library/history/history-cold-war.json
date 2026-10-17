@@ -188,7 +188,7 @@
     "topic": "Cold War",
     "difficulty": 2,
     "question": {
-      "text": "Which conflict began in 1950 when North Korean forces crossed the 38th parallel?",
+      "text": "Which conflict began in 1950 when a certain country's forces crossed the 38th parallel?",
       "answers": [
         {
           "text": "Korean War",
@@ -203,7 +203,8 @@
         {
           "text": "First Indochina War"
         }
-      ]
+      ],
+      "explanation": "The country being North Korea."
     }
   },
   {
@@ -272,7 +273,8 @@
         {
           "text": "Open Skies Treaty"
         }
-      ]
+      ],
+      "explanation": "The Intermediate-Range Nuclear Forces (INF) Treaty."
     }
   },
   {
@@ -285,7 +287,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "False. NATO was established in 1949, while the Warsaw Pact was established in 1955, six years later."
     }
   },
   {
@@ -408,7 +411,8 @@
             "Berlin Wall opened"
           ]
         }
-      }
+      },
+      "explanation": "Truman Doctrine announced — 1947\nBerlin Wall built — 1961\nCuban Missile Crisis — 1962\nBerlin Wall opened — 1989"
     }
   },
   {
@@ -426,7 +430,8 @@
             "Mikhail Gorbachev"
           ]
         }
-      }
+      },
+      "explanation": "Joseph Stalin — 1924 (became the dominant leader after Lenin’s death; consolidated power over the following years)\nNikita Khrushchev — 1953\nLeonid Brezhnev — 1964\nMikhail Gorbachev — 1985"
     }
   },
   {

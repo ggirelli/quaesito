@@ -229,7 +229,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Johannes Gutenberg did not invent paper; paper was invented centuries earlier in China and had already been in use in Europe long before his time."
     }
   },
   {
@@ -344,7 +345,8 @@
             "Transistor"
           ]
         }
-      }
+      },
+      "explanation": "• Printing press in Europe (Johannes Gutenberg): 1440\n• Steam engine improved by Watt (James Watt): 1776\n• Telephone (Alexander Graham Bell): 1876\n• Transistor (John Bardeen, Walter Brattain, and William Shockley): 1947"
     }
   },
   {
@@ -362,7 +364,8 @@
             "Internet opened to the public"
           ]
         }
-      }
+      },
+      "explanation": "• Electric telegraph: 1837 (Commercialized by Cooke and Wheatstone in the UK, and Morse in the US shortly after)\n• Telephone: 1876 (Patented by Alexander Graham Bell)\n• Commercial radio broadcasting: 1920 (KDKA in Pittsburgh aired the first licensed commercial broadcast)\n• Internet opened to the public: 1991 (When the World Wide Web became publicly available and commercial restrictions on the NSFNET were lifted)"
     }
   },
   {

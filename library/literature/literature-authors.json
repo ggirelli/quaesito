@@ -265,7 +265,8 @@
           "answer": false
         }
       },
-      "text": "James Joyce wrote the novel Middlemarch."
+      "text": "James Joyce wrote the novel Middlemarch.",
+      "explanation": "No, James Joyce did not write Middlemarch; it was written by the English author Mary Ann Evans, who wrote under the male pen name George Eliot."
     }
   },
   {
@@ -408,7 +409,8 @@
           ]
         }
       },
-      "text": "Put these novels in order of first publication, earliest first."
+      "text": "Put these novels in order of first publication, earliest first.",
+      "explanation": "1. Don Quixote (Part 1) – 1605\n2. Pride and Prejudice – 1813\n3. Jane Eyre – 1847\n4. The Great Gatsby – 1925"
     }
   },
   {
@@ -426,7 +428,8 @@
           ]
         }
       },
-      "text": "Put these novels in order of first publication or completion, earliest first."
+      "text": "Put these novels in order of first publication or completion, earliest first.",
+      "explanation": "1. The Tale of Genji – c. 1000–1012\n2. Don Quixote (Part 1) – 1605\n3. Frankenstein – 1818\n4. The Trial – 1925"
     }
   },
   {

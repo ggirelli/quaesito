@@ -298,7 +298,8 @@
           "answer": false
         }
       },
-      "text": "In Norse mythology, Loki is Thor's father."
+      "text": "In Norse mythology, Loki is Thor's father.",
+      "explanation": "False. Thor is the son of Odin, the chief of the Norse gods, and the goddess Jörð (Earth). Loki is Thor’s companion and occasional adversary, not his father."
     }
   },
   {
@@ -337,7 +338,8 @@
           "answer": false
         }
       },
-      "text": "In the Epic of Gilgamesh, Enkidu is immortal from birth."
+      "text": "In the Epic of Gilgamesh, Enkidu is immortal from birth.",
+      "explanation": "False. Enkidu is mortal. His death profoundly affects Gilgamesh and drives him to search for immortality."
     }
   },
   {

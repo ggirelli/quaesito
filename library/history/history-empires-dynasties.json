@@ -229,7 +229,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "False. Tenochtitlan stood where modern-day Mexico City, Mexico, is located, not Lima, Peru."
     }
   },
   {
@@ -255,7 +256,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "False. Christianity became the Roman Empire’s official religion under Emperor Theodosius I in 380 CE, not Julius Caesar, who was assassinated in 44 BCE."
     }
   },
   {
@@ -367,7 +369,8 @@
             "Mughal Empire"
           ]
         }
-      }
+      },
+      "explanation": "1. Achaemenid Persian Empire – 550 BC\n2. Roman Empire – 27 BC\n3. Mongol Empire – 1206 AD (or 1206 BCE depending on calendar, founded by Genghis Khan)\n4. Mughal Empire – 1526 AD"
     }
   },
   {
@@ -385,7 +388,8 @@
             "Ming dynasty"
           ]
         }
-      }
+      },
+      "explanation": "Qin dynasty — 221–206 BC\nHan dynasty — 206 BC–220 CE\nTang dynasty — 618–907 CE\nMing dynasty — 1368–1644 CE"
     }
   },
   {

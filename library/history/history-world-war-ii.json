@@ -183,7 +183,8 @@
           "answer": false
         }
       },
-      "text": "The attack on Pearl Harbor took place in 1940."
+      "text": "The attack on Pearl Harbor took place in 1940.",
+      "explanation": "No, the attack on Pearl Harbor did not take place in 1940; it occurred on December 7, 1941."
     }
   },
   {
@@ -209,7 +210,8 @@
           "answer": false
         }
       },
-      "text": "The Soviet Union fought on Germany's side after the German invasion of June 1941."
+      "text": "The Soviet Union fought on Germany's side after the German invasion of June 1941.",
+      "explanation": "No, the Soviet Union did not fight on Germany's side after the German invasion of June 1941."
     }
   },
   {
@@ -304,7 +306,8 @@
           ]
         }
       },
-      "text": "Put these events in chronological order, earliest first."
+      "text": "Put these events in chronological order, earliest first.",
+      "explanation": "1. Germany invades Poland – 1939 (September 1)\n2. Attack on Pearl Harbor – 1941 (December 7)\n3. D-Day landings – 1944 (June 6)\n4. Germany surrenders – 1945 (May 7)"
     }
   },
   {
@@ -322,7 +325,8 @@
           ]
         }
       },
-      "text": "Put these events in chronological order, earliest first."
+      "text": "Put these events in chronological order, earliest first.",
+      "explanation": "1. Battle of Britain – 1940 (July 10 – October 31)\n2. Germany invades the Soviet Union – 1941 (June 22, Operation Barbarossa)\n3. Battle of Midway – 1942 (June 4–7)\n4. Warsaw Uprising – 1944 (August 1 – October 2)"
     }
   },
   {
@@ -554,7 +558,8 @@
           }
         }
       },
-      "text": "How many years passed between Germany's invasion of Poland and its surrender? Give the number."
+      "text": "How many years passed between Germany's invasion of Poland and its surrender? Give the number.",
+      "explanation": "Approximately 6 years (specifically, about 5 years and 8 months) passed between Germany's invasion of Poland and Germany's unconditional surrender."
     }
   }
 ]

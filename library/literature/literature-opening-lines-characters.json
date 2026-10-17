@@ -242,7 +242,8 @@
           "answer": false
         }
       },
-      "text": "The narrator of The Great Gatsby is Jay Gatsby himself."
+      "text": "The narrator of The Great Gatsby is Jay Gatsby himself.",
+      "explanation": "False. The narrator is Nick Carraway, who tells the story of Jay Gatsby and his pursuit of Daisy Buchanan."
     }
   },
   {
@@ -255,7 +256,8 @@
           "answer": false
         }
       },
-      "text": "The opening section of The Sound and the Fury is narrated by Quentin Compson."
+      "text": "The opening section of The Sound and the Fury is narrated by Quentin Compson.",
+      "explanation": "False. The opening section of The Sound and the Fury is narrated by Benjy Compson, followed by Quentin, Jason, and a final section focused on Dilsey and the family."
     }
   },
   {
@@ -371,7 +373,8 @@
           ]
         }
       },
-      "text": "Put these novels in order of first publication, earliest first."
+      "text": "Put these novels in order of first publication, earliest first.",
+      "explanation": "Jane Eyre — 1847, by Charlotte Brontë\nMoby-Dick — 1851, by Herman Melville\nThe Great Gatsby — 1925, by F. Scott Fitzgerald\nThe Hobbit — 1937, by J. R. R. Tolkien"
     }
   },
   {
@@ -389,7 +392,8 @@
           ]
         }
       },
-      "text": "Put these novels in order of first publication, earliest first."
+      "text": "Put these novels in order of first publication, earliest first.",
+      "explanation": "The Metamorphosis — 1915, by Franz Kafka\nThe Great Gatsby — 1925, by F. Scott Fitzgerald\nThe Sound and the Fury — 1929, by William Faulkner\nThe Stranger (L’Étranger) — 1942, by Albert Camus"
     }
   },
   {
