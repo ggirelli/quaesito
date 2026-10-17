@@ -239,7 +239,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The original Sony Walkman, released in 1979, played cassette tapes, not compact discs. Sony introduced its portable CD player, the Discman, in 1984."
     }
   },
   {
@@ -278,7 +279,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The first iPhone, released in 2007, had a non-removable battery that users weren’t meant to swap themselves."
     }
   },
   {
@@ -408,7 +410,8 @@
             "Apple Watch"
           ]
         }
-      }
+      },
+      "explanation": "iPod — 2001\niPhone — 2007\niPad — 2010\nApple Watch — 2015"
     }
   },
   {
@@ -568,7 +571,8 @@
             "microSD card"
           ]
         }
-      }
+      },
+      "explanation": "Floppy disk — 1971\nCD-R — 1988 (introduced commercially in the late 1980s)\nUSB flash drive — 2000\nmicroSD card — 2005"
     }
   },
   {

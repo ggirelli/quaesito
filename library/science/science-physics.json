@@ -298,7 +298,8 @@
           "answer": false
         }
       },
-      "text": "Sound can travel through empty space without any matter."
+      "text": "Sound can travel through empty space without any matter.",
+      "explanation": "Sound cannot travel through empty space because it requires a physical medium—such as a solid, liquid, or gas—to transmit its vibrations."
     }
   },
   {
@@ -337,7 +338,8 @@
           "answer": false
         }
       },
-      "text": "In special relativity, an object's rest mass increases as its speed approaches the speed of light."
+      "text": "In special relativity, an object's rest mass increases as its speed approaches the speed of light.",
+      "explanation": "An object's rest mass remains completely constant and never changes, regardless of how fast the object is moving."
     }
   },
   {

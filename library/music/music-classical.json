@@ -311,7 +311,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Antonio Vivaldi was born in Venice, Italy."
     }
   },
   {
@@ -441,7 +442,8 @@
             "Frédéric Chopin"
           ]
         }
-      }
+      },
+      "explanation": "1. Wolfgang Amadeus Mozart – Born January 27, 1756 (Salzburg, Austria)\n2. Ludwig van Beethoven – Born December 16, 1770 (Bonn, Germany)\n3. Franz Schubert – Born January 31, 1797 (Vienna, Austria)\n4. Frédéric Chopin – Born March 1, 1810 (Żelazowa Wola, Poland)"
     }
   },
   {
@@ -459,7 +461,8 @@
             "Stravinsky: The Rite of Spring"
           ]
         }
-      }
+      },
+      "explanation": "1. The Magic Flute (Mozart) – Premiered on September 30, 1791 in Vienna, Austria\n2. Symphony No. 5 (Beethoven) – Premiered on December 22, 1808 in Vienna, Austria\n3. Swan Lake (Tchaikovsky) – Premiered on March 4, 1877 in Moscow, Russia\n4. The Rite of Spring (Stravinsky) – Premiered on May 29, 1913 in Paris, France"
     }
   },
   {

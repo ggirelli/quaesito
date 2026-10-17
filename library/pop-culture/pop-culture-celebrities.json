@@ -229,7 +229,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Meryl Streep did not make her film debut in The Devil Wears Prada; she had already been a massive Hollywood star for nearly three decades before the movie was released in 2006."
     }
   },
   {
@@ -242,7 +243,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Charlie Chaplin did not win the competitive Oscar for Best Actor for The Great Dictator; he was only nominated."
     }
   },
   {
@@ -343,7 +345,8 @@
             "Madonna"
           ]
         }
-      }
+      },
+      "explanation": "1. Charlie Chaplin – Born April 16, 1889 (London, England)\n2. Elvis Presley – Born January 8, 1935 (Tupelo, Mississippi)\n3. David Bowie – Born January 8, 1947 (London, England)\n4. Madonna – Born August 16, 1958 (Bay City, Michigan)"
     }
   },
   {
@@ -361,7 +364,8 @@
             "Tom Hanks"
           ]
         }
-      }
+      },
+      "explanation": "Clark Gable – Won in 1935 (for It Happened One Night, which was released in 1934)\nMarlon Brando – Won in 1955 (for On the Waterfront, which was released in 1954)\nJack Nicholson – Won in 1976 (for One Flew Over the Cuckoo's Nest, which was released in 1975)\nTom Hanks – Won in 1994 (for Philadelphia, which was released in 1993)"
     }
   },
   {
@@ -485,7 +489,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Keanu Reeves was actually born in Beirut, Lebanon."
     }
   },
   {

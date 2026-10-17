@@ -285,7 +285,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The euro is not used by every member state of the European Union; it is currently the official currency of 21 out of the 27 EU nations."
     }
   },
   {
@@ -324,7 +325,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The Indian rupee is not the official currency of Bangladesh; the official currency of Bangladesh is the Bangladeshi taka (BDT)."
     }
   },
   {

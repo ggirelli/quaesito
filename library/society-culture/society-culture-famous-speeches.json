@@ -298,7 +298,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Winston Churchill's legendary \"We shall fight on the beaches\" speech was delivered near the beginning of the Second World War, not after it ended."
     }
   },
   {
@@ -311,7 +312,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "U.S. President Ronald Reagan delivered his famous \"Tear down this wall!\" speech in West Berlin, not East Berlin."
     }
   },
   {

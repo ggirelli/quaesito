@@ -285,7 +285,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The internet is the global network of connected computers; the World Wide Web is a system of interlinked websites and pages that runs on the internet. The web is just one of the internet’s many services."
     }
   },
   {
@@ -324,7 +325,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "SMTP (Simple Mail Transfer Protocol) is used to send email. Browsers typically retrieve web pages using HTTP or HTTPS."
     }
   },
   {
@@ -439,7 +441,8 @@
             "Google is founded"
           ]
         }
-      }
+      },
+      "explanation": "ARPANET sends its first message — 1969\nTCP/IP adopted by ARPANET — 1983\nFirst website goes live — 1991\nGoogle is founded — 1998"
     }
   },
   {

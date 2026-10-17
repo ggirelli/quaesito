@@ -262,7 +262,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The vast majority of bacteria do not cause disease in humans, and many are actually essential for our survival."
     }
   },
   {
@@ -288,7 +289,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Xylem is responsible for transporting water and dissolved minerals upward from the roots to the leaves, while a completely different tissue called phloem transports sugars."
     }
   },
   {

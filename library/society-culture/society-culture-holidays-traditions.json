@@ -275,7 +275,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The Jewish festival of Hanukkah lasts for eight nights and days, not twelve."
     }
   },
   {
@@ -314,7 +315,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Midsummer Eve in Sweden is always celebrated on a Friday between 19 June and 25 June, meaning the exact date changes every year."
     }
   },
   {

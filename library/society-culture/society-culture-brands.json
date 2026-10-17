@@ -252,7 +252,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The first Apple computer was actually called the Apple I (stylized as Apple-1), which came out nearly eight years before the Macintosh."
     }
   },
   {
@@ -278,7 +279,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The automobile brand Volvo was founded in Gothenburg, Sweden, not Germany."
     }
   },
   {

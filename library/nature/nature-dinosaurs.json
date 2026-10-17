@@ -275,7 +275,8 @@
           "answer": false
         }
       },
-      "text": "All dinosaurs lived at the same time as humans."
+      "text": "All dinosaurs lived at the same time as humans.",
+      "explanation": "Dinosaurs and humans never coexisted; they are separated by an enormous evolutionary gap of roughly 65 million years."
     }
   },
   {
@@ -301,7 +302,8 @@
           "answer": false
         }
       },
-      "text": "Pterosaurs were dinosaurs."
+      "text": "Pterosaurs were dinosaurs.",
+      "explanation": "That is a very common misconception, but pterosaurs were not dinosaurs—they were a completely separate group of flying reptiles."
     }
   },
   {
@@ -411,7 +413,8 @@
           ]
         }
       },
-      "text": "Put the three periods of the Mesozoic Era in chronological order, earliest first."
+      "text": "Put the three periods of the Mesozoic Era in chronological order, earliest first.",
+      "explanation": "1. Triassic Period – Lasted from about 252 to 201 million years ago\n2. Jurassic Period – Lasted from about 201 to 145 million years ago\n3. Cretaceous Period – Lasted from about 145 to 66 million years ago"
     }
   },
   {

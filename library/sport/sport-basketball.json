@@ -319,12 +319,13 @@
     "topic": "Basketball",
     "difficulty": 2,
     "question": {
-      "text": "A player may score a field goal directly from a throw-in without another player touching the ball.",
+      "text": "In basketball, a player may score a field goal directly from a throw-in without another player touching the ball.",
       "kind": {
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "A player can never score a field goal directly from a throw-in without another player touching the ball first."
     }
   },
   {
@@ -337,7 +338,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The NBA three-point line is not a perfect circle, meaning the distance to the basket changes depending on where you stand on the court."
     }
   },
   {

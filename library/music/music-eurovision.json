@@ -252,7 +252,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The Eurovision Song Contest was first broadcast in colour in 1968, not 1956."
     }
   },
   {
@@ -379,7 +380,8 @@
             "Måns Zelmerlöw — Heroes"
           ]
         }
-      }
+      },
+      "explanation": "1. ABBA – Waterloo (Sweden) – Won in 1974\n2. Johnny Logan – What's Another Year (Ireland) – Won in 1980\n3. Loreen – Euphoria (Sweden) – Won in 2012\n4. Måns Zelmerlöw – Heroes (Sweden) – Won in 2015"
     }
   },
   {
@@ -397,7 +399,8 @@
             "Ukraine"
           ]
         }
-      }
+      },
+      "explanation": "1. Switzerland – Won in 1956 (Lys Assia with \"Refrain\")\n2. United Kingdom – Won in 1967 (Sandie Shaw with \"Puppet on a String\")\n3. Israel – Won in 1978 (Izhar Cohen & the Alphabeta with \"A-Ba-Ni-Bi\")\n4. Ukraine – Won in 2004 (Ruslana with \"Wild Dances\")"
     }
   },
   {

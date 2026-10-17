@@ -298,7 +298,8 @@
           "answer": false
         }
       },
-      "text": "All sharks must keep swimming or they will immediately suffocate."
+      "text": "All sharks must keep swimming or they will immediately suffocate.",
+      "explanation": "The vast majority of sharks can stop swimming and rest on the seafloor completely safely without suffocating."
     }
   },
   {
@@ -324,7 +325,8 @@
           "answer": false
         }
       },
-      "text": "Corals are plants that make their food through photosynthesis."
+      "text": "Corals are plants that make their food through photosynthesis.",
+      "explanation": "Corals are actually animals, not plants—though their survival depends on a fascinating partnership with tiny photosynthetic organisms."
     }
   },
   {

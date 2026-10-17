@@ -298,7 +298,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "ABBA is a band from Sweden."
     }
   },
   {
@@ -486,7 +487,8 @@
             "Queen"
           ]
         }
-      }
+      },
+      "explanation": "1. The Beatles – Formed in 1960 (evolving from John Lennon's previous group, The Quarrymen, which started in 1956)\n2. The Rolling Stones – Formed in 1962\n3. Pink Floyd – Formed in 1965\n4. Queen – Formed in 1970 (following the evolution of Brian May and Roger Taylor's previous band, Smile)"
     }
   },
   {
@@ -504,7 +506,8 @@
             "Radiohead: OK Computer"
           ]
         }
-      }
+      },
+      "explanation": "1. Revolver – The Beatles (Released: August 5, 1966)\n2. The Velvet Underground & Nico – The Velvet Underground (Released: March 12, 1967)\n3. Low – David Bowie (Released: January 14, 1977)\n4. OK Computer – Radiohead (Released: May 21, 1997)"
     }
   },
   {

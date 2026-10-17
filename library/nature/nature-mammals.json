@@ -252,7 +252,8 @@
           "answer": false
         }
       },
-      "text": "All mammals give birth to live young."
+      "text": "All mammals give birth to live young.",
+      "explanation": "While the vast majority of mammals give birth to live young, there is a unique group of mammals called monotremes that lay eggs instead."
     }
   },
   {
@@ -278,7 +279,8 @@
           "answer": false
         }
       },
-      "text": "Bats are naturally blind and navigate only by sound."
+      "text": "Bats are naturally blind and navigate only by sound.",
+      "explanation": "Bats are not naturally blind at all, and while many use echolocation to navigate in total darkness, they actually rely heavily on their eyesight to survive."
     }
   },
   {

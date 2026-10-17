@@ -183,7 +183,8 @@
           "answer": false
         }
       },
-      "text": "All penguin species live in the Arctic."
+      "text": "All penguin species live in the Arctic.",
+      "explanation": "No wild penguin species live in the Arctic; they are native almost exclusively to the Southern Hemisphere."
     }
   },
   {

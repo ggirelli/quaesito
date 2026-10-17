@@ -242,7 +242,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The Joker has always been a DC Comics character and has never debuted or belonged to Marvel Comics."
     }
   },
   {
@@ -268,7 +269,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The legendary comic strip Peanuts was created entirely by Charles M. Schulz, not Jack Kirby."
     }
   },
   {
@@ -383,7 +385,8 @@
             "Spider-Man"
           ]
         }
-      }
+      },
+      "explanation": "1. Superman – First appeared in Action Comics #1 (June 1938 / DC Comics)\n2. Batman – First appeared in Detective Comics #27 (May 1939 / DC Comics)\n3. Wonder Woman – First appeared in All Star Comics #8 (October 1941 / DC Comics)\n4. Spider-Man – First appeared in Amazing Fantasy #15 (August 1962 / Marvel Comics)"
     }
   },
   {
@@ -401,7 +404,8 @@
             "Hellboy"
           ]
         }
-      }
+      },
+      "explanation": "Fantastic Four – First issue appeared in November 1961 (Marvel Comics)\nX-Men – First issue appeared in September 1963 (Marvel Comics)\nWatchmen – First issue appeared in September 1986 (DC Comics)\nHellboy – First issue (Hellboy: Seed of Destruction #1) appeared in March 1994 (Dark Horse Comics)"
     }
   },
   {

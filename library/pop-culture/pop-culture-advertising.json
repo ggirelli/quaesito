@@ -207,7 +207,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The \"Marlboro Man\" was actually created to advertise filter cigarettes, not chewing gum."
     }
   },
   {
@@ -233,7 +234,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The \"Think Small\" Volkswagen campaign was specifically designed to embrace, celebrate, and highlight the Beetle's small size and simplicity, directly rejecting the traditional association of automobiles with luxury and status."
     }
   },
   {
@@ -319,7 +321,8 @@
             "“I'm lovin' it”"
           ]
         }
-      }
+      },
+      "explanation": "1. “A Diamond Is Forever” (De Beers) – Introduced in 1947\n2. “Think Small” (Volkswagen) – Introduced in 1959\n3. “Just Do It” (Nike) – Introduced in 1988\n4. “I'm lovin' it” (McDonald's) – Introduced in 2003"
     }
   },
   {
@@ -337,7 +340,8 @@
             "Energizer Bunny"
           ]
         }
-      }
+      },
+      "explanation": "Michelin Man (Bibendum) – Introduced in the 1890s (specifically 1898)\nTony the Tiger (Kellogg's Frosted Flakes) – Introduced in the 1950s (specifically 1952)\nPillsbury Doughboy (Poppin' Fresh) – Introduced in the 1960s (specifically 1965)\nEnergizer Bunny – Introduced in the 1980s (specifically 1989)"
     }
   },
   {
