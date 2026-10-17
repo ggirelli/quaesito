@@ -3,6 +3,8 @@
 //! The server bundles the entries (`library/library.json`, built from `library/checked`); hosts
 //! browse and pick them in the browser.
 
+use std::fmt::Write as _;
+
 use serde::{Deserialize, Serialize};
 
 use crate::{
@@ -116,6 +118,56 @@ impl LibraryEntry {
             }
         }
     }
+
+    /// A new GitHub issue reporting this question as wrong, filled in with the question as shown.
+    #[must_use]
+    pub fn report_url(&self) -> String {
+        let question = &self.question;
+        let mut details = format!(
+            "{}\n\n{} · {} · {} · {}",
+            question.text,
+            self.category,
+            self.topic,
+            self.difficulty_name(),
+            self.kind_name()
+        );
+        if !question.passage.is_empty() {
+            let _ = write!(details, "\n\nPassage: {}", question.passage);
+        }
+        if matches!(question.kind, QuestionKind::Choice) {
+            for answer in &question.answers {
+                let mark = if answer.correct { '✓' } else { '✗' };
+                let _ = write!(details, "\n- {mark} {}", answer.text);
+            }
+        } else {
+            let _ = write!(details, "\n\nAnswer: {}", self.answer());
+        }
+        if self.edited {
+            details.push_str("\n\n(Edited on this server.)");
+        }
+        if !self.id.is_empty() {
+            let _ = write!(details, "\n\nId: {}", self.id);
+        }
+        format!(
+            "{}/issues/new?template=wrong_question.yml&title={}&question={}",
+            env!("CARGO_PKG_REPOSITORY"),
+            encode_query(&format!("Wrong question: {}", question.text)),
+            encode_query(&details)
+        )
+    }
+}
+
+/// Percent-encodes `text` for a URL's query string.
+fn encode_query(text: &str) -> String {
+    let mut encoded = String::with_capacity(text.len());
+    for byte in text.bytes() {
+        if byte.is_ascii_alphanumeric() || b"-_.~".contains(&byte) {
+            encoded.push(char::from(byte));
+        } else {
+            let _ = write!(encoded, "%{byte:02X}");
+        }
+    }
+    encoded
 }
 
 /// What the host is looking for; empty fields match everything.
@@ -560,6 +612,19 @@ mod tests {
         assert_eq!(texts(LibrarySort::Difficulty), ['C', 'Y', 'R']);
         assert_eq!(texts(LibrarySort::Kind), ['C', 'R', 'Y']);
         assert_eq!(texts(LibrarySort::Text), ['C', 'R', 'Y']);
+    }
+
+    #[test]
+    fn reports_open_a_filled_in_issue() {
+        let all = library();
+        let url = all[0].report_url();
+        assert!(url.starts_with(
+            "https://github.com/ggirelli/quaesito/issues/new?template=wrong_question.yml&title=Wrong%20question%3A%20"
+        ));
+        assert!(url.contains("&question="));
+        assert!(url.contains("%E2%9C%93%20Paris"));
+        assert!(!url[url.find('?').unwrap()..].contains([' ', '\n', '#']));
+        assert_eq!(encode_query("a b&c=d/é"), "a%20b%26c%3Dd%2F%C3%A9");
     }
 
     #[test]

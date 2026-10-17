@@ -1,0 +1,18 @@
+name: Wrong library question
+description: A question in the library is wrong, unclear or out of date.
+labels: [bug]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: The question
+      description: Filled in by the report link in the library.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong?
+      description: The right answer, or what makes the question unclear, with a source if you have one.
+    validations:
+      required: true
