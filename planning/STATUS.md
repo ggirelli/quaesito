@@ -84,6 +84,12 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 75  | Phone lobby: “You’re in!” first, name and picture folded away (teams rename themselves); Teams panel toggles uploads               | ✅ done |
 | 76  | Text, picture or video shown with the answer only (explanation, fun fact); quiz file format 2                                      | ✅ done |
 | 77  | Soundtrack played with the answer (next to its picture or video)                                                                   | ✅ done |
+| 78  | Questions filed under the library’s categories and topics, shown on the big screen; topics added from the admin page               | ✅ done |
+| 79  | Editor: question navigator, scroll position in the URL, table view; floating field labels and boxed media                          | ✅ done |
+| 80  | Library: report a wrong question in a GitHub issue; save quiz questions to it and keep them in step; Source filter                 | ✅ done |
+| 81  | Wi-Fi slide with a QR code before the join code                                                                                    | ✅ done |
+| 82  | Big screen: picture beside a slide’s text or a question’s passage; cog button back to the admin page                               | ✅ done |
+| 83  | Release 0.5.0 (`v0.5.0` tag: downloads built by CI)                                                                                | ✅ done |
 
 ## Notes
 

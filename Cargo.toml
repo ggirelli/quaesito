@@ -1,6 +1,6 @@
 [package]
 name = "quaesito"
-version = "0.4.0"
+version = "0.5.0"
 edition = "2024"
 description = "Quizzes among friends: a self-hosted, live quiz web app"
 repository = "https://github.com/ggirelli/quaesito"
