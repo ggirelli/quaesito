@@ -17,7 +17,6 @@ pub fn Home() -> Element {
             JoinCodeForm {}
         }
         nav { class: "corner-links",
-            ThemeToggle { class: "corner-link" }
             HelpLink { class: "corner-link" }
             Link {
                 class: "corner-link",
@@ -26,6 +25,7 @@ pub fn Home() -> Element {
                 aria_label: "Admin",
                 Icon { kind: IconKind::Settings }
             }
+            ThemeToggle { class: "corner-link" }
         }
     }
 }

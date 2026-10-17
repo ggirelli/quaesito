@@ -113,7 +113,6 @@ fn LoginForm() -> Element {
     let mut error = use_signal(|| None::<String>);
     rsx! {
         nav { class: "corner-links",
-            ThemeToggle { class: "corner-link" }
             HelpLink { class: "corner-link" }
             Link {
                 class: "corner-link",
@@ -122,6 +121,7 @@ fn LoginForm() -> Element {
                 aria_label: "Home page",
                 Icon { kind: IconKind::Home }
             }
+            ThemeToggle { class: "corner-link" }
         }
         main { class: "page center narrow stack",
             Brand { large: true }
@@ -173,7 +173,6 @@ pub fn AdminHeader(#[props(default)] back: bool, children: Element) -> Element {
                         "Quizzes"
                     }
                 }
-                ThemeToggle { class: "button ghost icon" }
                 HelpLink { class: "button ghost", label: true }
                 Link {
                     class: "button ghost",
@@ -183,6 +182,7 @@ pub fn AdminHeader(#[props(default)] back: bool, children: Element) -> Element {
                     "Home"
                 }
                 button { class: "button ghost", onclick: move |_| token.clear(), "Log out" }
+                ThemeToggle { class: "button ghost icon" }
             }
         }
     }
