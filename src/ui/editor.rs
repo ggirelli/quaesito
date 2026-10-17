@@ -270,13 +270,6 @@ fn EditorForm(quiz: Quiz) -> Element {
                     SaveState::Failed => "Not saved, retrying…",
                 }
             }
-            button {
-                class: "button",
-                disabled: !issues().is_empty(),
-                title: if issues().is_empty() { "Try the quiz with the big screen and two phones side by side" } else { "Fix the quiz before testing it" },
-                onclick: test,
-                "🧪 Test"
-            }
         }
         main { class: "page editor",
             div { class: "editor-top stack",
@@ -337,6 +330,13 @@ fn EditorForm(quiz: Quiz) -> Element {
                 }
             }
             aside { class: "editor-side editor-shuffle",
+                button {
+                    class: "button",
+                    disabled: !issues().is_empty(),
+                    title: if issues().is_empty() { "Try the quiz with the big screen and two phones side by side" } else { "Fix the quiz before testing it" },
+                    onclick: test,
+                    "🧪 Test quiz"
+                }
                 button {
                     class: "button ghost shuffle",
                     disabled: !can_shuffle,
