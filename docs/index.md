@@ -38,6 +38,7 @@ Windows, macOS and Linux. Free and open source (MIT).
 - :material-wifi-off: Runs on your local network, no internet or accounts needed
 - :material-account-group: Up to 50 teams by default, as many as 10,000 if you like, with any number of players per team
 - :material-content-save: Quiz editor in the browser that saves as you type
+- :material-bookshelf: A library of about 2,700 ready-made questions, to pick from or fill a quiz at random
 - :material-test-tube: Test mode: the big screen and phones side by side
 - :material-image-filter-center-focus: Pictures revealed by zooming out or tile by tile
 - :material-music: Soundtracks that start with the clock, and sound effects up to the fanfare

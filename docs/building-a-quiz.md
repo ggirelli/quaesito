@@ -38,10 +38,12 @@ Quaesito comes with a library of about 2,700 ready-made questions in 14 categori
 technology, each rated easy, medium or hard. They were written with an AI model and fact-checked
 ([how](question-library.md)), but read the ones you pick before playing: a few may still be wrong.
 
+![The admin page's Questions tab, with the library's categories on the left](screenshots/library.webp)
+
 - **Browse it** on the admin page's **Questions** tab. Pick a category on the left to see only its
   questions; it opens onto its topics, which narrow the list further. Pick the category again to
-  close it. Search questions and answers, filter by difficulty and question type, and sort by
-  category, difficulty, question type or text.
+  close it. Search questions and answers, filter by difficulty, question type and source (came
+  with Quaesito, or added here), and sort by category, difficulty, question type or text.
 - **In the editor**, press **＋ From the library** to browse it the same way. **＋ Add** adds one
   question at the end of the quiz; 🎲 **Add at random** adds as many of the questions shown as
   you ask for. Questions already in the quiz are marked, and never added twice at random.
@@ -54,7 +56,30 @@ and points. It keeps the category and topic it comes from, which the big screen 
 
 To fix or change a question in the library itself, use its **edit** link: the question opens in a
 pop-up like the editor's, with its difficulty. Your changes are kept on this server only and the
-question is marked *edited*; **Back to the original** undoes them.
+question is marked *edited*; **Back to the original** undoes them. Found a question that is plain
+wrong? Its **report** link opens a GitHub issue, already filled in with the question and its
+answer: just say what is wrong.
+
+### Saving questions to the library
+
+The :material-content-save: button on each question card, between duplicate and delete, keeps a
+quiz question and the library in step. On a question of your own, it saves it to the library
+(it needs a category and a topic; the pop-up asks for a difficulty, and warns if the library
+already has the same question), so other quizzes can use it. Questions saved this way are kept on
+this server and marked *added* in the library, where they can be deleted.
+
+A question that came from the library, or was saved to it, stays linked to it, and the button's
+colour says how the two compare:
+
+- **In the library**: both are the same.
+- **Update library**: you changed it here. The pop-up shows both versions side by side, and says
+  how many other quizzes use the question and will be offered the change.
+- **Update from library**: the library's question changed since; updating replaces your copy.
+- **Changed in both**: pick the version to keep. **Save as new…** saves yours as a separate
+  library question instead, and **Unlink** stops comparing them.
+
+A question's own time limit and points, and the order of its choices, are the quiz's: they never
+count as changes.
 
 ## Category and topic
 

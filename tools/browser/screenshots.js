@@ -64,11 +64,17 @@ async function answer(phone, how) {
   await admin.waitForSelector('.list-row');
   await L.sleep(500);
   await shot(admin, 'dashboard');
-  const editor = await L.openAdmin(ctx, `/admin/quiz/${ctx.id}`, 1280, 1000);
+  const library = await L.openAdmin(ctx, '/admin/questions', 1280, 800);
+  await library.waitForSelector('.library-option');
+  await L.sleep(800);
+  await shot(library, 'library');
+  // Wide enough for the navigator and side buttons to sit beside the list, not over it.
+  const editor = await L.openAdmin(ctx, `/admin/quiz/${ctx.id}`, 1440, 1000);
   await editor.waitForSelector('.question');
   for (const [i, name] of [[1, 'editor-choices'], [6, 'editor-parts'], [7, 'editor-pin'], [8, 'editor-pairs']]) {
     await editor.evaluate((i) => document.querySelectorAll('.question')[i].scrollIntoView({ block: 'start' }), i);
-    await editor.evaluate(() => window.scrollBy(0, -80));
+    // Below the pinned header.
+    await editor.evaluate(() => window.scrollBy(0, -(document.querySelector('header')?.offsetHeight ?? 70) - 16));
     await L.sleep(500);
     await shot(editor, name);
   }
