@@ -32,6 +32,10 @@ All notable changes to quaesito are listed here. The format follows
 
 - The editor shows a question's category, topic, time and points above its text, and **＋ Add soundtrack** next to
   **＋ Add picture or video**. **Seconds** is now **Time (s)**.
+- Form fields wear their name small on the box's top border, and the box's border lights up while it is in use. The
+  editor puts each added picture, video and soundtrack in its own box, one under the other. Its **Category** and
+  **Topic** lists are as wide as the longest category and topic, and **Topic** shows as off until a category is
+  picked.
 
 - Phones show "You're in!" first when waiting for the quiz to start; the team's name, picture and background are
   folded away under **Change your name or picture**, and **Done** folds them again. Teams can rename themselves there

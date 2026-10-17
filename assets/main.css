@@ -402,6 +402,67 @@ button.corner-link {
   gap: 0.6rem;
 }
 
+/* A field with one box (not a range, nor one with a unit after it) wears its name small on the
+   box's top border. Both share one grid cell, so the box grows to fit a name longer than it. */
+.field:not(:has(> span ~ span)) {
+  display: grid;
+  gap: 0;
+  margin-top: 0.4rem;
+}
+
+.field:not(:has(> span ~ span)) > * {
+  grid-area: 1 / 1;
+}
+
+.field:not(:has(> span ~ span)) > span {
+  z-index: 1;
+  align-self: start;
+  justify-self: start;
+  margin: 0 0.6rem;
+  padding: 0 0.3rem;
+  font-size: 0.75rem;
+  line-height: 1;
+  white-space: nowrap;
+  /* Hides the border behind the name, letting the card show above it. */
+  background: linear-gradient(transparent calc(50% - 1px), var(--bg) calc(50% - 1px));
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Focus shows on the box itself, not as a square ring around the box and its name. */
+.field:not(:has(> span ~ span)):focus-within {
+  outline: none;
+}
+
+.field:not(:has(> span ~ span)):focus-within > span {
+  color: var(--accent);
+}
+
+.field:not(:has(> span ~ span)) > :is(input, select):focus {
+  border-color: var(--accent);
+}
+
+.field:not(:has(> span ~ span)) > :is(input, select) {
+  min-width: 100%;
+}
+
+/* An invisible name sharing a menu's cell, so the menu is as wide as its longest option could
+   be: its padding matches the menu's, with room for the arrow. */
+.select-sizer {
+  height: 0;
+  padding: 0 2.2rem 0 0.8rem;
+  border: 1px solid transparent;
+  overflow: hidden;
+  visibility: hidden;
+  white-space: nowrap;
+}
+
+input:disabled,
+select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* The quiz list's search box, with its magnifier inside, and sort menu. */
 .quiz-filters {
   flex-wrap: wrap;
@@ -697,7 +758,8 @@ input.short {
   gap: 1rem;
 }
 
-.choice {
+.choice,
+.media-box {
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 0.75rem;
@@ -705,7 +767,8 @@ input.short {
   min-width: 0;
 }
 
-.choice legend {
+.choice legend,
+.media-box legend {
   padding: 0 0.35rem;
   font-weight: 600;
 }
