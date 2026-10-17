@@ -71,8 +71,9 @@ screenshots:
     rm -rf target/e2e/data
     tools/browser/run.sh screenshots.js
 
-# Record the demo video with its voice-over, captions and transcript (needs ffmpeg). The voice is
-# chatterbox (expressive, best with an NVIDIA GPU) or kokoro (quick on any computer).
+# Record the demo videos (playing a quiz, building one, the question library) with their
+# voice-overs, captions and transcripts (needs ffmpeg). The voice is chatterbox (expressive, best
+# with an NVIDIA GPU) or kokoro (quick on any computer).
 demo-video voice="chatterbox":
     #!/usr/bin/env bash
     set -euo pipefail
@@ -91,5 +92,7 @@ demo-video voice="chatterbox":
         uvx --python 3.12 --with kokoro-onnx --with soundfile python tools/browser/voice.py kokoro ;;
       *) echo "voice must be chatterbox or kokoro" >&2; exit 1 ;;
     esac
-    rm -rf target/e2e/data
-    tools/browser/run.sh demo-video.js
+    for script in demo-video.js editor-video.js library-video.js; do
+      rm -rf target/e2e/data
+      tools/browser/run.sh "$script"
+    done

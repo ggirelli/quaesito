@@ -1,8 +1,9 @@
-"""Speaks the demo video's narration, as cheerfully as it can.
+"""Speaks the demo videos' narrations (narration/<video>.json), as cheerfully as it can.
 
-Writes out/voice/<id>.wav and out/voice/manifest.json (each line's duration in milliseconds).
-A recording in assets/voice/<id>.{wav,mp3,m4a,ogg,flac} (see planning/ASSETS.md) replaces the
-generated voice for that line. Run with uv, through `just demo-video`, which picks the engine:
+Writes out/voice/<video>/<id>.wav and out/voice/<video>/manifest.json (each line's duration in
+milliseconds), for every video or those named after the engine. A recording in
+assets/voice/<id>.{wav,mp3,m4a,ogg,flac} (see planning/ASSETS.md) replaces the generated voice for
+that line. Run with uv, through `just demo-video`, which picks the engine:
 
 - chatterbox (default): Resemble AI's Chatterbox, which can act excited. Fast on an NVIDIA GPU,
   slow on a CPU. Its model is downloaded from Hugging Face on first use.
@@ -21,6 +22,7 @@ import soundfile as sf
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
+NARRATION = HERE / "narration"
 RECORDED = ROOT / "assets" / "voice"
 OUT = HERE / "out" / "voice"
 
@@ -119,12 +121,20 @@ def main() -> None:
     engines = {"chatterbox": chatterbox, "kokoro": kokoro}
     if engine not in engines:
         sys.exit(f"unknown voice {engine!r}: use {' or '.join(engines)}")
-    OUT.mkdir(parents=True, exist_ok=True)
-    lines = json.loads((HERE / "narration.json").read_text())
+    videos = sys.argv[2:] or sorted(path.stem for path in NARRATION.glob("*.json"))
     speak = None
+    for video in videos:
+        speak = narrate(video, speak, engines[engine])
+
+
+def narrate(video: str, speak, engine):
+    """Speaks one video's lines; returns the voice, loaded on first use."""
+    out_dir = OUT / video
+    out_dir.mkdir(parents=True, exist_ok=True)
+    lines = json.loads((NARRATION / f"{video}.json").read_text())
     manifest = {}
     for line in lines:
-        out = OUT / f"{line['id']}.wav"
+        out = out_dir / f"{line['id']}.wav"
         if source := recorded(line["id"]):
             subprocess.run(
                 ["ffmpeg", "-loglevel", "error", "-y", "-i", str(source), "-ac", "1", str(out)],
@@ -134,13 +144,14 @@ def main() -> None:
             manifest[line["id"]] = round(info.frames / info.samplerate * 1000)
             print(f"{line['id']}: {manifest[line['id']]} ms (recorded: {source.name})")
             continue
-        speak = speak or engines[engine]()
+        speak = speak or engine()
         samples, rate = speak(line)
         samples = trimmed(samples, rate)
         sf.write(out, samples, rate)
         manifest[line["id"]] = round(len(samples) / rate * 1000)
-        print(f"{line['id']}: {manifest[line['id']]} ms ({engine})")
-    (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2))
+        print(f"{line['id']}: {manifest[line['id']]} ms ({engine.__name__})")
+    (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=2))
+    return speak
 
 
 if __name__ == "__main__":

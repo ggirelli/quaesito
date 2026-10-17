@@ -45,9 +45,14 @@ plugins:
 exclude_docs: |
   requirements.txt
   media/demo-transcript.md
+  media/demo-editor-transcript.md
+  media/demo-library-transcript.md
 
 extra_css:
   - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/video.js
 
 nav:
   - Home: index.md
@@ -62,7 +67,7 @@ nav:
       - Troubleshooting: troubleshooting.md
       - Configuration: configuration.md
       - Quiz file format: quiz-file-format.md
-  - Demo video: demo.md
+  - Demo videos: demo.md
   - Development: development.md
   - Question library: question-library.md
   - How it was made: how-it-was-made.md

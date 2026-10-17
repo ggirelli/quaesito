@@ -81,6 +81,72 @@
   align-items: start;
 }
 
+/* Demo videos: framed, with a play button over them until they play (javascripts/video.js). */
+.md-typeset .video-frame {
+  position: relative;
+  margin: 1rem 0;
+  border: 3px solid var(--md-accent-fg-color);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #14121f;
+  box-shadow: 0 8px 28px rgb(0 0 0 / 0.35);
+  line-height: 0;
+}
+
+.md-typeset .demo-video {
+  display: block;
+  width: 100%;
+}
+
+.md-typeset .video-play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background: var(--md-accent-fg-color);
+  box-shadow: 0 4px 20px rgb(0 0 0 / 0.5);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+/* The triangle. */
+.md-typeset .video-play::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: 1rem 0 1rem 1.7rem;
+  border-color: transparent transparent transparent #14121f;
+}
+
+.md-typeset .video-play:hover {
+  transform: scale(1.1);
+}
+
+.md-typeset .video-frame.playing .video-play {
+  display: none;
+}
+
+.md-typeset .videos .video-frame {
+  margin: 0;
+}
+
+/* Two videos side by side, one under the other on narrow screens. */
+.md-typeset .videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.md-typeset .videos figure {
+  margin: 0;
+}
+
 /* A row of phone screenshots. */
 .phones {
   display: grid;

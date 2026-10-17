@@ -13,14 +13,15 @@ drop. Shapes are drawn in off-white on violet and magenta, in deep indigo on the
 
 ### Demo video voice-over (optional)
 
-The demo video is narrated by [Chatterbox](https://github.com/resemble-ai/chatterbox), which runs
+The demo videos are narrated by [Chatterbox](https://github.com/resemble-ai/chatterbox), which runs
 locally and has an emotion setting, with each take checked by Whisper and redone if it misses
 words. It is still a model: a person, or a voice model directed line by line, would sound more
 natural.
 
-- **Files:** `assets/voice/<id>.mp3` (or `.wav`, `.m4a`, `.ogg`, `.flac`), one per line below.
+- **Files:** `assets/voice/<id>.mp3` (or `.wav`, `.m4a`, `.ogg`, `.flac`), one per line below
+  (the lines are in `tools/browser/narration/`).
   Any line without a file keeps the generated voice.
-- **Used by:** `just demo-video`, which stretches each step of the video to fit its line, mixes the
+- **Used by:** `just demo-video`, which stretches each step of the videos to fit its line, mixes the
   voice in, and writes the captions and transcript.
 - **Tool:** a voice model with emotion or audio tags, such as ElevenLabs (Eleven v3, whose audio
   tags like `[excited]` and `[laughs]` steer the delivery), or record yourself with your phone.
@@ -45,8 +46,25 @@ natural.
   | `order` | Put them in order, oldest first! Every item in the right place scores. |
   | `parts` | Several answers in one question, and this one is worth double points! |
   | `pin` | Drop a pin on the picture. The closer you get, the more you win! |
+  | `picture` | Any question can show a picture, as a clue or just for fun! |
+  | `music` | Or add a soundtrack: the clock starts with the music. Which way does this tune go? |
   | `podium` | And the winner is… drumroll, please! |
   | `outro` | Best of all, quaesito is free and open source. Grab it, and host your own quiz night! |
+  | `editor-intro` | Making a quiz is half the fun! Press New quiz, give it a name, and off you go. |
+  | `editor-question` | Type a question and its answers, then tick the right one. Everything saves as you type! |
+  | `editor-types` | Pick an answer type: true or false, typed answers, numbers, order, pins and pairs. |
+  | `editor-picture` | Add a picture, and reveal it bit by bit while the clock runs. |
+  | `editor-slide` | Slides open each round, with a title and a picture. |
+  | `editor-library` | Short on ideas? Grab questions from the library, one by one or at random! |
+  | `editor-navigate` | The strip on the side jumps anywhere in a long quiz, and the table view shows it all at once. |
+  | `editor-test` | Then test it: the big screen and two phones, side by side. Ready for quiz night! |
+  | `library-intro` | Quaesito comes with about 2,700 ready-made questions, in 14 categories. |
+  | `library-browse` | Pick a category, then a topic, to see just those questions. |
+  | `library-search` | Search them, and filter by difficulty, question type, or where they come from. |
+  | `library-edit` | Found a mistake? Fix it right here, or report it with one click. |
+  | `library-fill` | Starting a quiz? Fill it with random questions from the categories you like. |
+  | `library-save` | Your own questions can join the library too, and stay in step with your quizzes. |
+  | `library-outro` | Less time writing, more time playing. Happy quizzing! |
 
   With Eleven v3, add a tag at the start of a line to steer it, for example
   `[excited] Welcome to quaesito! …` or `[playful] Easy peasy!`.

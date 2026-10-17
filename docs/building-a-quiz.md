@@ -5,6 +5,13 @@ On the admin page, press :material-file-plus-outline: **New quiz**, type a title
 still missing. The quiz list flags quizzes that are not ready yet; search it by title, and sort it
 by last edit, newest, name or number of questions.
 
+<video controls preload="metadata" poster="../media/demo-editor-poster.webp" class="demo-video">
+  <source src="../media/demo-editor.mp4" type="video/mp4">
+  <track kind="captions" src="../media/demo-editor.vtt" srclang="en" label="English">
+</video>
+
+<small>A quiz built from scratch, narrated ([transcript](demo.md#building-a-quiz)).</small>
+
 ![The quiz editor with a multiple-choice question](screenshots/editor-choices.webp)
 
 ## Questions and slides
@@ -39,6 +46,14 @@ technology, each rated easy, medium or hard. They were written with an AI model 
 ([how](question-library.md)), but read the ones you pick before playing: a few may still be wrong.
 
 ![The admin page's Questions tab, with the library's categories on the left](screenshots/library.webp)
+
+<video controls preload="metadata" poster="../media/demo-library-poster.webp" class="demo-video">
+  <source src="../media/demo-library.mp4" type="video/mp4">
+  <track kind="captions" src="../media/demo-library.vtt" srclang="en" label="English">
+</video>
+
+<small>Browsing the library, filling a quiz at random and saving a question to it, narrated
+([transcript](demo.md#the-question-library)).</small>
 
 - **Browse it** on the admin page's **Questions** tab. Pick a category on the left to see only its
   questions; it opens onto its topics, which narrow the list further. Pick the category again to

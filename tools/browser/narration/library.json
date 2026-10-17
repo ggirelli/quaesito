@@ -1,0 +1,23 @@
+[
+  { "id": "library-intro", "caption": "About 2,700 ready-made questions",
+    "text": "Quaesito comes with about 2,700 ready-made questions, in 14 categories.",
+    "say": "Kwehzeetoh comes with about twenty-seven hundred ready-made questions, in fourteen categories!" },
+  { "id": "library-browse", "caption": "Browse by category and topic",
+    "text": "Pick a category, then a topic, to see just those questions.",
+    "say": "Pick a category, then a topic, to see just those questions." },
+  { "id": "library-search", "caption": "Search and filter",
+    "text": "Search them, and filter by difficulty, question type, or where they come from.",
+    "say": "Search them, and filter by difficulty, question type, or where they come from." },
+  { "id": "library-edit", "caption": "Edit or report a question",
+    "text": "Found a mistake? Fix it right here, or report it with one click.",
+    "say": "Found a mistake? Fix it right here, or report it with one click!" },
+  { "id": "library-fill", "caption": "Fill a new quiz at random",
+    "text": "Starting a quiz? Fill it with random questions from the categories you like.",
+    "say": "Starting a quiz? Fill it with random questions from the categories you like!" },
+  { "id": "library-save", "caption": "Save your own questions to the library",
+    "text": "Your own questions can join the library too, and stay in step with your quizzes.",
+    "say": "Your own questions can join the library too, and stay in step with your quizzes." },
+  { "id": "library-outro", "caption": "Free and open source: github.com/ggirelli/quaesito",
+    "text": "Less time writing, more time playing. Happy quizzing!",
+    "say": "Less time writing, more time playing. Happy quizzing!" }
+]

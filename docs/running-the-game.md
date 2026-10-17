@@ -11,6 +11,13 @@ colours turn with the background, so they stand out on every one. Until the
 quiz starts, teams can change their name (not to one another team has), picture and background
 under **Change your name or picture** on their phone.
 
+<video controls preload="metadata" poster="../media/demo-poster.webp" class="demo-video">
+  <source src="../media/demo.mp4" type="video/mp4">
+  <track kind="captions" src="../media/demo.vtt" srclang="en" label="English">
+</video>
+
+<small>A quiz played on the test page, narrated ([transcript](demo.md#playing-a-quiz)).</small>
+
 !!! info "How many can play"
     Each team plays from **one phone**, with as many players gathered around it as you like. A
     game takes **50 teams** unless you choose otherwise when you start it: lower it to keep a game
