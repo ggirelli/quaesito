@@ -203,7 +203,8 @@
         {
           "text": "In the same place"
         }
-      ]
+      ],
+      "explanation": "id est"
     }
   },
   {
@@ -216,7 +217,8 @@
           "answer": true
         }
       },
-      "text": "'RSVP' comes from a French phrase meaning 'please respond'."
+      "text": "'RSVP' comes from a French phrase meaning 'please respond'.",
+      "explanation": "Répondez s'il vous plaît"
     }
   },
   {
@@ -255,7 +257,8 @@
           "answer": false
         }
       },
-      "text": "'etc.' is an abbreviation of the English phrase 'and the rest'."
+      "text": "'etc.' is an abbreviation of the English phrase 'and the rest'.",
+      "explanation": "No, \"etc.\" is an abbreviation of a Latin phrase, not an English one.\nWhile it means \"and the rest\" in English, the actual letters stand for the Latin words \"et cetera.\""
     }
   },
   {
@@ -268,23 +271,8 @@
           "answer": false
         }
       },
-      "text": "'SOS' was originally chosen because it stands for 'Save Our Souls'."
-    }
-  },
-  {
-    "category": "Language & Words",
-    "topic": "Abbreviations",
-    "difficulty": 1,
-    "question": {
-      "kind": {
-        "Text": {
-          "accepted": [
-            "FAQ",
-            "FAQs"
-          ]
-        }
-      },
-      "text": "What three-letter abbreviation means 'frequently asked questions'?"
+      "text": "'SOS' was originally chosen because it stands for 'Save Our Souls'.",
+      "explanation": "No, \"SOS\" does not stand for \"Save Our Souls\"—in fact, it doesn't stand for anything at all."
     }
   },
   {
@@ -314,7 +302,8 @@
           ]
         }
       },
-      "text": "What Latin abbreviation means 'in the same place' in citations?"
+      "text": "What Latin abbreviation means 'in the same place' in citations?",
+      "explanation": "ibīdem"
     }
   },
   {
@@ -330,57 +319,6 @@
         }
       },
       "text": "What abbreviation is commonly used for 'confer', meaning compare, in academic writing?"
-    }
-  },
-  {
-    "category": "Language & Words",
-    "topic": "Abbreviations",
-    "difficulty": 1,
-    "question": {
-      "kind": {
-        "Number": {
-          "answer": 6,
-          "range": {
-            "min": 2,
-            "max": 12
-          }
-        }
-      },
-      "text": "How many letters are in the abbreviation 'UNESCO'?"
-    }
-  },
-  {
-    "category": "Language & Words",
-    "topic": "Abbreviations",
-    "difficulty": 2,
-    "question": {
-      "kind": {
-        "Number": {
-          "answer": 6,
-          "range": {
-            "min": 2,
-            "max": 12
-          }
-        }
-      },
-      "text": "How many letters are in the initialism 'UNICEF'?"
-    }
-  },
-  {
-    "category": "Language & Words",
-    "topic": "Abbreviations",
-    "difficulty": 3,
-    "question": {
-      "kind": {
-        "Number": {
-          "answer": 5,
-          "range": {
-            "min": 1,
-            "max": 10
-          }
-        }
-      },
-      "text": "How many letters are in the abbreviation 'scuba'?"
     }
   },
   {
@@ -450,6 +388,7 @@
           ]
         }
       },
+      "multiplier": 3,
       "text": "Type the expanded phrase for each abbreviation."
     }
   },

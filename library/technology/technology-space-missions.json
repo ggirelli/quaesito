@@ -239,7 +239,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Apollo 13 suffered an oxygen tank explosion in April 1970 and had to abort its Moon landing. The crew returned safely to Earth on 17 April 1970."
     }
   },
   {
@@ -363,7 +364,8 @@
             "First Space Shuttle flight"
           ]
         }
-      }
+      },
+      "explanation": "Sputnik 1 launch — 1957\nYuri Gagarin’s spaceflight — 1961 (first human in space)\nApollo 11 Moon landing — 1969\nFirst Space Shuttle flight — 1981 (Columbia, STS-1)"
     }
   },
   {
@@ -381,7 +383,8 @@
             "Curiosity"
           ]
         }
-      }
+      },
+      "explanation": "Mariner 4 — 1965 (first successful flyby of Mars)\nViking 1 — 1976 (first successful US Mars lander)\nMars Pathfinder — 1997\nCuriosity — 2012"
     }
   },
   {
@@ -486,7 +489,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The Soviet Union launched Sputnik 1 on 4 October 1957, making it the first artificial satellite to orbit Earth."
     }
   },
   {

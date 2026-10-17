@@ -211,7 +211,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The \"Success Kid\" meme was not a staged advertisement featuring a professional actor; it was a completely candid photo of an 11-month-old baby playing on the beach."
     }
   },
   {
@@ -237,7 +238,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The “Leeroy Jenkins” moment did not come from a football match; it originated entirely within the online video game World of Warcraft."
     }
   },
   {
@@ -367,7 +369,8 @@
             "Distracted Boyfriend"
           ]
         }
-      }
+      },
+      "explanation": "1. Dancing Baby (also known as \"Baby Cha-Cha\") – 1996.\n2. “All Your Base Are Belong to Us” – 2000.\n3. Nyan Cat – April 2011.\n4. Distracted Boyfriend – January 2017."
     }
   },
   {
@@ -394,7 +397,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 2
     }
   },
   {
@@ -550,7 +554,8 @@
             "Gangnam Style"
           ]
         }
-      }
+      },
+      "explanation": "1. Dancing Baby (also known as \"Baby Cha-Cha\") – 1996.\n2. Leeroy Jenkins – 2005.\n3. Rickrolling – 2007.\n4. Gangnam Style – 2012."
     }
   }
 ]

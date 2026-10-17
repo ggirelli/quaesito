@@ -280,7 +280,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "While the Olympic Games are scheduled to occur every four years, they have been completely canceled three times due to the World Wars and officially postponed once due to a global pandemic."
     }
   },
   {
@@ -420,7 +421,8 @@
             "Triathlon"
           ]
         }
-      }
+      },
+      "explanation": "1. Tennis – Debuted at the very first modern Games in 1896 (Athens, Greece).\n2. Basketball – Debuted in 1936 (Berlin, Germany), following a demonstration appearance in 1904.\n3. Judo – Debuted in 1964 (Tokyo, Japan).\n4. Triathlon – Debuted in 2000 (Sydney, Australia)."
     }
   },
   {
@@ -446,7 +448,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 2
     }
   },
   {

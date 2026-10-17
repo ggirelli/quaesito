@@ -275,7 +275,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "A bicycle with no gears is not always a fixed-gear bike; it can also be a single-speed bike, and the two operate on completely different mechanical rules."
     }
   },
   {
@@ -301,7 +302,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Drafting behind another rider significantly decreases air resistance, allowing the trailing cyclist to save a massive amount of energy."
     }
   },
   {
@@ -431,7 +433,8 @@
             "Vuelta a España"
           ]
         }
-      }
+      },
+      "explanation": "1. Paris–Roubaix – First edition held in 1896\n2. Tour de France – First edition held in 1903\n3. Giro d'Italia – First edition held in 1909\n4. Vuelta a España – First edition held in 1935"
     }
   },
   {
@@ -459,7 +462,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 2
     }
   },
   {
@@ -533,7 +537,8 @@
             "BMX freestyle"
           ]
         }
-      }
+      },
+      "explanation": "1. Track cycling – Debuted at the very first modern Games in 1896 (Athens, Greece).\n2. Mountain biking – Debuted a century later in 1996 (Atlanta, USA).\n3. BMX racing – Debuted in 2008 (Beijing, China).\n4. BMX freestyle – Debuted in 2021 (at the 2020 Tokyo Games, which were officially postponed due to the pandemic)."
     }
   },
   {

@@ -25,10 +25,11 @@ ROOT = Path(__file__).resolve().parents[2]
 SCHEMA = ROOT / "docs/schema/quiz-2.json"
 ENTRY_KEYS = {"category", "topic", "difficulty", "question"}
 # Fields a text-only library question must leave out: the library has no media, and per-question
-# timing and scoring are the host's choice.
-FORBIDDEN = {"image", "explanation_image", "explanation_audio", "audio", "image_reveal", "image_hold_secs", "multiplier", "time_limit_secs", "bonus"}
+# timing and bonuses are the host's choice. Points are set by the kind of question (see check_kind).
+FORBIDDEN = {"image", "explanation_image", "explanation_audio", "audio", "image_reveal", "image_hold_secs", "time_limit_secs", "bonus"}
 ALLOWED_KINDS = {"Choice", "TrueFalse", "Text", "Number", "Order", "Parts", "Pairs"}
 MAX_TEXT, MAX_ANSWER = 120, 40
+MAX_MULTIPLIER = 5  # src/model.rs
 
 
 def kind_of(q):
@@ -71,8 +72,11 @@ def check_kind(q, problems):
         elif len(answers) != 4:
             warn(f"{len(answers)} answers instead of 4")
         correct = sum(bool(a.get("correct")) for a in answers)
-        if correct != 1:
-            err(f"{correct} correct answers instead of 1")
+        # Teams may pick several answers, so a question can have more than one right.
+        if correct == 0:
+            err("no correct answer")
+        elif correct == len(answers):
+            err("every answer is correct")
         if len({same_key(t) for t in texts}) != len(texts):
             err("two answers are the same")
         if any(not t.strip() for t in texts):
@@ -118,6 +122,10 @@ def check_kind(q, problems):
         accepted = [{same_key(a) for a in p.get("accepted", [])} for p in parts]
         if any(accepted[i] & accepted[j] for i in range(len(accepted)) for j in range(i)):
             err("two parts accept the same answer, so typing it in both scores twice")
+    # A question asking for several typed answers is worth one question per answer.
+    points = min(len(body.get("parts", [])), MAX_MULTIPLIER) if k == "Parts" else 1
+    if q.get("multiplier", 1) != points:
+        err(f"points ×{q.get('multiplier', 1)}, should be ×{points}" + (" (one per part)" if k == "Parts" else ""))
     if k == "Pairs":
         pairs = body.get("pairs", [])
         if not 2 <= len(pairs) <= 6:

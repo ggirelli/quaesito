@@ -275,7 +275,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Classic martinis use gin, not tequila."
     }
   },
   {
@@ -403,7 +404,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 3
     }
   },
   {
@@ -570,7 +572,8 @@
             "Cosmopolitan"
           ]
         }
-      }
+      },
+      "explanation": "1. Old Fashioned — 1806.\n2. Daiquiri — 1898.\n3. Margarita — 1930s.\n4. Cosmopolitan — 1980s."
     }
   }
 ]

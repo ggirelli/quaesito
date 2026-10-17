@@ -298,7 +298,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "A tennis doubles court is wider than a singles court."
     }
   },
   {
@@ -475,7 +476,8 @@
             "Roger Federer"
           ]
         }
-      }
+      },
+      "explanation": "1. Björn Borg – Won his first title in 1976 (defeating Ilie Năstase)\n2. John McEnroe – Won his first title in 1981 (defeating Björn Borg)\n3. Pete Sampras – Won his first title in 1993 (defeating Jim Courier)\n4. Roger Federer – Won his first title in 2003 (defeating Mark Philippoussis)"
     }
   },
   {
@@ -503,7 +505,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 2
     }
   },
   {

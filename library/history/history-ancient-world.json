@@ -239,7 +239,8 @@
           "answer": false
         }
       },
-      "text": "The ancient Olympic Games were held every two years."
+      "text": "The ancient Olympic Games were held every two years.",
+      "explanation": "False — the ancient Olympic Games were held every four years, a period known as an Olympiad."
     }
   },
   {
@@ -265,7 +266,8 @@
           "answer": false
         }
       },
-      "text": "The city of Carthage was founded by ancient Greeks."
+      "text": "The city of Carthage was founded by ancient Greeks.",
+      "explanation": "False — Carthage was founded by Phoenician settlers from Tyre, in present-day Lebanon, traditionally dated to around 814 BC."
     }
   },
   {
@@ -291,7 +293,8 @@
           "answer": false
         }
       },
-      "text": "Linear B, the script used by Mycenaean Greeks, remains undeciphered."
+      "text": "Linear B, the script used by Mycenaean Greeks, remains undeciphered.",
+      "explanation": "False — Linear B was deciphered by Michael Ventris in 1952. It represents an early form of Greek used by the Mycenaean civilization."
     }
   },
   {
@@ -390,7 +393,8 @@
           ]
         }
       },
-      "text": "Put these periods in chronological order, earliest first."
+      "text": "Put these periods in chronological order, earliest first.",
+      "explanation": "Old Kingdom of Egypt — c. 2686–2181 BC\nNew Kingdom of Egypt — c. 1550–1070 BC\nClassical Athens — c. 480–323 BC\nRoman Empire begins — 27 BC, when Augustus became the first Roman emperor."
     }
   },
   {
@@ -409,7 +413,8 @@
           ]
         }
       },
-      "text": "Put these events in chronological order, earliest first."
+      "text": "Put these events in chronological order, earliest first.",
+      "explanation": "Sumerian cuneiform emerges — c. 3400–3200 BC\nGreat Pyramid of Giza built — c. 2560 BC\nCode of Hammurabi composed — c. 1754 BC\nAlexander the Great dies — 323 BC\nJulius Caesar assassinated — 44 BC"
     }
   },
   {

@@ -321,7 +321,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "A goalkeeper is strictly forbidden from handling a ball that has been deliberately kicked to them by a teammate, regardless of whether they are inside their own penalty area."
     }
   },
   {
@@ -451,7 +452,8 @@
             "Brazil"
           ]
         }
-      }
+      },
+      "explanation": "1. Uruguay – Won their first title in 1930.\n2. Italy – Won their first title in 1934.\n3. Germany – Won their first title in 1954.\n4. Brazil – Won their first title in 1958."
     }
   },
   {
@@ -497,7 +499,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 2
     }
   },
   {

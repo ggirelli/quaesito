@@ -252,7 +252,8 @@
           "answer": false
         }
       },
-      "text": "Michelangelo's David was carved from bronze."
+      "text": "Michelangelo's David was carved from bronze.",
+      "explanation": "Michelangelo's David was carved in marble, not bronze."
     }
   },
   {
@@ -278,7 +279,8 @@
           "answer": false
         }
       },
-      "text": "The Venus de Milo still has both of its original arms attached."
+      "text": "The Venus de Milo still has both of its original arms attached.",
+      "explanation": "The Venus de Milo has lost both its arms."
     }
   },
   {
@@ -388,7 +390,8 @@
           ]
         }
       },
-      "text": "Put these sculptures in chronological order, earliest first."
+      "text": "Put these sculptures in chronological order, earliest first.",
+      "explanation": "1. Laocoön and His Sons — approximately 200–40 BCE. 2. Michelangelo's David — 1501–1504. 3. The Thinker — 1880 (conceived). 4. Unique Forms of Continuity in Space — 1913."
     }
   },
   {
@@ -406,7 +409,8 @@
           ]
         }
       },
-      "text": "Put these sculptures in chronological order, earliest first."
+      "text": "Put these sculptures in chronological order, earliest first.",
+      "explanation": "1. The Dying Gaul — approximately 230–220 BCE. 2. Perseus with the Head of Medusa — 1545–1554. 3. The Kiss — 1882. 4. Bird in Space — 1923."
     }
   },
   {
@@ -434,6 +438,7 @@
           ]
         }
       },
+      "multiplier": 2,
       "text": "Name the sculptor and the work depicting six citizens offering themselves during the siege of Calais."
     }
   },

@@ -32,7 +32,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The number 2 is a prime number, and it is completely even."
     }
   },
   {
@@ -597,7 +598,8 @@
             "Emmy Noether"
           ]
         }
-      }
+      },
+      "explanation": "1. Euclid – Born c. 300 BCE (Alexandria, Egypt)\n2. Leonhard Euler – Born April 15, 1707 (Basel, Switzerland)\n3. Carl Friedrich Gauss – Born April 30, 1777 (Brunswick, Germany)\n4. Emmy Noether – Born March 23, 1882 (Erlangen, Germany)"
     }
   },
   {
@@ -623,7 +625,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 2
     }
   }
 ]

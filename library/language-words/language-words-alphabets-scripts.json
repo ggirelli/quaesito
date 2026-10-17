@@ -262,7 +262,8 @@
           "answer": false
         }
       },
-      "text": "Japanese is normally written using only the hiragana script."
+      "text": "Japanese is normally written using only the hiragana script.",
+      "explanation": "No, standard Japanese is normally written using a combination of three different scripts: Hiragana, Katakana, and Kanji."
     }
   },
   {
@@ -288,7 +289,8 @@
           "answer": false
         }
       },
-      "text": "Linear A has been fully deciphered and its language is known."
+      "text": "Linear A has been fully deciphered and its language is known.",
+      "explanation": "No, Linear A has not been fully deciphered, and the underlying Minoan language remains an unclassified mystery."
     }
   },
   {
@@ -543,7 +545,8 @@
           ]
         }
       },
-      "text": "Order these writing systems by earliest known use, earliest first."
+      "text": "Order these writing systems by earliest known use, earliest first.",
+      "explanation": "1. Cuneiform – c. 3400–3200 BC (Bronze Age Mesopotamia)\n2. Linear B – c. 1450 BC (Late Bronze Age Aegean)\n3. Phoenician alphabet – c. 1050 BC (Iron Age Levant)\n4. Latin alphabet – c. 7th century BC (Archaic Roman Period)"
     }
   },
   {
@@ -575,6 +578,7 @@
           ]
         }
       },
+      "multiplier": 3,
       "text": "Type the Greek letter that comes after each letter."
     }
   }

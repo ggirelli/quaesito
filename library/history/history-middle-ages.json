@@ -262,7 +262,8 @@
           "answer": false
         }
       },
-      "text": "The Black Death reached Europe in the 18th century."
+      "text": "The Black Death reached Europe in the 18th century.",
+      "explanation": "The Black Death originally reached Europe in 1347, not the 18th century."
     }
   },
   {
@@ -288,7 +289,8 @@
           "answer": false
         }
       },
-      "text": "The Byzantine Empire fell to the Ottomans in 1204."
+      "text": "The Byzantine Empire fell to the Ottomans in 1204.",
+      "explanation": "Constantinople was sacked and captured in 1204 by Western European Crusaders and Venetians during the Fourth Crusade, not the Ottomans."
     }
   },
   {
@@ -390,7 +392,8 @@
           ]
         }
       },
-      "text": "Put these events in chronological order, earliest first."
+      "text": "Put these events in chronological order, earliest first.",
+      "explanation": "1. Charlemagne crowned emperor — 800 AD\n2. Norman conquest of England — 1066 AD\n3. First Crusade begins — 1096 AD\n4. Black Death reaches Europe — 1347 AD"
     }
   },
   {
@@ -408,7 +411,8 @@
           ]
         }
       },
-      "text": "Put these events in chronological order, earliest first."
+      "text": "Put these events in chronological order, earliest first.",
+      "explanation": "• Magna Carta sealed – 1215\n• Battle of Bannockburn – 1314\n• Black Death reaches Europe – 1347\n• Fall of Constantinople – 1453"
     }
   },
   {

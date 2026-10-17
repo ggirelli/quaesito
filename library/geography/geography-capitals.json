@@ -298,7 +298,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Ankara"
     }
   },
   {
@@ -324,7 +325,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Bern"
     }
   },
   {
@@ -337,7 +339,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Bolivia has two capitals: Sucre, the constitutional capital, and La Paz, the seat of government."
     }
   },
   {
@@ -508,7 +511,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 4
     }
   },
   {

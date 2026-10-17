@@ -262,7 +262,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "While most wines are grape-based, some fruit wines are made from other fruits like berries or apples."
     }
   },
   {
@@ -458,7 +459,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 3
     }
   },
   {

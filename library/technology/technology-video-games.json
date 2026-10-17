@@ -275,7 +275,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The first PlayStation was originally released by Sony."
     }
   },
   {
@@ -383,7 +384,8 @@
             "GameCube"
           ]
         }
-      }
+      },
+      "explanation": "Nintendo Entertainment System (NES) — 1983 in Japan (Famicom)\nSuper Nintendo Entertainment System (SNES) — 1990 in Japan\nNintendo 64 — 1996 in Japan\nNintendo GameCube — 2001 in Japan"
     }
   },
   {
@@ -401,7 +403,8 @@
             "Street Fighter"
           ]
         }
-      }
+      },
+      "explanation": "Pong — 1972\nSpace Invaders — 1978\nPac-Man — 1980\nStreet Fighter — 1987"
     }
   },
   {
@@ -428,7 +431,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 2
     }
   },
   {

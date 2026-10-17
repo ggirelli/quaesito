@@ -160,7 +160,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The Beatles' self-titled 1968 double LP, universally known as the White Album, never officially had a colorful or illustrated front cover."
     }
   },
   {
@@ -300,7 +301,8 @@
             "Abbey Road"
           ]
         }
-      }
+      },
+      "explanation": "1. Rubber Soul – Released in 1965\n2. Revolver – Released in 1966\n3. Sgt. Pepper's Lonely Hearts Club Band – Released in 1967\n4. Abbey Road – Released in 1969"
     }
   },
   {
@@ -318,7 +320,8 @@
             "Nirvana — Nevermind"
           ]
         }
-      }
+      },
+      "explanation": "1. Elvis Presley (Elvis Presley) – Released in 1956\n2. Sgt. Pepper's Lonely Hearts Club Band (The Beatles) – Released in 1967\n3. The Dark Side of the Moon (Pink Floyd) – Released in 1973\n4. Nevermind (Nirvana) – Released in 1991"
     }
   },
   {
@@ -347,7 +350,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 2
     }
   },
   {

@@ -229,7 +229,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The Roman Republic was explicitly founded on the rejection of hereditary monarchs, and it never had an emperor during its existence."
     }
   },
   {
@@ -242,7 +243,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The European Union was officially established nearly a decade before the African Union."
     }
   },
   {
@@ -451,7 +453,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 2
     }
   },
   {

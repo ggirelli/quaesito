@@ -14,7 +14,7 @@
           "text": "Michelangelo"
         },
         {
-          "text": "Raphael"
+          "text": "Raffaello"
         },
         {
           "text": "Sandro Botticelli"
@@ -172,13 +172,13 @@
           "correct": true
         },
         {
-          "text": "Raphael"
+          "text": "Raffaello"
         },
         {
           "text": "Donatello"
         },
         {
-          "text": "Titian"
+          "text": "Tiziano"
         }
       ]
     }
@@ -262,7 +262,8 @@
           "answer": false
         }
       },
-      "text": "Edvard Munch painted The Starry Night."
+      "text": "Edvard Munch painted The Starry Night.",
+      "explanation": "It was painted by Vincent van Gogh"
     }
   },
   {
@@ -314,7 +315,8 @@
           "answer": false
         }
       },
-      "text": "Artemisia Gentileschi painted the ceiling of the Sistine Chapel."
+      "text": "Artemisia Gentileschi painted the ceiling of the Sistine Chapel.",
+      "explanation": "It was painted by Michelangelo."
     }
   },
   {
@@ -411,7 +413,8 @@
           }
         }
       },
-      "text": "How wide is Picasso's Guernica in centimetres, excluding its frame? Give the approximate figure."
+      "text": "How wide is Picasso's Guernica in centimetres, excluding its frame? Give the approximate figure.",
+      "explanation": "776.5 cm"
     }
   },
   {
@@ -498,9 +501,9 @@
     "question": {
       "kind": {
         "Number": {
-          "answer": 453,
+          "answer": 363,
           "range": {
-            "min": 363,
+            "min": 360,
             "max": 663
           }
         }

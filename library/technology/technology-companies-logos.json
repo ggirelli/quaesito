@@ -206,7 +206,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The Starbucks logo has never featured a coffee cup; instead, it has always featured a twin-tailed mermaid known as a Siren."
     }
   },
   {
@@ -232,7 +233,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The BMW logo is not a spinning propeller, and the company has officially stated its design has entirely different origins."
     }
   },
   {
@@ -361,7 +363,8 @@
             "Sony"
           ]
         }
-      }
+      },
+      "explanation": "1. Nokia – Founded in 1865 in Finland (originally starting out as a single wood-pulp mill).\n2. Nintendo – Founded in 1889 in Kyoto, Japan (originally producing handmade Hanafuda playing cards).\n3. Samsung – Founded in 1938 in Daegu, South Korea (originally trading groceries and dried fish).\n4. Sony – Founded in 1946 in Tokyo, Japan (originally starting out as an electronics and radio repair shop)."
     }
   },
   {
@@ -509,7 +512,8 @@
             "Toyota"
           ]
         }
-      }
+      },
+      "explanation": "1. Ford Motor Company – Founded on June 16, 1903 by Henry Ford.\n2. General Motors (GM) – Founded on September 16, 1908 by William C. Durant.\n3. IBM – Founded on June 16, 1911 as the Computing-Tabulating-Recording Company (CTR) before being renamed International Business Machines in 1924.\n4. Toyota – Founded on August 28, 1937 by Kiichiro Toyoda (initially starting out as a spinoff division of his father's toyoda automatic loom works)."
     }
   },
   {
@@ -541,7 +545,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 2
     }
   },
   {

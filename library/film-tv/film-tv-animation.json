@@ -163,7 +163,7 @@
   {
     "category": "Film & TV",
     "topic": "Animation",
-    "difficulty": 3,
+    "difficulty": 1,
     "question": {
       "text": "What is the name of the fictional city where Batman often operates in animated films and series?",
       "answers": [
@@ -206,7 +206,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "A panda named Po."
     }
   },
   {
@@ -385,7 +386,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 2
     }
   },
   {

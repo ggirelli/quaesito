@@ -124,7 +124,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Galileo Galilei did not invent the telescope—though he was the very first person to point it at the night sky and completely revolutionize astronomy."
     }
   },
   {
@@ -326,7 +327,8 @@
             "Marie Curie"
           ]
         }
-      }
+      },
+      "explanation": "Isaac Newton – Born January 4, 1643 (Woolsthorpe, England) (Note: Under the older Julian calendar in use at the time, his birth date was recorded as December 25, 1642).\nBenjamin Franklin – Born January 17, 1706 (Boston, Massachusetts)\nCharles Darwin – Born February 12, 1809 (Shrewsbury, England)\nMarie Curie – Born November 7, 1867 (Warsaw, Poland)"
     }
   },
   {
@@ -523,7 +525,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Albert Einstein did not win his Nobel Prize for the theory of relativity; he was explicitly awarded it for his discovery of the law of the photoelectric effect."
     }
   },
   {
@@ -599,7 +602,8 @@
             "Einstein publishes special relativity"
           ]
         }
-      }
+      },
+      "explanation": "Copernicus publishes heliocentric work (De revolutionibus orbium coelestium) – Published in 1543\nNewton publishes Principia (Philosophiae Naturalis Principia Mathematica) – Published in 1687\nDarwin publishes On the Origin of Species – Published in 1859\nEinstein publishes special relativity (during his Annus Mirabilis / Miracle Year) – Published in 1905"
     }
   },
   {
@@ -627,7 +631,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 2
     }
   }
 ]

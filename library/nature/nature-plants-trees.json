@@ -275,7 +275,8 @@
           "answer": false
         }
       },
-      "text": "Plants obtain most of their dry mass directly from the soil."
+      "text": "Plants obtain most of their dry mass directly from the soil.",
+      "explanation": "Plants actually obtain the vast majority of their dry mass directly from the air, not the soil."
     }
   },
   {
@@ -301,7 +302,8 @@
           "answer": false
         }
       },
-      "text": "All conifers keep their leaves throughout the year."
+      "text": "All conifers keep their leaves throughout the year.",
+      "explanation": "While the terms \"conifer\" and \"evergreen\" are often used interchangeably, not all conifers keep their leaves year-round; a small group of them are deciduous and drop all of their needles every autumn."
     }
   },
   {
@@ -475,6 +477,7 @@
           ]
         }
       },
+      "multiplier": 4,
       "text": "Name four common plant organs: the water-absorbing, supporting, food-making, and reproductive organs."
     }
   },

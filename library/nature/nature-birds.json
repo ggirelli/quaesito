@@ -183,7 +183,8 @@
           "answer": false
         }
       },
-      "text": "All penguin species live in the Arctic."
+      "text": "All penguin species live in the Arctic.",
+      "explanation": "No wild penguin species live in the Arctic; they are native almost exclusively to the Southern Hemisphere."
     }
   },
   {
@@ -568,6 +569,7 @@
           ]
         }
       },
+      "multiplier": 4,
       "text": "Name the flightless bird associated with each region: African savanna, Australian outback, New Zealand, and Australia/New Guinea rainforest."
     }
   },

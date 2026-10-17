@@ -382,7 +382,8 @@
             "Portugal"
           ]
         }
-      }
+      },
+      "explanation": "China, 14: Afghanistan, Bhutan, India, Kazakhstan, Kyrgyzstan, Laos, Mongolia, Myanmar, Nepal, North Korea, Pakistan, Russia, Tajikistan, and Vietnam\n\nGermany, 9: Denmark, Poland, Czechia, Austria, Switzerland, France, Luxembourg, Belgium, and the Netherlands\n\nAustria, 8: Germany, Czechia, Slovakia, Hungary, Slovenia, Italy, Switzerland, and Liechtenstein;\n\nPortugal, 1: Spain"
     }
   },
   {
@@ -442,7 +443,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 4
     }
   },
   {
@@ -565,7 +567,8 @@
         {
           "text": "Austria"
         }
-      ]
+      ],
+      "explanation": "Russia, 14: Norway, Finland, Estonia, Latvia, Lithuania, Poland, Belarus, Ukraine, Georgia, Azerbaijan, Kazakhstan, China, Mongolia, and North Korea. Note: Poland and Lithuania border Russia via the Kaliningrad exclave.\n\nFrance, 11 counting its overseas borders: Belgium, Luxembourg, Germany, Switzerland, Italy, Monaco, Spain, Andorra, Brazil, Suriname, and the Netherlands via Sint Maarten/Saint Martin.\n\nGermany, 9: Denmark, Poland, Czechia, Austria, Switzerland, France, Luxembourg, Belgium, and the Netherlands.\n\nAustria, 8: Germany, Czechia, Slovakia, Hungary, Slovenia, Italy, Switzerland, and Liechtenstein."
     }
   },
   {
@@ -588,7 +591,8 @@
         {
           "text": "Colombia"
         }
-      ]
+      ],
+      "explanation": "Brazil, 10: Argentina, Bolivia, Colombia, Guyana, Paraguay, Peru, Suriname, Uruguay, Venezuela, and France via French Guiana\n\nColombia, 5: Panama, Venezuela, Brazil, Peru, and Ecuador\n\nChile, 3: Peru, Bolivia, and Argentina\n\nEcuador, 2: Colombia and Peru"
     }
   }
 ]

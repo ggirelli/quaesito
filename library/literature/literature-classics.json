@@ -160,7 +160,8 @@
           "answer": false
         }
       },
-      "text": "Dracula was written by Mary Shelley."
+      "text": "Dracula was written by Mary Shelley.",
+      "explanation": "False. Dracula was written by Bram Stoker and published in 1897. Mary Shelley wrote Frankenstein, published in 1818."
     }
   },
   {
@@ -186,7 +187,8 @@
           "answer": false
         }
       },
-      "text": "The Canterbury Tales was written primarily in French."
+      "text": "The Canterbury Tales was written primarily in French.",
+      "explanation": "False. Geoffrey Chaucer wrote The Canterbury Tales primarily in Middle English, not French, in the late 14th century."
     }
   },
   {
@@ -282,7 +284,8 @@
           ]
         }
       },
-      "text": "Put these novels in order of first publication, earliest first."
+      "text": "Put these novels in order of first publication, earliest first.",
+      "explanation": "Pride and Prejudice — 1813, by Jane Austen\nFrankenstein — 1818, by Mary Shelley\nDracula — 1897, by Bram Stoker\nThe Great Gatsby — 1925, by F. Scott Fitzgerald"
     }
   },
   {
@@ -300,7 +303,8 @@
           ]
         }
       },
-      "text": "Put these novels in order of first publication, earliest first."
+      "text": "Put these novels in order of first publication, earliest first.",
+      "explanation": "Robinson Crusoe — 1719, by Daniel Defoe\nFrankenstein — 1818, by Mary Shelley\nJane Eyre — 1847, by Charlotte Brontë\nWar and Peace — 1869, by Leo Tolstoy"
     }
   },
   {
@@ -452,6 +456,7 @@
           ]
         }
       },
+      "multiplier": 3,
       "text": "Name one well-known novel by each of the three Brontë sisters."
     }
   }

@@ -252,7 +252,8 @@
           "answer": false
         }
       },
-      "text": "The United States entered World War I in 1914."
+      "text": "The United States entered World War I in 1914.",
+      "explanation": "The United States did not enter World War I in 1914; it entered the war in 1917."
     }
   },
   {
@@ -344,7 +345,8 @@
           ]
         }
       },
-      "text": "Put these events in chronological order, earliest first."
+      "text": "Put these events in chronological order, earliest first.",
+      "explanation": "1. Assassination at Sarajevo – 1914 (June 28)\n2. Battle of the Marne – 1914 (September 6–12)\n3. Battle of Verdun begins – 1916 (February 21)\n4. Armistice on the Western Front – 1918 (November 11)"
     }
   },
   {
@@ -556,7 +558,8 @@
           }
         }
       },
-      "text": "About how many months after the armistice was the Treaty of Versailles signed?"
+      "text": "About how many months after the armistice was the Treaty of Versailles signed?",
+      "explanation": "Approximately seven and a half months. The armistice went into effect on November 11, 1918, and the Treaty of Versailles was officially signed on June 28, 1919."
     }
   },
   {
@@ -574,7 +577,8 @@
           ]
         }
       },
-      "text": "Put these events in chronological order, earliest first."
+      "text": "Put these events in chronological order, earliest first.",
+      "explanation": "1. Lusitania is sunk – 1915 (May 7)\n2. Italy enters the war – 1915 (May 23)\n3. United States enters the war – 1917 (April 6)\n4. Armistice on the Western Front – 1918 (November 11)"
     }
   }
 ]

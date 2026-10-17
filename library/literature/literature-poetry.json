@@ -298,7 +298,8 @@
           "answer": false
         }
       },
-      "text": "The Divine Comedy was originally written in Latin."
+      "text": "The Divine Comedy was originally written in Latin.",
+      "explanation": "False. Dante wrote The Divine Comedy in Italian, specifically the Tuscan dialect, rather than Latin. This helped establish Italian as a major literary language."
     }
   },
   {
@@ -512,6 +513,7 @@
           ]
         }
       },
+      "multiplier": 3,
       "text": "Name the poet of each of these three poems."
     }
   },

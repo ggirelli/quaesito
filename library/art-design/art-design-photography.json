@@ -288,7 +288,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Higher ISO often adds noise."
     }
   },
   {
@@ -430,7 +431,8 @@
             "Diane Arbus"
           ]
         }
-      }
+      },
+      "explanation": "Julia Margaret Cameron, 1815, Alfred Stieglitz, 1864, Dorothea Lange, 1895, Diane Arbus, 1923."
     }
   },
   {
@@ -594,7 +596,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 3
     }
   }
 ]

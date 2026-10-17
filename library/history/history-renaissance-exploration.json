@@ -183,7 +183,8 @@
           "answer": false
         }
       },
-      "text": "Leonardo da Vinci painted the ceiling of the Sistine Chapel."
+      "text": "Leonardo da Vinci painted the ceiling of the Sistine Chapel.",
+      "explanation": "Michelangelo Buonarroti, not Leonardo da Vinci, painted the ceiling of the Sistine Chapel between 1508 and 1512."
     }
   },
   {
@@ -196,7 +197,8 @@
           "answer": false
         }
       },
-      "text": "Ferdinand Magellan personally completed the entire first circumnavigation of the globe."
+      "text": "Ferdinand Magellan personally completed the entire first circumnavigation of the globe.",
+      "explanation": "Magellan planned and led the 1519 Spanish expedition, but he was killed during the Battle of Mactan in the Philippines on April 27, 1521. Command of the remaining fleet passed to the Spanish navigator Juan Sebastián Elcano."
     }
   },
   {
@@ -313,7 +315,8 @@
           ]
         }
       },
-      "text": "Put these events in chronological order, earliest first."
+      "text": "Put these events in chronological order, earliest first.",
+      "explanation": "1. Gutenberg Bible printed — 1455\n2. Columbus reaches the Caribbean — 1492\n3. Vasco da Gama reaches India by sea — 1498\n4. Magellan's expedition departs — 1519"
     }
   },
   {
@@ -331,7 +334,8 @@
           ]
         }
       },
-      "text": "Put these events in chronological order, earliest first."
+      "text": "Put these events in chronological order, earliest first.",
+      "explanation": "1. Fall of Constantinople: 1453\n2. Treaty of Tordesillas: 1494\n3. Luther's 95 Theses: 1517\n4. Copernicus's major work published (De revolutionibus orbium coelestium): 1543"
     }
   },
   {

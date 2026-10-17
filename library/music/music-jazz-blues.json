@@ -579,7 +579,8 @@
             "Charlie Parker"
           ]
         }
-      }
+      },
+      "explanation": "1. Jelly Roll Morton – Born October 20, 1890 (New Orleans, Louisiana)\n2. Duke Ellington – Born April 29, 1899 (Washington, D.C.)\n3. Louis Armstrong – Born August 4, 1901 (New Orleans, Louisiana)\n4. Charlie Parker – Born August 29, 1920 (Kansas City, Kansas)"
     }
   },
   {
@@ -597,7 +598,8 @@
             "Miles Davis: Bitches Brew"
           ]
         }
-      }
+      },
+      "explanation": "1. Kind of Blue – Miles Davis (Released: August 17, 1959)\n2. The Shape of Jazz to Come – Ornette Coleman (Released: November 1959)\n3. Giant Steps – John Coltrane (Released: February 1960)\n4. Bitches Brew – Miles Davis (Released: March 30, 1970)"
     }
   },
   {
@@ -629,7 +631,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 3
     }
   }
 ]

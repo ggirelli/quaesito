@@ -142,7 +142,7 @@
     "topic": "World cuisines",
     "difficulty": 3,
     "question": {
-      "text": "Which Indonesian ingredient gives rendang much of its rich, aromatic base?",
+      "text": "Which Indonesian ingredient gives rendang much of its rich, creamy base?",
       "answers": [
         {
           "text": "Coconut milk",
@@ -390,7 +390,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 4
     }
   },
   {
@@ -531,7 +532,8 @@
             "Manchego"
           ]
         }
-      }
+      },
+      "explanation": "Feta — Greece\nGouda — Netherlands\nManchego — Spain\nParmigiano Reggiano — Italy"
     }
   }
 ]

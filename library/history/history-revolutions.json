@@ -183,7 +183,8 @@
           "answer": false
         }
       },
-      "text": "The French Revolution began in 1889."
+      "text": "The French Revolution began in 1889.",
+      "explanation": "The French Revolution actually began in 1789."
     }
   },
   {
@@ -209,7 +210,8 @@
           "answer": false
         }
       },
-      "text": "The Russian October Revolution took place in 1905."
+      "text": "The Russian October Revolution took place in 1905.",
+      "explanation": "The Russian October Revolution actually took place in 1917, not 1905."
     }
   },
   {
@@ -305,7 +307,8 @@
           ]
         }
       },
-      "text": "Put these events in chronological order, earliest first."
+      "text": "Put these events in chronological order, earliest first.",
+      "explanation": "1. American Declaration of Independence – 1776\n2. French Revolution begins – 1789\n3. Haitian independence – 1804\n4. Russian Revolution – 1917"
     }
   },
   {
@@ -323,7 +326,8 @@
           ]
         }
       },
-      "text": "Put these events in chronological order, earliest first."
+      "text": "Put these events in chronological order, earliest first.",
+      "explanation": "1. English Glorious Revolution – 1688\n2. American Declaration of Independence – 1776\n3. French Revolution begins – 1789\n4. Mexican Revolution begins – 1910"
     }
   },
   {
@@ -589,6 +593,7 @@
           ]
         }
       },
+      "multiplier": 3,
       "text": "Give the three words of the French revolutionary motto, in order."
     }
   }

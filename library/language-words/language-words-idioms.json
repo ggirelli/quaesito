@@ -288,7 +288,8 @@
           "answer": false
         }
       },
-      "text": "'To burn the midnight oil' means to get up unusually early."
+      "text": "'To burn the midnight oil' means to get up unusually early.",
+      "explanation": "No, \"to burn the midnight oil\" means the exact opposite: to stay up and work or study late into the night."
     }
   },
   {
@@ -314,7 +315,8 @@
           "answer": false
         }
       },
-      "text": "'To curry favour' originally refers to preparing a spicy curry for someone."
+      "text": "'To curry favour' originally refers to preparing a spicy curry for someone.",
+      "explanation": "No, \"to curry favour\" has absolutely nothing to do with food or preparing a spicy curry.\nThe phrase actually traces back to medieval France and is rooted in horse grooming and a satirical poem."
     }
   },
   {
@@ -362,57 +364,6 @@
         }
       },
       "text": "What idiom means to accept the consequences of your own actions?"
-    }
-  },
-  {
-    "category": "Language & Words",
-    "topic": "Idioms",
-    "difficulty": 1,
-    "question": {
-      "kind": {
-        "Number": {
-          "answer": 9,
-          "range": {
-            "min": 1,
-            "max": 20
-          }
-        }
-      },
-      "text": "In the phrase 'a stitch in time saves nine', what number is named?"
-    }
-  },
-  {
-    "category": "Language & Words",
-    "topic": "Idioms",
-    "difficulty": 2,
-    "question": {
-      "kind": {
-        "Number": {
-          "answer": 7,
-          "range": {
-            "min": 1,
-            "max": 15
-          }
-        }
-      },
-      "text": "In 'at sixes and sevens', what is the larger of the two numbers named?"
-    }
-  },
-  {
-    "category": "Language & Words",
-    "topic": "Idioms",
-    "difficulty": 3,
-    "question": {
-      "kind": {
-        "Number": {
-          "answer": 9,
-          "range": {
-            "min": 1,
-            "max": 20
-          }
-        }
-      },
-      "text": "In the idiom 'dressed to the nines', what number is named?"
     }
   },
   {
@@ -686,6 +637,7 @@
           ]
         }
       },
+      "multiplier": 3,
       "text": "Name the missing words from these three idioms."
     }
   }

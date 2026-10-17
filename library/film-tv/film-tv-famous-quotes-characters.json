@@ -222,14 +222,15 @@
   {
     "category": "Film & TV",
     "topic": "Famous quotes & characters",
-    "difficulty": 1,
+    "difficulty": 2,
     "question": {
       "kind": {
         "TrueFalse": {
           "answer": false
         }
       },
-      "text": "The line “Bond. James Bond.” was first spoken by Sean Connery in Goldfinger."
+      "text": "The line “Bond. James Bond.” was first spoken by Sean Connery in Goldfinger.",
+      "explanation": "Sean Connery first delivered the famous line, “Bond. James Bond.” in the very first James Bond film, Dr. No (1962), while introducing himself to Sylvia Trench at the baccarat table."
     }
   },
   {
@@ -372,7 +373,8 @@
           ]
         }
       },
-      "text": "Put these films in order of original US release, earliest first."
+      "text": "Put these films in order of original US release, earliest first.",
+      "explanation": "The Godfather – 1972\nJaws – 1975\nStar Wars (Episode IV: A New Hope) – 1977\nRaiders of the Lost Ark – 1981"
     }
   },
   {
@@ -390,7 +392,8 @@
           ]
         }
       },
-      "text": "Put these James Bond films in order of original UK release, earliest first."
+      "text": "Put these James Bond films in order of original UK release, earliest first.",
+      "explanation": "Dr. No – 1962\nGoldfinger – 1964\nLive and Let Die – 1973\nGoldenEye – 1995"
     }
   },
   {
@@ -617,7 +620,8 @@
           ]
         }
       },
-      "text": "Identify the actor, character and film for the famous “I'm gonna make him an offer” line."
+      "text": "Identify the actor, character and film for the famous “I'm gonna make him an offer” line.",
+      "multiplier": 3
     }
   }
 ]

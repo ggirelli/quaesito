@@ -285,7 +285,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The World Wide Web was actually invented at CERN (the European Organization for Nuclear Research) in Switzerland, not Xerox PARC."
     }
   },
   {
@@ -311,7 +312,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The original IBM PC did not launch with a 32-bit processor; it launched with a hybrid 8-bit/16-bit processor."
     }
   },
   {
@@ -460,7 +462,8 @@
             "World Wide Web proposed"
           ]
         }
-      }
+      },
+      "explanation": "UNIX created — 1969\nC language developed — 1972\nARPANET adopts TCP/IP — 1983\nWorld Wide Web proposed — 1989, by Tim Berners-Lee"
     }
   },
   {
@@ -478,7 +481,8 @@
             "CD-ROM"
           ]
         }
-      }
+      },
+      "explanation": "Punch card — 1890 (used for data processing in the US Census)\nMagnetic tape — 1928 (invented by Fritz Pfleumer; adopted for computer storage in the 1950s)\nFloppy disk — 1971 (introduced by IBM)\nCD-ROM — 1985 (standardised for computer data storage)"
     }
   },
   {
@@ -579,7 +583,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 2
     }
   },
   {

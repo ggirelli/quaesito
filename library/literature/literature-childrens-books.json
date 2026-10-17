@@ -275,7 +275,8 @@
           "answer": false
         }
       },
-      "text": "The Cat in the Hat was written by Maurice Sendak."
+      "text": "The Cat in the Hat was written by Maurice Sendak.",
+      "explanation": "No, The Cat in the Hat was not written by Maurice Sendak; it was written and illustrated by Theodor Geisel under his famous pen name, Dr. Seuss."
     }
   },
   {
@@ -301,7 +302,8 @@
           "answer": false
         }
       },
-      "text": "Anne of Green Gables is set mainly in Australia."
+      "text": "Anne of Green Gables is set mainly in Australia.",
+      "explanation": "No, Anne of Green Gables is set in Canada, not Australia."
     }
   },
   {
@@ -411,7 +413,8 @@
           }
         }
       },
-      "text": "How many books are in the original Harry Potter series?"
+      "text": "How many books are in the original Harry Potter series?",
+      "explanation": "1. Harry Potter and the Philosopher's Stone – 1997\n2. Harry Potter and the Chamber of Secrets – 1998\n3. Harry Potter and the Prisoner of Azkaban – 1999\n4. Harry Potter and the Goblet of Fire – 2000\n5. Harry Potter and the Order of the Phoenix – 2003\n6. Harry Potter and the Half-Blood Prince – 2005\n7. Harry Potter and the Deathly Hallows – 2007"
     }
   },
   {
@@ -429,7 +432,8 @@
           ]
         }
       },
-      "text": "Put these children's fantasy novels in order of first publication, earliest first."
+      "text": "Put these children's fantasy novels in order of first publication, earliest first.",
+      "explanation": "1. The Hobbit – 1937\n2. The Lion, the Witch and the Wardrobe – 1950\n3. Charlie and the Chocolate Factory – 1964\n4. Harry Potter and the Philosopher's Stone – 1997"
     }
   },
   {
@@ -447,7 +451,8 @@
           ]
         }
       },
-      "text": "Put these children's classics in order of first publication, earliest first."
+      "text": "Put these children's classics in order of first publication, earliest first.",
+      "explanation": "1. Alice's Adventures in Wonderland – 1865\n2. The Wonderful Wizard of Oz – 1900\n3. The Hobbit – 1937\n4. The Little Prince (Le Petit Prince) – 1943"
     }
   },
   {
@@ -483,6 +488,7 @@
           ]
         }
       },
+      "multiplier": 3,
       "text": "Name the author of each of these children's classics."
     }
   },

@@ -298,7 +298,8 @@
           "answer": false
         }
       },
-      "text": "The detective Sam Spade was created by Raymond Chandler."
+      "text": "The detective Sam Spade was created by Raymond Chandler.",
+      "explanation": "False. Sam Spade was created by Dashiell Hammett, appearing in his 1930 novel The Maltese Falcon. Raymond Chandler created the detective Philip Marlowe."
     }
   },
   {
@@ -311,7 +312,8 @@
           "answer": false
         }
       },
-      "text": "The fictional detective Hercule Poirot is English."
+      "text": "The fictional detective Hercule Poirot is English.",
+      "explanation": "False. Hercule Poirot is Belgian, not English. Agatha Christie created him, and he is a former Belgian police officer."
     }
   },
   {
@@ -426,7 +428,8 @@
           ]
         }
       },
-      "text": "Put these mystery novels in order of first publication, earliest first."
+      "text": "Put these mystery novels in order of first publication, earliest first.",
+      "explanation": "The Moonstone — 1868, by Wilkie Collins\nThe Hound of the Baskervilles — 1901–1902 (serialised; published as a book in 1902), by Arthur Conan Doyle\nThe Maltese Falcon — 1930, by Dashiell Hammett\nThe Name of the Rose — 1980, by Umberto Eco"
     }
   },
   {
@@ -444,7 +447,8 @@
           ]
         }
       },
-      "text": "Put these detective or mystery works in order of first publication, earliest first."
+      "text": "Put these detective or mystery works in order of first publication, earliest first.",
+      "explanation": "The Murders in the Rue Morgue — 1841, by Edgar Allan Poe\nThe Moonstone — 1868, by Wilkie Collins\nThe Big Sleep — 1939, by Raymond Chandler\nThe Name of the Rose — 1980, by Umberto Eco"
     }
   },
   {
@@ -575,6 +579,7 @@
           ]
         }
       },
+      "multiplier": 3,
       "text": "Name the famous detective associated with each of these three authors: Christie, Doyle and Sayers."
     }
   }

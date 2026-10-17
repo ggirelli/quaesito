@@ -298,7 +298,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "In rugby union, a conversion kick after a try is worth two points, not three."
     }
   },
   {
@@ -324,7 +325,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "The Six Nations Championship has never included South Africa; it is strictly a northern hemisphere tournament featuring six European rugby nations."
     }
   },
   {
@@ -481,7 +483,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 2
     }
   },
   {
@@ -607,7 +610,8 @@
             "First men's T20 World Cup"
           ]
         }
-      }
+      },
+      "explanation": "1. First men's Test match – Played in 1877 (between Australia and England at the Melbourne Cricket Ground).\n2. First women's Cricket World Cup – Held in 1973 in England (notably staging its inaugural tournament two years before the men's version).\n3. First men's ODI World Cup – Held in 1975 in England (officially known as the Prudential Cup).\n4. First men's T20 World Cup – Held in 2007 in South Africa (inaugural tournament won by India)."
     }
   }
 ]

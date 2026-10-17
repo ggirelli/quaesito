@@ -298,7 +298,8 @@
           "answer": false
         }
       },
-      "text": "Spiders are insects."
+      "text": "Spiders are insects.",
+      "explanation": "Spiders are aracnids."
     }
   },
   {
@@ -324,7 +325,8 @@
           "answer": false
         }
       },
-      "text": "All bees live in large colonies with a queen."
+      "text": "All bees live in large colonies with a queen.",
+      "explanation": "The vast majority of bee species do not live in colonies at all—they are completely solitary creatures."
     }
   },
   {
@@ -450,6 +452,7 @@
           ]
         }
       },
+      "multiplier": 4,
       "text": "Name four insect groups with social species that live in colonies with division of labour."
     }
   },

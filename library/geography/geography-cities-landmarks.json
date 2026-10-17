@@ -249,7 +249,8 @@
         {
           "text": "Yangon"
         }
-      ]
+      ],
+      "explanation": "In Cambodia."
     }
   },
   {
@@ -298,7 +299,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "It was actually a gift from France."
     }
   },
   {
@@ -324,7 +326,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "In Dubai."
     }
   },
   {
@@ -454,7 +457,8 @@
             "Eiffel Tower"
           ]
         }
-      }
+      },
+      "explanation": "Great Pyramid of Giza, around 2560 BCE\nParthenon 432 BCE\nColosseum 80 CE\nEiffel Tower 1889"
     }
   },
   {
@@ -481,7 +485,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 2
     }
   },
   {

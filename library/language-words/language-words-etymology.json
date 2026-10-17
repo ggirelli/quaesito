@@ -178,7 +178,8 @@
           "answer": false
         }
       },
-      "text": "The word “hamburger” was originally named after ham."
+      "text": "The word “hamburger” was originally named after ham.",
+      "explanation": "It was originally named after Hamburg, Germany, the country's second-largest city."
     }
   },
   {
@@ -204,7 +205,8 @@
           "answer": false
         }
       },
-      "text": "“Avocado” comes from a Spanish word meaning “little pear.”"
+      "text": "“Avocado” comes from a Spanish word meaning “little pear.”",
+      "explanation": "The Aztec Origin: The fruit originally comes from Mexico and Central America, where the Aztecs called it āhuacatl. While the literal base meaning of the word was simply the fruit itself, the Aztecs frequently used it as a slang term or euphemism for \"testicle\" due to the fruit's shape, hanging growth habit on trees, and perceived aphrodisiac qualities."
     }
   },
   {
@@ -332,7 +334,8 @@
           ]
         }
       },
-      "text": "Put these words in order of entering English, earliest first."
+      "text": "Put these words in order of entering English, earliest first.",
+      "explanation": "1. sandwich – 1762\n2. kindergarten – 1852\n3. boycott – 1880\n4. robot – 1922"
     }
   },
   {
@@ -364,6 +367,7 @@
           ]
         }
       },
+      "multiplier": 3,
       "text": "Complete the origin story of “robot”: give the source word, its language, and the play’s abbreviation."
     }
   },

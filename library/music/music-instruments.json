@@ -252,7 +252,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "A standard ukulele usually has four strings."
     }
   },
   {
@@ -265,7 +266,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "A piccolo sounds an octave higher than a concert flute."
     }
   },
   {
@@ -615,7 +617,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 3
     }
   }
 ]

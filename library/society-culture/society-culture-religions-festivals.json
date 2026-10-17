@@ -206,7 +206,8 @@
         "TrueFalse": {
           "answer": false
         }
-      }
+      },
+      "explanation": "Buddhism actually originated in ancient India, not Japan."
     }
   },
   {
@@ -524,7 +525,8 @@
             }
           ]
         }
-      }
+      },
+      "multiplier": 2
     }
   }
 ]
