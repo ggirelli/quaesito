@@ -73,6 +73,16 @@ impl LibraryEntry {
         }
     }
 
+    /// The question as added to a quiz: it keeps the category and topic it comes from.
+    #[must_use]
+    pub fn to_question(&self) -> Question {
+        Question {
+            category: self.category.clone(),
+            topic: self.topic.clone(),
+            ..self.question.clone()
+        }
+    }
+
     /// The right answer in one line, to judge a question at a glance.
     #[must_use]
     pub fn answer(&self) -> String {
@@ -263,7 +273,7 @@ pub fn random_quiz(
         questions.extend(
             sample(&pool, *count, &mut random)
                 .into_iter()
-                .map(|e| e.question.clone()),
+                .map(LibraryEntry::to_question),
         );
     }
     questions
@@ -439,5 +449,9 @@ mod tests {
             matches!(&questions[2].kind, QuestionKind::Slide { title, .. } if title == "Geography")
         );
         assert_eq!(questions.len(), 4);
+        assert_eq!(
+            (questions[3].category.as_str(), questions[3].topic.as_str()),
+            ("Geography", "Topic")
+        );
     }
 }

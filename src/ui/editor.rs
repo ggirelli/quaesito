@@ -1023,6 +1023,13 @@ fn QuestionCard(
                         value: "{question.passage}",
                         oninput: move |e| draft.edit_question(index, |q| q.passage = e.value()),
                     }
+                    if !standalone {
+                        SubjectEditor {
+                            question: index,
+                            category: question.category.clone(),
+                            topic: question.topic.clone(),
+                        }
+                    }
                 }
                 div { class: "question-media row",
                     if let Some(image) = &question.image {
@@ -1263,6 +1270,62 @@ fn QuestionCard(
                     text: question.explanation.clone(),
                     image: question.explanation_image.clone(),
                     audio: question.explanation_audio.clone(),
+                }
+            }
+        }
+    }
+}
+
+/// The category and topic the big screen shows with a question, suggesting those the quiz uses.
+#[component]
+fn SubjectEditor(question: usize, category: String, topic: String) -> Element {
+    let draft: Draft = use_context();
+    let mut categories = Vec::new();
+    let mut topics = Vec::new();
+    for q in &draft.quiz.read().questions {
+        let used = q.category.trim();
+        if !used.is_empty() && !categories.contains(&used.to_owned()) {
+            categories.push(used.to_owned());
+        }
+        let used = q.topic.trim();
+        if !used.is_empty()
+            && q.category.trim() == category.trim()
+            && !topics.contains(&used.to_owned())
+        {
+            topics.push(used.to_owned());
+        }
+    }
+    categories.sort();
+    topics.sort();
+    rsx! {
+        div { class: "question-subject-edit row",
+            title: "Shown on the big screen with the question",
+            label { class: "field inline",
+                span { "Category" }
+                input {
+                    list: "categories-{question}",
+                    placeholder: "e.g. Geography",
+                    value: "{category}",
+                    oninput: move |e| draft.edit_question(question, |q| q.category = e.value()),
+                }
+                datalist { id: "categories-{question}",
+                    for name in categories {
+                        option { value: "{name}" }
+                    }
+                }
+            }
+            label { class: "field inline",
+                span { "Topic" }
+                input {
+                    list: "topics-{question}",
+                    placeholder: "e.g. Capitals",
+                    value: "{topic}",
+                    oninput: move |e| draft.edit_question(question, |q| q.topic = e.value()),
+                }
+                datalist { id: "topics-{question}",
+                    for name in topics {
+                        option { value: "{name}" }
+                    }
                 }
             }
         }

@@ -186,7 +186,7 @@ pub fn LibraryBrowser(
         .collect();
     let picks = random_count().min(new.len());
     let add_random = {
-        let questions: Vec<Question> = new.iter().map(|e| e.question.clone()).collect();
+        let questions: Vec<Question> = new.iter().map(|e| e.to_question()).collect();
         move |_| {
             if let Some(on_add) = on_add {
                 on_add.call(crate::library::sample(
@@ -426,7 +426,7 @@ fn LibraryRow(
     on_add: Option<EventHandler<Vec<Question>>>,
     on_edit: EventHandler<LibraryEntry>,
 ) -> Element {
-    let question = entry.question.clone();
+    let question = entry.to_question();
     let edited = entry.clone();
     let (icon, color) = category_look(&entry.category);
     rsx! {

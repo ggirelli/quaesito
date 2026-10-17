@@ -44,11 +44,18 @@ technology, each rated easy, medium or hard. They were written with an AI model 
   to one difficulty, and open each category with a title slide.
 
 Once added, a question is yours like any other: edit it, add a picture, or change its time limit
-and points.
+and points. It keeps the category and topic it comes from, which the big screen shows with it.
 
 To fix or change a question in the library itself, use its **edit** link: the question opens in a
 pop-up like the editor's, with its difficulty. Your changes are kept on this server only and the
 question is marked *edited*; **Back to the original** undoes them.
+
+## Category and topic
+
+Under the question, **Category** and **Topic** say what it is about, say *Geography* and
+*Capitals*. Both are optional; the big screen shows them next to the question number. They suggest
+the categories the quiz already uses, and the topics of the category you typed. Questions from the
+library come with theirs filled in.
 
 ## Text with the question
 

@@ -830,6 +830,9 @@ fn QuestionHeader(question: QuestionInfo, children: Element) -> Element {
                 if question.multiplier > 1 {
                     span { class: "multiplier", "×{question.multiplier} points" }
                 }
+                if !question.subject.is_empty() {
+                    span { class: "question-subject", "{question.subject}" }
+                }
             }
             {children}
         }

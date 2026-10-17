@@ -1421,6 +1421,17 @@ table.results {
   font-weight: 800;
 }
 
+/* The question's category and topic, next to its number on the big screen. */
+.question-subject {
+  margin-left: 0.8em;
+  padding: 0.1em 0.6em;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--fg);
+  font-weight: 600;
+}
+
 .question-head {
   display: flex;
   align-items: center;

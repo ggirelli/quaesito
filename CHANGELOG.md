@@ -22,6 +22,9 @@ All notable changes to quaesito are listed here. The format follows
 - Questions can hold a text, a picture or a video that the big screen shows only with the answer: an explanation, a
   fun fact (**＋ Add something to show with the answer** in the editor), and a soundtrack it plays then. Quiz files move to format 2 for it; older
   versions ask before importing them and would leave it out.
+- Questions can say what they are about: a category and a topic, shown on the big screen next to the question
+  number. Questions added from the library keep theirs, and the editor's **Category** and **Topic** fields set them
+  for any question.
 
 ### Changed
 
