@@ -1416,9 +1416,11 @@ impl Game {
     fn explanation(&self, index: usize) -> Option<Explanation> {
         let question = &self.quiz.questions[index];
         let text = question.explanation.trim();
-        (!text.is_empty() || question.explanation_image.is_some()).then(|| Explanation {
+        let media = question.explanation_image.is_some() || question.explanation_audio.is_some();
+        (!text.is_empty() || media).then(|| Explanation {
             text: text.to_owned(),
             image: question.explanation_image.clone(),
+            audio: question.explanation_audio.clone(),
         })
     }
 
@@ -2209,6 +2211,7 @@ mod tests {
             passage: String::new(),
             explanation: String::new(),
             explanation_image: None,
+            explanation_audio: None,
         };
         Quiz {
             settings,
@@ -3143,6 +3146,7 @@ mod tests {
             });
             quiz.questions[0].explanation = " Saturn has 274.\n".to_owned();
             quiz.questions[0].explanation_image = Some("rings.jpg".to_owned());
+            quiz.questions[0].explanation_audio = Some("fanfare.mp3".to_owned());
             quiz.questions[1].explanation = "  ".to_owned();
             let mut g = Game::new("123456".to_owned(), quiz).unwrap();
             join(&mut g, "Owls");
@@ -3151,6 +3155,7 @@ mod tests {
         let shown = Some(Explanation {
             text: "Saturn has 274.".to_owned(),
             image: Some("rings.jpg".to_owned()),
+            audio: Some("fanfare.mp3".to_owned()),
         });
 
         let mut g = explained(RevealMode::AfterEachQuestion);
@@ -3165,7 +3170,7 @@ mod tests {
         let HostPhase::Closed { explanation, .. } = g.host_view(t0).phase else {
             panic!("not closed");
         };
-        assert_eq!(explanation, None, "blank text and no picture");
+        assert_eq!(explanation, None, "blank text and no media");
 
         let mut g = explained(RevealMode::AtEnd);
         g.next(t0).unwrap(); // question one

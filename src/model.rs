@@ -176,6 +176,7 @@ impl Quiz {
         for question in &self.questions {
             names.extend(question.image.iter().cloned());
             names.extend(question.explanation_image.iter().cloned());
+            names.extend(question.explanation_audio.iter().cloned());
             names.extend(question.audio.iter().cloned());
             names.extend(question.answers.iter().filter_map(|a| a.image.clone()));
             match &question.kind {
@@ -205,6 +206,7 @@ impl Quiz {
         for question in &mut self.questions {
             apply(&mut question.image);
             apply(&mut question.explanation_image);
+            apply(&mut question.explanation_audio);
             apply(&mut question.audio);
             for answer in &mut question.answers {
                 apply(&mut answer.image);
@@ -380,6 +382,9 @@ pub struct Question {
     /// Name of an uploaded picture or video shown with the [`Question::explanation`].
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub explanation_image: Option<String>,
+    /// Name of an uploaded soundtrack the big screen plays once the answer is revealed.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub explanation_audio: Option<String>,
 }
 
 /// A bonus question: teams type its answer together with the main answer, and the judge can
@@ -1061,6 +1066,7 @@ mod tests {
             passage: String::new(),
             explanation: String::new(),
             explanation_image: None,
+            explanation_audio: None,
         }
     }
 
@@ -1327,6 +1333,7 @@ mod tests {
         quiz.questions[0].audio = Some("s.mp3".to_owned());
         quiz.questions[0].answers[1].image = Some("a.jpg".to_owned());
         quiz.questions[0].explanation_image = Some("e.mp4".to_owned());
+        quiz.questions[0].explanation_audio = Some("f.mp3".to_owned());
         quiz.questions.push(Question {
             image: Some("q.jpg".to_owned()),
             ..Question::slide()
@@ -1340,7 +1347,9 @@ mod tests {
         });
         assert_eq!(
             quiz.media(),
-            ["a.jpg", "e.mp4", "l.jpg", "q.jpg", "r.jpg", "s.mp3"]
+            [
+                "a.jpg", "e.mp4", "f.mp3", "l.jpg", "q.jpg", "r.jpg", "s.mp3"
+            ]
         );
         quiz.rename_media(|name| (name != "s.mp3").then(|| format!("new-{name}")));
         assert_eq!(
@@ -1348,6 +1357,7 @@ mod tests {
             [
                 "new-a.jpg",
                 "new-e.mp4",
+                "new-f.mp3",
                 "new-l.jpg",
                 "new-q.jpg",
                 "new-r.jpg"

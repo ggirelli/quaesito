@@ -661,7 +661,12 @@ fn BonusEditor(question: usize, bonus: Option<Bonus>) -> Element {
 
 /// What the big screen shows only once the answer is revealed: a text, a picture or a video.
 #[component]
-fn ExplanationEditor(question: usize, text: String, image: Option<String>) -> Element {
+fn ExplanationEditor(
+    question: usize,
+    text: String,
+    image: Option<String>,
+    audio: Option<String>,
+) -> Element {
     let draft: Draft = use_context();
     let token: AdminToken = use_context();
     let limits: Limits = use_context();
@@ -684,11 +689,28 @@ fn ExplanationEditor(question: usize, text: String, image: Option<String>) -> El
         }
         uploading.set(false);
     };
-    if text.is_empty() && image.is_none() && !opened() {
+    let mut uploading_audio = use_signal(|| false);
+    let upload_audio = move |evt: FormEvent| async move {
+        let Some(file) = evt.files().into_iter().next() else {
+            return;
+        };
+        if let Some(error) = too_large(&file, limits.get().map(|l| l.audio), "soundtrack") {
+            upload_error.set(Some(error));
+            return;
+        }
+        uploading_audio.set(true);
+        upload_error.set(None);
+        match upload_question_audio(token.get(), file.into()).await {
+            Ok(name) => draft.edit_question(question, |q| q.explanation_audio = Some(name)),
+            Err(err) => upload_error.set(Some(message(&err))),
+        }
+        uploading_audio.set(false);
+    };
+    if text.is_empty() && image.is_none() && audio.is_none() && !opened() {
         return rsx! {
             button {
                 class: "button ghost add-bonus",
-                title: "An explanation, a fun fact or a picture, shown on the big screen with the answer",
+                title: "An explanation, a fun fact, a picture or a soundtrack, shown on the big screen with the answer",
                 onclick: move |_| opened.set(true),
                 "＋ Add something to show with the answer"
             }
@@ -734,6 +756,31 @@ fn ExplanationEditor(question: usize, text: String, image: Option<String>) -> El
                         }
                     }
                 }
+                if let Some(audio) = &audio {
+                    Icon { kind: IconKind::Music }
+                    audio {
+                        class: "audio-preview",
+                        src: media_url(audio),
+                        preload: "metadata",
+                        controls: true,
+                    }
+                    button {
+                        class: "button ghost",
+                        onclick: move |_| draft.edit_question(question, |q| q.explanation_audio = None),
+                        "Remove soundtrack"
+                    }
+                } else {
+                    label { class: "button ghost",
+                        title: "Music or a sound the big screen plays as it shows the answer",
+                        if uploading_audio() { "Uploading…" } else { "＋ Add soundtrack" }
+                        input {
+                            r#type: "file",
+                            accept: "audio/*",
+                            class: "visually-hidden",
+                            onchange: upload_audio,
+                        }
+                    }
+                }
                 span { class: "grow" }
                 button {
                     class: "button ghost",
@@ -742,6 +789,7 @@ fn ExplanationEditor(question: usize, text: String, image: Option<String>) -> El
                         draft.edit_question(question, |q| {
                             q.explanation.clear();
                             q.explanation_image = None;
+                            q.explanation_audio = None;
                         });
                     },
                     "Remove"
@@ -1214,6 +1262,7 @@ fn QuestionCard(
                     question: index,
                     text: question.explanation.clone(),
                     image: question.explanation_image.clone(),
+                    audio: question.explanation_audio.clone(),
                 }
             }
         }

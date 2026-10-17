@@ -65,7 +65,7 @@ version stays published next to the others:
 | Format | Since | What it added |
 | ------ | ----- | ------------- |
 | [1](schema/quiz-1.json) | 0.4 | the first published format |
-| [2](schema/quiz-2.json) | 0.5 | what a question shows with its answer (`explanation`, `explanation_image`) |
+| [2](schema/quiz-2.json) | 0.5 | what a question shows with its answer (`explanation`, `explanation_image`, `explanation_audio`) |
 
 When you import a quiz made with a newer version, Quaesito asks before importing it and says what
 it cannot read. Questions of kinds it does not know would be left out; **Import without them**

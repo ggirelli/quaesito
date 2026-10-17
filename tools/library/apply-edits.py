@@ -26,6 +26,7 @@ LIBRARY = ROOT / "library"
 UNFIT = {
     "image": "a picture",
     "explanation_image": "a picture shown with its answer",
+    "explanation_audio": "a soundtrack played with its answer",
     "audio": "a soundtrack",
     "time_limit_secs": "its own time limit",
     "multiplier": "its own points",
