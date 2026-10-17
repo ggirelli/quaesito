@@ -934,22 +934,179 @@ input.short {
   gap: 0.6rem;
 }
 
+.editor-shuffle {
+  height: calc(100vh - 6rem);
+}
+
+.editor-tools {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* Every question and slide as a link. The editor's script sizes them so the strip always fits:
+   open around the cards on screen and around the pointer, thin bars elsewhere. Thin bars keep the
+   colours that matter: lit on screen, accent at the top of the list, red with a problem. */
+.editor-nav {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.editor-nav a {
+  position: relative;
+  flex: 0 0 auto;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0 0.5rem;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--border);
+  color: transparent;
+  font-size: 0.8rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: flex-basis 0.15s ease, background-color 0.15s ease;
+}
+
+.editor-nav a.slide {
+  background: var(--muted);
+}
+
+.editor-nav a[data-visible] {
+  background: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.editor-nav a[aria-current] {
+  background: var(--accent);
+}
+
+.editor-nav a.flagged {
+  background: var(--danger);
+}
+
+.editor-nav a[data-open] {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+}
+
+.editor-nav a[data-open].slide {
+  border-style: dashed;
+}
+
+.editor-nav a[data-open][data-visible] {
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  color: var(--fg);
+}
+
+.editor-nav a[data-open][aria-current] {
+  border-color: var(--accent);
+  color: var(--accent-text);
+  font-weight: 700;
+}
+
+.editor-nav a[data-open]:hover {
+  border-color: var(--accent);
+}
+
+.editor-nav a[data-open].flagged::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--danger);
+}
+
+.editor-nav .nav-number {
+  flex: none;
+  min-width: 1.6rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.editor-nav .nav-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @media (max-width: 1300px) {
   .page.editor {
     max-width: 1000px;
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       "top"
-      "list"
+      "nav"
       "add"
-      "shuffle";
+      "shuffle"
+      "list";
   }
 
-  .editor-side {
-    position: static;
+  /* The navigator lies across the top of the list, and the side buttons in two rows under it, all
+     held under the header as the list scrolls. The navigator's borders, not padding, keep it
+     clear of the cards: the script sizes the links from the space inside them. */
+  .editor-side,
+  .editor-tools {
     flex-direction: row;
     flex-wrap: wrap;
+    align-content: center;
+    gap: 0.4rem;
+  }
+
+  .editor-add,
+  .editor-tools {
+    position: sticky;
+    top: calc(var(--topbar-height, 4rem) + 2.8rem);
+    z-index: 4;
+    align-self: stretch;
     justify-content: center;
+    margin-top: -1rem;
+    padding-block: 0.2rem;
+    background: var(--bg);
+  }
+
+  .editor-tools {
+    grid-area: shuffle;
+    top: calc(var(--topbar-height, 4rem) + 2.8rem + var(--editor-add-height, 3rem));
+  }
+
+  .editor-shuffle {
+    display: contents;
+  }
+
+  .editor-nav {
+    grid-area: nav;
+    position: sticky;
+    top: var(--topbar-height, 4rem);
+    z-index: 4;
+    flex-direction: row;
+    height: calc(2rem + 0.8rem);
+    border-block: 0.4rem solid var(--bg);
+    background: var(--bg);
+  }
+
+  .editor-nav a {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .editor-nav .nav-text {
+    display: none;
+  }
+
+  .editor-nav .nav-number {
+    min-width: 0;
   }
 
 }
