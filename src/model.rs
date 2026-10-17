@@ -585,6 +585,20 @@ fn pair_problems(pairs: &[Pair]) -> Vec<String> {
 }
 
 /// What is missing from a closest-number question: its answer, and a sensible range around it.
+fn typed_problems(accepted: &[Spellings], wanted: usize) -> Vec<String> {
+    let mut problems = Vec::new();
+    let answers = accepted.iter().filter(|a| !a.is_blank()).count();
+    if answers == 0 {
+        problems.push("Add at least one accepted answer.".to_owned());
+    } else if wanted > 1 && answers < wanted {
+        problems.push(format!("Accept at least {wanted} different answers."));
+    }
+    if !(1..=MAX_WANTED).contains(&wanted) {
+        problems.push(format!("Ask for between 1 and {MAX_WANTED} answers."));
+    }
+    problems
+}
+
 fn number_problems(answer: Option<f64>, range: Option<NumberRange>) -> Vec<String> {
     let mut problems = Vec::new();
     if !answer.is_some_and(f64::is_finite) {
@@ -631,6 +645,80 @@ impl NumberRange {
 pub const MIN_PARTS: usize = 2;
 /// Most parts a several-answers question has.
 pub const MAX_PARTS: usize = 8;
+/// Most different answers a typed-answer question can ask for.
+pub const MAX_WANTED: usize = MAX_PARTS;
+
+/// One accepted answer of a typed-answer question: its spellings ("ant", "ants"), all worth the
+/// same.
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(from = "SpellingsFile", into = "SpellingsFile")]
+pub struct Spellings(pub Vec<String>);
+
+impl Spellings {
+    /// Whether the answer has no spelling but blanks.
+    #[must_use]
+    pub fn is_blank(&self) -> bool {
+        self.0.iter().all(|s| s.trim().is_empty())
+    }
+}
+
+impl From<&str> for Spellings {
+    fn from(text: &str) -> Self {
+        Self(vec![text.to_owned()])
+    }
+}
+
+/// An accepted answer as files hold it: a plain string when it has one spelling, else the list
+/// of its spellings.
+#[derive(Serialize, Deserialize)]
+#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[serde(untagged)]
+enum SpellingsFile {
+    One(String),
+    Several(Vec<String>),
+}
+
+impl From<SpellingsFile> for Spellings {
+    fn from(file: SpellingsFile) -> Self {
+        match file {
+            SpellingsFile::One(text) => Self(vec![text]),
+            SpellingsFile::Several(texts) => Self(texts),
+        }
+    }
+}
+
+impl From<Spellings> for SpellingsFile {
+    fn from(Spellings(mut texts): Spellings) -> Self {
+        if texts.len() == 1 {
+            Self::One(texts.remove(0))
+        } else {
+            Self::Several(texts)
+        }
+    }
+}
+
+#[cfg(test)]
+impl schemars::JsonSchema for Spellings {
+    fn schema_name() -> std::borrow::Cow<'static, str> {
+        "Spellings".into()
+    }
+
+    fn json_schema(generator: &mut schemars::SchemaGenerator) -> schemars::Schema {
+        SpellingsFile::json_schema(generator)
+    }
+}
+
+#[allow(
+    clippy::trivially_copy_pass_by_ref,
+    reason = "serde passes a reference"
+)]
+const fn is_one(n: &usize) -> bool {
+    *n == 1
+}
+
+const fn one() -> usize {
+    1
+}
 
 /// How a question is answered.
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
@@ -639,8 +727,17 @@ pub enum QuestionKind {
     /// Pick one or more of the listed answers.
     #[default]
     Choice,
-    /// Type a short answer, right when it matches an accepted one (the judge may amend).
-    Text { accepted: Vec<String> },
+    /// Type a short answer, right when it matches an accepted one (the judge may amend). With
+    /// `wanted` above 1, teams type that many different accepted answers (four insects that live
+    /// in colonies…): each is judged on its own, an answer given twice counts once, and the
+    /// question is scored like one with several correct choices.
+    Text {
+        accepted: Vec<Spellings>,
+        /// How many different answers teams type.
+        #[serde(default = "one", skip_serializing_if = "is_one")]
+        #[cfg_attr(test, schemars(range(min = 1, max = MAX_WANTED)))]
+        wanted: usize,
+    },
     /// Enter a number; the closest guess wins.
     Number {
         answer: Option<f64>,
@@ -875,10 +972,8 @@ impl Question {
                     problems.push("At least one answer must be marked correct.".to_owned());
                 }
             }
-            QuestionKind::Text { accepted } => {
-                if accepted.iter().all(|a| a.trim().is_empty()) {
-                    problems.push("Add at least one accepted answer.".to_owned());
-                }
+            QuestionKind::Text { accepted, wanted } => {
+                problems.extend(typed_problems(accepted, *wanted));
             }
             QuestionKind::Number { answer, range } => {
                 problems.extend(number_problems(*answer, *range));
@@ -1120,7 +1215,8 @@ mod tests {
         assert_eq!(question.problems(), Vec::<String>::new());
         // Typed questions cannot carry one: it is ignored there.
         question.kind = QuestionKind::Text {
-            accepted: vec!["A".to_owned()],
+            accepted: vec!["A".into()],
+            wanted: 1,
         };
         assert!(!question.takes_bonus());
         // Saved quizzes without a bonus stay as they were.
@@ -1228,7 +1324,8 @@ mod tests {
         choice.answers.push(answer("Mars", false));
         let mut text = question();
         text.kind = QuestionKind::Text {
-            accepted: vec!["Saturn".to_owned()],
+            accepted: vec!["Saturn".into()],
+            wanted: 1,
         };
         let mut quiz = quiz();
         quiz.questions = vec![choice, text.clone()];
@@ -1514,15 +1611,22 @@ mod tests {
         let mut q = Question {
             text: "Who painted the Mona Lisa?".to_owned(),
             kind: QuestionKind::Text {
-                accepted: vec![" ".to_owned()],
+                accepted: vec![" ".into()],
+                wanted: 1,
             },
             ..Question::default()
         };
         assert_eq!(q.problems(), vec!["Add at least one accepted answer."]);
         q.kind = QuestionKind::Text {
-            accepted: vec!["Leonardo".to_owned()],
+            accepted: vec!["Leonardo".into()],
+            wanted: 1,
         };
         assert_eq!(q.problems(), Vec::<String>::new());
+        q.kind = QuestionKind::Text {
+            accepted: vec!["Ant".into(), " ".into()],
+            wanted: 2,
+        };
+        assert_eq!(q.problems(), vec!["Accept at least 2 different answers."]);
         q.kind = QuestionKind::Number {
             answer: None,
             range: None,
@@ -1570,5 +1674,32 @@ mod tests {
         assert_eq!(quiz.settings, QuizSettings::default());
         assert_eq!(quiz.questions[0].kind, QuestionKind::Choice);
         assert!(!quiz.questions[0].answers[0].correct);
+    }
+
+    #[test]
+    fn typed_answers_read_plain_spellings_and_lists_of_them() {
+        let kind: QuestionKind =
+            serde_json::from_str(r#"{"Text":{"accepted":["Bee",["Ant","Ants"]],"wanted":2}}"#)
+                .unwrap();
+        assert_eq!(
+            kind,
+            QuestionKind::Text {
+                accepted: vec![
+                    "Bee".into(),
+                    Spellings(vec!["Ant".to_owned(), "Ants".to_owned()]),
+                ],
+                wanted: 2,
+            }
+        );
+        assert_eq!(
+            serde_json::to_string(&kind).unwrap(),
+            r#"{"Text":{"accepted":["Bee",["Ant","Ants"]],"wanted":2}}"#
+        );
+        // Older files ask for one answer, and one-answer questions are saved as they were.
+        let one: QuestionKind = serde_json::from_str(r#"{"Text":{"accepted":["Bee"]}}"#).unwrap();
+        assert_eq!(
+            serde_json::to_string(&one).unwrap(),
+            r#"{"Text":{"accepted":["Bee"]}}"#
+        );
     }
 }

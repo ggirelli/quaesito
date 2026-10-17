@@ -41,6 +41,10 @@ The format is described by a [JSON Schema](https://json-schema.org/):
       "kind": { "Text": { "accepted": ["Steven Spielberg", "Spielberg"] } },
       "explanation": "He was 26 when he shot it."
     },
+    {
+      "text": "Name three insects that live in colonies.",
+      "kind": { "Text": { "accepted": [["Ant", "Ants"], "Bee", "Termite", "Wasp"], "wanted": 3 } }
+    },
     { "text": "", "kind": { "Slide": { "title": "Half time!" } } }
   ]
 }

@@ -80,7 +80,15 @@ impl LibraryEntry {
         let first = |accepted: &[String]| accepted.first().cloned().unwrap_or_default();
         match &question.kind {
             QuestionKind::TrueFalse { answer } => (if *answer { "True" } else { "False" }).into(),
-            QuestionKind::Text { accepted } => first(accepted),
+            QuestionKind::Text {
+                accepted,
+                wanted: 1,
+            } => accepted.first().map(|a| first(&a.0)).unwrap_or_default(),
+            QuestionKind::Text { accepted, .. } => accepted
+                .iter()
+                .map(|a| first(&a.0))
+                .collect::<Vec<_>>()
+                .join(", "),
             QuestionKind::Number { answer, .. } => {
                 answer.map(|n| n.to_string()).unwrap_or_default()
             }

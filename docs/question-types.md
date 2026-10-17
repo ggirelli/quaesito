@@ -4,7 +4,7 @@
 |---|---|---|
 | Choices | pick one or several of 2–6 answers (text and/or picture); each phone lists them in its own order, with the big screen's shapes and colours | all or nothing, or partial credit |
 | True/false | say whether a statement is true | like choices |
-| Typed answer | type a short answer | right when it matches an accepted spelling; you can amend |
+| Typed answer | type a short answer, or up to 8 different ones from a list | right when it matches an accepted spelling; you can amend; several answers are scored like several correct choices |
 | Number | guess a number, with a slider when you set a range | the closest guesses (ties included) win 1000 points |
 | Order | tap 2–6 items from first to last | each item in its place earns its share |
 | Several answers | type 2–8 answers at once | each part judged like a typed answer; points shared between parts |
@@ -17,6 +17,17 @@ Teams' answers are compared with the accepted spellings ignoring case, accents, 
 spacing, but not typos: list the spellings you accept, and amend on the reveal. Identical answers
 are grouped, and for each group you choose ✓ full, ½ half or ✗ no points, plus a bonus or malus in
 steps of 100. A malus can take a team below zero.
+
+### Several answers from a list
+
+Set **Teams type** to more than 1 for questions such as "Name four insects that live in colonies".
+List every answer you accept, each with its own spellings ("Ant", "Ants"): there can be more of
+them than teams have to type. Phones show one field per answer, in any order. Each different
+answer earns its share of the points, and an answer given twice, in any of its spellings, counts
+once. With the quiz's **Questions with several correct answers** setting on all or nothing, only
+teams with every answer right score; with partial credit, wrong answers cost nothing. On the
+reveal, each answer typed is judged like a typed answer; answers you accept that are not in the
+list count by their text, so accept one spelling of each.
 
 ## Number
 

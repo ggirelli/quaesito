@@ -33,8 +33,8 @@ use serde::{Deserialize, Serialize};
 use super::matching::normalize;
 use crate::{
     model::{
-        AdvanceMode, Bonus, MAX_TEXT_ANSWER_CHARS, PointsMode, Question, QuestionKind, Quiz,
-        RevealMode,
+        AdvanceMode, Bonus, MAX_TEXT_ANSWER_CHARS, MultiScoring, PointsMode, Question,
+        QuestionKind, Quiz, RevealMode,
     },
     protocol::{
         AnswerOutcome, BACKDROP_COUNT, DEFAULT_MAX_TEAMS, Explanation, Fastest, GameResults, Grade,
@@ -1219,7 +1219,8 @@ impl Game {
             items: match question.kind {
                 QuestionKind::Order { .. }
                 | QuestionKind::TrueFalse { .. }
-                | QuestionKind::Parts { .. } => self.shown_answers(index),
+                | QuestionKind::Parts { .. }
+                | QuestionKind::Text { .. } => self.shown_answers(index),
                 _ => Vec::new(),
             },
             // Phones show the passage (lyrics, a quote…) under the question, line breaks kept.
@@ -1530,8 +1531,8 @@ impl Game {
                     picks,
                 }
             }
-            QuestionKind::Text { accepted } => Reveal::Text {
-                accepted: tidy(accepted),
+            QuestionKind::Text { accepted, .. } => Reveal::Text {
+                accepted: accepted_shown(accepted),
                 groups: self.text_groups(index, None),
             },
             QuestionKind::Pin { answer, aspect, .. } => {
@@ -1588,6 +1589,9 @@ impl Game {
                 .enumerate()
                 .map(|(p, part)| part_label(part, p))
                 .collect(),
+            QuestionKind::Text { wanted, .. } if *wanted > 1 => {
+                (1..=*wanted).map(|n| format!("Answer {n}")).collect()
+            }
             _ => Vec::new(),
         }
     }
@@ -1633,25 +1637,29 @@ impl Game {
     }
 
     /// Typed answers to question `index` grouped by normalised text, most common first; `part`
-    /// picks one part of a several-answers question (blank answers are left out).
+    /// picks one part of a several-answers question, else every answer of a team counts (blank
+    /// answers are left out).
     fn text_groups(&self, index: usize, part: Option<usize>) -> Vec<TextGroup> {
         let mut groups: Vec<TextGroup> = Vec::new();
         for team in &self.teams {
             let Some(submission) = &team.submissions[index] else {
                 continue;
             };
-            let text = match (&submission.response, part) {
-                (Response::Text(text), None) => text,
-                (Response::Parts(texts), Some(p)) => match texts.get(p) {
-                    Some(text) if !normalize(text).is_empty() => text,
-                    _ => continue,
-                },
+            let texts: Vec<&String> = match (&submission.response, part) {
+                (Response::Text(text), None) => vec![text],
+                (Response::Parts(texts), None) => texts.iter().collect(),
+                (Response::Parts(texts), Some(p)) => texts.get(p).into_iter().collect(),
                 _ => continue,
             };
-            let key = text_key(part, text);
-            if let Some(group) = groups.iter_mut().find(|g| g.key == key) {
-                group.teams.push(team.name.clone());
-            } else {
+            for text in texts.into_iter().filter(|t| !normalize(t).is_empty()) {
+                let key = text_key(part, text);
+                if let Some(group) = groups.iter_mut().find(|g| g.key == key) {
+                    // A team typing the same answer twice is listed once.
+                    if !group.teams.contains(&team.name) {
+                        group.teams.push(team.name.clone());
+                    }
+                    continue;
+                }
                 let (judgement, amended) = self.judgement(index, &key);
                 groups.push(TextGroup {
                     key,
@@ -1679,7 +1687,7 @@ impl Game {
             _ if key.starts_with(BONUS_KEY_PREFIX) => {
                 bonus.is_some_and(|(norm, bonus)| accepts(&bonus.accepted, norm))
             }
-            QuestionKind::Text { accepted } => accepts(accepted, key),
+            QuestionKind::Text { accepted, .. } => accepted.iter().any(|a| accepts(&a.0, key)),
             QuestionKind::Parts { parts } => key
                 .split_once(PART_KEY_SEPARATOR)
                 .and_then(|(p, norm)| Some((parts.get(p.parse::<usize>().ok()?)?, norm)))
@@ -1689,6 +1697,55 @@ impl Game {
         Judgement {
             grade: if matches { Grade::Full } else { Grade::Wrong },
             bonus: 0,
+        }
+    }
+
+    /// The outcome of a team's `response` to typed-answer question `index`. When it asks for
+    /// several answers, each different answer is judged once (an accepted answer whatever its
+    /// spelling, any other by its text), scored like several correct choices.
+    fn typed_outcome(&self, index: usize, response: &Response, full: u32) -> AnswerOutcome {
+        let texts = match response {
+            Response::Text(text) => {
+                let (judgement, _) = self.judgement(index, &text_key(None, text));
+                return AnswerOutcome {
+                    points: scoring::text_points(judgement, full),
+                    fully_correct: judgement.grade == Grade::Full,
+                    joker: false,
+                };
+            }
+            Response::Parts(texts) => texts,
+            _ => &Vec::new(),
+        };
+        let (accepted, wanted) = match &self.quiz.questions[index].kind {
+            QuestionKind::Text { accepted, wanted } => (accepted.as_slice(), *wanted),
+            _ => (&[][..], 0),
+        };
+        let mut given: Vec<Result<usize, String>> = Vec::new();
+        let judgements: Vec<Judgement> = texts
+            .iter()
+            .map(|text| text_key(None, text))
+            .filter(|key| !key.is_empty())
+            .filter_map(|key| {
+                let answer = accepted
+                    .iter()
+                    .position(|a| a.0.iter().any(|s| normalize(s) == key))
+                    .ok_or_else(|| key.clone());
+                if given.contains(&answer) {
+                    return None;
+                }
+                given.push(answer);
+                Some(self.judgement(index, &key).0)
+            })
+            .collect();
+        let fully_correct =
+            judgements.len() == wanted && judgements.iter().all(|j| j.grade == Grade::Full);
+        AnswerOutcome {
+            points: match self.quiz.settings.multi_scoring {
+                MultiScoring::AllOrNothing if !fully_correct => 0,
+                _ => scoring::parts_points(&judgements, wanted, full),
+            },
+            fully_correct,
+            joker: false,
         }
     }
 
@@ -1774,14 +1831,7 @@ impl Game {
                     joker: false,
                 }
             }
-            (QuestionKind::Text { .. }, Response::Text(text)) => {
-                let (judgement, _) = self.judgement(index, &text_key(None, text));
-                AnswerOutcome {
-                    points: scoring::text_points(judgement, full),
-                    fully_correct: judgement.grade == Grade::Full,
-                    joker: false,
-                }
-            }
+            (QuestionKind::Text { .. }, response) => self.typed_outcome(index, response, full),
             (
                 QuestionKind::Number {
                     answer: Some(answer),
@@ -2006,7 +2056,7 @@ fn check_response(question: &Question, response: Response) -> Result<Response, R
             }
             Ok(Response::Choice(selected))
         }
-        (QuestionKind::Text { .. }, Response::Text(text)) => {
+        (QuestionKind::Text { wanted: 1, .. }, Response::Text(text)) => {
             let text = text.trim();
             if normalize(text).is_empty() {
                 return Err(Refusal("Please type an answer."));
@@ -2028,30 +2078,10 @@ fn check_response(question: &Question, response: Response) -> Result<Response, R
             Err(Refusal("Please enter a number."))
         }
         (QuestionKind::Parts { parts }, Response::Parts(texts)) => {
-            if texts.len() != parts.len() {
-                return Err(Refusal("That answer does not fit this question."));
-            }
-            // A part with nothing but punctuation counts as blank, as for a typed answer.
-            let texts: Vec<String> = texts
-                .iter()
-                .map(|t| {
-                    if normalize(t).is_empty() {
-                        String::new()
-                    } else {
-                        t.trim().to_owned()
-                    }
-                })
-                .collect();
-            if texts.iter().all(|t| normalize(t).is_empty()) {
-                return Err(Refusal("Please type at least one answer."));
-            }
-            if texts
-                .iter()
-                .any(|t| t.chars().count() > MAX_TEXT_ANSWER_CHARS)
-            {
-                return Err(Refusal("One of the answers is too long."));
-            }
-            Ok(Response::Parts(texts))
+            typed_answers(&texts, parts.len())
+        }
+        (QuestionKind::Text { wanted, .. }, Response::Parts(texts)) if *wanted > 1 => {
+            typed_answers(&texts, *wanted)
         }
         (QuestionKind::Pin { .. }, Response::Pin(at)) if at.is_on_picture() => {
             Ok(Response::Pin(at))
@@ -2086,11 +2116,41 @@ fn check_response(question: &Question, response: Response) -> Result<Response, R
     }
 }
 
+/// A team's answers to a question asking for `count` typed answers, trimmed, with blanks
+/// for answers left out.
+fn typed_answers(texts: &[String], count: usize) -> Result<Response, Refusal> {
+    if texts.len() != count {
+        return Err(Refusal("That answer does not fit this question."));
+    }
+    // A part with nothing but punctuation counts as blank, as for a typed answer.
+    let texts: Vec<String> = texts
+        .iter()
+        .map(|t| {
+            if normalize(t).is_empty() {
+                String::new()
+            } else {
+                t.trim().to_owned()
+            }
+        })
+        .collect();
+    if texts.iter().all(|t| normalize(t).is_empty()) {
+        return Err(Refusal("Please type at least one answer."));
+    }
+    if texts
+        .iter()
+        .any(|t| t.chars().count() > MAX_TEXT_ANSWER_CHARS)
+    {
+        return Err(Refusal("One of the answers is too long."));
+    }
+    Ok(Response::Parts(texts))
+}
+
 fn input_kind(question: &Question) -> InputKind {
     match question.kind {
         QuestionKind::Choice | QuestionKind::TrueFalse { .. } | QuestionKind::Slide { .. } => {
             InputKind::Choice
         }
+        QuestionKind::Text { wanted, .. } if wanted > 1 => InputKind::Parts,
         QuestionKind::Text { .. } => InputKind::Text,
         QuestionKind::Number { .. } => InputKind::Number,
         QuestionKind::Order { .. } => InputKind::Order,
@@ -2144,8 +2204,18 @@ fn part_label(part: &crate::model::Part, index: usize) -> String {
 fn question_parts(question: &Question) -> usize {
     match &question.kind {
         QuestionKind::Parts { parts } => parts.len(),
+        QuestionKind::Text { wanted, .. } if *wanted > 1 => *wanted,
         _ => 0,
     }
+}
+
+/// Accepted answers of a typed-answer question as shown, each with its spellings.
+fn accepted_shown(accepted: &[crate::model::Spellings]) -> Vec<String> {
+    accepted
+        .iter()
+        .map(|a| tidy(&a.0).join(" / "))
+        .filter(|a| !a.is_empty())
+        .collect()
 }
 
 /// Accepted answers as shown: trimmed, blanks left out.
@@ -2183,7 +2253,7 @@ fn millis(duration: Duration) -> u64 {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::model::{Answer, QuizSettings};
+    use crate::model::{Answer, QuizSettings, Spellings};
 
     fn quiz(settings: QuizSettings) -> Quiz {
         let question = |text: &str| Question {
@@ -3620,7 +3690,8 @@ mod tests {
     fn typed_answers_match_strictly_and_the_judge_amends() {
         let t0 = Instant::now();
         let kind = QuestionKind::Text {
-            accepted: vec!["Leonardo da Vinci".to_owned(), "Leonardo".to_owned()],
+            accepted: vec!["Leonardo da Vinci".into(), "Leonardo".into()],
+            wanted: 1,
         };
         let mut g = open_game(kind, QuizSettings::default());
         let owls = join(&mut g, "Owls");
@@ -3710,10 +3781,88 @@ mod tests {
     }
 
     #[test]
+    fn typed_answers_asking_for_several_count_each_different_answer_once() {
+        let t0 = Instant::now();
+        let kind = QuestionKind::Text {
+            accepted: vec![
+                Spellings(vec!["Ant".to_owned(), "Ants".to_owned()]),
+                "Bee".into(),
+                "Termite".into(),
+                "Wasp".into(),
+            ],
+            wanted: 3,
+        };
+        let texts = |t: &[&str]| Response::Parts(t.iter().map(|&t| t.to_owned()).collect());
+        let partial = QuizSettings {
+            multi_scoring: MultiScoring::Partial,
+            ..QuizSettings::default()
+        };
+        let mut g = open_game(kind.clone(), partial);
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        let bats = join(&mut g, "Bats");
+        g.next(t0).unwrap();
+        let PlayerPhase::Question { input, items, .. } = g.player_view(owls, t0).unwrap().phase
+        else {
+            panic!("expected the question");
+        };
+        assert_eq!(input, InputKind::Parts);
+        assert_eq!(items, ["Answer 1", "Answer 2", "Answer 3"]);
+        assert!(g.answer(owls, text("Ant"), false, t0).is_err());
+        assert!(g.answer(owls, texts(&["Ant", "Bee"]), false, t0).is_err());
+        g.answer(owls, texts(&["ants", "Bee", "wasp"]), false, t0)
+            .unwrap();
+        // Another spelling of the same answer counts once.
+        g.answer(cats, texts(&["Ant", "ANTS!", "bee"]), false, t0)
+            .unwrap();
+        g.answer(bats, texts(&["Ant", "Ladybird", ""]), false, t0)
+            .unwrap();
+        assert_eq!(g.player_view(owls, t0).unwrap().score, Some(1000));
+        assert_eq!(g.player_view(cats, t0).unwrap().score, Some(667));
+        assert_eq!(g.player_view(bats, t0).unwrap().score, Some(333));
+        let groups = text_groups(&g);
+        let teams: Vec<(&str, &[String])> = groups
+            .iter()
+            .map(|g| (g.0.as_str(), g.1.as_slice()))
+            .collect();
+        assert_eq!(
+            teams,
+            [
+                ("ants", &["Owls".to_owned(), "Cats".to_owned()][..]),
+                ("Bee", &["Owls".to_owned(), "Cats".to_owned()]),
+                ("Ant", &["Cats".to_owned(), "Bats".to_owned()]),
+                ("wasp", &["Owls".to_owned()]),
+                ("Ladybird", &["Bats".to_owned()]),
+            ]
+        );
+
+        // The judge accepts an answer that was not listed.
+        let full = Judgement {
+            grade: Grade::Full,
+            bonus: 0,
+        };
+        g.judge(0, "ladybird", full, t0).unwrap();
+        assert_eq!(g.player_view(bats, t0).unwrap().score, Some(667));
+
+        // All or nothing: only the three different answers score.
+        let mut g = open_game(kind, QuizSettings::default());
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        g.next(t0).unwrap();
+        g.answer(owls, texts(&["ants", "Bee", "wasp"]), false, t0)
+            .unwrap();
+        g.answer(cats, texts(&["Ant", "ANTS!", "bee"]), false, t0)
+            .unwrap();
+        assert_eq!(g.player_view(owls, t0).unwrap().score, Some(1000));
+        assert_eq!(g.player_view(cats, t0).unwrap().score, Some(0));
+    }
+
+    #[test]
     fn judging_waits_for_the_review_when_answers_are_hidden() {
         let t0 = Instant::now();
         let kind = QuestionKind::Text {
-            accepted: vec!["yes".to_owned()],
+            accepted: vec!["yes".into()],
+            wanted: 1,
         };
         let mut g = open_game(
             kind,

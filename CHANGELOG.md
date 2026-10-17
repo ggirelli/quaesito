@@ -23,6 +23,10 @@ All notable changes to quaesito are listed here. The format follows
   fun fact (**＋ Add something to show with the answer** in the editor), and a soundtrack it plays then. Quiz files move to format 2 for it; older
   versions ask before importing them and would leave it out.
 
+- Typed answers can ask for several different answers from a list ("Name four insects that live in colonies"):
+  set **Teams type** in the editor and accept each answer with its own spellings. An answer given twice counts
+  once, and the question is scored like one with several correct choices.
+
 ### Changed
 
 - Phones show "You're in!" first when waiting for the quiz to start; the team's name, picture and background are

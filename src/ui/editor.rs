@@ -20,9 +20,10 @@ use crate::{
     library::{LibraryEdit, LibraryEntry},
     model::{
         AdvanceMode, Answer, BONUS_PERCENTS, Bonus, ImageReveal, MAX_ANSWERS, MAX_MULTIPLIER,
-        MAX_PARTS, MAX_TIME_LIMIT_SECS, MIN_ANSWERS, MIN_PARTS, MIN_TIME_LIMIT_SECS, MultiScoring,
-        NumberRange, Pair, PairItem, Part, PhoneDisplay, PinTolerance, Point, PointsMode, Question,
-        QuestionKind, Quiz, QuizSettings, RevealMode, ValidationIssue, is_video,
+        MAX_PARTS, MAX_TIME_LIMIT_SECS, MAX_WANTED, MIN_ANSWERS, MIN_PARTS, MIN_TIME_LIMIT_SECS,
+        MultiScoring, NumberRange, Pair, PairItem, Part, PhoneDisplay, PinTolerance, Point,
+        PointsMode, Question, QuestionKind, Quiz, QuizSettings, RevealMode, Spellings,
+        ValidationIssue, is_video,
     },
     protocol::UploadLimits,
 };
@@ -88,8 +89,9 @@ impl Draft {
         });
     }
 
-    /// Edits the accepted answers of a typed-answer question, or of one `part` of a
-    /// several-answers question.
+    /// Edits the accepted answers of a typed-answer question asking for one answer, the
+    /// spellings of answer `part` of one asking for several, or the accepted answers of one `part`
+    /// of a several-answers question.
     fn edit_accepted(self, index: usize, part: Option<usize>, f: impl FnOnce(&mut Vec<String>)) {
         if part == Some(BONUS_PART) {
             self.edit_question(index, |q| {
@@ -100,13 +102,31 @@ impl Draft {
             return;
         }
         self.edit_question(index, |q| match (&mut q.kind, part) {
-            (QuestionKind::Text { accepted }, None) => f(accepted),
+            (QuestionKind::Text { accepted, .. }, None) => {
+                let mut texts: Vec<String> = accepted.drain(..).flat_map(|a| a.0).collect();
+                f(&mut texts);
+                accepted.extend(texts.into_iter().map(|t| Spellings(vec![t])));
+            }
+            (QuestionKind::Text { accepted, .. }, Some(p)) => {
+                if let Some(answer) = accepted.get_mut(p) {
+                    f(&mut answer.0);
+                }
+            }
             (QuestionKind::Parts { parts }, Some(p)) => {
                 if let Some(part) = parts.get_mut(p) {
                     f(&mut part.accepted);
                 }
             }
             _ => {}
+        });
+    }
+
+    /// Edits the accepted answers of a typed-answer question and how many teams type.
+    fn edit_typed(self, index: usize, f: impl FnOnce(&mut Vec<Spellings>, &mut usize)) {
+        self.edit_question(index, |q| {
+            if let QuestionKind::Text { accepted, wanted } = &mut q.kind {
+                f(accepted, wanted);
+            }
         });
     }
 
@@ -1224,8 +1244,8 @@ fn QuestionCard(
                             }
                         }
                     },
-                    QuestionKind::Text { accepted } => rsx! {
-                        AcceptedAnswers { question: index, accepted: accepted.clone() }
+                    QuestionKind::Text { accepted, wanted } => rsx! {
+                        TypedAnswers { question: index, accepted: accepted.clone(), wanted: *wanted }
                     },
                     QuestionKind::Number { answer, range } => rsx! {
                         NumberAnswer { question: index, answer: *answer, range: *range }
@@ -1306,7 +1326,8 @@ fn set_kind(question: &mut Question, choice: usize) {
             QuestionKind::Order { items }
         }
         (2, _) => QuestionKind::Text {
-            accepted: vec![String::new()],
+            accepted: vec![Spellings::default()],
+            wanted: 1,
         },
         (3, _) => QuestionKind::Number {
             answer: None,
@@ -1319,6 +1340,94 @@ fn set_kind(question: &mut Question, choice: usize) {
             QuestionKind::Choice
         }
     };
+}
+
+/// How many answers a typed-answer question asks for, and the answers it accepts: spellings of
+/// one answer, or several answers with their own spellings.
+#[component]
+fn TypedAnswers(question: usize, accepted: Vec<Spellings>, wanted: usize) -> Element {
+    let draft: Draft = use_context();
+    let count = accepted.len();
+    let set_wanted = move |n: usize| {
+        draft.edit_typed(question, |accepted, wanted| {
+            match (*wanted, n) {
+                // The spellings of the one answer become those of the first of several…
+                (1, 2..) => {
+                    let texts: Vec<String> = accepted.drain(..).flat_map(|a| a.0).collect();
+                    accepted.push(Spellings(texts));
+                }
+                // …and any spelling of any answer is right when one answer is asked for.
+                (2.., 1) => {
+                    let texts: Vec<String> = accepted.drain(..).flat_map(|a| a.0).collect();
+                    accepted.extend(texts.into_iter().map(|t| Spellings(vec![t])));
+                }
+                _ => {}
+            }
+            if n > 1 && accepted.len() < n {
+                accepted.resize_with(n, || Spellings(vec![String::new()]));
+            }
+            *wanted = n;
+        });
+    };
+    rsx! {
+        label { class: "field inline",
+            span { "Teams type" }
+            input {
+                r#type: "number",
+                class: "short",
+                min: 1,
+                max: MAX_WANTED,
+                value: "{wanted}",
+                oninput: move |e| {
+                    if let Ok(n) = e.value().trim().parse::<usize>()
+                        && (1..=MAX_WANTED).contains(&n)
+                    {
+                        set_wanted(n);
+                    }
+                },
+            }
+            span { if wanted == 1 { "answer" } else { "different answers" } }
+        }
+        if wanted == 1 {
+            AcceptedAnswers {
+                question,
+                accepted: accepted.into_iter().flat_map(|a| a.0).collect::<Vec<_>>(),
+            }
+        } else {
+            div { class: "parts-edit",
+                for (i, answer) in accepted.into_iter().enumerate() {
+                    div { key: "{i}", class: "part-edit stack",
+                        div { class: "row between",
+                            span { class: "order-rank", "{i + 1}" }
+                            button {
+                                class: "button ghost icon danger-icon",
+                                title: "Remove this answer",
+                                aria_label: "Remove this answer",
+                                disabled: count <= wanted,
+                                onclick: move |_| draft.edit_typed(question, |accepted, _| {
+                                    accepted.remove(i);
+                                }),
+                                Icon { kind: IconKind::Trash }
+                            }
+                        }
+                        AcceptedAnswers { question, part: Some(i), accepted: answer.0 }
+                    }
+                }
+            }
+            div { class: "row between",
+                button {
+                    class: "button ghost",
+                    onclick: move |_| draft.edit_typed(question, |accepted, _| {
+                        accepted.push(Spellings(vec![String::new()]));
+                    }),
+                    "＋ Add answer"
+                }
+                span { class: "muted small",
+                    "Accept as many answers as you like. The same answer twice counts once; scoring follows the setting for questions with several correct answers."
+                }
+            }
+        }
+    }
 }
 
 /// The accepted answers of a typed-text question.

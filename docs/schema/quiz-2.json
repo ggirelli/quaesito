@@ -364,15 +364,22 @@
         },
         {
           "additionalProperties": false,
-          "description": "Type a short answer, right when it matches an accepted one (the judge may amend).",
+          "description": "Type a short answer, right when it matches an accepted one (the judge may amend). With\n`wanted` above 1, teams type that many different accepted answers (four insects that live\nin colonies…): each is judged on its own, an answer given twice counts once, and the\nquestion is scored like one with several correct choices.",
           "properties": {
             "Text": {
               "properties": {
                 "accepted": {
                   "items": {
-                    "type": "string"
+                    "$ref": "#/$defs/Spellings"
                   },
                   "type": "array"
+                },
+                "wanted": {
+                  "description": "How many different answers teams type.",
+                  "format": "uint",
+                  "maximum": 8,
+                  "minimum": 1,
+                  "type": "integer"
                 }
               },
               "required": [
@@ -630,6 +637,20 @@
           "type": "string"
         }
       ]
+    },
+    "Spellings": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ],
+      "description": "An accepted answer as files hold it: a plain string when it has one spelling, else the list\nof its spellings."
     }
   },
   "$id": "https://ggirelli.github.io/quaesito/schema/quiz-2.json",
