@@ -115,6 +115,23 @@ const waitButton = (page, label) => page.waitForFunction(
   await L.clickText(ed, '.library-sync-dialog button', 'Unlink');
   expect('unlinked', await waitButton(ed, 'Save to library'));
 
+  // The Questions tab marks added questions, and can delete them.
+  const tab = await L.openAdmin(ctx, '/admin/questions', 1280, 900);
+  await tab.waitForSelector('input[type=search]');
+  await tab.type('input[type=search]', 'Quaesitopolis');
+  await tab.waitForFunction(() => document.querySelectorAll('.library-row').length > 0);
+  const rows = () => tab.$$eval('.library-row', (rs) => rs.map((r) => r.innerText.replace(/\n+/g, ' ')));
+  const before = await rows();
+  expect(`added questions are marked: ${before.length}`, before.every((r) => r.includes('· added')));
+  expect('added questions cannot be reported to GitHub', before.every((r) => !r.includes('report')));
+  await L.clickText(tab, '.library-row .link-button', 'edit');
+  await tab.waitForSelector('.edit-library-dialog');
+  await L.clickText(tab, '.edit-library-dialog button', 'Delete from the library');
+  await L.clickText(tab, '.edit-library-dialog button', 'Delete for good?');
+  await tab.waitForFunction((n) => !document.querySelector('.edit-library-dialog')
+    && document.querySelectorAll('.library-row').length === n - 1, {}, before.length);
+  expect('deleted', true);
+
   expect(`no page errors: ${ctx.errors.join('; ')}`, ctx.errors.length === 0);
   await ctx.browser.close();
   process.exit(failed ? 1 : 0);

@@ -14,9 +14,9 @@ use super::{
 };
 use crate::{
     api::{
-        add_library_question, edit_library_question, get_quiz, library_question_uses,
-        library_subjects, revert_library_question, save_quiz, start_test, upload_limits,
-        upload_question_audio, upload_question_image, upload_question_media,
+        add_library_question, delete_library_question, edit_library_question, get_quiz,
+        library_question_uses, library_subjects, revert_library_question, save_quiz, start_test,
+        upload_limits, upload_question_audio, upload_question_image, upload_question_media,
     },
     library::{
         LibraryCategory, LibraryEdit, LibraryEntry, LibrarySync, answer_line, differences,
@@ -421,7 +421,8 @@ fn EditorForm(quiz: Quiz) -> Element {
 }
 
 /// Edits a library question in a pop-up, with the editor's question card. Saving keeps the change
-/// on this server; an edited question can go back to how the library has it.
+/// on this server; an edited question can go back to how the library has it, and one added here
+/// can be deleted.
 #[component]
 pub fn LibraryQuestionEditor(
     entry: LibraryEntry,
@@ -469,6 +470,22 @@ pub fn LibraryQuestionEditor(
         }
     };
 
+    let mut deleting = use_signal(|| false);
+    let deleted = entry.clone();
+    let delete = move |_| {
+        let entry = deleted.clone();
+        async move {
+            if !deleting() {
+                deleting.set(true);
+                return;
+            }
+            match delete_library_question(token.get(), entry.id.clone()).await {
+                Ok(()) => on_saved.call(entry),
+                Err(err) => error.set(Some(message(&err))),
+            }
+        }
+    };
+
     let quiz = draft.quiz.read();
     let issues = quiz.validate();
     let defaults = QuizSettings::default();
@@ -495,11 +512,22 @@ pub fn LibraryQuestionEditor(
             Issues { issues: issues.clone() }
             ErrorBox { error: error() }
             p { class: "muted small",
-                "Changes are kept on this server only; the library that comes with Quaesito stays as it is."
+                if entry.added {
+                    "Saved to the library on this server, from a quiz. Quizzes using it are offered the changes."
+                } else {
+                    "Changes are kept on this server only; the library that comes with Quaesito stays as it is."
+                }
             }
             div { class: "row between",
                 if entry.edited {
                     button { class: "button ghost", onclick: revert, "↶ Back to the original" }
+                } else if entry.added {
+                    button {
+                        class: "button ghost danger",
+                        title: "Quizzes keep their copy of the question",
+                        onclick: delete,
+                        if deleting() { "Delete for good?" } else { "Delete from the library" }
+                    }
                 } else {
                     span {}
                 }
