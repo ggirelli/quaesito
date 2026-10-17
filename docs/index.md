@@ -50,13 +50,31 @@ Windows, macOS and Linux. Free and open source (MIT).
 
 ## See it in action { .section }
 
-<video controls preload="metadata" poster="media/demo-poster.webp" style="width:100%;border-radius:12px">
+<video controls preload="metadata" poster="media/demo-poster.webp" class="demo-video">
   <source src="media/demo.mp4" type="video/mp4">
   <track kind="captions" src="media/demo.vtt" srclang="en" label="English">
 </video>
 
-A quiz played on the test page, narrated. More [demo videos](demo.md) show how to build a quiz
-and use the question library, with transcripts.
+A quiz played on the test page, narrated.
+
+<div class="videos" markdown>
+<figure markdown>
+<video controls preload="metadata" poster="media/demo-editor-poster.webp" class="demo-video">
+  <source src="media/demo-editor.mp4" type="video/mp4">
+  <track kind="captions" src="media/demo-editor.vtt" srclang="en" label="English">
+</video>
+<figcaption>Building a quiz</figcaption>
+</figure>
+<figure markdown>
+<video controls preload="metadata" poster="media/demo-library-poster.webp" class="demo-video">
+  <source src="media/demo-library.mp4" type="video/mp4">
+  <track kind="captions" src="media/demo-library.vtt" srclang="en" label="English">
+</video>
+<figcaption>The question library</figcaption>
+</figure>
+</div>
+
+Transcripts are on the [demo videos](demo.md) page.
 
 ## Ready in three steps { .section }
 

@@ -51,6 +51,9 @@ exclude_docs: |
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - javascripts/video.js
+
 nav:
   - Home: index.md
   - Guide:

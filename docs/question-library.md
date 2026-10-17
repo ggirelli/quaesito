@@ -6,6 +6,14 @@ editor, or fill a new quiz with them at random (see
 [Building a quiz](building-a-quiz.md#the-question-library)). This page is for those who look after
 the library itself.
 
+<video controls preload="metadata" poster="../media/demo-library-poster.webp" class="demo-video">
+  <source src="../media/demo-library.mp4" type="video/mp4">
+  <track kind="captions" src="../media/demo-library.vtt" srclang="en" label="English">
+</video>
+
+<small>Browsing the library, filling a quiz at random and saving a question to it, narrated
+([transcript](demo.md#the-question-library)).</small>
+
 ## How the questions were made
 
 1. **Generated** with ChatGPT: 99 batches of 30 questions, one per topic, from the prompt below and

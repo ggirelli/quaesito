@@ -4,7 +4,7 @@
 
 A quiz played on the test page: the big screen on the left, two teams' phones on the right.
 
-<video controls preload="metadata" poster="../media/demo-poster.webp" style="width:100%;border-radius:12px">
+<video controls preload="metadata" poster="../media/demo-poster.webp" class="demo-video">
   <source src="../media/demo.mp4" type="video/mp4">
   <track kind="captions" src="../media/demo.vtt" srclang="en" label="English" default>
 </video>
@@ -18,7 +18,7 @@ A quiz played on the test page: the big screen on the left, two teams' phones on
 A quiz made from scratch in the editor: questions, answer types, a picture, a slide, questions
 from the library, and a test run.
 
-<video controls preload="metadata" poster="../media/demo-editor-poster.webp" style="width:100%;border-radius:12px">
+<video controls preload="metadata" poster="../media/demo-editor-poster.webp" class="demo-video">
   <source src="../media/demo-editor.mp4" type="video/mp4">
   <track kind="captions" src="../media/demo-editor.vtt" srclang="en" label="English" default>
 </video>
@@ -32,7 +32,7 @@ from the library, and a test run.
 Browsing and searching the library, editing a question, filling a new quiz at random, and saving
 a question of your own to the library.
 
-<video controls preload="metadata" poster="../media/demo-library-poster.webp" style="width:100%;border-radius:12px">
+<video controls preload="metadata" poster="../media/demo-library-poster.webp" class="demo-video">
   <source src="../media/demo-library.mp4" type="video/mp4">
   <track kind="captions" src="../media/demo-library.vtt" srclang="en" label="English" default>
 </video>
