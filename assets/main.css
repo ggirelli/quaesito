@@ -1068,6 +1068,69 @@ input.short {
   opacity: 0.75;
 }
 
+/* A topic, with a button to remove it when it was added on this server and has no questions. */
+.library-topic-row {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.library-topic-row .remove-topic {
+  flex: none;
+}
+
+/* The Questions tab's button for a new topic, under the categories. */
+.library-nav .add-topic {
+  margin-top: 0.8rem;
+}
+
+.add-topic-dialog {
+  max-width: 34rem;
+}
+
+/* The category a new topic goes in: its icon and name in its colour. */
+.category-preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+/* The icons and colours a new category can have; those other categories have are greyed out. */
+.look-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.look-choice {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-2);
+  cursor: pointer;
+}
+
+.look-choice.swatch {
+  background: var(--swatch);
+}
+
+.look-choice.selected {
+  border-color: var(--fg);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.look-choice:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
 /* The difficulty and answer type lists, under a small title. */
 .library-filter-list {
   display: flex;
@@ -1419,6 +1482,33 @@ table.results {
   background: var(--accent);
   color: var(--accent-ink);
   font-weight: 800;
+}
+
+/* The question's category and topic, next to its number on the big screen: plain text, the
+   category in its icon and colour from the library. */
+/* The counter, the category and topic after a dash, and the points multiplier, on one line. */
+.question-count {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.question-count .multiplier {
+  margin-left: 0.3em;
+}
+
+.question-subject {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  color: var(--category);
+  font-weight: 700;
+}
+
+.question-topic {
+  color: var(--muted);
+  font-weight: 500;
 }
 
 .question-head {

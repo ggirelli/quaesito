@@ -1409,6 +1409,8 @@ impl Game {
                 .map(|b| (b.text.trim().to_owned(), b.percent)),
             passage: question.passage.trim().to_owned(),
             pairs: self.pair_columns(index),
+            category: question.category.trim().to_owned(),
+            topic: question.topic.trim().to_owned(),
         }
     }
 
@@ -2212,6 +2214,8 @@ mod tests {
             explanation: String::new(),
             explanation_image: None,
             explanation_audio: None,
+            category: String::new(),
+            topic: String::new(),
         };
         Quiz {
             settings,

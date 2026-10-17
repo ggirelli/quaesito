@@ -139,6 +139,10 @@ pub struct QuestionInfo {
     pub passage: String,
     /// The columns of a pairs question.
     pub pairs: Option<PairColumns>,
+    /// What the question is about, e.g. "Geography"; empty when the quiz doesn't say.
+    pub category: String,
+    /// The topic within the category, e.g. "Capitals"; empty when the quiz doesn't say.
+    pub topic: String,
 }
 
 /// What the big screen adds once a question's answer is revealed: an explanation, a fun fact…

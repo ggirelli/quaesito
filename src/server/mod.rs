@@ -39,6 +39,8 @@ pub struct AppState {
     pub sessions: Sessions,
     /// This server's edits to the question library.
     pub library_edits: library::LibraryEdits,
+    /// The categories and topics this server added to the question library.
+    pub library_topics: library::AddedTopics,
     /// The largest uploads accepted.
     pub limits: crate::protocol::UploadLimits,
 }
@@ -69,6 +71,7 @@ pub async fn init() -> anyhow::Result<()> {
         media: MediaStore::open(data_dir.join("media")).await?,
         sessions: Sessions::open(data_dir.join("games")).await?,
         library_edits: library::LibraryEdits::open(data_dir.join("library-edits.json")).await?,
+        library_topics: library::AddedTopics::open(data_dir.join("library-topics.json")).await?,
         limits: media::limits_from_env(),
     };
     if let Err(err) = demo::add_once(&data_dir, &state.quizzes, &state.media).await {

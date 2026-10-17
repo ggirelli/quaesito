@@ -23,7 +23,7 @@ by last edit, newest, name or number of questions.
   question; the right answers stay right.
 
 Each question has an **answer type** (see [question types](question-types.md)), a time limit
-(the quiz's default unless you set one) and a **points** multiplier: a ×2 question earns twice
+(**Time (s)**, the quiz's default unless you set one) and a **points** multiplier: a ×2 question earns twice
 the usual points.
 
 ## The question library
@@ -44,11 +44,26 @@ technology, each rated easy, medium or hard. They were written with an AI model 
   to one difficulty, and open each category with a title slide.
 
 Once added, a question is yours like any other: edit it, add a picture, or change its time limit
-and points.
+and points. It keeps the category and topic it comes from, which the big screen shows with it.
 
 To fix or change a question in the library itself, use its **edit** link: the question opens in a
 pop-up like the editor's, with its difficulty. Your changes are kept on this server only and the
 question is marked *edited*; **Back to the original** undoes them.
+
+## Category and topic
+
+Above the question, **Category** and **Topic** say what it is about, say *Geography* and
+*Capitals*. Both are optional; the big screen shows them next to the question number, with the
+category's icon and colour from the library. They list the library's categories and topics, so
+questions from your quizzes and from the library are filed the same way. Questions from the
+library come with theirs filled in.
+
+To file questions under a topic the library lacks, add it on the admin page's **Questions** tab:
+**＋ Add a topic**, under the categories, opens a pop-up that takes a category (one of the
+library's, or a new one) and a topic. A new category also gets an icon and a colour, which the big
+screen shows it with; those other categories already have are greyed out. Added categories and
+topics are kept on this server; while a topic holds no library questions, the × next to it removes
+it, and its category goes with its last topic.
 
 ## Text with the question
 

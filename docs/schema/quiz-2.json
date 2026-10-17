@@ -275,6 +275,10 @@
           ],
           "description": "A typed bonus question, answered together with this one."
         },
+        "category": {
+          "description": "What the question is about, e.g. \"Geography\", shown on the big screen. Library questions\nkeep the category they come from.",
+          "type": "string"
+        },
         "explanation": {
           "description": "Shown on the big screen only once the answer is revealed: an explanation, a fun fact…",
           "type": "string"
@@ -347,6 +351,10 @@
             "integer",
             "null"
           ]
+        },
+        "topic": {
+          "description": "The subject within the category, e.g. \"Capitals\", shown with it.",
+          "type": "string"
         }
       },
       "required": [

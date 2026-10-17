@@ -385,6 +385,13 @@ pub struct Question {
     /// Name of an uploaded soundtrack the big screen plays once the answer is revealed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub explanation_audio: Option<String>,
+    /// What the question is about, e.g. "Geography", shown on the big screen. Library questions
+    /// keep the category they come from.
+    #[serde(default, skip_serializing_if = "String::is_empty")]
+    pub category: String,
+    /// The subject within the category, e.g. "Capitals", shown with it.
+    #[serde(default, skip_serializing_if = "String::is_empty")]
+    pub topic: String,
 }
 
 /// A bonus question: teams type its answer together with the main answer, and the judge can
@@ -1067,6 +1074,8 @@ mod tests {
             explanation: String::new(),
             explanation_image: None,
             explanation_audio: None,
+            category: String::new(),
+            topic: String::new(),
         }
     }
 

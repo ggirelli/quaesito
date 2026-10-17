@@ -22,8 +22,16 @@ All notable changes to quaesito are listed here. The format follows
 - Questions can hold a text, a picture or a video that the big screen shows only with the answer: an explanation, a
   fun fact (**＋ Add something to show with the answer** in the editor), and a soundtrack it plays then. Quiz files move to format 2 for it; older
   versions ask before importing them and would leave it out.
+- Questions can say what they are about: a category and a topic of the library, shown on the big screen next to the
+  question number with the category's icon and colour. Questions added from the library keep theirs, and the
+  editor's **Category** and **Topic** lists set them for any question. The **Questions** tab's **＋ Add a topic** adds
+  topics to a category of the library, or to a new one with an icon and a colour no other category has, and removes
+  the added ones.
 
 ### Changed
+
+- The editor shows a question's category, topic, time and points above its text, and **＋ Add soundtrack** next to
+  **＋ Add picture or video**. **Seconds** is now **Time (s)**.
 
 - Phones show "You're in!" first when waiting for the quiz to start; the team's name, picture and background are
   folded away under **Change your name or picture**, and **Done** folds them again. Teams can rename themselves there
