@@ -67,7 +67,9 @@ just test                               # every question must also be playable
 ## Fixing questions from the app
 
 The **edit** link on a library question saves the change on that server only, in the data folder's
-`library-edits.json`. To bring those edits into the library itself, run from the repository:
+`library-edits.json`; questions saved from quizzes go in `library-added.json`. The **report** link
+opens a [*Wrong library question*](https://github.com/ggirelli/quaesito/issues/new?template=wrong_question.yml)
+issue on GitHub, filled in with the question, its answer and its id. To bring those edits into the library itself, run from the repository:
 
 ```sh
 just library-apply-edits                          # reads data/library-edits.json

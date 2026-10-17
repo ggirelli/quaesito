@@ -15,6 +15,13 @@ All notable changes to quaesito are listed here. The format follows
   **Questions** tab browses them by category and topic, with search and filters. The editor's **＋ From the library**
   adds them one by one or at random, and a new quiz can be filled with random questions from the categories you
   tick.
+- Quiz questions can be saved to the server's library (the floppy-disk button on each question card), and a
+  question added from the library stays linked to it: the button shows whether either side changed, and its pop-up
+  updates the library from the quiz or the quiz from the library, saves the question as new, or unlinks it.
+- The library's filters have a **Source** list: questions that came with Quaesito, or were added here.
+- The editor's question navigator: a strip beside the list (above it on narrow screens) with a link to every question
+  and slide, which opens up around the pointer. The address bar keeps the editor's place, so a reload comes back to it.
+- **☰ Table view** in the editor: the whole quiz as a table, a row per question or slide.
 - Each library question has a **report** link, next to **edit**: it opens a GitHub issue reporting the question as
   wrong, filled in with the question and its answer.
 - Teams pick a background for their picture: one of six colours or five gradients, shown behind their initial and
