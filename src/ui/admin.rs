@@ -157,12 +157,15 @@ fn LoginForm() -> Element {
     }
 }
 
-/// Top bar of admin pages. With `back`, it links back to the quiz list.
+/// Top bar of admin pages, with the logo always first. With `back`, its right side links back to
+/// the quiz list.
 #[component]
 pub fn AdminHeader(#[props(default)] back: bool, children: Element) -> Element {
     let token: AdminToken = use_context();
     rsx! {
         header { class: "topbar",
+            Link { to: Route::Admin {}, Brand {} }
+            div { class: "row", {children} }
             div { class: "row",
                 if back {
                     Link { class: "button ghost", to: Route::Admin {},
@@ -170,10 +173,6 @@ pub fn AdminHeader(#[props(default)] back: bool, children: Element) -> Element {
                         "Quizzes"
                     }
                 }
-                Link { to: Route::Admin {}, Brand {} }
-            }
-            div { class: "row", {children} }
-            div { class: "row",
                 ThemeToggle { class: "button ghost icon" }
                 HelpLink { class: "button ghost", label: true }
                 Link {
