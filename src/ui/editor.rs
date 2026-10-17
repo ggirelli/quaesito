@@ -270,13 +270,6 @@ fn EditorForm(quiz: Quiz) -> Element {
                     SaveState::Failed => "Not saved, retrying…",
                 }
             }
-            button {
-                class: "button",
-                disabled: !issues().is_empty(),
-                title: if issues().is_empty() { "Try the quiz with the big screen and two phones side by side" } else { "Fix the quiz before testing it" },
-                onclick: test,
-                "🧪 Test"
-            }
         }
         main { class: "page editor",
             div { class: "editor-top stack",
@@ -337,6 +330,13 @@ fn EditorForm(quiz: Quiz) -> Element {
                 }
             }
             aside { class: "editor-side editor-shuffle",
+                button {
+                    class: "button",
+                    disabled: !issues().is_empty(),
+                    title: if issues().is_empty() { "Try the quiz with the big screen and two phones side by side" } else { "Fix the quiz before testing it" },
+                    onclick: test,
+                    "🧪 Test quiz"
+                }
                 button {
                     class: "button ghost shuffle",
                     disabled: !can_shuffle,
@@ -515,7 +515,7 @@ fn SettingsCard(settings: QuizSettings) -> Element {
     rsx! {
         section { class: "card stack",
             h2 { "Settings" }
-            label { class: "field inline",
+            label { class: "field inline beside",
                 span { "Default time per question (seconds)" }
                 input {
                     r#type: "number",
@@ -541,7 +541,7 @@ fn SettingsCard(settings: QuizSettings) -> Element {
                     on_select: move |i| draft.edit_settings(|s| s.reveal = if i == 0 { RevealMode::AfterEachQuestion } else { RevealMode::AtEnd }),
                 }
                 Choice {
-                    label: "Questions with several correct answers",
+                    label: "Several correct answers",
                     options: vec![
                         ("All or nothing", "Points only for picking exactly the correct answers."),
                         ("Partial credit", "Credit for each correct pick, minus wrong picks."),

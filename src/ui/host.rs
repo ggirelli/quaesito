@@ -138,7 +138,6 @@ fn HostScreen(code: String) -> Element {
                         "Code "
                         span { class: "code", "{view.code}" }
                     }
-                    ThemeToggle { class: "button ghost icon" }
                     button {
                         class: "button ghost",
                         title: if muted() { "Turn sound effects on" } else { "Mute sound effects" },
@@ -156,6 +155,7 @@ fn HostScreen(code: String) -> Element {
                         onclick: move |_| show_teams.set(true),
                         "Teams ({view.teams.len()})"
                     }
+                    ThemeToggle { class: "button ghost icon" }
                 }
             }
             if show_teams() {

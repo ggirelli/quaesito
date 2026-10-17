@@ -113,7 +113,6 @@ fn LoginForm() -> Element {
     let mut error = use_signal(|| None::<String>);
     rsx! {
         nav { class: "corner-links",
-            ThemeToggle { class: "corner-link" }
             HelpLink { class: "corner-link" }
             Link {
                 class: "corner-link",
@@ -122,6 +121,7 @@ fn LoginForm() -> Element {
                 aria_label: "Home page",
                 Icon { kind: IconKind::Home }
             }
+            ThemeToggle { class: "corner-link" }
         }
         main { class: "page center narrow stack",
             Brand { large: true }
@@ -157,12 +157,15 @@ fn LoginForm() -> Element {
     }
 }
 
-/// Top bar of admin pages. With `back`, it links back to the quiz list.
+/// Top bar of admin pages, with the logo always first. With `back`, its right side links back to
+/// the quiz list.
 #[component]
 pub fn AdminHeader(#[props(default)] back: bool, children: Element) -> Element {
     let token: AdminToken = use_context();
     rsx! {
         header { class: "topbar",
+            Link { to: Route::Admin {}, Brand {} }
+            div { class: "row", {children} }
             div { class: "row",
                 if back {
                     Link { class: "button ghost", to: Route::Admin {},
@@ -170,11 +173,6 @@ pub fn AdminHeader(#[props(default)] back: bool, children: Element) -> Element {
                         "Quizzes"
                     }
                 }
-                Link { to: Route::Admin {}, Brand {} }
-            }
-            div { class: "row", {children} }
-            div { class: "row",
-                ThemeToggle { class: "button ghost icon" }
                 HelpLink { class: "button ghost", label: true }
                 Link {
                     class: "button ghost",
@@ -184,6 +182,7 @@ pub fn AdminHeader(#[props(default)] back: bool, children: Element) -> Element {
                     "Home"
                 }
                 button { class: "button ghost", onclick: move |_| token.clear(), "Log out" }
+                ThemeToggle { class: "button ghost icon" }
             }
         }
     }

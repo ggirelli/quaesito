@@ -1,7 +1,7 @@
 # Testing a quiz
 
-Press **🧪 Test** on the admin page or in the editor (which saves first) to play the quiz on your
-own: the real big screen and two phones appear side by side, already joined.
+Press **🧪 Test** on the admin page, or **🧪 Test quiz** in the editor (which saves first), to play
+the quiz on your own: the real big screen and two phones appear side by side, already joined.
 
 ![Test mode with the big screen and two phones](screenshots/test-mode.webp)
 
