@@ -826,12 +826,10 @@ fn qr_svg(url: &str) -> Option<String> {
 fn QuestionHeader(question: QuestionInfo, children: Element) -> Element {
     rsx! {
         div { class: "question-head",
-            span { class: "muted",
-                "Question {question.number} of {question.total}"
-                if question.multiplier > 1 {
-                    span { class: "multiplier", "×{question.multiplier} points" }
-                }
+            span { class: "muted question-count",
+                span { "Question {question.number} of {question.total}" }
                 if !question.category.is_empty() {
+                    span { "—" }
                     span {
                         class: "question-subject",
                         style: "--category: {category_look(&question.category).1}",
@@ -841,6 +839,9 @@ fn QuestionHeader(question: QuestionInfo, children: Element) -> Element {
                             span { class: "question-topic", "· {question.topic}" }
                         }
                     }
+                }
+                if question.multiplier > 1 {
+                    span { class: "multiplier", "×{question.multiplier} points" }
                 }
             }
             {children}

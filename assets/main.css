@@ -1441,11 +1441,22 @@ table.results {
 
 /* The question's category and topic, next to its number on the big screen: plain text, the
    category in its icon and colour from the library. */
+/* The counter, the category and topic after a dash, and the points multiplier, on one line. */
+.question-count {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.question-count .multiplier {
+  margin-left: 0.3em;
+}
+
 .question-subject {
   display: inline-flex;
   align-items: center;
   gap: 0.35em;
-  margin-left: 0.8em;
   color: var(--category);
   font-weight: 700;
 }
