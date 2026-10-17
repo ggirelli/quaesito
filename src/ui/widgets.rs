@@ -276,6 +276,72 @@ pub enum IconKind {
     Users,
     Trophy,
     Cpu,
+    // More for the categories added on a server.
+    Heart,
+    Camera,
+    Compass,
+    Anchor,
+    Gift,
+    Map,
+    Zap,
+    Smile,
+    Award,
+    Briefcase,
+    Headphones,
+    Feather,
+    Tv,
+    Truck,
+    ShoppingBag,
+    Umbrella,
+    DollarSign,
+    Activity,
+    Grid,
+    Hash,
+}
+
+impl IconKind {
+    /// The icon a category's look names (see [`crate::library::CATEGORY_ICONS`]); a question
+    /// mark for any other name.
+    #[must_use]
+    pub fn of_category(key: &str) -> Self {
+        match key {
+            "pen-tool" => Self::PenTool,
+            "film" => Self::Film,
+            "coffee" => Self::Coffee,
+            "globe" => Self::Globe,
+            "clock" => Self::Clock,
+            "type" => Self::Type,
+            "book" => Self::Book,
+            "music" => Self::Music,
+            "leaf" => Self::Leaf,
+            "star" => Self::Star,
+            "flask" => Self::Flask,
+            "users" => Self::Users,
+            "trophy" => Self::Trophy,
+            "cpu" => Self::Cpu,
+            "heart" => Self::Heart,
+            "camera" => Self::Camera,
+            "compass" => Self::Compass,
+            "anchor" => Self::Anchor,
+            "gift" => Self::Gift,
+            "map" => Self::Map,
+            "zap" => Self::Zap,
+            "smile" => Self::Smile,
+            "award" => Self::Award,
+            "briefcase" => Self::Briefcase,
+            "headphones" => Self::Headphones,
+            "feather" => Self::Feather,
+            "tv" => Self::Tv,
+            "truck" => Self::Truck,
+            "shopping-bag" => Self::ShoppingBag,
+            "umbrella" => Self::Umbrella,
+            "dollar-sign" => Self::DollarSign,
+            "activity" => Self::Activity,
+            "grid" => Self::Grid,
+            "hash" => Self::Hash,
+            _ => Self::Help,
+        }
+    }
 }
 
 /// Where this device remembers the chosen colour theme ("light"; dark when unset).
@@ -492,6 +558,97 @@ pub fn Icon(kind: IconKind) -> Element {
             line { x1: 20, y1: 14, x2: 23, y2: 14 }
             line { x1: 1, y1: 9, x2: 4, y2: 9 }
             line { x1: 1, y1: 14, x2: 4, y2: 14 }
+        },
+        IconKind::Heart => rsx! {
+            path { d: "M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" }
+        },
+        IconKind::Camera => rsx! {
+            path { d: "M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" }
+            circle { cx: 12, cy: 13, r: 4 }
+        },
+        IconKind::Compass => rsx! {
+            circle { cx: 12, cy: 12, r: 10 }
+            polygon { points: "16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" }
+        },
+        IconKind::Anchor => rsx! {
+            circle { cx: 12, cy: 5, r: 3 }
+            line { x1: 12, y1: 22, x2: 12, y2: 8 }
+            path { d: "M5 12H2a10 10 0 0 0 20 0h-3" }
+        },
+        IconKind::Gift => rsx! {
+            polyline { points: "20 12 20 22 4 22 4 12" }
+            rect { x: 2, y: 7, width: 20, height: 5 }
+            line { x1: 12, y1: 22, x2: 12, y2: 7 }
+            path { d: "M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" }
+            path { d: "M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" }
+        },
+        IconKind::Map => rsx! {
+            polygon { points: "1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" }
+            line { x1: 8, y1: 2, x2: 8, y2: 18 }
+            line { x1: 16, y1: 6, x2: 16, y2: 22 }
+        },
+        IconKind::Zap => rsx! {
+            polygon { points: "13 2 3 14 12 14 11 22 21 10 12 10 13 2" }
+        },
+        IconKind::Smile => rsx! {
+            circle { cx: 12, cy: 12, r: 10 }
+            path { d: "M8 14s1.5 2 4 2 4-2 4-2" }
+            line { x1: 9, y1: 9, x2: 9.01, y2: 9 }
+            line { x1: 15, y1: 9, x2: 15.01, y2: 9 }
+        },
+        IconKind::Award => rsx! {
+            circle { cx: 12, cy: 8, r: 7 }
+            polyline { points: "8.21 13.89 7 23 12 20 17 23 15.79 13.88" }
+        },
+        IconKind::Briefcase => rsx! {
+            rect { x: 2, y: 7, width: 20, height: 14, rx: 2, ry: 2 }
+            path { d: "M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" }
+        },
+        IconKind::Headphones => rsx! {
+            path { d: "M3 18v-6a9 9 0 0 1 18 0v6" }
+            path { d: "M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" }
+        },
+        IconKind::Feather => rsx! {
+            path { d: "M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z" }
+            line { x1: 16, y1: 8, x2: 2, y2: 22 }
+            line { x1: 17.5, y1: 15, x2: 9, y2: 15 }
+        },
+        IconKind::Tv => rsx! {
+            rect { x: 2, y: 7, width: 20, height: 15, rx: 2, ry: 2 }
+            polyline { points: "17 2 12 7 7 2" }
+        },
+        IconKind::Truck => rsx! {
+            rect { x: 1, y: 3, width: 15, height: 13 }
+            polygon { points: "16 8 20 8 23 11 23 16 16 16 16 8" }
+            circle { cx: 5.5, cy: 18.5, r: 2.5 }
+            circle { cx: 18.5, cy: 18.5, r: 2.5 }
+        },
+        IconKind::ShoppingBag => rsx! {
+            path { d: "M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" }
+            line { x1: 3, y1: 6, x2: 21, y2: 6 }
+            path { d: "M16 10a4 4 0 0 1-8 0" }
+        },
+        IconKind::Umbrella => rsx! {
+            path { d: "M23 12a11.05 11.05 0 0 0-22 0zm-5 7a3 3 0 0 1-6 0v-7" }
+        },
+        IconKind::DollarSign => rsx! {
+            line { x1: 12, y1: 1, x2: 12, y2: 23 }
+            path { d: "M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" }
+        },
+        IconKind::Activity => rsx! {
+            polyline { points: "22 12 18 12 15 21 9 3 6 12 2 12" }
+        },
+        IconKind::Grid => rsx! {
+            rect { x: 3, y: 3, width: 7, height: 7 }
+            rect { x: 14, y: 3, width: 7, height: 7 }
+            rect { x: 14, y: 14, width: 7, height: 7 }
+            rect { x: 3, y: 14, width: 7, height: 7 }
+        },
+        IconKind::Hash => rsx! {
+            line { x1: 4, y1: 9, x2: 20, y2: 9 }
+            line { x1: 4, y1: 15, x2: 20, y2: 15 }
+            line { x1: 10, y1: 3, x2: 8, y2: 21 }
+            line { x1: 16, y1: 3, x2: 14, y2: 21 }
         },
     };
     rsx! {

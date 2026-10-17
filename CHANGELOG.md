@@ -24,8 +24,9 @@ All notable changes to quaesito are listed here. The format follows
   versions ask before importing them and would leave it out.
 - Questions can say what they are about: a category and a topic of the library, shown on the big screen next to the
   question number with the category's icon and colour. Questions added from the library keep theirs, and the
-  editor's **Category** and **Topic** lists set them for any question. The **Questions** tab adds topics, to a
-  category of the library or a new one, and removes the added ones.
+  editor's **Category** and **Topic** lists set them for any question. The **Questions** tab's **＋ Add a topic** adds
+  topics to a category of the library, or to a new one with an icon and a colour no other category has, and removes
+  the added ones.
 
 ### Changed
 

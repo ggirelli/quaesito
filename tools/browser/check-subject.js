@@ -10,27 +10,44 @@ function expect(what, ok) {
   if (!ok) failed += 1;
 }
 
-/** Adds a topic with the Questions tab's form. */
-async function addTopic(page, category, topic) {
-  const [c, t] = await page.$$('.library-add-topic input');
-  await c.evaluate((i) => i.select());
-  await page.keyboard.press('Backspace');
+/** Adds a topic with the Questions tab's pop-up, picking `look` ([icon, colour]) if given; returns
+ * the pop-up's text if it stays open (refused). */
+async function addTopic(page, category, topic, look) {
+  await L.clickText(page, '.library-nav button', 'Add a topic');
+  await page.waitForSelector('.add-topic-dialog input');
+  const [c] = await page.$$('.add-topic-dialog input');
   await c.type(category);
+  if (look) {
+    await page.click(`.look-choice[aria-label="Icon ${look[0]}"]`);
+    await page.click(`.look-choice[aria-label="Colour ${look[1]}"]`);
+  }
+  const [, t] = await page.$$('.add-topic-dialog input');
   await t.type(topic);
-  await L.clickText(page, '.library-add-topic button', 'Add topic');
+  await L.clickText(page, '.add-topic-dialog button', 'Add topic');
   await L.sleep(800);
+  const open = await page.$eval('.add-topic-dialog', (d) => d.innerText.replace(/\n/g, ' ')).catch(() => null);
+  if (open) await L.clickText(page, '.add-topic-dialog button', 'Close');
+  return open;
 }
 
 (async () => {
   const ctx = await L.setup({ questions: [L.choice('Who won the 1972 world chess title?', 0, ['Fischer', 'Spassky'])] });
 
   const tab = await L.openAdmin(ctx, '/admin/questions', 1280, 900);
-  await tab.waitForSelector('.library-add-topic input');
-  await addTopic(tab, 'Board games', 'Chess');
+  await tab.waitForSelector('.library-nav .add-topic');
+  // A new category: the library's icons and colours are greyed out.
+  await L.clickText(tab, '.library-nav button', 'Add a topic');
+  await tab.waitForSelector('.add-topic-dialog input');
+  await tab.type('.add-topic-dialog input', 'Board games');
+  const greyed = await tab.$eval('.look-choice[aria-label="Icon globe"]', (b) => b.disabled)
+    && await tab.$eval('.look-choice[aria-label="Colour #0d9488"]', (b) => b.disabled)
+    && !(await tab.$eval('.look-choice[aria-label="Icon grid"]', (b) => b.disabled));
+  expect('taken icons and colours are greyed out', greyed);
+  await L.clickText(tab, '.add-topic-dialog button', 'Close');
+  expect('a new category is added', await addTopic(tab, 'Board games', 'Chess', ['grid', '#f43f5e']) === null);
   await addTopic(tab, 'board games', 'Typo');
-  await addTopic(tab, 'Geography', 'Capitals');
-  const refused = await tab.$eval('.library-add-topic', (f) => f.innerText);
-  expect(`a library topic is refused: ${refused.replace(/\n/g, ' ')}`, refused.includes('already has the topic'));
+  const refused = await addTopic(tab, 'Geography', 'Capitals');
+  expect(`a library topic is refused: ${refused}`, !!refused && refused.includes('already has the topic'));
   await L.clickText(tab, '.library-category', 'Board games');
   await tab.waitForSelector('.library-topic-row');
   let topics = await tab.$$eval('.library-topic-row', (rs) => rs.map((r) => r.innerText.replace(/\n/g, ' ')));
@@ -77,6 +94,8 @@ async function addTopic(page, category, topic) {
   await host.waitForSelector('.question-head');
   const shown = await host.$eval('.question-subject', (s) => s.innerText.replace(/\s+/g, ' ')).catch(() => 'none');
   expect(`big screen: ${shown}`, shown === 'Board games · Chess');
+  const look = await host.$eval('.question-subject', (s) => ({ color: s.style.getPropertyValue('--category'), rects: s.querySelectorAll('svg rect').length }));
+  expect(`its look: ${JSON.stringify(look)}`, look.color === '#f43f5e' && look.rects === 4);
   await host.screenshot({ path: 'out/subject-host.png' });
   // Refusing a topic the library has answers 500, as server functions do for errors.
   const errors = ctx.errors.filter((e) => !(e.startsWith('/admin/questions') && e.includes('status of 500')));

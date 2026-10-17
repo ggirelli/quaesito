@@ -1079,11 +1079,56 @@ input.short {
   flex: none;
 }
 
-/* The Questions tab's form for a new topic, under the categories. */
-.library-add-topic {
+/* The Questions tab's button for a new topic, under the categories. */
+.library-nav .add-topic {
   margin-top: 0.8rem;
-  padding-top: 0.8rem;
-  border-top: 1px solid var(--border);
+}
+
+.add-topic-dialog {
+  max-width: 34rem;
+}
+
+/* The category a new topic goes in: its icon and name in its colour. */
+.category-preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+/* The icons and colours a new category can have; those other categories have are greyed out. */
+.look-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.look-choice {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-2);
+  cursor: pointer;
+}
+
+.look-choice.swatch {
+  background: var(--swatch);
+}
+
+.look-choice.selected {
+  border-color: var(--fg);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.look-choice:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
 }
 
 /* The difficulty and answer type lists, under a small title. */

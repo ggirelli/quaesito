@@ -13,37 +13,40 @@ use super::{
 };
 use crate::{
     api::{add_library_topic, library_subjects, question_library, remove_library_topic},
-    library::{DIFFICULTIES, KINDS, LibraryCategory, LibraryEntry, LibraryFilter, LibrarySort},
+    library::{
+        CATEGORY_COLORS, CATEGORY_ICONS, CategoryLook, DIFFICULTIES, KINDS, LibraryCategory,
+        LibraryEntry, LibraryFilter, LibrarySort, look_of,
+    },
     model::{Question, QuestionKind},
 };
 
-/// Each category's icon and colour, shown in the lists and as a stripe beside its questions.
-pub fn category_look(category: &str) -> (IconKind, &'static str) {
-    match category {
-        "Art & Design" => (IconKind::PenTool, "#ef4444"),
-        "Film & TV" => (IconKind::Film, "#a855f7"),
-        "Food & Drink" => (IconKind::Coffee, "#f97316"),
-        "Geography" => (IconKind::Globe, "#0d9488"),
-        "History" => (IconKind::Clock, "#a16207"),
-        "Language & Words" => (IconKind::Type, "#84cc16"),
-        "Literature" => (IconKind::Book, "#6366f1"),
-        "Music" => (IconKind::Music, "#ec4899"),
-        "Nature" => (IconKind::Leaf, "#22c55e"),
-        "Pop Culture" => (IconKind::Star, "#eab308"),
-        "Science" => (IconKind::Flask, "#06b6d4"),
-        "Society & Culture" => (IconKind::Users, "#d946ef"),
-        "Sport" => (IconKind::Trophy, "#2563eb"),
-        "Technology" => (IconKind::Cpu, "#64748b"),
-        _ => (IconKind::Help, "#94a3b8"),
+/// The library's categories with their looks, those added on this server included, once loaded:
+/// what the big screen draws a question's category with.
+#[derive(Clone, Copy)]
+pub struct Categories(pub Resource<Vec<LibraryCategory>>);
+
+impl Categories {
+    /// Loads the categories.
+    pub fn use_loaded() -> Self {
+        let token: AdminToken = use_context();
+        Self(use_resource(move || async move {
+            library_subjects(token.get()).await.unwrap_or_default()
+        }))
+    }
+
+    /// The icon and colour of `category`; the library's own until the categories load.
+    pub fn look(self, category: &str) -> CategoryLook {
+        look_of(category, self.0.read().as_deref().unwrap_or_default())
     }
 }
 
 /// A category's icon, in its colour.
 #[component]
-pub fn CategoryIcon(category: String) -> Element {
-    let (kind, color) = category_look(&category);
+pub fn CategoryIcon(look: CategoryLook) -> Element {
     rsx! {
-        span { class: "category-icon", style: "color: {color}", Icon { kind } }
+        span { class: "category-icon", style: "color: {look.color}",
+            Icon { kind: IconKind::of_category(&look.icon) }
+        }
     }
 }
 
@@ -126,6 +129,8 @@ pub fn LibraryBrowser(
     let mut difficulty = use_signal(|| None::<u8>);
     let mut kind = use_signal(String::new);
     let mut sort = use_signal(LibrarySort::default);
+    // Whether the pop-up adding a topic is open.
+    let mut adding = use_signal(|| false);
     // The question being edited in a pop-up.
     let mut editing = use_signal(|| None::<LibraryEntry>);
     let mut shown_count = use_signal(|| PAGE);
@@ -214,14 +219,13 @@ pub fn LibraryBrowser(
     };
     let categories = match &*subjects.read() {
         Some(Ok(found)) => found.clone(),
-        _ => crate::library::subjects(entries, &[]),
+        _ => crate::library::subjects(entries, &crate::library::Added::default()),
     };
     let topics = categories
         .iter()
         .find(|c| Some(&c.name) == category().as_ref())
         .map(|c| c.topics.clone())
         .unwrap_or_default();
-    let names: Vec<String> = categories.iter().map(|c| c.name.clone()).collect();
     // On the Questions tab, a topic added on this server can be removed while it has no
     // questions.
     let remove_topic = move |category: String, topic: String| async move {
@@ -233,6 +237,16 @@ pub fn LibraryBrowser(
         }
     };
     rsx! {
+        if adding() {
+            AddTopicDialog {
+                categories: categories.clone(),
+                on_added: move |()| {
+                    adding.set(false);
+                    subjects.restart();
+                },
+                on_close: move |()| adding.set(false),
+            }
+        }
         if let Some(entry) = editing() {
             LibraryQuestionEditor {
                 key: "{entry.id}",
@@ -269,7 +283,7 @@ pub fn LibraryBrowser(
                     span { class: "grow", "All categories" }
                     span { class: "count", "{entries.len()}" }
                 }
-                for LibraryCategory { name, count, .. } in categories {
+                for LibraryCategory { name, count, look, .. } in categories.clone() {
                     div { key: "{name}", class: "library-group",
                         button {
                             class: "library-category",
@@ -279,7 +293,7 @@ pub fn LibraryBrowser(
                                 let name = name.clone();
                                 move |_| pick_category(Some(name.clone()))
                             },
-                            CategoryIcon { category: name.clone() }
+                            CategoryIcon { look }
                             span { class: "grow", "{name}" }
                             span { class: "count", "{count}" }
                         }
@@ -317,7 +331,12 @@ pub fn LibraryBrowser(
                     }
                 }
                 if on_add.is_none() {
-                    AddTopicForm { categories: names, on_added: move |()| subjects.restart() }
+                    button {
+                        class: "button ghost add-topic",
+                        title: "Add a topic to a category, or a new category, to file questions under",
+                        onclick: move |_| adding.set(true),
+                        "＋ Add a topic"
+                    }
                 }
             }
             aside { class: "library-filters", aria_label: "Filters",
@@ -396,6 +415,7 @@ pub fn LibraryBrowser(
                         LibraryRow {
                             key: "{index}",
                             entry: (*entry).clone(),
+                            look: look_of(&entry.category, &categories),
                             in_quiz: present.contains(entry.question.text.as_str()),
                             on_add,
                             on_edit: move |entry| editing.set(Some(entry)),
@@ -414,53 +434,144 @@ pub fn LibraryBrowser(
     }
 }
 
-/// Adds a topic to a category of the library, or to a new one, so quizzes can file their
-/// questions under it.
+/// A pop-up adding a topic to a category of the library, or to a new one with an icon and a
+/// colour no other category has, so quizzes can file their questions under it.
 #[component]
-fn AddTopicForm(
-    /// The categories so far, suggested.
-    categories: Vec<String>,
+fn AddTopicDialog(
+    /// The categories so far, with their looks.
+    categories: Vec<LibraryCategory>,
     on_added: EventHandler<()>,
+    on_close: EventHandler<()>,
 ) -> Element {
     let token: AdminToken = use_context();
+    let taken_icons: Vec<String> = categories.iter().map(|c| c.look.icon.clone()).collect();
+    let taken_colors: Vec<String> = categories.iter().map(|c| c.look.color.clone()).collect();
     let mut category = use_signal(String::new);
     let mut topic = use_signal(String::new);
+    // A new category starts with the first icon and colour still free.
+    let mut icon = use_signal(|| {
+        let free = CATEGORY_ICONS
+            .iter()
+            .find(|i| !taken_icons.iter().any(|t| t == *i));
+        free.map(|i| (*i).to_owned()).unwrap_or_default()
+    });
+    let mut color = use_signal(|| {
+        let free = CATEGORY_COLORS
+            .iter()
+            .find(|c| !taken_colors.iter().any(|t| t == *c));
+        free.map(|c| (*c).to_owned()).unwrap_or_default()
+    });
     let mut error = use_signal(|| None::<String>);
+
+    let typed = category().trim().to_lowercase();
+    let existing = categories
+        .iter()
+        .find(|c| c.name.to_lowercase() == typed)
+        .cloned();
+    let new_category = existing.is_none() && !typed.is_empty();
+    let blank = typed.is_empty()
+        || topic().trim().is_empty()
+        || (new_category && (icon().is_empty() || color().is_empty()));
     let add = move |evt: FormEvent| async move {
         evt.prevent_default();
-        match add_library_topic(token.get(), category(), topic()).await {
-            Ok(_) => {
-                topic.set(String::new());
-                error.set(None);
-                on_added.call(());
-            }
+        let look = new_category.then(|| CategoryLook {
+            icon: icon(),
+            color: color(),
+        });
+        match add_library_topic(token.get(), category(), topic(), look).await {
+            Ok(_) => on_added.call(()),
             Err(err) => error.set(Some(message(&err))),
         }
     };
-    let blank = category().trim().is_empty() || topic().trim().is_empty();
     rsx! {
-        form { class: "library-add-topic stack-tight", onsubmit: add,
-            span { class: "library-filter-title", "Add a topic" }
-            input {
-                list: "library-category-names",
-                placeholder: "Category, new or not",
-                aria_label: "Category",
-                value: category,
-                oninput: move |e| category.set(e.value()),
-            }
-            datalist { id: "library-category-names",
-                for name in categories {
-                    option { value: "{name}" }
+        Dialog { title: "Add a topic", class: "add-topic-dialog", on_close,
+            form { class: "stack", onsubmit: add,
+                label { class: "field",
+                    span { "Category" }
+                    input {
+                        list: "library-category-names",
+                        placeholder: "One of the library's, or a new one",
+                        autofocus: true,
+                        value: category,
+                        oninput: move |e| category.set(e.value()),
+                    }
+                    datalist { id: "library-category-names",
+                        for c in categories.iter() {
+                            option { value: "{c.name}" }
+                        }
+                    }
+                }
+                if let Some(found) = existing {
+                    p { class: "category-preview",
+                        CategoryIcon { look: found.look.clone() }
+                        span { style: "color: {found.look.color}", "{found.name}" }
+                        span { class: "muted small", "gets a new topic." }
+                    }
+                } else if new_category {
+                    p { class: "category-preview",
+                        CategoryIcon {
+                            look: CategoryLook {
+                                icon: icon(),
+                                color: color(),
+                            },
+                        }
+                        span { style: "color: {color}", "{category().trim()}" }
+                        span { class: "muted small", "is a new category: pick its icon and colour." }
+                    }
+                    div { class: "look-choices", role: "group", aria_label: "Icon",
+                        for key in CATEGORY_ICONS {
+                            button {
+                                r#type: "button",
+                                class: "look-choice",
+                                class: if icon() == key { "selected" },
+                                style: "color: {color}",
+                                disabled: taken_icons.iter().any(|t| t == key),
+                                title: if taken_icons.iter().any(|t| t == key) { "Another category has this icon" } else { key },
+                                aria_label: "Icon {key}",
+                                aria_pressed: icon() == key,
+                                onclick: move |_| icon.set(key.to_owned()),
+                                Icon { kind: IconKind::of_category(key) }
+                            }
+                        }
+                    }
+                    div { class: "look-choices", role: "group", aria_label: "Colour",
+                        for value in CATEGORY_COLORS {
+                            button {
+                                r#type: "button",
+                                class: "look-choice swatch",
+                                class: if color() == value { "selected" },
+                                style: "--swatch: {value}",
+                                disabled: taken_colors.iter().any(|t| t == value),
+                                title: if taken_colors.iter().any(|t| t == value) { "Another category has this colour" } else { value },
+                                aria_label: "Colour {value}",
+                                aria_pressed: color() == value,
+                                onclick: move |_| color.set(value.to_owned()),
+                            }
+                        }
+                    }
+                    p { class: "muted small",
+                        "Icons and colours other categories have are greyed out."
+                    }
+                }
+                label { class: "field",
+                    span { "Topic" }
+                    input {
+                        placeholder: "e.g. Chess",
+                        value: topic,
+                        oninput: move |e| topic.set(e.value()),
+                    }
+                }
+                ErrorBox { error: error() }
+                div { class: "row between",
+                    span { class: "muted small", "Added topics are kept on this server." }
+                    button {
+                        class: "button primary",
+                        r#type: "submit",
+                        disabled: blank,
+                        "＋ Add topic"
+                    }
                 }
             }
-            input {
-                placeholder: "Topic",
-                aria_label: "Topic",
-                value: topic,
-                oninput: move |e| topic.set(e.value()),
-            }
-            button { class: "button", r#type: "submit", disabled: blank, "＋ Add topic" }
-            ErrorBox { error: error() }
         }
     }
 }
@@ -509,19 +620,21 @@ fn FilterList(
 #[component]
 fn LibraryRow(
     entry: LibraryEntry,
+    look: CategoryLook,
     in_quiz: bool,
     on_add: Option<EventHandler<Vec<Question>>>,
     on_edit: EventHandler<LibraryEntry>,
 ) -> Element {
     let question = entry.to_question();
     let edited = entry.clone();
-    let (icon, color) = category_look(&entry.category);
     rsx! {
-        li { class: "list-row library-row", style: "--category: {color}",
+        li { class: "list-row library-row", style: "--category: {look.color}",
             div { class: "grow stack-tight",
                 div { class: "muted small library-meta",
                     span {
-                        span { class: "category-icon", Icon { kind: icon } }
+                        span { class: "category-icon",
+                            Icon { kind: IconKind::of_category(&look.icon) }
+                        }
                         "{entry.category} · {entry.topic}"
                         if entry.edited {
                             span { class: "library-edited", " · edited" }
@@ -674,7 +787,7 @@ pub fn RandomQuizFields(
                                     }
                                 },
                             }
-                            CategoryIcon { category: name.clone() }
+                            CategoryIcon { look: look_of(&name, &[]) }
                             span { "{name}" }
                             span { class: "muted small", "({count})" }
                         }

@@ -59,9 +59,11 @@ questions from your quizzes and from the library are filed the same way. Questio
 library come with theirs filled in.
 
 To file questions under a topic the library lacks, add it on the admin page's **Questions** tab:
-**Add a topic**, under the categories, takes a category (one of the library's, or a new one) and a
-topic. Added topics are kept on this server; while they hold no library questions, the × next to
-them removes them.
+**＋ Add a topic**, under the categories, opens a pop-up that takes a category (one of the
+library's, or a new one) and a topic. A new category also gets an icon and a colour, which the big
+screen shows it with; those other categories already have are greyed out. Added categories and
+topics are kept on this server; while a topic holds no library questions, the × next to it removes
+it, and its category goes with its last topic.
 
 ## Text with the question
 

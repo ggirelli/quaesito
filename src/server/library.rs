@@ -7,7 +7,10 @@ use serde::{Deserialize, Serialize};
 use tokio::sync::Mutex;
 
 use crate::{
-    library::{AddedTopic, LibraryCategory, LibraryEdit, LibraryEntry},
+    library::{
+        Added, AddedCategory, AddedTopic, CATEGORY_COLORS, CATEGORY_ICONS, CategoryLook,
+        LibraryCategory, LibraryEdit, LibraryEntry,
+    },
     model::Quiz,
 };
 
@@ -145,43 +148,44 @@ impl LibraryEdits {
 /// file their questions under these and the library's own.
 pub struct AddedTopics {
     path: PathBuf,
-    topics: Mutex<Vec<AddedTopic>>,
+    added: Mutex<Added>,
 }
 
 impl AddedTopics {
-    /// Reads the topics saved at `path`, if any.
+    /// Reads the categories and topics saved at `path`, if any.
     ///
     /// # Errors
     /// Fails if the file exists but cannot be read or parsed.
     pub async fn open(path: PathBuf) -> anyhow::Result<Self> {
-        let topics = match tokio::fs::read(&path).await {
+        let added = match tokio::fs::read(&path).await {
             Ok(bytes) => serde_json::from_slice(&bytes)
                 .with_context(|| format!("reading {}", path.display()))?,
-            Err(err) if err.kind() == std::io::ErrorKind::NotFound => Vec::new(),
+            Err(err) if err.kind() == std::io::ErrorKind::NotFound => Added::default(),
             Err(err) => return Err(err).with_context(|| format!("reading {}", path.display())),
         };
         Ok(Self {
             path,
-            topics: Mutex::new(topics),
+            added: Mutex::new(added),
         })
     }
 
     /// Every category with its topics: those of `entries`, and the ones added here.
     pub async fn subjects(&self, entries: &[LibraryEntry]) -> Vec<LibraryCategory> {
-        crate::library::subjects(entries, &self.topics.lock().await)
+        crate::library::subjects(entries, &*self.added.lock().await)
     }
 
-    /// Adds `topic` to `category`, a new one or one of `entries` (whatever the case it is typed
-    /// in), and returns every category.
+    /// Adds `topic` to `category`, one of the existing ones (whatever the case it is typed in) or
+    /// a new one with `look`, and returns every category.
     ///
     /// # Errors
-    /// Fails if a name is empty or too long, the topic already exists, or the file cannot be
-    /// written.
+    /// Fails if a name is empty or too long, the topic already exists, a new category has no
+    /// look or one another category has, or the file cannot be written.
     pub async fn add(
         &self,
         entries: &[LibraryEntry],
         category: &str,
         topic: &str,
+        look: Option<CategoryLook>,
     ) -> anyhow::Result<Vec<LibraryCategory>> {
         let (category, topic) = (category.trim(), topic.trim());
         anyhow::ensure!(
@@ -192,23 +196,39 @@ impl AddedTopics {
             category.chars().count() <= MAX_NAME_CHARS && topic.chars().count() <= MAX_NAME_CHARS,
             "Keep names to {MAX_NAME_CHARS} characters."
         );
-        let mut topics = self.topics.lock().await;
+        let mut added = self.added.lock().await;
         let same = |a: &str, b: &str| a.to_lowercase() == b.to_lowercase();
-        let existing = crate::library::subjects(entries, &topics);
-        let found = existing.iter().find(|c| same(&c.name, category));
-        if let Some(known) = found.and_then(|c| c.topics.iter().find(|t| same(&t.name, topic))) {
-            anyhow::bail!(
-                "{} already has the topic {}.",
-                found.map_or(category, |c| &c.name),
-                known.name
+        let existing = crate::library::subjects(entries, &added);
+        let name = if let Some(found) = existing.iter().find(|c| same(&c.name, category)) {
+            if let Some(known) = found.topics.iter().find(|t| same(&t.name, topic)) {
+                anyhow::bail!("{} already has the topic {}.", found.name, known.name);
+            }
+            found.name.clone()
+        } else {
+            let look = look.context("Pick an icon and a colour for the new category.")?;
+            anyhow::ensure!(
+                CATEGORY_ICONS.contains(&look.icon.as_str())
+                    && CATEGORY_COLORS.contains(&look.color.as_str()),
+                "Pick one of the icons and colours offered."
             );
-        }
-        topics.push(AddedTopic {
-            category: found.map_or(category, |c| &c.name).to_owned(),
+            if let Some(other) = existing.iter().find(|c| c.look.icon == look.icon) {
+                anyhow::bail!("{} already has this icon.", other.name);
+            }
+            if let Some(other) = existing.iter().find(|c| c.look.color == look.color) {
+                anyhow::bail!("{} already has this colour.", other.name);
+            }
+            added.categories.push(AddedCategory {
+                name: category.to_owned(),
+                look,
+            });
+            category.to_owned()
+        };
+        added.topics.push(AddedTopic {
+            category: name,
             topic: topic.to_owned(),
         });
-        self.write(&topics).await?;
-        Ok(crate::library::subjects(entries, &topics))
+        self.write(&added).await?;
+        Ok(crate::library::subjects(entries, &added))
     }
 
     /// Removes a topic added here, and its category if it has no other, and returns every
@@ -222,19 +242,23 @@ impl AddedTopics {
         category: &str,
         topic: &str,
     ) -> anyhow::Result<Vec<LibraryCategory>> {
-        let mut topics = self.topics.lock().await;
-        let index = topics
+        let mut added = self.added.lock().await;
+        let index = added
+            .topics
             .iter()
             .position(|t| t.category == category && t.topic == topic)
             .context("Only topics added on this server can be removed.")?;
-        topics.remove(index);
-        self.write(&topics).await?;
-        Ok(crate::library::subjects(entries, &topics))
+        added.topics.remove(index);
+        if !added.topics.iter().any(|t| t.category == category) {
+            added.categories.retain(|c| c.name != category);
+        }
+        self.write(&added).await?;
+        Ok(crate::library::subjects(entries, &added))
     }
 
-    async fn write(&self, topics: &[AddedTopic]) -> anyhow::Result<()> {
+    async fn write(&self, added: &Added) -> anyhow::Result<()> {
         let tmp = self.path.with_extension("json.tmp");
-        tokio::fs::write(&tmp, serde_json::to_vec_pretty(topics)?).await?;
+        tokio::fs::write(&tmp, serde_json::to_vec_pretty(added)?).await?;
         tokio::fs::rename(&tmp, &self.path).await?;
         Ok(())
     }
@@ -327,6 +351,17 @@ mod tests {
         tokio::fs::remove_dir_all(dir).await.unwrap();
     }
 
+    #[test]
+    fn every_library_category_has_a_look() {
+        for entry in entries() {
+            assert!(
+                CategoryLook::of_library(&entry.category).is_some(),
+                "{}",
+                entry.category
+            );
+        }
+    }
+
     #[tokio::test]
     async fn topics_are_added_kept_and_removed() {
         let dir = std::env::temp_dir().join(format!("quaesito-topics-{}", uuid::Uuid::new_v4()));
@@ -339,7 +374,7 @@ mod tests {
         // A known category keeps its spelling; a known topic is refused.
         let lower = known.category.to_lowercase();
         let found = topics
-            .add(entries, &lower, " Odds and ends ")
+            .add(entries, &lower, " Odds and ends ", None)
             .await
             .unwrap();
         let category = found.iter().find(|c| c.name == known.category).unwrap();
@@ -350,14 +385,51 @@ mod tests {
                 .any(|t| t.name == "Odds and ends" && t.count == 0)
         );
         let upper = known.topic.to_uppercase();
-        assert!(topics.add(entries, &known.category, &upper).await.is_err());
-        assert!(topics.add(entries, "Board games", " ").await.is_err());
-        let found = topics.add(entries, "Board games", "Chess").await.unwrap();
         assert!(
-            found
-                .iter()
-                .any(|c| c.name == "Board games" && c.count == 0)
+            topics
+                .add(entries, &known.category, &upper, None)
+                .await
+                .is_err()
         );
+        assert!(topics.add(entries, "Board games", " ", None).await.is_err());
+
+        // A new category needs a look of its own, among those offered.
+        let look = |icon: &str, color: &str| {
+            Some(CategoryLook {
+                icon: icon.into(),
+                color: color.into(),
+            })
+        };
+        let taken = CategoryLook::of_library(&known.category).unwrap();
+        for refused in [
+            None,
+            look("grid", &taken.color),
+            look(&taken.icon, "#f43f5e"),
+            look("grid", "red"),
+        ] {
+            assert!(
+                topics
+                    .add(entries, "Board games", "Chess", refused)
+                    .await
+                    .is_err()
+            );
+        }
+        let found = topics
+            .add(entries, "Board games", "Chess", look("grid", "#f43f5e"))
+            .await
+            .unwrap();
+        let board = found.iter().find(|c| c.name == "Board games").unwrap();
+        assert_eq!((board.count, board.look.icon.as_str()), (0, "grid"));
+        assert!(
+            topics
+                .add(entries, "Cards", "Poker", look("hash", "#f43f5e"))
+                .await
+                .is_err()
+        );
+        topics
+            .add(entries, "board games", "Go", None)
+            .await
+            .unwrap();
 
         // A restart reads them back; library topics cannot be removed.
         let topics = AddedTopics::open(path).await.unwrap();
@@ -371,8 +443,19 @@ mod tests {
             .remove(entries, "Board games", "Chess")
             .await
             .unwrap();
+        assert!(
+            found
+                .iter()
+                .any(|c| c.name == "Board games" && c.look.icon == "grid")
+        );
+        let found = topics.remove(entries, "Board games", "Go").await.unwrap();
         assert!(!found.iter().any(|c| c.name == "Board games"));
         assert_eq!(found.len(), topics.subjects(entries).await.len());
+        // Its look is free again.
+        topics
+            .add(entries, "Cards", "Poker", look("grid", "#f43f5e"))
+            .await
+            .unwrap();
         tokio::fs::remove_dir_all(dir).await.unwrap();
     }
 }

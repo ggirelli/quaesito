@@ -6,7 +6,7 @@ use super::{
     LOBBY_ART, Route,
     admin::{AdminGate, AdminToken},
     client,
-    library::{CategoryIcon, category_look},
+    library::{Categories, CategoryIcon},
     live::{ConnectionBanner, Live, countdown_ms, elapsed_now, remaining_ms, use_clock, use_live},
     sfx::{self, Cue, SFX_JS, Sfx},
     widgets::{
@@ -63,6 +63,8 @@ fn HostScreen(code: String) -> Element {
     let code = use_signal(|| code);
     let live = use_live(move || host_socket(code(), token.get(), WebSocketOptions::new()));
     use_context_provider(|| live);
+    let categories = Categories::use_loaded();
+    use_context_provider(|| categories);
     let now = use_clock(200);
     let mut show_teams = use_signal(|| false);
     let mut show_results = use_signal(|| false);
@@ -824,6 +826,8 @@ fn qr_svg(url: &str) -> Option<String> {
 
 #[component]
 fn QuestionHeader(question: QuestionInfo, children: Element) -> Element {
+    let categories: Categories = use_context();
+    let look = categories.look(&question.category);
     rsx! {
         div { class: "question-head",
             span { class: "muted question-count",
@@ -832,8 +836,8 @@ fn QuestionHeader(question: QuestionInfo, children: Element) -> Element {
                     span { "—" }
                     span {
                         class: "question-subject",
-                        style: "--category: {category_look(&question.category).1}",
-                        CategoryIcon { category: question.category.clone() }
+                        style: "--category: {look.color}",
+                        CategoryIcon { look: look.clone() }
                         "{question.category}"
                         if !question.topic.is_empty() {
                             span { class: "question-topic", "· {question.topic}" }

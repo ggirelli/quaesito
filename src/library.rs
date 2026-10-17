@@ -213,6 +213,101 @@ pub fn categories(entries: &[LibraryEntry]) -> Vec<(String, usize)> {
     found
 }
 
+/// How a category shows: an icon (one of [`CATEGORY_ICONS`]) in a colour (a CSS hex colour).
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+pub struct CategoryLook {
+    pub icon: String,
+    pub color: String,
+}
+
+impl CategoryLook {
+    fn new(icon: &str, color: &str) -> Self {
+        Self {
+            icon: icon.to_owned(),
+            color: color.to_owned(),
+        }
+    }
+
+    /// The look of a category with none: a question mark in grey.
+    #[must_use]
+    pub fn unknown() -> Self {
+        Self::new("help", "#94a3b8")
+    }
+
+    /// The look of one of the library's own categories.
+    #[must_use]
+    pub fn of_library(category: &str) -> Option<Self> {
+        LIBRARY_LOOKS
+            .iter()
+            .find(|(name, ..)| *name == category)
+            .map(|(_, icon, color)| Self::new(icon, color))
+    }
+}
+
+/// The library's categories, each with its icon and colour.
+const LIBRARY_LOOKS: [(&str, &str, &str); 14] = [
+    ("Art & Design", "pen-tool", "#ef4444"),
+    ("Film & TV", "film", "#a855f7"),
+    ("Food & Drink", "coffee", "#f97316"),
+    ("Geography", "globe", "#0d9488"),
+    ("History", "clock", "#a16207"),
+    ("Language & Words", "type", "#84cc16"),
+    ("Literature", "book", "#6366f1"),
+    ("Music", "music", "#ec4899"),
+    ("Nature", "leaf", "#22c55e"),
+    ("Pop Culture", "star", "#eab308"),
+    ("Science", "flask", "#06b6d4"),
+    ("Society & Culture", "users", "#d946ef"),
+    ("Sport", "trophy", "#2563eb"),
+    ("Technology", "cpu", "#64748b"),
+];
+
+/// The icons a category can have: the library's, then more for new categories.
+pub const CATEGORY_ICONS: [&str; 34] = [
+    "pen-tool",
+    "film",
+    "coffee",
+    "globe",
+    "clock",
+    "type",
+    "book",
+    "music",
+    "leaf",
+    "star",
+    "flask",
+    "users",
+    "trophy",
+    "cpu",
+    "heart",
+    "camera",
+    "compass",
+    "anchor",
+    "gift",
+    "map",
+    "zap",
+    "smile",
+    "award",
+    "briefcase",
+    "headphones",
+    "feather",
+    "tv",
+    "truck",
+    "shopping-bag",
+    "umbrella",
+    "dollar-sign",
+    "activity",
+    "grid",
+    "hash",
+];
+
+/// The colours a category can have: the library's, then more for new categories.
+pub const CATEGORY_COLORS: [&str; 26] = [
+    "#ef4444", "#a855f7", "#f97316", "#0d9488", "#a16207", "#84cc16", "#6366f1", "#ec4899",
+    "#22c55e", "#eab308", "#06b6d4", "#d946ef", "#2563eb", "#64748b", "#f43f5e", "#0ea5e9",
+    "#7c3aed", "#10b981", "#f59e0b", "#be185d", "#0f766e", "#65a30d", "#c2410c", "#4f46e5",
+    "#b45309", "#78716c",
+];
+
 /// A category questions can be filed under: one of the library's, or one this server added.
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct LibraryCategory {
@@ -220,6 +315,18 @@ pub struct LibraryCategory {
     /// Its number of library questions.
     pub count: usize,
     pub topics: Vec<LibraryTopic>,
+    pub look: CategoryLook,
+}
+
+/// The look of `category` among `categories`, else of the library's, else the unknown one.
+#[must_use]
+pub fn look_of(category: &str, categories: &[LibraryCategory]) -> CategoryLook {
+    categories
+        .iter()
+        .find(|c| c.name == category)
+        .map(|c| c.look.clone())
+        .or_else(|| CategoryLook::of_library(category))
+        .unwrap_or_else(CategoryLook::unknown)
 }
 
 /// A topic of a [`LibraryCategory`]; one this server added has no questions yet.
@@ -237,23 +344,47 @@ pub struct AddedTopic {
     pub topic: String,
 }
 
-/// Every category with its topics, by name: those of `entries`, and the `added` ones.
+/// A category this server added, with its look.
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+pub struct AddedCategory {
+    pub name: String,
+    #[serde(flatten)]
+    pub look: CategoryLook,
+}
+
+/// The categories and topics this server added to the library.
+#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+pub struct Added {
+    #[serde(default)]
+    pub categories: Vec<AddedCategory>,
+    #[serde(default)]
+    pub topics: Vec<AddedTopic>,
+}
+
+/// Every category with its topics and look, by name: those of `entries`, and the `added` ones.
 #[must_use]
-pub fn subjects(entries: &[LibraryEntry], added: &[AddedTopic]) -> Vec<LibraryCategory> {
+pub fn subjects(entries: &[LibraryEntry], added: &Added) -> Vec<LibraryCategory> {
     let mut found: Vec<LibraryCategory> = Vec::new();
     let pairs = entries
         .iter()
         .map(|e| (&e.category, &e.topic, 1))
-        .chain(added.iter().map(|a| (&a.category, &a.topic, 0)));
+        .chain(added.topics.iter().map(|a| (&a.category, &a.topic, 0)));
     for (category, topic, count) in pairs {
         let index = found
             .iter()
             .position(|c| c.name == *category)
             .unwrap_or_else(|| {
+                let look = CategoryLook::of_library(category)
+                    .or_else(|| {
+                        let added = added.categories.iter().find(|c| c.name == *category);
+                        added.map(|c| c.look.clone())
+                    })
+                    .unwrap_or_else(CategoryLook::unknown);
                 found.push(LibraryCategory {
                     name: category.clone(),
                     count: 0,
                     topics: Vec::new(),
+                    look,
                 });
                 found.len() - 1
             });
@@ -467,7 +598,13 @@ mod tests {
         };
         let found = subjects(
             &all,
-            &[added("Geography", "Rivers"), added("Board games", "Chess")],
+            &Added {
+                categories: vec![AddedCategory {
+                    name: "Board games".into(),
+                    look: CategoryLook::new("grid", "#f43f5e"),
+                }],
+                topics: vec![added("Geography", "Rivers"), added("Board games", "Chess")],
+            },
         );
         let names: Vec<&str> = found.iter().map(|c| c.name.as_str()).collect();
         assert_eq!(names, ["Board games", "Geography", "History"]);
@@ -479,6 +616,29 @@ mod tests {
             .collect();
         assert_eq!(geography, [("Europe", 1), ("Rivers", 0), ("Topic", 1)]);
         assert_eq!(found[1].count, 2);
+        assert_eq!(found[0].look, CategoryLook::new("grid", "#f43f5e"));
+        assert_eq!(found[1].look, CategoryLook::new("globe", "#0d9488"));
+        assert_eq!(look_of("Board games", &found).icon, "grid");
+        assert_eq!(look_of("Sport", &[]).icon, "trophy");
+        assert_eq!(look_of("Nope", &found), CategoryLook::unknown());
+    }
+
+    #[test]
+    fn the_library_looks_are_offered_and_all_different() {
+        for (name, icon, color) in LIBRARY_LOOKS {
+            assert!(CATEGORY_ICONS.contains(&icon), "{name}");
+            assert!(CATEGORY_COLORS.contains(&color), "{name}");
+        }
+        let mut icons = CATEGORY_ICONS.to_vec();
+        icons.sort_unstable();
+        icons.dedup();
+        let mut colors = CATEGORY_COLORS.to_vec();
+        colors.sort_unstable();
+        colors.dedup();
+        assert_eq!(
+            (icons.len(), colors.len()),
+            (CATEGORY_ICONS.len(), CATEGORY_COLORS.len())
+        );
     }
 
     #[test]

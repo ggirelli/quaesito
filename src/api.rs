@@ -13,7 +13,7 @@ use dioxus::{
 };
 
 use crate::{
-    library::{LibraryCategory, LibraryEdit, LibraryEntry},
+    library::{CategoryLook, LibraryCategory, LibraryEdit, LibraryEntry},
     model::{Quiz, QuizSummary, ValidationIssue},
     protocol::{
         GameResults, HostCommand, HostView, JoinTicket, PlayerCommand, PlayerView, SessionSummary,
@@ -151,19 +151,21 @@ pub async fn library_subjects(token: String) -> ServerFnResult<Vec<LibraryCatego
     Ok(state.library_topics.subjects(&entries).await)
 }
 
-/// Adds a topic to a category of the library, or to a new one, and returns every category.
+/// Adds a topic to a category of the library, or to a new one with `look`, and returns every
+/// category.
 #[post("/api/admin/library/topic/add")]
 pub async fn add_library_topic(
     token: String,
     category: String,
     topic: String,
+    look: Option<CategoryLook>,
 ) -> ServerFnResult<Vec<LibraryCategory>> {
     let state = crate::server::state();
     state.auth.require(&token)?;
     let entries = state.library_edits.entries().await;
     Ok(state
         .library_topics
-        .add(&entries, &category, &topic)
+        .add(&entries, &category, &topic, look)
         .await?)
 }
 
