@@ -515,7 +515,7 @@ fn SettingsCard(settings: QuizSettings) -> Element {
     rsx! {
         section { class: "card stack",
             h2 { "Settings" }
-            label { class: "field inline",
+            label { class: "field inline beside",
                 span { "Default time per question (seconds)" }
                 input {
                     r#type: "number",

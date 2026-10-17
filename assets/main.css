@@ -402,19 +402,20 @@ button.corner-link {
   gap: 0.6rem;
 }
 
-/* A field with one box (not a range, nor one with a unit after it) wears its name small on the
-   box's top border. Both share one grid cell, so the box grows to fit a name longer than it. */
-.field:not(:has(> span ~ span)) {
+/* A field with one box (not a range, one with a unit after it, nor one whose long name sits beside
+   it) wears its name small on the box's top border. Both share one grid cell, so the box grows to
+   fit a name longer than it. */
+.field:not(.beside, :has(> span ~ span)) {
   display: grid;
   gap: 0;
   margin-top: 0.4rem;
 }
 
-.field:not(:has(> span ~ span)) > * {
+.field:not(.beside, :has(> span ~ span)) > * {
   grid-area: 1 / 1;
 }
 
-.field:not(:has(> span ~ span)) > span {
+.field:not(.beside, :has(> span ~ span)) > span {
   z-index: 1;
   align-self: start;
   justify-self: start;
@@ -430,19 +431,19 @@ button.corner-link {
 }
 
 /* Focus shows on the box itself, not as a square ring around the box and its name. */
-.field:not(:has(> span ~ span)):focus-within {
+.field:not(.beside, :has(> span ~ span)):focus-within {
   outline: none;
 }
 
-.field:not(:has(> span ~ span)):focus-within > span {
+.field:not(.beside, :has(> span ~ span)):focus-within > span {
   color: var(--accent);
 }
 
-.field:not(:has(> span ~ span)) > :is(input, select):focus {
+.field:not(.beside, :has(> span ~ span)) > :is(input, select):focus {
   border-color: var(--accent);
 }
 
-.field:not(:has(> span ~ span)) > :is(input, select) {
+.field:not(.beside, :has(> span ~ span)) > :is(input, select) {
   min-width: 100%;
 }
 
