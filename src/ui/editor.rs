@@ -541,7 +541,7 @@ fn SettingsCard(settings: QuizSettings) -> Element {
                     on_select: move |i| draft.edit_settings(|s| s.reveal = if i == 0 { RevealMode::AfterEachQuestion } else { RevealMode::AtEnd }),
                 }
                 Choice {
-                    label: "Questions with several correct answers",
+                    label: "Several correct answers",
                     options: vec![
                         ("All or nothing", "Points only for picking exactly the correct answers."),
                         ("Partial credit", "Credit for each correct pick, minus wrong picks."),
