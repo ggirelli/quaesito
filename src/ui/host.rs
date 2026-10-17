@@ -1032,18 +1032,29 @@ fn tile_order(seed: usize) -> Vec<usize> {
 }
 
 /// A slide between questions: title, picture and text, each optional.
+/// With both a picture and text, the picture goes left of the text to use the screen's width.
 #[component]
 fn SlideView(slide: SlideInfo) -> Element {
+    let media = slide.image.as_ref().map(|image| {
+        rsx! {
+            QuestionMedia { name: image.clone(), class: "slide-image", autoplay: true }
+        }
+    });
+    let text = (!slide.text.is_empty()).then(|| {
+        rsx! {
+            p { class: "slide-text", "{slide.text}" }
+        }
+    });
     rsx! {
         div { class: "slide",
             if !slide.title.is_empty() {
                 h1 { class: "slide-title", "{slide.title}" }
             }
-            if let Some(image) = &slide.image {
-                QuestionMedia { name: image.clone(), class: "slide-image", autoplay: true }
-            }
-            if !slide.text.is_empty() {
-                p { class: "slide-text", "{slide.text}" }
+            if media.is_some() && text.is_some() {
+                div { class: "slide-split", {media} {text} }
+            } else {
+                {media}
+                {text}
             }
         }
     }
