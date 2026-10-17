@@ -41,6 +41,9 @@ pub struct LibraryEdit {
 /// Each difficulty and its name.
 pub const DIFFICULTIES: [(u8, &str); 3] = [(1, "Easy"), (2, "Medium"), (3, "Hard")];
 
+/// Where questions come from: whether they were added on this server, and its name.
+pub const ORIGINS: [(bool, &str); 2] = [(false, "Came with Quaesito"), (true, "Added here")];
+
 /// The answer types library questions use, named as in the editor.
 pub const KINDS: [&str; 7] = [
     "Choices",
@@ -198,6 +201,8 @@ pub struct LibraryFilter {
     pub difficulty: Option<u8>,
     /// One of [`KINDS`].
     pub kind: Option<&'static str>,
+    /// Whether to show only the questions added on this server, or only the bundled ones.
+    pub added: Option<bool>,
 }
 
 impl LibraryFilter {
@@ -211,6 +216,7 @@ impl LibraryFilter {
             .filter(|e| self.topic.as_ref().is_none_or(|t| *t == e.topic))
             .filter(|e| self.difficulty.is_none_or(|d| d == e.difficulty))
             .filter(|e| self.kind.is_none_or(|k| k == e.kind_name()))
+            .filter(|e| self.added.is_none_or(|a| a == e.added))
             .filter(|e| {
                 words.is_empty()
                     || search::contains_all(
@@ -802,6 +808,20 @@ mod tests {
             }),
             ["Capital of France?"]
         );
+        let mut mixed = all.clone();
+        mixed[1].added = true;
+        let added = |added: bool| -> Vec<String> {
+            LibraryFilter {
+                added: Some(added),
+                ..LibraryFilter::default()
+            }
+            .apply(&mixed)
+            .iter()
+            .map(|e| e.question.text.clone())
+            .collect()
+        };
+        assert_eq!(added(true), [mixed[1].question.text.clone()]);
+        assert_eq!(added(false).len(), 2);
     }
 
     #[test]
