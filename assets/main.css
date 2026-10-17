@@ -1439,22 +1439,19 @@ table.results {
   font-weight: 800;
 }
 
-/* The question's category and topic, next to its number on the big screen, in the category's
-   icon and colour from the library. */
+/* The question's category and topic, next to its number on the big screen: plain text, the
+   category in its icon and colour from the library. */
 .question-subject {
   display: inline-flex;
   align-items: center;
-  gap: 0.4em;
+  gap: 0.35em;
   margin-left: 0.8em;
-  padding: 0.1em 0.7em;
-  border: 2px solid var(--category);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--category) 18%, var(--surface));
-  color: var(--fg);
+  color: var(--category);
   font-weight: 700;
 }
 
 .question-topic {
+  color: var(--muted);
   font-weight: 500;
 }
 
