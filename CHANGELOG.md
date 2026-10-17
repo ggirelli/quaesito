@@ -8,6 +8,7 @@ All notable changes to quaesito are listed here. The format follows
 
 ### Added
 
+- The big screen's top bar has a cog button, next to **Teams**, that goes back to the admin page.
 - A **Wi-Fi slide** setting: the game opens on the network's name and password, with a QR code that connects phones to
   it, before the join code. Teams can already join while it is up.
 - A question library: about 2,700 ready-made questions in 14 categories, rated easy, medium or hard. The admin page's new
