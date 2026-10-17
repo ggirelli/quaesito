@@ -6,6 +6,7 @@ use super::{
     LOBBY_ART, Route,
     admin::{AdminGate, AdminToken},
     client,
+    library::{CategoryIcon, category_look},
     live::{ConnectionBanner, Live, countdown_ms, elapsed_now, remaining_ms, use_clock, use_live},
     sfx::{self, Cue, SFX_JS, Sfx},
     widgets::{
@@ -830,8 +831,16 @@ fn QuestionHeader(question: QuestionInfo, children: Element) -> Element {
                 if question.multiplier > 1 {
                     span { class: "multiplier", "×{question.multiplier} points" }
                 }
-                if !question.subject.is_empty() {
-                    span { class: "question-subject", "{question.subject}" }
+                if !question.category.is_empty() {
+                    span {
+                        class: "question-subject",
+                        style: "--category: {category_look(&question.category).1}",
+                        CategoryIcon { category: question.category.clone() }
+                        "{question.category}"
+                        if !question.topic.is_empty() {
+                            span { class: "question-topic", "· {question.topic}" }
+                        }
+                    }
                 }
             }
             {children}

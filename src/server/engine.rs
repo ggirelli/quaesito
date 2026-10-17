@@ -1409,7 +1409,8 @@ impl Game {
                 .map(|b| (b.text.trim().to_owned(), b.percent)),
             passage: question.passage.trim().to_owned(),
             pairs: self.pair_columns(index),
-            subject: question.subject(),
+            category: question.category.trim().to_owned(),
+            topic: question.topic.trim().to_owned(),
         }
     }
 

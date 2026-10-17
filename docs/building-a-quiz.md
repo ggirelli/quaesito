@@ -23,7 +23,7 @@ by last edit, newest, name or number of questions.
   question; the right answers stay right.
 
 Each question has an **answer type** (see [question types](question-types.md)), a time limit
-(the quiz's default unless you set one) and a **points** multiplier: a ×2 question earns twice
+(**Time (s)**, the quiz's default unless you set one) and a **points** multiplier: a ×2 question earns twice
 the usual points.
 
 ## The question library
@@ -52,10 +52,16 @@ question is marked *edited*; **Back to the original** undoes them.
 
 ## Category and topic
 
-Under the question, **Category** and **Topic** say what it is about, say *Geography* and
-*Capitals*. Both are optional; the big screen shows them next to the question number. They suggest
-the categories the quiz already uses, and the topics of the category you typed. Questions from the
+Above the question, **Category** and **Topic** say what it is about, say *Geography* and
+*Capitals*. Both are optional; the big screen shows them next to the question number, with the
+category's icon and colour from the library. They list the library's categories and topics, so
+questions from your quizzes and from the library are filed the same way. Questions from the
 library come with theirs filled in.
+
+To file questions under a topic the library lacks, add it on the admin page's **Questions** tab:
+**Add a topic**, under the categories, takes a category (one of the library's, or a new one) and a
+topic. Added topics are kept on this server; while they hold no library questions, the × next to
+them removes them.
 
 ## Text with the question
 

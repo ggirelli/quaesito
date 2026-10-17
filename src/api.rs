@@ -13,7 +13,7 @@ use dioxus::{
 };
 
 use crate::{
-    library::{LibraryEdit, LibraryEntry},
+    library::{LibraryCategory, LibraryEdit, LibraryEntry},
     model::{Quiz, QuizSummary, ValidationIssue},
     protocol::{
         GameResults, HostCommand, HostView, JoinTicket, PlayerCommand, PlayerView, SessionSummary,
@@ -139,6 +139,48 @@ pub async fn revert_library_question(token: String, id: String) -> ServerFnResul
     let state = crate::server::state();
     state.auth.require(&token)?;
     Ok(state.library_edits.revert(&id).await?)
+}
+
+/// Every category of the library with its topics, those added on this server included: the ones
+/// questions can be filed under.
+#[post("/api/admin/library/subjects")]
+pub async fn library_subjects(token: String) -> ServerFnResult<Vec<LibraryCategory>> {
+    let state = crate::server::state();
+    state.auth.require(&token)?;
+    let entries = state.library_edits.entries().await;
+    Ok(state.library_topics.subjects(&entries).await)
+}
+
+/// Adds a topic to a category of the library, or to a new one, and returns every category.
+#[post("/api/admin/library/topic/add")]
+pub async fn add_library_topic(
+    token: String,
+    category: String,
+    topic: String,
+) -> ServerFnResult<Vec<LibraryCategory>> {
+    let state = crate::server::state();
+    state.auth.require(&token)?;
+    let entries = state.library_edits.entries().await;
+    Ok(state
+        .library_topics
+        .add(&entries, &category, &topic)
+        .await?)
+}
+
+/// Removes a topic added on this server and returns every category.
+#[post("/api/admin/library/topic/remove")]
+pub async fn remove_library_topic(
+    token: String,
+    category: String,
+    topic: String,
+) -> ServerFnResult<Vec<LibraryCategory>> {
+    let state = crate::server::state();
+    state.auth.require(&token)?;
+    let entries = state.library_edits.entries().await;
+    Ok(state
+        .library_topics
+        .remove(&entries, &category, &topic)
+        .await?)
 }
 
 /// Uploads a picture (for an answer or a part) and returns its media name.

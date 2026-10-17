@@ -14,10 +14,11 @@ use super::{
 };
 use crate::{
     api::{
-        edit_library_question, get_quiz, revert_library_question, save_quiz, start_test,
-        upload_limits, upload_question_audio, upload_question_image, upload_question_media,
+        edit_library_question, get_quiz, library_subjects, revert_library_question, save_quiz,
+        start_test, upload_limits, upload_question_audio, upload_question_image,
+        upload_question_media,
     },
-    library::{LibraryEdit, LibraryEntry},
+    library::{LibraryCategory, LibraryEdit, LibraryEntry},
     model::{
         AdvanceMode, Answer, BONUS_PERCENTS, Bonus, ImageReveal, MAX_ANSWERS, MAX_MULTIPLIER,
         MAX_PARTS, MAX_TIME_LIMIT_SECS, MIN_ANSWERS, MIN_PARTS, MIN_TIME_LIMIT_SECS, MultiScoring,
@@ -203,6 +204,8 @@ fn EditorForm(quiz: Quiz) -> Element {
     use_context_provider(|| draft);
     let limits = use_resource(move || async move { upload_limits(token.get()).await.ok() });
     use_context_provider(|| Limits(limits));
+    let subjects = use_resource(move || async move { library_subjects(token.get()).await.ok() });
+    use_context_provider(|| Subjects(subjects));
     let save_state = use_autosave(token, draft, issues);
     // The order before the last shuffle, and the revision the shuffle produced: undo is offered
     // until anything else changes.
@@ -1007,6 +1010,46 @@ fn QuestionCard(
                     }
                 }
             }
+            if !slide {
+                div { class: "question-settings row",
+                    if !standalone {
+                        SubjectEditor {
+                            question: index,
+                            category: question.category.clone(),
+                            topic: question.topic.clone(),
+                        }
+                    }
+                    label { class: "field inline",
+                        span { "Time (s)" }
+                        input {
+                            r#type: "number",
+                            class: "short",
+                            min: MIN_TIME_LIMIT_SECS,
+                            max: MAX_TIME_LIMIT_SECS,
+                            placeholder: "{default_limit}",
+                            value: "{limit}",
+                            oninput: move |e| {
+                                let value = e.value();
+                                draft.edit_question(index, |q| q.time_limit_secs = value.trim().parse().ok());
+                            },
+                        }
+                    }
+                    label { class: "field inline",
+                        title: "How many times a usual question's points this one is worth",
+                        span { "Points" }
+                        select {
+                            value: "{question.multiplier()}",
+                            onchange: move |e| {
+                                let multiplier = e.value().parse().ok().filter(|&m| m > 1);
+                                draft.edit_question(index, |q| q.multiplier = multiplier);
+                            },
+                            for m in 1..=MAX_MULTIPLIER {
+                                option { value: "{m}", "×{m}" }
+                            }
+                        }
+                    }
+                }
+            }
             if !results_slide {
                 textarea {
                     class: "question-text",
@@ -1022,13 +1065,6 @@ fn QuestionCard(
                         rows: if question.passage.is_empty() { 1 } else { 4 },
                         value: "{question.passage}",
                         oninput: move |e| draft.edit_question(index, |q| q.passage = e.value()),
-                    }
-                    if !standalone {
-                        SubjectEditor {
-                            question: index,
-                            category: question.category.clone(),
-                            topic: question.topic.clone(),
-                        }
                     }
                 }
                 div { class: "question-media row",
@@ -1112,32 +1148,30 @@ fn QuestionCard(
                         }
                     }
                     if !slide {
-                        label { class: "field inline",
-                            span { "Seconds" }
-                            input {
-                                r#type: "number",
-                                class: "short",
-                                min: MIN_TIME_LIMIT_SECS,
-                                max: MAX_TIME_LIMIT_SECS,
-                                placeholder: "{default_limit}",
-                                value: "{limit}",
-                                oninput: move |e| {
-                                    let value = e.value();
-                                    draft.edit_question(index, |q| q.time_limit_secs = value.trim().parse().ok());
-                                },
+                        if let Some(audio) = &question.audio {
+                            Icon { kind: IconKind::Music }
+                            audio {
+                                class: "audio-preview",
+                                src: media_url(audio),
+                                preload: "metadata",
+                                controls: true,
                             }
-                        }
-                        label { class: "field inline",
-                            title: "How many times a usual question's points this one is worth",
-                            span { "Points" }
-                            select {
-                                value: "{question.multiplier()}",
-                                onchange: move |e| {
-                                    let multiplier = e.value().parse().ok().filter(|&m| m > 1);
-                                    draft.edit_question(index, |q| q.multiplier = multiplier);
-                                },
-                                for m in 1..=MAX_MULTIPLIER {
-                                    option { value: "{m}", "×{m}" }
+                            button {
+                                class: "button ghost",
+                                onclick: move |_| draft.edit_question(index, |q| q.audio = None),
+                                "Remove soundtrack"
+                            }
+                            span { class: "muted small",
+                                "The clock starts when you start the music on the big screen."
+                            }
+                        } else {
+                            label { class: "button ghost",
+                                if uploading_audio() { "Uploading…" } else { "＋ Add soundtrack" }
+                                input {
+                                    r#type: "file",
+                                    accept: "audio/*",
+                                    class: "visually-hidden",
+                                    onchange: upload_audio,
                                 }
                             }
                         }
@@ -1146,35 +1180,6 @@ fn QuestionCard(
             }
             ErrorBox { error: upload_error() }
             if !slide {
-                div { class: "question-media row",
-                    if let Some(audio) = &question.audio {
-                        Icon { kind: IconKind::Music }
-                        audio {
-                            class: "audio-preview",
-                            src: media_url(audio),
-                            preload: "metadata",
-                            controls: true,
-                        }
-                        button {
-                            class: "button ghost",
-                            onclick: move |_| draft.edit_question(index, |q| q.audio = None),
-                            "Remove soundtrack"
-                        }
-                        span { class: "muted small",
-                            "The clock starts when you start the music on the big screen."
-                        }
-                    } else {
-                        label { class: "button ghost",
-                            if uploading_audio() { "Uploading…" } else { "＋ Add soundtrack" }
-                            input {
-                                r#type: "file",
-                                accept: "audio/*",
-                                class: "visually-hidden",
-                                onchange: upload_audio,
-                            }
-                        }
-                    }
-                }
                 Choice {
                     label: "Answer type",
                     options: vec![
@@ -1276,56 +1281,66 @@ fn QuestionCard(
     }
 }
 
-/// The category and topic the big screen shows with a question, suggesting those the quiz uses.
+/// The library's categories with their topics, those added on this server included: the ones
+/// questions can be filed under. `None` until loaded.
+#[derive(Clone, Copy)]
+struct Subjects(Resource<Option<Vec<LibraryCategory>>>);
+
+/// The category and topic the big screen shows with a question, picked among the library's.
+/// A name the library doesn't have (from an imported quiz, say) stays until another is picked.
 #[component]
 fn SubjectEditor(question: usize, category: String, topic: String) -> Element {
     let draft: Draft = use_context();
-    let mut categories = Vec::new();
-    let mut topics = Vec::new();
-    for q in &draft.quiz.read().questions {
-        let used = q.category.trim();
-        if !used.is_empty() && !categories.contains(&used.to_owned()) {
-            categories.push(used.to_owned());
-        }
-        let used = q.topic.trim();
-        if !used.is_empty()
-            && q.category.trim() == category.trim()
-            && !topics.contains(&used.to_owned())
-        {
-            topics.push(used.to_owned());
-        }
-    }
-    categories.sort();
-    topics.sort();
+    let subjects: Subjects = use_context();
+    let loaded = subjects.0.read().clone().flatten();
+    let categories = loaded.clone().unwrap_or_default();
+    let topics: Vec<String> = categories
+        .iter()
+        .find(|c| c.name == category)
+        .map(|c| c.topics.iter().map(|t| t.name.clone()).collect())
+        .unwrap_or_default();
+    // Until the library loads, the names are shown as they are.
+    let unknown_category = !category.is_empty() && !categories.iter().any(|c| c.name == category);
+    let unknown_topic = !topic.is_empty() && !topics.contains(&topic);
+    let suffix = if loaded.is_some() {
+        " (not in the library)"
+    } else {
+        ""
+    };
+    // Options say which is selected: the select's value would be set before its options exist.
     rsx! {
-        div { class: "question-subject-edit row",
-            title: "Shown on the big screen with the question",
-            label { class: "field inline",
-                span { "Category" }
-                input {
-                    list: "categories-{question}",
-                    placeholder: "e.g. Geography",
-                    value: "{category}",
-                    oninput: move |e| draft.edit_question(question, |q| q.category = e.value()),
+        label { class: "field inline",
+            title: "Shown on the big screen with the question. Add categories and topics on the admin page's Questions tab.",
+            span { "Category" }
+            select {
+                class: "subject-select",
+                // A topic belongs to its category: picking another clears it.
+                onchange: move |e| draft.edit_question(question, |q| {
+                    q.category = e.value();
+                    q.topic.clear();
+                }),
+                option { value: "", selected: category.is_empty(), "None" }
+                if unknown_category {
+                    option { value: "{category}", selected: true, "{category}{suffix}" }
                 }
-                datalist { id: "categories-{question}",
-                    for name in categories {
-                        option { value: "{name}" }
-                    }
+                for c in categories {
+                    option { value: "{c.name}", selected: c.name == category, "{c.name}" }
                 }
             }
-            label { class: "field inline",
-                span { "Topic" }
-                input {
-                    list: "topics-{question}",
-                    placeholder: "e.g. Capitals",
-                    value: "{topic}",
-                    oninput: move |e| draft.edit_question(question, |q| q.topic = e.value()),
+        }
+        label { class: "field inline",
+            title: "Shown on the big screen with the question. Add categories and topics on the admin page's Questions tab.",
+            span { "Topic" }
+            select {
+                class: "subject-select",
+                disabled: category.is_empty(),
+                onchange: move |e| draft.edit_question(question, |q| q.topic = e.value()),
+                option { value: "", selected: topic.is_empty(), "None" }
+                if unknown_topic {
+                    option { value: "{topic}", selected: true, "{topic}{suffix}" }
                 }
-                datalist { id: "topics-{question}",
-                    for name in topics {
-                        option { value: "{name}" }
-                    }
+                for name in topics {
+                    option { value: "{name}", selected: name == topic, "{name}" }
                 }
             }
         }

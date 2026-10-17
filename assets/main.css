@@ -1068,6 +1068,24 @@ input.short {
   opacity: 0.75;
 }
 
+/* A topic, with a button to remove it when it was added on this server and has no questions. */
+.library-topic-row {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.library-topic-row .remove-topic {
+  flex: none;
+}
+
+/* The Questions tab's form for a new topic, under the categories. */
+.library-add-topic {
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border);
+}
+
 /* The difficulty and answer type lists, under a small title. */
 .library-filter-list {
   display: flex;
@@ -1421,15 +1439,23 @@ table.results {
   font-weight: 800;
 }
 
-/* The question's category and topic, next to its number on the big screen. */
+/* The question's category and topic, next to its number on the big screen, in the category's
+   icon and colour from the library. */
 .question-subject {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
   margin-left: 0.8em;
-  padding: 0.1em 0.6em;
-  border: 1px solid var(--border);
+  padding: 0.1em 0.7em;
+  border: 2px solid var(--category);
   border-radius: 999px;
-  background: var(--surface-2);
+  background: color-mix(in srgb, var(--category) 18%, var(--surface));
   color: var(--fg);
-  font-weight: 600;
+  font-weight: 700;
+}
+
+.question-topic {
+  font-weight: 500;
 }
 
 .question-head {

@@ -213,17 +213,64 @@ pub fn categories(entries: &[LibraryEntry]) -> Vec<(String, usize)> {
     found
 }
 
-/// The topics of `category` with their number of questions, by name.
+/// A category questions can be filed under: one of the library's, or one this server added.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+pub struct LibraryCategory {
+    pub name: String,
+    /// Its number of library questions.
+    pub count: usize,
+    pub topics: Vec<LibraryTopic>,
+}
+
+/// A topic of a [`LibraryCategory`]; one this server added has no questions yet.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+pub struct LibraryTopic {
+    pub name: String,
+    /// Its number of library questions.
+    pub count: usize,
+}
+
+/// A topic this server added to the library, possibly in a new category.
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+pub struct AddedTopic {
+    pub category: String,
+    pub topic: String,
+}
+
+/// Every category with its topics, by name: those of `entries`, and the `added` ones.
 #[must_use]
-pub fn topics(entries: &[LibraryEntry], category: &str) -> Vec<(String, usize)> {
-    let mut found: Vec<(String, usize)> = Vec::new();
-    for entry in entries.iter().filter(|e| e.category == category) {
-        match found.iter_mut().find(|(name, _)| *name == entry.topic) {
-            Some((_, count)) => *count += 1,
-            None => found.push((entry.topic.clone(), 1)),
+pub fn subjects(entries: &[LibraryEntry], added: &[AddedTopic]) -> Vec<LibraryCategory> {
+    let mut found: Vec<LibraryCategory> = Vec::new();
+    let pairs = entries
+        .iter()
+        .map(|e| (&e.category, &e.topic, 1))
+        .chain(added.iter().map(|a| (&a.category, &a.topic, 0)));
+    for (category, topic, count) in pairs {
+        let index = found
+            .iter()
+            .position(|c| c.name == *category)
+            .unwrap_or_else(|| {
+                found.push(LibraryCategory {
+                    name: category.clone(),
+                    count: 0,
+                    topics: Vec::new(),
+                });
+                found.len() - 1
+            });
+        let category = &mut found[index];
+        category.count += count;
+        match category.topics.iter_mut().find(|t| t.name == *topic) {
+            Some(found) => found.count += count,
+            None => category.topics.push(LibraryTopic {
+                name: topic.clone(),
+                count,
+            }),
         }
     }
-    found.sort();
+    found.sort_by(|a, b| a.name.cmp(&b.name));
+    for category in &mut found {
+        category.topics.sort_by(|a, b| a.name.cmp(&b.name));
+    }
     found
 }
 
@@ -395,16 +442,12 @@ mod tests {
     }
 
     #[test]
-    fn categories_and_their_topics_are_counted_by_name() {
+    fn categories_are_counted_by_name_and_topics_filter() {
         let mut all = library();
         all[1].topic = "Europe".into();
         assert_eq!(
             categories(&all),
             [("Geography".to_owned(), 2), ("History".to_owned(), 1)]
-        );
-        assert_eq!(
-            topics(&all, "Geography"),
-            [("Europe".to_owned(), 1), ("Topic".to_owned(), 1)]
         );
         let europe = LibraryFilter {
             category: Some("Geography".into()),
@@ -412,6 +455,30 @@ mod tests {
             ..LibraryFilter::default()
         };
         assert_eq!(europe.apply(&all), [&all[1]]);
+    }
+
+    #[test]
+    fn subjects_add_the_added_topics_without_questions() {
+        let mut all = library();
+        all[1].topic = "Europe".into();
+        let added = |category: &str, topic: &str| AddedTopic {
+            category: category.into(),
+            topic: topic.into(),
+        };
+        let found = subjects(
+            &all,
+            &[added("Geography", "Rivers"), added("Board games", "Chess")],
+        );
+        let names: Vec<&str> = found.iter().map(|c| c.name.as_str()).collect();
+        assert_eq!(names, ["Board games", "Geography", "History"]);
+        assert_eq!((found[0].count, found[0].topics[0].count), (0, 0));
+        let geography: Vec<(&str, usize)> = found[1]
+            .topics
+            .iter()
+            .map(|t| (t.name.as_str(), t.count))
+            .collect();
+        assert_eq!(geography, [("Europe", 1), ("Rivers", 0), ("Topic", 1)]);
+        assert_eq!(found[1].count, 2);
     }
 
     #[test]

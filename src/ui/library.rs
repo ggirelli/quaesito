@@ -12,8 +12,8 @@ use super::{
     widgets::{Dialog, ErrorBox, Icon, IconKind, Spinner, message},
 };
 use crate::{
-    api::question_library,
-    library::{DIFFICULTIES, KINDS, LibraryEntry, LibraryFilter, LibrarySort},
+    api::{add_library_topic, library_subjects, question_library, remove_library_topic},
+    library::{DIFFICULTIES, KINDS, LibraryCategory, LibraryEntry, LibraryFilter, LibrarySort},
     model::{Question, QuestionKind},
 };
 
@@ -116,7 +116,10 @@ pub fn LibraryBrowser(
     present: Vec<String>,
     on_add: Option<EventHandler<Vec<Question>>>,
 ) -> Element {
+    let token: AdminToken = use_context();
     let mut library = use_library(|| true);
+    // The categories and topics, with those added on this server.
+    let mut subjects = use_resource(move || async move { library_subjects(token.get()).await });
     let mut search = use_signal(String::new);
     let mut category = use_signal(|| None::<String>);
     let mut topic = use_signal(|| None::<String>);
@@ -209,10 +212,26 @@ pub fn LibraryBrowser(
         topic.set(name);
         shown_count.set(PAGE);
     };
-    let categories = crate::library::categories(entries);
-    let topics = category()
-        .map(|c| crate::library::topics(entries, &c))
+    let categories = match &*subjects.read() {
+        Some(Ok(found)) => found.clone(),
+        _ => crate::library::subjects(entries, &[]),
+    };
+    let topics = categories
+        .iter()
+        .find(|c| Some(&c.name) == category().as_ref())
+        .map(|c| c.topics.clone())
         .unwrap_or_default();
+    let names: Vec<String> = categories.iter().map(|c| c.name.clone()).collect();
+    // On the Questions tab, a topic added on this server can be removed while it has no
+    // questions.
+    let remove_topic = move |category: String, topic: String| async move {
+        if remove_library_topic(token.get(), category, topic)
+            .await
+            .is_ok()
+        {
+            subjects.restart();
+        }
+    };
     rsx! {
         if let Some(entry) = editing() {
             LibraryQuestionEditor {
@@ -222,6 +241,7 @@ pub fn LibraryBrowser(
                 on_saved: move |_| {
                     editing.set(None);
                     library.restart();
+                    subjects.restart();
                 },
                 on_close: move |()| editing.set(None),
             }
@@ -249,7 +269,7 @@ pub fn LibraryBrowser(
                     span { class: "grow", "All categories" }
                     span { class: "count", "{entries.len()}" }
                 }
-                for (name , count) in categories {
+                for LibraryCategory { name, count, .. } in categories {
                     div { key: "{name}", class: "library-group",
                         button {
                             class: "library-category",
@@ -265,23 +285,39 @@ pub fn LibraryBrowser(
                         }
                         if category().as_deref() == Some(name.as_str()) {
                             div { class: "library-topics",
-                                for (name , count) in topics.clone() {
-                                    button {
-                                        key: "{name}",
-                                        class: "library-topic",
-                                        class: if topic().as_deref() == Some(name.as_str()) { "selected" },
-                                        aria_pressed: topic().as_deref() == Some(name.as_str()),
-                                        onclick: {
-                                            let name = name.clone();
-                                            move |_| pick_topic(name.clone())
-                                        },
-                                        span { class: "grow", "{name}" }
-                                        span { class: "count", "{count}" }
+                                for item in topics.clone() {
+                                    div { key: "{item.name}", class: "library-topic-row",
+                                        button {
+                                            class: "library-topic",
+                                            class: if topic().as_deref() == Some(item.name.as_str()) { "selected" },
+                                            aria_pressed: topic().as_deref() == Some(item.name.as_str()),
+                                            onclick: {
+                                                let name = item.name.clone();
+                                                move |_| pick_topic(name.clone())
+                                            },
+                                            span { class: "grow", "{item.name}" }
+                                            span { class: "count", "{item.count}" }
+                                        }
+                                        if on_add.is_none() && item.count == 0 {
+                                            button {
+                                                class: "button ghost icon remove-topic",
+                                                title: "Remove this topic",
+                                                aria_label: "Remove {item.name}",
+                                                onclick: {
+                                                    let (category, topic) = (name.clone(), item.name.clone());
+                                                    move |_| remove_topic(category.clone(), topic.clone())
+                                                },
+                                                "×"
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+                }
+                if on_add.is_none() {
+                    AddTopicForm { categories: names, on_added: move |()| subjects.restart() }
                 }
             }
             aside { class: "library-filters", aria_label: "Filters",
@@ -374,6 +410,57 @@ pub fn LibraryBrowser(
                     }
                 }
             }
+        }
+    }
+}
+
+/// Adds a topic to a category of the library, or to a new one, so quizzes can file their
+/// questions under it.
+#[component]
+fn AddTopicForm(
+    /// The categories so far, suggested.
+    categories: Vec<String>,
+    on_added: EventHandler<()>,
+) -> Element {
+    let token: AdminToken = use_context();
+    let mut category = use_signal(String::new);
+    let mut topic = use_signal(String::new);
+    let mut error = use_signal(|| None::<String>);
+    let add = move |evt: FormEvent| async move {
+        evt.prevent_default();
+        match add_library_topic(token.get(), category(), topic()).await {
+            Ok(_) => {
+                topic.set(String::new());
+                error.set(None);
+                on_added.call(());
+            }
+            Err(err) => error.set(Some(message(&err))),
+        }
+    };
+    let blank = category().trim().is_empty() || topic().trim().is_empty();
+    rsx! {
+        form { class: "library-add-topic stack-tight", onsubmit: add,
+            span { class: "library-filter-title", "Add a topic" }
+            input {
+                list: "library-category-names",
+                placeholder: "Category, new or not",
+                aria_label: "Category",
+                value: category,
+                oninput: move |e| category.set(e.value()),
+            }
+            datalist { id: "library-category-names",
+                for name in categories {
+                    option { value: "{name}" }
+                }
+            }
+            input {
+                placeholder: "Topic",
+                aria_label: "Topic",
+                value: topic,
+                oninput: move |e| topic.set(e.value()),
+            }
+            button { class: "button", r#type: "submit", disabled: blank, "＋ Add topic" }
+            ErrorBox { error: error() }
         }
     }
 }

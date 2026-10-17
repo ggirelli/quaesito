@@ -778,16 +778,6 @@ impl Question {
         )
     }
 
-    /// The category and topic in one line, e.g. "Geography · Capitals"; empty when neither is set.
-    #[must_use]
-    pub fn subject(&self) -> String {
-        [self.category.trim(), self.topic.trim()]
-            .into_iter()
-            .filter(|part| !part.is_empty())
-            .collect::<Vec<_>>()
-            .join(" · ")
-    }
-
     /// Whether this is a slide rather than a question.
     #[must_use]
     pub fn is_slide(&self) -> bool {
@@ -1087,16 +1077,6 @@ mod tests {
             category: String::new(),
             topic: String::new(),
         }
-    }
-
-    #[test]
-    fn the_subject_joins_the_category_and_topic_that_are_set() {
-        let mut q = question();
-        assert_eq!(q.subject(), "");
-        q.topic = " Capitals ".to_owned();
-        assert_eq!(q.subject(), "Capitals");
-        q.category = "Geography".to_owned();
-        assert_eq!(q.subject(), "Geography · Capitals");
     }
 
     fn quiz() -> Quiz {
