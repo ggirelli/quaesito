@@ -457,6 +457,20 @@ pub struct Question {
     /// The subject within the category, e.g. "Capitals", shown with it.
     #[serde(default, skip_serializing_if = "String::is_empty")]
     pub topic: String,
+    /// The library question this one was added from or saved as, to keep the two in step.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub library: Option<LibraryLink>,
+}
+
+/// Ties a quiz question to a library question (see [`crate::library::sync`]).
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(test, derive(schemars::JsonSchema))]
+pub struct LibraryLink {
+    /// The library question's id.
+    pub id: String,
+    /// The [`crate::library::fingerprint`] of the question when the quiz and the library last
+    /// had the same one: which of the two changed since.
+    pub synced: String,
 }
 
 /// A bonus question: teams type its answer together with the main answer, and the judge can
@@ -1141,6 +1155,7 @@ mod tests {
             explanation_audio: None,
             category: String::new(),
             topic: String::new(),
+            library: None,
         }
     }
 

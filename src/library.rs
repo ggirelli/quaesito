@@ -8,7 +8,7 @@ use std::fmt::Write as _;
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    model::{Question, QuestionKind},
+    model::{LibraryLink, Question, QuestionKind},
     search,
 };
 
@@ -75,14 +75,27 @@ impl LibraryEntry {
         }
     }
 
-    /// The question as added to a quiz: it keeps the category and topic it comes from.
+    /// The question as added to a quiz: it keeps the category and topic it comes from, and its
+    /// link to this entry.
     #[must_use]
     pub fn to_question(&self) -> Question {
+        let question = self.shared();
         Question {
+            library: Some(LibraryLink {
+                id: self.id.clone(),
+                synced: fingerprint(&question),
+            }),
+            ..question
+        }
+    }
+
+    /// What the entry shares with the quizzes it is in (see [`shared`]).
+    fn shared(&self) -> Question {
+        shared(&Question {
             category: self.category.clone(),
             topic: self.topic.clone(),
             ..self.question.clone()
-        }
+        })
     }
 
     /// The right answer in one line, to judge a question at a glance.
@@ -248,6 +261,94 @@ impl LibrarySort {
             }
             Self::Text => entries.sort_by_cached_key(|e| search::fold(&e.question.text)),
         }
+    }
+}
+
+/// What a quiz question shares with its library question: everything but the quiz's own timing
+/// and points, and the link.
+#[must_use]
+pub fn shared(question: &Question) -> Question {
+    Question {
+        time_limit_secs: None,
+        multiplier: None,
+        library: None,
+        ..question.clone()
+    }
+}
+
+/// A short digest of what `question` shares with the library, to tell whether it changed.
+/// Choices count in any order, so shuffling them is no change.
+///
+/// # Panics
+/// Never: questions always serialise.
+#[must_use]
+pub fn fingerprint(question: &Question) -> String {
+    let mut question = shared(question);
+    if question.kind == QuestionKind::Choice {
+        question
+            .answers
+            .sort_by_cached_key(|a| serde_json::to_string(a).expect("answers serialise"));
+    }
+    fnv(&serde_json::to_string(&question).expect("questions serialise"))
+}
+
+/// FNV-1a of `text`, in hex: tiny, and the same in every Rust version and on every platform
+/// (unlike the standard hasher).
+#[must_use]
+pub fn fnv(text: &str) -> String {
+    let hash = text.bytes().fold(0xcbf2_9ce4_8422_2325_u64, |hash, byte| {
+        (hash ^ u64::from(byte)).wrapping_mul(0x0100_0000_01b3)
+    });
+    format!("{hash:016x}")
+}
+
+/// Where a quiz question linked to the library stands against it.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum LibrarySync {
+    /// Both have the same question.
+    InStep,
+    /// Changed in the quiz: the library can take it.
+    ChangedHere,
+    /// Changed in the library: the quiz can take it.
+    ChangedInLibrary,
+    /// Changed on both sides since they last agreed.
+    ChangedInBoth,
+    /// The library no longer has the question (deleted, or this is another server's).
+    Gone,
+}
+
+/// Where `question` stands against its library question among `entries`; `None` if it has no
+/// link.
+#[must_use]
+pub fn sync<'a>(
+    question: &Question,
+    entries: &'a [LibraryEntry],
+) -> Option<(LibrarySync, Option<&'a LibraryEntry>)> {
+    let link = question.library.as_ref()?;
+    let Some(entry) = entries.iter().find(|e| e.id == link.id) else {
+        return Some((LibrarySync::Gone, None));
+    };
+    let here = fingerprint(question);
+    let there = fingerprint(&entry.shared());
+    let state = if here == there {
+        LibrarySync::InStep
+    } else {
+        match (here != link.synced, there != link.synced) {
+            (true, false) => LibrarySync::ChangedHere,
+            (false, true) => LibrarySync::ChangedInLibrary,
+            _ => LibrarySync::ChangedInBoth,
+        }
+    };
+    Some((state, Some(entry)))
+}
+
+/// `question` replaced by the library's `entry`, keeping its own timing and points.
+#[must_use]
+pub fn pulled(question: &Question, entry: &LibraryEntry) -> Question {
+    Question {
+        time_limit_secs: question.time_limit_secs,
+        multiplier: question.multiplier,
+        ..entry.to_question()
     }
 }
 
@@ -559,6 +660,62 @@ mod tests {
                 },
             ),
         ]
+    }
+
+    #[test]
+    fn linked_questions_tell_which_side_changed() {
+        let mut entries = library();
+        entries[0].id = "a".into();
+        let added = entries[0].to_question();
+        assert_eq!(added.category, "Geography");
+        assert_eq!(sync(&added, &entries).unwrap().0, LibrarySync::InStep);
+        assert_eq!(sync(&Question::blank(), &entries), None);
+
+        // The quiz's own timing and points, and the order of choices, are no change.
+        let mut timed = added.clone();
+        timed.time_limit_secs = Some(10);
+        timed.multiplier = Some(2);
+        timed.answers.reverse();
+        assert_eq!(sync(&timed, &entries).unwrap().0, LibrarySync::InStep);
+
+        let mut changed = added.clone();
+        changed.text = "Capital city of France?".into();
+        assert_eq!(
+            sync(&changed, &entries).unwrap().0,
+            LibrarySync::ChangedHere
+        );
+
+        let mut library_changed = entries.clone();
+        library_changed[0].question.passage = "Think of the Seine.".into();
+        assert_eq!(
+            sync(&added, &library_changed).unwrap().0,
+            LibrarySync::ChangedInLibrary
+        );
+        assert_eq!(
+            sync(&changed, &library_changed).unwrap().0,
+            LibrarySync::ChangedInBoth
+        );
+        // Both made the same change: they agree again.
+        let mut same = added.clone();
+        same.passage = "Think of the Seine.".into();
+        assert_eq!(
+            sync(&same, &library_changed).unwrap().0,
+            LibrarySync::InStep
+        );
+
+        let pulled = pulled(&timed, &library_changed[0]);
+        assert_eq!(pulled.passage, "Think of the Seine.");
+        assert_eq!(
+            (pulled.time_limit_secs, pulled.multiplier),
+            (Some(10), Some(2))
+        );
+        assert_eq!(
+            sync(&pulled, &library_changed).unwrap().0,
+            LibrarySync::InStep
+        );
+
+        entries.clear();
+        assert_eq!(sync(&added, &entries).unwrap().0, LibrarySync::Gone);
     }
 
     #[test]

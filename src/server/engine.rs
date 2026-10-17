@@ -2240,6 +2240,7 @@ mod tests {
             explanation_audio: None,
             category: String::new(),
             topic: String::new(),
+            library: None,
         };
         Quiz {
             settings,

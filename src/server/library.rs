@@ -39,12 +39,7 @@ pub fn entries() -> &'static [LibraryEntry] {
 /// A stable id for a bundled entry, from its content: edits stay with their question across
 /// restarts and new versions, and are left behind when the bundled question itself changes.
 fn id_of(entry: &LibraryEntry) -> String {
-    let json = serde_json::to_string(entry).expect("entries serialise");
-    // FNV-1a: tiny, and the same in every Rust version (unlike the standard hasher).
-    let hash = json.bytes().fold(0xcbf2_9ce4_8422_2325_u64, |hash, byte| {
-        (hash ^ u64::from(byte)).wrapping_mul(0x0100_0000_01b3)
-    });
-    format!("{hash:016x}")
+    crate::library::fnv(&serde_json::to_string(entry).expect("entries serialise"))
 }
 
 /// An edit as kept in `library-edits.json`: with where the question came from, so
