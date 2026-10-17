@@ -255,7 +255,8 @@
           "answer": false
         }
       },
-      "text": "The word 'ketchup' is certainly derived from the English word 'catch up'."
+      "text": "The word 'ketchup' is certainly derived from the English word 'catch up'.",
+      "explanation": "No, the word \"ketchup\" is not derived from the English phrase \"catch up.\" It actually traces back to an Ancient Chinese fish sauce."
     }
   },
   {
@@ -268,7 +269,8 @@
           "answer": false
         }
       },
-      "text": "The word 'amok' comes from Latin."
+      "text": "The word 'amok' comes from Latin.",
+      "explanation": "It is borrowed from the Malay word amuk, which traditionally means \"rushing in a frenzy\" or \"attacking furiously\"."
     }
   },
   {
@@ -314,57 +316,6 @@
         }
       },
       "text": "What Portuguese word for a longing or melancholy is used in English?"
-    }
-  },
-  {
-    "category": "Language & Words",
-    "topic": "Words from other languages",
-    "difficulty": 1,
-    "question": {
-      "kind": {
-        "Number": {
-          "answer": 6,
-          "range": {
-            "min": 2,
-            "max": 12
-          }
-        }
-      },
-      "text": "How many letters are in the French loanword 'ballet'?"
-    }
-  },
-  {
-    "category": "Language & Words",
-    "topic": "Words from other languages",
-    "difficulty": 2,
-    "question": {
-      "kind": {
-        "Number": {
-          "answer": 9,
-          "range": {
-            "min": 5,
-            "max": 17
-          }
-        }
-      },
-      "text": "How many letters are in the German loanword 'zeitgeist'?"
-    }
-  },
-  {
-    "category": "Language & Words",
-    "topic": "Words from other languages",
-    "difficulty": 3,
-    "question": {
-      "kind": {
-        "Number": {
-          "answer": 7,
-          "range": {
-            "min": 4,
-            "max": 14
-          }
-        }
-      },
-      "text": "How many letters are in the Portuguese loanword 'saudade'?"
     }
   },
   {

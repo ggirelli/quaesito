@@ -314,7 +314,8 @@
           "answer": false
         }
       },
-      "text": "The spelling 'alright' is accepted by every style guide as the only correct form."
+      "text": "The spelling 'alright' is accepted by every style guide as the only correct form.",
+      "explanation": "• The Formal Standard (\"all right\"): This is the safer, universally accepted choice for professional copy, essays, and published works.\n• The Informal Variant (\"alright\"): This spelling is highly common in casual everyday speech, text messages, literature, and fictional dialogue where it matches the conversational flow of a character's voice."
     }
   },
   {
@@ -362,23 +363,6 @@
         }
       },
       "text": "How many syllables are in the word 'beautiful' in standard pronunciation?"
-    }
-  },
-  {
-    "category": "Language & Words",
-    "topic": "Grammar & spelling",
-    "difficulty": 3,
-    "question": {
-      "kind": {
-        "Number": {
-          "answer": 11,
-          "range": {
-            "min": 5,
-            "max": 18
-          }
-        }
-      },
-      "text": "How many letters are in the word 'mississippi'?"
     }
   },
   {
