@@ -158,6 +158,13 @@ fn HostScreen(code: String) -> Element {
                         onclick: move |_| show_teams.set(true),
                         "Teams ({view.teams.len()})"
                     }
+                    Link {
+                        class: "button ghost icon",
+                        to: Route::Admin {},
+                        title: "Admin",
+                        aria_label: "Admin",
+                        Icon { kind: IconKind::Settings }
+                    }
                     ThemeToggle { class: "button ghost icon" }
                 }
             }
