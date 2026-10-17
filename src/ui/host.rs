@@ -864,8 +864,18 @@ fn qr_svg(text: &str) -> Option<String> {
     )
 }
 
+/// A question's count, category and `children` (such as the clock), then its text.
 #[component]
 fn QuestionHeader(question: QuestionInfo, children: Element) -> Element {
+    rsx! {
+        QuestionHead { question: question.clone(), {children} }
+        QuestionText { question }
+    }
+}
+
+/// The line above a question: its count and category, with `children` (such as the clock).
+#[component]
+fn QuestionHead(question: QuestionInfo, children: Element) -> Element {
     let categories: Categories = use_context();
     let look = categories.look(&question.category);
     rsx! {
@@ -890,8 +900,16 @@ fn QuestionHeader(question: QuestionInfo, children: Element) -> Element {
             }
             {children}
         }
+    }
+}
+
+/// A question's text, with its passage (unless shown elsewhere), bonus question and a note when
+/// several answers are right.
+#[component]
+fn QuestionText(question: QuestionInfo, #[props(default = true)] passage: bool) -> Element {
+    rsx! {
         h1 { class: "question-title", "{question.text}" }
-        if !question.passage.is_empty() {
+        if passage && !question.passage.is_empty() {
             p { class: "question-passage", "{question.passage}" }
         }
         if let Some((text, percent)) = &question.bonus {
@@ -929,19 +947,21 @@ fn QuestionSlide(
     };
     let seconds = (left_ms / 1000.0).ceil();
     rsx! {
-        QuestionHeader { question: question.clone(),
+        QuestionHead { question: question.clone(),
             Timer { fraction, seconds }
         }
-        div { class: "question-body",
-            if let Some(image) = &question.image {
-                QuestionImage { image: image.clone(), reveal: question.image_reveal, left: reveal_left, seed: question.index, paused }
-            }
+        QuestionBody {
+            question: question.clone(),
+            picture: rsx! {
+                if let Some(image) = &question.image {
+                    QuestionImage { image: image.clone(), reveal: question.image_reveal, left: reveal_left, seed: question.index, paused }
+                }
+            },
             div { class: "answered",
                 strong { "{answered}/{teams}" }
                 span { class: "muted", "answered" }
             }
         }
-        AnswersOrPrompt { question: question.clone() }
     }
 }
 
@@ -1066,19 +1086,57 @@ fn ReadySlide(question: QuestionInfo, teams: usize) -> Element {
     #[allow(clippy::cast_precision_loss, reason = "time limits are small")]
     let seconds = (question.time_limit_ms as f64 / 1000.0).ceil();
     rsx! {
-        QuestionHeader { question: question.clone(),
+        QuestionHead { question: question.clone(),
             Timer { fraction: 1.0, seconds }
         }
-        div { class: "question-body",
-            if let Some(image) = &question.image {
-                QuestionImage { image: image.clone(), reveal: question.image_reveal, left: 1.0, seed: question.index }
-            }
+        QuestionBody {
+            question: question.clone(),
+            picture: rsx! {
+                if let Some(image) = &question.image {
+                    QuestionImage { image: image.clone(), reveal: question.image_reveal, left: 1.0, seed: question.index }
+                }
+            },
             div { class: "answered",
                 strong { Icon { kind: IconKind::Music } }
                 span { class: "muted", "The clock starts with the music" }
             }
         }
-        AnswersOrPrompt { question: question.clone() }
+    }
+}
+
+/// Lines longer than this, in characters, give a passage beside a picture the wider column.
+const WIDE_PASSAGE: usize = 40;
+
+/// A question's text, picture, `children` (such as how many teams answered) and answers. With a
+/// picture and a passage, the picture goes left of the passage to use the screen's width, as on
+/// slides, and `children` go below them. A passage with long lines takes the wider share.
+#[component]
+fn QuestionBody(question: QuestionInfo, picture: Element, children: Element) -> Element {
+    let split = question.image.is_some() && !question.passage.is_empty();
+    // The passage's longest line sizes its text to fit without wrapping, within limits.
+    let longest = question
+        .passage
+        .lines()
+        .map(|line| line.chars().count())
+        .max()
+        .unwrap_or(0);
+    rsx! {
+        QuestionText { question: question.clone(), passage: !split }
+        if split {
+            div { class: if longest > WIDE_PASSAGE { "question-split wide-text" } else { "question-split" },
+                {picture}
+                div { class: "passage-box",
+                    p { class: "question-passage", style: "--longest: {longest.max(1)}", "{question.passage}" }
+                }
+            }
+            {children}
+        } else {
+            div { class: "question-body",
+                {picture}
+                {children}
+            }
+        }
+        AnswersOrPrompt { question }
     }
 }
 
