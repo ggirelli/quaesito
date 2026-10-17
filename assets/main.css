@@ -1602,8 +1602,11 @@ table.results {
 
 .answer-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* minmax(0, …) keeps a long word or a picture from widening the tiles past the screen. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.2vw;
+  /* Room for the ring around the right answer, which the scrolling slide would clip. */
+  padding: 8px;
 }
 
 .answer-tile {
@@ -1625,6 +1628,8 @@ table.results {
 
 .answer-tile .text {
   flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .tile-image {
@@ -1645,7 +1650,6 @@ table.results {
 }
 
 .answer-tile.right {
-  transform: scale(1.02);
   /* A light ring shows on every answer colour, teal and green included. */
   box-shadow: 0 0 0 3px var(--bg), 0 0 0 7px var(--fg);
 }
@@ -2811,7 +2815,7 @@ button.joker {
   }
 
   .answer-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .topbar {
