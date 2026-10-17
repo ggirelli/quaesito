@@ -228,6 +228,17 @@ fn EditorForm(quiz: Quiz) -> Element {
         .is_some_and(|(revision, _)| *revision == (draft.revision)());
 
     let mut browsing = use_signal(|| false);
+    // The quiz as a table, one row per question or slide, instead of its cards.
+    let mut table = use_signal(|| false);
+    // Shows the cards or the table, at the item named (or the one at the top of the list).
+    let mut switch_view = move |to_table: bool, at: Option<String>| {
+        table.set(to_table);
+        document::eval(&format!(
+            "const id = {:?} || decodeURIComponent(location.hash.slice(1));
+            requestAnimationFrame(() => requestAnimationFrame(() => window.qnav?.jump(id, 'instant')));",
+            at.unwrap_or_default()
+        ));
+    };
     let mut test_error = use_signal(|| None::<String>);
     let nav = navigator();
     // Save the latest edits first, so the test plays what is on screen. `from` starts the test
@@ -321,14 +332,21 @@ fn EditorForm(quiz: Quiz) -> Element {
                 }
             }
             div { class: "editor-list stack",
-                for index in 0..question_count {
-                    QuestionCard {
-                        key: "{index}",
-                        index,
-                        label: quiz.label(index),
-                        count: question_count,
-                        question: quiz.questions[index].clone(),
-                        default_limit: quiz.settings.default_time_limit_secs,
+                if table() {
+                    QuizTable {
+                        rows: (0..question_count).map(|index| TableRow::new(&quiz, index, &issues.read())).collect::<Vec<_>>(),
+                        on_open: move |anchor| switch_view(false, Some(anchor)),
+                    }
+                } else {
+                    for index in 0..question_count {
+                        QuestionCard {
+                            key: "{index}",
+                            index,
+                            label: quiz.label(index),
+                            count: question_count,
+                            question: quiz.questions[index].clone(),
+                            default_limit: quiz.settings.default_time_limit_secs,
+                        }
                     }
                 }
             }
@@ -364,6 +382,12 @@ fn EditorForm(quiz: Quiz) -> Element {
                     }
                     if can_undo {
                         button { class: "button ghost", onclick: undo_shuffle, "↶ Undo shuffle" }
+                    }
+                    button {
+                        class: "button ghost",
+                        title: if table() { "Edit the questions on their cards" } else { "See the whole quiz at a glance, one row per question or slide" },
+                        onclick: move |_| switch_view(!table(), None),
+                        if table() { "▦ Card view" } else { "☰ Table view" }
                     }
                 }
                 QuizNavigator { items: nav_items }
@@ -937,6 +961,153 @@ fn QuizNavigator(items: Vec<NavItem>) -> Element {
     }
 }
 
+/// A question or slide as the table shows it.
+#[derive(Clone, PartialEq)]
+struct TableRow {
+    anchor: String,
+    /// "12", or "S2" for a slide.
+    number: String,
+    kind: &'static str,
+    /// The question, or the slide's title (its text when untitled).
+    text: String,
+    /// The time limit, and whether it is the quiz's default.
+    time: Option<(u32, bool)>,
+    multiplier: Option<u32>,
+    category: String,
+    topic: String,
+    /// What keeps it from being played, one per line.
+    problems: String,
+}
+
+impl TableRow {
+    fn new(quiz: &Quiz, index: usize, issues: &[ValidationIssue]) -> Self {
+        let question = &quiz.questions[index];
+        let number = quiz.ordinal(index) + 1;
+        let slide = question.is_slide();
+        let text = match &question.kind {
+            QuestionKind::Slide { title, .. } if !title.trim().is_empty() => title.trim(),
+            _ => question.text.trim(),
+        };
+        Self {
+            anchor: anchor(&quiz.label(index)),
+            number: if slide {
+                format!("S{number}")
+            } else {
+                number.to_string()
+            },
+            kind: kind_name(question),
+            text: text.to_owned(),
+            time: (!slide).then(|| {
+                (
+                    question.time_limit_secs(&quiz.settings),
+                    question.time_limit_secs.is_none(),
+                )
+            }),
+            multiplier: question.multiplier.filter(|&m| m > 1),
+            category: question.category.trim().to_owned(),
+            topic: question.topic.trim().to_owned(),
+            problems: issues
+                .iter()
+                .filter(|issue| issue.question == Some(index))
+                .map(|issue| issue.message.as_str())
+                .collect::<Vec<_>>()
+                .join("\n"),
+        }
+    }
+}
+
+/// The answer type, named as in the editor.
+fn kind_name(question: &Question) -> &'static str {
+    match question.kind {
+        QuestionKind::Choice => "Choices",
+        QuestionKind::TrueFalse { .. } => "True/false",
+        QuestionKind::Text { .. } => "Typed answer",
+        QuestionKind::Number { .. } => "Number",
+        QuestionKind::Order { .. } => "Order",
+        QuestionKind::Parts { .. } => "Several answers",
+        QuestionKind::Pin { .. } => "Pin",
+        QuestionKind::Pairs { .. } => "Pairs",
+        QuestionKind::Slide { results: true, .. } => "Results slide",
+        QuestionKind::Slide { .. } => "Slide",
+    }
+}
+
+/// The whole quiz in a table, one row per question or slide; a row opens its card.
+#[component]
+fn QuizTable(rows: Vec<TableRow>, on_open: EventHandler<String>) -> Element {
+    rsx! {
+        div { class: "card quiz-table-card",
+            table { class: "quiz-table",
+                thead {
+                    tr {
+                        th { "#" }
+                        th { class: "col-kind", "Type" }
+                        th { class: "col-subject", "Category" }
+                        th { class: "col-subject", "Topic" }
+                        th { class: "col-number", "Time" }
+                        th { class: "col-number col-points", "Points" }
+                        th { "Question" }
+                    }
+                }
+                tbody {
+                    for row in rows {
+                        tr {
+                            key: "{row.anchor}",
+                            id: "{row.anchor}",
+                            class: if row.time.is_none() { "slide-row" },
+                            onclick: {
+                                let anchor = row.anchor.clone();
+                                move |_| on_open.call(anchor.clone())
+                            },
+                            td { class: "col-index",
+                                a {
+                                    href: "#{row.anchor}",
+                                    title: "Open its card",
+                                    onclick: {
+                                        let anchor = row.anchor.clone();
+                                        move |e: MouseEvent| {
+                                            e.prevent_default();
+                                            e.stop_propagation();
+                                            on_open.call(anchor.clone());
+                                        }
+                                    },
+                                    "{row.number}"
+                                }
+                                if !row.problems.is_empty() {
+                                    span {
+                                        class: "table-problem",
+                                        title: "{row.problems}",
+                                        aria_label: "Not ready to play",
+                                        "●"
+                                    }
+                                }
+                            }
+                            td { class: "col-kind", "{row.kind}" }
+                            td { class: "col-subject", "{row.category}" }
+                            td { class: "col-subject", "{row.topic}" }
+                            td { class: "col-number",
+                                if let Some((secs, inherited)) = row.time {
+                                    span {
+                                        class: if inherited { "muted" },
+                                        title: if inherited { "The quiz's default" },
+                                        "{secs}s"
+                                    }
+                                }
+                            }
+                            td { class: "col-number col-points",
+                                if let Some(times) = row.multiplier { "×{times}" }
+                            }
+                            td { class: "col-text", title: "{row.text}",
+                                div { class: "single-line", "{row.text}" }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 /// Sizes the navigator's links (open around the cards on screen, or around the pointer or a
 /// finger sliding along it, thin elsewhere), lights the ones on screen, keeps the card at the top
 /// of the list in the URL fragment (without adding history entries), and on load scrolls back to
@@ -961,7 +1132,8 @@ if (list && nav) {
         const element = document.querySelector(selector);
         return element ? (parseFloat(getComputedStyle(element).top) || 0) + element.offsetHeight : 0;
     })) + 8;
-    const cards = () => [...list.children].filter((card) => card.id);
+    // The cards, or the table's rows in their place.
+    const cards = () => [...list.querySelectorAll(":scope > [id], tbody > tr[id]")];
     const chips = () => [...nav.children];
     let following = null;
     let shown = null;
@@ -1097,12 +1269,12 @@ if (list && nav) {
     if (target && list.contains(target)) following = target;
     requestAnimationFrame(() => requestAnimationFrame(schedule));
     window.qnav = {
-        jump(id) {
+        jump(id, behavior = "smooth") {
             // The click that follows a finger lifted from the strip.
             if (Date.now() - scrubbedAt < 500) return;
             const card = document.getElementById(id);
             following = null;
-            if (card) align(card, "smooth");
+            if (card) align(card, behavior);
         },
         stop() {
             listen.abort();
