@@ -148,6 +148,8 @@ pub struct Explanation {
     pub text: String,
     /// A picture or video.
     pub image: Option<String>,
+    /// A soundtrack, played as the answer is shown.
+    pub audio: Option<String>,
 }
 
 /// A slide as shown on the big screen; any part may be empty.

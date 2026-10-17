@@ -249,8 +249,8 @@ fn HostScreen(code: String) -> Element {
                     }
                 }
                 span { class: "grow" }
-                if let Some((index, name, started_at)) = soundtrack {
-                    Soundtrack { key: "{index}", name, started_at, paused }
+                if let Some(Playing { key, name, started_at, seek }) = soundtrack {
+                    Soundtrack { key: "{key}", name, started_at, seek, paused }
                 }
                 if let Some(secs) = auto_left {
                     span { class: "auto-note", "Continuing in {secs}s" }
@@ -634,13 +634,39 @@ fn next_label(view: &HostView) -> Option<String> {
     })
 }
 
-/// The soundtrack to keep on screen: question index, media name, and the browser time its
-/// clock started (pauses excluded), once it has.
-fn soundtrack(
-    phase: &HostPhase,
-    received_at: f64,
-    paused: bool,
-) -> Option<(usize, String, Option<f64>)> {
+/// A soundtrack kept on screen.
+struct Playing {
+    /// Tells soundtracks apart, so a new one starts from its beginning.
+    key: String,
+    name: String,
+    /// The browser time the music started (pauses excluded), once it has.
+    started_at: Option<f64>,
+    /// Whether to play from `started_at`, keeping the music in time with a clock.
+    seek: bool,
+}
+
+/// The soundtrack to keep on screen: the one revealed with an answer, or else the question's.
+fn soundtrack(phase: &HostPhase, received_at: f64, paused: bool) -> Option<Playing> {
+    if let HostPhase::Closed {
+        question,
+        explanation: Some(explanation),
+        ..
+    }
+    | HostPhase::Review {
+        question,
+        explanation: Some(explanation),
+        ..
+    } = phase
+        && let Some(name) = explanation.audio.clone()
+    {
+        // Plays from where it is, and on from a pause.
+        return Some(Playing {
+            key: format!("answer-{}", question.index),
+            name,
+            started_at: Some(received_at),
+            seek: false,
+        });
+    }
     let (question, started_at) = match phase {
         HostPhase::Question {
             question,
@@ -656,15 +682,20 @@ fn soundtrack(
         _ => return None,
     };
     let name = question.audio.clone()?;
-    Some((question.index, name, started_at))
+    Some(Playing {
+        key: question.index.to_string(),
+        name,
+        started_at,
+        seek: true,
+    })
 }
 
-/// Plays a question's soundtrack once its clock has started, from the matching position, and
-/// pauses it with the clock.
+/// Plays a soundtrack once it has started (a question's with its clock, from the matching
+/// position), and pauses it with the game.
 #[component]
-fn Soundtrack(name: String, started_at: Option<f64>, paused: bool) -> Element {
+fn Soundtrack(name: String, started_at: Option<f64>, seek: bool, paused: bool) -> Element {
     let mut played = use_signal(|| false);
-    use_effect(use_reactive!(|started_at, paused| {
+    use_effect(use_reactive!(|started_at, seek, paused| {
         if paused {
             if *played.peek() {
                 played.set(false);
@@ -682,9 +713,14 @@ fn Soundtrack(name: String, started_at: Option<f64>, paused: bool) -> Element {
         }
         played.set(true);
         let offset = ((client::now_ms() - started_at) / 1000.0).max(0.0);
+        let seek = if seek {
+            format!("a.currentTime = {offset:.3}; ")
+        } else {
+            String::new()
+        };
         document::eval(&format!(
             "const a = document.getElementById('soundtrack');\n\
-             if (a) {{ a.currentTime = {offset:.3}; a.play().catch(() => {{}}); }}"
+             if (a) {{ {seek}a.play().catch(() => {{}}); }}"
         ));
     }));
     // No player controls: the host starts the music with the "next" step only, which also
@@ -1465,7 +1501,8 @@ fn ReviewSlide(
 /// What the question shows with its answer: an explanation, a fun fact, a picture…
 #[component]
 fn ExplanationNote(explanation: Option<Explanation>) -> Element {
-    let Some(explanation) = explanation else {
+    // A soundtrack alone plays from the toolbar.
+    let Some(explanation) = explanation.filter(|e| !e.text.is_empty() || e.image.is_some()) else {
         return rsx! {};
     };
     rsx! {

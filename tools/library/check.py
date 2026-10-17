@@ -26,7 +26,7 @@ SCHEMA = ROOT / "docs/schema/quiz-2.json"
 ENTRY_KEYS = {"category", "topic", "difficulty", "question"}
 # Fields a text-only library question must leave out: the library has no media, and per-question
 # timing and scoring are the host's choice.
-FORBIDDEN = {"image", "explanation_image", "audio", "image_reveal", "image_hold_secs", "multiplier", "time_limit_secs", "bonus"}
+FORBIDDEN = {"image", "explanation_image", "explanation_audio", "audio", "image_reveal", "image_hold_secs", "multiplier", "time_limit_secs", "bonus"}
 ALLOWED_KINDS = {"Choice", "TrueFalse", "Text", "Number", "Order", "Parts", "Pairs"}
 MAX_TEXT, MAX_ANSWER = 120, 40
 

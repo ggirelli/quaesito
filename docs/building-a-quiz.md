@@ -63,6 +63,10 @@ until the answer is revealed: why the answer is right, a fun fact, the painting 
 about. The big screen shows it under the answers, after each question or in the walk through the
 answers, depending on when the quiz [reveals answers](quiz-settings.md). Phones do not show it.
 
+**＋ Add soundtrack** in the same box adds music or a sound the big screen plays as it shows the
+answer: the song the question was about, a fanfare. It takes over from the question's own
+soundtrack, and pauses with the game.
+
 ## Pictures
 
 Add a picture to any question. For a guessing game, choose how it appears while the clock runs:

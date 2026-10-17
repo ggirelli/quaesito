@@ -279,6 +279,13 @@
           "description": "Shown on the big screen only once the answer is revealed: an explanation, a fun fact…",
           "type": "string"
         },
+        "explanation_audio": {
+          "description": "Name of an uploaded soundtrack the big screen plays once the answer is revealed.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "explanation_image": {
           "description": "Name of an uploaded picture or video shown with the `explanation`.",
           "type": [
