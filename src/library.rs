@@ -21,6 +21,9 @@ pub struct LibraryEntry {
     /// Whether this server's admin edited the question.
     #[serde(default, skip_serializing_if = "std::ops::Not::not")]
     pub edited: bool,
+    /// Whether the question was saved to the library on this server, from a quiz.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub added: bool,
     pub category: String,
     pub topic: String,
     /// 1: most adults know it, 2: keen quizzers, 3: experts.
@@ -619,6 +622,7 @@ mod tests {
         LibraryEntry {
             id: String::new(),
             edited: false,
+            added: false,
             category: category.into(),
             topic: "Topic".into(),
             difficulty,

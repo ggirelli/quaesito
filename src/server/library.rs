@@ -1,4 +1,5 @@
-//! The bundled question library (see [`crate::library`]), and this server's edits to it.
+//! The bundled question library (see [`crate::library`]), and this server's edits to it: changed
+//! questions, and questions saved from quizzes.
 
 use std::{collections::BTreeMap, path::PathBuf, sync::OnceLock};
 
@@ -11,7 +12,7 @@ use crate::{
         Added, AddedCategory, AddedTopic, CATEGORY_COLORS, CATEGORY_ICONS, CategoryLook,
         LibraryCategory, LibraryEdit, LibraryEntry,
     },
-    model::Quiz,
+    model::{Question, Quiz},
 };
 
 /// Longest name a category or topic added on this server may have, in characters.
@@ -57,44 +58,92 @@ struct StoredEdit {
     edit: LibraryEdit,
 }
 
-/// This server's edits to library questions, by id, kept in one JSON file.
+/// This server's edits to the library: changes to bundled questions, by id, and the questions
+/// added here, each kept in a JSON file.
 pub struct LibraryEdits {
     path: PathBuf,
     edits: Mutex<BTreeMap<String, StoredEdit>>,
+    added_path: PathBuf,
+    added: Mutex<Vec<LibraryEntry>>,
 }
 
 impl LibraryEdits {
-    /// Reads the edits saved at `path`, if any.
+    /// Reads the edits saved at `path` and the questions added at `added_path`, if any.
     ///
     /// # Errors
-    /// Fails if the file exists but cannot be read or parsed.
-    pub async fn open(path: PathBuf) -> anyhow::Result<Self> {
-        let edits = match tokio::fs::read(&path).await {
-            Ok(bytes) => serde_json::from_slice(&bytes)
-                .with_context(|| format!("reading {}", path.display()))?,
-            Err(err) if err.kind() == std::io::ErrorKind::NotFound => BTreeMap::new(),
-            Err(err) => return Err(err).with_context(|| format!("reading {}", path.display())),
-        };
+    /// Fails if a file exists but cannot be read or parsed.
+    pub async fn open(path: PathBuf, added_path: PathBuf) -> anyhow::Result<Self> {
+        let edits = read_or_default(&path).await?;
+        let added = read_or_default(&added_path).await?;
         Ok(Self {
             path,
             edits: Mutex::new(edits),
+            added_path,
+            added: Mutex::new(added),
         })
     }
 
-    /// The library with this server's edits applied.
+    /// The library with this server's edits applied, then the questions added here.
     pub async fn entries(&self) -> Vec<LibraryEntry> {
         let edits = self.edits.lock().await;
+        let added = self.added.lock().await;
         entries()
             .iter()
             .map(|entry| apply(entry, edits.get(&entry.id)))
+            .chain(added.iter().map(|entry| LibraryEntry {
+                added: true,
+                ..entry.clone()
+            }))
             .collect()
     }
 
-    /// Saves an edit of the bundled question `id` and returns the edited entry.
+    /// Adds a question to the library, filed under the category and topic it has, and returns
+    /// it with its new id.
+    ///
+    /// # Errors
+    /// Fails if the question has no category or topic, or it cannot be written.
+    pub async fn add(&self, difficulty: u8, question: Question) -> anyhow::Result<LibraryEntry> {
+        anyhow::ensure!(
+            !question.category.is_empty() && !question.topic.is_empty(),
+            "Pick a category and a topic first."
+        );
+        let mut entry = LibraryEntry {
+            id: crate::server::store::new_id(),
+            edited: false,
+            added: false,
+            category: String::new(),
+            topic: String::new(),
+            difficulty,
+            question: Question::default(),
+        };
+        file(&mut entry, question);
+        let mut added = self.added.lock().await;
+        added.push(entry.clone());
+        write(&self.added_path, &*added).await?;
+        Ok(LibraryEntry {
+            added: true,
+            ..entry
+        })
+    }
+
+    /// Saves an edit of question `id` and returns the edited entry. A category and topic in
+    /// the question move it there.
     ///
     /// # Errors
     /// Fails if there is no such question or the edits cannot be written.
     pub async fn save(&self, id: &str, edit: LibraryEdit) -> anyhow::Result<LibraryEntry> {
+        let mut added = self.added.lock().await;
+        if let Some(entry) = added.iter_mut().find(|e| e.id == id) {
+            entry.difficulty = edit.difficulty;
+            file(entry, edit.question);
+            let entry = LibraryEntry {
+                added: true,
+                ..entry.clone()
+            };
+            write(&self.added_path, &*added).await?;
+            return Ok(entry);
+        }
+        drop(added);
         let entry = find(id)?;
         let mut edits = self.edits.lock().await;
         edits.insert(
@@ -103,14 +152,17 @@ impl LibraryEdits {
                 category: entry.category.clone(),
                 topic: entry.topic.clone(),
                 text: entry.question.text.clone(),
-                edit,
+                edit: LibraryEdit {
+                    difficulty: edit.difficulty,
+                    question: crate::library::shared(&edit.question),
+                },
             },
         );
-        self.write(&edits).await?;
+        write(&self.path, &*edits).await?;
         Ok(apply(entry, edits.get(id)))
     }
 
-    /// Drops the edit of question `id`, if any, and returns the bundled question.
+    /// Drops the edit of bundled question `id`, if any, and returns the bundled question.
     ///
     /// # Errors
     /// Fails if there is no such question or the edits cannot be written.
@@ -118,25 +170,68 @@ impl LibraryEdits {
         let entry = find(id)?;
         let mut edits = self.edits.lock().await;
         if edits.remove(id).is_some() {
-            self.write(&edits).await?;
+            write(&self.path, &*edits).await?;
         }
         Ok(entry.clone())
     }
 
-    /// Names of the uploaded files edited questions use, so they are not cleaned up.
-    pub async fn media(&self) -> Vec<String> {
-        let edits = self.edits.lock().await;
-        let mut quiz = Quiz::new(String::new(), String::new());
-        quiz.questions = edits.values().map(|e| e.edit.question.clone()).collect();
-        quiz.media()
+    /// Deletes question `id`, one added here.
+    ///
+    /// # Errors
+    /// Fails if the question was not added here, or the file cannot be written.
+    pub async fn delete(&self, id: &str) -> anyhow::Result<()> {
+        let mut added = self.added.lock().await;
+        let index = added
+            .iter()
+            .position(|e| e.id == id)
+            .context("Only questions added on this server can be deleted.")?;
+        added.remove(index);
+        write(&self.added_path, &*added).await
     }
 
-    async fn write(&self, edits: &BTreeMap<String, StoredEdit>) -> anyhow::Result<()> {
-        let tmp = self.path.with_extension("json.tmp");
-        tokio::fs::write(&tmp, serde_json::to_vec_pretty(edits)?).await?;
-        tokio::fs::rename(&tmp, &self.path).await?;
-        Ok(())
+    /// Names of the uploaded files edited and added questions use, so they are not cleaned up.
+    pub async fn media(&self) -> Vec<String> {
+        let edits = self.edits.lock().await;
+        let added = self.added.lock().await;
+        let mut quiz = Quiz::new(String::new(), String::new());
+        quiz.questions = edits
+            .values()
+            .map(|e| e.edit.question.clone())
+            .chain(added.iter().map(|e| e.question.clone()))
+            .collect();
+        quiz.media()
     }
+}
+
+/// Files `question` in `entry`: under its category and topic, if it has them, without what only
+/// a quiz has.
+fn file(entry: &mut LibraryEntry, mut question: Question) {
+    if !question.category.is_empty() {
+        entry.category = std::mem::take(&mut question.category);
+        entry.topic = std::mem::take(&mut question.topic);
+    }
+    entry.question = crate::library::shared(&question);
+}
+
+/// The JSON at `path`, or the default if there is no file.
+async fn read_or_default<T: Default + serde::de::DeserializeOwned>(
+    path: &std::path::Path,
+) -> anyhow::Result<T> {
+    match tokio::fs::read(path).await {
+        Ok(bytes) => {
+            serde_json::from_slice(&bytes).with_context(|| format!("reading {}", path.display()))
+        }
+        Err(err) if err.kind() == std::io::ErrorKind::NotFound => Ok(T::default()),
+        Err(err) => Err(err).with_context(|| format!("reading {}", path.display())),
+    }
+}
+
+/// Writes `value` to `path` as JSON, whole or not at all.
+async fn write(path: &std::path::Path, value: &impl Serialize) -> anyhow::Result<()> {
+    let tmp = path.with_extension("json.tmp");
+    tokio::fs::write(&tmp, serde_json::to_vec_pretty(value)?).await?;
+    tokio::fs::rename(&tmp, path).await?;
+    Ok(())
 }
 
 /// The categories and topics this server added to the library, kept in one JSON file. Quizzes
@@ -152,12 +247,7 @@ impl AddedTopics {
     /// # Errors
     /// Fails if the file exists but cannot be read or parsed.
     pub async fn open(path: PathBuf) -> anyhow::Result<Self> {
-        let added = match tokio::fs::read(&path).await {
-            Ok(bytes) => serde_json::from_slice(&bytes)
-                .with_context(|| format!("reading {}", path.display()))?,
-            Err(err) if err.kind() == std::io::ErrorKind::NotFound => Added::default(),
-            Err(err) => return Err(err).with_context(|| format!("reading {}", path.display())),
-        };
+        let added = read_or_default(&path).await?;
         Ok(Self {
             path,
             added: Mutex::new(added),
@@ -222,7 +312,7 @@ impl AddedTopics {
             category: name,
             topic: topic.to_owned(),
         });
-        self.write(&added).await?;
+        write(&self.path, &*added).await?;
         Ok(crate::library::subjects(entries, &added))
     }
 
@@ -247,15 +337,8 @@ impl AddedTopics {
         if !added.topics.iter().any(|t| t.category == category) {
             added.categories.retain(|c| c.name != category);
         }
-        self.write(&added).await?;
+        write(&self.path, &*added).await?;
         Ok(crate::library::subjects(entries, &added))
-    }
-
-    async fn write(&self, added: &Added) -> anyhow::Result<()> {
-        let tmp = self.path.with_extension("json.tmp");
-        tokio::fs::write(&tmp, serde_json::to_vec_pretty(added)?).await?;
-        tokio::fs::rename(&tmp, &self.path).await?;
-        Ok(())
     }
 }
 
@@ -270,7 +353,7 @@ fn apply(entry: &LibraryEntry, edit: Option<&StoredEdit>) -> LibraryEntry {
     let mut entry = entry.clone();
     if let Some(StoredEdit { edit, .. }) = edit {
         entry.difficulty = edit.difficulty;
-        entry.question = edit.question.clone();
+        file(&mut entry, edit.question.clone());
         entry.edited = true;
     }
     entry
@@ -316,6 +399,7 @@ mod tests {
         let dir = std::env::temp_dir().join(format!("quaesito-library-{}", uuid::Uuid::new_v4()));
         tokio::fs::create_dir_all(&dir).await.unwrap();
         let path = dir.join("library-edits.json");
+        let added = dir.join("library-added.json");
         let original = entries()[0].clone();
         let mut question = original.question.clone();
         question.text = "Edited?".into();
@@ -325,7 +409,9 @@ mod tests {
             question,
         };
 
-        let edits = LibraryEdits::open(path.clone()).await.unwrap();
+        let edits = LibraryEdits::open(path.clone(), added.clone())
+            .await
+            .unwrap();
         let edited = edits.save(&original.id, edit.clone()).await.unwrap();
         assert!(edited.edited && edited.difficulty == 3 && edited.id == original.id);
         assert!(edits.save("nope", edit).await.is_err());
@@ -336,13 +422,73 @@ mod tests {
             "\"text\": {}",
             serde_json::to_string(&original.question.text).unwrap()
         )));
-        let edits = LibraryEdits::open(path).await.unwrap();
+        let edits = LibraryEdits::open(path, added).await.unwrap();
         assert_eq!(edits.entries().await[0].question.text, "Edited?");
         assert_eq!(edits.media().await, ["picture.webp"]);
 
         assert_eq!(edits.revert(&original.id).await.unwrap(), original);
         assert_eq!(edits.entries().await[0], original);
         assert_eq!(edits.media().await, Vec::<String>::new());
+        tokio::fs::remove_dir_all(dir).await.unwrap();
+    }
+
+    #[tokio::test]
+    async fn questions_are_added_moved_and_deleted() {
+        let dir = std::env::temp_dir().join(format!("quaesito-library-{}", uuid::Uuid::new_v4()));
+        tokio::fs::create_dir_all(&dir).await.unwrap();
+        let (path, added) = (
+            dir.join("library-edits.json"),
+            dir.join("library-added.json"),
+        );
+        let edits = LibraryEdits::open(path.clone(), added.clone())
+            .await
+            .unwrap();
+        let mut question = Question::blank();
+        question.text = "Mine?".into();
+        question.time_limit_secs = Some(5);
+        question.audio = Some("tune.ogg".into());
+        assert!(edits.add(2, question.clone()).await.is_err());
+
+        question.category = "Music".into();
+        question.topic = "Mine".into();
+        let entry = edits.add(2, question.clone()).await.unwrap();
+        assert!(entry.added && entry.category == "Music" && entry.topic == "Mine");
+        // Kept without what only a quiz has.
+        assert!(entry.question.category.is_empty() && entry.question.time_limit_secs.is_none());
+        assert_eq!(edits.entries().await.last(), Some(&entry));
+        assert_eq!(edits.media().await, ["tune.ogg"]);
+        assert!(edits.revert(&entry.id).await.is_err());
+
+        // Saving moves it, and a restart reads it back.
+        question.topic = "Ours".into();
+        let edit = LibraryEdit {
+            difficulty: 3,
+            question,
+        };
+        let moved = edits.save(&entry.id, edit).await.unwrap();
+        assert_eq!(
+            (moved.id.as_str(), moved.topic.as_str()),
+            (entry.id.as_str(), "Ours")
+        );
+        let edits = LibraryEdits::open(path.clone(), added.clone())
+            .await
+            .unwrap();
+        assert_eq!(edits.entries().await.last(), Some(&moved));
+
+        // A bundled question moves too.
+        let original = entries()[0].clone();
+        let mut question = original.to_question();
+        question.topic = "Elsewhere".into();
+        let edit = LibraryEdit {
+            difficulty: 1,
+            question,
+        };
+        let edited = edits.save(&original.id, edit).await.unwrap();
+        assert!(edited.edited && edited.topic == "Elsewhere" && edited.question.topic.is_empty());
+
+        assert!(edits.delete(&original.id).await.is_err());
+        edits.delete(&entry.id).await.unwrap();
+        assert_eq!(edits.entries().await.len(), entries().len());
         tokio::fs::remove_dir_all(dir).await.unwrap();
     }
 
