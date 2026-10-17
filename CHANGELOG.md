@@ -12,6 +12,8 @@ All notable changes to quaesito are listed here. The format follows
   **Questions** tab browses them by category and topic, with search and filters. The editor's **＋ From the library**
   adds them one by one or at random, and a new quiz can be filled with random questions from the categories you
   tick.
+- Each library question has a **report** link, next to **edit**: it opens a GitHub issue reporting the question as
+  wrong, filled in with the question and its answer.
 - Teams pick a background for their picture: one of six colours or five gradients, shown behind their initial and
   through the transparent parts of a cut-out picture, on phones and the big screen.
 - 16 ready-made team pictures (an owl, a fox, a robot…): teams pick one instead of uploading their own. Their colours

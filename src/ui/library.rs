@@ -649,6 +649,15 @@ fn LibraryRow(
                             onclick: move |_| on_edit.call(edited.clone()),
                             "edit"
                         }
+                        " · "
+                        a {
+                            class: "link-button",
+                            href: entry.report_url(),
+                            target: "_blank",
+                            rel: "noopener",
+                            title: "Report this question as wrong, in a new GitHub issue",
+                            "report"
+                        }
                     }
                 }
                 span { class: "strong", "{entry.question.text}" }
