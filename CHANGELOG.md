@@ -6,6 +6,11 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-10-17
+
+A library of about 2,700 ready-made questions, team picture backgrounds and mascots, things shown with the answer,
+and an editor with a navigator and a table view.
+
 ### Added
 
 - The big screen's top bar has a cog button, next to **Teams**, that goes back to the admin page.
@@ -53,7 +58,6 @@ All notable changes to quaesito are listed here. The format follows
   editor puts each added picture, video and soundtrack in its own box, one under the other. Its **Category** and
   **Topic** lists are as wide as the longest category and topic, and **Topic** shows as off until a category is
   picked.
-
 - Phones show "You're in!" first when waiting for the quiz to start; the team's name, picture and background are
   folded away under **Change your name or picture**, and **Done** folds them again. Teams can rename themselves there
   until the quiz starts (not to a name another team has).
@@ -189,7 +193,8 @@ The first release: everything needed for a quiz night with friends.
 - **Downloads** for Linux, macOS (Apple silicon) and Windows with a start script, a documentation
   site with screenshots and a narrated demo video.
 
-[Unreleased]: https://github.com/ggirelli/quaesito/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/ggirelli/quaesito/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/ggirelli/quaesito/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/ggirelli/quaesito/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/ggirelli/quaesito/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/ggirelli/quaesito/compare/v0.1.0...v0.2.0
