@@ -581,6 +581,42 @@ input.short-number {
   width: min(52rem, 100%);
 }
 
+/* A question card's link to the library: highlighted when one side changed. */
+.library-sync.in-step {
+  color: var(--ok-text);
+}
+
+.library-sync.changed {
+  color: var(--accent-text);
+  border-color: var(--accent-text);
+}
+
+/* The pop-up keeping a question and the library in step: the two versions side by side. */
+.dialog.library-sync-dialog {
+  width: min(52rem, 100%);
+}
+
+.library-versions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 0.75rem;
+}
+
+.library-version {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.library-version h3 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.library-duplicate {
+  color: var(--accent-text);
+}
+
 /* A multiple-choice question's options, the wrong ones in grey. */
 .library-options {
   display: flex;

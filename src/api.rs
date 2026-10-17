@@ -113,6 +113,23 @@ pub async fn question_library(token: String) -> ServerFnResult<Vec<LibraryEntry>
     Ok(state.library_edits.entries().await)
 }
 
+/// Why `question` cannot be a library question with `difficulty`, if it cannot.
+#[cfg(feature = "server")]
+fn check_library_question(difficulty: u8, question: &crate::model::Question) -> ServerFnResult<()> {
+    if question.is_slide() {
+        return Err(ServerFnError::new("Slides cannot go in the library."));
+    }
+    let mut quiz = Quiz::new(String::new(), "Library".to_owned());
+    quiz.questions = vec![question.clone()];
+    if let Some(issue) = quiz.validate().into_iter().next() {
+        return Err(ServerFnError::new(issue.message));
+    }
+    if !(1..=3).contains(&difficulty) {
+        return Err(ServerFnError::new("Pick a difficulty."));
+    }
+    Ok(())
+}
+
 /// Saves this server's edit of library question `id`, if it is playable, and returns it.
 #[post("/api/admin/library/edit")]
 pub async fn edit_library_question(
@@ -122,15 +139,53 @@ pub async fn edit_library_question(
 ) -> ServerFnResult<LibraryEntry> {
     let state = crate::server::state();
     state.auth.require(&token)?;
-    let mut quiz = Quiz::new(String::new(), "Library".to_owned());
-    quiz.questions = vec![edit.question.clone()];
-    if let Some(issue) = quiz.validate().into_iter().next() {
-        return Err(ServerFnError::new(issue.message));
-    }
-    if !(1..=3).contains(&edit.difficulty) {
-        return Err(ServerFnError::new("Pick a difficulty."));
-    }
+    check_library_question(edit.difficulty, &edit.question)?;
     Ok(state.library_edits.save(&id, edit).await?)
+}
+
+/// Adds a quiz's question to the library on this server, filed under its category and topic,
+/// and returns it.
+#[post("/api/admin/library/add")]
+pub async fn add_library_question(
+    token: String,
+    edit: LibraryEdit,
+) -> ServerFnResult<LibraryEntry> {
+    let state = crate::server::state();
+    state.auth.require(&token)?;
+    check_library_question(edit.difficulty, &edit.question)?;
+    Ok(state
+        .library_edits
+        .add(edit.difficulty, edit.question)
+        .await?)
+}
+
+/// Deletes library question `id`, one added on this server.
+#[post("/api/admin/library/delete")]
+pub async fn delete_library_question(token: String, id: String) -> ServerFnResult<()> {
+    let state = crate::server::state();
+    state.auth.require(&token)?;
+    Ok(state.library_edits.delete(&id).await?)
+}
+
+/// How many quizzes other than `quiz` have a question linked to library question `id`.
+#[post("/api/admin/library/uses")]
+pub async fn library_question_uses(
+    token: String,
+    id: String,
+    quiz: String,
+) -> ServerFnResult<usize> {
+    let state = crate::server::state();
+    state.auth.require(&token)?;
+    let quizzes = state.quizzes.all().await?;
+    Ok(quizzes
+        .iter()
+        .filter(|q| q.id != quiz)
+        .filter(|q| {
+            q.questions
+                .iter()
+                .any(|question| question.library.as_ref().is_some_and(|link| link.id == id))
+        })
+        .count())
 }
 
 /// Drops this server's edit of library question `id` and returns the question as it came.

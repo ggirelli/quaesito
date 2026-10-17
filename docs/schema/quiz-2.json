@@ -86,6 +86,24 @@
         }
       ]
     },
+    "LibraryLink": {
+      "description": "Ties a quiz question to a library question (see `sync`).",
+      "properties": {
+        "id": {
+          "description": "The library question's id.",
+          "type": "string"
+        },
+        "synced": {
+          "description": "The `fingerprint` of the question when the quiz and the library last\nhad the same one: which of the two changed since.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "synced"
+      ],
+      "type": "object"
+    },
     "MultiScoring": {
       "description": "How questions with several correct answers are scored.",
       "oneOf": [
@@ -342,6 +360,17 @@
           "$ref": "#/$defs/QuestionKind",
           "default": "Choice",
           "description": "How teams answer. Older quizzes without it are multiple choice."
+        },
+        "library": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LibraryLink"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "The library question this one was added from or saved as, to keep the two in step."
         },
         "multiplier": {
           "default": null,

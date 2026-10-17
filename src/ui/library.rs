@@ -639,6 +639,9 @@ fn LibraryRow(
                         if entry.edited {
                             span { class: "library-edited", " · edited" }
                         }
+                        if entry.added {
+                            span { class: "library-edited", " · added" }
+                        }
                     }
                     span { class: "library-meta-kind",
                         "{entry.difficulty_name()} · {entry.kind_name()} · "
@@ -649,14 +652,17 @@ fn LibraryRow(
                             onclick: move |_| on_edit.call(edited.clone()),
                             "edit"
                         }
-                        " · "
-                        a {
-                            class: "link-button",
-                            href: entry.report_url(),
-                            target: "_blank",
-                            rel: "noopener",
-                            title: "Report this question as wrong, in a new GitHub issue",
-                            "report"
+                        // Questions added here are not Quaesito's to fix.
+                        if !entry.added {
+                            " · "
+                            a {
+                                class: "link-button",
+                                href: entry.report_url(),
+                                target: "_blank",
+                                rel: "noopener",
+                                title: "Report this question as wrong, in a new GitHub issue",
+                                "report"
+                            }
                         }
                     }
                 }

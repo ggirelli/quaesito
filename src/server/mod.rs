@@ -70,7 +70,11 @@ pub async fn init() -> anyhow::Result<()> {
         quizzes: QuizStore::open(data_dir.join("quizzes")).await?,
         media: MediaStore::open(data_dir.join("media")).await?,
         sessions: Sessions::open(data_dir.join("games")).await?,
-        library_edits: library::LibraryEdits::open(data_dir.join("library-edits.json")).await?,
+        library_edits: library::LibraryEdits::open(
+            data_dir.join("library-edits.json"),
+            data_dir.join("library-added.json"),
+        )
+        .await?,
         library_topics: library::AddedTopics::open(data_dir.join("library-topics.json")).await?,
         limits: media::limits_from_env(),
     };
@@ -114,7 +118,7 @@ const MEDIA_GRACE: Duration = Duration::from_hours(24);
 /// How often unused uploads are looked for.
 const MEDIA_CLEANUP_EVERY: Duration = Duration::from_hours(24);
 
-/// Deletes uploads no quiz, live game or edited library question uses, now and then daily.
+/// Deletes uploads no quiz, live game or edited or added library question uses, now and then daily.
 async fn clean_up_media() {
     loop {
         let state = state();
