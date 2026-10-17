@@ -55,7 +55,8 @@ Windows, macOS and Linux. Free and open source (MIT).
   <track kind="captions" src="media/demo.vtt" srclang="en" label="English">
 </video>
 
-A quiz played on the test page, narrated. [Transcript](demo.md#transcript).
+A quiz played on the test page, narrated. More [demo videos](demo.md) show how to build a quiz
+and use the question library, with transcripts.
 
 ## Ready in three steps { .section }
 

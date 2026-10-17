@@ -1,0 +1,7 @@
+- **00:00** Quaesito comes with about 2,700 ready-made questions, in 14 categories.
+- **00:04** Pick a category, then a topic, to see just those questions.
+- **00:08** Search them, and filter by difficulty, question type, or where they come from.
+- **00:13** Found a mistake? Fix it right here, or report it with one click.
+- **00:18** Starting a quiz? Fill it with random questions from the categories you like.
+- **00:26** Your own questions can join the library too, and stay in step with your quizzes.
+- **00:32** Less time writing, more time playing. Happy quizzing!
