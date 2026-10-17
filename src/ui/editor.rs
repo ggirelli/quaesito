@@ -729,73 +729,87 @@ fn ExplanationEditor(
                 value: "{text}",
                 oninput: move |e| draft.edit_question(question, |q| q.explanation = e.value()),
             }
-            div { class: "question-media row",
+            div { class: "question-media stack",
                 if let Some(image) = &image {
-                    if is_video(image) {
-                        video {
-                            class: "thumb",
-                            src: media_url(image),
-                            preload: "metadata",
-                            muted: true,
-                            controls: true,
-                        }
-                    } else {
-                        img { class: "thumb", src: media_url(image), alt: "Picture shown with the answer" }
-                    }
-                    button {
-                        class: "button ghost",
-                        onclick: move |_| draft.edit_question(question, |q| q.explanation_image = None),
-                        if is_video(image) { "Remove video" } else { "Remove picture" }
-                    }
-                } else {
-                    label { class: "button ghost",
-                        title: media_limits_title(limits),
-                        if uploading() { "Uploading…" } else { "＋ Add picture or video" }
-                        input {
-                            r#type: "file",
-                            accept: MEDIA_ACCEPT,
-                            class: "visually-hidden",
-                            onchange: upload,
+                    fieldset { class: "media-box",
+                        legend { if is_video(image) { "Video" } else { "Picture" } }
+                        div { class: "row",
+                            if is_video(image) {
+                                video {
+                                    class: "thumb",
+                                    src: media_url(image),
+                                    preload: "metadata",
+                                    muted: true,
+                                    controls: true,
+                                }
+                            } else {
+                                img { class: "thumb", src: media_url(image), alt: "Picture shown with the answer" }
+                            }
+                            button {
+                                class: "button ghost",
+                                onclick: move |_| draft.edit_question(question, |q| q.explanation_image = None),
+                                if is_video(image) { "Remove video" } else { "Remove picture" }
+                            }
                         }
                     }
                 }
                 if let Some(audio) = &audio {
-                    Icon { kind: IconKind::Music }
-                    audio {
-                        class: "audio-preview",
-                        src: media_url(audio),
-                        preload: "metadata",
-                        controls: true,
-                    }
-                    button {
-                        class: "button ghost",
-                        onclick: move |_| draft.edit_question(question, |q| q.explanation_audio = None),
-                        "Remove soundtrack"
-                    }
-                } else {
-                    label { class: "button ghost",
-                        title: "Music or a sound the big screen plays as it shows the answer",
-                        if uploading_audio() { "Uploading…" } else { "＋ Add soundtrack" }
-                        input {
-                            r#type: "file",
-                            accept: "audio/*",
-                            class: "visually-hidden",
-                            onchange: upload_audio,
+                    fieldset { class: "media-box",
+                        legend { "Soundtrack" }
+                        div { class: "row",
+                            Icon { kind: IconKind::Music }
+                            audio {
+                                class: "audio-preview",
+                                src: media_url(audio),
+                                preload: "metadata",
+                                controls: true,
+                            }
+                            button {
+                                class: "button ghost",
+                                onclick: move |_| draft.edit_question(question, |q| q.explanation_audio = None),
+                                "Remove soundtrack"
+                            }
                         }
                     }
                 }
-                span { class: "grow" }
-                button {
-                    class: "button ghost",
-                    onclick: move |_| {
-                        opened.set(false);
-                        draft.edit_question(question, |q| {
-                            q.explanation.clear();
-                            q.explanation_image = None;
-                            q.explanation_audio = None;
-                        });
-                    },
-                    "Remove"
+                div { class: "row",
+                    if image.is_none() {
+                        label { class: "button ghost",
+                            title: media_limits_title(limits),
+                            if uploading() { "Uploading…" } else { "＋ Add picture or video" }
+                            input {
+                                r#type: "file",
+                                accept: MEDIA_ACCEPT,
+                                class: "visually-hidden",
+                                onchange: upload,
+                            }
+                        }
+                    }
+                    if audio.is_none() {
+                        label { class: "button ghost",
+                            title: "Music or a sound the big screen plays as it shows the answer",
+                            if uploading_audio() { "Uploading…" } else { "＋ Add soundtrack" }
+                            input {
+                                r#type: "file",
+                                accept: "audio/*",
+                                class: "visually-hidden",
+                                onchange: upload_audio,
+                            }
+                        }
+                    }
+                    span { class: "grow" }
+                    button {
+                        class: "button ghost",
+                        onclick: move |_| {
+                            opened.set(false);
+                            draft.edit_question(question, |q| {
+                                q.explanation.clear();
+                                q.explanation_image = None;
+                                q.explanation_audio = None;
+                            });
+                        },
+                        "Remove"
+                    }
                 }
             }
             ErrorBox { error: upload_error() }
@@ -1067,111 +1081,125 @@ fn QuestionCard(
                         oninput: move |e| draft.edit_question(index, |q| q.passage = e.value()),
                     }
                 }
-                div { class: "question-media row",
+                div { class: "question-media stack",
                     if let Some(image) = &question.image {
-                        if is_video(image) {
-                            video {
-                                class: "thumb",
-                                src: media_url(image),
-                                preload: "metadata",
-                                muted: true,
-                                controls: true,
-                            }
-                        } else {
-                            img { class: "thumb", src: media_url(image), alt: "Question picture" }
-                        }
-                        button {
-                            class: "button ghost",
-                            onclick: move |_| draft.edit_question(index, |q| q.set_image(None)),
-                            if is_video(image) { "Remove video" } else { "Remove picture" }
-                        }
-                        if !slide {
-                            label { class: "field inline",
-                                title: "How the picture appears while the clock runs",
-                                span { "Reveal" }
-                                select {
-                                    value: match question.image_reveal {
-                                        ImageReveal::Shown => "shown",
-                                        ImageReveal::Zoom => "zoom",
-                                        ImageReveal::Tiles => "tiles",
-                                    },
-                                    onchange: move |e| {
-                                        let reveal = match e.value().as_str() {
-                                            "zoom" => ImageReveal::Zoom,
-                                            "tiles" => ImageReveal::Tiles,
-                                            _ => ImageReveal::Shown,
-                                        };
-                                        draft.edit_question(index, |q| {
-                                            // Suggest a few seconds to look at the whole picture.
-                                            if q.image_reveal == ImageReveal::Shown && q.image_hold_secs == 0 {
-                                                q.image_hold_secs = DEFAULT_HOLD_SECS;
-                                            }
-                                            q.image_reveal = reveal;
-                                        });
-                                    },
-                                    option { value: "shown", "Show it all" }
-                                    option { value: "zoom", "Zoom out from a close-up" }
-                                    option { value: "tiles", "Uncover tile by tile" }
-                                }
-                            }
-                            if question.image_reveal != ImageReveal::Shown {
-                                label { class: "field inline",
-                                    title: "The reveal takes the rest of the question's time",
-                                    span { "then fully visible for" }
-                                    input {
-                                        r#type: "number",
-                                        class: "short",
-                                        min: 0,
-                                        max: MAX_TIME_LIMIT_SECS,
-                                        value: "{question.image_hold_secs}",
-                                        oninput: move |e| {
-                                            if let Ok(secs) = e.value().trim().parse() {
-                                                draft.edit_question(index, |q| q.image_hold_secs = secs);
-                                            }
-                                        },
+                        fieldset { class: "media-box",
+                            legend { if is_video(image) { "Video" } else { "Picture" } }
+                            div { class: "row",
+                                if is_video(image) {
+                                    video {
+                                        class: "thumb",
+                                        src: media_url(image),
+                                        preload: "metadata",
+                                        muted: true,
+                                        controls: true,
                                     }
-                                    span { "s" }
+                                } else {
+                                    img { class: "thumb", src: media_url(image), alt: "Question picture" }
                                 }
-                            }
-                        }
-                    } else {
-                        label {
-                            class: "button ghost",
-                            title: media_limits_title(limits),
-                            if uploading() { "Uploading…" } else { "＋ Add picture or video" }
-                            input {
-                                r#type: "file",
-                                accept: MEDIA_ACCEPT,
-                                class: "visually-hidden",
-                                onchange: upload,
+                                button {
+                                    class: "button ghost",
+                                    onclick: move |_| draft.edit_question(index, |q| q.set_image(None)),
+                                    if is_video(image) { "Remove video" } else { "Remove picture" }
+                                }
+                                if !slide {
+                                    label { class: "field inline",
+                                        title: "How the picture appears while the clock runs",
+                                        span { "Reveal" }
+                                        select {
+                                            value: match question.image_reveal {
+                                                ImageReveal::Shown => "shown",
+                                                ImageReveal::Zoom => "zoom",
+                                                ImageReveal::Tiles => "tiles",
+                                            },
+                                            onchange: move |e| {
+                                                let reveal = match e.value().as_str() {
+                                                    "zoom" => ImageReveal::Zoom,
+                                                    "tiles" => ImageReveal::Tiles,
+                                                    _ => ImageReveal::Shown,
+                                                };
+                                                draft.edit_question(index, |q| {
+                                                    // Suggest a few seconds to look at the whole picture.
+                                                    if q.image_reveal == ImageReveal::Shown && q.image_hold_secs == 0 {
+                                                        q.image_hold_secs = DEFAULT_HOLD_SECS;
+                                                    }
+                                                    q.image_reveal = reveal;
+                                                });
+                                            },
+                                            option { value: "shown", "Show it all" }
+                                            option { value: "zoom", "Zoom out from a close-up" }
+                                            option { value: "tiles", "Uncover tile by tile" }
+                                        }
+                                    }
+                                    if question.image_reveal != ImageReveal::Shown {
+                                        label { class: "field inline",
+                                            title: "The reveal takes the rest of the question's time",
+                                            span { "then fully visible for" }
+                                            input {
+                                                r#type: "number",
+                                                class: "short",
+                                                min: 0,
+                                                max: MAX_TIME_LIMIT_SECS,
+                                                value: "{question.image_hold_secs}",
+                                                oninput: move |e| {
+                                                    if let Ok(secs) = e.value().trim().parse() {
+                                                        draft.edit_question(index, |q| q.image_hold_secs = secs);
+                                                    }
+                                                },
+                                            }
+                                            span { "s" }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
-                    if !slide {
-                        if let Some(audio) = &question.audio {
-                            Icon { kind: IconKind::Music }
-                            audio {
-                                class: "audio-preview",
-                                src: media_url(audio),
-                                preload: "metadata",
-                                controls: true,
+                    if let (false, Some(audio)) = (slide, &question.audio) {
+                        fieldset { class: "media-box",
+                            legend { "Soundtrack" }
+                            div { class: "row",
+                                Icon { kind: IconKind::Music }
+                                audio {
+                                    class: "audio-preview",
+                                    src: media_url(audio),
+                                    preload: "metadata",
+                                    controls: true,
+                                }
+                                button {
+                                    class: "button ghost",
+                                    onclick: move |_| draft.edit_question(index, |q| q.audio = None),
+                                    "Remove soundtrack"
+                                }
+                                span { class: "muted small",
+                                    "The clock starts when you start the music on the big screen."
+                                }
                             }
-                            button {
-                                class: "button ghost",
-                                onclick: move |_| draft.edit_question(index, |q| q.audio = None),
-                                "Remove soundtrack"
+                        }
+                    }
+                    if question.image.is_none() || (!slide && question.audio.is_none()) {
+                        div { class: "row",
+                            if question.image.is_none() {
+                                label {
+                                    class: "button ghost",
+                                    title: media_limits_title(limits),
+                                    if uploading() { "Uploading…" } else { "＋ Add picture or video" }
+                                    input {
+                                        r#type: "file",
+                                        accept: MEDIA_ACCEPT,
+                                        class: "visually-hidden",
+                                        onchange: upload,
+                                    }
+                                }
                             }
-                            span { class: "muted small",
-                                "The clock starts when you start the music on the big screen."
-                            }
-                        } else {
-                            label { class: "button ghost",
-                                if uploading_audio() { "Uploading…" } else { "＋ Add soundtrack" }
-                                input {
-                                    r#type: "file",
-                                    accept: "audio/*",
-                                    class: "visually-hidden",
-                                    onchange: upload_audio,
+                            if !slide && question.audio.is_none() {
+                                label { class: "button ghost",
+                                    if uploading_audio() { "Uploading…" } else { "＋ Add soundtrack" }
+                                    input {
+                                        r#type: "file",
+                                        accept: "audio/*",
+                                        class: "visually-hidden",
+                                        onchange: upload_audio,
+                                    }
                                 }
                             }
                         }
@@ -1299,6 +1327,12 @@ fn SubjectEditor(question: usize, category: String, topic: String) -> Element {
         .find(|c| c.name == category)
         .map(|c| c.topics.iter().map(|t| t.name.clone()).collect())
         .unwrap_or_default();
+    // Hidden copies of every name widen each menu to its longest, whichever category is picked.
+    let category_names: Vec<String> = categories.iter().map(|c| c.name.clone()).collect();
+    let topic_names: Vec<String> = categories
+        .iter()
+        .flat_map(|c| c.topics.iter().map(|t| t.name.clone()))
+        .collect();
     // Until the library loads, the names are shown as they are.
     let unknown_category = !category.is_empty() && !categories.iter().any(|c| c.name == category);
     let unknown_topic = !topic.is_empty() && !topics.contains(&topic);
@@ -1327,6 +1361,9 @@ fn SubjectEditor(question: usize, category: String, topic: String) -> Element {
                     option { value: "{c.name}", selected: c.name == category, "{c.name}" }
                 }
             }
+            for name in category_names {
+                div { class: "select-sizer", aria_hidden: "true", "{name}" }
+            }
         }
         label { class: "field inline",
             title: "Shown on the big screen with the question. Add categories and topics on the admin page's Questions tab.",
@@ -1342,6 +1379,9 @@ fn SubjectEditor(question: usize, category: String, topic: String) -> Element {
                 for name in topics {
                     option { value: "{name}", selected: name == topic, "{name}" }
                 }
+            }
+            for name in topic_names {
+                div { class: "select-sizer", aria_hidden: "true", "{name}" }
             }
         }
     }
