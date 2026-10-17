@@ -256,10 +256,11 @@ textarea {
   color: var(--muted);
 }
 
+/* The outer columns grow equally, so the middle one (e.g. the editor's save state) stays centred. */
 .topbar {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
   align-items: center;
-  justify-content: space-between;
   gap: 1rem;
   padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--border);
@@ -271,6 +272,14 @@ textarea {
 
 .topbar a {
   text-decoration: none;
+}
+
+.topbar > :first-child {
+  justify-self: start;
+}
+
+.topbar > :last-child {
+  justify-self: end;
 }
 
 .icon-svg {
@@ -3227,7 +3236,9 @@ button.joker {
   }
 
   .topbar {
+    display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
   }
 }
 
