@@ -104,35 +104,7 @@ impl LibraryEntry {
     /// The right answer in one line, to judge a question at a glance.
     #[must_use]
     pub fn answer(&self) -> String {
-        let question = &self.question;
-        let first = |accepted: &[String]| accepted.first().cloned().unwrap_or_default();
-        match &question.kind {
-            QuestionKind::TrueFalse { answer } => (if *answer { "True" } else { "False" }).into(),
-            QuestionKind::Text { accepted } => first(accepted),
-            QuestionKind::Number { answer, .. } => {
-                answer.map(|n| n.to_string()).unwrap_or_default()
-            }
-            QuestionKind::Order { items } => items.join(" → "),
-            QuestionKind::Parts { parts } => parts
-                .iter()
-                .map(|p| format!("{}: {}", p.label, first(&p.accepted)))
-                .collect::<Vec<_>>()
-                .join(" · "),
-            QuestionKind::Pairs { pairs } => pairs
-                .iter()
-                .map(|p| format!("{} – {}", p.left.text, p.right.text))
-                .collect::<Vec<_>>()
-                .join(" · "),
-            QuestionKind::Choice | QuestionKind::Pin { .. } | QuestionKind::Slide { .. } => {
-                question
-                    .answers
-                    .iter()
-                    .filter(|a| a.correct)
-                    .map(|a| a.text.as_str())
-                    .collect::<Vec<_>>()
-                    .join(" · ")
-            }
-        }
+        answer_line(&self.question)
     }
 
     /// A new GitHub issue reporting this question as wrong, filled in with the question as shown.
@@ -170,6 +142,35 @@ impl LibraryEntry {
             encode_query(&format!("Wrong question: {}", question.text)),
             encode_query(&details)
         )
+    }
+}
+
+/// The right answer of `question` in one line, to judge it at a glance.
+#[must_use]
+pub fn answer_line(question: &Question) -> String {
+    let first = |accepted: &[String]| accepted.first().cloned().unwrap_or_default();
+    match &question.kind {
+        QuestionKind::TrueFalse { answer } => (if *answer { "True" } else { "False" }).into(),
+        QuestionKind::Text { accepted } => first(accepted),
+        QuestionKind::Number { answer, .. } => answer.map(|n| n.to_string()).unwrap_or_default(),
+        QuestionKind::Order { items } => items.join(" → "),
+        QuestionKind::Parts { parts } => parts
+            .iter()
+            .map(|p| format!("{}: {}", p.label, first(&p.accepted)))
+            .collect::<Vec<_>>()
+            .join(" · "),
+        QuestionKind::Pairs { pairs } => pairs
+            .iter()
+            .map(|p| format!("{} – {}", p.left.text, p.right.text))
+            .collect::<Vec<_>>()
+            .join(" · "),
+        QuestionKind::Choice | QuestionKind::Pin { .. } | QuestionKind::Slide { .. } => question
+            .answers
+            .iter()
+            .filter(|a| a.correct)
+            .map(|a| a.text.as_str())
+            .collect::<Vec<_>>()
+            .join(" · "),
     }
 }
 
@@ -343,6 +344,46 @@ pub fn sync<'a>(
         }
     };
     Some((state, Some(entry)))
+}
+
+/// What differs between two versions of a question, named for people: the parts the library
+/// shares (see [`shared`]), choices in any order.
+#[must_use]
+pub fn differences(a: &Question, b: &Question) -> Vec<&'static str> {
+    let choices = |q: &Question| {
+        let mut answers = q.answers.clone();
+        if q.kind == QuestionKind::Choice {
+            answers.sort_by(|x, y| {
+                (&x.text, x.correct, &x.image).cmp(&(&y.text, y.correct, &y.image))
+            });
+        }
+        answers
+    };
+    [
+        ("Question", a.text == b.text),
+        ("Text shown with it", a.passage == b.passage),
+        ("Answer", a.kind == b.kind && choices(a) == choices(b)),
+        (
+            "Picture",
+            (&a.image, a.image_reveal, a.image_hold_secs)
+                == (&b.image, b.image_reveal, b.image_hold_secs),
+        ),
+        ("Soundtrack", a.audio == b.audio),
+        ("Bonus question", a.bonus == b.bonus),
+        (
+            "Shown with the answer",
+            (&a.explanation, &a.explanation_image, &a.explanation_audio)
+                == (&b.explanation, &b.explanation_image, &b.explanation_audio),
+        ),
+        (
+            "Category and topic",
+            (&a.category, &a.topic) == (&b.category, &b.topic),
+        ),
+    ]
+    .into_iter()
+    .filter(|(_, same)| !same)
+    .map(|(name, _)| name)
+    .collect()
 }
 
 /// `question` replaced by the library's `entry`, keeping its own timing and points.
@@ -716,6 +757,12 @@ mod tests {
         assert_eq!(
             sync(&pulled, &library_changed).unwrap().0,
             LibrarySync::InStep
+        );
+
+        assert_eq!(differences(&timed, &added), Vec::<&str>::new());
+        assert_eq!(
+            differences(&changed, &library_changed[0].to_question()),
+            ["Question", "Text shown with it"]
         );
 
         entries.clear();

@@ -6,7 +6,7 @@ use super::{
     Route,
     admin::{AdminGate, AdminHeader, AdminToken},
     client,
-    library::LibraryDialog,
+    library::{LibraryDialog, use_library},
     widgets::{
         AnswerBadge, ClientOnly, Dialog, ErrorBox, Icon, IconKind, MapPin, PinMap, STAR, Spinner,
         media_url, message,
@@ -14,17 +14,21 @@ use super::{
 };
 use crate::{
     api::{
-        edit_library_question, get_quiz, library_subjects, revert_library_question, save_quiz,
-        start_test, upload_limits, upload_question_audio, upload_question_image,
-        upload_question_media,
+        add_library_question, edit_library_question, get_quiz, library_question_uses,
+        library_subjects, revert_library_question, save_quiz, start_test, upload_limits,
+        upload_question_audio, upload_question_image, upload_question_media,
     },
-    library::{LibraryCategory, LibraryEdit, LibraryEntry},
+    library::{
+        LibraryCategory, LibraryEdit, LibraryEntry, LibrarySync, answer_line, differences,
+        fingerprint, pulled,
+    },
     model::{
-        AdvanceMode, Answer, BONUS_PERCENTS, Bonus, ImageReveal, MAX_ANSWERS, MAX_MULTIPLIER,
-        MAX_NETWORK_NAME_BYTES, MAX_NETWORK_PASSWORD_CHARS, MAX_PARTS, MAX_TIME_LIMIT_SECS,
-        MIN_ANSWERS, MIN_PARTS, MIN_TIME_LIMIT_SECS, MultiScoring, NetworkSlide, NumberRange, Pair,
-        PairItem, Part, PhoneDisplay, PinTolerance, Point, PointsMode, Question, QuestionKind,
-        Quiz, QuizSettings, RevealMode, ValidationIssue, is_video,
+        AdvanceMode, Answer, BONUS_PERCENTS, Bonus, ImageReveal, LibraryLink, MAX_ANSWERS,
+        MAX_MULTIPLIER, MAX_NETWORK_NAME_BYTES, MAX_NETWORK_PASSWORD_CHARS, MAX_PARTS,
+        MAX_TIME_LIMIT_SECS, MIN_ANSWERS, MIN_PARTS, MIN_TIME_LIMIT_SECS, MultiScoring,
+        NetworkSlide, NumberRange, Pair, PairItem, Part, PhoneDisplay, PinTolerance, Point,
+        PointsMode, Question, QuestionKind, Quiz, QuizSettings, RevealMode, ValidationIssue,
+        is_video,
     },
     protocol::UploadLimits,
 };
@@ -207,6 +211,22 @@ fn EditorForm(quiz: Quiz) -> Element {
     use_context_provider(|| Limits(limits));
     let subjects = use_resource(move || async move { library_subjects(token.get()).await.ok() });
     use_context_provider(|| Subjects(subjects));
+    // The library, to compare linked questions with: loaded once a question is linked, or one
+    // is about to be saved to it.
+    let linked = use_memo(move || {
+        draft
+            .quiz
+            .read()
+            .questions
+            .iter()
+            .any(|q| q.library.is_some())
+    });
+    let wanted = use_signal(|| false);
+    let library = use_library(move || linked() || wanted());
+    use_context_provider(|| Library {
+        entries: library,
+        wanted,
+    });
     let save_state = use_autosave(token, draft, issues);
     // The order before the last shuffle, and the revision the shuffle produced: undo is offered
     // until anything else changes.
@@ -1497,6 +1517,9 @@ fn QuestionCard(
                         }),
                         Icon { kind: IconKind::Copy }
                     }
+                    if !slide {
+                        LibrarySyncButton { index, question: question.clone() }
+                    }
                     button {
                         class: "button ghost icon danger-icon",
                         title: "Delete",
@@ -1809,6 +1832,335 @@ fn QuestionCard(
                     image: question.explanation_image.clone(),
                     audio: question.explanation_audio.clone(),
                 }
+            }
+        }
+    }
+}
+
+/// The library as the editor compares linked questions with it, with this server's edits and
+/// added questions. Setting `wanted` loads it even with no question linked.
+#[derive(Clone, Copy)]
+struct Library {
+    entries: Resource<Option<Result<Vec<LibraryEntry>, ServerFnError>>>,
+    wanted: Signal<bool>,
+}
+
+impl Library {
+    /// The entries, once loaded.
+    fn loaded(self) -> Option<Vec<LibraryEntry>> {
+        match &*self.entries.read() {
+            Some(Some(Ok(entries))) => Some(entries.clone()),
+            _ => None,
+        }
+    }
+}
+
+/// Where a question stands against the library, on a button that opens [`LibrarySyncDialog`].
+#[component]
+fn LibrarySyncButton(index: usize, question: Question) -> Element {
+    let library: Library = use_context();
+    let mut open = use_signal(|| false);
+    let entries = library.loaded();
+    let state = entries
+        .as_deref()
+        .and_then(|entries| crate::library::sync(&question, entries))
+        .map(|(state, _)| state);
+    let (label, title, class) = match (&question.library, state) {
+        (None, _) if question.category.is_empty() || question.topic.is_empty() => (
+            "Save to library",
+            "Pick a category and a topic to save the question to the library",
+            "button ghost icon library-sync",
+        ),
+        (None, _) => (
+            "Save to library",
+            "Keeps it on this server, for other quizzes",
+            "button ghost icon library-sync",
+        ),
+        (Some(_), None) => (
+            "Library…",
+            "Loading the library",
+            "button ghost icon library-sync",
+        ),
+        (Some(_), Some(LibrarySync::InStep)) => (
+            "In the library",
+            "Same as the library's question",
+            "button ghost icon library-sync in-step",
+        ),
+        (Some(_), Some(LibrarySync::ChangedHere)) => (
+            "Update library",
+            "Changed here since it came from the library",
+            "button ghost icon library-sync changed",
+        ),
+        (Some(_), Some(LibrarySync::ChangedInLibrary)) => (
+            "Update from library",
+            "The library's question changed since",
+            "button ghost icon library-sync changed",
+        ),
+        (Some(_), Some(LibrarySync::ChangedInBoth)) => (
+            "Changed in both",
+            "Changed here and in the library: pick a version",
+            "button ghost icon library-sync changed",
+        ),
+        (Some(_), Some(LibrarySync::Gone)) => (
+            "Not in the library",
+            "The library no longer has this question",
+            "button ghost icon library-sync",
+        ),
+    };
+    let unfiled =
+        question.library.is_none() && (question.category.is_empty() || question.topic.is_empty());
+    let loading = question.library.is_some() && state.is_none();
+    rsx! {
+        button {
+            r#type: "button",
+            class,
+            title: "{label}: {title}",
+            aria_label: "{label}",
+            disabled: unfiled || loading,
+            onclick: move |_| {
+                let mut wanted = library.wanted;
+                wanted.set(true);
+                open.set(true);
+            },
+            Icon { kind: IconKind::Save }
+        }
+        if open() {
+            LibrarySyncDialog { index, question, on_close: move |()| open.set(false) }
+        }
+    }
+}
+
+/// Saves a question to the library, or brings it and its library question back in step, each
+/// way said before it is done.
+#[component]
+fn LibrarySyncDialog(index: usize, question: Question, on_close: EventHandler<()>) -> Element {
+    let draft: Draft = use_context();
+    let library: Library = use_context();
+    let token: AdminToken = use_context();
+    let mut difficulty = use_signal(|| 1u8);
+    let mut error = use_signal(|| None::<String>);
+    let mut busy = use_signal(|| false);
+    let mut as_new = use_signal(|| false);
+    let link_id = question.library.as_ref().map(|l| l.id.clone());
+    // How many other quizzes an update of the library reaches.
+    let uses = use_resource(move || {
+        let id = link_id.clone();
+        let quiz = draft.quiz.peek().id.clone();
+        async move {
+            match id {
+                Some(id) => library_question_uses(token.get(), id, quiz).await.ok(),
+                None => None,
+            }
+        }
+    });
+    let Some(entries) = library.loaded() else {
+        return rsx! {
+            Dialog { title: "Question library", on_close, Spinner {} }
+        };
+    };
+    let found = crate::library::sync(&question, &entries);
+    // Saving as new shows what saving an unlinked question does.
+    let state = found.map(|(state, _)| state).filter(|_| !as_new());
+    let entry = found.and_then(|(_, entry)| entry).cloned();
+
+    // Links the question to `entry`, as it now is in both.
+    let relink = move |entry: &LibraryEntry| {
+        let id = entry.id.clone();
+        draft.edit_question(index, |q| {
+            q.library = Some(LibraryLink {
+                synced: fingerprint(q),
+                id,
+            });
+        });
+    };
+    let save_new = {
+        let question = question.clone();
+        move |_| {
+            let question = question.clone();
+            async move {
+                busy.set(true);
+                let edit = LibraryEdit {
+                    difficulty: difficulty(),
+                    question,
+                };
+                match add_library_question(token.get(), edit).await {
+                    Ok(entry) => {
+                        relink(&entry);
+                        library.entries.clone().restart();
+                        on_close.call(());
+                    }
+                    Err(err) => error.set(Some(message(&err))),
+                }
+                busy.set(false);
+            }
+        }
+    };
+    let push = {
+        let (question, entry) = (question.clone(), entry.clone());
+        move |_| {
+            let (question, entry) = (question.clone(), entry.clone());
+            async move {
+                let Some(entry) = entry else { return };
+                busy.set(true);
+                let edit = LibraryEdit {
+                    difficulty: entry.difficulty,
+                    question,
+                };
+                match edit_library_question(token.get(), entry.id.clone(), edit).await {
+                    Ok(saved) => {
+                        relink(&saved);
+                        library.entries.clone().restart();
+                        on_close.call(());
+                    }
+                    Err(err) => error.set(Some(message(&err))),
+                }
+                busy.set(false);
+            }
+        }
+    };
+    let pull = {
+        let entry = entry.clone();
+        move |_| {
+            if let Some(entry) = &entry {
+                draft.edit_question(index, |q| *q = pulled(q, entry));
+            }
+            on_close.call(());
+        }
+    };
+    let unlink = move |_| {
+        draft.edit_question(index, |q| q.library = None);
+        on_close.call(());
+    };
+
+    let others = match uses() {
+        None | Some(None | Some(0)) => "No other quiz uses it.".to_owned(),
+        Some(Some(1)) => "1 other quiz uses it and will be offered the update.".to_owned(),
+        Some(Some(n)) => format!("{n} other quizzes use it and will be offered the update."),
+    };
+    let duplicate = state.is_none()
+        && entries
+            .iter()
+            .any(|e| crate::search::fold(&e.question.text) == crate::search::fold(&question.text));
+    let changed = entry
+        .as_ref()
+        .map(|e| differences(&question, &e.to_question()))
+        .unwrap_or_default();
+    let title = match state {
+        None | Some(LibrarySync::Gone) => "Save to library",
+        Some(LibrarySync::InStep) => "In the library",
+        Some(LibrarySync::ChangedHere) => "Update the library?",
+        Some(LibrarySync::ChangedInLibrary) => "Update from the library?",
+        Some(LibrarySync::ChangedInBoth) => "Changed in both",
+    };
+    rsx! {
+        Dialog { title, class: "library-sync-dialog", on_close,
+            match (state, &entry) {
+                (None | Some(LibrarySync::Gone), _) => rsx! {
+                    if state == Some(LibrarySync::Gone) {
+                        p { "The library no longer has the question this one came from. Save it again, or keep it in this quiz only." }
+                    }
+                    p { "Saves the question to this server's library, under {question.category} · {question.topic}. Its time limit and points stay with the quiz." }
+                    if duplicate {
+                        p { class: "library-duplicate", "⚠ The library already has a question with this text." }
+                    }
+                    Choice {
+                        label: "Difficulty",
+                        options: vec![
+                            ("Easy", "Most adults know the answer."),
+                            ("Medium", "Keen quizzers know it."),
+                            ("Hard", "For experts."),
+                        ],
+                        selected: usize::from(difficulty().clamp(1, 3) - 1),
+                        on_select: move |i: usize| difficulty.set(u8::try_from(i + 1).unwrap_or(1)),
+                    }
+                },
+                (Some(LibrarySync::InStep), _) => rsx! {
+                    p { "This question is the same as the library's. Its time limit and points are the quiz's own." }
+                },
+                (Some(_), Some(entry)) => rsx! {
+                    p { class: "muted small", "Differs in: {changed.join(\", \")}" }
+                    div { class: "library-versions",
+                        QuestionVersion { heading: "In this quiz", question: question.clone() }
+                        QuestionVersion { heading: "In the library", question: entry.to_question() }
+                    }
+                    if matches!(state, Some(LibrarySync::ChangedHere | LibrarySync::ChangedInBoth)) {
+                        p {
+                            strong { "Update library" }
+                            " replaces the library's question with this one: future imports get this version. "
+                            "{others}"
+                        }
+                    }
+                    if matches!(state, Some(LibrarySync::ChangedInLibrary | LibrarySync::ChangedInBoth)) {
+                        p {
+                            strong { "Update from library" }
+                            " replaces this question with the library's version: your changes here are lost. Its time limit and points stay."
+                        }
+                    }
+                },
+                (Some(_), None) => rsx! {},
+            }
+            ErrorBox { error: error() }
+            div { class: "row between",
+                div { class: "row",
+                    if question.library.is_some() {
+                        button {
+                            class: "button ghost",
+                            title: "Keep the question in this quiz only",
+                            onclick: unlink,
+                            "Unlink"
+                        }
+                    }
+                    if matches!(state, Some(LibrarySync::ChangedHere | LibrarySync::ChangedInBoth)) {
+                        button {
+                            class: "button ghost",
+                            title: "Keep the library's question, and save this one next to it",
+                            disabled: busy(),
+                            onclick: move |_| {
+                                if let Some(entry) = &entry {
+                                    difficulty.set(entry.difficulty);
+                                }
+                                as_new.set(true);
+                            },
+                            "Save as new…"
+                        }
+                    }
+                }
+                div { class: "row",
+                    button { class: "button ghost", onclick: move |_| on_close.call(()), "Cancel" }
+                    match state {
+                        None | Some(LibrarySync::Gone) => rsx! {
+                            button { class: "button primary", disabled: busy(), onclick: save_new, "⇪ Save to library" }
+                        },
+                        Some(LibrarySync::InStep) => rsx! {},
+                        _ => rsx! {
+                            if matches!(state, Some(LibrarySync::ChangedInLibrary | LibrarySync::ChangedInBoth)) {
+                                button { class: "button", disabled: busy(), onclick: pull, "⇩ Update from library" }
+                            }
+                            if matches!(state, Some(LibrarySync::ChangedHere | LibrarySync::ChangedInBoth)) {
+                                button { class: "button primary", disabled: busy(), onclick: push, "⇪ Update library" }
+                            }
+                        },
+                    }
+                }
+            }
+        }
+    }
+}
+
+/// One version of a question, to compare it with another.
+#[component]
+fn QuestionVersion(heading: &'static str, question: Question) -> Element {
+    rsx! {
+        div { class: "library-version stack-tight",
+            h3 { "{heading}" }
+            span { class: "muted small", "{question.category} · {question.topic}" }
+            span { class: "strong", "{question.text}" }
+            if !question.passage.is_empty() {
+                span { class: "small library-passage", "{question.passage}" }
+            }
+            span { class: "small library-answer", "✓ {answer_line(&question)}" }
+            if !question.explanation.is_empty() {
+                span { class: "small muted", "{question.explanation}" }
             }
         }
     }
