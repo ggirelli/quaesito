@@ -1976,6 +1976,77 @@ table.results {
   object-fit: contain;
 }
 
+/* A question with a picture and a passage: the picture on the left, the passage beside it, each
+   in half the width and meeting in the middle. It keeps its full height, so what comes below never
+   overlaps it: the slide scrolls instead. */
+.question-split {
+  flex: 1 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3vw;
+  align-items: center;
+}
+
+.question-split > .question-image,
+.question-split > .reveal-frame {
+  max-width: 100%;
+  justify-self: end;
+}
+
+.question-split > .question-image,
+.question-split > .reveal-frame .question-image {
+  max-height: 45vh;
+  max-width: 100%;
+}
+
+.question-split.wide-text {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+}
+
+/* The passage's column, measured so the text can shrink until its longest line fits. */
+.passage-box {
+  container-type: inline-size;
+  min-width: 0;
+}
+
+/* About half an em per character of a serif font; never below 1em nor above the usual 1.5em. */
+.question-split .question-passage {
+  margin: 0;
+  max-width: none;
+  max-height: 45vh;
+  text-align: left;
+  font-size: clamp(1em, calc(100cqi / (var(--longest) * 0.52)), 1.5em);
+}
+
+@media (max-width: 800px) {
+  .question-split {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+
+  .question-split > .question-image,
+  .question-split > .reveal-frame {
+    justify-self: center;
+  }
+
+  .question-split > .question-image,
+  .question-split > .reveal-frame .question-image {
+    max-height: 38vh;
+  }
+
+  .question-split.wide-text {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .passage-box {
+    width: 100%;
+  }
+
+  .question-split .question-passage {
+    text-align: center;
+  }
+}
+
 /* A picture revealed while the clock runs: the frame clips the zoom and holds the tiles. */
 .reveal-frame {
   position: relative;
