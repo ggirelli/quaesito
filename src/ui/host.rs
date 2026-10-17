@@ -17,7 +17,7 @@ use super::{
 };
 use crate::{
     api::{end_session, game_results, host_socket, join_origin},
-    model::{ImageReveal, Pair, Point},
+    model::{ImageReveal, NetworkSlide, Pair, Point},
     protocol::{
         Explanation, Fastest, Grade, Guess, HostCommand, HostPhase, HostView, InputKind, Judgement,
         MAX_NAME_CHARS, PairColumns, PartReveal, PinGuess, QuestionInfo, Reveal, SlideInfo,
@@ -106,7 +106,10 @@ fn HostScreen(code: String) -> Element {
         .map(|ms| (remaining_ms(ms, received_at, now()) / 1000.0).ceil());
     let paused = view.paused;
     let soundtrack = soundtrack(&view.phase, received_at, paused);
-    let can_pause = !matches!(view.phase, HostPhase::Lobby | HostPhase::Ready { .. });
+    let can_pause = !matches!(
+        view.phase,
+        HostPhase::Network { .. } | HostPhase::Lobby { .. } | HostPhase::Ready { .. }
+    );
     let question_open = matches!(view.phase, HostPhase::Question { .. });
 
     rsx! {
@@ -170,7 +173,10 @@ fn HostScreen(code: String) -> Element {
             }
             main { class: "host-main",
                 match &view.phase {
-                    HostPhase::Lobby => rsx! {
+                    HostPhase::Network { network } => rsx! {
+                        NetworkSlideView { network: network.clone() }
+                    },
+                    HostPhase::Lobby { .. } => rsx! {
                         Lobby { code: view.code.clone(), teams: view.teams.clone(), max_teams: view.max_teams }
                     },
                     HostPhase::Ready { question } => rsx! {
@@ -230,7 +236,7 @@ fn HostScreen(code: String) -> Element {
                     button {
                         class: "button ghost",
                         title: "Back (← or B)",
-                        disabled: matches!(view.phase, HostPhase::Lobby),
+                        disabled: view.phase.is_start(),
                         onclick: move |_| send(HostCommand::Back),
                         "◀ Back"
                     }
@@ -261,7 +267,7 @@ fn HostScreen(code: String) -> Element {
                 if let Some(label) = next_label(view) {
                     button {
                         class: "button primary big",
-                        disabled: matches!(view.phase, HostPhase::Lobby) && view.teams.is_empty(),
+                        disabled: matches!(view.phase, HostPhase::Lobby { .. }) && view.teams.is_empty(),
                         onclick: move |_| send(HostCommand::Next),
                         "{label}"
                     }
@@ -601,7 +607,8 @@ fn BackToAdmin(class: &'static str, code: String) -> Element {
 /// Label of the host's "next" button, or `None` once everything is revealed.
 fn next_label(view: &HostView) -> Option<String> {
     Some(match &view.phase {
-        HostPhase::Lobby => "Start the quiz".to_owned(),
+        HostPhase::Network { .. } => "Show the join code".to_owned(),
+        HostPhase::Lobby { .. } => "Start the quiz".to_owned(),
         HostPhase::Ready { .. } => "▶ Start the music".to_owned(),
         HostPhase::Question { .. } => "Stop the clock".to_owned(),
         HostPhase::Closed { then, .. }
@@ -812,9 +819,42 @@ fn Lobby(code: String, teams: Vec<TeamInfo>, max_teams: usize) -> Element {
     }
 }
 
-/// The join link as an SVG QR code.
-fn qr_svg(url: &str) -> Option<String> {
-    let code = qrcode::QrCode::new(url.as_bytes()).ok()?;
+/// The first slide: how to get on the Wi-Fi, before scanning the join code.
+#[component]
+fn NetworkSlideView(network: NetworkSlide) -> Element {
+    let qr = qr_svg(&network.qr_text());
+    rsx! {
+        div { class: "lobby",
+            div { class: "join-panel",
+                span { "Scan to join the Wi-Fi" }
+                div { class: "qr",
+                    if let Some(svg) = qr {
+                        div { dangerous_inner_html: svg }
+                    }
+                }
+            }
+            div { class: "stack wifi-details",
+                h1 { class: "question-title", "Get on the Wi-Fi" }
+                div { class: "wifi-field",
+                    span { class: "muted", "Network" }
+                    span { class: "wifi-value", "{network.name}" }
+                }
+                div { class: "wifi-field",
+                    span { class: "muted", "Password" }
+                    if network.password.is_empty() {
+                        span { class: "wifi-value", "None needed" }
+                    } else {
+                        span { class: "wifi-value", "{network.password}" }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/// Text, such as the join link, as an SVG QR code.
+fn qr_svg(text: &str) -> Option<String> {
+    let code = qrcode::QrCode::new(text.as_bytes()).ok()?;
     Some(
         code.render::<qrcode::render::svg::Color<'_>>()
             .quiet_zone(false)

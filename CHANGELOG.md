@@ -8,6 +8,8 @@ All notable changes to quaesito are listed here. The format follows
 
 ### Added
 
+- A **Wi-Fi slide** setting: the game opens on the network's name and password, with a QR code that connects phones to
+  it, before the join code. Teams can already join while it is up.
 - A question library: about 2,700 ready-made questions in 14 categories, rated easy, medium or hard. The admin page's new
   **Questions** tab browses them by category and topic, with search and filters. The editor's **＋ From the library**
   adds them one by one or at random, and a new quiz can be filled with random questions from the categories you

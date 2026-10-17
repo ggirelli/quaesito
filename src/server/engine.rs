@@ -3,11 +3,14 @@
 //! Pure logic: every method takes the current time, so it can be tested without a runtime.
 //!
 //! ```text
-//! Lobby → Question(0) → Closed(0) → … → Closed(n-1) → [Review(0) → … → Review(n-1)] → Podium
+//! [Network] → Lobby → Question(0) → Closed(0) → … → Closed(n-1) → [Review(0) → … → Review(n-1)] → Podium
 //! ```
 //!
 //! The host can pause (freezing the clock and auto-advance), add time to an open question, and
 //! go back: to the previous slide or reveal, or out of a question opened by mistake.
+//!
+//! When the quiz has a Wi-Fi slide, the game opens on it, before the join code; teams may already
+//! join there.
 //!
 //! A question with a soundtrack first waits in `Ready` until the host starts the music, which
 //! also starts its clock. Slides sit between questions as `Slide(i)` and are skipped by the
@@ -93,6 +96,7 @@ impl Snapshot {
 
 #[derive(Serialize, Deserialize)]
 enum SavedPhase {
+    Network,
     Lobby,
     Ready {
         index: usize,
@@ -173,6 +177,8 @@ struct Submission {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum Phase {
+    /// The Wi-Fi slide, before the lobby.
+    Network,
     Lobby,
     Ready {
         index: usize,
@@ -236,6 +242,11 @@ impl Game {
                 _ => Vec::new(),
             })
             .collect();
+        let phase = if quiz.settings.network.enabled {
+            Phase::Network
+        } else {
+            Phase::Lobby
+        };
         Ok(Self {
             code,
             quiz,
@@ -243,7 +254,7 @@ impl Game {
             next_team_id: 1,
             max_teams: DEFAULT_MAX_TEAMS,
             pictures: true,
-            phase: Phase::Lobby,
+            phase,
             judgements: vec![HashMap::new(); quiz_len],
             played: vec![false; quiz_len],
             paused_at: None,
@@ -287,6 +298,7 @@ impl Game {
             max_teams: self.max_teams,
             pictures: self.pictures,
             phase: match self.phase {
+                Phase::Network => SavedPhase::Network,
                 Phase::Lobby => SavedPhase::Lobby,
                 Phase::Ready { index } => SavedPhase::Ready { index },
                 Phase::Question {
@@ -314,6 +326,7 @@ impl Game {
     #[must_use]
     pub fn restore(snapshot: Snapshot, now: Instant) -> Self {
         let phase = match snapshot.phase {
+            SavedPhase::Network => Phase::Network,
             SavedPhase::Lobby => Phase::Lobby,
             SavedPhase::Ready { index } => Phase::Ready { index },
             SavedPhase::Question {
@@ -514,10 +527,10 @@ impl Game {
         }
     }
 
-    /// Whether the game is still waiting in the lobby.
+    /// Whether the game is still waiting in the lobby (or on the Wi-Fi slide before it).
     #[must_use]
     pub fn in_lobby(&self) -> bool {
-        matches!(self.phase, Phase::Lobby)
+        matches!(self.phase, Phase::Network | Phase::Lobby)
     }
 
     /// Whether teams may upload a picture.
@@ -591,6 +604,7 @@ impl Game {
     pub fn next(&mut self, now: Instant) -> Result<(), Refusal> {
         self.resume(now);
         let phase = match self.phase {
+            Phase::Network => Phase::Lobby,
             Phase::Lobby => {
                 if self.teams.is_empty() {
                     return Err(Refusal("Wait for at least one team to join."));
@@ -646,7 +660,7 @@ impl Game {
     /// # Errors
     /// Refuses outside the lobby, without teams, or past the end of the quiz.
     pub fn start_from(&mut self, index: usize, now: Instant) -> Result<(), Refusal> {
-        if !matches!(self.phase, Phase::Lobby) {
+        if !self.in_lobby() {
             return Err(Refusal("The quiz has already started."));
         }
         if self.teams.is_empty() {
@@ -664,12 +678,13 @@ impl Game {
     /// that is still open withdraws it, so it is asked afresh later.
     ///
     /// # Errors
-    /// Refuses in the lobby.
+    /// Refuses at the start: the lobby, or the Wi-Fi slide before it.
     pub fn back(&mut self, now: Instant) -> Result<(), Refusal> {
         self.resume(now);
         let last = self.quiz.questions.len() - 1;
         self.phase = match self.phase {
-            Phase::Lobby => return Err(Refusal("This is the start.")),
+            Phase::Lobby if self.quiz.settings.network.enabled => Phase::Network,
+            Phase::Network | Phase::Lobby => return Err(Refusal("This is the start.")),
             Phase::Question { index, .. } => {
                 for team in &mut self.teams {
                     team.submissions[index] = None;
@@ -717,7 +732,11 @@ impl Game {
     /// # Errors
     /// Refuses when there is nothing to pause.
     pub fn pause(&mut self, now: Instant) -> Result<(), Refusal> {
-        if matches!(self.phase, Phase::Lobby | Phase::Ready { .. }) || self.paused_at.is_some() {
+        if matches!(
+            self.phase,
+            Phase::Network | Phase::Lobby | Phase::Ready { .. }
+        ) || self.paused_at.is_some()
+        {
             return Err(Refusal("Nothing to pause."));
         }
         self.paused_at = Some(now);
@@ -742,7 +761,7 @@ impl Game {
             | Phase::Review { since, .. }
             | Phase::Standings { since, .. }
             | Phase::Podium { since, .. } => *since += pause,
-            Phase::Lobby | Phase::Ready { .. } => {}
+            Phase::Network | Phase::Lobby | Phase::Ready { .. } => {}
         }
     }
 
@@ -967,7 +986,12 @@ impl Game {
     pub fn host_view(&self, now: Instant) -> HostView {
         let clock = self.clock(now);
         let phase = match self.phase {
-            Phase::Lobby => HostPhase::Lobby,
+            Phase::Network => HostPhase::Network {
+                network: self.quiz.settings.network.clone(),
+            },
+            Phase::Lobby => HostPhase::Lobby {
+                wifi_slide: self.quiz.settings.network.enabled,
+            },
             Phase::Ready { index } => HostPhase::Ready {
                 question: self.question_info(index),
             },
@@ -1104,7 +1128,7 @@ impl Game {
             .map_or(0, |row| row.rank);
         let mut score_visible = revealing;
         let phase = match self.phase {
-            Phase::Lobby => PlayerPhase::Lobby {
+            Phase::Network | Phase::Lobby => PlayerPhase::Lobby {
                 teams: self.teams.len(),
                 pictures: self.pictures,
             },
@@ -1865,7 +1889,7 @@ impl Game {
     /// How many questions, from the start, have closed and therefore count towards scores.
     fn closed_count(&self) -> usize {
         match self.phase {
-            Phase::Lobby => 0,
+            Phase::Network | Phase::Lobby => 0,
             Phase::Ready { index } | Phase::Question { index, .. } => index,
             Phase::Closed { index, .. }
             | Phase::Slide { index, .. }
@@ -2243,6 +2267,38 @@ mod tests {
     }
 
     #[test]
+    fn the_wifi_slide_comes_before_the_lobby() {
+        let t0 = Instant::now();
+        let mut g = game(QuizSettings {
+            network: crate::model::NetworkSlide {
+                enabled: true,
+                name: "Pub".to_owned(),
+                password: String::new(),
+            },
+            ..QuizSettings::default()
+        });
+        let view = g.host_view(t0);
+        assert!(matches!(view.phase, HostPhase::Network { .. }));
+        assert!(view.phase.is_start());
+        assert!(g.back(t0).is_err());
+        assert!(g.pause(t0).is_err());
+        // Teams may join while the slide is up, and the host may move on without them.
+        assert!(g.in_lobby());
+        join(&mut g, "Owls");
+        g.next(t0).unwrap();
+        let view = g.host_view(t0);
+        assert_eq!(view.phase, HostPhase::Lobby { wifi_slide: true });
+        assert!(!view.phase.is_start());
+        g.back(t0).unwrap();
+        assert!(matches!(g.host_view(t0).phase, HostPhase::Network { .. }));
+        // A test can start at a chosen question straight from the slide.
+        g.start_from(1, t0).unwrap();
+        assert_eq!(at(&g, t0), "Q1");
+        // Without the slide, the lobby is the start.
+        assert!(game(QuizSettings::default()).host_view(t0).phase.is_start());
+    }
+
+    #[test]
     fn team_pictures_can_be_turned_off_and_backdrops_picked() {
         let t0 = Instant::now();
         let mut g = game(QuizSettings::default());
@@ -2480,7 +2536,7 @@ mod tests {
         g.next(t0).unwrap();
         g.answer(owls, pick(&[0]), false, t0).unwrap();
         g.back(t0).unwrap();
-        assert!(matches!(g.host_view(t0).phase, HostPhase::Lobby));
+        assert!(matches!(g.host_view(t0).phase, HostPhase::Lobby { .. }));
         g.next(t0).unwrap();
         assert!(matches!(
             g.host_view(t0).phase,
@@ -3205,7 +3261,8 @@ mod tests {
                 _ => unreachable!(),
             },
             HostPhase::Podium { .. } => "P".to_owned(),
-            HostPhase::Lobby => "L".to_owned(),
+            HostPhase::Network { .. } => "N".to_owned(),
+            HostPhase::Lobby { .. } => "L".to_owned(),
             HostPhase::Ready { .. } => "W".to_owned(),
         }
     }
