@@ -15,7 +15,7 @@ use crate::{
     api::{add_library_topic, library_subjects, question_library, remove_library_topic},
     library::{
         CATEGORY_COLORS, CATEGORY_ICONS, CategoryLook, DIFFICULTIES, KINDS, LibraryCategory,
-        LibraryEntry, LibraryFilter, LibrarySort, look_of,
+        LibraryEntry, LibraryFilter, LibrarySort, ORIGINS, look_of,
     },
     model::{Question, QuestionKind},
 };
@@ -128,6 +128,7 @@ pub fn LibraryBrowser(
     let mut topic = use_signal(|| None::<String>);
     let mut difficulty = use_signal(|| None::<u8>);
     let mut kind = use_signal(String::new);
+    let mut added = use_signal(|| None::<bool>);
     let mut sort = use_signal(LibrarySort::default);
     // Whether the pop-up adding a topic is open.
     let mut adding = use_signal(|| false);
@@ -157,6 +158,7 @@ pub fn LibraryBrowser(
         topic: topic(),
         difficulty: difficulty(),
         kind: KINDS.into_iter().find(|k| *k == kind()),
+        added: added(),
     };
     let mut matching = filter.apply(entries);
     sort().apply(&mut matching);
@@ -181,6 +183,19 @@ pub fn LibraryBrowser(
             label: name.to_owned(),
             count: LibraryFilter {
                 kind: Some(name),
+                ..filter.clone()
+            }
+            .apply(entries)
+            .len(),
+        })
+        .collect();
+    let origins: Vec<FilterOption> = ORIGINS
+        .into_iter()
+        .map(|(origin, name)| FilterOption {
+            key: origin.to_string(),
+            label: name.to_owned(),
+            count: LibraryFilter {
+                added: Some(origin),
                 ..filter.clone()
             }
             .apply(entries)
@@ -355,6 +370,15 @@ pub fn LibraryBrowser(
                     selected: Some(kind()).filter(|k| !k.is_empty()),
                     on_pick: move |key: Option<String>| {
                         kind.set(key.unwrap_or_default());
+                        shown_count.set(PAGE);
+                    },
+                }
+                FilterList {
+                    title: "Source",
+                    options: origins,
+                    selected: added().map(|origin| origin.to_string()),
+                    on_pick: move |key: Option<String>| {
+                        added.set(key.and_then(|k| k.parse().ok()));
                         shown_count.set(PAGE);
                     },
                 }
