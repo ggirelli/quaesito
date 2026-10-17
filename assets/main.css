@@ -2297,6 +2297,42 @@ table.results {
   white-space: pre-line;
 }
 
+/* A slide with both a picture and text: the picture on the left, the text beside it. */
+.slide-split {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 3vw;
+  align-items: center;
+  width: 100%;
+  min-height: 0;
+}
+
+.slide-split .slide-image {
+  max-width: 100%;
+  max-height: 70vh;
+  justify-self: end;
+}
+
+.slide-split .slide-text {
+  text-align: left;
+}
+
+@media (max-width: 800px) {
+  .slide-split {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+
+  .slide-split .slide-image {
+    max-height: 45vh;
+    justify-self: center;
+  }
+
+  .slide-split .slide-text {
+    text-align: center;
+  }
+}
+
 .waiting-note {
   text-align: center;
   font-size: 1.6em;

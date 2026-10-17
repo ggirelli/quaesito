@@ -34,6 +34,8 @@ All notable changes to quaesito are listed here. The format follows
 
 ### Changed
 
+- A slide with both a picture or video and text shows them side by side on the big screen, the picture on the left,
+  instead of one under the other. Narrow screens still stack them.
 - The editor shows a question's category, topic, time and points above its text, and **＋ Add soundtrack** next to
   **＋ Add picture or video**. **Seconds** is now **Time (s)**.
 - Form fields wear their name small on the box's top border, and the box's border lights up while it is in use. The
