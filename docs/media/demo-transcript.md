@@ -11,4 +11,4 @@
 - **00:50** Any question can show a picture, as a clue or just for fun!
 - **00:55** Or add a soundtrack: the clock starts with the music. Which way does this tune go?
 - **01:04** And the winner is… drumroll, please!
-- **01:11** Best of all, quaesito is free and open source. Grab it, and host your own quiz night!
+- **01:13** Best of all, quaesito is free and open source. Grab it, and host your own quiz night!
