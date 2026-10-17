@@ -1118,7 +1118,7 @@ input.short {
   transition: flex-basis 0.15s ease, background-color 0.15s ease;
 }
 
-.editor-nav a.slide {
+.editor-nav a.nav-slide {
   background: var(--muted);
 }
 
@@ -1141,7 +1141,7 @@ input.short {
   color: var(--muted);
 }
 
-.editor-nav a[data-open].slide {
+.editor-nav a[data-open].nav-slide {
   border-style: dashed;
 }
 

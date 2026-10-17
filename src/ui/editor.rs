@@ -1051,8 +1051,8 @@ fn QuizNavigator(items: Vec<NavItem>) -> Element {
                     key: "{item.anchor}",
                     href: "#{item.anchor}",
                     class: match (item.slide, item.flagged) {
-                        (true, true) => "slide flagged",
-                        (true, false) => "slide",
+                        (true, true) => "nav-slide flagged",
+                        (true, false) => "nav-slide",
                         (false, true) => "flagged",
                         (false, false) => "",
                     },
