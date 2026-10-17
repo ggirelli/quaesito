@@ -21,6 +21,12 @@ by last edit, newest, name or number of questions.
   round, slides stay where they are, and you can undo it until you change something else.
   :material-shuffle: **Shuffle answers** does the same for the answers of every multiple-choice
   question; the right answers stay right.
+- **Find your way** in a long quiz with the strip of numbers beside the list (above it on
+  smaller screens): the items on screen are lit, a red one has a problem, and a click jumps
+  there. Point along it, or slide a finger, to spread out the part you are looking at. The
+  address bar keeps your place, so reloading the page brings you back to it.
+- **☰ Table view** shows the whole quiz at a glance, a row per question or slide: its type,
+  text, time, points, category and topic. Click a row to open its card.
 
 Each question has an **answer type** (see [question types](question-types.md)), a time limit
 (**Time (s)**, the quiz's default unless you set one) and a **points** multiplier: a ×2 question earns twice
