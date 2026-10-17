@@ -101,6 +101,27 @@
         }
       ]
     },
+    "NetworkSlide": {
+      "description": "The Wi-Fi network teams join before the game, shown on a first slide with a QR code that\nconnects phones to it. The name and password are kept while the slide is off.",
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Whether the game opens on the slide, before the join code.",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "The network name (SSID).",
+          "type": "string"
+        },
+        "password": {
+          "default": "",
+          "description": "Empty for an open network.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "NumberRange": {
       "description": "The numbers a closest-number question accepts, both ends included.",
       "properties": {
@@ -609,6 +630,15 @@
           "$ref": "#/$defs/MultiScoring",
           "default": "AllOrNothing"
         },
+        "network": {
+          "$ref": "#/$defs/NetworkSlide",
+          "default": {
+            "enabled": false,
+            "name": "",
+            "password": ""
+          },
+          "description": "A first slide telling the room how to get on the Wi-Fi."
+        },
         "phone_display": {
           "$ref": "#/$defs/PhoneDisplay",
           "default": "ButtonsOnly"
@@ -681,6 +711,11 @@
         "default_time_limit_secs": 20,
         "joker": false,
         "multi_scoring": "AllOrNothing",
+        "network": {
+          "enabled": false,
+          "name": "",
+          "password": ""
+        },
         "phone_display": "ButtonsOnly",
         "points": "Speed",
         "reveal": "AfterEachQuestion"

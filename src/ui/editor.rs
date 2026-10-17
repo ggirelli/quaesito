@@ -21,9 +21,10 @@ use crate::{
     library::{LibraryCategory, LibraryEdit, LibraryEntry},
     model::{
         AdvanceMode, Answer, BONUS_PERCENTS, Bonus, ImageReveal, MAX_ANSWERS, MAX_MULTIPLIER,
-        MAX_PARTS, MAX_TIME_LIMIT_SECS, MIN_ANSWERS, MIN_PARTS, MIN_TIME_LIMIT_SECS, MultiScoring,
-        NumberRange, Pair, PairItem, Part, PhoneDisplay, PinTolerance, Point, PointsMode, Question,
-        QuestionKind, Quiz, QuizSettings, RevealMode, ValidationIssue, is_video,
+        MAX_NETWORK_NAME_BYTES, MAX_NETWORK_PASSWORD_CHARS, MAX_PARTS, MAX_TIME_LIMIT_SECS,
+        MIN_ANSWERS, MIN_PARTS, MIN_TIME_LIMIT_SECS, MultiScoring, NetworkSlide, NumberRange, Pair,
+        PairItem, Part, PhoneDisplay, PinTolerance, Point, PointsMode, Question, QuestionKind,
+        Quiz, QuizSettings, RevealMode, ValidationIssue, is_video,
     },
     protocol::UploadLimits,
 };
@@ -302,7 +303,7 @@ fn EditorForm(quiz: Quiz) -> Element {
                 }
                 Issues { issues: issues() }
                 ErrorBox { error: test_error() }
-                SettingsCard { settings: quiz.settings }
+                SettingsCard { settings: quiz.settings.clone() }
             }
             aside { class: "editor-side editor-add",
                 button {
@@ -338,6 +339,9 @@ fn EditorForm(quiz: Quiz) -> Element {
                         on_open: move |anchor| switch_view(false, Some(anchor)),
                     }
                 } else {
+                    if quiz.settings.network.enabled {
+                        WifiSlideCard { network: quiz.settings.network.clone() }
+                    }
                     for index in 0..question_count {
                         QuestionCard {
                             key: "{index}",
@@ -622,6 +626,62 @@ fn SettingsCard(settings: QuizSettings) -> Element {
                     selected: usize::from(settings.phone_display == PhoneDisplay::FullText),
                     on_select: move |i| draft.edit_settings(|s| s.phone_display = if i == 0 { PhoneDisplay::ButtonsOnly } else { PhoneDisplay::FullText }),
                 }
+                Choice {
+                    label: "Wi-Fi slide",
+                    options: vec![
+                        ("Off", "The game opens on the join code."),
+                        ("On", "The game opens on the Wi-Fi's name, password and a QR code that connects phones to it. Fill them in on the first card below."),
+                    ],
+                    selected: usize::from(settings.network.enabled),
+                    on_select: move |i| draft.edit_settings(|s| s.network.enabled = i == 1),
+                }
+            }
+        }
+    }
+}
+
+/// The Wi-Fi slide that opens the game, while the setting is on: the network's name and password.
+#[component]
+fn WifiSlideCard(network: NetworkSlide) -> Element {
+    let draft: Draft = use_context();
+    rsx! {
+        section { id: "wifi-slide", class: "card stack question slide-card",
+            div { class: "row between",
+                h3 { "Wi-Fi slide" }
+                button {
+                    class: "button ghost icon danger-icon",
+                    title: "Turn off the Wi-Fi slide (the name and password are kept)",
+                    aria_label: "Turn off the Wi-Fi slide",
+                    onclick: move |_| draft.edit_settings(|s| s.network.enabled = false),
+                    Icon { kind: IconKind::Trash }
+                }
+            }
+            p { class: "muted",
+                "📶 Opens the game with the network's name, password and a QR code that connects phones to it. The join code comes next."
+            }
+            div { class: "row",
+                label { class: "field inline",
+                    span { "Network name" }
+                    input {
+                        r#type: "text",
+                        maxlength: MAX_NETWORK_NAME_BYTES,
+                        value: "{network.name}",
+                        oninput: move |e| draft.edit_settings(|s| s.network.name = e.value()),
+                    }
+                }
+                label { class: "field inline",
+                    title: "Leave empty for an open network",
+                    span { "Password" }
+                    input {
+                        r#type: "text",
+                        maxlength: MAX_NETWORK_PASSWORD_CHARS,
+                        value: "{network.password}",
+                        oninput: move |e| draft.edit_settings(|s| s.network.password = e.value()),
+                    }
+                }
+            }
+            if let Some(problem) = network.problem() {
+                p { class: "field-error", "{problem}" }
             }
         }
     }

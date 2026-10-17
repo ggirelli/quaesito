@@ -4,7 +4,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use crate::model::{ImageReveal, Pair, PairItem, PhoneDisplay, Point};
+use crate::model::{ImageReveal, NetworkSlide, Pair, PairItem, PhoneDisplay, Point};
 
 /// Longest team name, in characters.
 pub const MAX_NAME_CHARS: usize = 24;
@@ -303,8 +303,11 @@ pub struct HostView {
 /// The stage of the quiz, as seen by the host.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum HostPhase {
-    /// Waiting for teams to join.
-    Lobby,
+    /// How to get on the Wi-Fi, before the lobby; teams may already join.
+    Network { network: NetworkSlide },
+    /// Waiting for teams to join. `wifi_slide`: the Wi-Fi slide came first, so going back
+    /// shows it again.
+    Lobby { wifi_slide: bool },
     /// A question with a soundtrack, waiting for the host to start the music and the clock.
     Ready { question: QuestionInfo },
     /// A question is open for answers.
@@ -355,6 +358,17 @@ pub enum HostPhase {
         standings: Vec<StandingRow>,
         finished: bool,
     },
+}
+
+impl HostPhase {
+    /// Whether this is the first screen of the game, with nothing to go back to.
+    #[must_use]
+    pub fn is_start(&self) -> bool {
+        matches!(
+            self,
+            Self::Network { .. } | Self::Lobby { wifi_slide: false }
+        )
+    }
 }
 
 /// Commands the host screen can send.

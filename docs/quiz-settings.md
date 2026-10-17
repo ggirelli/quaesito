@@ -11,5 +11,6 @@ Each quiz has its own settings, at the top of the editor.
 | Jokers | off, or each team may double one question's points, chosen while answering |
 | Moving on | the host clicks, or the quiz continues by itself after a short pause |
 | On team phones | coloured buttons only (read on the big screen), or the full question and answers |
+| Wi-Fi slide | off, or the game opens on a slide with the Wi-Fi's name, password and a QR code that connects phones to it; **Next** then shows the join code. Turning it on adds a **Wi-Fi slide** card at the top of the list, where you type the network name and password (empty for an open network) |
 
 Ties in the final ranking go to the team that spent less time on its right answers.

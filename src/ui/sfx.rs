@@ -72,7 +72,7 @@ impl Cue {
     #[must_use]
     pub fn of(view: &HostView) -> Self {
         match &view.phase {
-            HostPhase::Lobby => Self::Lobby {
+            HostPhase::Lobby { .. } => Self::Lobby {
                 teams: view.teams.len(),
             },
             HostPhase::Question { question, .. } => Self::Question(question.index),
@@ -90,9 +90,10 @@ impl Cue {
                 shown: standings.len(),
                 finished: *finished,
             },
-            HostPhase::Ready { .. } | HostPhase::Slide { .. } | HostPhase::Standings { .. } => {
-                Self::Other
-            }
+            HostPhase::Network { .. }
+            | HostPhase::Ready { .. }
+            | HostPhase::Slide { .. }
+            | HostPhase::Standings { .. } => Self::Other,
         }
     }
 

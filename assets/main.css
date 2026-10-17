@@ -1747,6 +1747,25 @@ table.results {
   line-height: 1;
 }
 
+.wifi-details {
+  gap: 4vh;
+}
+
+.wifi-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5vh;
+  font-size: 1.4em;
+}
+
+.wifi-value {
+  font-family: ui-monospace, monospace;
+  font-size: 1.8em;
+  font-weight: 800;
+  color: var(--accent-text);
+  overflow-wrap: anywhere;
+}
+
 .lobby-art {
   max-width: 100%;
   max-height: 42vh;
