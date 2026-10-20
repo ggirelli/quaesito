@@ -3275,14 +3275,13 @@ button.joker {
   outline-offset: 2px;
 }
 
-/* The backgrounds a team picks for its picture, as round swatches; the first is none. */
+/* The backgrounds a team picks for its picture, as round swatches; the first is none. Six to a
+   row, so the twelve make two even rows. */
 .backdrop-picker {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(6, 2.2rem);
   justify-content: center;
   gap: 0.5rem;
-  max-width: 20rem;
-  margin-inline: auto;
 }
 
 .backdrop-swatch {
