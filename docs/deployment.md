@@ -203,7 +203,8 @@ admin page (**Export**) also saves it with its media, to import on any quaesito.
 
 - The admin password protects everything but playing: quizzes, the big screen and its controls.
   Uploads also need the server's own machine (see [above](#pictures-soundtracks-and-videos)), so
-  someone who learns the password still cannot put files on the server. Admin logins stay valid across restarts; to log every browser out, stop the service,
+  someone who learns the password still cannot put files on the server.
+- Admin logins last 12 hours, across restarts. To log every browser out sooner, stop the service,
   delete `/var/lib/quaesito/admin-tokens.json` and start it again.
 - Anyone with a game's join code can join it as a team, up to the game's team limit. A client that
   asks for 30 codes no game has within five minutes waits five minutes, as one with 10 wrong passwords
@@ -233,7 +234,6 @@ admin page (**Export**) also saves it with its media, to import on any quaesito.
   requests a client makes. For a public server
   that attracts unwanted traffic, consider a provider's firewall rules or Caddy
   [rate limiting](https://github.com/mholt/caddy-ratelimit) (a plugin).
-- Admin logins do not expire. Log out on shared computers, or log every browser out as above.
 
 ## Oracle Cloud
 

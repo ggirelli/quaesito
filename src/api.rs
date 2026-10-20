@@ -44,7 +44,7 @@ pub async fn admin_login(password: String) -> ServerFnResult<String> {
     })
 }
 
-/// Whether an admin token is still valid (tokens do not survive restarts).
+/// Whether an admin token is still valid (tokens expire 12 hours after logging in).
 #[post("/api/admin/check")]
 pub async fn admin_check(token: String) -> ServerFnResult<bool> {
     Ok(crate::server::state().auth.is_valid(&token))

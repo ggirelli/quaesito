@@ -1,19 +1,49 @@
 //! Admin authentication: one shared password, opaque bearer tokens.
 //!
-//! Tokens are kept in a file so admins (and the host screen) stay logged in across restarts.
+//! Tokens are kept in a file so admins (and the host screen) stay logged in across restarts, and
+//! expire [`LOGIN_LIFETIME`] after logging in.
 
-use std::{path::PathBuf, sync::Mutex};
+use std::{
+    path::PathBuf,
+    sync::Mutex,
+    time::{Duration, SystemTime, UNIX_EPOCH},
+};
 
 use dioxus::prelude::{HttpError, ServerFnError, StatusCode};
+use serde::{Deserialize, Serialize};
 
 /// Most tokens kept; the oldest are forgotten first.
 const MAX_TOKENS: usize = 50;
+
+/// How long a login lasts: a stolen or forgotten one stops working by the next day.
+pub const LOGIN_LIFETIME: Duration = Duration::from_hours(12);
+
+/// An issued token.
+#[derive(Serialize, Deserialize)]
+struct Login {
+    token: String,
+    /// When it was issued, in seconds since 1970.
+    issued: u64,
+}
+
+impl Login {
+    fn is_current(&self, now: u64) -> bool {
+        now.saturating_sub(self.issued) < LOGIN_LIFETIME.as_secs()
+    }
+}
+
+/// Now, in seconds since 1970.
+fn now() -> u64 {
+    SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .map_or(0, |since| since.as_secs())
+}
 
 /// Admin password check and issued session tokens.
 pub struct Auth {
     password: String,
     /// Oldest first.
-    tokens: Mutex<Vec<String>>,
+    tokens: Mutex<Vec<Login>>,
     /// Where tokens are saved, if anywhere.
     file: Option<PathBuf>,
     /// The password was generated at startup (no `QUAESITO_ADMIN_PASSWORD`).
@@ -22,7 +52,8 @@ pub struct Auth {
 
 impl Auth {
     /// Uses `QUAESITO_ADMIN_PASSWORD`, or generates a password and logs it. Tokens are saved in
-    /// `file`, and the ones saved there before are still valid.
+    /// `file`, and the ones saved there before stay valid until they expire (tokens saved by
+    /// versions without expiry are dropped).
     #[must_use]
     pub fn from_env(file: PathBuf) -> Self {
         let chosen = std::env::var("QUAESITO_ADMIN_PASSWORD")
@@ -71,8 +102,13 @@ impl Auth {
             return None;
         }
         let token = uuid::Uuid::new_v4().simple().to_string();
+        let now = now();
         let mut tokens = self.lock();
-        tokens.push(token.clone());
+        tokens.retain(|login| login.is_current(now));
+        tokens.push(Login {
+            token: token.clone(),
+            issued: now,
+        });
         let excess = tokens.len().saturating_sub(MAX_TOKENS);
         tokens.drain(..excess);
         if let Some(file) = &self.file {
@@ -86,11 +122,12 @@ impl Auth {
         Some(token)
     }
 
-    /// Whether the token was issued by [`Auth::login`].
+    /// Whether the token was issued by [`Auth::login`] and has not expired.
     pub fn is_valid(&self, token: &str) -> bool {
-        self.lock()
-            .iter()
-            .any(|t| constant_time_eq(t.as_bytes(), token.as_bytes()))
+        let now = now();
+        self.lock().iter().any(|login| {
+            constant_time_eq(login.token.as_bytes(), token.as_bytes()) && login.is_current(now)
+        })
     }
 
     /// Errors with 401 unless the token is valid.
@@ -105,7 +142,7 @@ impl Auth {
         }
     }
 
-    fn lock(&self) -> std::sync::MutexGuard<'_, Vec<String>> {
+    fn lock(&self) -> std::sync::MutexGuard<'_, Vec<Login>> {
         self.tokens
             .lock()
             .unwrap_or_else(std::sync::PoisonError::into_inner)
@@ -144,6 +181,21 @@ mod tests {
     }
 
     #[test]
+    fn tokens_expire() {
+        let auth = Auth::new("secret".to_owned());
+        let fresh = auth.login("secret").unwrap();
+        auth.lock().push(Login {
+            token: "old".to_owned(),
+            issued: now() - LOGIN_LIFETIME.as_secs(),
+        });
+        assert!(auth.is_valid(&fresh));
+        assert!(!auth.is_valid("old"));
+        // Logging in again forgets expired tokens.
+        auth.login("secret").unwrap();
+        assert!(auth.lock().iter().all(|login| login.token != "old"));
+    }
+
+    #[test]
     fn tokens_survive_a_restart() {
         let file = std::env::temp_dir().join(format!("quaesito-tokens-{}", uuid::Uuid::new_v4()));
         let auth = Auth {
@@ -151,8 +203,9 @@ mod tests {
             ..Auth::new("secret".to_owned())
         };
         let token = auth.login("secret").unwrap();
-        let tokens: Vec<String> = serde_json::from_slice(&std::fs::read(&file).unwrap()).unwrap();
-        assert_eq!(tokens, [token]);
+        let tokens: Vec<Login> = serde_json::from_slice(&std::fs::read(&file).unwrap()).unwrap();
+        assert_eq!(tokens.len(), 1);
+        assert_eq!(tokens[0].token, token);
         for _ in 0..MAX_TOKENS {
             auth.login("secret").unwrap();
         }

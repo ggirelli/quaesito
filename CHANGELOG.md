@@ -34,6 +34,7 @@ All notable changes to quaesito are listed here. The format follows
 - Team names starting like a spreadsheet formula (`=`, `+`, `-`, `@`) are quoted in the results CSV.
 - Responses tell browsers not to guess file types and not to send quaesito addresses (which can hold a team's ticket)
   to other sites; admin and team tickets are compared in constant time.
+- Admin logins expire 12 hours after logging in. Logins saved by earlier versions are dropped: log in again once.
 - A team keeps at most three live connections (a new one closes its oldest), and its answers, renames and pictures are
   paced to ten a second: each one sends every screen a new view.
 

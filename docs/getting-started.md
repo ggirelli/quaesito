@@ -82,7 +82,8 @@ The server window shows where quaesito is and the admin password:
 
 Click the :material-cog: icon in the top right corner and type the admin password from the server
 window. A new password is made at every start unless you choose your own (see
-[configuration](configuration.md)).
+[configuration](configuration.md)). A login lasts 12 hours: the big screen uses it too, so log in
+on the computer that runs it shortly before the game.
 
 ## 3. Try the demo quiz
 

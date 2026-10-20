@@ -29,5 +29,5 @@ To run quaesito on a server that players reach over the internet, see
 | `quizzes/` | one JSON file per quiz |
 | `media/` | uploaded pictures, soundtracks and videos; unused ones are removed after a day |
 | `games/` | live games, so they survive a restart |
-| `admin-tokens.json` | admin logins, so you stay logged in across restarts |
+| `admin-tokens.json` | admin logins, so you stay logged in across restarts; each lasts 12 hours |
 | `library-edits.json` | your edits to questions of the [question library](building-a-quiz.md#the-question-library) |
