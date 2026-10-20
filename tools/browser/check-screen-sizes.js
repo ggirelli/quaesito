@@ -3,7 +3,8 @@
 //   tools/browser/run.sh check-screen-sizes.js
 const L = require('./lib.js');
 
-const TEAMS = ['The Quizzical Owls Club', 'Cats', 'Know-It-Alls Anonymous', 'Dogs', 'Les Encyclopédistes'];
+const TEAMS = ['The Quizzical Owls Club', 'Cats', 'Know-It-Alls Anonymous', 'Dogs', 'Les Encyclopédistes',
+  'Pub', 'Brainiacs', 'Quizteama Aguilera', 'Owls', 'The Usual Suspects'];
 const SIZES = [[1920, 1080], [1600, 900], [1280, 720], [1024, 768], [870, 740], [800, 600], [640, 480]];
 
 (async () => {

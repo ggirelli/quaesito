@@ -216,7 +216,9 @@ fn HostScreen(code: String) -> Element {
                         SlideView { slide: slide.clone() }
                     },
                     HostPhase::Standings { title, standings, .. } => rsx! {
-                        div { class: "slide results-slide",
+                        div {
+                            class: "slide results-slide",
+                            style: "--rows: {standings.len().min(RESULTS_SHOWN)}",
                             if !title.is_empty() {
                                 h1 { class: "slide-title", "{title}" }
                             }
