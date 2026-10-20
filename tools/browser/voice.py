@@ -12,6 +12,7 @@ that line. Run with uv, through `just demo-video`, which picks the engine:
   target/kokoro.
 """
 
+import itertools
 import json
 import re
 import subprocess
@@ -37,6 +38,16 @@ CFG_WEIGHT = 0.3
 SEED = 7
 TAKES = 4
 
+# The app's name, spelled for the voice: kweh-ZEE-toh. Chatterbox still gets it wrong in about half
+# its takes (an extra syllable, or no k when it opens a sentence), so a sentence with the name is
+# also checked phoneme by phoneme (wav2vec2's espeak phonemes, close sounds counted as the same),
+# with up to NAME_TAKES takes. Mid-sentence it always glides "kweh" into "kway", so that counts too.
+NAME = "Kweh-zee-toe"
+NAME_PHONEMES = ["k", "w", "ɛ", "z", "iː", "t", "oʊ"]
+SAME_PHONEME = {"e": "ɛ", "eɪ": "ɛ", "i": "iː", "ɪ": "iː", "o": "oʊ", "ou": "oʊ", "oː": "oʊ", "əʊ": "oʊ", "s": "z"}
+PHONEME_MODEL = "facebook/wav2vec2-lv-60-espeak-cv-ft"
+NAME_TAKES = 12
+
 # Kokoro has no mood setting. Nova and Kore vary their pitch the most of its English voices
 # (about twice as much as Bella and Heart, measured with librosa's pyin on a narration line), so an
 # even blend, a little faster, sounds the least flat.
@@ -56,30 +67,45 @@ def chatterbox():
     import torchaudio
     from chatterbox.tts import ChatterboxTTS
     from faster_whisper import WhisperModel
+    from huggingface_hub import hf_hub_download
+    from transformers import Wav2Vec2FeatureExtractor, Wav2Vec2ForCTC
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model = ChatterboxTTS.from_pretrained(device=device)
     ear = WhisperModel("small.en", device="cpu", compute_type="int8")
+    # Its tokenizer needs espeak to load, but reading the phonemes back only needs the vocabulary.
+    features = Wav2Vec2FeatureExtractor.from_pretrained(PHONEME_MODEL)
+    phonemizer = Wav2Vec2ForCTC.from_pretrained(PHONEME_MODEL).eval().to(device)
+    vocab = json.loads(Path(hf_hub_download(PHONEME_MODEL, "vocab.json")).read_text())
+    symbols = {index: symbol for symbol, index in vocab.items()}
+
+    def phonemes(audio: np.ndarray) -> list[str]:
+        inputs = features(audio, sampling_rate=16000, return_tensors="pt").input_values.to(device)
+        with torch.no_grad():
+            best = phonemizer(inputs).logits.argmax(-1)[0].tolist()
+        return [symbols[i] for i, _ in itertools.groupby(best) if not symbols[i].startswith("<")]
 
     def speak(line: dict, sentence: str) -> tuple[np.ndarray, int]:
         # The sentence's words that the caption has too (not the name, spelled out for the voice).
         known = set(spoken(line["text"]))
         words = [word for word in spoken(sentence) if word in known]
         exaggeration = line.get("exaggeration", EXAGGERATION)
+        named = NAME in sentence
         best = None
-        for take in range(TAKES):
+        for take in range(NAME_TAKES if named else TAKES):
             torch.manual_seed(SEED + take)
             wav = model.generate(sentence, exaggeration=exaggeration, cfg_weight=CFG_WEIGHT)
             samples = wav.squeeze(0).cpu().numpy()
-            for_ear = torchaudio.functional.resample(wav, model.sr, 16000).squeeze(0).cpu()
-            heard, _ = ear.transcribe(for_ear.numpy(), beam_size=5)
+            for_ear = torchaudio.functional.resample(wav, model.sr, 16000).squeeze(0).cpu().numpy()
+            heard, _ = ear.transcribe(for_ear, beam_size=5)
             heard = set(spoken(" ".join(part.text for part in heard)))
             missing = [word for word in words if word not in heard]
-            if best is None or len(missing) < best[0]:
-                best = (len(missing), samples)
-            if not missing:
+            off = name_off(phonemes(for_ear)) if named else 0
+            if best is None or (len(missing), off) < best[0]:
+                best = ((len(missing), off), samples)
+            if not missing and not off:
                 break
-            print(f"  take {take + 1} missed {missing}")
+            print(f"  take {take + 1} missed {missing}" + (f", name {off} phonemes off" if off else ""))
         return best[1], model.sr
 
     return speak
@@ -97,6 +123,17 @@ def kokoro():
         return model.create(sentence, voice=voice, speed=SPEED, lang="en-us")
 
     return speak
+
+
+def name_off(heard: list[str]) -> int:
+    """How many phonemes the name is off by where it fits best among those heard (edit distance)."""
+    heard = [SAME_PHONEME.get(symbol, symbol) for symbol in heard]
+    row = [0] * (len(heard) + 1)
+    for i, want in enumerate(NAME_PHONEMES, 1):
+        prev, row = row, [i] + [0] * len(heard)
+        for j, got in enumerate(heard, 1):
+            row[j] = min(prev[j] + 1, row[j - 1] + 1, prev[j - 1] + (want != got))
+    return min(row)
 
 
 def spoken(text: str) -> list[str]:

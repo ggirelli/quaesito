@@ -1,7 +1,7 @@
 [
   { "id": "intro", "caption": "quaesito: questions on the TV, answers on your phones",
     "text": "Welcome to quaesito! The questions go up on the TV, and every team answers right from their phone.",
-    "say": "Welcome to Kwehzeetoh! The questions go up on the TV, and every team answers right from their phone!" },
+    "say": "Welcome to Kweh-zee-toe! The questions go up on the TV, and every team answers right from their phone!" },
   { "id": "join", "caption": "Teams join with the QR code and pick a picture",
     "text": "Teams join by scanning the QR code, then pick a name and a picture. Easy peasy!",
     "say": "Teams join by scanning the QR code, then pick a name and a picture. Easy peasy.",
@@ -41,5 +41,5 @@
     "say": "And the winner is... drumroll, please!" },
   { "id": "outro", "caption": "Free and open source: github.com/ggirelli/quaesito",
     "text": "Best of all, quaesito is free and open source. Grab it, and host your own quiz night!",
-    "say": "Best of all, Kwehzeetoh is free and open source. Grab it, and host your own quiz night!" }
+    "say": "Best of all, Kweh-zee-toe is free and open source. Grab it, and host your own quiz night!" }
 ]
