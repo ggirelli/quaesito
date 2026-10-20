@@ -90,6 +90,10 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 81  | Wi-Fi slide with a QR code before the join code                                                                                    | ✅ done |
 | 82  | Big screen: picture beside a slide’s text or a question’s passage; cog button back to the admin page                               | ✅ done |
 | 83  | Release 0.5.0 (`v0.5.0` tag: downloads built by CI)                                                                                | ✅ done |
+| 84  | Hosting on the internet: deployment guide, Linux ARM64 downloads, guessing throttle, local-only uploads, HTTPS join links          | ✅ done |
+| 85  | Big screen: **New teams can join** toggle; every slide and the podium fit any screen size                                          | ✅ done |
+| 86  | ↺ Reopen a question closed by mistake                                                                                              | ✅ done |
+| 87  | Release 0.6.0 (`v0.6.0` tag: downloads built by CI)                                                                                | ✅ done |
 
 ## Notes
 
