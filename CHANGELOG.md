@@ -6,6 +6,13 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- Linux ARM64 downloads, for ARM servers such as small cloud machines and single-board computers.
+- [Hosting on the internet](https://ggirelli.github.io/quaesito/deployment/): running quaesito on a Linux server
+  behind Caddy for HTTPS, as a systemd service, with backups, a checklist and Oracle Cloud's free ARM machines. The
+  Linux downloads include the service and Caddy files in `deploy/`.
+
 ### Fixed
 
 - Opened over HTTPS (a server behind a proxy), the big screen's join link and QR code use the address it was opened

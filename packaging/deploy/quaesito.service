@@ -1,0 +1,48 @@
+# Runs quaesito as a service: copy to /etc/systemd/system/quaesito.service.
+# Expects the release unpacked in /opt/quaesito, a "quaesito" system user and
+# /etc/quaesito/quaesito.env (see quaesito.env.example). Data goes to /var/lib/quaesito.
+[Unit]
+Description=Quaesito quiz server
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=quaesito
+Group=quaesito
+# The user guide is looked for in ./docs.
+WorkingDirectory=/opt/quaesito
+ExecStart=/opt/quaesito/server
+# Listen on this machine only: the reverse proxy (Caddy) faces the internet.
+Environment=IP=127.0.0.1 PORT=8080 QUAESITO_DATA_DIR=/var/lib/quaesito
+# Read by systemd as root, so it can stay readable by root only. Its values win over the above.
+EnvironmentFile=/etc/quaesito/quaesito.env
+# Creates /var/lib/quaesito, owned by quaesito and closed to other users.
+StateDirectory=quaesito
+StateDirectoryMode=0750
+UMask=0027
+Restart=on-failure
+RestartSec=2
+
+# Hardening: the server only needs its data folder and the network.
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+ProtectHostname=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+SystemCallArchitectures=native
+
+[Install]
+WantedBy=multi-user.target
