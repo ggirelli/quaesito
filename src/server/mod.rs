@@ -10,6 +10,7 @@ pub mod live;
 pub mod matching;
 pub mod media;
 pub mod net;
+pub mod peer;
 pub mod sessions;
 pub mod store;
 pub mod throttle;
@@ -21,7 +22,7 @@ use dioxus::fullstack::{
         Router,
         body::Body,
         extract::{Path, Query},
-        http::{HeaderValue, StatusCode, header},
+        http::{Extensions, HeaderMap, HeaderValue, StatusCode, header},
         response::{IntoResponse, Response},
     },
     routing::{get, post},
@@ -176,6 +177,56 @@ pub fn offline_policy() -> SetResponseHeaderLayer<HeaderValue> {
     )
 }
 
+/// Browser protections for every response: the [content security policy](offline_policy),
+/// files used only as the type they are served as, and other sites not told which quaesito page
+/// linked to them (a phone's join address holds its team's ticket).
+pub fn protect(router: Router) -> Router {
+    router
+        .layer(offline_policy())
+        .layer(SetResponseHeaderLayer::if_not_present(
+            header::X_CONTENT_TYPE_OPTIONS,
+            HeaderValue::from_static("nosniff"),
+        ))
+        .layer(SetResponseHeaderLayer::if_not_present(
+            header::REFERRER_POLICY,
+            HeaderValue::from_static("same-origin"),
+        ))
+}
+
+/// Serves the application from `app` on `IP`:`PORT` (default `127.0.0.1:8080`), as
+/// `dioxus::serve` does in release builds, but with each connection's address for
+/// [`peer::Peer`].
+#[cfg(not(debug_assertions))]
+pub fn serve<F>(app: impl FnOnce() -> F) -> !
+where
+    F: Future<Output = anyhow::Result<Router>>,
+{
+    dioxus::logger::initialize_default();
+    let served = tokio::runtime::Builder::new_multi_thread()
+        .enable_all()
+        .build()
+        .map_err(anyhow::Error::from)
+        .and_then(|runtime| {
+            runtime.block_on(async {
+                let router = app().await?;
+                let addr = dioxus::cli_config::fullstack_address_or_localhost();
+                let listener = tokio::net::TcpListener::bind(addr)
+                    .await
+                    .map_err(|err| anyhow::anyhow!("listening on {addr}: {err}"))?;
+                dioxus::fullstack::axum::serve(
+                    listener,
+                    router.into_make_service_with_connect_info::<std::net::SocketAddr>(),
+                )
+                .await?;
+                Ok(())
+            })
+        });
+    if let Err(err) = served {
+        dioxus::logger::tracing::error!("{err:#}");
+    }
+    std::process::exit(1)
+}
+
 /// Routes served next to the Dioxus application.
 pub fn routes() -> Router {
     Router::new()
@@ -196,10 +247,19 @@ struct ImportQuery {
 /// `POST /import?token=…&consent=…`, with an exported quiz (zip bundle with media, or plain
 /// JSON) as the body: imports it under a new id. The answer streams one JSON
 /// [`ImportProgress`] per line, so the admin page can follow the processing of the media.
-async fn import(Query(query): Query<ImportQuery>, body: Body) -> Response {
+/// Like other uploads, only from this machine.
+async fn import(
+    extensions: Extensions,
+    headers: HeaderMap,
+    Query(query): Query<ImportQuery>,
+    body: Body,
+) -> Response {
     let state = state();
     if !state.auth.is_valid(&query.token) {
         return StatusCode::UNAUTHORIZED.into_response();
+    }
+    if !peer::Peer::of(&extensions, &headers).is_this_machine() {
+        return (StatusCode::FORBIDDEN, peer::FROM_THIS_MACHINE).into_response();
     }
     let bytes = match media::read_upload(body.into_data_stream(), state.limits.import).await {
         Ok(bytes) => bytes,

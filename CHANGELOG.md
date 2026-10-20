@@ -21,9 +21,15 @@ All notable changes to quaesito are listed here. The format follows
 ### Security
 
 - Guessing is slowed down for servers reachable from the internet: a client that enters ten wrong admin passwords, or
-  asks for thirty join codes no game has, waits five minutes. Calls from a team's phone no longer tell an unknown code
+  asks for thirty join codes no game has, waits five minutes. Clients are told apart by their address, or by the one a
+  reverse proxy on the same machine passes on in `X-Forwarded-For`. Calls from a team's phone no longer tell an unknown code
   from an unknown team, so they cannot be used to find live games either.
 - Other sites can no longer show quaesito's pages in a frame, where they could trick an admin into clicking.
+- Pictures, soundtracks, videos and quiz imports are only accepted from the computer quaesito runs on (on a server,
+  through an SSH tunnel), and team pictures only from phones on its local network: nobody on the internet can put files
+  on the server, even with the admin password.
+- Responses tell browsers not to guess file types and not to send quaesito addresses (which can hold a team's ticket)
+  to other sites.
 
 ## [0.5.0] - 2026-10-17
 

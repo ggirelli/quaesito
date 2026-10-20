@@ -3,7 +3,8 @@
 Press **▶ Start** next to a quiz, choose how many teams may join, and start. Tick **Shuffle the
 answers** to play the multiple-choice answers in a new order, for this game only: the saved quiz
 keeps its own. Untick **Teams can add a picture** to keep uploads off the big screen: teams then
-pick one of the 16 ready-made pictures, or show their initial. Put the big screen on the TV, full screen with ++f11++. Teams scan the QR code, or open the address shown and type
+pick one of the 16 ready-made pictures, or show their initial. Only phones on the same network as
+quaesito can upload a picture: phones joining over the internet always pick a ready-made one. Put the big screen on the TV, full screen with ++f11++. Teams scan the QR code, or open the address shown and type
 the game code, then pick a name, a picture (their own, or one of 16 ready-made mascots) and a
 background for it: a colour or a gradient, which shows behind their initial and through the
 see-through parts of a picture (the mascots, or a PNG with a transparent background). The mascots'

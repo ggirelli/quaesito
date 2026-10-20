@@ -149,6 +149,11 @@ plays again from the start when you click it. Pin questions need a picture.
 
 The upload limits can be changed; see [configuration](configuration.md).
 
+Pictures, soundtracks and videos can only be uploaded on the computer quaesito runs on, at
+`http://localhost:8080`: not from another computer, tablet or phone, even on the same Wi-Fi. On a
+server, open the admin page through an SSH tunnel; see
+[hosting on the internet](deployment.md#pictures-soundtracks-and-videos).
+
 ## Soundtracks
 
 A question can have a soundtrack (MP3, M4A/AAC, Ogg/Opus, WebM, FLAC or WAV, up to 40 MB). The
@@ -171,7 +176,7 @@ music too; when time runs out instead, it plays on while the answers are shown.
 
 The export icon on the admin page downloads a quiz as a `.zip` with its pictures and
 soundtracks. **Import** on another computer brings it back as a new quiz; older `.json` exports
-import too. A bar above the list follows big quizzes as they upload, as their pictures and
+import too. Like uploads, imports only work on the computer quaesito runs on. A bar above the list follows big quizzes as they upload, as their pictures and
 soundtracks are processed, and as exports download. A quiz made with a newer version of Quaesito asks first, and says what this version
 would leave out. The [quiz file format](quiz-file-format.md) page describes what is inside, to write
 or generate quizzes yourself.

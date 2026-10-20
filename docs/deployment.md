@@ -46,9 +46,10 @@ players' browsers ──HTTPS──▶ Caddy (ports 80, 443) ──HTTP and WebS
 !!! warning "Before going public"
     - Choose a **long random admin password** (`openssl rand -base64 24`). Anyone on the internet can
       reach the login page.
-    - Always run quaesito behind Caddy or another reverse proxy that sets `X-Forwarded-For`, never
-      directly on a public port: quaesito slows down clients that guess passwords or join codes, and
-      tells clients apart by that header.
+    - Run quaesito behind Caddy, on the same machine, with quaesito listening on `127.0.0.1` only.
+      Quaesito trusts the `X-Forwarded-For` header of a proxy on its own machine to tell visitors
+      apart. A proxy that does not set it (nginx, unless told to) makes every visitor look like the
+      server itself, which may upload files.
 
 ## Install
 
@@ -124,6 +125,27 @@ Run these on the server.
 
 Then open `https://quiz.example.com/admin` and log in.
 
+## Pictures, soundtracks and videos
+
+Nothing can be uploaded to quaesito over the internet: question pictures, soundtracks, videos and
+quiz imports are only accepted from the server itself. Team pictures are only accepted from phones
+on the server's local network, so players joining over the internet pick one of the ready-made
+pictures instead.
+
+To add media to a quiz on the server, open the admin page through an **SSH tunnel**, which makes
+your browser's requests come from the server. On your computer:
+
+```sh
+ssh -N -L 8080:127.0.0.1:8080 ubuntu@quiz.example.com
+```
+
+Leave it running, open `http://localhost:8080/admin`, and log in again (logins are kept per
+address). Edit, upload or import as usual, then close the tunnel with ++ctrl+c++. Everything else
+(starting games, the big screen) works at the public address.
+
+You can also build the quiz on your own computer, export it, and import the `.zip` through the
+tunnel.
+
 ## Running it
 
 | To | Run |
@@ -179,8 +201,9 @@ admin page (**Export**) also saves it with its media, to import on any quaesito.
 
 ## Security notes
 
-- The admin password protects everything but playing: quizzes, uploads, the big screen and its
-  controls. Admin logins stay valid across restarts; to log every browser out, stop the service,
+- The admin password protects everything but playing: quizzes, the big screen and its controls.
+  Uploads also need the server's own machine (see [above](#pictures-soundtracks-and-videos)), so
+  someone who learns the password still cannot put files on the server. Admin logins stay valid across restarts; to log every browser out, stop the service,
   delete `/var/lib/quaesito/admin-tokens.json` and start it again.
 - Anyone with a game's join code can join it as a team, up to the game's team limit. A client that
   asks for 30 codes no game has within five minutes waits five minutes, as one with 10 wrong passwords
@@ -203,9 +226,12 @@ admin page (**Export**) also saves it with its media, to import on any quaesito.
     }
     ```
 
-- Caddy and quaesito do not limit how many requests or connections a client makes beyond the above.
-  For a public server that attracts unwanted traffic, consider a provider's firewall rules or Caddy
+- Caddy and quaesito do not limit how many requests or connections a client makes beyond the above:
+  a team's phone may open several connections, and one message on them can be up to 64 MB. Phones
+  get a pause between commands, so one cannot keep the server busy for everyone. For a public server
+  that attracts unwanted traffic, consider a provider's firewall rules or Caddy
   [rate limiting](https://github.com/mholt/caddy-ratelimit) (a plugin).
+- Admin logins do not expire. Log out on shared computers, or log every browser out as above.
 
 ## Oracle Cloud
 

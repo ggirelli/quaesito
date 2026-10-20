@@ -17,7 +17,7 @@ serde_json = "1"
 anyhow = { version = "1", optional = true }
 futures-util = { version = "0.3", optional = true }
 image = { version = "0.25", default-features = false, features = ["gif", "jpeg", "png", "webp"], optional = true }
-tokio = { version = "1", features = ["fs", "macros", "rt", "sync", "time"], optional = true }
+tokio = { version = "1", features = ["fs", "macros", "net", "rt", "rt-multi-thread", "sync", "time"], optional = true }
 tower-http = { version = "0.6", features = ["fs", "set-header"], optional = true }
 unicode-normalization = { version = "0.1", optional = true }
 uuid = { version = "1", features = ["v4"], optional = true }

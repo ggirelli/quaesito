@@ -23,11 +23,11 @@ use crate::{
 
 /// Exchanges the admin password for a session token. A client that keeps getting it wrong has
 /// to wait.
-#[post("/api/admin/login", headers: dioxus::fullstack::HeaderMap)]
+#[post("/api/admin/login")]
 pub async fn admin_login(password: String) -> ServerFnResult<String> {
     let state = crate::server::state();
     let (client, now) = (
-        crate::server::throttle::client(&headers),
+        crate::server::peer::Peer::current().client(),
         std::time::Instant::now(),
     );
     if !state.logins.allows(client, now) {
@@ -259,6 +259,7 @@ pub async fn remove_library_topic(
 pub async fn upload_question_image(token: String, file: FileStream) -> ServerFnResult<String> {
     let state = crate::server::state();
     state.auth.require(&token)?;
+    crate::server::peer::Peer::current().require_this_machine()?;
     let bytes = crate::server::media::read_upload(file, state.limits.picture).await?;
     Ok(state
         .media
@@ -271,6 +272,7 @@ pub async fn upload_question_image(token: String, file: FileStream) -> ServerFnR
 pub async fn upload_question_media(token: String, file: FileStream) -> ServerFnResult<String> {
     let state = crate::server::state();
     state.auth.require(&token)?;
+    crate::server::peer::Peer::current().require_this_machine()?;
     let limits = state.limits;
     let bytes = crate::server::media::read_upload(file, limits.picture.max(limits.video)).await?;
     let mb = crate::protocol::UploadLimits::megabytes;
@@ -308,6 +310,7 @@ pub async fn upload_limits(token: String) -> ServerFnResult<UploadLimits> {
 pub async fn upload_question_audio(token: String, file: FileStream) -> ServerFnResult<String> {
     let state = crate::server::state();
     state.auth.require(&token)?;
+    crate::server::peer::Peer::current().require_this_machine()?;
     let bytes = crate::server::media::read_upload(file, state.limits.audio).await?;
     Ok(state.media.store_audio(bytes).await?)
 }
@@ -495,15 +498,15 @@ pub async fn join_origin(
 }
 
 /// Title of the quiz behind a join code, or `None` if no such session is live.
-#[post("/api/game/info", headers: dioxus::fullstack::HeaderMap)]
+#[post("/api/game/info")]
 pub async fn game_info(code: String) -> ServerFnResult<Option<String>> {
-    Ok(find_game(&headers, &code)?.map(|s| s.read(|g| g.title().to_owned())))
+    Ok(find_game(&code)?.map(|s| s.read(|g| g.title().to_owned())))
 }
 
 /// Registers a team in a session.
-#[post("/api/game/join", headers: dioxus::fullstack::HeaderMap)]
+#[post("/api/game/join")]
 pub async fn join_game(code: String, name: String) -> ServerFnResult<JoinTicket> {
-    let session = find_game(&headers, &code)?
+    let session = find_game(&code)?
         .ok_or_else(|| ServerFnError::new("No game with this code is running."))?;
     let token = uuid::Uuid::new_v4().simple().to_string();
     let team_id = session
@@ -516,12 +519,11 @@ pub async fn join_game(code: String, name: String) -> ServerFnResult<JoinTicket>
 /// no game has has to wait, so live games cannot be found by trying codes.
 #[cfg(feature = "server")]
 fn find_game(
-    headers: &dioxus::fullstack::HeaderMap,
     code: &str,
 ) -> Result<Option<std::sync::Arc<crate::server::sessions::Session>>, ServerFnError> {
     let state = crate::server::state();
     let (client, now) = (
-        crate::server::throttle::client(headers),
+        crate::server::peer::Peer::current().client(),
         std::time::Instant::now(),
     );
     if !state.join_codes.allows(client, now) {
@@ -561,7 +563,20 @@ pub async fn check_ticket(code: String, token: String) -> ServerFnResult<bool> {
         .is_some_and(|s| s.read(|g| g.team_for_token(&token).is_some())))
 }
 
-/// Uploads a team avatar and returns its media name.
+/// Whether this phone may upload a team picture: only phones on the server's local network may,
+/// so nobody on the internet can put pictures on the big screen.
+#[post("/api/game/pictures-here")]
+pub async fn pictures_from_here() -> ServerFnResult<bool> {
+    Ok(crate::server::peer::Peer::current().is_local_network())
+}
+
+/// Why a team picture from the internet was refused.
+#[cfg(feature = "server")]
+const PICTURES_FROM_NETWORK: &str =
+    "Team pictures can only be uploaded from the network the quiz runs on.";
+
+/// Uploads a team avatar and returns its media name. Only phones on the server's local network
+/// may.
 #[post("/api/game/avatar?code&token")]
 pub async fn upload_avatar(
     code: String,
@@ -570,6 +585,9 @@ pub async fn upload_avatar(
 ) -> ServerFnResult<String> {
     let state = crate::server::state();
     let (session, team) = my_team(&code, &token)?;
+    if !crate::server::peer::Peer::current().is_local_network() {
+        return Err(HttpError::new(StatusCode::FORBIDDEN, PICTURES_FROM_NETWORK).into());
+    }
     if !session.read(crate::server::engine::Game::pictures) {
         return Err(ServerFnError::new("This game does not take team pictures."));
     }
