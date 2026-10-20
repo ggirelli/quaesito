@@ -2,7 +2,10 @@
 //!
 //! The address is the connection's, or, when that is this machine and the request carries
 //! `X-Forwarded-For`, the one a reverse proxy here put last in it (Caddy sets it to the address
-//! that connected to it). Elsewhere, the header is ignored: anyone can send it.
+//! that connected to it). Elsewhere, the header is ignored: anyone can send it. A request from
+//! this machine must also be addressed to it (`localhost` or a loopback address in `Host`), so a
+//! proxy that passes on the public hostname but no `X-Forwarded-For` does not make every visitor
+//! look local.
 //!
 //! Development builds run behind dx's proxy, which does not pass the address on: there, every
 //! request counts as coming from this machine.
@@ -16,9 +19,14 @@ use dioxus::fullstack::{
 };
 use dioxus::prelude::{HttpError, ServerFnError};
 
-/// The address a request comes from, `None` if it cannot be told (development builds).
+/// Where a request comes from.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub struct Peer(Option<IpAddr>);
+pub struct Peer {
+    /// The address, `None` if it cannot be told (development builds).
+    ip: Option<IpAddr>,
+    /// The request was addressed to this machine by a loopback name.
+    to_loopback: bool,
+}
 
 impl Peer {
     /// The peer of a request, from its extensions (the connection's address) and headers.
@@ -27,19 +35,26 @@ impl Peer {
         let connection = extensions
             .get::<ConnectInfo<SocketAddr>>()
             .map(|info| info.0.ip().to_canonical());
-        Self(connection.map(|ip| {
-            if ip.is_loopback() {
-                forwarded_for(headers).unwrap_or(ip)
-            } else {
-                ip
-            }
-        }))
+        Self {
+            ip: connection.map(|ip| {
+                if ip.is_loopback() {
+                    forwarded_for(headers).unwrap_or(ip)
+                } else {
+                    ip
+                }
+            }),
+            to_loopback: addressed_to_loopback(headers),
+        }
     }
 
     /// The peer of the server function being run.
     #[must_use]
     pub fn current() -> Self {
-        FullstackContext::current().map_or(Self(None), |context| {
+        let unknown = Self {
+            ip: None,
+            to_loopback: false,
+        };
+        FullstackContext::current().map_or(unknown, |context| {
             let parts = context.parts_mut();
             Self::of(&parts.extensions, &parts.headers)
         })
@@ -49,23 +64,26 @@ impl Peer {
     /// subscriber usually holds whole).
     #[must_use]
     pub fn client(self) -> Option<IpAddr> {
-        self.0.map(|ip| match ip {
+        self.ip.map(|ip| match ip {
             IpAddr::V6(v6) => IpAddr::V6((u128::from(v6) & !u128::from(u64::MAX)).into()),
             IpAddr::V4(_) => ip,
         })
     }
 
-    /// Whether the request comes from the machine quaesito runs on (an SSH tunnel to it counts).
+    /// Whether the request comes from the machine quaesito runs on, addressed to it as
+    /// `localhost` (an SSH tunnel to it counts).
     #[must_use]
     pub fn is_this_machine(self) -> bool {
-        self.0.map_or(cfg!(debug_assertions), |ip| ip.is_loopback())
+        self.ip.map_or(cfg!(debug_assertions), |ip| {
+            ip.is_loopback() && self.to_loopback
+        })
     }
 
     /// Whether the request comes from this machine or the local network (a private address),
     /// not from the internet.
     #[must_use]
     pub fn is_local_network(self) -> bool {
-        self.0.map_or(cfg!(debug_assertions), |ip| match ip {
+        self.ip.map_or(cfg!(debug_assertions), |ip| match ip {
             IpAddr::V4(v4) => v4.is_loopback() || v4.is_private() || v4.is_link_local(),
             IpAddr::V6(v6) => {
                 v6.is_loopback() || v6.is_unique_local() || v6.is_unicast_link_local()
@@ -90,6 +108,25 @@ impl Peer {
 pub const FROM_THIS_MACHINE: &str = "Uploads only work on the computer quaesito runs on: open \
     it there, at http://localhost and its port (on a server, through an SSH tunnel).";
 
+/// Whether the `Host` header names this machine by a loopback name: `localhost`, `127.0.0.1`,
+/// `[::1]`, with or without a port.
+fn addressed_to_loopback(headers: &HeaderMap) -> bool {
+    let Some(host) = headers
+        .get(dioxus::fullstack::http::header::HOST)
+        .and_then(|value| value.to_str().ok())
+    else {
+        return false;
+    };
+    let name = match host.strip_prefix('[') {
+        Some(bracketed) => bracketed.split(']').next().unwrap_or_default(),
+        None => host.split(':').next().unwrap_or_default(),
+    };
+    name.eq_ignore_ascii_case("localhost")
+        || name
+            .parse::<IpAddr>()
+            .is_ok_and(|ip| ip.to_canonical().is_loopback())
+}
+
 /// The address a proxy on this machine put last in `X-Forwarded-For`.
 fn forwarded_for(headers: &HeaderMap) -> Option<IpAddr> {
     headers
@@ -109,11 +146,16 @@ mod tests {
     use super::*;
 
     fn peer(connection: Option<&str>, forwarded: &[&str]) -> Peer {
+        peer_to("localhost:8080", connection, forwarded)
+    }
+
+    fn peer_to(host: &str, connection: Option<&str>, forwarded: &[&str]) -> Peer {
         let mut extensions = Extensions::new();
         if let Some(addr) = connection {
             extensions.insert(ConnectInfo(addr.parse::<SocketAddr>().unwrap()));
         }
         let mut headers = HeaderMap::new();
+        headers.insert("host", host.parse().unwrap());
         for value in forwarded {
             headers.append("x-forwarded-for", value.parse().unwrap());
         }
@@ -126,20 +168,20 @@ mod tests {
 
     #[test]
     fn a_local_proxy_names_the_client() {
-        assert_eq!(peer(Some("127.0.0.1:5000"), &[]).0, Some(ip("127.0.0.1")));
+        assert_eq!(peer(Some("127.0.0.1:5000"), &[]).ip, Some(ip("127.0.0.1")));
         let proxied = peer(Some("127.0.0.1:5000"), &["10.0.0.1, 203.0.113.7"]);
-        assert_eq!(proxied.0, Some(ip("203.0.113.7")));
+        assert_eq!(proxied.ip, Some(ip("203.0.113.7")));
         assert_eq!(
-            peer(Some("[::1]:5000"), &["10.0.0.1", "203.0.113.8"]).0,
+            peer(Some("[::1]:5000"), &["10.0.0.1", "203.0.113.8"]).ip,
             Some(ip("203.0.113.8"))
         );
         assert_eq!(
-            peer(Some("127.0.0.1:5000"), &["::ffff:203.0.113.9"]).0,
+            peer(Some("127.0.0.1:5000"), &["::ffff:203.0.113.9"]).ip,
             Some(ip("203.0.113.9"))
         );
         // Junk leaves the connection's address.
         assert_eq!(
-            peer(Some("127.0.0.1:5000"), &["junk"]).0,
+            peer(Some("127.0.0.1:5000"), &["junk"]).ip,
             Some(ip("127.0.0.1"))
         );
     }
@@ -147,7 +189,7 @@ mod tests {
     #[test]
     fn others_cannot_claim_an_address() {
         let spoofed = peer(Some("192.168.1.20:5000"), &["127.0.0.1"]);
-        assert_eq!(spoofed.0, Some(ip("192.168.1.20")));
+        assert_eq!(spoofed.ip, Some(ip("192.168.1.20")));
         assert!(!spoofed.is_this_machine());
         let spoofed = peer(Some("203.0.113.5:5000"), &["192.168.1.20"]);
         assert!(!spoofed.is_local_network());
@@ -176,6 +218,31 @@ mod tests {
         let through_proxy = peer(Some("127.0.0.1:5000"), &["203.0.113.5"]);
         assert!(!through_proxy.is_this_machine() && !through_proxy.is_local_network());
         assert!(through_proxy.require_this_machine().is_err());
+    }
+
+    #[test]
+    fn this_machine_is_addressed_as_localhost() {
+        for host in [
+            "localhost",
+            "LOCALHOST:8080",
+            "127.0.0.1:8080",
+            "[::1]:8080",
+            "[::1]",
+        ] {
+            assert!(
+                peer_to(host, Some("127.0.0.1:5000"), &[]).is_this_machine(),
+                "{host}"
+            );
+        }
+        // A proxy that sends the public name but no X-Forwarded-For.
+        let proxied = peer_to("quiz.example.com", Some("127.0.0.1:5000"), &[]);
+        assert!(!proxied.is_this_machine());
+        let lookalike = peer_to("localhost.example.com", Some("127.0.0.1:5000"), &[]);
+        assert!(!lookalike.is_this_machine());
+        // No Host header at all.
+        let mut extensions = Extensions::new();
+        extensions.insert(ConnectInfo("127.0.0.1:5000".parse::<SocketAddr>().unwrap()));
+        assert!(!Peer::of(&extensions, &HeaderMap::new()).is_this_machine());
     }
 
     #[test]

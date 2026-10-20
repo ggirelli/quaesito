@@ -48,8 +48,9 @@ players' browsers ──HTTPS──▶ Caddy (ports 80, 443) ──HTTP and WebS
       reach the login page.
     - Run quaesito behind Caddy, on the same machine, with quaesito listening on `127.0.0.1` only.
       Quaesito trusts the `X-Forwarded-For` header of a proxy on its own machine to tell visitors
-      apart. A proxy that does not set it (nginx, unless told to) makes every visitor look like the
-      server itself, which may upload files.
+      apart, and Caddy sets it. With another proxy, make sure it sets that header too (in nginx:
+      `proxy_set_header X-Forwarded-For $remote_addr;`): otherwise visitors may look like the server
+      itself, which may upload files.
 
 ## Install
 
