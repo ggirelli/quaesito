@@ -585,6 +585,7 @@ pub async fn upload_avatar(
 ) -> ServerFnResult<String> {
     let state = crate::server::state();
     let (session, team) = my_team(&code, &token)?;
+    session.pace(team).await;
     if !crate::server::peer::Peer::current().is_local_network() {
         return Err(HttpError::new(StatusCode::FORBIDDEN, PICTURES_FROM_NETWORK).into());
     }
@@ -607,6 +608,7 @@ pub async fn upload_avatar(
 #[post("/api/game/rename")]
 pub async fn rename_my_team(code: String, token: String, name: String) -> ServerFnResult<()> {
     let (session, team) = my_team(&code, &token)?;
+    session.pace(team).await;
     if !session.read(crate::server::engine::Game::in_lobby) {
         return Err(ServerFnError::new(
             "The quiz has started: ask the host to rename your team.",
@@ -625,6 +627,7 @@ pub async fn set_team_mascot(
     mascot: Option<String>,
 ) -> ServerFnResult<()> {
     let (session, team) = my_team(&code, &token)?;
+    session.pace(team).await;
     session
         .update(|g, _| g.set_mascot(team, mascot))
         .map_err(|refusal| ServerFnError::new(refusal.0))
@@ -639,6 +642,7 @@ pub async fn set_team_backdrop(
     backdrop: Option<u8>,
 ) -> ServerFnResult<()> {
     let (session, team) = my_team(&code, &token)?;
+    session.pace(team).await;
     session
         .update(|g, _| g.set_backdrop(team, backdrop))
         .map_err(|refusal| ServerFnError::new(refusal.0))

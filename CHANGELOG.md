@@ -33,7 +33,9 @@ All notable changes to quaesito are listed here. The format follows
 - Pictures, soundtracks and videos are streamed instead of being read whole into memory for each request.
 - Team names starting like a spreadsheet formula (`=`, `+`, `-`, `@`) are quoted in the results CSV.
 - Responses tell browsers not to guess file types and not to send quaesito addresses (which can hold a team's ticket)
-  to other sites; admin and team tickets are compared in constant time; a phone's commands are paced.
+  to other sites; admin and team tickets are compared in constant time.
+- A team keeps at most three live connections (a new one closes its oldest), and its answers, renames and pictures are
+  paced to ten a second: each one sends every screen a new view.
 
 ## [0.5.0] - 2026-10-17
 

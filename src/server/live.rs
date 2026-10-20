@@ -10,11 +10,6 @@ use crate::protocol::{HostCommand, HostView, PlayerCommand, PlayerView};
 /// Most time the host can add in one go.
 const MAX_EXTRA_SECS: u32 = 60;
 
-/// Least time between two commands from a phone: each one sends every screen a new view, so a
-/// phone sending them in a loop would keep the server busy for everyone. A team answers a few
-/// times per question at most.
-const PHONE_COMMAND_GAP: std::time::Duration = std::time::Duration::from_millis(100);
-
 /// Serves the host screen until it disconnects.
 pub async fn host(mut socket: TypedWebsocket<HostCommand, HostView>, session: Arc<Session>) {
     let mut updates = session.subscribe();
@@ -74,21 +69,22 @@ pub async fn player(
     session: Arc<Session>,
     team: u32,
 ) {
+    // Connecting also sends every screen a new view.
+    session.pace(team).await;
+    let (phone, mut closed) = session.connect_phone(team);
     session.update(|g, _| g.set_connected(team, true));
     let mut updates = session.subscribe();
-    let mut last_command = None;
     while let Some(view) = session.read(|g| g.player_view(team, std::time::Instant::now())) {
         if socket.send(view).await.is_err() {
             break;
         }
         tokio::select! {
             changed = updates.changed() => if changed.is_err() { break },
+            // The team opened too many connections: this, its oldest, closes.
+            _ = &mut closed => break,
             command = socket.recv() => match command {
                 Ok(PlayerCommand::Answer { response, joker, bonus }) => {
-                    if let Some(last) = last_command {
-                        tokio::time::sleep_until(last + PHONE_COMMAND_GAP).await;
-                    }
-                    last_command = Some(tokio::time::Instant::now());
+                    session.pace(team).await;
                     // Refusals (late or duplicate answers) are reflected by the next view.
                     let _ = session.update(|g, now| {
                         g.answer_with_bonus(team, response, joker, bonus, now)
@@ -98,5 +94,6 @@ pub async fn player(
             },
         }
     }
+    session.disconnect_phone(team, phone);
     session.update(|g, _| g.set_connected(team, false));
 }

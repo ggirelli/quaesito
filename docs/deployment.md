@@ -227,9 +227,10 @@ admin page (**Export**) also saves it with its media, to import on any quaesito.
     }
     ```
 
-- Caddy and quaesito do not limit how many requests or connections a client makes beyond the above:
-  a team's phone may open several connections, and one message on them can be up to 64 MB. Phones
-  get a pause between commands, so one cannot keep the server busy for everyone. For a public server
+- A team keeps at most three live connections (a new one closes its oldest), and its actions are
+  paced to ten a second, so one phone cannot keep the server busy for everyone. A message on a
+  connection can still be up to 64 MB. Beyond this, Caddy and quaesito do not limit how many
+  requests a client makes. For a public server
   that attracts unwanted traffic, consider a provider's firewall rules or Caddy
   [rate limiting](https://github.com/mholt/caddy-ratelimit) (a plugin).
 - Admin logins do not expire. Log out on shared computers, or log every browser out as above.

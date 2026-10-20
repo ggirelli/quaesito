@@ -8,19 +8,34 @@ use std::{
     path::{Path, PathBuf},
     sync::{
         Arc, Mutex, MutexGuard, PoisonError, Weak,
-        atomic::{AtomicBool, Ordering},
+        atomic::{AtomicBool, AtomicU64, Ordering},
     },
     time::Duration,
 };
 
 use anyhow::Context;
-use tokio::{sync::watch, time::Instant};
+use tokio::{
+    sync::{oneshot, watch},
+    time::Instant,
+};
 
 use super::engine::{Game, Refusal, Snapshot};
 use crate::{model::Quiz, protocol::SessionSummary};
 
 /// How long changes settle before a game is saved.
 const SAVE_DELAY: Duration = Duration::from_millis(300);
+
+/// Most connections a team's phones keep at once; a new one closes the oldest. A phone has one,
+/// plus perhaps a dead one the server has not noticed yet after it changed networks.
+const MAX_PHONE_CONNECTIONS: usize = 3;
+
+/// Least time between two actions of a team (answers, renames, pictures): each one sends every
+/// screen a new view, so a phone sending them in a loop would keep the server busy for everyone.
+/// A team acts a few times per question at most.
+const TEAM_ACTION_GAP: Duration = Duration::from_millis(100);
+
+/// A phone connection: its number, and what closes it when dropped.
+type Phone = (u64, oneshot::Sender<()>);
 
 /// A live session: the game plus a version counter bumped on every change.
 pub struct Session {
@@ -30,6 +45,12 @@ pub struct Session {
     ended: AtomicBool,
     /// An admin's test game: never saved.
     test: bool,
+    /// Per team, its open phone connections, oldest first: dropping one closes it.
+    phones: Mutex<HashMap<u32, Vec<Phone>>>,
+    /// Numbers phone connections.
+    next_phone: AtomicU64,
+    /// Per team, when its latest action may run.
+    actions: Mutex<HashMap<u32, Instant>>,
 }
 
 impl Session {
@@ -39,7 +60,46 @@ impl Session {
             version: watch::channel(0).0,
             ended: AtomicBool::new(false),
             test,
+            phones: Mutex::default(),
+            next_phone: AtomicU64::new(0),
+            actions: Mutex::default(),
         }
+    }
+
+    /// Registers a phone connection of `team`, closing the team's oldest if it has too many.
+    /// Returns the connection's number, for [`Session::disconnect_phone`], and what tells it to
+    /// close.
+    pub fn connect_phone(&self, team: u32) -> (u64, oneshot::Receiver<()>) {
+        let id = self.next_phone.fetch_add(1, Ordering::Relaxed);
+        let (close, closed) = oneshot::channel();
+        let mut phones = self.phones.lock().unwrap_or_else(PoisonError::into_inner);
+        let open = phones.entry(team).or_default();
+        open.push((id, close));
+        let excess = open.len().saturating_sub(MAX_PHONE_CONNECTIONS);
+        open.drain(..excess);
+        (id, closed)
+    }
+
+    /// Forgets a phone connection registered with [`Session::connect_phone`].
+    pub fn disconnect_phone(&self, team: u32, id: u64) {
+        let mut phones = self.phones.lock().unwrap_or_else(PoisonError::into_inner);
+        if let Some(open) = phones.get_mut(&team) {
+            open.retain(|(other, _)| *other != id);
+        }
+    }
+
+    /// Waits until `team` may act again, so its actions run at most every [`TEAM_ACTION_GAP`].
+    pub async fn pace(&self, team: u32) {
+        let slot = {
+            let mut actions = self.actions.lock().unwrap_or_else(PoisonError::into_inner);
+            let now = Instant::now();
+            let slot = actions
+                .get(&team)
+                .map_or(now, |last| (*last + TEAM_ACTION_GAP).max(now));
+            actions.insert(team, slot);
+            slot
+        };
+        tokio::time::sleep_until(slot).await;
     }
 
     /// Whether this is an admin's test game.
@@ -300,6 +360,52 @@ mod tests {
             }],
             ..Quiz::new("q".to_owned(), "Saved".to_owned())
         }
+    }
+
+    fn session() -> Session {
+        Session::new(Game::new("123456".to_owned(), quiz()).unwrap(), true)
+    }
+
+    #[test]
+    fn a_new_phone_connection_closes_the_teams_oldest() {
+        let session = session();
+        let mut open: Vec<_> = (0..MAX_PHONE_CONNECTIONS)
+            .map(|_| session.connect_phone(1))
+            .collect();
+        // Another team's connections do not count.
+        let (_, mut other) = session.connect_phone(2);
+        for (_, closed) in &mut open {
+            assert_eq!(closed.try_recv(), Err(oneshot::error::TryRecvError::Empty));
+        }
+        let (newest, _newest_closed) = session.connect_phone(1);
+        assert_eq!(
+            open[0].1.try_recv(),
+            Err(oneshot::error::TryRecvError::Closed)
+        );
+        assert_eq!(
+            open[1].1.try_recv(),
+            Err(oneshot::error::TryRecvError::Empty)
+        );
+        assert_eq!(other.try_recv(), Err(oneshot::error::TryRecvError::Empty));
+        // A connection that ends makes room.
+        session.disconnect_phone(1, newest);
+        session.connect_phone(1);
+        assert_eq!(
+            open[1].1.try_recv(),
+            Err(oneshot::error::TryRecvError::Empty)
+        );
+    }
+
+    #[tokio::test(start_paused = true)]
+    async fn a_teams_actions_are_paced() {
+        let session = session();
+        let start = Instant::now();
+        session.pace(1).await;
+        session.pace(2).await;
+        assert_eq!(start.elapsed(), Duration::ZERO);
+        session.pace(1).await;
+        session.pace(1).await;
+        assert_eq!(start.elapsed(), TEAM_ACTION_GAP * 2);
     }
 
     #[tokio::test]
