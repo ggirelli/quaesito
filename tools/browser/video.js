@@ -14,6 +14,8 @@ const OUT = path.resolve(__dirname, '../../docs/media');
 const FRAMES = path.join(__dirname, 'out/frames');
 /** The videos' width: 1080p (the pages are recorded at a higher pixel density to fill it). */
 const WIDTH = 1920;
+/** The videos' frame rate. */
+const FPS = 30;
 /** Pause between a line's caption showing up and its voice, for the picture to sink in. */
 const LEAD_MS = 500;
 /** Pause after each spoken line. */
@@ -26,7 +28,9 @@ const lines = (name) => JSON.parse(fs.readFileSync(path.join(__dirname, 'narrati
  * Records the page with Chrome's screencast: every frame keeps the time it was painted, and the
  * video shows each one for exactly as long as it was on screen, so it runs on the same clock as
  * the narration. (Puppeteer's recorder stretched the video and dropped its end.)
- * `stop()` returns the first frame's time (ms since the epoch) and an ffmpeg concat list.
+ * `stop()` returns the first frame's time (ms since the epoch) and the frames at FPS, numbered for
+ * ffmpeg: each repeated until the next one was painted. (A concat list with each frame's duration
+ * gave frames under 1/25 s a whole 1/25 s, so the picture fell seconds behind the voice.)
  */
 async function record(page) {
   fs.rmSync(FRAMES, { recursive: true, force: true });
@@ -45,16 +49,14 @@ async function record(page) {
     async stop() {
       const end = Date.now();
       await cdp.send('Page.stopScreencast');
-      const list = [];
-      frames.forEach((frame, i) => {
-        const until = i + 1 < frames.length ? frames[i + 1].at : end;
-        list.push(`file '${frame.file}'`, `duration ${((until - frame.at) / 1000).toFixed(4)}`);
-      });
-      // The concat demuxer needs the last file listed again for its duration to count.
-      list.push(`file '${frames[frames.length - 1].file}'`);
-      const file = path.join(FRAMES, 'list.txt');
-      fs.writeFileSync(file, list.join('\n') + '\n');
-      return { origin: frames[0].at, list: file };
+      const seq = path.join(FRAMES, 'seq');
+      fs.mkdirSync(seq);
+      const origin = frames[0].at;
+      for (let k = 0, i = 0; origin + (k * 1000) / FPS < end; k++) {
+        while (i + 1 < frames.length && frames[i + 1].at <= origin + (k * 1000) / FPS) i++;
+        fs.symlinkSync(frames[i].file, path.join(seq, `${String(k).padStart(6, '0')}.jpg`));
+      }
+      return { origin, frames: path.join(seq, '%06d.jpg') };
     },
   };
 }
@@ -169,11 +171,11 @@ async function start(page, name, { bottom = false } = {}) {
      * seconds), captions (.vtt) and transcript (-transcript.md).
      */
     async finish(out, { posterAt = 9 } = {}) {
-      const { origin, list } = await recorder.stop();
+      const { origin, frames } = await recorder.stop();
       if (process.env.DRY) {
         // A silent draft, to look over.
         const draft = path.join(__dirname, 'out', `${out}-dry.mp4`);
-        execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', list, '-vf', `fps=10,scale=${WIDTH}:-2`,
+        execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-framerate', String(FPS), '-i', frames, '-vf', `fps=10,scale=${WIDTH}:-2`,
           '-c:v', 'libx264', '-preset', 'veryfast', '-pix_fmt', 'yuv420p', draft]);
         console.log('draft:', draft, cues.map((c) => `${c.id}@${c.at}`).join(' '));
         return;
@@ -184,7 +186,7 @@ async function start(page, name, { bottom = false } = {}) {
       for (const cue of cues) cue.at = Math.max(cue.at + shift, 0);
 
       // The voice-over: each line placed where its step started, mixed into one track.
-      const inputs = ['-f', 'concat', '-safe', '0', '-i', list];
+      const inputs = ['-framerate', String(FPS), '-i', frames];
       const filters = [];
       const tracks = [];
       cues.forEach((cue, k) => {
@@ -203,7 +205,7 @@ async function start(page, name, { bottom = false } = {}) {
       const mp4 = path.join(OUT, `${out}.mp4`);
       // H.264 and AAC in MP4: plays everywhere and stays small.
       execFileSync('ffmpeg', ['-loglevel', 'error', '-y', ...inputs, '-filter_complex', mix,
-        '-map', '0:v', '-map', '[voice]', '-vf', `fps=30,scale=${WIDTH}:-2`, '-c:v', 'libx264', '-preset', 'slow', '-crf', '30',
+        '-map', '0:v', '-map', '[voice]', '-vf', `scale=${WIDTH}:-2`, '-c:v', 'libx264', '-preset', 'slow', '-crf', '30',
         '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '96k', '-movflags', '+faststart', mp4]);
       execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-ss', String(posterAt), '-i', mp4, '-frames:v', '1',
         '-q:v', '80', path.join(OUT, `${out}-poster.webp`)]);

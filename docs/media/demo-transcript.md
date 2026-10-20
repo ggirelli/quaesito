@@ -1,7 +1,7 @@
 - **00:01** Welcome to quaesito! The questions go up on the TV, and every team answers right from their phone.
-- **00:07** Teams join by scanning the QR code, then pick a name and a picture. Easy peasy!
+- **00:08** Teams join by scanning the QR code, then pick a name and a picture. Easy peasy!
 - **00:14** Slides kick off each round. Let's go!
-- **00:18** First up, multiple choice! The faster you answer correctly, the more points you score.
+- **00:19** First up, multiple choice! The faster you answer correctly, the more points you score.
 - **00:26** True or false? Quick and snappy!
 - **00:31** Typed answers are grouped on the big screen, so the host can judge them in a flash, even with half points!
 - **00:39** How many keys on a piano? The closest guess wins!
@@ -10,5 +10,5 @@
 - **00:59** Drop a pin on the picture. The closer you get, the more you win!
 - **01:06** Any question can show a picture, as a clue or just for fun!
 - **01:12** Or add a soundtrack: the clock starts with the music. Which way does this tune go?
-- **01:21** And the winner is… drumroll, please!
-- **01:30** Best of all, quaesito is free and open source. Grab it, and host your own quiz night!
+- **01:22** And the winner is… drumroll, please!
+- **01:31** Best of all, quaesito is free and open source. Grab it, and host your own quiz night!
