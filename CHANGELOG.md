@@ -6,6 +6,11 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-10-20
+
+Ready for hosting on the internet: a deployment guide, Linux ARM64 downloads and hardening against guessing and
+uploads from strangers; plus reopening a question closed by mistake and closing the door to new teams.
+
 ### Added
 
 - **New teams can join** under **Teams** on the big screen: untick it once every team is in, so nobody else can join with
@@ -229,7 +234,8 @@ The first release: everything needed for a quiz night with friends.
 - **Downloads** for Linux, macOS (Apple silicon) and Windows with a start script, a documentation
   site with screenshots and a narrated demo video.
 
-[Unreleased]: https://github.com/ggirelli/quaesito/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/ggirelli/quaesito/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/ggirelli/quaesito/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/ggirelli/quaesito/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/ggirelli/quaesito/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/ggirelli/quaesito/compare/v0.2.0...v0.3.0
