@@ -1,7 +1,8 @@
 """Speaks the demo videos' narrations (narration/<video>.json), as cheerfully as it can.
 
-Writes out/voice/<video>/<id>.wav and out/voice/<video>/manifest.json (each line's duration in
-milliseconds), for every video or those named after the engine. A recording in
+Each sentence is spoken on its own and the sentences are joined with a pause, so the voice takes
+its time instead of rushing a whole line in one breath. Writes out/voice/<video>/<id>.wav and
+out/voice/<video>/manifest.json (each line's duration in milliseconds), for every video or those named after the engine. A recording in
 assets/voice/<id>.{wav,mp3,m4a,ogg,flac} (see planning/ASSETS.md) replaces the generated voice for
 that line. Run with uv, through `just demo-video`, which picks the engine:
 
@@ -42,6 +43,9 @@ TAKES = 4
 BLEND = {"af_nova": 0.5, "af_kore": 0.5}
 SPEED = 1.1
 
+# The pause between the sentences of a line, in seconds.
+PAUSE = 0.45
+
 # Quieter than this (relative to the loudest sample) counts as silence when trimming each line.
 SILENCE = 0.02
 
@@ -57,13 +61,15 @@ def chatterbox():
     model = ChatterboxTTS.from_pretrained(device=device)
     ear = WhisperModel("small.en", device="cpu", compute_type="int8")
 
-    def speak(line: dict) -> tuple[np.ndarray, int]:
-        words = spoken(line["text"])
+    def speak(line: dict, sentence: str) -> tuple[np.ndarray, int]:
+        # The sentence's words that the caption has too (not the name, spelled out for the voice).
+        known = set(spoken(line["text"]))
+        words = [word for word in spoken(sentence) if word in known]
         exaggeration = line.get("exaggeration", EXAGGERATION)
         best = None
         for take in range(TAKES):
             torch.manual_seed(SEED + take)
-            wav = model.generate(line["say"], exaggeration=exaggeration, cfg_weight=CFG_WEIGHT)
+            wav = model.generate(sentence, exaggeration=exaggeration, cfg_weight=CFG_WEIGHT)
             samples = wav.squeeze(0).cpu().numpy()
             for_ear = torchaudio.functional.resample(wav, model.sr, 16000).squeeze(0).cpu()
             heard, _ = ear.transcribe(for_ear.numpy(), beam_size=5)
@@ -87,8 +93,8 @@ def kokoro():
     model = Kokoro(str(models / "kokoro-v1.0.onnx"), str(models / "voices-v1.0.bin"))
     voice = sum(model.get_voice_style(name) * weight for name, weight in BLEND.items())
 
-    def speak(line: dict) -> tuple[np.ndarray, int]:
-        return model.create(line["say"], voice=voice, speed=SPEED, lang="en-us")
+    def speak(line: dict, sentence: str) -> tuple[np.ndarray, int]:
+        return model.create(sentence, voice=voice, speed=SPEED, lang="en-us")
 
     return speak
 
@@ -96,6 +102,24 @@ def kokoro():
 def spoken(text: str) -> list[str]:
     """The words of a line to listen for, leaving out the app's name (spelled out for the voice)."""
     return [word for word in re.findall(r"[a-z']+", text.lower()) if word != "quaesito"]
+
+
+def sentences(text: str) -> list[str]:
+    """A line's sentences ("And the winner is..." counts as one)."""
+    return [part for part in re.split(r"(?<=[.!?…])\s+", text.strip()) if part]
+
+
+def said(line: dict, speak) -> tuple[np.ndarray, int]:
+    """A line spoken a sentence at a time, with a pause between sentences."""
+    clips = []
+    for sentence in sentences(line["say"]):
+        samples, rate = speak(line, sentence)
+        clips.append(trimmed(samples, rate))
+    gap = np.zeros(round(PAUSE * rate), dtype=clips[0].dtype)
+    joined = [clips[0]]
+    for clip in clips[1:]:
+        joined += [gap, clip]
+    return np.concatenate(joined), rate
 
 
 def trimmed(samples: np.ndarray, rate: int) -> np.ndarray:
@@ -145,8 +169,7 @@ def narrate(video: str, speak, engine):
             print(f"{line['id']}: {manifest[line['id']]} ms (recorded: {source.name})")
             continue
         speak = speak or engine()
-        samples, rate = speak(line)
-        samples = trimmed(samples, rate)
+        samples, rate = said(line, speak)
         sf.write(out, samples, rate)
         manifest[line["id"]] = round(len(samples) / rate * 1000)
         print(f"{line['id']}: {manifest[line['id']]} ms ({engine.__name__})")

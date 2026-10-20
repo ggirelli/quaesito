@@ -12,8 +12,10 @@ const L = require('./lib.js');
 
 const OUT = path.resolve(__dirname, '../../docs/media');
 const FRAMES = path.join(__dirname, 'out/frames');
+/** Pause between a line's caption showing up and its voice, for the picture to sink in. */
+const LEAD_MS = 500;
 /** Pause after each spoken line. */
-const BREATH_MS = 600;
+const BREATH_MS = 1000;
 
 /** A narration's lines (narration/<name>.json). */
 const lines = (name) => JSON.parse(fs.readFileSync(path.join(__dirname, 'narration', `${name}.json`), 'utf8'));
@@ -139,10 +141,13 @@ async function start(page, name, { bottom = false } = {}) {
     durations,
     /** Milliseconds since recording started. */
     now: () => Date.now() - started,
-    /** Shows a line's caption, runs `actions`, and lasts at least as long as the line is spoken. */
+    /**
+     * Shows a line's caption, runs `actions`, and lasts at least as long as the line is spoken
+     * (it starts LEAD_MS after the caption) and a breath after.
+     */
     async step(id, actions = async () => {}, extraMs = 0) {
       const at = Date.now() - started;
-      cues.push({ id, at, ms: durations[id] });
+      cues.push({ id, at: at + LEAD_MS, ms: durations[id] });
       await caption(page, line(id).caption, bottom);
       try {
         await actions();
@@ -151,7 +156,7 @@ async function start(page, name, { bottom = false } = {}) {
         await page.screenshot({ path: path.join(__dirname, 'out', `failed-${id}.png`) });
         throw e;
       }
-      const left = at + durations[id] + BREATH_MS + extraMs - (Date.now() - started);
+      const left = at + LEAD_MS + durations[id] + BREATH_MS + extraMs - (Date.now() - started);
       if (left > 0) await L.sleep(left);
     },
     /** A sound the screencast cannot hear (say the big screen's music), mixed in at `at`. */
@@ -215,4 +220,4 @@ async function start(page, name, { bottom = false } = {}) {
   };
 }
 
-module.exports = { start, caption, pointer, click, byText };
+module.exports = { start, caption, pointer, click, byText, LEAD_MS };

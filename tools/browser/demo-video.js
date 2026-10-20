@@ -87,11 +87,11 @@ const TUNE = path.resolve(__dirname, '../../target/e2e/data/media', 'aaaaaaaaaaa
     }
   }, 2000);
   // Answers wait until the line is nearly spoken, so the picture stays up while it is talked about.
-  await step('picture', async () => { await next(Math.max(DURATIONS.picture - 300, 1200)); await tap(0, 0); await tap(1, 2); }, 1500);
+  await step('picture', async () => { await next(Math.max(V.LEAD_MS + DURATIONS.picture - 300, 1200)); await tap(0, 0); await tap(1, 2); }, 1500);
   // The question asks its riddle first; the music starts once the line is spoken.
   await step('music', async () => {
     await next(0);
-    await L.sleep(Math.max(DURATIONS.music - 1500, 0));
+    await L.sleep(Math.max(V.LEAD_MS + DURATIONS.music - 1500, 0));
     video.sound(TUNE, video.now());
     await next(3000);
     await tap(0, 0);
