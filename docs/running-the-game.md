@@ -31,6 +31,7 @@ under **Change your name or picture** on their phone.
 |---|---|
 | move on | the big button, ++arrow-right++, ++page-down++ or ++n++ (presentation clickers work) |
 | go back | ++arrow-left++, ++page-up++ or ++b++: the previous slide, results or podium step, or out of a question opened by mistake |
+| reopen a question closed by mistake | **↺ Reopen** on its results (go back to them first if you already moved on): the teams that had not answered get a fresh clock, answers already in stay |
 | pause | ++p++ or ⏸: the clock, the music and the automatic advance stop |
 | give more time | **+10 s** while a question is open |
 | rename or remove a team | **Teams** in the top bar |

@@ -10,6 +10,8 @@ All notable changes to quaesito are listed here. The format follows
 
 - **New teams can join** under **Teams** on the big screen: untick it once every team is in, so nobody else can join with
   the code. Teams already in can still reconnect.
+- **↺ Reopen** on a question's results on the big screen, for a question closed by mistake (say, by a double click on
+  the big button): the teams that had not answered get a fresh clock, and answers already in stay.
 - Linux ARM64 downloads, for ARM servers such as small cloud machines and single-board computers.
 - [Hosting on the internet](https://ggirelli.github.io/quaesito/deployment/): running quaesito on a Linux server
   behind Caddy for HTTPS, as a systemd service, with backups, a checklist and Oracle Cloud's free ARM machines. The
