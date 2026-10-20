@@ -6,6 +6,12 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+### Security
+
+- Guessing is slowed down for servers reachable from the internet: a client that enters ten wrong admin passwords, or
+  asks for thirty join codes no game has, waits five minutes. Calls from a team's phone no longer tell an unknown code
+  from an unknown team, so they cannot be used to find live games either.
+
 ## [0.5.0] - 2026-10-17
 
 A library of about 2,700 ready-made questions, team picture backgrounds and mascots, things shown with the answer,

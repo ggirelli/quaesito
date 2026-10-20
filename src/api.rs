@@ -21,13 +21,27 @@ use crate::{
     },
 };
 
-/// Exchanges the admin password for a session token.
-#[post("/api/admin/login")]
+/// Exchanges the admin password for a session token. A client that keeps getting it wrong has
+/// to wait.
+#[post("/api/admin/login", headers: dioxus::fullstack::HeaderMap)]
 pub async fn admin_login(password: String) -> ServerFnResult<String> {
-    crate::server::state()
-        .auth
-        .login(&password)
-        .ok_or_else(|| ServerFnError::new("Wrong password."))
+    let state = crate::server::state();
+    let (client, now) = (
+        crate::server::throttle::client(&headers),
+        std::time::Instant::now(),
+    );
+    if !state.logins.allows(client, now) {
+        return Err(HttpError::new(
+            StatusCode::TOO_MANY_REQUESTS,
+            "Too many wrong passwords: try again in a few minutes.",
+        )
+        .into());
+    }
+    state.auth.login(&password).ok_or_else(|| {
+        state.logins.fail(client, now);
+        dioxus::logger::tracing::warn!("wrong admin password");
+        ServerFnError::new("Wrong password.")
+    })
 }
 
 /// Whether an admin token is still valid (tokens do not survive restarts).
@@ -477,26 +491,61 @@ pub async fn join_origin(token: String, page_port: String) -> ServerFnResult<Str
 }
 
 /// Title of the quiz behind a join code, or `None` if no such session is live.
-#[post("/api/game/info")]
+#[post("/api/game/info", headers: dioxus::fullstack::HeaderMap)]
 pub async fn game_info(code: String) -> ServerFnResult<Option<String>> {
-    Ok(crate::server::state()
-        .sessions
-        .get(&code)
-        .map(|s| s.read(|g| g.title().to_owned())))
+    Ok(find_game(&headers, &code)?.map(|s| s.read(|g| g.title().to_owned())))
 }
 
 /// Registers a team in a session.
-#[post("/api/game/join")]
+#[post("/api/game/join", headers: dioxus::fullstack::HeaderMap)]
 pub async fn join_game(code: String, name: String) -> ServerFnResult<JoinTicket> {
-    let session = crate::server::state()
-        .sessions
-        .get(&code)
+    let session = find_game(&headers, &code)?
         .ok_or_else(|| ServerFnError::new("No game with this code is running."))?;
     let token = uuid::Uuid::new_v4().simple().to_string();
     let team_id = session
         .update(|g, _| g.join(&name, token.clone()))
         .map_err(|refusal| ServerFnError::new(refusal.0))?;
     Ok(JoinTicket { team_id, token })
+}
+
+/// The live game behind a join code typed in by a player. A client that keeps asking for codes
+/// no game has has to wait, so live games cannot be found by trying codes.
+#[cfg(feature = "server")]
+fn find_game(
+    headers: &dioxus::fullstack::HeaderMap,
+    code: &str,
+) -> Result<Option<std::sync::Arc<crate::server::sessions::Session>>, ServerFnError> {
+    let state = crate::server::state();
+    let (client, now) = (
+        crate::server::throttle::client(headers),
+        std::time::Instant::now(),
+    );
+    if !state.join_codes.allows(client, now) {
+        return Err(HttpError::new(
+            StatusCode::TOO_MANY_REQUESTS,
+            "Too many unknown codes: try again in a few minutes.",
+        )
+        .into());
+    }
+    let session = state.sessions.get(code);
+    if session.is_none() {
+        state.join_codes.fail(client, now);
+    }
+    Ok(session)
+}
+
+/// The game and team behind a phone's ticket. An unknown code gets the same answer as an
+/// unknown ticket, so these calls do not tell which codes are live either.
+#[cfg(feature = "server")]
+fn my_team(
+    code: &str,
+    token: &str,
+) -> Result<(std::sync::Arc<crate::server::sessions::Session>, u32), ServerFnError> {
+    crate::server::state()
+        .sessions
+        .get(code)
+        .and_then(|session| Some((session.clone(), session.read(|g| g.team_for_token(token))?)))
+        .ok_or_else(|| ServerFnError::new("Your team is not in a running game."))
 }
 
 /// Whether a stored ticket still belongs to a team in the session.
@@ -516,13 +565,8 @@ pub async fn upload_avatar(
     file: FileStream,
 ) -> ServerFnResult<String> {
     let state = crate::server::state();
-    let session = state
-        .sessions
-        .get(&code)
-        .ok_or_else(|| ServerFnError::new("No game with this code is running."))?;
-    let (team, pictures) = session.read(|g| (g.team_for_token(&token), g.pictures()));
-    let team = team.ok_or_else(|| ServerFnError::new("Unknown team."))?;
-    if !pictures {
+    let (session, team) = my_team(&code, &token)?;
+    if !session.read(crate::server::engine::Game::pictures) {
         return Err(ServerFnError::new("This game does not take team pictures."));
     }
     let bytes = crate::server::media::read_upload(file, state.limits.picture).await?;
@@ -540,13 +584,8 @@ pub async fn upload_avatar(
 /// another team (ignoring case) are refused.
 #[post("/api/game/rename")]
 pub async fn rename_my_team(code: String, token: String, name: String) -> ServerFnResult<()> {
-    let session = crate::server::state()
-        .sessions
-        .get(&code)
-        .ok_or_else(|| ServerFnError::new("No game with this code is running."))?;
-    let (team, lobby) = session.read(|g| (g.team_for_token(&token), g.in_lobby()));
-    let team = team.ok_or_else(|| ServerFnError::new("Unknown team."))?;
-    if !lobby {
+    let (session, team) = my_team(&code, &token)?;
+    if !session.read(crate::server::engine::Game::in_lobby) {
         return Err(ServerFnError::new(
             "The quiz has started: ask the host to rename your team.",
         ));
@@ -563,13 +602,7 @@ pub async fn set_team_mascot(
     token: String,
     mascot: Option<String>,
 ) -> ServerFnResult<()> {
-    let session = crate::server::state()
-        .sessions
-        .get(&code)
-        .ok_or_else(|| ServerFnError::new("No game with this code is running."))?;
-    let team = session
-        .read(|g| g.team_for_token(&token))
-        .ok_or_else(|| ServerFnError::new("Unknown team."))?;
+    let (session, team) = my_team(&code, &token)?;
     session
         .update(|g, _| g.set_mascot(team, mascot))
         .map_err(|refusal| ServerFnError::new(refusal.0))
@@ -583,13 +616,7 @@ pub async fn set_team_backdrop(
     token: String,
     backdrop: Option<u8>,
 ) -> ServerFnResult<()> {
-    let session = crate::server::state()
-        .sessions
-        .get(&code)
-        .ok_or_else(|| ServerFnError::new("No game with this code is running."))?;
-    let team = session
-        .read(|g| g.team_for_token(&token))
-        .ok_or_else(|| ServerFnError::new("Unknown team."))?;
+    let (session, team) = my_team(&code, &token)?;
     session
         .update(|g, _| g.set_backdrop(team, backdrop))
         .map_err(|refusal| ServerFnError::new(refusal.0))
@@ -618,12 +645,6 @@ pub async fn player_socket(
     token: String,
     options: WebSocketOptions,
 ) -> ServerFnResult<Websocket<PlayerCommand, PlayerView>> {
-    let session = crate::server::state()
-        .sessions
-        .get(&code)
-        .ok_or_else(|| ServerFnError::new("This game is not running anymore."))?;
-    let team = session
-        .read(|g| g.team_for_token(&token))
-        .ok_or_else(|| ServerFnError::new("Unknown team."))?;
+    let (session, team) = my_team(&code, &token)?;
     Ok(options.on_upgrade(move |socket| crate::server::live::player(socket, session, team)))
 }

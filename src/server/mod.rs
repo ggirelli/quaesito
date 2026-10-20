@@ -12,6 +12,7 @@ pub mod media;
 pub mod net;
 pub mod sessions;
 pub mod store;
+pub mod throttle;
 
 use std::{collections::HashSet, path::PathBuf, sync::OnceLock, time::Duration};
 
@@ -28,7 +29,9 @@ use dioxus::fullstack::{
 
 use tower_http::set_header::SetResponseHeaderLayer;
 
-use self::{auth::Auth, media::MediaStore, sessions::Sessions, store::QuizStore};
+use self::{
+    auth::Auth, media::MediaStore, sessions::Sessions, store::QuizStore, throttle::Throttle,
+};
 use crate::model::{ImportOutcome, ImportProgress, Quiz};
 
 /// Everything the server keeps for its lifetime.
@@ -43,7 +46,18 @@ pub struct AppState {
     pub library_topics: library::AddedTopics,
     /// The largest uploads accepted.
     pub limits: crate::protocol::UploadLimits,
+    /// Wrong admin passwords.
+    pub logins: Throttle,
+    /// Join codes asked for that no game has.
+    pub join_codes: Throttle,
 }
+
+/// Wrong admin passwords allowed per client and [`GUESS_WINDOW`].
+const MAX_WRONG_PASSWORDS: u32 = 10;
+/// Unknown join codes allowed per client and [`GUESS_WINDOW`]: a mistyped code is rare, while
+/// finding a live game among the million codes takes hundreds of thousands of tries.
+const MAX_UNKNOWN_CODES: u32 = 30;
+const GUESS_WINDOW: Duration = Duration::from_mins(5);
 
 static STATE: OnceLock<AppState> = OnceLock::new();
 
@@ -77,6 +91,8 @@ pub async fn init() -> anyhow::Result<()> {
         .await?,
         library_topics: library::AddedTopics::open(data_dir.join("library-topics.json")).await?,
         limits: media::limits_from_env(),
+        logins: Throttle::new(MAX_WRONG_PASSWORDS, GUESS_WINDOW),
+        join_codes: Throttle::new(MAX_UNKNOWN_CODES, GUESS_WINDOW),
     };
     if let Err(err) = demo::add_once(&data_dir, &state.quizzes, &state.media).await {
         dioxus::logger::tracing::warn!("adding the demo quiz: {err:#}");
