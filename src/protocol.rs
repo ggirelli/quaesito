@@ -392,6 +392,8 @@ pub enum HostCommand {
     },
     /// Go back to the previous slide, reveal or podium step.
     Back,
+    /// Reopen the closed question on screen for the teams that have not answered yet.
+    Reopen,
     /// Pause or resume the clock and auto-advance.
     TogglePause,
     /// Give the open question this many more seconds.

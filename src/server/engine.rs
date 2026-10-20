@@ -7,7 +7,9 @@
 //! ```
 //!
 //! The host can pause (freezing the clock and auto-advance), add time to an open question, and
-//! go back: to the previous slide or reveal, or out of a question opened by mistake.
+//! go back: to the previous slide or reveal, or out of a question opened by mistake. A closed
+//! question can be reopened for the teams that have not answered yet, when it was closed by
+//! mistake.
 //!
 //! When the quiz has a Wi-Fi slide, the game opens on it, before the join code; teams may already
 //! join there.
@@ -744,6 +746,23 @@ impl Game {
                 RevealMode::AfterEachQuestion => self.revisit(last, now),
             },
         };
+        Ok(())
+    }
+
+    /// Reopens the closed question on screen for the teams that have not answered, with a fresh
+    /// clock; answers already in stay. For a question closed early by mistake.
+    ///
+    /// # Errors
+    /// Refuses when no closed question is on screen, or when every team has answered.
+    pub fn reopen(&mut self, now: Instant) -> Result<(), Refusal> {
+        let Phase::Closed { index, .. } = self.phase else {
+            return Err(Refusal("No closed question is on screen."));
+        };
+        if self.teams.iter().all(|t| t.submissions[index].is_some()) {
+            return Err(Refusal("Every team has answered."));
+        }
+        self.resume(now);
+        self.phase = self.open_question(index, now);
         Ok(())
     }
 
@@ -2594,6 +2613,58 @@ mod tests {
         assert!(matches!(
             g.host_view(t0).phase,
             HostPhase::Closed { question, .. } if question.index == 1
+        ));
+    }
+
+    #[test]
+    fn a_question_closed_by_mistake_can_be_reopened() {
+        let t0 = Instant::now();
+        let mut g = game(QuizSettings::default());
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        g.set_connected(owls, true);
+        g.set_connected(cats, true);
+        assert!(g.reopen(t0).is_err());
+        g.next(t0).unwrap();
+        g.answer(owls, pick(&[0]), false, t0 + Duration::from_millis(500))
+            .unwrap();
+        // A double click closes question one and opens question two.
+        g.next(t0 + secs(3)).unwrap();
+        g.next(t0 + secs(3)).unwrap();
+        assert!(g.reopen(t0 + secs(3)).is_err());
+        g.back(t0 + secs(4)).unwrap();
+        g.reopen(t0 + secs(5)).unwrap();
+        let HostPhase::Question {
+            question,
+            remaining_ms,
+            answered,
+            ..
+        } = g.host_view(t0 + secs(5)).phase
+        else {
+            panic!("expected the question open again");
+        };
+        assert_eq!((question.index, answered), (0, 1));
+        assert_eq!(remaining_ms, 10_000);
+        assert!(g.answer(owls, pick(&[1]), false, t0 + secs(6)).is_err());
+        g.answer(cats, pick(&[0]), false, t0 + secs(6)).unwrap();
+        // Everyone is in: closed again, the Owls keeping their answer time.
+        let HostPhase::Closed {
+            fastest, answered, ..
+        } = g.host_view(t0 + secs(6)).phase
+        else {
+            panic!("expected results");
+        };
+        assert_eq!(answered, 2);
+        assert_eq!(
+            fastest.map(|f| (f.team, f.answer_ms)),
+            Some(("Owls".to_owned(), 500))
+        );
+        assert!(g.reopen(t0 + secs(7)).is_err());
+        // Going forward asks question two afresh, as it was withdrawn.
+        g.next(t0 + secs(7)).unwrap();
+        assert!(matches!(
+            g.host_view(t0 + secs(7)).phase,
+            HostPhase::Question { answered: 0, .. }
         ));
     }
 

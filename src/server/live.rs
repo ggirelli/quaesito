@@ -31,6 +31,9 @@ pub async fn host(mut socket: TypedWebsocket<HostCommand, HostView>, session: Ar
                 Ok(HostCommand::Back) => {
                     let _ = session.update(Game::back);
                 }
+                Ok(HostCommand::Reopen) => {
+                    let _ = session.update(Game::reopen);
+                }
                 Ok(HostCommand::TogglePause) => {
                     let _ = session.update(|g, now| {
                         if g.is_paused() {

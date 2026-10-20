@@ -111,6 +111,8 @@ fn HostScreen(code: String) -> Element {
         HostPhase::Network { .. } | HostPhase::Lobby { .. } | HostPhase::Ready { .. }
     );
     let question_open = matches!(view.phase, HostPhase::Question { .. });
+    let can_reopen =
+        matches!(view.phase, HostPhase::Closed { answered, .. } if answered < view.teams.len());
 
     rsx! {
         div {
@@ -249,6 +251,14 @@ fn HostScreen(code: String) -> Element {
                         disabled: view.phase.is_start(),
                         onclick: move |_| send(HostCommand::Back),
                         "◀ Back"
+                    }
+                    if can_reopen {
+                        button {
+                            class: "button ghost",
+                            title: "Open this question again for the teams that have not answered",
+                            onclick: move |_| send(HostCommand::Reopen),
+                            "↺ Reopen"
+                        }
                     }
                     if can_pause {
                         button {
