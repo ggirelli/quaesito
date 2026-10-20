@@ -296,9 +296,10 @@ fn content_type(name: &str) -> Option<&'static str> {
 /// Axum handler for `GET /media/{name}`.
 ///
 /// Honours single byte ranges so browsers can seek in soundtracks and videos, reading only the
-/// slice asked for; open-ended ranges get at most [`MAX_SLICE_BYTES`] at a time.
+/// slice asked for; open-ended ranges get at most [`MAX_SLICE_BYTES`] at a time. Files are
+/// streamed, so big videos asked for many times at once do not fill the memory.
 pub async fn serve(Path(name): Path<String>, headers: HeaderMap) -> Response {
-    use tokio::io::{AsyncReadExt, AsyncSeekExt};
+    use tokio::io::AsyncSeekExt;
 
     let Some((mut file, len, content_type)) = super::state().media.open_file(&name).await else {
         return StatusCode::NOT_FOUND.into_response();
@@ -315,11 +316,12 @@ pub async fn serve(Path(name): Path<String>, headers: HeaderMap) -> Response {
         .get(header::RANGE)
         .and_then(|value| value.to_str().ok());
     let Some(range) = range else {
-        let mut data = Vec::new();
-        return match file.read_to_end(&mut data).await {
-            Ok(_) => (common, Body::from(data)).into_response(),
-            Err(_) => StatusCode::INTERNAL_SERVER_ERROR.into_response(),
-        };
+        return (
+            common,
+            [(header::CONTENT_LENGTH, len.to_string())],
+            stream(file, len),
+        )
+            .into_response();
     };
     let Some((start, end)) = byte_range(range, len) else {
         return (
@@ -328,18 +330,41 @@ pub async fn serve(Path(name): Path<String>, headers: HeaderMap) -> Response {
         )
             .into_response();
     };
-    let mut data = vec![0; usize::try_from(end - start + 1).unwrap_or(0)];
-    if file.seek(SeekFrom::Start(start)).await.is_err() || file.read_exact(&mut data).await.is_err()
-    {
+    if file.seek(SeekFrom::Start(start)).await.is_err() {
         return StatusCode::INTERNAL_SERVER_ERROR.into_response();
     }
+    let slice = end - start + 1;
     (
         StatusCode::PARTIAL_CONTENT,
         common,
-        [(header::CONTENT_RANGE, format!("bytes {start}-{end}/{len}"))],
-        Body::from(data),
+        [
+            (header::CONTENT_RANGE, format!("bytes {start}-{end}/{len}")),
+            (header::CONTENT_LENGTH, slice.to_string()),
+        ],
+        stream(file, slice),
     )
         .into_response()
+}
+
+/// The next `len` bytes of `file`, read as they are sent.
+fn stream(file: tokio::fs::File, len: u64) -> Body {
+    use tokio::io::AsyncReadExt;
+
+    const CHUNK_BYTES: usize = 64 * 1024;
+    let chunks = futures_util::stream::unfold(Some(file.take(len)), |file| async move {
+        let mut file = file?;
+        let mut chunk = vec![0; CHUNK_BYTES];
+        match file.read(&mut chunk).await {
+            Ok(0) => None,
+            Ok(n) => {
+                chunk.truncate(n);
+                Some((Ok(chunk), Some(file)))
+            }
+            // Ends the body after the error.
+            Err(err) => Some((Err(err), None)),
+        }
+    });
+    Body::from_stream(chunks)
 }
 
 /// Parses a single `bytes=` range into inclusive bounds within a body of `len` bytes. An

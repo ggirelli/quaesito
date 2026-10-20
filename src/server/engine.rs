@@ -80,6 +80,9 @@ pub struct Snapshot {
     /// Whether teams may upload a picture.
     #[serde(default = "yes")]
     pictures: bool,
+    /// Whether new teams may join.
+    #[serde(default = "yes")]
+    joining: bool,
     phase: SavedPhase,
     judgements: Vec<HashMap<String, Judgement>>,
     played: Vec<bool>,
@@ -133,6 +136,8 @@ pub struct Game {
     max_teams: usize,
     /// Whether teams may upload a picture.
     pictures: bool,
+    /// Whether new teams may join: the host closes joining once every team is in.
+    joining: bool,
     phase: Phase,
     /// Per question: the judge's amendments to typed answers, by normalised text.
     judgements: Vec<HashMap<String, Judgement>>,
@@ -254,6 +259,7 @@ impl Game {
             next_team_id: 1,
             max_teams: DEFAULT_MAX_TEAMS,
             pictures: true,
+            joining: true,
             phase,
             judgements: vec![HashMap::new(); quiz_len],
             played: vec![false; quiz_len],
@@ -297,6 +303,7 @@ impl Game {
             next_team_id: self.next_team_id,
             max_teams: self.max_teams,
             pictures: self.pictures,
+            joining: self.joining,
             phase: match self.phase {
                 Phase::Network => SavedPhase::Network,
                 Phase::Lobby => SavedPhase::Lobby,
@@ -354,6 +361,7 @@ impl Game {
             next_team_id: snapshot.next_team_id,
             max_teams: snapshot.max_teams,
             pictures: snapshot.pictures,
+            joining: snapshot.joining,
             phase,
             judgements: snapshot.judgements,
             played: snapshot.played,
@@ -426,6 +434,9 @@ impl Game {
     /// Refuses empty, overlong or duplicate names, and joining a full or finished game.
     pub fn join(&mut self, name: &str, token: String) -> Result<u32, Refusal> {
         let name = self.check_name(name, None)?;
+        if !self.joining {
+            return Err(Refusal("This game is not taking new teams: ask the host."));
+        }
         if self.teams.len() >= self.max_teams {
             return Err(Refusal("This game is full."));
         }
@@ -513,7 +524,10 @@ impl Game {
     /// The team owning a reconnect token.
     #[must_use]
     pub fn team_for_token(&self, token: &str) -> Option<u32> {
-        self.teams.iter().find(|t| t.token == token).map(|t| t.id)
+        self.teams
+            .iter()
+            .find(|t| super::auth::constant_time_eq(t.token.as_bytes(), token.as_bytes()))
+            .map(|t| t.id)
     }
 
     /// Lets teams upload a picture, or not (they still pick a background for their initial).
@@ -525,6 +539,12 @@ impl Game {
                 team.avatar = None;
             }
         }
+    }
+
+    /// Opens or closes the game to new teams. Teams already in stay, and their phones can still
+    /// reconnect.
+    pub fn set_joining(&mut self, joining: bool) {
+        self.joining = joining;
     }
 
     /// Whether the game is still waiting in the lobby (or on the Wi-Fi slide before it).
@@ -1063,6 +1083,7 @@ impl Game {
             teams: self.teams.iter().map(Team::info).collect(),
             max_teams: self.max_teams,
             pictures: self.pictures,
+            joining: self.joining,
             paused: self.paused_at.is_some(),
             speed_points: self.quiz.settings.points == PointsMode::Speed,
             auto_advance_ms: match self.phase {
@@ -2300,6 +2321,21 @@ mod tests {
     }
 
     #[test]
+    fn the_host_can_close_joining() {
+        let t0 = Instant::now();
+        let mut g = game(QuizSettings::default());
+        let owls = join(&mut g, "Owls");
+        g.set_joining(false);
+        assert!(!g.host_view(t0).joining);
+        assert!(g.join("Cats", "token-cats".to_owned()).is_err());
+        assert_eq!(g.team_for_token("token-Owls"), Some(owls));
+        let mut restored = Game::restore(g.snapshot(t0), t0);
+        assert!(restored.join("Cats", "token-cats".to_owned()).is_err());
+        g.set_joining(true);
+        join(&mut g, "Cats");
+    }
+
+    #[test]
     fn team_pictures_can_be_turned_off_and_backdrops_picked() {
         let t0 = Instant::now();
         let mut g = game(QuizSettings::default());
@@ -2821,6 +2857,16 @@ mod tests {
             results.to_csv(),
             "Rank,Team,Total,one,two\r\n1,Owls,2000,2000,\r\n2,\"Cats, \"\"the\"\"\",1000,0,1000\r\n"
         );
+    }
+
+    #[test]
+    fn team_names_cannot_be_spreadsheet_formulas() {
+        let mut g = game(QuizSettings::default());
+        join(&mut g, "=HYPERLINK(\"x\")");
+        join(&mut g, "-1+2");
+        let csv = g.results().to_csv();
+        assert!(csv.contains(",\"'=HYPERLINK(\"\"x\"\")\","), "{csv}");
+        assert!(csv.contains(",'-1+2,"), "{csv}");
     }
 
     #[test]

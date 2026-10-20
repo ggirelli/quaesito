@@ -31,13 +31,16 @@ See [question types](https://ggirelli.github.io/quaesito/question-types/) and [q
 
 ## Get started
 
-1. Download the archive for your system (Windows, macOS on Apple silicon, Linux) from the
+1. Download the archive for your system (Windows, macOS on Apple silicon, Linux on x86-64 or ARM64) from the
    [latest release](https://github.com/ggirelli/quaesito/releases/latest) and unpack it.
 2. Double-click `start.bat` (Windows) or `start.command` (macOS), or run `./start.sh` (Linux).
 3. Your browser opens quaesito. Log in with the admin password shown in the server window, and try the **Demo quiz**.
 
 The [getting started guide](https://ggirelli.github.io/quaesito/getting-started/) covers the details, and the user guide also ships with the app
 (**Help** in the admin pages).
+
+To let teams join from anywhere, run it on a small Linux server (x86-64 or ARM64) behind HTTPS: see
+[hosting on the internet](https://ggirelli.github.io/quaesito/deployment/).
 
 ## Development
 

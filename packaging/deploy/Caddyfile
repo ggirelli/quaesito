@@ -1,0 +1,8 @@
+# Caddy in front of quaesito: copy to /etc/caddy/Caddyfile and put your hostname below.
+# Caddy gets and renews the HTTPS certificate itself, redirects HTTP to HTTPS, passes
+# WebSockets through, and sets X-Forwarded-For to the connecting address (which quaesito
+# uses to slow down password and join code guessing).
+quiz.example.com {
+	encode zstd gzip
+	reverse_proxy 127.0.0.1:8080
+}

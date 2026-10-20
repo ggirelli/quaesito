@@ -66,6 +66,7 @@ nav:
       - After the game: after-the-game.md
       - Troubleshooting: troubleshooting.md
       - Configuration: configuration.md
+      - Hosting on the internet: deployment.md
       - Quiz file format: quiz-file-format.md
   - Demo videos: demo.md
   - Development: development.md

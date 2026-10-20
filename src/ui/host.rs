@@ -172,6 +172,7 @@ fn HostScreen(code: String) -> Element {
                 TeamsPanel {
                     teams: view.teams.clone(),
                     pictures: view.pictures,
+                    joining: view.joining,
                     on_close: move |()| show_teams.set(false),
                 }
             }
@@ -466,8 +467,16 @@ fn file_stem(title: &str) -> String {
 
 /// The host's team manager: rename or remove teams.
 #[component]
-fn TeamsPanel(teams: Vec<TeamInfo>, pictures: bool, on_close: EventHandler<()>) -> Element {
+fn TeamsPanel(
+    teams: Vec<TeamInfo>,
+    pictures: bool,
+    joining: bool,
+    on_close: EventHandler<()>,
+) -> Element {
     let live: Live<HostCommand, HostView> = use_context();
+    let set_joining = move |e: FormEvent| async move {
+        let _ = live.socket.send(HostCommand::SetJoining(e.checked())).await;
+    };
     let set_pictures = move |e: FormEvent| async move {
         let _ = live
             .socket
@@ -493,6 +502,21 @@ fn TeamsPanel(teams: Vec<TeamInfo>, pictures: bool, on_close: EventHandler<()>) 
                 div { class: "row between",
                     h2 { "Teams" }
                     button { class: "button ghost", onclick: move |_| on_close.call(()), "Close" }
+                }
+                label { class: "check-field",
+                    input {
+                        r#type: "checkbox",
+                        checked: joining,
+                        onchange: set_joining,
+                    }
+                    span { "New teams can join" }
+                }
+                p { class: "muted small",
+                    if joining {
+                        "Untick once every team is in, so nobody else can join with the code."
+                    } else {
+                        "Nobody else can join. Teams already in can still reconnect."
+                    }
                 }
                 label { class: "check-field",
                     input {
@@ -769,7 +793,7 @@ fn Soundtrack(name: String, started_at: Option<f64>, seek: bool, paused: bool) -
 fn Lobby(code: String, teams: Vec<TeamInfo>, max_teams: usize) -> Element {
     let token: AdminToken = use_context();
     let origin = use_resource(move || async move {
-        join_origin(token.get(), client::page_port())
+        join_origin(token.get(), client::page_origin(), client::page_port())
             .await
             .unwrap_or_else(|_| client::page_origin())
     });

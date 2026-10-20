@@ -660,9 +660,10 @@ fn StartDialog(id: String, on_close: EventHandler<()>) -> Element {
                     span { "Teams can add a picture" }
                 }
                 p { class: "muted small",
-                    "Teams upload a picture from their phone in the lobby. Turn it off to keep "
-                    "the big screen free of surprises: teams then show their initial on the "
-                    "background they pick."
+                    "Teams upload a picture from their phone in the lobby, if the phone is on "
+                    "this network (not over the internet). Turn it off to keep the big screen "
+                    "free of surprises: teams then show their initial on the background they "
+                    "pick."
                 }
                 ErrorBox { error: error() }
                 button { r#type: "submit", class: "button primary big", "▶ Start" }

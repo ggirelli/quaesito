@@ -54,6 +54,9 @@ pub async fn host(mut socket: TypedWebsocket<HostCommand, HostView>, session: Ar
                 Ok(HostCommand::SetPictures(pictures)) => {
                     session.update(|g, _| g.set_pictures(pictures));
                 }
+                Ok(HostCommand::SetJoining(joining)) => {
+                    session.update(|g, _| g.set_joining(joining));
+                }
                 Err(_) => return,
             },
         }
@@ -66,6 +69,9 @@ pub async fn player(
     session: Arc<Session>,
     team: u32,
 ) {
+    // Connecting also sends every screen a new view.
+    session.pace(team).await;
+    let (phone, mut closed) = session.connect_phone(team);
     session.update(|g, _| g.set_connected(team, true));
     let mut updates = session.subscribe();
     while let Some(view) = session.read(|g| g.player_view(team, std::time::Instant::now())) {
@@ -74,8 +80,11 @@ pub async fn player(
         }
         tokio::select! {
             changed = updates.changed() => if changed.is_err() { break },
+            // The team opened too many connections: this, its oldest, closes.
+            _ = &mut closed => break,
             command = socket.recv() => match command {
                 Ok(PlayerCommand::Answer { response, joker, bonus }) => {
+                    session.pace(team).await;
                     // Refusals (late or duplicate answers) are reflected by the next view.
                     let _ = session.update(|g, now| {
                         g.answer_with_bonus(team, response, joker, bonus, now)
@@ -85,5 +94,6 @@ pub async fn player(
             },
         }
     }
+    session.disconnect_phone(team, phone);
     session.update(|g, _| g.set_connected(team, false));
 }

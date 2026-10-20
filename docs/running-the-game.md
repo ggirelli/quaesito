@@ -3,7 +3,8 @@
 Press **▶ Start** next to a quiz, choose how many teams may join, and start. Tick **Shuffle the
 answers** to play the multiple-choice answers in a new order, for this game only: the saved quiz
 keeps its own. Untick **Teams can add a picture** to keep uploads off the big screen: teams then
-pick one of the 16 ready-made pictures, or show their initial. Put the big screen on the TV, full screen with ++f11++. Teams scan the QR code, or open the address shown and type
+pick one of the 16 ready-made pictures, or show their initial. Only phones on the same network as
+quaesito can upload a picture: phones joining over the internet always pick a ready-made one. Put the big screen on the TV, full screen with ++f11++. Teams scan the QR code, or open the address shown and type
 the game code, then pick a name, a picture (their own, or one of 16 ready-made mascots) and a
 background for it: a colour or a gradient, which shows behind their initial and through the
 see-through parts of a picture (the mascots, or a PNG with a transparent background). The mascots'
@@ -33,6 +34,7 @@ under **Change your name or picture** on their phone.
 | pause | ++p++ or ⏸: the clock, the music and the automatic advance stop |
 | give more time | **+10 s** while a question is open |
 | rename or remove a team | **Teams** in the top bar |
+| stop new teams joining | **Teams** in the top bar: untick **New teams can join** once every team is in; teams already in can still reconnect |
 | go back to the admin page | :material-cog: in the top bar |
 | turn uploaded team pictures on or off | **Teams** in the top bar: turning them off removes those already uploaded; ready-made pictures and backgrounds stay |
 | mute sound effects | :material-volume-high: in the top bar |

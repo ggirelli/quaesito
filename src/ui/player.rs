@@ -13,8 +13,8 @@ use super::{
 };
 use crate::{
     api::{
-        check_ticket, game_info, join_game, player_socket, rename_my_team, set_team_backdrop,
-        set_team_mascot, upload_avatar,
+        check_ticket, game_info, join_game, pictures_from_here, player_socket, rename_my_team,
+        set_team_backdrop, set_team_mascot, upload_avatar,
     },
     model::{MAX_TEXT_ANSWER_CHARS, NumberRange, PhoneDisplay, Point},
     protocol::{
@@ -557,6 +557,9 @@ fn LobbyView(
     /// Whether the game takes team pictures.
     pictures: bool,
 ) -> Element {
+    // Only phones on the quiz's own network may upload one; others still pick a ready-made one.
+    let from_here = use_resource(|| async { pictures_from_here().await.unwrap_or(false) });
+    let pictures = pictures && from_here().unwrap_or(false);
     let code = use_signal(|| code);
     let token = use_signal(|| token);
     let mut uploading = use_signal(|| false);

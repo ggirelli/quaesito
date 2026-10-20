@@ -10,8 +10,10 @@ pub mod live;
 pub mod matching;
 pub mod media;
 pub mod net;
+pub mod peer;
 pub mod sessions;
 pub mod store;
+pub mod throttle;
 
 use std::{collections::HashSet, path::PathBuf, sync::OnceLock, time::Duration};
 
@@ -20,7 +22,7 @@ use dioxus::fullstack::{
         Router,
         body::Body,
         extract::{Path, Query},
-        http::{HeaderValue, StatusCode, header},
+        http::{Extensions, HeaderMap, HeaderValue, StatusCode, header},
         response::{IntoResponse, Response},
     },
     routing::{get, post},
@@ -28,7 +30,9 @@ use dioxus::fullstack::{
 
 use tower_http::set_header::SetResponseHeaderLayer;
 
-use self::{auth::Auth, media::MediaStore, sessions::Sessions, store::QuizStore};
+use self::{
+    auth::Auth, media::MediaStore, sessions::Sessions, store::QuizStore, throttle::Throttle,
+};
 use crate::model::{ImportOutcome, ImportProgress, Quiz};
 
 /// Everything the server keeps for its lifetime.
@@ -43,7 +47,18 @@ pub struct AppState {
     pub library_topics: library::AddedTopics,
     /// The largest uploads accepted.
     pub limits: crate::protocol::UploadLimits,
+    /// Wrong admin passwords.
+    pub logins: Throttle,
+    /// Join codes asked for that no game has.
+    pub join_codes: Throttle,
 }
+
+/// Wrong admin passwords allowed per client and [`GUESS_WINDOW`].
+const MAX_WRONG_PASSWORDS: u32 = 10;
+/// Unknown join codes allowed per client and [`GUESS_WINDOW`]: a mistyped code is rare, while
+/// finding a live game among the million codes takes hundreds of thousands of tries.
+const MAX_UNKNOWN_CODES: u32 = 30;
+const GUESS_WINDOW: Duration = Duration::from_mins(5);
 
 static STATE: OnceLock<AppState> = OnceLock::new();
 
@@ -77,6 +92,8 @@ pub async fn init() -> anyhow::Result<()> {
         .await?,
         library_topics: library::AddedTopics::open(data_dir.join("library-topics.json")).await?,
         limits: media::limits_from_env(),
+        logins: Throttle::new(MAX_WRONG_PASSWORDS, GUESS_WINDOW),
+        join_codes: Throttle::new(MAX_UNKNOWN_CODES, GUESS_WINDOW),
     };
     if let Err(err) = demo::add_once(&data_dir, &state.quizzes, &state.media).await {
         dioxus::logger::tracing::warn!("adding the demo quiz: {err:#}");
@@ -99,7 +116,7 @@ fn print_banner(auth: &Auth) {
     let phones = if ip.starts_with("127.") || ip == "localhost" {
         format!("not reachable: listening on {ip} only (set IP=0.0.0.0)")
     } else {
-        net::join_origin(&port)
+        net::join_origin("", &port)
     };
     let password = auth.generated_password().map_or_else(
         || "the one in QUAESITO_ADMIN_PASSWORD".to_owned(),
@@ -144,9 +161,10 @@ async fn clean_up_media() {
 
 /// Only quaesito itself may serve what its pages load (scripts, styles, fonts, pictures, sounds,
 /// connections): the app works without internet and sends nothing to third parties. Inline code
-/// and `eval` stay allowed for Dioxus and the user guide.
+/// and `eval` stay allowed for Dioxus and the user guide. Only quaesito's own pages may show its
+/// pages in a frame (as the test game does), so another site cannot trick an admin into clicks.
 const CONTENT_SECURITY_POLICY: &str = "default-src 'self' 'unsafe-inline' 'unsafe-eval' \
-    'wasm-unsafe-eval' data: blob:; connect-src 'self' ws: wss:";
+    'wasm-unsafe-eval' data: blob:; connect-src 'self' ws: wss:; frame-ancestors 'self'";
 
 /// Adds the content security policy to every response, so a browser refuses third-party requests
 /// even from code quaesito does not control (such as the font dx's rebuild notice loads in debug
@@ -157,6 +175,56 @@ pub fn offline_policy() -> SetResponseHeaderLayer<HeaderValue> {
         header::CONTENT_SECURITY_POLICY,
         HeaderValue::from_static(CONTENT_SECURITY_POLICY),
     )
+}
+
+/// Browser protections for every response: the [content security policy](offline_policy),
+/// files used only as the type they are served as, and other sites not told which quaesito page
+/// linked to them (a phone's join address holds its team's ticket).
+pub fn protect(router: Router) -> Router {
+    router
+        .layer(offline_policy())
+        .layer(SetResponseHeaderLayer::if_not_present(
+            header::X_CONTENT_TYPE_OPTIONS,
+            HeaderValue::from_static("nosniff"),
+        ))
+        .layer(SetResponseHeaderLayer::if_not_present(
+            header::REFERRER_POLICY,
+            HeaderValue::from_static("same-origin"),
+        ))
+}
+
+/// Serves the application from `app` on `IP`:`PORT` (default `127.0.0.1:8080`), as
+/// `dioxus::serve` does in release builds, but with each connection's address for
+/// [`peer::Peer`].
+#[cfg(not(debug_assertions))]
+pub fn serve<F>(app: impl FnOnce() -> F) -> !
+where
+    F: Future<Output = anyhow::Result<Router>>,
+{
+    dioxus::logger::initialize_default();
+    let served = tokio::runtime::Builder::new_multi_thread()
+        .enable_all()
+        .build()
+        .map_err(anyhow::Error::from)
+        .and_then(|runtime| {
+            runtime.block_on(async {
+                let router = app().await?;
+                let addr = dioxus::cli_config::fullstack_address_or_localhost();
+                let listener = tokio::net::TcpListener::bind(addr)
+                    .await
+                    .map_err(|err| anyhow::anyhow!("listening on {addr}: {err}"))?;
+                dioxus::fullstack::axum::serve(
+                    listener,
+                    router.into_make_service_with_connect_info::<std::net::SocketAddr>(),
+                )
+                .await?;
+                Ok(())
+            })
+        });
+    if let Err(err) = served {
+        dioxus::logger::tracing::error!("{err:#}");
+    }
+    std::process::exit(1)
 }
 
 /// Routes served next to the Dioxus application.
@@ -179,10 +247,19 @@ struct ImportQuery {
 /// `POST /import?token=…&consent=…`, with an exported quiz (zip bundle with media, or plain
 /// JSON) as the body: imports it under a new id. The answer streams one JSON
 /// [`ImportProgress`] per line, so the admin page can follow the processing of the media.
-async fn import(Query(query): Query<ImportQuery>, body: Body) -> Response {
+/// Like other uploads, only from this machine.
+async fn import(
+    extensions: Extensions,
+    headers: HeaderMap,
+    Query(query): Query<ImportQuery>,
+    body: Body,
+) -> Response {
     let state = state();
     if !state.auth.is_valid(&query.token) {
         return StatusCode::UNAUTHORIZED.into_response();
+    }
+    if !peer::Peer::of(&extensions, &headers).is_this_machine() {
+        return (StatusCode::FORBIDDEN, peer::FROM_THIS_MACHINE).into_response();
     }
     let bytes = match media::read_upload(body.into_data_stream(), state.limits.import).await {
         Ok(bytes) => bytes,

@@ -49,6 +49,17 @@ jobs:
       - uses: taiki-e/install-action@just
       - run: just test
 
+  # Servers on ARM (such as small cloud machines) run the same code: build and test it there.
+  test-arm64:
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - uses: taiki-e/install-action@just
+      - run: just test
+
   deny:
     if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-latest

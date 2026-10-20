@@ -6,6 +6,40 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- **New teams can join** under **Teams** on the big screen: untick it once every team is in, so nobody else can join with
+  the code. Teams already in can still reconnect.
+- Linux ARM64 downloads, for ARM servers such as small cloud machines and single-board computers.
+- [Hosting on the internet](https://ggirelli.github.io/quaesito/deployment/): running quaesito on a Linux server
+  behind Caddy for HTTPS, as a systemd service, with backups, a checklist and Oracle Cloud's free ARM machines. The
+  Linux downloads include the service and Caddy files in `deploy/`.
+
+### Fixed
+
+- Opened over HTTPS (a server behind a proxy), the big screen's join link and QR code use the address it was opened
+  on, not the server's private address, when `QUAESITO_PUBLIC_URL` is not set.
+
+### Security
+
+- Guessing is slowed down for servers reachable from the internet: a client that enters ten wrong admin passwords, or
+  asks for thirty join codes no game has, waits five minutes. Clients are told apart by their address, or by the one a
+  reverse proxy on the same machine passes on in `X-Forwarded-For`. Calls from a team's phone no longer tell an unknown code
+  from an unknown team, so they cannot be used to find live games either.
+- Other sites can no longer show quaesito's pages in a frame, where they could trick an admin into clicking.
+- Pictures, soundtracks, videos and quiz imports are only accepted from the computer quaesito runs on (on a server,
+  through an SSH tunnel), and team pictures only from phones on its local network: nobody on the internet can put files
+  on the server, even with the admin password.
+- Pictures, soundtracks and videos are streamed instead of being read whole into memory for each request.
+- Team names starting like a spreadsheet formula (`=`, `+`, `-`, `@`) are quoted in the results CSV.
+- Responses tell browsers not to guess file types and not to send quaesito addresses (which can hold a team's ticket)
+  to other sites; admin and team tickets are compared in constant time.
+- A request only counts as coming from the server's own machine (for uploads) if it is also addressed to it as
+  `localhost`, so a proxy that passes on the public hostname but no `X-Forwarded-For` does not make visitors look local.
+- Admin logins expire 12 hours after logging in. Logins saved by earlier versions are dropped: log in again once.
+- A team keeps at most three live connections (a new one closes its oldest), and its answers, renames and pictures are
+  paced to ten a second: each one sends every screen a new view.
+
 ## [0.5.0] - 2026-10-17
 
 A library of about 2,700 ready-made questions, team picture backgrounds and mascots, things shown with the answer,
