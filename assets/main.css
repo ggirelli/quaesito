@@ -2682,7 +2682,17 @@ ol.order-items {
   align-items: center;
   gap: 1vh;
   width: 22vw;
-  animation: rise 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* A revealed spot: its block grows from the floor, then the team pops in whole. Sliding the spot
+   up from below the screen showed the avatar while the name was still out of view on short screens. */
+.podium-spot:not(.hidden) .podium-block {
+  transform-origin: bottom;
+  animation: rise 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.podium-spot:not(.hidden) > :not(.podium-block) {
+  animation: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
 }
 
 .podium-spot .avatar {
@@ -2748,8 +2758,7 @@ ol.order-items {
 
 @keyframes rise {
   from {
-    transform: translateY(30vh);
-    opacity: 0;
+    transform: scaleY(0);
   }
 }
 
