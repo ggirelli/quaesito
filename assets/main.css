@@ -1556,7 +1556,8 @@ svg.shape {
 
 /* ---------- Host (big screen) ---------- */
 
-/* Exactly one screen tall: the main area scrolls when it must, so the controls stay in view. */
+/* Exactly one screen tall: the main area scrolls when it must, so the controls stay in view. Text
+   follows the screen's width and height, so a short or small screen still fits each slide. */
 .host {
   height: 100vh;
   height: 100dvh;
@@ -1564,7 +1565,7 @@ svg.shape {
   flex-direction: column;
   padding: 2vh 3vw;
   gap: 2vh;
-  font-size: clamp(1rem, 1.6vw, 2.2rem);
+  font-size: clamp(0.75rem, min(1.6vw, 2.8vh), 2.2rem);
 }
 
 .host-bar {
@@ -1758,7 +1759,7 @@ table.results {
   background: #fff;
   padding: 1vw;
   border-radius: var(--radius);
-  width: min(32vw, 52vh);
+  width: min(32vw, 46vh);
   aspect-ratio: 1;
 }
 
@@ -2228,13 +2229,13 @@ table.results {
   color: var(--muted);
 }
 
+/* Names wrap rather than shrink to an ellipsis: an avatar always comes with its team's whole name. */
 .standing .name {
   flex: 1;
   min-width: 0;
   font-weight: 700;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
 .standing .round,
@@ -2307,10 +2308,11 @@ table.results {
 }
 
 /* A results slide: the standings under the slide's title. */
+/* `--rows` is the number of teams shown: the rows shrink so they all fit under the title. */
 .results-slide .standings {
-  width: min(40rem, 90vw);
+  width: min(60rem, 90vw);
   text-align: left;
-  font-size: 1.3em;
+  font-size: min(1.3em, (100dvh - 13em) / (var(--rows, 6) * 3.6));
 }
 
 .standing .score {
@@ -2341,7 +2343,7 @@ table.results {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: safe center;
   gap: 3vh;
   min-height: 0;
   text-align: center;
@@ -2682,13 +2684,23 @@ ol.order-items {
   align-items: center;
   gap: 1vh;
   width: 22vw;
-  animation: rise 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* A revealed spot: its block grows from the floor, then the team pops in whole. Sliding the spot
+   up from below the screen showed the avatar while the name was still out of view on short screens. */
+.podium-spot:not(.hidden) .podium-block {
+  transform-origin: bottom;
+  animation: rise 0.6s ease-out both;
+}
+
+.podium-spot:not(.hidden) > :not(.podium-block) {
+  animation: pop 0.4s ease-out 0.4s both;
 }
 
 .podium-spot .avatar {
-  width: 14vh;
-  height: 14vh;
-  font-size: 6vh;
+  width: 11vh;
+  height: 11vh;
+  font-size: 5vh;
 }
 
 .podium-spot .team-name {
@@ -2716,17 +2728,17 @@ ol.order-items {
 }
 
 .podium-spot.p1 .podium-block {
-  height: 26vh;
+  height: 20vh;
   background: linear-gradient(var(--accent), #e09f00);
 }
 
 .podium-spot.p2 .podium-block {
-  height: 18vh;
+  height: 14vh;
   background: linear-gradient(#d9d9e6, #a9a9bb);
 }
 
 .podium-spot.p3 .podium-block {
-  height: 12vh;
+  height: 9vh;
   background: linear-gradient(#e2a072, #b8764a);
 }
 
@@ -2748,8 +2760,7 @@ ol.order-items {
 
 @keyframes rise {
   from {
-    transform: translateY(30vh);
-    opacity: 0;
+    transform: scaleY(0);
   }
 }
 
@@ -2758,6 +2769,7 @@ ol.order-items {
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.6vw;
+  font-size: 0.8em;
   color: var(--muted);
 }
 
@@ -3382,7 +3394,7 @@ button.joker {
 
 /* ---------- Small screens ---------- */
 
-@media (max-width: 700px) {
+@media (max-width: 700px) and (orientation: portrait) {
   .lobby,
   .closed-layout {
     grid-template-columns: 1fr;
@@ -3395,7 +3407,9 @@ button.joker {
   .answer-grid {
     grid-template-columns: minmax(0, 1fr);
   }
+}
 
+@media (max-width: 700px) {
   .topbar {
     display: flex;
     flex-wrap: wrap;
