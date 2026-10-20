@@ -14,7 +14,7 @@ const PICTURE = path.join(__dirname, 'out/editor-picture.jpg');
 
 (async () => {
   // Another quiz on the list, so the admin page is not empty.
-  const ctx = await L.setup(Object.assign(sample.quiz(), { title: 'Friday Night Quiz' }));
+  const ctx = await L.setup(Object.assign(sample.quiz(), { title: 'Friday Night Quiz' }), {}, { scale: V.density(1440) });
   execFileSync('magick', [path.resolve(__dirname, '../../assets/brand/lobby.webp'), '-background', '#14121f', '-flatten',
     '-quality', '88', PICTURE]);
 

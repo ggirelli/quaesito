@@ -12,6 +12,8 @@ const L = require('./lib.js');
 
 const OUT = path.resolve(__dirname, '../../docs/media');
 const FRAMES = path.join(__dirname, 'out/frames');
+/** The videos' width: 1080p (the pages are recorded at a higher pixel density to fill it). */
+const WIDTH = 1920;
 /** Pause between a line's caption showing up and its voice, for the picture to sink in. */
 const LEAD_MS = 500;
 /** Pause after each spoken line. */
@@ -37,7 +39,8 @@ async function record(page) {
     frames.push({ file, at: metadata.timestamp * 1000 });
     cdp.send('Page.screencastFrameAck', { sessionId }).catch(() => {});
   });
-  await cdp.send('Page.startScreencast', { format: 'jpeg', quality: 90, everyNthFrame: 1 });
+  // Frames come in CSS pixels unless asked for more: as wide as the video, at the page's density.
+  await cdp.send('Page.startScreencast', { format: 'jpeg', quality: 90, everyNthFrame: 1, maxWidth: WIDTH, maxHeight: WIDTH });
   return {
     async stop() {
       const end = Date.now();
@@ -170,7 +173,7 @@ async function start(page, name, { bottom = false } = {}) {
       if (process.env.DRY) {
         // A silent draft, to look over.
         const draft = path.join(__dirname, 'out', `${out}-dry.mp4`);
-        execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', list, '-vf', 'fps=10,scale=1280:-2',
+        execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', list, '-vf', `fps=10,scale=${WIDTH}:-2`,
           '-c:v', 'libx264', '-preset', 'veryfast', '-pix_fmt', 'yuv420p', draft]);
         console.log('draft:', draft, cues.map((c) => `${c.id}@${c.at}`).join(' '));
         return;
@@ -200,7 +203,7 @@ async function start(page, name, { bottom = false } = {}) {
       const mp4 = path.join(OUT, `${out}.mp4`);
       // H.264 and AAC in MP4: plays everywhere and stays small.
       execFileSync('ffmpeg', ['-loglevel', 'error', '-y', ...inputs, '-filter_complex', mix,
-        '-map', '0:v', '-map', '[voice]', '-vf', 'fps=30,scale=1280:-2', '-c:v', 'libx264', '-preset', 'slow', '-crf', '30',
+        '-map', '0:v', '-map', '[voice]', '-vf', `fps=30,scale=${WIDTH}:-2`, '-c:v', 'libx264', '-preset', 'slow', '-crf', '30',
         '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '96k', '-movflags', '+faststart', mp4]);
       execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-ss', String(posterAt), '-i', mp4, '-frames:v', '1',
         '-q:v', '80', path.join(OUT, `${out}-poster.webp`)]);
@@ -220,4 +223,7 @@ async function start(page, name, { bottom = false } = {}) {
   };
 }
 
-module.exports = { start, caption, pointer, click, byText, LEAD_MS };
+/** The pixel density that fills the video with a page `width` CSS pixels wide. */
+const density = (width) => WIDTH / width;
+
+module.exports = { start, caption, pointer, click, byText, density, LEAD_MS };

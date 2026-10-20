@@ -13,7 +13,7 @@ const sample = require('./sample.js');
 const TUNE = path.resolve(__dirname, '../../target/e2e/data/media', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa3.wav');
 
 (async () => {
-  const ctx = await L.setup(sample.quiz(), { joker: true });
+  const ctx = await L.setup(sample.quiz(), { joker: true }, { scale: V.density(1600) });
   const pictures = sample.avatars(path.join(__dirname, 'out/avatars'));
 
   // A test game played by two named teams instead of "Phone 1" and "Phone 2".

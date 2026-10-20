@@ -18,7 +18,7 @@ const V = require('./video.js');
       topic: 'Blockbusters',
       answers: [{ text: 'Star Wars', correct: true }, { text: 'Dune' }, { text: 'Alien' }, { text: 'Tron' }],
     }],
-  });
+  }, {}, { scale: V.density(1440) });
 
   const page = await L.openAdmin(ctx, '/admin', 1440, 900);
   await V.pointer(page);

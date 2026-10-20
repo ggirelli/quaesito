@@ -17,7 +17,7 @@ WIDTH, HEIGHT = 520, 44
 def main() -> None:
     video = sys.argv[1]
     raw = subprocess.run(
-        ["ffmpeg", "-loglevel", "error", "-i", video, "-vf", f"fps={FPS},crop={CROP},format=gray",
+        ["ffmpeg", "-loglevel", "error", "-i", video, "-vf", f"fps={FPS},scale=1280:-2,crop={CROP},format=gray",
          "-f", "rawvideo", "-"],
         check=True, capture_output=True,
     ).stdout
