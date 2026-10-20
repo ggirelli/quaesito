@@ -2,14 +2,18 @@
 
 use std::net::{IpAddr, UdpSocket};
 
-/// Base URL for join links: `QUAESITO_PUBLIC_URL` if set, otherwise this machine's LAN address
-/// with the port the host screen was opened on.
+/// Base URL for join links: `QUAESITO_PUBLIC_URL` if set; otherwise the origin the host screen
+/// was opened on if that is HTTPS (a server behind a proxy, where this machine's address is a
+/// private one), else this machine's LAN address with the port the host screen was opened on.
 #[must_use]
-pub fn join_origin(page_port: &str) -> String {
+pub fn join_origin(page_origin: &str, page_port: &str) -> String {
     if let Ok(url) = std::env::var("QUAESITO_PUBLIC_URL")
         && !url.is_empty()
     {
         return url.trim_end_matches('/').to_owned();
+    }
+    if page_origin.starts_with("https://") {
+        return page_origin.trim_end_matches('/').to_owned();
     }
     let ip = lan_ip().map_or_else(|| "localhost".to_owned(), |ip| ip.to_string());
     let port = page_port.trim();

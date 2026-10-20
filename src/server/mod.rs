@@ -115,7 +115,7 @@ fn print_banner(auth: &Auth) {
     let phones = if ip.starts_with("127.") || ip == "localhost" {
         format!("not reachable: listening on {ip} only (set IP=0.0.0.0)")
     } else {
-        net::join_origin(&port)
+        net::join_origin("", &port)
     };
     let password = auth.generated_password().map_or_else(
         || "the one in QUAESITO_ADMIN_PASSWORD".to_owned(),

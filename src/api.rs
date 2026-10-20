@@ -483,11 +483,15 @@ pub async fn end_session(token: String, code: String) -> ServerFnResult<()> {
     Ok(())
 }
 
-/// Base URL phones should use to join, given the port the host page was opened on.
+/// Base URL phones should use to join, given the origin and port the host page was opened on.
 #[post("/api/admin/join-origin")]
-pub async fn join_origin(token: String, page_port: String) -> ServerFnResult<String> {
+pub async fn join_origin(
+    token: String,
+    page_origin: String,
+    page_port: String,
+) -> ServerFnResult<String> {
     crate::server::state().auth.require(&token)?;
-    Ok(crate::server::net::join_origin(&page_port))
+    Ok(crate::server::net::join_origin(&page_origin, &page_port))
 }
 
 /// Title of the quiz behind a join code, or `None` if no such session is live.

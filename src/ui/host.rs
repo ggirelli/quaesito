@@ -769,7 +769,7 @@ fn Soundtrack(name: String, started_at: Option<f64>, seek: bool, paused: bool) -
 fn Lobby(code: String, teams: Vec<TeamInfo>, max_teams: usize) -> Element {
     let token: AdminToken = use_context();
     let origin = use_resource(move || async move {
-        join_origin(token.get(), client::page_port())
+        join_origin(token.get(), client::page_origin(), client::page_port())
             .await
             .unwrap_or_else(|_| client::page_origin())
     });

@@ -6,6 +6,11 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+### Fixed
+
+- Opened over HTTPS (a server behind a proxy), the big screen's join link and QR code use the address it was opened
+  on, not the server's private address, when `QUAESITO_PUBLIC_URL` is not set.
+
 ### Security
 
 - Guessing is slowed down for servers reachable from the internet: a client that enters ten wrong admin passwords, or
