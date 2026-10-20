@@ -1,8 +1,8 @@
 - **00:00** Making a quiz is half the fun! Press New quiz, give it a name, and off you go.
-- **00:05** Type a question and its answers, then tick the right one. Everything saves as you type!
-- **00:12** Pick an answer type: true or false, typed answers, numbers, order, pins and pairs.
-- **00:17** Add a picture, and reveal it bit by bit while the clock runs.
-- **00:21** Slides open each round, with a title and a picture.
-- **00:25** Short on ideas? Grab questions from the library, one by one or at random!
-- **00:31** The strip on the side jumps anywhere in a long quiz, and the table view shows it all at once.
-- **00:38** Then test it: the big screen and two phones, side by side. Ready for quiz night!
+- **00:06** Type a question and its answers, then tick the right one. Everything saves as you type!
+- **00:13** Pick an answer type: true or false, typed answers, numbers, order, pins and pairs.
+- **00:20** Add a picture, and reveal it bit by bit while the clock runs.
+- **00:24** Slides open each round, with a title and a picture.
+- **00:28** Short on ideas? Grab questions from the library, one by one or at random!
+- **00:34** The strip on the side jumps anywhere in a long quiz, and the table view shows it all at once.
+- **00:42** Then test it: the big screen and two phones, side by side. Ready for quiz night!
