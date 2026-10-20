@@ -283,6 +283,10 @@ pub struct Fastest {
 
 /// Everything the host screen shows.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[allow(
+    clippy::struct_excessive_bools,
+    reason = "independent switches and states of the game, not a state machine"
+)]
 pub struct HostView {
     pub title: String,
     pub code: String,
@@ -291,6 +295,8 @@ pub struct HostView {
     pub max_teams: usize,
     /// Whether teams may upload a picture.
     pub pictures: bool,
+    /// Whether new teams may join.
+    pub joining: bool,
     /// Time until the quiz moves on by itself, when auto-advance is on (and not paused).
     pub auto_advance_ms: Option<u64>,
     /// The host paused the clock.
@@ -396,6 +402,8 @@ pub enum HostCommand {
     RemoveTeam { team: u32 },
     /// Let teams upload a picture, or not; turning it off drops the pictures uploaded so far.
     SetPictures(bool),
+    /// Let new teams join, or not; teams already in stay.
+    SetJoining(bool),
 }
 
 /// How a team did on one question.

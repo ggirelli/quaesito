@@ -207,8 +207,9 @@ admin page (**Export**) also saves it with its media, to import on any quaesito.
   delete `/var/lib/quaesito/admin-tokens.json` and start it again.
 - Anyone with a game's join code can join it as a team, up to the game's team limit. A client that
   asks for 30 codes no game has within five minutes waits five minutes, as one with 10 wrong passwords
-  does, so codes cannot practically be found by trying. Share the code only with your players, remove
-  unwanted teams from the big screen (**Teams**), and turn team pictures off if strangers might join.
+  does, so codes cannot practically be found by trying. Share the code only with your players; once
+  every team is in, untick **New teams can join** under **Teams** on the big screen, where you can
+  also remove unwanted teams.
   End games you no longer need.
 - Pictures, soundtracks and videos are served to anyone who has their address, which is random and
   only appears in the pages of the quizzes using them.

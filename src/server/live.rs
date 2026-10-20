@@ -59,6 +59,9 @@ pub async fn host(mut socket: TypedWebsocket<HostCommand, HostView>, session: Ar
                 Ok(HostCommand::SetPictures(pictures)) => {
                     session.update(|g, _| g.set_pictures(pictures));
                 }
+                Ok(HostCommand::SetJoining(joining)) => {
+                    session.update(|g, _| g.set_joining(joining));
+                }
                 Err(_) => return,
             },
         }

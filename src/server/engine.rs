@@ -80,6 +80,9 @@ pub struct Snapshot {
     /// Whether teams may upload a picture.
     #[serde(default = "yes")]
     pictures: bool,
+    /// Whether new teams may join.
+    #[serde(default = "yes")]
+    joining: bool,
     phase: SavedPhase,
     judgements: Vec<HashMap<String, Judgement>>,
     played: Vec<bool>,
@@ -133,6 +136,8 @@ pub struct Game {
     max_teams: usize,
     /// Whether teams may upload a picture.
     pictures: bool,
+    /// Whether new teams may join: the host closes joining once every team is in.
+    joining: bool,
     phase: Phase,
     /// Per question: the judge's amendments to typed answers, by normalised text.
     judgements: Vec<HashMap<String, Judgement>>,
@@ -254,6 +259,7 @@ impl Game {
             next_team_id: 1,
             max_teams: DEFAULT_MAX_TEAMS,
             pictures: true,
+            joining: true,
             phase,
             judgements: vec![HashMap::new(); quiz_len],
             played: vec![false; quiz_len],
@@ -297,6 +303,7 @@ impl Game {
             next_team_id: self.next_team_id,
             max_teams: self.max_teams,
             pictures: self.pictures,
+            joining: self.joining,
             phase: match self.phase {
                 Phase::Network => SavedPhase::Network,
                 Phase::Lobby => SavedPhase::Lobby,
@@ -354,6 +361,7 @@ impl Game {
             next_team_id: snapshot.next_team_id,
             max_teams: snapshot.max_teams,
             pictures: snapshot.pictures,
+            joining: snapshot.joining,
             phase,
             judgements: snapshot.judgements,
             played: snapshot.played,
@@ -426,6 +434,9 @@ impl Game {
     /// Refuses empty, overlong or duplicate names, and joining a full or finished game.
     pub fn join(&mut self, name: &str, token: String) -> Result<u32, Refusal> {
         let name = self.check_name(name, None)?;
+        if !self.joining {
+            return Err(Refusal("This game is not taking new teams: ask the host."));
+        }
         if self.teams.len() >= self.max_teams {
             return Err(Refusal("This game is full."));
         }
@@ -528,6 +539,12 @@ impl Game {
                 team.avatar = None;
             }
         }
+    }
+
+    /// Opens or closes the game to new teams. Teams already in stay, and their phones can still
+    /// reconnect.
+    pub fn set_joining(&mut self, joining: bool) {
+        self.joining = joining;
     }
 
     /// Whether the game is still waiting in the lobby (or on the Wi-Fi slide before it).
@@ -1066,6 +1083,7 @@ impl Game {
             teams: self.teams.iter().map(Team::info).collect(),
             max_teams: self.max_teams,
             pictures: self.pictures,
+            joining: self.joining,
             paused: self.paused_at.is_some(),
             speed_points: self.quiz.settings.points == PointsMode::Speed,
             auto_advance_ms: match self.phase {
@@ -2300,6 +2318,21 @@ mod tests {
         assert_eq!(at(&g, t0), "Q1");
         // Without the slide, the lobby is the start.
         assert!(game(QuizSettings::default()).host_view(t0).phase.is_start());
+    }
+
+    #[test]
+    fn the_host_can_close_joining() {
+        let t0 = Instant::now();
+        let mut g = game(QuizSettings::default());
+        let owls = join(&mut g, "Owls");
+        g.set_joining(false);
+        assert!(!g.host_view(t0).joining);
+        assert!(g.join("Cats", "token-cats".to_owned()).is_err());
+        assert_eq!(g.team_for_token("token-Owls"), Some(owls));
+        let mut restored = Game::restore(g.snapshot(t0), t0);
+        assert!(restored.join("Cats", "token-cats".to_owned()).is_err());
+        g.set_joining(true);
+        join(&mut g, "Cats");
     }
 
     #[test]

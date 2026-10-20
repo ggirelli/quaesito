@@ -34,6 +34,7 @@ under **Change your name or picture** on their phone.
 | pause | ++p++ or ⏸: the clock, the music and the automatic advance stop |
 | give more time | **+10 s** while a question is open |
 | rename or remove a team | **Teams** in the top bar |
+| stop new teams joining | **Teams** in the top bar: untick **New teams can join** once every team is in; teams already in can still reconnect |
 | go back to the admin page | :material-cog: in the top bar |
 | turn uploaded team pictures on or off | **Teams** in the top bar: turning them off removes those already uploaded; ready-made pictures and backgrounds stay |
 | mute sound effects | :material-volume-high: in the top bar |
