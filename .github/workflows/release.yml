@@ -20,6 +20,7 @@ jobs:
         include:
           # 22.04 builds against an older glibc, so the server runs on more distributions.
           - { name: linux-x86_64, os: ubuntu-22.04, start: start.sh, archive: tar.gz }
+          - { name: linux-arm64, os: ubuntu-22.04-arm, start: start.sh, archive: tar.gz }
           - { name: macos-arm64, os: macos-14, start: start.command, archive: tar.gz }
           - { name: windows-x86_64, os: windows-latest, start: start.bat, archive: zip }
     runs-on: ${{ matrix.os }}
@@ -40,6 +41,20 @@ jobs:
           tool: dioxus-cli@${{ env.DIOXUS_CLI_VERSION }}
       - name: Bundle
         run: dx bundle --platform web --release --out-dir dist
+      # The server starts from another folder and answers: the app's page, its script and an admin
+      # login.
+      - name: Smoke test
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          export IP=127.0.0.1 PORT=8090 QUAESITO_ADMIN_PASSWORD=smoke QUAESITO_DATA_DIR="$RUNNER_TEMP/data"
+          (cd "$RUNNER_TEMP" && exec "$GITHUB_WORKSPACE/dist/server") &
+          for _ in $(seq 60); do curl -fsS -o /dev/null "http://$IP:$PORT/" && break; sleep 1; done
+          script=$(curl -fsS "http://$IP:$PORT/" | grep -o '/assets/quaesito-[^"]*\.js' | head -n 1)
+          curl -fsS -o /dev/null "http://$IP:$PORT$script"
+          curl -fsS -H 'Content-Type: application/json' -d '{"password":"smoke"}' \
+            "http://$IP:$PORT/api/admin/login" | grep -Eq '^"[0-9a-f]{32}"$'
+          kill %1
       - uses: astral-sh/setup-uv@v6
       # The user guide ships with the app and is served at /docs/, so it works without internet.
       - name: User guide
@@ -56,6 +71,8 @@ jobs:
           cp -R dist/. "out/$name/"
           cp "packaging/${{ matrix.start }}" packaging/README.txt LICENSE "out/$name/"
           cp -R guide "out/$name/docs"
+          # Files for running it as a service on a server; see the user guide's deployment page.
+          [ "$RUNNER_OS" != Linux ] || cp -R packaging/deploy "out/$name/deploy"
           cd out
           if [ "${{ matrix.archive }}" = zip ]; then
             7z a "$name.zip" "$name" >/dev/null
