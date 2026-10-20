@@ -160,9 +160,10 @@ async fn clean_up_media() {
 
 /// Only quaesito itself may serve what its pages load (scripts, styles, fonts, pictures, sounds,
 /// connections): the app works without internet and sends nothing to third parties. Inline code
-/// and `eval` stay allowed for Dioxus and the user guide.
+/// and `eval` stay allowed for Dioxus and the user guide. Only quaesito's own pages may show its
+/// pages in a frame (as the test game does), so another site cannot trick an admin into clicks.
 const CONTENT_SECURITY_POLICY: &str = "default-src 'self' 'unsafe-inline' 'unsafe-eval' \
-    'wasm-unsafe-eval' data: blob:; connect-src 'self' ws: wss:";
+    'wasm-unsafe-eval' data: blob:; connect-src 'self' ws: wss:; frame-ancestors 'self'";
 
 /// Adds the content security policy to every response, so a browser refuses third-party requests
 /// even from code quaesito does not control (such as the font dx's rebuild notice loads in debug
