@@ -30,8 +30,11 @@ const choice = (t, right = 0, answers = ['right', 'also']) => ({
   answers: answers.map((a, i) => ({ text: a, correct: i === right })),
 });
 
-/** Logs in, creates and saves a quiz, and launches a browser. */
-async function setup(quizBody, settings = {}) {
+/**
+ * Logs in, creates and saves a quiz, and launches a browser whose pages have `scale` device pixels
+ * to a CSS pixel (screencasts only come out sharper with Chrome's flag for it, not the viewport's).
+ */
+async function setup(quizBody, settings = {}, { scale = 1 } = {}) {
   const token = await api('/api/admin/login', { password: 'test' });
   const id = await api('/api/admin/quiz/create', { token, title: quizBody.title || 'Test' });
   const quiz = Object.assign({
@@ -47,7 +50,7 @@ async function setup(quizBody, settings = {}) {
   const browser = await puppeteer.launch({
     executablePath: CHROME,
     headless: process.env.HEADFUL ? false : 'new',
-    args: ['--no-sandbox', '--autoplay-policy=no-user-gesture-required'],
+    args: ['--no-sandbox', '--autoplay-policy=no-user-gesture-required', `--force-device-scale-factor=${scale}`],
   });
   const errors = [];
   const watch = (p, name) => {
@@ -60,14 +63,14 @@ async function setup(quizBody, settings = {}) {
       }
     });
   };
-  return { token, id, browser, errors, watch };
+  return { token, id, browser, errors, watch, scale };
 }
 
 /** An admin page (logged in) in its own browser context. */
 async function openAdmin(ctx, path, width = 1280, height = 900) {
   const p = await (await ctx.browser.createBrowserContext()).newPage();
   ctx.watch(p, path);
-  await p.setViewport({ width, height });
+  await p.setViewport({ width, height, deviceScaleFactor: ctx.scale });
   await p.evaluateOnNewDocument((t) => localStorage.setItem('quaesito.admin', t), ctx.token);
   await p.goto(`${B}${path}`, { waitUntil: 'networkidle0' });
   return p;
