@@ -88,7 +88,9 @@ impl Auth {
 
     /// Whether the token was issued by [`Auth::login`].
     pub fn is_valid(&self, token: &str) -> bool {
-        self.lock().iter().any(|t| t == token)
+        self.lock()
+            .iter()
+            .any(|t| constant_time_eq(t.as_bytes(), token.as_bytes()))
     }
 
     /// Errors with 401 unless the token is valid.
@@ -121,7 +123,8 @@ fn write_private(path: &std::path::Path, bytes: &[u8]) -> std::io::Result<()> {
     Ok(())
 }
 
-fn constant_time_eq(a: &[u8], b: &[u8]) -> bool {
+/// Compares secrets in a time that does not tell how much of them matched.
+pub(crate) fn constant_time_eq(a: &[u8], b: &[u8]) -> bool {
     a.len() == b.len() && a.iter().zip(b).fold(0, |acc, (x, y)| acc | (x ^ y)) == 0
 }
 

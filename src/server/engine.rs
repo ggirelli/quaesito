@@ -513,7 +513,10 @@ impl Game {
     /// The team owning a reconnect token.
     #[must_use]
     pub fn team_for_token(&self, token: &str) -> Option<u32> {
-        self.teams.iter().find(|t| t.token == token).map(|t| t.id)
+        self.teams
+            .iter()
+            .find(|t| super::auth::constant_time_eq(t.token.as_bytes(), token.as_bytes()))
+            .map(|t| t.id)
     }
 
     /// Lets teams upload a picture, or not (they still pick a background for their initial).
@@ -2821,6 +2824,16 @@ mod tests {
             results.to_csv(),
             "Rank,Team,Total,one,two\r\n1,Owls,2000,2000,\r\n2,\"Cats, \"\"the\"\"\",1000,0,1000\r\n"
         );
+    }
+
+    #[test]
+    fn team_names_cannot_be_spreadsheet_formulas() {
+        let mut g = game(QuizSettings::default());
+        join(&mut g, "=HYPERLINK(\"x\")");
+        join(&mut g, "-1+2");
+        let csv = g.results().to_csv();
+        assert!(csv.contains(",\"'=HYPERLINK(\"\"x\"\")\","), "{csv}");
+        assert!(csv.contains(",'-1+2,"), "{csv}");
     }
 
     #[test]

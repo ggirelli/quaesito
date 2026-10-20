@@ -554,10 +554,16 @@ impl GameResults {
     #[must_use]
     pub fn to_csv(&self) -> String {
         let field = |text: &str| {
+            // Spreadsheets run cells starting like a formula: team names come from phones.
+            let text = if text.starts_with(['=', '+', '-', '@', '\t', '\r']) {
+                format!("'{text}")
+            } else {
+                text.to_owned()
+            };
             if text.contains([',', '"', '\n', '\r']) {
                 format!("\"{}\"", text.replace('"', "\"\""))
             } else {
-                text.to_owned()
+                text
             }
         };
         let mut lines = vec![

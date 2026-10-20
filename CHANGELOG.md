@@ -28,8 +28,10 @@ All notable changes to quaesito are listed here. The format follows
 - Pictures, soundtracks, videos and quiz imports are only accepted from the computer quaesito runs on (on a server,
   through an SSH tunnel), and team pictures only from phones on its local network: nobody on the internet can put files
   on the server, even with the admin password.
+- Pictures, soundtracks and videos are streamed instead of being read whole into memory for each request.
+- Team names starting like a spreadsheet formula (`=`, `+`, `-`, `@`) are quoted in the results CSV.
 - Responses tell browsers not to guess file types and not to send quaesito addresses (which can hold a team's ticket)
-  to other sites.
+  to other sites; admin and team tickets are compared in constant time; a phone's commands are paced.
 
 ## [0.5.0] - 2026-10-17
 
