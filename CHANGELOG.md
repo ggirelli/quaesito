@@ -6,6 +6,17 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+## [0.6.1] - 2026-10-21
+
+### Fixed
+
+- Importing a quiz keeps the soundtracks of its explanations: they were taken for pictures and dropped.
+
+### Security
+
+- Updated the certificates trusted for HTTPS connections, which no longer trust some withdrawn intermediates
+  (RUSTSEC-2026-0381, RUSTSEC-2026-0382).
+
 ## [0.6.0] - 2026-10-20
 
 Ready for hosting on the internet: a deployment guide, Linux ARM64 downloads and hardening against guessing and
