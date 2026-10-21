@@ -116,7 +116,8 @@ pub async fn import(
     let soundtracks: std::collections::HashSet<String> = quiz
         .questions
         .iter()
-        .filter_map(|q| q.audio.clone())
+        .flat_map(|q| [q.audio.clone(), q.explanation_audio.clone()])
+        .flatten()
         .collect();
     for (name, bytes) in &files {
         let limit = if soundtracks.contains(name) {
@@ -326,12 +327,14 @@ mod tests {
         let picture = store.store(png(), ImageKind::Question).await.unwrap();
         let mut sound = b"ID3".to_vec();
         sound.extend([0; 64]);
-        let soundtrack = store.store_audio(sound).await.unwrap();
+        let soundtrack = store.store_audio(sound.clone()).await.unwrap();
+        let recap = store.store_audio(sound).await.unwrap();
         let quiz = Quiz {
             questions: vec![Question {
                 text: "Q".to_owned(),
                 image: Some(picture.clone()),
                 audio: Some(soundtrack.clone()),
+                explanation_audio: Some(recap.clone()),
                 answers: vec![
                     Answer {
                         text: String::new(),
@@ -358,19 +361,20 @@ mod tests {
             .await
             .unwrap(),
         );
-        // Both bundled files are counted, from none.
-        assert_eq!(progress, [(0, 2), (1, 2), (2, 2)]);
+        // Every bundled file is counted, from none.
+        assert_eq!(progress, [(0, 3), (1, 3), (2, 3), (3, 3)]);
         let question = &imported.questions[0];
         let new_picture = question.image.clone().unwrap();
         assert_ne!(new_picture, picture);
         assert_eq!(question.answers[0].image.as_ref(), Some(&new_picture));
         assert!(store.read_bytes(&new_picture).await.is_some());
-        assert!(
-            question
-                .audio
-                .as_ref()
+        let is_mp3 = |a: &Option<String>| {
+            a.as_ref()
                 .is_some_and(|a| std::path::Path::new(a).extension() == Some("mp3".as_ref()))
-        );
+        };
+        assert!(is_mp3(&question.audio));
+        // The recap's soundtrack is a soundtrack too, not a picture that fails to decode.
+        assert!(is_mp3(&question.explanation_audio));
         // The missing picture is dropped rather than failing the import.
         assert_eq!(question.answers[1].image, None);
 
