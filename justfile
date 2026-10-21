@@ -1,6 +1,9 @@
 # docs/requirements.txt pins MkDocs below 2.0, so Material's banner warning about MkDocs 2.0 is noise
 export NO_MKDOCS_2_WARNING := "true"
 
+# The dioxus-cli version that builds the app; Cargo.lock keeps Dioxus at the same version (see `just tag`)
+dx-version := "0.7.10"
+
 # List available recipes
 default:
     @just --list
@@ -56,6 +59,25 @@ deny:
 
 # Everything CI checks
 check: fmt-check clippy test deny
+
+# Print the workspace's version
+version:
+    @sed -n 's/^version = "\(.*\)"$/\1/p' Cargo.toml | head -n 1
+
+# Print a version's section of the CHANGELOG (X.Y.Z or Unreleased), failing if it's missing or empty
+release-notes version:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    notes=$(awk -v v="{{version}}" '
+      /^## \[/ { if (on) exit; on = index($0, "[" v "]") > 0; next }
+      on { print }
+    ' CHANGELOG.md)
+    [ -n "$(tr -d '[:space:]' <<<"$notes")" ] || { echo "The CHANGELOG has no notes for {{version}}." >&2; exit 1; }
+    printf '%s\n' "$notes"
+
+# Bump the version (major, minor, patch or X.Y.Z) once the dependencies are updated and checked, committing both (see tools/release/tag.sh)
+tag *args:
+    tools/release/tag.sh {{args}}
 
 # Serve the documentation site with live reload at http://127.0.0.1:8000
 docs:

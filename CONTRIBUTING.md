@@ -50,7 +50,16 @@ with the big screen and two phones side by side.
 6. Open a pull request against `main`. `main` is protected: changes land through pull requests
    (squash or rebase, so history stays linear) once the CI and docs checks pass.
 
-## Style
+## Releasing
+
+1. On a clean, up-to-date `main`, run `just tag patch` (or `minor`, `major`, or an exact `X.Y.Z`). It
+   updates the dependencies within Cargo.toml's ranges (keeping Dioxus at `dx-version`, in the
+   justfile), runs `just check`, sets the new version and moves the CHANGELOG's "Unreleased" notes
+   under it, in two commits: "build: update dependencies" and "build: tag vX.Y.Z".
+2. Open a pull request with them.
+3. Once it's merged, tag `main` and push the tag (`git tag vX.Y.Z && git push origin vX.Y.Z`): the
+   release workflow builds the downloads and publishes them with the version's CHANGELOG notes.
+
 
 - Code follows `rustfmt` and `clippy::pedantic`; prefer clear names over comments, and comment the
   *why* when it is not obvious.
