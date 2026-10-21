@@ -6,6 +6,8 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+## [0.6.1] - 2026-10-21
+
 ### Fixed
 
 - Importing a quiz keeps the soundtracks of its explanations: they were taken for pictures and dropped.
