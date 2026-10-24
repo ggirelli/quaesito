@@ -93,8 +93,9 @@ network: go back to step 1.
 Pictures, soundtracks, videos and imports are only accepted on the computer running quaesito,
 with the admin page opened at `http://localhost:8080` (or `127.0.0.1`). Another computer, a
 tablet or a phone cannot upload, even on the same Wi-Fi, and neither can the computer itself if
-its admin page is opened at its network address (`http://192.168.…`). On a server, use an SSH
-tunnel; see [hosting on the internet](deployment.md#pictures-soundtracks-and-videos).
+its admin page is opened at its network address (`http://192.168.…`): then the message links to
+the same page at `localhost`. On a server, use an SSH tunnel; see
+[hosting on the internet](deployment.md#pictures-soundtracks-and-videos).
 
 "Team pictures can only be uploaded from the network the quiz runs on" means the phone is not
 on the computer's network (on mobile data, say): it can pick a ready-made picture instead.

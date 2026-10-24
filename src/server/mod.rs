@@ -274,8 +274,9 @@ async fn import(
     if !state.auth.is_valid(&query.token) {
         return StatusCode::UNAUTHORIZED.into_response();
     }
-    if !peer::Peer::of(&extensions, &headers).is_this_machine() {
-        return (StatusCode::FORBIDDEN, peer::FROM_THIS_MACHINE).into_response();
+    let peer = peer::Peer::of(&extensions, &headers);
+    if !peer.is_this_machine() {
+        return (StatusCode::FORBIDDEN, peer.refusal()).into_response();
     }
     let bytes = match media::read_upload(body.into_data_stream(), state.limits.import).await {
         Ok(bytes) => bytes,

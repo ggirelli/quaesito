@@ -78,15 +78,39 @@ pub fn Brand(#[props(default)] large: bool) -> Element {
     }
 }
 
-/// An error message box, hidden when there is no error.
+/// An error message box, hidden when there is no error. A `http://localhost…` address in it (an
+/// upload refused because the page is open at this computer's network address) links to this
+/// page there.
 #[component]
 pub fn ErrorBox(error: Option<String>) -> Element {
-    match error {
-        Some(message) => rsx! {
+    let Some(message) = error else {
+        return rsx! {};
+    };
+    match localhost_link(&message) {
+        Some((before, address, after)) => {
+            let href = format!("{address}{}", super::client::page_path());
+            rsx! {
+                p { class: "error", role: "alert",
+                    "{before}"
+                    a { href, "{address}" }
+                    "{after}"
+                }
+            }
+        }
+        None => rsx! {
             p { class: "error", role: "alert", "{message}" }
         },
-        None => rsx! {},
     }
+}
+
+/// `message` split around the `http://localhost…` address it says to open the page at, as
+/// `Peer::refusal` words it (`Open it at http://localhost:8080 instead.`).
+fn localhost_link(message: &str) -> Option<(&str, &str, &str)> {
+    let start = message.find("Open it at http://localhost")? + "Open it at ".len();
+    let end = message[start..]
+        .find(char::is_whitespace)
+        .map_or(message.len(), |len| start + len);
+    Some((&message[..start], &message[start..end], &message[end..]))
 }
 
 /// Human-readable message for a failed server call.
@@ -877,5 +901,31 @@ pub fn QuestionMedia(
             title: "Click to play again",
             onclick: replay,
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::localhost_link;
+
+    #[test]
+    fn the_localhost_address_to_open_is_a_link() {
+        assert_eq!(
+            localhost_link("…another device. Open it at http://localhost:8080 instead."),
+            Some((
+                "…another device. Open it at ",
+                "http://localhost:8080",
+                " instead."
+            ))
+        );
+        assert_eq!(
+            localhost_link("Open it at http://localhost"),
+            Some(("Open it at ", "http://localhost", ""))
+        );
+        // The generic refusal names localhost without a page to link to.
+        assert_eq!(
+            localhost_link("open it there, at http://localhost and its port"),
+            None
+        );
     }
 }

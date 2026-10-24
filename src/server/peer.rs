@@ -5,12 +5,13 @@
 //! that connected to it). Elsewhere, the header is ignored: anyone can send it. A request from
 //! this machine must also be addressed to it (`localhost` or a loopback address in `Host`), so a
 //! proxy that passes on the public hostname but no `X-Forwarded-For` does not make every visitor
-//! look local.
+//! look local. This machine opened at one of its network addresses (`http://192.168.…`) counts
+//! as another device, but is told to use `localhost` instead.
 //!
 //! Development builds run behind dx's proxy, which does not pass the address on: there, every
 //! request counts as coming from this machine.
 
-use std::net::{IpAddr, SocketAddr};
+use std::net::{IpAddr, SocketAddr, UdpSocket};
 
 use dioxus::fullstack::{
     FullstackContext, HeaderMap,
@@ -26,6 +27,8 @@ pub struct Peer {
     ip: Option<IpAddr>,
     /// The request was addressed to this machine by a loopback name.
     to_loopback: bool,
+    /// The port in `Host`, for the `localhost` address in [`Self::refusal`].
+    port: Option<u16>,
 }
 
 impl Peer {
@@ -35,6 +38,7 @@ impl Peer {
         let connection = extensions
             .get::<ConnectInfo<SocketAddr>>()
             .map(|info| info.0.ip().to_canonical());
+        let host = host(headers);
         Self {
             ip: connection.map(|ip| {
                 if ip.is_loopback() {
@@ -43,7 +47,8 @@ impl Peer {
                     ip
                 }
             }),
-            to_loopback: addressed_to_loopback(headers),
+            to_loopback: host.is_some_and(|(name, _)| is_loopback_name(name)),
+            port: host.and_then(|(_, port)| port),
         }
     }
 
@@ -53,6 +58,7 @@ impl Peer {
         let unknown = Self {
             ip: None,
             to_loopback: false,
+            port: None,
         };
         FullstackContext::current().map_or(unknown, |context| {
             let parts = context.parts_mut();
@@ -79,6 +85,13 @@ impl Peer {
         })
     }
 
+    /// Whether the request comes from this machine, addressed to it by one of its network
+    /// addresses: only this machine's own addresses can be bound.
+    fn is_this_machine_by_network_address(self) -> bool {
+        self.ip
+            .is_some_and(|ip| !ip.is_loopback() && UdpSocket::bind((ip, 0)).is_ok())
+    }
+
     /// Whether the request comes from this machine or the local network (a private address),
     /// not from the internet.
     #[must_use]
@@ -99,28 +112,44 @@ impl Peer {
         if self.is_this_machine() {
             Ok(())
         } else {
-            Err(HttpError::new(StatusCode::FORBIDDEN, FROM_THIS_MACHINE).into())
+            Err(HttpError::new(StatusCode::FORBIDDEN, self.refusal()).into())
+        }
+    }
+
+    /// Why an upload from elsewhere was refused. This machine opened at its network address is
+    /// given its `localhost` address, which the admin page shows as a link.
+    #[must_use]
+    pub fn refusal(self) -> String {
+        if self.is_this_machine_by_network_address() {
+            let port = self.port.map(|port| format!(":{port}")).unwrap_or_default();
+            format!(
+                "Uploads only work on the computer quaesito runs on, opened at localhost: this \
+                 page is open at the computer's network address, which counts as another \
+                 device. Open it at http://localhost{port} instead."
+            )
+        } else {
+            "Uploads only work on the computer quaesito runs on: open it there, at \
+             http://localhost and its port (on a server, through an SSH tunnel)."
+                .to_owned()
         }
     }
 }
 
-/// Why an upload from another device was refused.
-pub const FROM_THIS_MACHINE: &str = "Uploads only work on the computer quaesito runs on: open \
-    it there, at http://localhost and its port (on a server, through an SSH tunnel).";
+/// The name and port in the `Host` header: `localhost:8080`, `[::1]`.
+fn host(headers: &HeaderMap) -> Option<(&str, Option<u16>)> {
+    let host = headers
+        .get(dioxus::fullstack::http::header::HOST)?
+        .to_str()
+        .ok()?;
+    let (name, port) = match host.strip_prefix('[') {
+        Some(bracketed) => bracketed.split_once(']').unwrap_or((bracketed, "")),
+        None => host.split_once(':').unwrap_or((host, "")),
+    };
+    Some((name, port.trim_start_matches(':').parse().ok()))
+}
 
-/// Whether the `Host` header names this machine by a loopback name: `localhost`, `127.0.0.1`,
-/// `[::1]`, with or without a port.
-fn addressed_to_loopback(headers: &HeaderMap) -> bool {
-    let Some(host) = headers
-        .get(dioxus::fullstack::http::header::HOST)
-        .and_then(|value| value.to_str().ok())
-    else {
-        return false;
-    };
-    let name = match host.strip_prefix('[') {
-        Some(bracketed) => bracketed.split(']').next().unwrap_or_default(),
-        None => host.split(':').next().unwrap_or_default(),
-    };
+/// Whether a host name names this machine by a loopback name: `localhost`, `127.0.0.1`, `::1`.
+fn is_loopback_name(name: &str) -> bool {
     name.eq_ignore_ascii_case("localhost")
         || name
             .parse::<IpAddr>()
@@ -243,6 +272,22 @@ mod tests {
         let mut extensions = Extensions::new();
         extensions.insert(ConnectInfo("127.0.0.1:5000".parse::<SocketAddr>().unwrap()));
         assert!(!Peer::of(&extensions, &HeaderMap::new()).is_this_machine());
+    }
+
+    #[test]
+    fn this_machine_at_its_network_address_is_sent_to_localhost() {
+        // The unspecified address stands in for a network address: every machine can bind it,
+        // and it is not loopback.
+        let own = peer_to("192.168.1.20:8080", Some("0.0.0.0:5000"), &[]);
+        assert!(!own.is_this_machine());
+        assert!(
+            own.refusal()
+                .ends_with("Open it at http://localhost:8080 instead.")
+        );
+        let no_port = peer_to("192.168.1.20", Some("0.0.0.0:5000"), &[]);
+        assert!(no_port.refusal().ends_with("at http://localhost instead."));
+        let other = peer_to("192.168.1.20:8080", Some("192.0.2.1:5000"), &[]);
+        assert!(other.refusal().contains("SSH tunnel"));
     }
 
     #[test]
