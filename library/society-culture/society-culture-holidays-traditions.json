@@ -411,13 +411,14 @@
       "kind": {
         "Order": {
           "items": [
-            "New Year's Day (1 January)",
-            "Valentine's Day (14 February)",
-            "Halloween (31 October)",
-            "Christmas Day (25 December)"
+            "New Year's Day",
+            "Valentine's Day",
+            "Halloween",
+            "Christmas Day"
           ]
         }
-      }
+      },
+      "explanation": "New Year's Day – 1 January\nValentine's Day – 14 February\nHalloween – 31 October\nChristmas Day – 25 December"
     }
   },
   {
@@ -429,13 +430,14 @@
       "kind": {
         "Order": {
           "items": [
-            "Nowruz (around 20 March)",
-            "Midsummer (June)",
-            "Halloween (October)",
-            "Yule (December)"
+            "Nowruz",
+            "Midsummer",
+            "Halloween",
+            "Yule"
           ]
         }
-      }
+      },
+      "explanation": "Nowruz – around 20 March\nMidsummer – June\nHalloween – October\nYule – December"
     }
   },
   {

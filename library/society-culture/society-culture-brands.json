@@ -374,13 +374,14 @@
       "kind": {
         "Order": {
           "items": [
-            "Nokia (1865)",
-            "Nintendo (1889)",
-            "Sony (1946)",
-            "Apple (1976)"
+            "Nokia",
+            "Nintendo",
+            "Sony",
+            "Apple"
           ]
         }
-      }
+      },
+      "explanation": "Nokia – 1865\nNintendo – 1889\nSony – 1946\nApple – 1976"
     }
   },
   {
@@ -392,13 +393,14 @@
       "kind": {
         "Order": {
           "items": [
-            "Hermès (1837)",
-            "Levi Strauss & Co. (1853)",
-            "Prada (1913)",
-            "Gucci (1921)"
+            "Hermès",
+            "Levi Strauss & Co.",
+            "Prada",
+            "Gucci"
           ]
         }
-      }
+      },
+      "explanation": "Hermès – 1837\nLevi Strauss & Co. – 1853\nPrada – 1913\nGucci – 1921"
     }
   },
   {

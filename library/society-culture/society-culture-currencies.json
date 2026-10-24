@@ -484,13 +484,14 @@
       "kind": {
         "Order": {
           "items": [
-            "British pound banknotes (1694)",
-            "US dollar (1862)",
-            "Japanese yen (1872)",
-            "Euro banknotes (2002)"
+            "British pound banknotes",
+            "US dollar",
+            "Japanese yen",
+            "Euro banknotes"
           ]
         }
-      }
+      },
+      "explanation": "British pound banknotes – 1694\nUS dollar – 1862\nJapanese yen – 1872\nEuro banknotes – 2002"
     }
   },
   {
@@ -502,13 +503,14 @@
       "kind": {
         "Order": {
           "items": [
-            "Indian rupee (1540)",
-            "US dollar (1792)",
-            "Japanese yen (1871)",
-            "Euro (1999)"
+            "Indian rupee",
+            "US dollar",
+            "Japanese yen",
+            "Euro"
           ]
         }
-      }
+      },
+      "explanation": "Indian rupee – 1540\nUS dollar – 1792\nJapanese yen – 1871\nEuro – 1999"
     }
   },
   {
