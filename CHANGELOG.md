@@ -6,6 +6,8 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-10-24
+
 ### Added
 
 - Number questions can be scored three ways: the closest guesses win (as before), the closer the more points (full
