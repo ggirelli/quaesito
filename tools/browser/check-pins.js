@@ -15,7 +15,7 @@ const offset = (page, pinSel, at) => page.evaluate((pinSel, at) => {
   const ed = await L.openAdmin(ctx, `/admin/quiz/${ctx.id}`, 1280, 900);
   await ed.waitForSelector('.question-text');
   await L.clickText(ed, '.segmented button', 'Pin');
-  await (await ed.$('.question input[accept="image/*"]')).uploadFile(picture);
+  await (await ed.$('.question input[accept^="image/*"]')).uploadFile(picture);
   // First click: the picture alone, to learn its shape; second: on the drawing.
   for (const [fx, fy] of [[0.3, 0.3], [0.7, 0.25]]) {
     const map = await ed.waitForSelector('.pin-edit .pin-map');
