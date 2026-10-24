@@ -16,7 +16,7 @@ works without internet, and needs no accounts or app installs.
 [Download](https://github.com/ggirelli/quaesito/releases/latest){ .md-button .md-button--primary }
 [Read the guide](getting-started.md){ .md-button }
 
-For Windows (64-bit), Macs with Apple silicon and Linux (x86-64 and ARM64); see
+For Windows (64-bit, also on Arm), Macs (Apple silicon and Intel) and Linux (x86-64 and ARM64); see
 [which download](getting-started.md#which-download). Free and open source (MIT).
 
 </div>

@@ -13,6 +13,8 @@ All notable changes to quaesito are listed here. The format follows
   move to format 3 for it; older versions ask before importing a quiz that uses it.
 - The big screen gives number guesses a bonus or malus with − and +, as for typed answers.
 - **Drag to reorder** in the editor's table view: hold a row and drag it to move the question or slide.
+- A download for Intel Macs (`macos-x86_64`). The Windows download is now tested on Windows on Arm too, where it runs
+  under Windows' x64 emulation.
 
 ### Changed
 

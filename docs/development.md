@@ -30,10 +30,9 @@ just docs    # this site, live at http://127.0.0.1:8000
 
 ## Running it from source
 
-There is no download for Intel Macs, or for systems the
-[downloads](getting-started.md#which-download) do not cover. With the tools above, `just play`
-builds a release and serves it on the LAN, as the start scripts do: quizzes and pictures are kept
-in `data` in the checkout. CI does not build or test these systems. On a Linux server, see
+For systems the [downloads](getting-started.md#which-download) do not cover. With the tools
+above, `just play` builds a release and serves it on the LAN, as the start scripts do: quizzes and
+pictures are kept in `data` in the checkout. CI does not build or test these systems. On a Linux server, see
 [building from source](deployment.md#building-from-source).
 
 ## The user guide

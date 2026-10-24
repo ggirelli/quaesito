@@ -132,7 +132,6 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 - No automated browser tests in CI; `tools/browser` has headless-Chrome checks to run by hand.
 - The repository is private: release downloads and private vulnerability reporting are only
   available to collaborators until it is made public (the documentation site is public).
-- No download for Intel Macs yet (build from source there).
 - `main` is protected by the "Protect main" ruleset: no deletion or force pushes, linear history,
   and pull requests with the CI (`test`, `clippy`, `fmt`, `deny`) and docs (`build`) checks
   passing. Nobody bypasses it: every change, the maintainer's too, goes through a pull request.
