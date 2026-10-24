@@ -128,3 +128,27 @@ pub fn page_origin() -> String {
         String::new()
     }
 }
+
+/// The current page's path, query and fragment, e.g. `/admin/quiz/abc#q3`.
+#[must_use]
+pub fn page_path() -> String {
+    #[cfg(target_arch = "wasm32")]
+    {
+        web_sys::window()
+            .map(|w| {
+                let location = w.location();
+                let part = |part: Result<String, _>| part.unwrap_or_default();
+                format!(
+                    "{}{}{}",
+                    part(location.pathname()),
+                    part(location.search()),
+                    part(location.hash())
+                )
+            })
+            .unwrap_or_default()
+    }
+    #[cfg(not(target_arch = "wasm32"))]
+    {
+        String::new()
+    }
+}
