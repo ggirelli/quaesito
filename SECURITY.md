@@ -27,4 +27,7 @@ Quaesito is meant to run on a trusted local network for a game night:
 - Uploaded pictures are decoded and re-encoded before they are stored; soundtracks are only
   accepted in recognised audio formats, and imported quiz bundles go through the same checks.
 - Traffic is plain HTTP. Do not expose the server to the internet without a reverse proxy that
-  adds TLS, and choose a strong admin password if you do.
+  adds TLS, and choose a strong admin password if you do. TLS protects the traffic, not quaesito
+  itself: the code has not been audited, and exposing it remains at your own risk. See
+  [hosting on the internet](https://ggirelli.github.io/quaesito/deployment/) for the setup, its
+  limits and its security notes.

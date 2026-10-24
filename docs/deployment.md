@@ -30,6 +30,23 @@ players' browsers ──HTTPS──▶ Caddy (ports 80, 443) ──HTTP and WebS
                                                                      /var/lib/quaesito (data)
 ```
 
+## Local network or internet
+
+| | On a trusted local network | On the internet |
+|---|---|---|
+| Who can reach it | devices on your Wi-Fi | anyone, anywhere |
+| Set up | unpack and start ([getting started](getting-started.md)) | a Linux server, a hostname and a reverse proxy (this page) |
+| Traffic | plain HTTP, readable by others on the same network | HTTPS, through the reverse proxy |
+| Who can join a game | anyone on the network with its join code | anyone on the internet with its join code |
+| What protects the admin pages | the admin password, with limits on guessing it ([security notes](#security-notes)) | the same |
+| Made for it | yes: a game night among people you trust | no: **at your own risk**, see the warning above |
+
+A **reverse proxy** is a web server, such as Caddy or nginx, that faces the internet and passes
+requests on to quaesito. Here it adds HTTPS: it encrypts the traffic between players and the
+server, so others cannot read or change it on the way. **HTTPS does not make quaesito itself
+safe to expose:** any weakness in quaesito stays reachable through it.
+Run the proxy on the same machine as quaesito; see *Before going public* below.
+
 ## What you need
 
 - A Linux server with a public IP address: x86-64 or ARM64 (64-bit), with systemd. The steps use
