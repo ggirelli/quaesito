@@ -34,7 +34,7 @@ with the big screen and two phones side by side.
 2. Run the checks CI runs:
 
    ```sh
-   just check   # rustfmt, clippy (server and wasm, pedantic, warnings are errors), tests, cargo-deny
+   just check   # rustfmt, clippy (server and wasm, pedantic, warnings are errors), rustdoc, tests, cargo-deny
    ```
 
 3. Add or update tests. The game logic lives in `src/server/engine.rs` and is fully unit tested

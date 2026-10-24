@@ -39,6 +39,18 @@ jobs:
       - uses: taiki-e/install-action@just
       - run: just clippy
 
+  doc:
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+      - uses: taiki-e/install-action@just
+      - run: just doc
+
   test:
     if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-latest

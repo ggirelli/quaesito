@@ -296,7 +296,7 @@ fn content_type(name: &str) -> Option<&'static str> {
 /// Axum handler for `GET /media/{name}`.
 ///
 /// Honours single byte ranges so browsers can seek in soundtracks and videos, reading only the
-/// slice asked for; open-ended ranges get at most [`MAX_SLICE_BYTES`] at a time. Files are
+/// slice asked for; open-ended ranges get at most `MAX_SLICE_BYTES` at a time. Files are
 /// streamed, so big videos asked for many times at once do not fill the memory.
 pub async fn serve(Path(name): Path<String>, headers: HeaderMap) -> Response {
     use tokio::io::AsyncSeekExt;
