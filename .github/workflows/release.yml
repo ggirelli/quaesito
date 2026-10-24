@@ -22,13 +22,15 @@ jobs:
           - { name: linux-x86_64, os: ubuntu-22.04, start: start.sh, archive: tar.gz }
           - { name: linux-arm64, os: ubuntu-22.04-arm, start: start.sh, archive: tar.gz }
           - { name: macos-arm64, os: macos-14, start: start.command, archive: tar.gz }
+          # Intel Macs: built on Apple silicon, whose Rosetta 2 runs it for the smoke test.
+          - { name: macos-x86_64, os: macos-14, target: x86_64-apple-darwin, start: start.command, archive: tar.gz }
           - { name: windows-x86_64, os: windows-latest, start: start.bat, archive: zip }
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v5
       - uses: dtolnay/rust-toolchain@stable
         with:
-          targets: wasm32-unknown-unknown
+          targets: wasm32-unknown-unknown${{ matrix.target && format(',{0}', matrix.target) || '' }}
       - uses: Swatinem/rust-cache@v2
         with:
           key: ${{ matrix.name }}
@@ -39,14 +41,18 @@ jobs:
         uses: taiki-e/install-action@v2
         with:
           tool: dioxus-cli@${{ env.DIOXUS_CLI_VERSION }}
+      # Naming a target for the server build replaces dx's own server arguments, so the features too.
       - name: Bundle
-        run: dx bundle --platform web --release --out-dir dist
+        run: dx bundle --platform web --release --out-dir dist ${{ matrix.target && format('@server --target {0} --no-default-features --features server', matrix.target) || '' }}
       # The server starts from another folder and answers: the app's page, its script and an admin
       # login.
       - name: Smoke test
         if: runner.os != 'Windows'
         shell: bash
         run: |
+          target='${{ matrix.target }}'
+          file -b dist/server
+          [ -z "$target" ] || file -b dist/server | grep -q "${target%%-*}"
           export IP=127.0.0.1 PORT=8090 QUAESITO_ADMIN_PASSWORD=smoke QUAESITO_DATA_DIR="$RUNNER_TEMP/data"
           (cd "$RUNNER_TEMP" && exec "$GITHUB_WORKSPACE/dist/server") &
           for _ in $(seq 60); do curl -fsS -o /dev/null "http://$IP:$PORT/" && break; sleep 1; done
@@ -87,9 +93,45 @@ jobs:
           path: out/quaesito-*.*
           if-no-files-found: error
 
+  # The Windows download, unpacked and started from another folder, on x64 and on Windows on Arm
+  # (under its x64 emulation): it answers the app's page, its script and an admin login.
+  smoke-windows:
+    name: smoke (windows-x86_64 on ${{ matrix.os }})
+    needs: package
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, windows-11-arm]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          name: windows-x86_64
+      - name: Smoke test
+        shell: pwsh
+        run: |
+          "Running on $env:PROCESSOR_ARCHITECTURE"
+          Expand-Archive -Path quaesito-*.zip -DestinationPath "$env:RUNNER_TEMP\app"
+          $server = Get-ChildItem "$env:RUNNER_TEMP\app\*\server.exe"
+          $env:IP = '127.0.0.1'; $env:PORT = '8090'; $env:QUAESITO_ADMIN_PASSWORD = 'smoke'
+          $env:QUAESITO_DATA_DIR = "$env:RUNNER_TEMP\data"
+          $proc = Start-Process $server.FullName -WorkingDirectory $env:RUNNER_TEMP -PassThru
+          $base = 'http://127.0.0.1:8090'
+          $page = $null
+          foreach ($i in 1..60) {
+            try { $page = Invoke-WebRequest "$base/" -UseBasicParsing; break } catch { Start-Sleep 1 }
+          }
+          if (-not $page) { throw 'The server did not answer' }
+          $script = [regex]::Match($page.Content, '/assets/quaesito-[^"]*\.js').Value
+          Invoke-WebRequest "$base$script" -UseBasicParsing | Out-Null
+          $token = Invoke-RestMethod "$base/api/admin/login" -Method Post `
+            -ContentType 'application/json' -Body '{"password":"smoke"}'
+          if ($token -notmatch '^[0-9a-f]{32}$') { throw "Unexpected login answer: $token" }
+          Stop-Process $proc
+
   release:
     if: github.ref_type == 'tag'
-    needs: package
+    needs: [package, smoke-windows]
     runs-on: ubuntu-latest
     permissions:
       contents: write
