@@ -41,6 +41,11 @@ clippy-web:
 # Lint both builds
 clippy: clippy-server clippy-web
 
+# Check the API docs of both builds, failing on warnings (such as links to private items)
+doc:
+    RUSTDOCFLAGS="-D warnings" cargo doc --no-deps --no-default-features --features server --locked
+    RUSTDOCFLAGS="-D warnings" cargo doc --no-deps --target wasm32-unknown-unknown --locked
+
 # Run the test suite
 test:
     cargo test --no-default-features --features server --locked
@@ -58,7 +63,7 @@ deny:
     cargo deny --locked check
 
 # Everything CI checks
-check: fmt-check clippy test deny
+check: fmt-check clippy doc test deny
 
 # Print the workspace's version
 version:

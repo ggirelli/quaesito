@@ -51,7 +51,7 @@ and [`uv`](https://docs.astral.sh/uv/) (for the user guide, which `just serve` b
 ```sh
 just serve   # hot-reloading dev server (admin password "quaesito")
 just play    # release build served on the LAN, for real games
-just check   # fmt, clippy, tests and cargo-deny, as in CI
+just check   # fmt, clippy, rustdoc, tests and cargo-deny, as in CI
 just docs    # the user guide, live at http://127.0.0.1:8000
 ```
 
