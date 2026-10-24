@@ -6,6 +6,12 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- The [Playground](https://ggirelli.github.io/quaesito/playground/): a short quiz to try in the browser, with its big screen and a pretend
+  phone side by side, as on the test page. It runs entirely in the browser, with the app's own game engine and
+  screens; nothing is installed or sent anywhere.
+
 ### Changed
 
 - For contributors: the code is split into a Cargo workspace. The rules (quizzes, scoring, the game engine) are in

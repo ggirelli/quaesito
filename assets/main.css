@@ -3543,6 +3543,101 @@ button.joker {
   place-items: center;
 }
 
+/* The Playground (crates/playground): the test page's layout, but its big screen and phone are
+   parts of the page rather than frames. The big screen's box is a container, and its main sizes
+   follow the box (cqw, cqh) where the real screen follows the window (vw, vh). */
+.playground-screen {
+  container-type: size;
+  height: max(30rem, calc(100dvh - 6rem));
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+
+.playground-screen .host {
+  height: 100%;
+  padding: 2cqh 3cqw;
+  gap: 2cqh;
+  font-size: clamp(0.75rem, min(1.6cqw, 2.8cqh), 2.2rem);
+}
+
+.playground-screen .host-main {
+  gap: 2cqh;
+}
+
+.playground-screen .slide {
+  gap: 3cqh;
+}
+
+.playground-screen .closed-layout {
+  gap: 3cqw;
+}
+
+/* As the real screen does on a narrow window (see "Small screens"). */
+@container (max-width: 720px) {
+  .playground-screen .closed-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.playground-screen .results-slide .standings {
+  width: min(60rem, 90cqw);
+  font-size: min(1.3em, (100cqh - 13em) / (var(--rows, 6) * 3.6));
+}
+
+.playground-screen .podium {
+  gap: 2cqw;
+  padding-top: 2cqh;
+}
+
+.playground-screen .podium-spot {
+  width: 22cqw;
+}
+
+.playground-screen .podium-spot .avatar {
+  width: 11cqh;
+  height: 11cqh;
+  font-size: 5cqh;
+}
+
+.playground-screen .podium-spot.p1 .podium-block {
+  height: 20cqh;
+}
+
+.playground-screen .podium-spot.p2 .podium-block {
+  height: 14cqh;
+}
+
+.playground-screen .podium-spot.p3 .podium-block {
+  height: 9cqh;
+}
+
+.playground-intro {
+  text-align: center;
+}
+
+/* Side by side down to small laptops: the phone is narrow. */
+@media (min-width: 801px) and (max-width: 1100px) {
+  .playground .test-layout {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+.playground-phone {
+  width: 330px;
+  height: max(30rem, min(640px, calc(100dvh - 8rem)));
+  overflow-y: auto;
+  border: 8px solid #000;
+  border-radius: 28px;
+  background: var(--bg);
+}
+
+.playground-phone .player,
+.playground-phone .page.center {
+  min-height: 100%;
+}
+
 /* A picture with pins (pin questions): one SVG drawing, so pins stay on their spot. */
 .pin-map {
   display: block;

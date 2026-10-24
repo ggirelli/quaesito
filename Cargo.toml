@@ -9,7 +9,7 @@ publish = false
 
 # The app is the root package; its domain logic and server live in member crates.
 [workspace]
-members = ["crates/core", "crates/server"]
+members = ["crates/core", "crates/playground", "crates/server"]
 resolver = "3"
 
 # Versions shared by several crates of the workspace.
@@ -24,7 +24,7 @@ serde_json = "1"
 uuid = { version = "1", features = ["v4"] }
 
 [dependencies]
-dioxus = { workspace = true, features = ["router", "fullstack"] }
+dioxus = { workspace = true, features = ["router"] }
 qrcode = { version = "0.14", default-features = false, features = ["svg"] }
 quaesito-core.workspace = true
 serde.workspace = true
@@ -42,8 +42,12 @@ web-sys = { version = "0.3", features = ["Location", "Storage", "Window"] }
 
 [features]
 default = ["web"]
-web = ["dioxus/web"]
-server = ["dioxus/server", "dep:anyhow", "dep:quaesito-server", "dep:uuid"]
+# `dioxus/fullstack` by name: dx only builds the server when it sees it here.
+web = ["dioxus/web", "dioxus/fullstack", "fullstack"]
+server = ["dioxus/server", "fullstack", "dep:anyhow", "dep:quaesito-server", "dep:uuid"]
+# The pages that talk to a server. Without it the crate only offers what runs in the browser alone:
+# the screens' parts and the Playground (see crates/playground).
+fullstack = ["dioxus/fullstack"]
 
 [lints]
 workspace = true

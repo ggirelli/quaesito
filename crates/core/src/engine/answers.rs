@@ -1,6 +1,6 @@
 //! Taking the teams' answers and the judge's amendments to typed ones.
 
-use std::time::Instant;
+use web_time::Instant;
 
 use super::{Game, Phase, Refusal, Submission};
 use crate::matching::normalize;

@@ -6,6 +6,9 @@ use super::{seconds, use_precise_times};
 use crate::protocol::StandingRow;
 use crate::ui::widgets::TeamAvatar;
 
+/// Teams listed on a results slide.
+pub(super) const RESULTS_SHOWN: usize = 10;
+
 /// How many teams the between-questions leaderboard shows.
 pub(super) const STANDINGS_SHOWN: usize = 6;
 

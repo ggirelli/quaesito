@@ -114,6 +114,7 @@ fn localhost_link(message: &str) -> Option<(&str, &str, &str)> {
 }
 
 /// Human-readable message for a failed server call.
+#[cfg(feature = "fullstack")]
 #[must_use]
 pub fn message(err: &ServerFnError) -> String {
     match err {
@@ -271,6 +272,10 @@ pub fn TeamAvatar(team: crate::protocol::TeamInfo, #[props(default)] class: Stri
 
 /// Line icons drawn inline so they follow the text colour (shapes from Feather, MIT).
 #[derive(Clone, Copy, PartialEq, Eq)]
+#[cfg_attr(
+    not(feature = "fullstack"),
+    allow(dead_code, reason = "most icons are the server pages'")
+)]
 pub enum IconKind {
     Settings,
     Help,

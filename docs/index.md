@@ -15,6 +15,7 @@ works without internet, and needs no accounts or app installs.
 
 [Download](https://github.com/ggirelli/quaesito/releases/latest){ .md-button .md-button--primary }
 [Read the guide](getting-started.md){ .md-button }
+[Try it in your browser](https://ggirelli.github.io/quaesito/playground/){ .md-button }
 
 For Windows (64-bit, also on Arm), Macs (Apple silicon and Intel) and Linux (x86-64 and ARM64); see
 [which download](getting-started.md#which-download). Free and open source (MIT).
@@ -62,8 +63,10 @@ For Windows (64-bit, also on Arm), Macs (Apple silicon and Intel) and Linux (x86
 A quiz played on the test page, narrated: the big screen on the left, two teams' phones on the
 right, from the lobby through the questions to the podium.
 
-There is no online demo to try. To try it yourself, [download it](getting-started.md): it comes
-with a **Demo quiz** you can play on your own with **🧪 Test**.
+To try it with nothing to install, play the
+[Playground](https://ggirelli.github.io/quaesito/playground/): a short quiz with the big screen and
+a pretend phone side by side, in your browser. For the whole app, [download it](getting-started.md):
+it comes with a **Demo quiz** you can play on your own with **🧪 Test**.
 
 <div class="videos" markdown>
 <figure markdown>

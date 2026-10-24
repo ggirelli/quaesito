@@ -1,0 +1,7 @@
+[application]
+name = "quaesito-playground"
+
+[web.app]
+title = "Quaesito Playground"
+# Published at https://ggirelli.github.io/quaesito/playground/
+base_path = "quaesito/playground"

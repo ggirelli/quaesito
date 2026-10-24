@@ -1,0 +1,81 @@
+{
+  "id": "playground",
+  "title": "A quick quiz",
+  "questions": [
+    {
+      "kind": { "Slide": { "title": "Welcome!" } },
+      "text": "A short quiz with one question of each kind, played right here in your browser. Answer on the phone; the big screen shows the questions and the results."
+    },
+    {
+      "text": "Which planet has the most known moons?",
+      "answers": [
+        { "text": "Jupiter", "correct": false },
+        { "text": "Saturn", "correct": true },
+        { "text": "Uranus", "correct": false },
+        { "text": "Neptune", "correct": false }
+      ],
+      "explanation": "Saturn has 274 known moons, Jupiter 97."
+    },
+    {
+      "text": "Which of these are mammals? Pick every correct answer.",
+      "answers": [
+        { "text": "Dolphin", "correct": true },
+        { "text": "Bat", "correct": true },
+        { "text": "Shark", "correct": false },
+        { "text": "Penguin", "correct": false }
+      ],
+      "explanation": "Dolphins and bats feed their young on milk; sharks are fish and penguins are birds."
+    },
+    {
+      "kind": { "TrueFalse": { "answer": true } },
+      "text": "Honey found in ancient Egyptian tombs was still edible.",
+      "explanation": "Honey is too sugary and acidic for microbes, so it keeps for thousands of years."
+    },
+    {
+      "kind": { "Text": { "accepted": ["Canberra"] } },
+      "text": "What is the capital of Australia?",
+      "explanation": "Canberra was built as a compromise between Sydney and Melbourne."
+    },
+    {
+      "kind": { "Number": { "answer": 88 } },
+      "text": "How many keys does a standard piano have?",
+      "explanation": "52 white keys and 36 black ones. The closer the guess, the more points."
+    },
+    {
+      "kind": { "Order": { "items": ["Pyramids of Giza", "Colosseum", "Eiffel Tower", "Burj Khalifa"] } },
+      "text": "Oldest first!",
+      "explanation": "Giza: about 2560 BC. Colosseum: AD 80. Eiffel Tower: 1889. Burj Khalifa: 2010."
+    },
+    {
+      "kind": {
+        "Parts": {
+          "parts": [
+            { "label": "Painter", "accepted": ["Leonardo da Vinci", "Leonardo", "da Vinci"] },
+            { "label": "City", "accepted": ["Paris"] }
+          ]
+        }
+      },
+      "text": "The Mona Lisa: who painted it, and in which city can you see it?",
+      "multiplier": 2,
+      "explanation": "Leonardo painted it in the early 1500s; it hangs in the Louvre. This question counts double."
+    },
+    {
+      "kind": {
+        "Pairs": {
+          "pairs": [
+            { "left": { "text": "Kangaroo" }, "right": { "text": "Joey" } },
+            { "left": { "text": "Swan" }, "right": { "text": "Cygnet" } },
+            { "left": { "text": "Owl" }, "right": { "text": "Owlet" } },
+            { "left": { "text": "Hare" }, "right": { "text": "Leveret" } }
+          ]
+        }
+      },
+      "text": "Match each animal with its young.",
+      "explanation": "Joey, cygnet, owlet, leveret."
+    },
+    {
+      "kind": { "Slide": { "title": "That's it!" } },
+      "text": "Quaesito runs on your own computer for game nights: the big screen on a TV, and every team answers on its own phone."
+    }
+  ]
+}

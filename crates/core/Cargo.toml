@@ -13,6 +13,8 @@ schemars = { workspace = true, optional = true }
 serde.workspace = true
 serde_json.workspace = true
 unicode-normalization = "0.1"
+# The engine's clock: std's `Instant` natively, the browser's clock in wasm.
+web-time = "1"
 
 [features]
 # JSON Schema derives on the quiz types, to publish the quiz file format (tests only).
