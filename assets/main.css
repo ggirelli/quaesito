@@ -2712,8 +2712,11 @@ ol.order-items {
   content: "🏆";
 }
 
+/* On a short screen the blocks give up height rather than push the screen's content out of view:
+   the final buttons are taller than the reveal one, and land just as first place takes its spot. */
 .podium {
   flex: 1;
+  min-height: 0;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -2727,6 +2730,7 @@ ol.order-items {
   align-items: center;
   gap: 1vh;
   width: 22vw;
+  max-height: 100%;
 }
 
 /* A revealed spot: its block grows from the floor, then the team pops in whole. Sliding the spot
@@ -2814,6 +2818,11 @@ ol.order-items {
   gap: 0.6vw;
   font-size: 0.8em;
   color: var(--muted);
+}
+
+/* No bounce: the bottom row would spill out of view while it grows past its size. */
+.runners-up .team-chip {
+  animation-timing-function: ease-out;
 }
 
 .auto-note {

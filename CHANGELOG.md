@@ -10,6 +10,8 @@ All notable changes to quaesito are listed here. The format follows
 
 - The big screen of a game that isn't running (an unknown code, or a game that has ended) says so, with a way back
   to the admin page, instead of loading forever.
+- The podium no longer spills off a small big screen once first place is shown, nor for a moment as the other
+  teams' names come in.
 
 ## [0.7.0] - 2026-10-24
 
