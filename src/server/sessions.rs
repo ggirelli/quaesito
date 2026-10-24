@@ -88,7 +88,7 @@ impl Session {
         }
     }
 
-    /// Waits until `team` may act again, so its actions run at most every [`TEAM_ACTION_GAP`].
+    /// Waits until `team` may act again, so its actions run at most every `TEAM_ACTION_GAP`.
     pub async fn pace(&self, team: u32) {
         let slot = {
             let mut actions = self.actions.lock().unwrap_or_else(PoisonError::into_inner);
