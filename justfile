@@ -4,25 +4,29 @@ export NO_MKDOCS_2_WARNING := "true"
 # The dioxus-cli version that builds the app; Cargo.lock keeps Dioxus at the same version (see `just tag`)
 dx-version := "0.7.10"
 
-# List available recipes
+# List recipes
 default:
-    @just --list
+    @just --list --unsorted
 
-# Run the app with hot reload, reachable from phones on the LAN (with a fresh user guide at /docs/)
+# Run the app with hot reload on the LAN
+[group('run')]
 serve port="8080": docs-build
     QUAESITO_ADMIN_PASSWORD="${QUAESITO_ADMIN_PASSWORD:-quaesito}" dx serve --platform web --addr 0.0.0.0 --port {{port}}
 
-# Build an optimized release bundle into ./dist, with the user guide in ./dist/docs as in the downloads
+# Build the release bundle into ./dist
+[group('run')]
 bundle:
     dx bundle --platform web --release --out-dir dist
     rm -rf dist/docs
     uvx --with-requirements docs/requirements.txt mkdocs build --strict --site-dir dist/docs
 
-# Build and run the release bundle on the LAN; quizzes and pictures live in ./data
+# Build and run the release bundle on the LAN
+[group('run')]
 play port="8080": bundle
     cd dist && IP=0.0.0.0 PORT={{port}} QUAESITO_DATA_DIR="{{justfile_directory()}}/data" ./server
 
 # Build the Playground into ./target/pages
+[group('playground')]
 playground:
     #!/usr/bin/env bash
     set -euo pipefail
@@ -34,10 +38,12 @@ playground:
     cp -r "$target/playground/public" target/pages/quaesito/playground
 
 # Serve the Playground at /quaesito/playground/
+[group('playground')]
 playground-serve port="8094": playground
     cd target/pages && python3 -m http.server {{port}} --bind 127.0.0.1
 
 # Play the Playground in a headless browser
+[group('playground')]
 playground-check port="8094": playground
     #!/usr/bin/env bash
     set -euo pipefail
@@ -48,67 +54,83 @@ playground-check port="8094": playground
     sleep 1
     PLAYGROUND="http://127.0.0.1:{{port}}/quaesito/playground/" node tools/browser/check-playground.js
 
-# Format all code
+# Format the code
+[group('checks')]
 fmt:
     cargo fmt --all
 
-# Check formatting without modifying files
+# Check formatting
+[group('checks')]
 fmt-check:
     cargo fmt --all -- --check
 
-# Lint the server build (every crate of the workspace)
+# Lint the server build
+[group('checks')]
 clippy-server:
     cargo clippy --workspace --no-default-features --features quaesito/server --all-targets --locked -- -D warnings
 
-# Lint the wasm client build (the app and the crates it builds into the browser)
+# Lint the browser build
+[group('checks')]
 clippy-web:
     cargo clippy --target wasm32-unknown-unknown -p quaesito -p quaesito-core --all-targets --locked -- -D warnings
 
 # Lint the Playground build (no fullstack)
+[group('checks')]
 clippy-playground:
     cargo clippy --target wasm32-unknown-unknown -p quaesito-playground --all-targets --locked -- -D warnings
 
 # Lint every build
+[group('checks')]
 clippy: clippy-server clippy-web clippy-playground
 
-# Check the API docs of both builds, failing on warnings (such as links to private items)
+# Check the API docs
+[group('checks')]
 doc:
     RUSTDOCFLAGS="-D warnings" cargo doc --workspace --no-deps --no-default-features --features quaesito/server --locked
     RUSTDOCFLAGS="-D warnings" cargo doc --no-deps --target wasm32-unknown-unknown -p quaesito -p quaesito-core --locked
 
-# Test the rules crate on its own, and check it builds for the browser (no server code)
+# Test the core crate and its wasm build
+[group('checks')]
 core:
     cargo test -p quaesito-core --locked
     cargo check -p quaesito-core --target wasm32-unknown-unknown --locked
 
-# Run the test suite of every crate
+# Run every test
+[group('checks')]
 test:
     cargo test --workspace --no-default-features --features quaesito/server --locked
 
-# Rewrite the published schema of the quiz file format (docs/schema) from the quiz types
+# Regenerate the quiz file schema
+[group('quiz data')]
 schema:
     QUAESITO_WRITE_SCHEMA=1 cargo test -p quaesito-server --locked the_published_schema_is_current
 
-# Copy the question edits saved in the app (data/library-edits.json) into the library's topic files
+# Apply saved question edits to the library
+[group('quiz data')]
 library-apply-edits edits="data/library-edits.json":
     uv run tools/library/apply-edits.py {{edits}}
 
-# Check advisories, licenses, bans and sources
+# Check advisories, licences and sources
+[group('checks')]
 deny:
     cargo deny --locked check
 
-# Check that no source file is over 1,000 lines (see CONTRIBUTING.md, "Modules")
+# Check no source file exceeds 1,000 lines
+[group('checks')]
 file-length:
     tools/check/file-length.sh
 
-# Everything CI checks
+# Run everything CI checks
+[group('checks')]
 check: fmt-check file-length clippy doc test core deny
 
-# Print the workspace's version
+# Print the version
+[group('release')]
 version:
     @sed -n 's/^version = "\(.*\)"$/\1/p' Cargo.toml | head -n 1
 
-# Print a version's section of the CHANGELOG (X.Y.Z or Unreleased), failing if it's missing or empty
+# Print a version's CHANGELOG notes
+[group('release')]
 release-notes version:
     #!/usr/bin/env bash
     set -euo pipefail
@@ -119,31 +141,35 @@ release-notes version:
     [ -n "$(tr -d '[:space:]' <<<"$notes")" ] || { echo "The CHANGELOG has no notes for {{version}}." >&2; exit 1; }
     printf '%s\n' "$notes"
 
-# Bump the version (major, minor, patch or X.Y.Z) once the dependencies are updated and checked, committing both (see tools/release/tag.sh)
+# Bump the version and commit
+[group('release')]
 tag *args:
     tools/release/tag.sh {{args}}
 
-# Serve the documentation site with live reload at http://127.0.0.1:8000
+# Serve the docs with live reload
+[group('docs')]
 docs:
     uvx --with-requirements docs/requirements.txt mkdocs serve --livereload
 
-# Build the documentation site into ./site, failing on warnings (as CI does)
+# Build the docs into ./site
+[group('docs')]
 docs-build:
     uvx --with-requirements docs/requirements.txt mkdocs build --strict
 
-# Retake the documentation screenshots (plays a sample quiz in a headless browser)
+# Retake the docs screenshots
+[group('docs')]
 screenshots:
     cd tools/browser && npm install --no-audit --no-fund >/dev/null
     rm -rf target/e2e/data
     tools/browser/run.sh screenshots.js
 
-# Record the demo videos (playing a quiz, building one, the question library) with their
-# voice-overs, captions and transcripts (needs ffmpeg). The voice is chatterbox (expressive, best
-# with an NVIDIA GPU) or kokoro (quick on any computer).
+# Record the demo videos (needs ffmpeg)
+[group('docs')]
 demo-video voice="chatterbox":
     #!/usr/bin/env bash
     set -euo pipefail
     (cd tools/browser && npm install --no-audit --no-fund >/dev/null)
+    # chatterbox is expressive (best with an NVIDIA GPU); kokoro is quick on any computer.
     case "{{voice}}" in
       chatterbox)
         # perth, its watermarker, still imports pkg_resources, gone from setuptools 81.
