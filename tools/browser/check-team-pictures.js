@@ -176,10 +176,14 @@ function cutout(file) {
   expect('done: picture folded away', folded);
   await owls.screenshot({ path: 'out/team-pictures-folded.png' });
   await L.clickText(host, 'button', 'Teams (');
+  // Found by its label: the panel's first option lets new teams join.
   await host.waitForSelector('.panel .check-field input');
-  expect('teams panel: uploads on', await host.$eval('.panel .check-field input', (i) => i.checked));
-  await host.click('.panel .check-field input');
-  const off = await owls.waitForFunction(() => !document.querySelector('.avatar-picker') && !document.querySelector('.avatar.large img'), { timeout: 5000 }).then(() => true, () => false);
+  const uploads = await host.evaluateHandle(() => [...document.querySelectorAll('.panel .check-field')]
+    .find((l) => l.textContent.includes('Teams can add a picture'))?.querySelector('input'));
+  expect('teams panel: uploads on', await uploads.evaluate((i) => i?.checked === true));
+  await uploads.click();
+  // The uploaded picture is the avatar itself (`img.avatar`); without it the phone shows the initial.
+  const off = await owls.waitForFunction(() => !document.querySelector('.avatar-picker') && document.querySelector('span.avatar.large:not(.mascot)'), { timeout: 5000 }).then(() => true, () => false);
   expect('teams panel: uploads off, the picture gone from the phone', off);
   await host.screenshot({ path: 'out/team-pictures-panel.png' });
   const admin = await L.openAdmin(ctx, '/admin');
