@@ -14,6 +14,10 @@ All notable changes to quaesito are listed here. The format follows
 - The big screen gives number guesses a bonus or malus with − and +, as for typed answers.
 - **Drag to reorder** in the editor's table view: hold a row and drag it to move the question or slide.
 
+### Changed
+
+- The table view hides the navigator strip.
+
 ## [0.6.1] - 2026-10-21
 
 ### Fixed

@@ -420,7 +420,7 @@ fn EditorForm(quiz: Quiz) -> Element {
                         if table() { "▦ Card view" } else { "☰ Table view" }
                     }
                 }
-                QuizNavigator { items: nav_items }
+                QuizNavigator { items: nav_items, hidden: table() }
             }
         }
     }
@@ -1047,11 +1047,11 @@ impl NavItem {
 
 /// Every question and slide as a link, in a strip that always fits: thin bars, widened around
 /// the cards on screen and around the pointer. A click (or a finger lifted after sliding along
-/// it) scrolls there.
+/// it) scrolls there. Kept but `hidden` in the table view, where the rows fit on a few screens.
 #[component]
-fn QuizNavigator(items: Vec<NavItem>) -> Element {
+fn QuizNavigator(items: Vec<NavItem>, hidden: bool) -> Element {
     rsx! {
-        nav { class: "editor-nav", aria_label: "Questions and slides",
+        nav { class: "editor-nav", aria_label: "Questions and slides", hidden,
             for item in items {
                 a {
                     key: "{item.anchor}",

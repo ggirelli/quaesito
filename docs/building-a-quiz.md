@@ -35,7 +35,7 @@ by last edit, newest, name or number of questions.
 - **☰ Table view** shows the whole quiz at a glance, a row per question or slide: its type,
   text, time, points, category and topic. Click a row to open its card, or drag it to move it:
   with a mouse, hold the button and drag; on a touch screen, hold your finger still for a moment
-  first.
+  first. The strip of numbers is hidden there.
 
 Each question has an **answer type** (see [question types](question-types.md)), a time limit
 (**Time (s)**, the quiz's default unless you set one) and a **points** multiplier: a ×2 question earns twice
