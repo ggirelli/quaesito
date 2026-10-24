@@ -95,7 +95,9 @@ missing. Recorded effects would sound richer; if you add them I will play them i
   octopus, robot, alien, ghost, dragon, unicorn, sloth, llama, panda), 256×256 cut-outs made by
   `uv run tools/assets/team-mascots.py` from the 1254×1254 originals (kept locally in
   `assets/teams/originals/`, git-ignored). The script removes the checkerboard some generators draw
-  in place of transparency, and centres each mascot with room for its round frame.
+  in place of transparency, and centres each mascot with room for its round frame. The mascots
+  were drawn for the sky-blue background; on the others, a `hue-rotate()` in each `.backdrop-<n>`
+  class keeps the same contrast.
 - `assets/brand/icon.png`: the app icon (1254×1254 source). The app uses `icon-192.png`, a cropped
   192×192 copy, as favicon and logo mark.
 - `assets/brand/logo-{dark,light}.{png,svg}`: logo with word mark (README header).

@@ -25,6 +25,7 @@ jobs:
           components: rustfmt
       - uses: taiki-e/install-action@just
       - run: just fmt-check
+      - run: just file-length
 
   clippy:
     if: ${{ !github.event.pull_request.draft }}

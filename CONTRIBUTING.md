@@ -37,7 +37,7 @@ with the big screen and two phones side by side.
    just check   # rustfmt, clippy (server and wasm, pedantic, warnings are errors), rustdoc, tests, cargo-deny
    ```
 
-3. Add or update tests. The game logic lives in `crates/core/src/engine.rs` and is fully unit tested
+3. Add or update tests. The game logic lives in `crates/core/src/engine/` and is fully unit tested
    (it takes the time and randomness as inputs, so no tricks are needed); scoring is in
    `crates/core/src/scoring.rs`. `quaesito-core` must stay free of server code: `just core` tests it
    alone and builds it for wasm (see [how the code is organised](docs/development.md#how-the-code-is-organised)).
@@ -49,9 +49,11 @@ with the big screen and two phones side by side.
    tools/browser/run.sh check-pins.js assets/brand/lobby.webp
    ```
 
+   CI does not run these checks, so run the ones about the screens you changed.
+
 5. Update the docs that describe what you changed: the user guide in [docs/](docs/) for players
    and hosts (`just docs` previews it), [README.md](README.md) for the overview,
-   [DESIGN.md](planning/DESIGN.md) for how it works, [STATUS.md](planning/STATUS.md) for progress, and an entry in
+   [how it works](docs/architecture.md) for the design, and an entry in
    [CHANGELOG.md](CHANGELOG.md) under "Unreleased".
 6. Open a pull request against `main`. `main` is protected: changes land through pull requests
    (squash or rebase, so history stays linear) once the CI and docs checks pass.
@@ -68,15 +70,48 @@ with the big screen and two phones side by side.
 
 ## Style
 
+### Code
+
 - Code follows `rustfmt` and `clippy::pedantic`; prefer clear names over comments, and comment the
   *why* when it is not obvious.
+- Write code a reader can follow from top to bottom: small functions named after what they do, the
+  main path first and the details after it, no clever shortcuts where a plain loop or `match` reads
+  better.
+- Match the code around you: its naming, its idioms and how much it comments.
+- Every public item has a doc comment, and every module opens with a `//!` comment saying what it
+  is for. Public functions that can fail say when in an `# Errors` section.
+
+### Modules
+
+- A source file stays under 1,000 lines, tests included; `just check` fails on longer ones.
+- Split code by subject, not by kind: a module holds one topic (the teams of a game, the reveal of
+  an answer, the pairs editor) with its types, functions and components together.
+- When a module grows too big, turn it into a folder: `engine.rs` becomes `engine/mod.rs` with
+  sibling modules for its topics. Re-export from `mod.rs` what used to be public, so callers keep
+  their paths. A type's methods can be spread over the modules of its topics, each in its own
+  `impl` block.
+- Code that moves keeps its shape: a pull request that moves code does not also change it, so the
+  diff (`git diff --color-moved`) shows that nothing else changed.
+
+### Tests
+
+- Unit tests live next to the code they test. Small modules keep them in a `#[cfg(test)] mod tests`
+  at the end; big ones put them in a sibling file (`mod tests;` → `tests.rs`, or a `tests/` folder
+  split by subject, like the module itself).
+- Test names are sentences describing the behaviour (`a_joker_doubles_one_question_once`).
+- `quaesito-core` takes the time and randomness as inputs: tests pass them in instead of waiting
+  or mocking.
+
+### Words and commits
+
 - Messages shown to people are short, friendly sentences in British English.
 - Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/)
-  (`feat:`, `fix:`, `docs:`…), with a body explaining what changed and why.
+  (`feat:`, `fix:`, `docs:`…), with a body explaining what changed and why. Pull request titles do
+  too, since they become the commit message when the pull request is squash-merged.
 
 ## Assets
 
-Pictures and sounds the project needs but cannot make itself are listed in [ASSETS.md](planning/ASSETS.md),
+Pictures and sounds the project needs but cannot make itself are listed in [assets/README.md](assets/README.md),
 with prompts for generating them. Only contribute assets you have the right to share under the
 project's licence.
 

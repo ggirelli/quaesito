@@ -67,7 +67,7 @@ which plays a sample quiz in a headless browser; the demo videos come from `just
 The [quiz file format](quiz-file-format.md) schema in `docs/schema` is generated from the quiz types,
 and a test fails when they drift apart. After changing what a quiz holds, `just schema` rewrites it;
 if an older version would misread or lose the change (a new kind of question, a new setting value),
-raise `QUIZ_FORMAT` in `crates/core/src/model.rs` first, so the new schema is published next to the
+raise `QUIZ_FORMAT` in `crates/core/src/model/quiz.rs` first, so the new schema is published next to the
 old one.
 
 ## Contributing
@@ -78,5 +78,4 @@ old one.
   [security policy](https://github.com/ggirelli/quaesito/blob/main/SECURITY.md) explains.
 - **Changes:** see [CONTRIBUTING.md](https://github.com/ggirelli/quaesito/blob/main/CONTRIBUTING.md)
   for the workflow, checks and conventions.
-- **How it works inside:** [DESIGN.md](https://github.com/ggirelli/quaesito/blob/main/planning/DESIGN.md);
-  progress is tracked in [STATUS.md](https://github.com/ggirelli/quaesito/blob/main/planning/STATUS.md).
+- **How it works inside:** see [How it works](architecture.md).

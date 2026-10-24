@@ -29,7 +29,7 @@ ENTRY_KEYS = {"category", "topic", "difficulty", "question"}
 FORBIDDEN = {"image", "explanation_image", "explanation_audio", "audio", "image_reveal", "image_hold_secs", "time_limit_secs", "bonus"}
 ALLOWED_KINDS = {"Choice", "TrueFalse", "Text", "Number", "Order", "Parts", "Pairs"}
 MAX_TEXT, MAX_ANSWER = 120, 40
-MAX_MULTIPLIER = 5  # crates/core/src/model.rs
+MAX_MULTIPLIER = 5  # crates/core/src/model/question.rs
 
 
 def kind_of(q):

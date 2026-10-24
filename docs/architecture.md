@@ -1,4 +1,7 @@
-# Design
+# How it works
+
+How Quaesito works inside: its screens, the game engine, the quiz model, scoring, storage and
+networking. [Development](development.md) explains how the code is organised and how to build it.
 
 ## Overview
 
@@ -15,7 +18,7 @@ The admin password guards `/admin` and `/host/<code>`; the host screen is opened
 dashboard when a quiz is started. Phones join at `/join/<code>`.
 
 The server is authoritative for game state and timing. Each running session is an in-memory state
-machine (`crates/core/src/engine.rs`) that takes the current time as an input, so it is fully unit tested:
+machine (`crates/core/src/engine/`) that takes the current time as an input, so it is fully unit tested:
 
 ```
 Lobby → Question(0) → Closed(0) → … → Closed(n-1) → [Review(0) → … → Review(n-1)] → Podium(0..=3)
@@ -27,7 +30,8 @@ A slide in the list shows as `Slide(i)` in place of a question: there is nothing
 say to watch the big screen, and the review skips it. With automatic advance it stays up for 10
 seconds. `Review` only exists when answers are revealed at the end. A question closes when its time runs
 out, when every connected team has answered, or when the host stops the clock. With automatic
-advance, a per-session timer task moves on after a short pause.
+advance, a per-session timer task moves on after a short pause: 8 seconds after a
+revealed question, 3 when its answers stay hidden, 4 per podium step.
 
 The host can pause (`HostCommand::TogglePause`): the game keeps a `paused_at` instant, its clock
 reads that instant until resumed, and resuming shifts every phase timestamp by the pause length, so
@@ -180,14 +184,14 @@ Everything lives under a data directory (`QUAESITO_DATA_DIR`, default `./data`):
   JSON; bundled media go through the same checks and re-encoding as uploads, get new names, and
   references to missing or rejected media are dropped. Sizes are capped before and after
   decompression.
-- `demo-quiz-added`: written once the built-in demo quiz (`server/demo-quiz.json` and its
+- `demo-quiz-added`: written once the built-in demo quiz (`crates/server/src/demo-quiz.json` and its
   picture, compiled into the server) has been offered. It is added only when there are no quizzes,
   so a new install has an example and deleting it is final.
 - Uploads no quiz or live game uses (pictures, soundtracks, team avatars) are deleted at startup
   and daily, once they are a day old, so files uploaded into an unsaved editor survive.
 
 The user guide (the MkDocs site in `docs/`) ships in the downloads as a built `docs` folder, served
-at `/docs/` by `server::docs`, so help works on a quiz night without internet. Without a local
+at `/docs/` by `quaesito_server::docs`, so help works on a quiz night without internet. Without a local
 copy (`QUAESITO_DOCS_DIR`, `docs` or `site`), `/docs/…` redirects to the hosted guide.
 
 ## Networking
@@ -196,3 +200,13 @@ Plain HTTP on the LAN, no internet required (no CDNs or web fonts). The join lin
 `QUAESITO_PUBLIC_URL` if set, otherwise the machine's outbound LAN address plus the port the host
 page was opened on; the QR code is drawn in the browser. Team leaders get a reconnect token stored
 in `localStorage`, so a sleeping phone can rejoin without losing its score.
+
+## Offline
+
+Nothing the app or the bundled user guide shows comes from the internet: the guide self-hosts its
+fonts (Material's privacy plugin) and shows the repository link without GitHub's facts
+(`overrides/partials/source.html`). The server sends a content security policy that allows only
+itself, which also blocks the Inter font that dx's rebuild notice imports from Google in debug
+builds. `RELEASE=1 DEMO_QUIZ=1 tools/browser/run.sh check-offline.js` fails on any request
+outside the server.
+
