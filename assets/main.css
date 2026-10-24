@@ -1033,6 +1033,40 @@ input.short {
   background: color-mix(in srgb, var(--muted) 10%, transparent);
 }
 
+/* A row held and dragged to move it: it follows the pointer, raised, and the others make room. */
+.quiz-table tbody {
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.quiz-table tbody tr {
+  transition: transform 150ms ease;
+}
+
+.quiz-table.dragging tbody {
+  cursor: grabbing;
+}
+
+.quiz-table.dragging tbody tr:hover {
+  background: none;
+}
+
+.quiz-table.dragging tbody tr.slide-row {
+  background: color-mix(in srgb, var(--muted) 10%, transparent);
+}
+
+.quiz-table.dragging tbody tr.dragged {
+  position: relative;
+  z-index: 1;
+  background: var(--surface-2);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 30%);
+  transition: none;
+}
+
+.quiz-table.settling tbody tr {
+  transition: none;
+}
+
 .quiz-table .col-index {
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
@@ -1089,6 +1123,10 @@ input.short {
 /* Every question and slide as a link. The editor's script sizes them so the strip always fits:
    open around the cards on screen and around the pointer, thin bars elsewhere. Thin bars keep the
    colours that matter: lit on screen, accent at the top of the list, red with a problem. */
+.editor-nav[hidden] {
+  display: none;
+}
+
 .editor-nav {
   flex: 1;
   min-height: 0;
@@ -1209,7 +1247,7 @@ input.short {
   .editor-add,
   .editor-tools {
     position: sticky;
-    top: calc(var(--topbar-height, 4rem) + 2.8rem);
+    top: calc(var(--topbar-height, 4rem) + var(--editor-nav-held, 2.8rem));
     z-index: 4;
     align-self: stretch;
     justify-content: center;
@@ -1220,11 +1258,16 @@ input.short {
 
   .editor-tools {
     grid-area: shuffle;
-    top: calc(var(--topbar-height, 4rem) + 2.8rem + var(--editor-add-height, 3rem));
+    top: calc(var(--topbar-height, 4rem) + var(--editor-nav-held, 2.8rem) + var(--editor-add-height, 3rem));
   }
 
   .editor-shuffle {
     display: contents;
+  }
+
+  /* Without the navigator (in the table view), the bars held under it move up into its place. */
+  .page.editor:has(.editor-nav[hidden]) {
+    --editor-nav-held: 0rem;
   }
 
   .editor-nav {
