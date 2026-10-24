@@ -58,4 +58,4 @@ The voice is generated with [Chatterbox](https://github.com/resemble-ai/chatterb
 open-weight text-to-speech model that can sound excited, and the videos are recorded by
 `just demo-video`, which drives the app in a headless browser. Each line starts when its caption
 appears on screen; recordings placed in `assets/voice/` replace the generated voice (see
-`planning/ASSETS.md`).
+[`assets/README.md`](https://github.com/ggirelli/quaesito/blob/main/assets/README.md)).

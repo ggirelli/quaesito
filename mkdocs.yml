@@ -74,6 +74,7 @@ nav:
   - Troubleshooting: troubleshooting.md
   - Development:
       - Development: development.md
+      - How it works: architecture.md
       - How it was made: how-it-was-made.md
 
 markdown_extensions:

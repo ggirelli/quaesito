@@ -78,5 +78,4 @@ old one.
   [security policy](https://github.com/ggirelli/quaesito/blob/main/SECURITY.md) explains.
 - **Changes:** see [CONTRIBUTING.md](https://github.com/ggirelli/quaesito/blob/main/CONTRIBUTING.md)
   for the workflow, checks and conventions.
-- **How it works inside:** [DESIGN.md](https://github.com/ggirelli/quaesito/blob/main/planning/DESIGN.md);
-  progress is tracked in [STATUS.md](https://github.com/ggirelli/quaesito/blob/main/planning/STATUS.md).
+- **How it works inside:** see [How it works](architecture.md).

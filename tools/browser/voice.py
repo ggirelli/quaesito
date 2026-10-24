@@ -3,7 +3,7 @@
 Each sentence is spoken on its own and the sentences are joined with a pause, so the voice takes
 its time instead of rushing a whole line in one breath. Writes out/voice/<video>/<id>.wav and
 out/voice/<video>/manifest.json (each line's duration in milliseconds), for every video or those named after the engine. A recording in
-assets/voice/<id>.{wav,mp3,m4a,ogg,flac} (see planning/ASSETS.md) replaces the generated voice for
+assets/voice/<id>.{wav,mp3,m4a,ogg,flac} (see assets/README.md) replaces the generated voice for
 that line. Run with uv, through `just demo-video`, which picks the engine:
 
 - chatterbox (default): Resemble AI's Chatterbox, which can act excited. Fast on an NVIDIA GPU,

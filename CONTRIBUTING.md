@@ -49,9 +49,11 @@ with the big screen and two phones side by side.
    tools/browser/run.sh check-pins.js assets/brand/lobby.webp
    ```
 
+   CI does not run these checks, so run the ones about the screens you changed.
+
 5. Update the docs that describe what you changed: the user guide in [docs/](docs/) for players
    and hosts (`just docs` previews it), [README.md](README.md) for the overview,
-   [DESIGN.md](planning/DESIGN.md) for how it works, [STATUS.md](planning/STATUS.md) for progress, and an entry in
+   [how it works](docs/architecture.md) for the design, and an entry in
    [CHANGELOG.md](CHANGELOG.md) under "Unreleased".
 6. Open a pull request against `main`. `main` is protected: changes land through pull requests
    (squash or rebase, so history stays linear) once the CI and docs checks pass.
@@ -109,7 +111,7 @@ with the big screen and two phones side by side.
 
 ## Assets
 
-Pictures and sounds the project needs but cannot make itself are listed in [ASSETS.md](planning/ASSETS.md),
+Pictures and sounds the project needs but cannot make itself are listed in [assets/README.md](assets/README.md),
 with prompts for generating them. Only contribute assets you have the right to share under the
 project's licence.
 

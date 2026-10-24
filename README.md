@@ -55,8 +55,8 @@ just check   # fmt, clippy, rustdoc, tests and cargo-deny, as in CI
 just docs    # the user guide, live at http://127.0.0.1:8000
 ```
 
-More in the [development guide](https://ggirelli.github.io/quaesito/development/), [DESIGN.md](planning/DESIGN.md) and
-[STATUS.md](planning/STATUS.md).
+More in the [development guide](https://ggirelli.github.io/quaesito/development/) and
+[how it works](https://ggirelli.github.io/quaesito/architecture/).
 
 ## Contributing
 
