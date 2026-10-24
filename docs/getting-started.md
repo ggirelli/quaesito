@@ -41,12 +41,13 @@ The rest of this page goes through each step in detail.
 | Computer | Download | Notes |
 |---|---|---|
 | Windows PC, 64-bit Intel or AMD | `quaesito-…-windows-x86_64.zip` | |
+| Windows on Arm (such as Snapdragon laptops) | `quaesito-…-windows-x86_64.zip` | runs under Windows' built-in x64 emulation |
 | Mac with Apple silicon (M1 and later) | `quaesito-…-macos-arm64.tar.gz` | |
-| Mac with an Intel processor | none | [build it from source](development.md#running-it-from-source) |
+| Mac with an Intel processor | `quaesito-…-macos-x86_64.tar.gz` | |
 | Linux PC, 64-bit Intel or AMD (`uname -m` says `x86_64`) | `quaesito-…-linux-x86_64.tar.gz` | built on Ubuntu 22.04: needs glibc 2.35 or later |
 | Linux, 64-bit ARM (`uname -m` says `aarch64`) | `quaesito-…-linux-arm64.tar.gz` | built on Ubuntu 22.04: needs glibc 2.35 or later |
 
-There is no build for 32-bit systems or Windows on Arm. To find out which Mac you have, open the
+There is no build for 32-bit systems. To find out which Mac you have, open the
 Apple menu → **About This Mac**: **Chip** means Apple silicon, **Processor** means Intel.
 
 ## 1. Download and start it
@@ -67,10 +68,9 @@ Apple menu → **About This Mac**: **Chip** means Apple silicon, **Processor** m
 
 === "macOS"
 
-    For Macs with Apple silicon (M1 and later). On an Intel Mac,
-    [build it from source](development.md#running-it-from-source).
+    `macos-arm64` is for Macs with Apple silicon (M1 and later), `macos-x86_64` for Intel Macs.
 
-    1. Download **`quaesito-…-macos-arm64.tar.gz`**. Safari unpacks it by itself; otherwise
+    1. Download **`quaesito-…-macos-arm64.tar.gz`** (or **`…-macos-x86_64.tar.gz`**). Safari unpacks it by itself; otherwise
        double-click it in your Downloads folder.
     2. Open the **`quaesito-…`** folder and double-click **`start.command`**.
     3. The first time, macOS says it **cannot verify** the app, because it is not signed by a
