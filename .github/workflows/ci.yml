@@ -61,6 +61,20 @@ jobs:
       - uses: taiki-e/install-action@just
       - run: just test
 
+  # The rules crate alone: its tests build without the server's dependencies, and it builds for
+  # the browser, so no server code creeps into it.
+  core:
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+      - uses: taiki-e/install-action@just
+      - run: just core
+
   # Servers on ARM (such as small cloud machines) run the same code: build and test it there.
   test-arm64:
     if: ${{ !github.event.pull_request.draft }}
