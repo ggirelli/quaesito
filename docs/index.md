@@ -42,7 +42,7 @@ For Windows (64-bit, also on Arm), Macs (Apple silicon and Intel) and Linux (x86
 - :material-format-list-checks: [Eight kinds of questions](question-types.md), from multiple choice to pins on a map
 - :material-bookshelf: A [library of about 2,700 ready-made questions](question-library.md), to pick from or fill a quiz at random
 - :material-folder-lock: Self-hosted: your quizzes and pictures stay in a folder on your computer
-- :material-account-group: Up to 50 teams by default, as many as 10,000 if you like, with any number of players per team
+- :material-account-group: Up to 50 teams by default, which the host can raise to at most 10,000 (a cap, not a tested size: your network sets the real limit), with any number of players per team
 - :material-content-save: Quiz editor in the browser that saves as you type
 - :material-test-tube: Test mode: the big screen and phones side by side
 - :material-image-filter-center-focus: Pictures revealed by zooming out or tile by tile

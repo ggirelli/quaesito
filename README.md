@@ -25,8 +25,8 @@ every team answering on a phone, and the whole thing running on your own laptop.
 The [Playground](https://ggirelli.github.io/quaesito/playground/) is a short quiz you can play right
 now, with nothing to install: the big screen and a pretend phone sit side by side on one page. Answer
 on the phone and watch the big screen run the clock, reveal the answer and keep the score, up to the
-podium. It runs Quaesito's own game engine and screens, entirely in your browser; nothing is sent
-anywhere.
+podium. It runs Quaesito's own game engine and screens entirely in your browser. No game server is
+involved, and your answers stay on your device.
 
 It is a taste, not the whole thing: one team, eight questions, no pictures or music. The real app
 adds everything below.
@@ -45,7 +45,8 @@ adds everything below.
 - **The drama of a real quiz show:** a clock with music, pictures revealed tile by tile, reveals with
   the fastest team and who moved up, jokers and double-points questions, and a podium with a fanfare.
 - **Made for real life:** pause, extra time, going back, and games that survive a crash or restart.
-- **Up to 50 teams by default** (as many as 10,000 if you like), with any number of players each.
+- **Up to 50 teams by default**, which the host can raise to at most 10,000 when starting a game, with
+  any number of players each. That is a cap, not a tested size: your network sets the real limit.
 - **Yours:** self-hosted, with your quizzes and pictures kept in a folder on your computer. Results
   print or download as CSV, and quizzes export with their pictures to share.
 

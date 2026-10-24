@@ -190,7 +190,15 @@ Files are written whole, so a copy taken while it runs is usable; stop it for a 
 ```sh
 # Back up
 sudo tar -czf quaesito-$(date +%F).tar.gz -C /var/lib quaesito
+```
 
+!!! danger "Restoring replaces the data folder"
+    Restoring deletes `/var/lib/quaesito` and puts the backup in its place: quizzes, pictures, saved
+    games and anything else created since that backup are lost. First check that it is the right
+    backup and that it reads whole (`tar -tzf quaesito-2026-10-20.tar.gz > /dev/null` prints no
+    errors), and if you may still need what is there now, back that up too, under another name.
+
+```sh
 # Restore
 sudo systemctl stop quaesito
 sudo rm -rf /var/lib/quaesito
