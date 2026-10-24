@@ -12,6 +12,7 @@ All notable changes to quaesito are listed here. The format follows
   points within one distance, none beyond another), or right within a margin (0: only the exact number). Quiz files
   move to format 3 for it; older versions ask before importing a quiz that uses it.
 - The big screen gives number guesses a bonus or malus with − and +, as for typed answers.
+- **Drag to reorder** in the editor's table view: hold a row and drag it to move the question or slide.
 
 ## [0.6.1] - 2026-10-21
 

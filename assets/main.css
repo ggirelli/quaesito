@@ -1033,6 +1033,40 @@ input.short {
   background: color-mix(in srgb, var(--muted) 10%, transparent);
 }
 
+/* A row held and dragged to move it: it follows the pointer, raised, and the others make room. */
+.quiz-table tbody {
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.quiz-table tbody tr {
+  transition: transform 150ms ease;
+}
+
+.quiz-table.dragging tbody {
+  cursor: grabbing;
+}
+
+.quiz-table.dragging tbody tr:hover {
+  background: none;
+}
+
+.quiz-table.dragging tbody tr.slide-row {
+  background: color-mix(in srgb, var(--muted) 10%, transparent);
+}
+
+.quiz-table.dragging tbody tr.dragged {
+  position: relative;
+  z-index: 1;
+  background: var(--surface-2);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 30%);
+  transition: none;
+}
+
+.quiz-table.settling tbody tr {
+  transition: none;
+}
+
 .quiz-table .col-index {
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
