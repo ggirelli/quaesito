@@ -4,9 +4,11 @@
 #
 #   tools/browser/run.sh check-pins.js [args…]
 #
-# The build and data stay apart from `just serve`, so both can run at once. RELEASE=1 checks an
+# The script runs from this folder: arguments naming files are made absolute first, so they can
+# be given relative to where run.sh is called from. The build and data stay apart from `just serve`, so both can run at once. RELEASE=1 checks an
 # optimized bundle instead (in target/e2e/dist), as shipped in the downloads.
 set -eu
+caller=$(pwd)
 here=$(cd "$(dirname "$0")" && pwd)
 root=$(cd "$here/../.." && pwd)
 port=${PORT:-8093}
@@ -31,5 +33,12 @@ trap 'kill "$server" 2>/dev/null' EXIT
 sleep 2
 script=$1
 shift
+cd "$caller"
+# realpath also drops `..`, which Chrome does not read an upload through.
+for arg; do
+  shift
+  if [ -e "$arg" ]; then arg=$(realpath "$arg"); fi
+  set -- "$@" "$arg"
+done
 cd "$here"
 BASE="http://127.0.0.1:$port" node "$script" "$@"
