@@ -401,13 +401,14 @@
       "kind": {
         "Order": {
           "items": [
-            "Magna Carta sealed (1215)",
-            "English Civil War begins (1642)",
-            "American Declaration of Independence (1776)",
-            "French Revolution begins (1789)"
+            "Magna Carta sealed",
+            "English Civil War begins",
+            "American Declaration of Independence",
+            "French Revolution begins"
           ]
         }
-      }
+      },
+      "explanation": "Magna Carta sealed – 1215\nEnglish Civil War begins – 1642\nAmerican Declaration of Independence – 1776\nFrench Revolution begins – 1789"
     }
   },
   {

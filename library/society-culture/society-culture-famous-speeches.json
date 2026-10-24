@@ -393,13 +393,14 @@
       "kind": {
         "Order": {
           "items": [
-            "Gettysburg Address (1863)",
-            "Churchill's Iron Curtain speech (1946)",
-            "King's I Have a Dream speech (1963)",
-            "Reagan's Berlin Wall speech (1987)"
+            "Gettysburg Address",
+            "Churchill's Iron Curtain speech",
+            "King's I Have a Dream speech",
+            "Reagan's Berlin Wall speech"
           ]
         }
-      }
+      },
+      "explanation": "Gettysburg Address – 1863\nChurchill's Iron Curtain speech – 1946\nKing's I Have a Dream speech – 1963\nReagan's Berlin Wall speech – 1987"
     }
   },
   {
@@ -411,13 +412,14 @@
       "kind": {
         "Order": {
           "items": [
-            "George Washington's first inaugural (1789)",
-            "Abraham Lincoln's first inaugural (1861)",
-            "Franklin D. Roosevelt's first inaugural (1933)",
-            "John F. Kennedy's inaugural (1961)"
+            "George Washington's first inaugural",
+            "Abraham Lincoln's first inaugural",
+            "Franklin D. Roosevelt's first inaugural",
+            "John F. Kennedy's inaugural"
           ]
         }
-      }
+      },
+      "explanation": "George Washington's first inaugural – 1789\nAbraham Lincoln's first inaugural – 1861\nFranklin D. Roosevelt's first inaugural – 1933\nJohn F. Kennedy's inaugural – 1961"
     }
   },
   {
