@@ -16,7 +16,8 @@ works without internet, and needs no accounts or app installs.
 [Download](https://github.com/ggirelli/quaesito/releases/latest){ .md-button .md-button--primary }
 [Read the guide](getting-started.md){ .md-button }
 
-Windows, macOS and Linux. Free and open source (MIT).
+For Windows (64-bit), Macs with Apple silicon and Linux (x86-64 and ARM64); see
+[which download](getting-started.md#which-download). Free and open source (MIT).
 
 </div>
 
@@ -35,10 +36,13 @@ Windows, macOS and Linux. Free and open source (MIT).
 
 ## Made for game nights { .section }
 
+- :material-television: Questions on the TV, answers on each team's phone: no app to install
 - :material-wifi-off: Runs on your local network, no internet or accounts needed
+- :material-format-list-checks: [Eight kinds of questions](question-types.md), from multiple choice to pins on a map
+- :material-bookshelf: A [library of about 2,700 ready-made questions](question-library.md), to pick from or fill a quiz at random
+- :material-folder-lock: Self-hosted: your quizzes and pictures stay in a folder on your computer
 - :material-account-group: Up to 50 teams by default, as many as 10,000 if you like, with any number of players per team
 - :material-content-save: Quiz editor in the browser that saves as you type
-- :material-bookshelf: A library of about 2,700 ready-made questions, to pick from or fill a quiz at random
 - :material-test-tube: Test mode: the big screen and phones side by side
 - :material-image-filter-center-focus: Pictures revealed by zooming out or tile by tile
 - :material-music: Soundtracks that start with the clock, and sound effects up to the fanfare
@@ -55,7 +59,11 @@ Windows, macOS and Linux. Free and open source (MIT).
   <track kind="captions" src="media/demo.vtt" srclang="en" label="English">
 </video>
 
-A quiz played on the test page, narrated.
+A quiz played on the test page, narrated: the big screen on the left, two teams' phones on the
+right, from the lobby through the questions to the podium.
+
+There is no online demo to try. To try it yourself, [download it](getting-started.md): it comes
+with a **Demo quiz** you can play on your own with **🧪 Test**.
 
 <div class="videos" markdown>
 <figure markdown>
