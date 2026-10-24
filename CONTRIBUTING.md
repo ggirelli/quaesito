@@ -68,11 +68,44 @@ with the big screen and two phones side by side.
 
 ## Style
 
+### Code
+
 - Code follows `rustfmt` and `clippy::pedantic`; prefer clear names over comments, and comment the
   *why* when it is not obvious.
+- Write code a reader can follow from top to bottom: small functions named after what they do, the
+  main path first and the details after it, no clever shortcuts where a plain loop or `match` reads
+  better.
+- Match the code around you: its naming, its idioms and how much it comments.
+- Every public item has a doc comment, and every module opens with a `//!` comment saying what it
+  is for. Public functions that can fail say when in an `# Errors` section.
+
+### Modules
+
+- A source file stays under 1,000 lines, tests included; `just check` fails on longer ones.
+- Split code by subject, not by kind: a module holds one topic (the teams of a game, the reveal of
+  an answer, the pairs editor) with its types, functions and components together.
+- When a module grows too big, turn it into a folder: `engine.rs` becomes `engine/mod.rs` with
+  sibling modules for its topics. Re-export from `mod.rs` what used to be public, so callers keep
+  their paths. A type's methods can be spread over the modules of its topics, each in its own
+  `impl` block.
+- Code that moves keeps its shape: a pull request that moves code does not also change it, so the
+  diff (`git diff --color-moved`) shows that nothing else changed.
+
+### Tests
+
+- Unit tests live next to the code they test. Small modules keep them in a `#[cfg(test)] mod tests`
+  at the end; big ones put them in a sibling file (`mod tests;` → `tests.rs`, or a `tests/` folder
+  split by subject, like the module itself).
+- Test names are sentences describing the behaviour (`a_joker_doubles_one_question_once`).
+- `quaesito-core` takes the time and randomness as inputs: tests pass them in instead of waiting
+  or mocking.
+
+### Words and commits
+
 - Messages shown to people are short, friendly sentences in British English.
 - Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/)
-  (`feat:`, `fix:`, `docs:`…), with a body explaining what changed and why.
+  (`feat:`, `fix:`, `docs:`…), with a body explaining what changed and why. Pull request titles do
+  too, since they become the commit message when the pull request is squash-merged.
 
 ## Assets
 
