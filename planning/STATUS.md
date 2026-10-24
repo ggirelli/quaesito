@@ -94,6 +94,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 | 85  | Big screen: **New teams can join** toggle; every slide and the podium fit any screen size                                          | ✅ done |
 | 86  | ↺ Reopen a question closed by mistake                                                                                              | ✅ done |
 | 87  | Release 0.6.0 (`v0.6.0` tag: downloads built by CI)                                                                                | ✅ done |
+| 88  | Number scoring: closest wins, by distance, or within a margin; bonus/malus on number guesses; quiz file format 3                   | ✅ done |
 
 ## Notes
 

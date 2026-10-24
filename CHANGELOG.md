@@ -6,6 +6,13 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- Number questions can be scored three ways: the closest guesses win (as before), the closer the more points (full
+  points within one distance, none beyond another), or right within a margin (0: only the exact number). Quiz files
+  move to format 3 for it; older versions ask before importing a quiz that uses it.
+- The big screen gives number guesses a bonus or malus with − and +, as for typed answers.
+
 ## [0.6.1] - 2026-10-21
 
 ### Fixed

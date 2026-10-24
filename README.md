@@ -25,8 +25,8 @@ your laptop over the local Wi-Fi: no internet, no accounts, no app to install.
 3. **Play**: teams answer against the clock, the big screen reveals answers and standings, and a podium crowns the
    winner. Results can be printed or downloaded as CSV.
 
-**Question types:** multiple choice, true or false, typed answers (judged by the host on the big screen), closest
-number, put in order, several answers in one, and pin on a picture. Each quiz sets its own scoring, reveals and pace.
+**Question types:** multiple choice, true or false, typed answers (judged by the host on the big screen), number
+guesses (closest wins, or by distance), put in order, several answers in one, and pin on a picture. Each quiz sets its own scoring, reveals and pace.
 See [question types](https://ggirelli.github.io/quaesito/question-types/) and [quiz settings](https://ggirelli.github.io/quaesito/quiz-settings/).
 
 ## Get started

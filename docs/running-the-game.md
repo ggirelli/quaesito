@@ -44,7 +44,8 @@ under **Change your name or picture** on their phone.
 ## Judging
 
 For typed answers, the reveal groups identical answers: mark each group ✓ full, ½ half or ✗ no
-points, and add a bonus or malus with − and +. Standings update straight away.
+points, and add a bonus or malus with − and +. Number guesses take a bonus or malus the same way.
+Standings update straight away.
 
 ![Judging typed answers on the big screen](screenshots/host-judging.webp)
 

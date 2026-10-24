@@ -19,12 +19,12 @@ keeps the rest.
 ## The schema
 
 The format is described by a [JSON Schema](https://json-schema.org/):
-[`quiz-2.json`](schema/quiz-2.json). Exports point to it from their first line:
+[`quiz-3.json`](schema/quiz-3.json). Exports point to it from their first line:
 
 ```json
 {
-  "$schema": "https://ggirelli.github.io/quaesito/schema/quiz-2.json",
-  "format": 2,
+  "$schema": "https://ggirelli.github.io/quaesito/schema/quiz-3.json",
+  "format": 3,
   "id": "4d1f…",
   "title": "Movie night",
   "settings": { "reveal": "AtEnd", "points": "Flat" },
@@ -66,6 +66,7 @@ version stays published next to the others:
 | ------ | ----- | ------------- |
 | [1](schema/quiz-1.json) | 0.4 | the first published format |
 | [2](schema/quiz-2.json) | 0.5 | what a question shows with its answer (`explanation`, `explanation_image`, `explanation_audio`), and each question's `category` and `topic` |
+| [3](schema/quiz-3.json) | 0.7 | how a number question is scored (`scoring`: closest wins, by distance, or within a margin) |
 
 When you import a quiz made with a newer version, Quaesito asks before importing it and says what
 it cannot read. Questions of kinds it does not know would be left out; **Import without them**

@@ -5,7 +5,7 @@
 | Choices | pick one or several of 2–6 answers (text and/or picture); each phone lists them in its own order, with the big screen's shapes and colours | all or nothing, or partial credit |
 | True/false | say whether a statement is true | like choices |
 | Typed answer | type a short answer | right when it matches an accepted spelling; you can amend |
-| Number | guess a number, with a slider when you set a range | the closest guesses (ties included) win 1000 points |
+| Number | guess a number, with a slider when you set a range | the closest guesses (ties included) win 1000 points; or the closer, the more points; or right within a margin |
 | Order | tap 2–6 items from first to last | each item in its place earns its share |
 | Several answers | type 2–8 answers at once | each part judged like a typed answer; points shared between parts |
 | Pin | drop a pin on the question's picture | full points close to the spot, fewer further away |
@@ -20,9 +20,21 @@ steps of 100. A malus can take a team below zero.
 
 ## Number
 
-Type the correct number; the closest guesses win, ties included. Optionally give a **range**
-(say 0 to 200): phones then show a slider for a quick guess next to the field for an exact one,
-and guesses outside the range are refused. Whole-number ends make the slider move in whole steps.
+Type the correct number. Optionally give a **range** (say 0 to 200): phones then show a slider for
+a quick guess next to the field for an exact one, and guesses outside the range are refused.
+Whole-number ends make the slider move in whole steps.
+
+Pick the **scoring**:
+
+| Scoring | Points |
+|---|---|
+| Closest wins | the closest guesses win 1000 points, ties included, however long they took; the others none |
+| Closer earns more | full points up to the first distance from the correct number, none beyond the second, and fewer the farther in between (say full within 5, none beyond 50) |
+| Close enough | full points up to a margin from the correct number, none beyond; a margin of 0 accepts only the exact number |
+
+With **Closer earns more** and **Close enough**, full points follow the quiz's points setting
+(faster answers earn more, or 1000 for every right answer), as for other questions. On the reveal,
+you can give each guess a bonus or malus with − and +, in steps of 100.
 
 ## Several answers
 

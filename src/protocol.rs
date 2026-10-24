@@ -52,7 +52,7 @@ pub enum InputKind {
     Choice,
     /// A short typed answer.
     Text,
-    /// A number; the closest guess wins.
+    /// A number, scored by its distance from the correct one.
     Number,
     /// Items to put in order.
     Order,
@@ -125,6 +125,8 @@ pub struct QuestionInfo {
     /// Media name of the soundtrack, if any.
     pub audio: Option<String>,
     pub input: InputKind,
+    /// A number question whose closest guesses win, rather than any close enough.
+    pub closest_wins: bool,
     /// Answer texts of a multiple-choice question, or the shuffled items of an order question
     /// (empty for other kinds).
     pub answers: Vec<String>,
@@ -247,8 +249,14 @@ pub struct TextGroup {
 pub struct Guess {
     pub team: String,
     pub value: f64,
-    /// Whether this is (one of) the closest guesses.
-    pub closest: bool,
+    /// Whether the guess earned full points: one of the closest, or close enough.
+    pub full: bool,
+    /// Points earned, the judge's bonus or malus included.
+    pub points: i32,
+    /// Identifies the guess when the judge gives it a bonus or malus.
+    pub key: String,
+    /// The judge's bonus (or malus) in points.
+    pub bonus: i32,
 }
 
 /// One line of the leaderboard.
@@ -383,8 +391,9 @@ pub enum HostCommand {
     /// Move to the next step: start, play a soundtrack, close the question early, next
     /// question or slide, next podium spot.
     Next,
-    /// Amend the verdict on a group of typed answers (identified by its normalised `key`)
-    /// while that question's answers are shown.
+    /// Amend the verdict on a group of typed answers (identified by its normalised `key`), or
+    /// give a number guess a bonus or malus (by its [`Guess::key`]), while that question's
+    /// answers are shown.
     Judge {
         question: usize,
         key: String,

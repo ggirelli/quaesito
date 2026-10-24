@@ -38,8 +38,8 @@ use serde::{Deserialize, Serialize};
 use super::matching::normalize;
 use crate::{
     model::{
-        AdvanceMode, Bonus, MAX_TEXT_ANSWER_CHARS, PointsMode, Question, QuestionKind, Quiz,
-        RevealMode,
+        AdvanceMode, Bonus, MAX_TEXT_ANSWER_CHARS, NumberScoring, PointsMode, Question,
+        QuestionKind, Quiz, RevealMode,
     },
     protocol::{
         AnswerOutcome, BACKDROP_COUNT, DEFAULT_MAX_TEAMS, Explanation, Fastest, GameResults, Grade,
@@ -957,16 +957,17 @@ impl Game {
         if !shown {
             return Err(Refusal("These answers are not on screen."));
         }
-        let typed = matches!(
-            self.quiz.questions[question].kind,
-            QuestionKind::Text { .. } | QuestionKind::Parts { .. }
-        );
+        let kind = &self.quiz.questions[question].kind;
+        let typed = matches!(kind, QuestionKind::Text { .. } | QuestionKind::Parts { .. });
         let bonus = key.starts_with(BONUS_KEY_PREFIX) && self.active_bonus(question).is_some();
-        if !typed && !bonus {
-            return Err(Refusal("Only typed answers can be judged."));
+        let number =
+            matches!(kind, QuestionKind::Number { .. }) && key.starts_with(NUMBER_KEY_PREFIX);
+        if !typed && !bonus && !number {
+            return Err(Refusal("Only typed answers and numbers can be judged."));
         }
         let judgement = Judgement {
-            grade: judgement.grade,
+            // Numbers are scored by distance: the judge only adds a bonus or malus.
+            grade: if number { Grade::Full } else { judgement.grade },
             bonus: judgement
                 .bonus
                 .clamp(-scoring::MAX_BONUS, scoring::MAX_BONUS),
@@ -1464,6 +1465,13 @@ impl Game {
             multiplier: question.multiplier(),
             audio: question.audio.clone(),
             input: input_kind(question),
+            closest_wins: matches!(
+                question.kind,
+                QuestionKind::Number {
+                    scoring: NumberScoring::Closest,
+                    ..
+                }
+            ),
             answers: self.shown_answers(index),
             answer_images: answer_images(question),
             multi: question.is_multi(),
@@ -1615,28 +1623,38 @@ impl Game {
                     .collect(),
             },
             QuestionKind::Number { answer, .. } => {
-                let answer = answer.unwrap_or_default();
-                let closest = self.closest_distance(index);
-                let mut guesses: Vec<(f64, Guess)> = responses()
-                    .filter_map(|(team, response)| match response {
-                        Response::Number(value) => Some((
-                            (value - answer).abs(),
-                            Guess {
-                                team: team.to_owned(),
-                                value: *value,
-                                closest: closest.is_some_and(|c| (value - answer).abs() <= c),
-                            },
-                        )),
-                        _ => None,
-                    })
-                    .collect();
-                guesses.sort_by(|a, b| a.0.total_cmp(&b.0));
-                Reveal::Number {
-                    answer,
-                    guesses: guesses.into_iter().map(|(_, g)| g).collect(),
-                }
+                self.number_reveal(index, answer.unwrap_or_default())
             }
         }
+    }
+
+    /// Every guess on number question `index`, closest to `answer` first.
+    fn number_reveal(&self, index: usize, answer: f64) -> Reveal {
+        let mut guesses: Vec<Guess> = self
+            .teams
+            .iter()
+            .filter_map(|team| match team.submissions[index].as_ref()?.response {
+                Response::Number(value) => {
+                    let outcome = self.outcome(index, team);
+                    let key = number_key(team.id);
+                    Some(Guess {
+                        team: team.name.clone(),
+                        value,
+                        full: outcome.fully_correct,
+                        points: outcome.points,
+                        bonus: self.judgement(index, &key).0.bonus,
+                        key,
+                    })
+                }
+                _ => None,
+            })
+            .collect();
+        guesses.sort_by(|a, b| {
+            (a.value - answer)
+                .abs()
+                .total_cmp(&(b.value - answer).abs())
+        });
+        Reveal::Number { answer, guesses }
     }
 
     /// Answer texts as shown for question `index`: the options of a multiple-choice question,
@@ -1733,7 +1751,8 @@ impl Game {
         groups
     }
 
-    /// Full points when `key` matches an accepted answer, none otherwise.
+    /// Full points when `key` matches an accepted answer (or is a number guess's), none
+    /// otherwise.
     fn automatic_judgement(&self, index: usize, key: &str) -> Judgement {
         let accepts = |accepted: &[String], norm: &str| {
             !norm.is_empty() && accepted.iter().any(|a| normalize(a) == norm)
@@ -1746,6 +1765,7 @@ impl Game {
                 bonus.is_some_and(|(norm, bonus)| accepts(&bonus.accepted, norm))
             }
             QuestionKind::Text { accepted } => accepts(accepted, key),
+            QuestionKind::Number { .. } => key.starts_with(NUMBER_KEY_PREFIX),
             QuestionKind::Parts { parts } => key
                 .split_once(PART_KEY_SEPARATOR)
                 .and_then(|(p, norm)| Some((parts.get(p.parse::<usize>().ok()?)?, norm)))
@@ -1755,6 +1775,32 @@ impl Game {
         Judgement {
             grade: if matches { Grade::Full } else { Grade::Wrong },
             bonus: 0,
+        }
+    }
+
+    /// How `team` did with a guess `distance` from the correct number of question `index`, where a
+    /// fully correct answer is worth `full`, the judge's bonus or malus included.
+    fn number_outcome(
+        &self,
+        index: usize,
+        team: &Team,
+        distance: f64,
+        number_scoring: NumberScoring,
+        full: u32,
+    ) -> AnswerOutcome {
+        let (points, fully_correct) = if number_scoring == NumberScoring::Closest {
+            let closest = self.closest_distance(index).is_some_and(|c| distance <= c);
+            (if closest { scoring::CLOSEST_POINTS } else { 0 }, closest)
+        } else {
+            let points = scoring::number_points(full, distance, number_scoring);
+            let all = scoring::number_points(full, 0.0, number_scoring);
+            (i32::try_from(points).unwrap_or(i32::MAX), points == all)
+        };
+        let bonus = self.judgement(index, &number_key(team.id)).0.bonus;
+        AnswerOutcome {
+            points: points.saturating_add(bonus.clamp(-scoring::MAX_BONUS, scoring::MAX_BONUS)),
+            fully_correct,
+            joker: false,
         }
     }
 
@@ -1803,11 +1849,12 @@ impl Game {
             let question = &self.quiz.questions[index];
             let limit =
                 Duration::from_secs(u64::from(question.time_limit_secs(&self.quiz.settings)));
-            // Speed means nothing for numbers: the closest guesses earn a set amount.
+            // Speed means nothing when the closest guesses win: they earn a set amount.
             let full = match question.kind {
-                QuestionKind::Number { .. } => {
-                    u32::try_from(scoring::CLOSEST_POINTS).unwrap_or(scoring::MAX_POINTS)
-                }
+                QuestionKind::Number {
+                    scoring: NumberScoring::Closest,
+                    ..
+                } => u32::try_from(scoring::CLOSEST_POINTS).unwrap_or(scoring::MAX_POINTS),
                 _ => scoring::full_points(self.quiz.settings.points, submission.elapsed, limit),
             };
             let (judgement, _) = self.judgement(index, &bonus_key(text));
@@ -1851,19 +1898,11 @@ impl Game {
             (
                 QuestionKind::Number {
                     answer: Some(answer),
+                    scoring: number_scoring,
                     ..
                 },
                 Response::Number(value),
-            ) => {
-                let closest = self
-                    .closest_distance(index)
-                    .is_some_and(|c| (value - answer).abs() <= c);
-                AnswerOutcome {
-                    points: if closest { scoring::CLOSEST_POINTS } else { 0 },
-                    fully_correct: closest,
-                    joker: false,
-                }
-            }
+            ) => self.number_outcome(index, team, (value - answer).abs(), *number_scoring, full),
             (QuestionKind::Parts { parts }, Response::Parts(texts)) => {
                 // The question's points are split evenly between its parts.
                 let judgements: Vec<Judgement> = texts
@@ -2181,6 +2220,14 @@ fn answer_images(question: &Question) -> Vec<Option<String>> {
 const PART_KEY_SEPARATOR: char = '|';
 /// Prefix of the judgement keys of bonus answers (parts use their index instead).
 const BONUS_KEY_PREFIX: &str = "bonus|";
+
+/// Prefix of the judgement keys of number guesses, followed by the team's id.
+const NUMBER_KEY_PREFIX: &str = "number|";
+
+/// The judgement key of `team`'s guess on a number question, which only takes a bonus or malus.
+fn number_key(team: u32) -> String {
+    format!("{NUMBER_KEY_PREFIX}{team}")
+}
 
 /// The judgement key of a typed bonus answer.
 fn bonus_key(text: &str) -> String {
@@ -3922,6 +3969,7 @@ mod tests {
         quiz.questions[0].kind = QuestionKind::Number {
             answer: Some(88.0),
             range: None,
+            scoring: NumberScoring::Closest,
         };
         quiz.questions[0].bonus = Some(Bonus {
             text: "Who invented it?".to_owned(),
@@ -3957,6 +4005,7 @@ mod tests {
         let kind = QuestionKind::Number {
             answer: Some(42.0),
             range: Some(range),
+            scoring: NumberScoring::Closest,
         };
         let mut g = open_game(kind, QuizSettings::default());
         let owls = join(&mut g, "Owls");
@@ -3976,6 +4025,7 @@ mod tests {
         let kind = QuestionKind::Number {
             answer: Some(330.0),
             range: None,
+            scoring: NumberScoring::Closest,
         };
         let mut g = open_game(kind, QuizSettings::default());
         let owls = join(&mut g, "Owls");
@@ -3999,16 +4049,104 @@ mod tests {
             panic!("expected guesses on screen");
         };
         assert!((answer - 330.0).abs() < f64::EPSILON);
-        let summary: Vec<(&str, bool)> = guesses
-            .iter()
-            .map(|g| (g.team.as_str(), g.closest))
-            .collect();
+        let summary: Vec<(&str, bool)> =
+            guesses.iter().map(|g| (g.team.as_str(), g.full)).collect();
         assert_eq!(
             summary,
             vec![("Owls", true), ("Cats", true), ("Bats", false)]
         );
         assert_eq!(g.player_view(cats, t0).unwrap().score, Some(1000));
         assert_eq!(g.player_view(bats, t0).unwrap().score, Some(0));
+    }
+
+    #[test]
+    fn numbers_can_score_by_distance_or_margin() {
+        let t0 = Instant::now();
+        let flat = QuizSettings {
+            points: PointsMode::Flat,
+            ..QuizSettings::default()
+        };
+        let number = |scoring| QuestionKind::Number {
+            answer: Some(100.0),
+            range: None,
+            scoring,
+        };
+        let distance = NumberScoring::Distance {
+            full_within: 10.0,
+            none_beyond: 50.0,
+        };
+        let mut g = open_game(number(distance), flat.clone());
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        let bats = join(&mut g, "Bats");
+        g.next(t0).unwrap();
+        g.answer(owls, Response::Number(95.0), false, t0).unwrap();
+        g.answer(cats, Response::Number(130.0), false, t0).unwrap();
+        g.answer(bats, Response::Number(160.0), false, t0).unwrap();
+        let score = |g: &Game, team| g.player_view(team, t0).unwrap().score;
+        assert_eq!(score(&g, owls), Some(1000));
+        assert_eq!(score(&g, cats), Some(500));
+        assert_eq!(score(&g, bats), Some(0));
+
+        let mut g = open_game(number(NumberScoring::Margin { margin: 0.0 }), flat);
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        g.next(t0).unwrap();
+        g.answer(owls, Response::Number(100.0), false, t0).unwrap();
+        g.answer(cats, Response::Number(101.0), false, t0).unwrap();
+        assert_eq!(score(&g, owls), Some(1000));
+        assert_eq!(score(&g, cats), Some(0));
+    }
+
+    #[test]
+    fn the_judge_gives_number_guesses_a_bonus_or_malus() {
+        let t0 = Instant::now();
+        let kind = QuestionKind::Number {
+            answer: Some(330.0),
+            range: None,
+            scoring: NumberScoring::Closest,
+        };
+        let mut g = open_game(kind, QuizSettings::default());
+        let owls = join(&mut g, "Owls");
+        let cats = join(&mut g, "Cats");
+        g.next(t0).unwrap();
+        g.answer(owls, Response::Number(300.0), false, t0).unwrap();
+        g.answer(cats, Response::Number(1000.0), false, t0).unwrap();
+        let guesses = |g: &Game| {
+            let HostPhase::Closed {
+                reveal: Some(Reveal::Number { guesses, .. }),
+                ..
+            } = g.host_view(t0).phase
+            else {
+                panic!("expected guesses on screen");
+            };
+            guesses
+        };
+        let key = guesses(&g)[1].key.clone();
+        // The grade is ignored: numbers are scored by distance.
+        let malus = Judgement {
+            grade: Grade::Wrong,
+            bonus: -200,
+        };
+        g.judge(0, &key, malus, t0).unwrap();
+        let cats_guess = &guesses(&g)[1];
+        assert_eq!((cats_guess.bonus, cats_guess.points), (-200, -200));
+        assert_eq!(g.player_view(cats, t0).unwrap().score, Some(-200));
+        let bonus = Judgement {
+            grade: Grade::Full,
+            bonus: 100,
+        };
+        let owls_key = guesses(&g)[0].key.clone();
+        g.judge(0, &owls_key, bonus, t0).unwrap();
+        assert_eq!(g.player_view(owls, t0).unwrap().score, Some(1100));
+        // Back to no bonus, the verdict is the automatic one again.
+        let none = Judgement {
+            grade: Grade::Full,
+            bonus: 0,
+        };
+        g.judge(0, &key, none, t0).unwrap();
+        assert!(!g.judgements[0].contains_key(&key));
+        assert!(g.judge(0, "330", bonus, t0).is_err());
     }
 
     #[test]

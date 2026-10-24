@@ -128,7 +128,7 @@ Transcripts are on the [demo videos](demo.md) page.
 -   **Multiple choice:** two to six answers, one or several right, with pictures if you like.
 -   **True or false:** quick statements to keep the pace up.
 -   **Typed answers:** teams type; you judge on the big screen: full, half or no points, bonus or malus.
--   **Closest number:** how many keys on a piano? The closest guess wins.
+-   **Numbers:** how many keys on a piano? The closest guess wins, or the closer the more points.
 -   **Put in order:** oldest first, biggest first; each item in place earns points.
 -   **Several answers:** title and artist, or five posters, each part judged on its own.
 -   **Pin on a picture:** maps, floor plans, paintings; the closer the pin, the more points.
