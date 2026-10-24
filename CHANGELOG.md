@@ -6,6 +6,8 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-10-24
+
 ### Added
 
 - The [Playground](https://ggirelli.github.io/quaesito/playground/): a short quiz to try in the browser, with its big screen and a pretend
