@@ -66,7 +66,7 @@ async function addTopic(page, category, topic, look) {
   expect(`categories offered: ${options.length}`, options.includes('Board games') && options.includes('Geography') && options[0] === '');
   await ed.select('.subject-select', 'Board games');
   await L.sleep(300);
-  const [, topicSelect] = await ed.$$('#question-0 .subject-select');
+  const [, topicSelect] = await ed.$$('#question-1 .subject-select');
   const topicOptions = await topicSelect.evaluate((s) => [...s.options].map((o) => o.value));
   expect(`topics offered: ${topicOptions.join(', ')}`, topicOptions.join() === ',Chess');
   await topicSelect.select('Chess');
