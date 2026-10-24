@@ -1,10 +1,10 @@
 # The question library
 
-Quaesito comes with about 2,700 ready-made questions in 14 categories and 99 topics, each rated
-easy, medium or hard. Hosts browse them on the admin page's **Questions** tab, add them from the
-editor, or fill a new quiz with them at random (see
-[Building a quiz](building-a-quiz.md#the-question-library)). This page is for those who look after
-the library itself.
+Quaesito comes with about 2,700 ready-made questions in 14 categories, from art to technology,
+and 99 topics, each rated easy, medium or hard. Use them to fill a quiz in minutes instead of
+writing every question yourself, and add questions of your own.
+
+![The admin page's Questions tab, with the library's categories on the left](screenshots/library.webp)
 
 <video controls preload="metadata" poster="../media/demo-library-poster.webp" class="demo-video">
   <source src="../media/demo-library.mp4" type="video/mp4">
@@ -13,6 +13,58 @@ the library itself.
 
 <small>Browsing the library, filling a quiz at random and saving a question to it, narrated
 ([transcript](demo.md#the-question-library)).</small>
+
+!!! warning "Read the questions before you play them"
+    The questions were written with an AI model and fact-checked ([how](#how-the-questions-were-made)),
+    but a few may still be wrong. Read the ones you pick before the game.
+
+## Finding and adding questions
+
+- **Browse it** on the admin page's **Questions** tab. Pick a category on the left to see only its
+  questions; it opens onto its topics, which narrow the list further. Pick the category again to
+  close it. Search questions and answers, filter by difficulty, question type and source (came
+  with Quaesito, or added here), and sort by category, difficulty, question type or text.
+- **In the editor**, press **＋ From the library** to browse it the same way. **＋ Add** adds one
+  question at the end of the quiz; 🎲 **Add at random** adds as many of the questions shown as
+  you ask for. Questions already in the quiz are marked, and never added twice at random.
+- **For a whole quiz**, tick **Fill it with random questions from the library** when creating it,
+  tick the categories you want and say how many questions each gets (5 by default). You can keep
+  to one difficulty, and open each category with a title slide.
+
+Once added, a question is yours like any other: edit it, add a picture, or change its time limit
+and points. It keeps the category and topic it comes from, which the big screen shows with it.
+
+To write your own questions, see [building a quiz](building-a-quiz.md); to bring in many at once,
+write or generate a [quiz file](quiz-file-format.md) and import it.
+
+## Fixing a question
+
+To fix or change a question in the library itself, use its **edit** link: the question opens in a
+pop-up like the editor's, with its difficulty. Your changes are kept on this server only and the
+question is marked *edited*; **Back to the original** undoes them. Found a question that is plain
+wrong? Its **report** link opens a GitHub issue, already filled in with the question and its
+answer: just say what is wrong.
+
+## Saving questions to the library
+
+The :material-content-save: button on each question card, between duplicate and delete, keeps a
+quiz question and the library in step. On a question of your own, it saves it to the library
+(it needs a category and a topic; the pop-up asks for a difficulty, and warns if the library
+already has the same question), so other quizzes can use it. Questions saved this way are kept on
+this server and marked *added* in the library, where they can be deleted.
+
+A question that came from the library, or was saved to it, stays linked to it, and the button's
+colour says how the two compare:
+
+- **In the library**: both are the same.
+- **Update library**: you changed it here. The pop-up shows both versions side by side, and says
+  how many other quizzes use the question and will be offered the change.
+- **Update from library**: the library's question changed since; updating replaces your copy.
+- **Changed in both**: pick the version to keep. **Save as new…** saves yours as a separate
+  library question instead, and **Unlink** stops comparing them.
+
+A question's own time limit and points, and the order of its choices, are the quiz's: they never
+count as changes.
 
 ## How the questions were made
 
@@ -31,7 +83,33 @@ the library itself.
 The batches, findings and repairs are in the project's git history. The maintainer is reviewing
 every question by hand; even so, read the ones you pick before playing.
 
-## Files
+## What the library holds
+
+| Answer type | Questions |
+|---|---|
+| Multiple choice | 1,128 |
+| True or false | 460 |
+| Typed answer | 328 |
+| Number | 321 |
+| Put in order | 194 |
+| Pairs | 191 |
+| Several answers | 83 |
+
+That is 2,705 questions in all. Library questions have no pictures, sounds, pins or bonus
+questions; you can add those once a question is in your quiz.
+
+## Licence
+
+Quaesito's software is free under the
+[MIT licence](https://github.com/ggirelli/quaesito/blob/main/LICENSE), the only licence file in
+the repository. The question library and the pictures that come with the app (the team
+mascots, the logo) have no licence notice of their own.
+
+## For maintainers
+
+The rest of this page is for those who look after the library in Quaesito's repository.
+
+### Files
 
 Each topic is a file, `library/<category>/<category>-<topic>.json`: a JSON array of entries. The app
 combines them when it is built, so a change reaches the app with the next build.
@@ -53,7 +131,7 @@ combines them when it is built, so a change reaches the app with the next build.
   over the years. A several-answers question is worth ×K points, K being its number of answers;
   every other question is worth ×1.
 
-## Checking the library
+### Checking the library
 
 ```sh
 uv run tools/library/check.py           # the whole library; must report 0 errors
@@ -72,7 +150,7 @@ just test                               # every question must also be playable
 - the same question twice; near-identical wording is a warning, usually harmless ("What is the
   capital of …")
 
-## Fixing questions from the app
+### Fixing questions from the app
 
 The **edit** link on a library question saves the change on that server only, in the data folder's
 `library-edits.json`; questions saved from quizzes go in `library-added.json`. The **report** link
@@ -89,7 +167,7 @@ so `git diff` shows only what changed, then checks the library. Edits the librar
 (pictures, sounds, time limits, bonuses, pin questions) are reported and left out. Running it
 again changes nothing.
 
-## Adding questions
+### Adding questions
 
 Attach `docs/schema/quiz-3.json` to a conversation with an AI model, paste the prompt below and fill
 in the batch at the end. Ask for number and typed-answer questions separately if quality matters:
