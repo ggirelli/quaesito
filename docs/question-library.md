@@ -15,8 +15,8 @@ writing every question yourself, and add questions of your own.
 ([transcript](demo.md#the-question-library)).</small>
 
 !!! warning "Read the questions before you play them"
-    The questions were written with an AI model and fact-checked ([how](#how-the-questions-were-made)),
-    but a few may still be wrong. Read the ones you pick before the game.
+    The questions were written with an AI model, fact-checked and reviewed by hand
+    ([how](#how-the-questions-were-made)), but a few may still be wrong. Read the ones you pick before the game.
 
 ## Finding and adding questions
 
@@ -79,9 +79,10 @@ count as changes.
 4. **Repaired** with ChatGPT, following each finding's fix, and every repair checked again by
    Claude. Questions that could not be fixed, repeats across categories and questions whose answers
    may change over the years were dropped.
+5. **Reviewed by hand** by the maintainer, every question.
 
-The batches, findings and repairs are in the project's git history. The maintainer is reviewing
-every question by hand; even so, read the ones you pick before playing.
+The batches, findings and repairs are in the project's git history. Mistakes are still possible:
+read the questions you pick before playing.
 
 ## What the library holds
 
@@ -100,10 +101,11 @@ questions; you can add those once a question is in your quiz.
 
 ## Licence
 
-Quaesito's software is free under the
-[MIT licence](https://github.com/ggirelli/quaesito/blob/main/LICENSE), the only licence file in
-the repository. The question library and the pictures that come with the app (the team
-mascots, the logo) have no licence notice of their own.
+Everything in Quaesito is free under the
+[MIT licence](https://github.com/ggirelli/quaesito/blob/main/LICENSE): the software, the
+question library, and the pictures that come with the app (the team mascots, the logo). You may
+use, change and share the questions, in Quaesito or elsewhere, as long as copies keep the licence's
+copyright and permission notice.
 
 ## For maintainers
 
