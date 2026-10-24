@@ -15,7 +15,7 @@ The admin password guards `/admin` and `/host/<code>`; the host screen is opened
 dashboard when a quiz is started. Phones join at `/join/<code>`.
 
 The server is authoritative for game state and timing. Each running session is an in-memory state
-machine (`crates/core/src/engine.rs`) that takes the current time as an input, so it is fully unit tested:
+machine (`crates/core/src/engine/`) that takes the current time as an input, so it is fully unit tested:
 
 ```
 Lobby → Question(0) → Closed(0) → … → Closed(n-1) → [Review(0) → … → Review(n-1)] → Podium(0..=3)

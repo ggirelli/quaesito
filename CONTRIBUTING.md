@@ -37,7 +37,7 @@ with the big screen and two phones side by side.
    just check   # rustfmt, clippy (server and wasm, pedantic, warnings are errors), rustdoc, tests, cargo-deny
    ```
 
-3. Add or update tests. The game logic lives in `crates/core/src/engine.rs` and is fully unit tested
+3. Add or update tests. The game logic lives in `crates/core/src/engine/` and is fully unit tested
    (it takes the time and randomness as inputs, so no tricks are needed); scoring is in
    `crates/core/src/scoring.rs`. `quaesito-core` must stay free of server code: `just core` tests it
    alone and builds it for wasm (see [how the code is organised](docs/development.md#how-the-code-is-organised)).

@@ -109,7 +109,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 - `crates/server/src/auth.rs`: admin password from `QUAESITO_ADMIN_PASSWORD` (generated and logged if unset), in-memory bearer tokens.
 - `src/api.rs`: server functions for login, quiz CRUD, duplicate, JSON import and picture upload.
 - `crates/core/src/protocol.rs`: host/player views and commands pushed over WebSockets (full view on every change).
-- `crates/core/src/engine.rs`: pure session state machine (lobby → questions → optional review → podium 3→2→1), time passed in explicitly for testability. Auto-advance pauses: 8 s after a revealed question, 3 s when hidden, 4 s per podium step.
+- `crates/core/src/engine/`: pure session state machine (lobby → questions → optional review → podium 3→2→1), time passed in explicitly for testability. Auto-advance pauses: 8 s after a revealed question, 3 s when hidden, 4 s per podium step.
 - `crates/server/src/sessions.rs`: live sessions by 6-digit code; a timer task per session fires deadlines and auto-advance.
 - `crates/server/src/live.rs`: WebSocket loops (`/api/ws/host`, `/api/ws/player`) pushing full views on every change.
 - `crates/server/src/net.rs`: join URL origin from `QUAESITO_PUBLIC_URL` or the LAN IP plus the host page's port (the QR code is drawn client-side, step 9).
