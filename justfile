@@ -67,8 +67,12 @@ library-apply-edits edits="data/library-edits.json":
 deny:
     cargo deny --locked check
 
+# Check that no source file is over 1,000 lines (see CONTRIBUTING.md, "Modules")
+file-length:
+    tools/check/file-length.sh
+
 # Everything CI checks
-check: fmt-check clippy doc test core deny
+check: fmt-check file-length clippy doc test core deny
 
 # Print the workspace's version
 version:
