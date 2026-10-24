@@ -1,20 +1,32 @@
 //! The web interface.
+//!
+//! Without the `fullstack` feature, only the parts that need no server are built: the big
+//! screen's and the phones' boards, driven by a game in the browser (see [`playground`]).
 
+#[cfg(feature = "fullstack")]
 mod admin;
+mod categories;
 pub mod client;
+#[cfg(feature = "fullstack")]
 mod editor;
+#[cfg(feature = "fullstack")]
 mod home;
 mod host;
+#[cfg(feature = "fullstack")]
 mod library;
 mod live;
 mod player;
+pub mod playground;
 mod sfx;
+#[cfg(feature = "fullstack")]
 mod test;
+#[cfg(feature = "fullstack")]
 mod transfer;
 mod widgets;
 
 use dioxus::prelude::*;
 
+#[cfg(feature = "fullstack")]
 use self::{
     admin::{Admin, AdminQuestions},
     editor::Editor,
@@ -24,14 +36,17 @@ use self::{
     test::Test,
 };
 
+#[cfg(feature = "fullstack")]
 const FAVICON: Asset = asset!("/assets/brand/icon-192.png");
-const MAIN_CSS: Asset = asset!("/assets/main.css");
+/// The app's stylesheet.
+pub const MAIN_CSS: Asset = asset!("/assets/main.css");
 /// The logo mark, used in page headers.
 pub const ICON: Asset = asset!("/assets/brand/icon-192.png");
 /// Illustration on the big screen while teams join.
 pub const LOBBY_ART: Asset = asset!("/assets/brand/lobby.webp");
 
 /// All pages.
+#[cfg(feature = "fullstack")]
 #[derive(Routable, Clone, PartialEq)]
 #[rustfmt::skip]
 pub enum Route {
@@ -58,6 +73,7 @@ pub enum Route {
 }
 
 /// Root component.
+#[cfg(feature = "fullstack")]
 #[component]
 pub fn App() -> Element {
     rsx! {
@@ -71,6 +87,7 @@ pub fn App() -> Element {
     }
 }
 
+#[cfg(feature = "fullstack")]
 #[component]
 fn NotFound(segments: Vec<String>) -> Element {
     let path = segments.join("/");

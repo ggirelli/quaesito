@@ -12,9 +12,6 @@ use crate::{
     protocol::{HostCommand, HostView, MAX_NAME_CHARS, TeamInfo},
 };
 
-/// Teams listed on a results slide.
-pub(super) const RESULTS_SHOWN: usize = 10;
-
 /// Every team's points on every question, with a CSV download.
 #[component]
 pub(super) fn ResultsPanel(code: String, on_close: EventHandler<()>) -> Element {

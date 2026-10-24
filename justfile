@@ -22,6 +22,32 @@ bundle:
 play port="8080": bundle
     cd dist && IP=0.0.0.0 PORT={{port}} QUAESITO_DATA_DIR="{{justfile_directory()}}/data" ./server
 
+# Build the Playground into ./target/pages
+playground:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    target="${CARGO_TARGET_DIR:-target}"
+    # dx keeps the files of earlier builds in its output: start afresh.
+    rm -rf "$target/dx/quaesito-playground/release/web/public" "$target/playground" target/pages
+    dx bundle --platform web --release -p quaesito-playground --out-dir "$target/playground"
+    mkdir -p target/pages/quaesito
+    cp -r "$target/playground/public" target/pages/quaesito/playground
+
+# Serve the Playground at /quaesito/playground/
+playground-serve port="8094": playground
+    cd target/pages && python3 -m http.server {{port}} --bind 127.0.0.1
+
+# Play the Playground in a headless browser
+playground-check port="8094": playground
+    #!/usr/bin/env bash
+    set -euo pipefail
+    (cd tools/browser && npm install --no-audit --no-fund >/dev/null)
+    (cd target/pages && exec python3 -m http.server {{port}} --bind 127.0.0.1 >/dev/null 2>&1) &
+    server=$!
+    trap 'kill "$server" 2>/dev/null' EXIT
+    sleep 1
+    PLAYGROUND="http://127.0.0.1:{{port}}/quaesito/playground/" node tools/browser/check-playground.js
+
 # Format all code
 fmt:
     cargo fmt --all
@@ -38,8 +64,12 @@ clippy-server:
 clippy-web:
     cargo clippy --target wasm32-unknown-unknown -p quaesito -p quaesito-core --all-targets --locked -- -D warnings
 
-# Lint both builds
-clippy: clippy-server clippy-web
+# Lint the Playground build (no fullstack)
+clippy-playground:
+    cargo clippy --target wasm32-unknown-unknown -p quaesito-playground --all-targets --locked -- -D warnings
+
+# Lint every build
+clippy: clippy-server clippy-web clippy-playground
 
 # Check the API docs of both builds, failing on warnings (such as links to private items)
 doc:

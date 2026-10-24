@@ -7,6 +7,7 @@ use dioxus::prelude::*;
 
 use super::{
     admin::AdminToken,
+    categories::{Categories, CategoryIcon},
     client,
     editor::LibraryQuestionEditor,
     widgets::{Dialog, ErrorBox, Icon, IconKind, Spinner, message},
@@ -20,11 +21,6 @@ use crate::{
     model::{Question, QuestionKind},
 };
 
-/// The library's categories with their looks, those added on this server included, once loaded:
-/// what the big screen draws a question's category with.
-#[derive(Clone, Copy)]
-pub struct Categories(pub Resource<Vec<LibraryCategory>>);
-
 impl Categories {
     /// Loads the categories.
     pub fn use_loaded() -> Self {
@@ -32,21 +28,6 @@ impl Categories {
         Self(use_resource(move || async move {
             library_subjects(token.get()).await.unwrap_or_default()
         }))
-    }
-
-    /// The icon and colour of `category`; the library's own until the categories load.
-    pub fn look(self, category: &str) -> CategoryLook {
-        look_of(category, self.0.read().as_deref().unwrap_or_default())
-    }
-}
-
-/// A category's icon, in its colour.
-#[component]
-pub fn CategoryIcon(look: CategoryLook) -> Element {
-    rsx! {
-        span { class: "category-icon", style: "color: {look.color}",
-            Icon { kind: IconKind::of_category(&look.icon) }
-        }
     }
 }
 

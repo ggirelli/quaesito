@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <!-- dx fills in the title from Dioxus.toml. -->
+        <!-- Until the app sets its icon, so the browser does not ask for /favicon.ico outside the Playground. -->
+        <link rel="icon" href="data:,">
+    </head>
+    <body>
+        <noscript>The Quaesito Playground needs JavaScript (and WebAssembly) to run.</noscript>
+        <div id="main"></div>
+        <script>
+            // A browser that cannot run the app, or a crash, would leave the page blank or stuck:
+            // say so instead.
+            function playgroundFailed() {
+                if (document.getElementById("playground-failed")) return;
+                var box = document.createElement("p");
+                box.id = "playground-failed";
+                box.setAttribute("role", "alert");
+                box.style.cssText = "position:fixed;inset:auto 1rem 1rem;z-index:100;margin:0;padding:1rem;" +
+                    "border-radius:12px;background:#3b1219;color:#fff;font:1rem system-ui,sans-serif";
+                box.innerHTML = "Something went wrong and the Playground stopped. " +
+                    "<a href=\"\" style=\"color:inherit\">Reload the page</a> to start again.";
+                document.body.appendChild(box);
+            }
+            addEventListener("error", playgroundFailed);
+            addEventListener("unhandledrejection", playgroundFailed);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,19 @@
+[package]
+name = "quaesito-playground"
+# Internal crate, versioned with the app (the root package).
+version = "0.0.0"
+edition = "2024"
+description = "Quaesito in the browser alone: one quiz, its big screen and a pretend phone"
+repository = "https://github.com/ggirelli/quaesito"
+license = "MIT"
+publish = false
+
+[dependencies]
+# No `fullstack`: it makes the browser hydrate a server-rendered page, and there is no server.
+dioxus = { workspace = true, features = ["web"] }
+# The screens of the app, without its server pages (no `fullstack`).
+quaesito = { path = "../..", default-features = false }
+serde_json.workspace = true
+
+[lints]
+workspace = true

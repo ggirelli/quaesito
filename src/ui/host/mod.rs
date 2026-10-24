@@ -1,21 +1,20 @@
-//! The big screen: lobby with QR code, questions, reveals and podium.
+//! The big screen: questions, reveals and podium, driven by a game on the server (`connected`) or
+//! in the browser (the Playground).
 
-use dioxus::{fullstack::WebSocketOptions, prelude::*};
+use dioxus::prelude::*;
 
 use super::{
-    Route,
-    admin::{AdminGate, AdminToken},
-    library::Categories,
-    live::{ConnectionBanner, Live, countdown_ms, elapsed_now, remaining_ms, use_clock, use_live},
-    sfx::{self, SFX_JS},
-    widgets::{Brand, ClientOnly, Icon, IconKind, Spinner, ThemeToggle},
+    live::{ConnectionBanner, Live, countdown_ms, elapsed_now, remaining_ms, use_clock},
+    sfx,
+    widgets::{Brand, Spinner, ThemeToggle},
 };
-use crate::{
-    api::{end_session, host_socket, list_sessions},
-    protocol::{HostCommand, HostPhase, HostView, Upcoming},
-};
+use crate::protocol::{HostCommand, HostPhase, HostView, Upcoming};
 
+#[cfg(feature = "fullstack")]
+mod connected;
+#[cfg(feature = "fullstack")]
 mod lobby;
+#[cfg(feature = "fullstack")]
 mod panels;
 mod question;
 mod reveal;
@@ -23,51 +22,34 @@ mod sound;
 mod standings;
 mod tiles;
 
-use lobby::{Lobby, NetworkSlideView};
-use panels::{RESULTS_SHOWN, ResultsPanel, TeamsPanel};
+#[cfg(feature = "fullstack")]
+pub use connected::Host;
 use question::{QuestionSlide, ReadySlide, SlideView};
 use reveal::{ClosedSlide, ReviewSlide};
 use sound::{Playing, Soundtrack, soundtrack, use_sound_effects};
-use standings::{Podium, Standings};
+use standings::{Podium, RESULTS_SHOWN, Standings};
 
 /// Seconds the host's "+" button adds to an open question.
 const EXTRA_SECS: u32 = 10;
 
+/// The big screen of a live game, whatever drives it: plays the [`Live`] game in the context,
+/// and leaves the lobby, the extra tools and the end to its caller.
 #[component]
-pub fn Host(code: String) -> Element {
-    rsx! {
-        document::Script { src: SFX_JS }
-        ClientOnly {
-            AdminGate {
-                HostScreen { code }
-            }
-        }
-    }
-}
-
-#[component]
-fn HostScreen(code: String) -> Element {
-    let token: AdminToken = use_context();
-    let code = use_signal(|| code);
-    let live = use_live(move || host_socket(code(), token.get(), WebSocketOptions::new()));
-    use_context_provider(|| live);
-    // The browser can't tell a refused socket from a dropped one, so on every drop ask whether
-    // the game is still running.
-    let mut gone = use_signal(|| false);
-    use_effect(move || {
-        if !(live.connected)() {
-            spawn(async move {
-                if let Ok(sessions) = list_sessions(token.get()).await {
-                    gone.set(!sessions.iter().any(|s| s.code == *code.peek()));
-                }
-            });
-        }
-    });
-    let categories = Categories::use_loaded();
-    use_context_provider(|| categories);
+pub fn HostBoard(
+    /// What the Wi-Fi slide and the lobby show.
+    lobby: Element,
+    /// More buttons in the header, after the sound toggle.
+    tools: Element,
+    /// The buttons once everything is revealed.
+    finish: Element,
+    /// Whether the header shows the join code.
+    #[props(default = true)]
+    show_code: bool,
+    /// Panels opened over the game.
+    children: Element,
+) -> Element {
+    let live: Live<HostCommand, HostView> = use_context();
     let now = use_clock(200);
-    let mut show_teams = use_signal(|| false);
-    let mut show_results = use_signal(|| false);
     let mut muted = use_signal(sfx::is_muted);
     use_sound_effects(live.view, live.received_at, now);
 
@@ -87,14 +69,6 @@ fn HostScreen(code: String) -> Element {
         live.send(command);
     };
 
-    if gone() {
-        return rsx! {
-            div { class: "page center",
-                h1 { "This game is not running" }
-                BackToAdmin { class: "button", code: code() }
-            }
-        };
-    }
     let view = live.view.read();
     let Some(view) = view.as_ref() else {
         return rsx! {
@@ -140,9 +114,11 @@ fn HostScreen(code: String) -> Element {
                 Brand {}
                 span { class: "strong", "{view.title}" }
                 div { class: "row",
-                    span {
-                        "Code "
-                        span { class: "code", "{view.code}" }
+                    if show_code {
+                        span {
+                            "Code "
+                            span { class: "code", "{view.code}" }
+                        }
                     }
                     button {
                         class: "button ghost",
@@ -155,28 +131,8 @@ fn HostScreen(code: String) -> Element {
                         },
                         if muted() { "🔇" } else { "🔊" }
                     }
-                    button {
-                        class: "button ghost",
-                        title: "Rename or remove teams",
-                        onclick: move |_| show_teams.set(true),
-                        "Teams ({view.teams.len()})"
-                    }
-                    Link {
-                        class: "button ghost icon",
-                        to: Route::Admin {},
-                        title: "Admin",
-                        aria_label: "Admin",
-                        Icon { kind: IconKind::Settings }
-                    }
+                    {tools}
                     ThemeToggle { class: "button ghost icon" }
-                }
-            }
-            if show_teams() {
-                TeamsPanel {
-                    teams: view.teams.clone(),
-                    pictures: view.pictures,
-                    joining: view.joining,
-                    on_close: move |()| show_teams.set(false),
                 }
             }
             if paused {
@@ -184,12 +140,7 @@ fn HostScreen(code: String) -> Element {
             }
             main { class: "host-main",
                 match &view.phase {
-                    HostPhase::Network { network } => rsx! {
-                        NetworkSlideView { network: network.clone() }
-                    },
-                    HostPhase::Lobby { .. } => rsx! {
-                        Lobby { code: view.code.clone(), teams: view.teams.clone(), max_teams: view.max_teams }
-                    },
+                    HostPhase::Network { .. } | HostPhase::Lobby { .. } => lobby,
                     HostPhase::Ready { question } => rsx! {
                         ReadySlide { question: question.clone(), teams: view.teams.len() }
                     },
@@ -293,44 +244,12 @@ fn HostScreen(code: String) -> Element {
                         "{label}"
                     }
                 } else {
-                    button {
-                        class: "button primary big",
-                        onclick: move |_| show_results.set(true),
-                        "📊 Results"
-                    }
-                    BackToAdmin { class: "button big", code: code() }
+                    {finish}
                 }
             }
-            if show_results() {
-                ResultsPanel { code: code(), on_close: move |()| show_results.set(false) }
-            }
+            {children}
             ConnectionBanner { connected: (live.connected)() }
         }
-    }
-}
-
-/// Back to the quiz list. In the test page's frame it ends the test and leaves the test page,
-/// instead of opening the admin pages inside the frame.
-#[component]
-fn BackToAdmin(class: &'static str, code: String) -> Element {
-    let token: AdminToken = use_context();
-    let leave = move |_| {
-        let code = code.clone();
-        async move {
-            let framed = document::eval("return window.self !== window.top;")
-                .join::<bool>()
-                .await
-                .unwrap_or(false);
-            if framed {
-                let _ = end_session(token.get(), code).await;
-                document::eval("window.top.location.assign('/admin');");
-            } else {
-                navigator().push(Route::Admin {});
-            }
-        }
-    };
-    rsx! {
-        button { class, onclick: leave, "Back to admin" }
     }
 }
 

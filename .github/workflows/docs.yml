@@ -1,6 +1,7 @@
 name: Docs
 
-# Builds the documentation site (MkDocs) on every change, and publishes it to GitHub Pages from main.
+# Builds the documentation site (MkDocs) and the Playground (crates/playground, published at
+# /quaesito/playground/) on every change, and publishes them to GitHub Pages from main.
 on:
   push:
     branches: [main]
@@ -11,6 +12,11 @@ on:
 
 permissions:
   contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+  # The justfile's dx-version, as in release.yml.
+  DIOXUS_CLI_VERSION: 0.7.10
 
 concurrency:
   group: docs-${{ github.ref }}
@@ -26,6 +32,21 @@ jobs:
       - run: uvx --with-requirements docs/requirements.txt mkdocs build --strict
         env:
           NO_MKDOCS_2_WARNING: "true" # MkDocs is pinned below 2.0 in docs/requirements.txt
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: just,dioxus-cli@${{ env.DIOXUS_CLI_VERSION }}
+      # Builds the Playground into target/pages/quaesito/playground, and plays its quiz to the end
+      # there, as Pages serves it (the runner has Chrome, Node.js and Python).
+      - run: just playground-check
+      - name: Add the Playground to the site
+        run: |
+          # The site's own pages must never be replaced.
+          if [ -e site/playground ]; then echo "site/playground already exists" >&2; exit 1; fi
+          cp -r target/pages/quaesito/playground site/playground
       - if: github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v4
         with:

@@ -13,6 +13,8 @@ app to the big screen and the phones, and keeps the games' state.
   `just bundle` build it too
 - [`cargo-deny`](https://github.com/EmbarkStudios/cargo-deny), for `just check`
 - Node.js and npm, only for the browser checks, screenshots and demo videos in `tools/browser`
+- Python 3 (`python3`), only for `just playground-serve` and `just playground-check`, which serve
+  the [Playground](#the-playground) with its built-in web server
 
 ## Common commands
 
@@ -31,11 +33,15 @@ just docs    # this site, live at http://127.0.0.1:8000
 
 ## How the code is organised
 
-The repository is a Cargo workspace of three crates, each depending only on the ones below it:
+The repository is a Cargo workspace of four crates, each depending only on the ones below it:
 
+- **`quaesito-playground`** (`crates/playground`): the [Playground](https://ggirelli.github.io/quaesito/playground/), one quiz played in the
+  browser alone (see [below](#the-playground)).
 - **`quaesito`** (the root: `src/`): the app. `main.rs` starts it, `src/ui/` holds the pages and
   screens, and `src/api.rs` declares the server functions the browser calls. Built for the browser
   (the default `web` feature) and for the server (`--features server`, which adds `quaesito-server`).
+  The pages that talk to a server need its `fullstack` feature (both builds turn it on); without it,
+  only the big screen's and the phones' parts and the Playground are built.
 - **`quaesito-server`** (`crates/server`): everything that needs a server: quiz, media and
   library storage, admin sign-in, live sessions and their WebSockets, HTTP routes. Its `build.rs`
   bundles the question library from `library/`.
@@ -43,6 +49,23 @@ The repository is a Cargo workspace of three crates, each depending only on the 
   and their validation, the messages of a live game, scoring, typed-answer matching and the game
   engine. Time and randomness are passed in, so its tests need no tricks; it also builds for the
   browser. `just core` tests it on its own and checks that it builds for wasm.
+
+## The Playground
+
+The [Playground](https://ggirelli.github.io/quaesito/playground/) plays one quiz (`crates/playground/src/demo-quiz.json`) with no server: the
+game runs in the browser, with `quaesito-core`'s engine, and drives the app's own big screen and
+phone, side by side as on the test page (`src/ui/playground/`). It is built without `fullstack`,
+which would make the browser wait for a server-rendered page, and published with this guide at
+`/quaesito/playground/` by the docs workflow.
+
+```sh
+just playground         # build it as published, into target/pages/quaesito/playground
+just playground-serve   # serve that at http://127.0.0.1:8094/quaesito/playground/
+just playground-check   # play its quiz to the end in a headless browser, as CI does
+```
+
+`just clippy` lints its build on its own (`just clippy-playground`): built with the other crates,
+Cargo would turn `fullstack` back on.
 
 ## Running it from source
 

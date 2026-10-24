@@ -1,20 +1,20 @@
 //! The team leader's phone: join a game, answer questions, see results.
 
-use dioxus::{fullstack::WebSocketOptions, prelude::*};
+use dioxus::prelude::*;
 
 use super::{
-    Route,
-    live::{ConnectionBanner, countdown_ms, use_live},
+    live::{ConnectionBanner, Live, countdown_ms},
     widgets::{Spinner, TeamAvatar},
 };
-use crate::{
-    api::{check_ticket, player_socket},
-    protocol::{InputKind, PlayerPhase, PlayerView, Response},
-};
+use crate::protocol::{InputKind, PlayerCommand, PlayerPhase, PlayerView, Response};
 
 mod choice;
+#[cfg(feature = "fullstack")]
+mod connected;
 mod controls;
+#[cfg(feature = "fullstack")]
 mod join;
+#[cfg(feature = "fullstack")]
 mod lobby;
 mod order;
 mod outcome;
@@ -23,10 +23,12 @@ mod parts;
 mod pins;
 mod typed;
 
+#[cfg(feature = "fullstack")]
+use connected::PlayerGame;
+#[cfg(feature = "fullstack")]
 pub use join::{Join, JoinBlank, JoinCodeForm};
 
 use choice::AnswerPad;
-use lobby::LobbyView;
 use order::OrderPad;
 use outcome::OutcomeView;
 use pairs::PairsPad;
@@ -34,23 +36,16 @@ use parts::PartsPad;
 use pins::PinPad;
 use typed::OpenPad;
 
+/// A team leader's phone in a live game, whatever drives it: plays the [`Live`] game in the
+/// context, and leaves the lobby and the way out to its caller.
 #[component]
-fn PlayerGame(code: String, token: String, on_gone: EventHandler<()>) -> Element {
-    let code = use_signal(|| code);
-    let token = use_signal(|| token);
-    let live = use_live(move || player_socket(code(), token(), WebSocketOptions::new()));
-    use_context_provider(|| live);
-    // A dropped connection may mean the host removed the team, or ended the game.
-    use_effect(move || {
-        if !(live.connected)() {
-            spawn(async move {
-                if matches!(check_ticket(code(), token()).await, Ok(false)) {
-                    on_gone.call(());
-                }
-            });
-        }
-    });
-
+pub fn PlayerBoard(
+    /// What the phone shows while teams join.
+    lobby: Element,
+    /// Shown under the final rank, once the quiz is over.
+    done: Element,
+) -> Element {
+    let live: Live<PlayerCommand, PlayerView> = use_context();
     let view = live.view.read();
     let Some(view) = view.as_ref() else {
         return rsx! {
@@ -68,18 +63,16 @@ fn PlayerGame(code: String, token: String, on_gone: EventHandler<()>) -> Element
                     span { class: "player-score", "{score} pts" }
                 }
             }
-            PhaseView { code: code(), token: token(), view: view.clone(), live_received: (live.received_at)() }
+            PhaseView { view: view.clone(), live_received: (live.received_at)(), lobby, done }
             ConnectionBanner { connected: (live.connected)() }
         }
     }
 }
 
 #[component]
-fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) -> Element {
+fn PhaseView(view: PlayerView, live_received: f64, lobby: Element, done: Element) -> Element {
     match view.phase {
-        PlayerPhase::Lobby { teams, pictures } => rsx! {
-            LobbyView { code, token, team: view.team.clone(), teams, pictures }
-        },
+        PlayerPhase::Lobby { .. } => lobby,
         PlayerPhase::Slide => rsx! {
             main { class: "player-main",
                 div { class: "big-icon", "👀" }
@@ -336,7 +329,7 @@ fn PhaseView(code: String, token: String, view: PlayerView, live_received: f64) 
                 }
                 if finished {
                     p { class: "muted", "Thanks for playing!" }
-                    Link { class: "button", to: Route::Home {}, "Done" }
+                    {done}
                 }
             }
         },

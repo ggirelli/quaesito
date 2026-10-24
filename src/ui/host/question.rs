@@ -6,7 +6,7 @@ use super::reveal::{PairBoard, PartCards};
 use super::tiles::QuestionImage;
 use crate::protocol::{InputKind, QuestionInfo, SlideInfo};
 use crate::ui::{
-    library::{Categories, CategoryIcon},
+    categories::{Categories, CategoryIcon},
     widgets::{ANSWER_STYLES, AnswerShape, Icon, IconKind, QuestionMedia, media_url},
 };
 

@@ -4,17 +4,19 @@
 //! not know where views come from, so another source (such as a game running in the browser)
 //! could drive the same screens.
 
+#[cfg(feature = "fullstack")]
 use std::future::Future;
 
-use dioxus::{
-    fullstack::{Websocket, use_websocket},
-    prelude::*,
-};
+#[cfg(feature = "fullstack")]
+use dioxus::fullstack::{Websocket, use_websocket};
+use dioxus::prelude::*;
+#[cfg(feature = "fullstack")]
 use serde::{Serialize, de::DeserializeOwned};
 
 use super::client;
 
 /// Pause before reconnecting a dropped socket.
+#[cfg(feature = "fullstack")]
 const RECONNECT_DELAY_MS: u32 = 1500;
 
 /// A live game as a screen sees it: what it last received, and where its commands go.
@@ -37,6 +39,22 @@ impl<In, Out> Clone for Live<In, Out> {
 impl<In, Out> Copy for Live<In, Out> {}
 
 impl<In, Out> Live<In, Out> {
+    /// A live game fed by its owner, such as a game running in the browser: it sets `view` and
+    /// `received_at`, and `commands` gets what the screen sends.
+    pub fn new(
+        view: Signal<Option<Out>>,
+        received_at: Signal<f64>,
+        connected: Signal<bool>,
+        commands: Callback<In>,
+    ) -> Self {
+        Self {
+            view,
+            received_at,
+            connected,
+            commands,
+        }
+    }
+
     /// Sends a command; the screen learns its effect from the next view.
     pub fn send(&self, command: In) {
         self.commands.call(command);
@@ -44,6 +62,7 @@ impl<In, Out> Live<In, Out> {
 }
 
 /// Connects with `connect` and keeps the connection alive.
+#[cfg(feature = "fullstack")]
 pub fn use_live<In, Out, Fut>(connect: impl FnMut() -> Fut + Copy + 'static) -> Live<In, Out>
 where
     In: Serialize + 'static,
@@ -75,12 +94,7 @@ where
             }
         }
     });
-    Live {
-        view,
-        received_at,
-        connected,
-        commands,
-    }
+    Live::new(view, received_at, connected, commands)
 }
 
 /// The browser clock, refreshed every `period_ms`.
