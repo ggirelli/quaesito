@@ -1,11 +1,9 @@
 //! Saving a game and restoring it, for example after the server restarts.
 
-use std::{
-    collections::HashMap,
-    time::{Duration, Instant},
-};
+use std::{collections::HashMap, time::Duration};
 
 use serde::{Deserialize, Serialize};
+use web_time::Instant;
 
 use super::{Game, Phase, Submission, Team};
 use crate::{

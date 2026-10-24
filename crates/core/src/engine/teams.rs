@@ -1,6 +1,6 @@
 //! The teams of a game: joining, names, pictures and connections.
 
-use std::time::Instant;
+use web_time::Instant;
 
 use super::{Game, Phase, Refusal, Team};
 use crate::protocol::{BACKDROP_COUNT, MASCOTS, MAX_NAME_CHARS};

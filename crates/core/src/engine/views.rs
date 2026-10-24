@@ -2,8 +2,10 @@
 
 use std::{
     hash::{Hash, Hasher},
-    time::{Duration, Instant},
+    time::Duration,
 };
+
+use web_time::Instant;
 
 use super::{Game, Phase, Team};
 use crate::{

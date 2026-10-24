@@ -1,6 +1,8 @@
 //! Moving through the quiz: next and back, pausing, timers and auto-advance.
 
-use std::time::{Duration, Instant};
+use std::time::Duration;
+
+use web_time::Instant;
 
 use super::{Game, Phase, Refusal};
 use crate::{

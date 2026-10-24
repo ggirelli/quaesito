@@ -27,10 +27,7 @@
 //!
 //! The review at the end then only covers the questions after the last results slide.
 
-use std::{
-    collections::HashMap,
-    time::{Duration, Instant},
-};
+use std::{collections::HashMap, time::Duration};
 
 use serde::{Deserialize, Serialize};
 
@@ -40,6 +37,7 @@ use crate::{
 };
 
 mod answers;
+mod commands;
 mod flow;
 mod outcomes;
 mod reveal;
@@ -48,7 +46,11 @@ mod standings;
 mod teams;
 mod views;
 
+pub use commands::MAX_EXTRA_SECS;
 pub use snapshot::Snapshot;
+/// The clock the engine takes: std's `Instant` natively, the browser's clock in wasm (where std's
+/// cannot tell the time).
+pub use web_time::Instant;
 
 /// One running quiz.
 pub struct Game {
