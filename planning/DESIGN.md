@@ -15,7 +15,7 @@ The admin password guards `/admin` and `/host/<code>`; the host screen is opened
 dashboard when a quiz is started. Phones join at `/join/<code>`.
 
 The server is authoritative for game state and timing. Each running session is an in-memory state
-machine (`src/server/engine.rs`) that takes the current time as an input, so it is fully unit tested:
+machine (`crates/core/src/engine.rs`) that takes the current time as an input, so it is fully unit tested:
 
 ```
 Lobby → Question(0) → Closed(0) → … → Closed(n-1) → [Review(0) → … → Review(n-1)] → Podium(0..=3)
@@ -61,7 +61,7 @@ the same large app at once, Firefox can leave one of them loading forever. A fra
 after 15 s is reloaded.
 
 Screens hold a WebSocket each (`/api/ws/host`, `/api/ws/player`). On every change the server
-pushes a complete, role-specific view (`src/protocol.rs`), so clients never reconstruct state and
+pushes a complete, role-specific view (`crates/core/src/protocol.rs`), so clients never reconstruct state and
 a reconnecting phone simply receives the current view. Countdowns are sent as "milliseconds left"
 and run locally from the moment the view arrived.
 

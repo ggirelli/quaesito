@@ -16,7 +16,7 @@ from PIL import Image, ImageDraw
 
 ROOT = Path(__file__).resolve().parents[2]
 ORIGINALS, OUT = ROOT / "assets/teams/originals", ROOT / "assets/teams"
-SIZE = 256  # the app's team picture size (AVATAR_SIZE in src/server/media.rs)
+SIZE = 256  # the app's team picture size (AVATAR_SIZE in crates/server/src/media.rs)
 FILL = 0.84  # share of the square the character spans
 
 

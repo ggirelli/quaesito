@@ -98,21 +98,21 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 
 ## Notes
 
-- `src/model.rs`: quizzes, questions, answers, settings and validation.
-- `src/scoring.rs`: speed-weighted points, all-or-nothing/partial correctness, judged typed answers, ranking.
-- `src/server/matching.rs`: normalisation of typed answers (case, accents, punctuation, spacing).
-- `src/server/store.rs`: one JSON file per quiz, atomic writes, path-safe ids.
-- `src/server/media.rs`: picture re-encoding (questions → JPEG ≤1600×1200, avatars → 256² PNG keeping transparency), `GET /media/{name}`.
+- `crates/core/src/model.rs`: quizzes, questions, answers, settings and validation.
+- `crates/core/src/scoring.rs`: speed-weighted points, all-or-nothing/partial correctness, judged typed answers, ranking.
+- `crates/core/src/matching.rs`: normalisation of typed answers (case, accents, punctuation, spacing).
+- `crates/server/src/store.rs`: one JSON file per quiz, atomic writes, path-safe ids.
+- `crates/server/src/media.rs`: picture re-encoding (questions → JPEG ≤1600×1200, avatars → 256² PNG keeping transparency), `GET /media/{name}`.
 - Team pictures: an upload (unless the game turns uploads off) or one of 16 ready-made mascots (`assets/teams/`, made by `tools/assets/team-mascots.py`), on a background the team picks (`.backdrop-<n>` classes; inline styles flickered). Mascots were drawn for
   the sky-blue background; on others a `hue-rotate()` per background class keeps the same contrast.
-- `src/server/mod.rs`: global state initialised from `QUAESITO_DATA_DIR` (default `./data`).
-- `src/server/auth.rs`: admin password from `QUAESITO_ADMIN_PASSWORD` (generated and logged if unset), in-memory bearer tokens.
+- `crates/server/src/lib.rs`: global state initialised from `QUAESITO_DATA_DIR` (default `./data`).
+- `crates/server/src/auth.rs`: admin password from `QUAESITO_ADMIN_PASSWORD` (generated and logged if unset), in-memory bearer tokens.
 - `src/api.rs`: server functions for login, quiz CRUD, duplicate, JSON import and picture upload.
-- `src/protocol.rs`: host/player views and commands pushed over WebSockets (full view on every change).
-- `src/server/engine.rs`: pure session state machine (lobby → questions → optional review → podium 3→2→1), time passed in explicitly for testability. Auto-advance pauses: 8 s after a revealed question, 3 s when hidden, 4 s per podium step.
-- `src/server/sessions.rs`: live sessions by 6-digit code; a timer task per session fires deadlines and auto-advance.
-- `src/server/live.rs`: WebSocket loops (`/api/ws/host`, `/api/ws/player`) pushing full views on every change.
-- `src/server/net.rs`: join URL origin from `QUAESITO_PUBLIC_URL` or the LAN IP plus the host page's port (the QR code is drawn client-side, step 9).
+- `crates/core/src/protocol.rs`: host/player views and commands pushed over WebSockets (full view on every change).
+- `crates/core/src/engine.rs`: pure session state machine (lobby → questions → optional review → podium 3→2→1), time passed in explicitly for testability. Auto-advance pauses: 8 s after a revealed question, 3 s when hidden, 4 s per podium step.
+- `crates/server/src/sessions.rs`: live sessions by 6-digit code; a timer task per session fires deadlines and auto-advance.
+- `crates/server/src/live.rs`: WebSocket loops (`/api/ws/host`, `/api/ws/player`) pushing full views on every change.
+- `crates/server/src/net.rs`: join URL origin from `QUAESITO_PUBLIC_URL` or the LAN IP plus the host page's port (the QR code is drawn client-side, step 9).
 - `src/ui/`: router (`/`, `/admin`, `/admin/quiz/:id`), `ClientOnly` wrapper so `localStorage`-dependent pages hydrate cleanly, admin gate with token check, dashboard (create/duplicate/export/import/delete), editor with ~1 s autosave and live validation.
 - `GET /export/{id}?token=…` downloads a quiz as JSON.
 - `assets/main.css`: single offline stylesheet (no web fonts/CDNs, the LAN may have no internet).
@@ -120,7 +120,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
   GitHub's facts (`overrides/partials/source.html`). `RELEASE=1 DEMO_QUIZ=1 tools/browser/run.sh check-offline.js` fails on
   any request outside the server. The server sends a content security policy allowing only itself, which also blocks the
   Inter font that dx's rebuild notice imports from Google in debug builds.
-- `src/ui/live.rs`: `use_live` hook keeping a WebSocket alive with reconnection; countdowns run on the client from the last server snapshot.
+- `src/ui/live.rs`: `use_live` hook keeping a WebSocket alive with reconnection; countdowns run on the client from the last server snapshot. Screens only see `Live` (the latest view, `Live::send` for commands), not the socket.
 - `src/ui/host.rs`: `/host/:code` big screen: lobby with client-side QR code, timed questions, reveals with pick counts, standings, podium 3→2→1. Advance with the button, →, PageDown or N (presentation clickers).
 - Admin dashboard: start a quiz, list live games, reopen or end them.
 - `src/ui/player.rs`: `/join` and `/join/:code` phone flow: team name, optional team picture and background (folded away in the lobby), reconnect token per game in `localStorage`, tap-to-answer (single) or select-and-submit (multi), results, final rank.

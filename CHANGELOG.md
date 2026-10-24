@@ -6,6 +6,12 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+### Changed
+
+- For contributors: the code is split into a Cargo workspace. The rules (quizzes, scoring, the game engine) are in
+  `quaesito-core`, which builds and tests without the server and also builds for the browser; the server is in
+  `quaesito-server`; the app stays at the root. Nothing changes for players, hosts or saved data.
+
 ### Fixed
 
 - The big screen of a game that isn't running (an unknown code, or a game that has ended) says so, with a way back
