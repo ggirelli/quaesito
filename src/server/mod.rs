@@ -212,7 +212,7 @@ where
                 let addr = dioxus::cli_config::fullstack_address_or_localhost();
                 let listener = tokio::net::TcpListener::bind(addr)
                     .await
-                    .map_err(|err| anyhow::anyhow!("listening on {addr}: {err}"))?;
+                    .map_err(|err| listen_error(addr, &err))?;
                 dioxus::fullstack::axum::serve(
                     listener,
                     router.into_make_service_with_connect_info::<std::net::SocketAddr>(),
@@ -225,6 +225,22 @@ where
         dioxus::logger::tracing::error!("{err:#}");
     }
     std::process::exit(1)
+}
+
+/// Why quaesito cannot listen on `addr`. A busy port is common (often an earlier quaesito still
+/// running) and each system words it differently, so it also says what to do.
+#[cfg(any(test, not(debug_assertions)))]
+fn listen_error(addr: std::net::SocketAddr, err: &std::io::Error) -> anyhow::Error {
+    if err.kind() != std::io::ErrorKind::AddrInUse {
+        return anyhow::anyhow!("listening on {addr}: {err}");
+    }
+    let port = addr.port();
+    let other = port.checked_add(1).unwrap_or(8081);
+    anyhow::anyhow!(
+        "listening on {addr}: {err}. Another program, perhaps another quaesito window, already \
+         uses port {port}: close it, or start quaesito on another port with PORT={other} (in a \
+         Windows Command Prompt: set PORT={other}, then start.bat)"
+    )
 }
 
 /// Routes served next to the Dioxus application.
@@ -350,4 +366,23 @@ async fn export(Path(id): Path<String>, Query(query): Query<ExportQuery>) -> Res
         bundle,
     )
         .into_response()
+}
+
+#[cfg(test)]
+mod tests {
+    use std::io::{Error, ErrorKind};
+
+    use super::listen_error;
+
+    #[test]
+    fn a_busy_port_says_what_to_do() {
+        let addr = "0.0.0.0:8080".parse().unwrap();
+        let busy = listen_error(addr, &Error::from(ErrorKind::AddrInUse)).to_string();
+        assert!(busy.starts_with("listening on 0.0.0.0:8080: "), "{busy}");
+        assert!(busy.contains("uses port 8080"), "{busy}");
+        assert!(busy.contains("PORT=8081"), "{busy}");
+
+        let denied = listen_error(addr, &Error::from(ErrorKind::PermissionDenied)).to_string();
+        assert!(!denied.contains("PORT="), "{denied}");
+    }
 }
