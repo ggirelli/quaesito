@@ -98,7 +98,7 @@ Living tracker of the implementation plan. See [DESIGN.md](DESIGN.md) for the de
 
 ## Notes
 
-- `crates/core/src/model.rs`: quizzes, questions, answers, settings and validation.
+- `crates/core/src/model/`: quizzes, questions, answers, settings and validation.
 - `crates/core/src/scoring.rs`: speed-weighted points, all-or-nothing/partial correctness, judged typed answers, ranking.
 - `crates/core/src/matching.rs`: normalisation of typed answers (case, accents, punctuation, spacing).
 - `crates/server/src/store.rs`: one JSON file per quiz, atomic writes, path-safe ids.
