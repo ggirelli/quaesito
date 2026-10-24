@@ -45,7 +45,8 @@ To let teams join from anywhere, run it on a small Linux server (x86-64 or ARM64
 ## Development
 
 Requires Rust (stable) with the `wasm32-unknown-unknown` target, [`dx`](https://dioxuslabs.com/learn/0.7/getting_started)
-(Dioxus CLI 0.7), [`just`](https://github.com/casey/just) and [`cargo-deny`](https://github.com/EmbarkStudios/cargo-deny).
+(Dioxus CLI 0.7), [`just`](https://github.com/casey/just), [`cargo-deny`](https://github.com/EmbarkStudios/cargo-deny)
+and [`uv`](https://docs.astral.sh/uv/) (for the user guide, which `just serve` builds).
 
 ```sh
 just serve   # hot-reloading dev server (admin password "quaesito")
