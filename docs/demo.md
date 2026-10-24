@@ -1,5 +1,16 @@
 # Demo videos
 
+Three narrated videos, with captions and transcripts, show quaesito from both sides: what the
+host and the big screen show, what teams see on their phones, and how quizzes are made.
+
+There is no online demo to try. The closest is the app itself: [download it](getting-started.md),
+and play its **Demo quiz** on your own with [**🧪 Test**](testing.md), which shows the big screen
+and two phones side by side.
+
+For still pictures, see the [home page](index.md#the-big-screen-and-the-phones) (the big screen
+next to a phone), [question types](question-types.md) and
+[running the game](running-the-game.md).
+
 ## Playing a quiz
 
 A quiz played on the test page: the big screen on the left, two teams' phones on the right.

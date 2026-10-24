@@ -1,16 +1,24 @@
 # Running the game
 
-Press **▶ Start** next to a quiz, choose how many teams may join, and start. Tick **Shuffle the
-answers** to play the multiple-choice answers in a new order, for this game only: the saved quiz
-keeps its own. Untick **Teams can add a picture** to keep uploads off the big screen: teams then
-pick one of the 16 ready-made pictures, or show their initial. Only phones on the same network as
-quaesito can upload a picture: phones joining over the internet always pick a ready-made one. Put the big screen on the TV, full screen with ++f11++. Teams scan the QR code, or open the address shown and type
-the game code, then pick a name, a picture (their own, or one of 16 ready-made mascots) and a
-background for it: a colour or a gradient, which shows behind their initial and through the
-see-through parts of a picture (the mascots, or a PNG with a transparent background). The mascots'
-colours turn with the background, so they stand out on every one. Until the
-quiz starts, teams can change their name (not to one another team has), picture and background
-under **Change your name or picture** on their phone.
+1. **Start a game:** press **▶ Start** next to a quiz, choose how many teams may join, and start.
+    - Tick **Shuffle the answers** to play the multiple-choice answers in a new order, for this
+      game only: the saved quiz keeps its own.
+    - Untick **Teams can add a picture** to keep uploads off the big screen: teams then pick one
+      of the 16 ready-made pictures, or show their initial. Only phones on the same network as
+      quaesito can upload a picture: phones joining over the internet always pick a ready-made
+      one.
+2. **Show the big screen** on the TV, full screen with ++f11++.
+3. **Teams join:** they scan the QR code, or open the address shown and type the game code. Then
+   they pick a name, a picture (their own, or one of 16 ready-made mascots) and a background for
+   it: a colour or a gradient, which shows behind their initial and through the see-through parts
+   of a picture (the mascots, or a PNG with a transparent background). The mascots' colours turn
+   with the background, so they stand out on every one. If phones cannot connect, see
+   [troubleshooting](troubleshooting.md#phones-cannot-connect).
+4. **Until the quiz starts**, teams can change their name (not to one another team has), picture
+   and background under **Change your name or picture** on their phone.
+5. **Play:** move on with the big button, and use the controls below.
+
+![The big screen's lobby with a QR code and three teams](screenshots/host-lobby.webp)
 
 <video controls preload="metadata" poster="../media/demo-poster.webp" class="demo-video">
   <source src="../media/demo.mp4" type="video/mp4">

@@ -14,7 +14,10 @@ welcome: bug reports, question-type ideas, fixes, docs and translations of the i
 
 You need Rust (stable) with the `wasm32-unknown-unknown` target,
 [`dx`](https://dioxuslabs.com/learn/0.7/getting_started) (Dioxus CLI 0.7),
-[`just`](https://github.com/casey/just) and [`cargo-deny`](https://github.com/EmbarkStudios/cargo-deny).
+[`just`](https://github.com/casey/just), [`cargo-deny`](https://github.com/EmbarkStudios/cargo-deny)
+and [`uv`](https://docs.astral.sh/uv/) (`just serve` builds the user guide with it). The
+[development guide](https://ggirelli.github.io/quaesito/development/) lists them with install
+commands.
 
 ```sh
 rustup target add wasm32-unknown-unknown
@@ -44,7 +47,8 @@ with the big screen and two phones side by side.
    tools/browser/run.sh check-pins.js assets/brand/lobby.webp
    ```
 
-5. Update the docs that describe what you changed: [README.md](README.md) for players and hosts,
+5. Update the docs that describe what you changed: the user guide in [docs/](docs/) for players
+   and hosts (`just docs` previews it), [README.md](README.md) for the overview,
    [DESIGN.md](planning/DESIGN.md) for how it works, [STATUS.md](planning/STATUS.md) for progress, and an entry in
    [CHANGELOG.md](CHANGELOG.md) under "Unreleased".
 6. Open a pull request against `main`. `main` is protected: changes land through pull requests
@@ -60,6 +64,7 @@ with the big screen and two phones side by side.
 3. Once it's merged, tag `main` and push the tag (`git tag vX.Y.Z && git push origin vX.Y.Z`): the
    release workflow builds the downloads and publishes them with the version's CHANGELOG notes.
 
+## Style
 
 - Code follows `rustfmt` and `clippy::pedantic`; prefer clear names over comments, and comment the
   *why* when it is not obvious.

@@ -1,11 +1,24 @@
 # Configuration
 
-Quaesito reads a few environment variables. The start scripts set sensible defaults; set the
-variables before starting to change them, for example on macOS or Linux:
+Quaesito reads a few environment variables: settings given to a program when it starts. The start
+scripts set sensible defaults; set the variables before starting to change them:
 
-```sh
-QUAESITO_ADMIN_PASSWORD=pick-something ./start.sh
-```
+=== "macOS and Linux"
+
+    ```sh
+    QUAESITO_ADMIN_PASSWORD=pick-something ./start.sh
+    ```
+
+    (or `./start.command` on macOS, from a terminal in quaesito's folder)
+
+=== "Windows"
+
+    In a Command Prompt, in quaesito's folder:
+
+    ```bat
+    set QUAESITO_ADMIN_PASSWORD=pick-something
+    start.bat
+    ```
 
 | Variable | Default | Meaning |
 |---|---|---|
@@ -19,6 +32,10 @@ QUAESITO_ADMIN_PASSWORD=pick-something ./start.sh
 | `QUAESITO_MAX_VIDEO_MB` | `200` | largest video upload |
 | `QUAESITO_MAX_IMPORT_MB` | `500` | largest quiz bundle to import (media included) |
 
+The defaults above are the start scripts'. The server program on its own (`server`, or
+`server.exe` on Windows, started without a start script) listens on `127.0.0.1` only, and keeps
+its data in `data` in the folder it was started from.
+
 To run quaesito on a server that players reach over the internet, see
 [hosting on the internet](deployment.md).
 
@@ -30,4 +47,10 @@ To run quaesito on a server that players reach over the internet, see
 | `media/` | uploaded pictures, soundtracks and videos; unused ones are removed after a day |
 | `games/` | live games, so they survive a restart |
 | `admin-tokens.json` | admin logins, so you stay logged in across restarts; each lasts 12 hours |
-| `library-edits.json` | your edits to questions of the [question library](building-a-quiz.md#the-question-library) |
+| `library-edits.json` | your edits to questions of the [question library](question-library.md#fixing-a-question) |
+| `library-added.json` | questions [saved to the library](question-library.md#saving-questions-to-the-library) from your quizzes |
+| `library-topics.json` | categories and topics [you added](building-a-quiz.md#category-and-topic) |
+| `demo-quiz-added` | a marker that the Demo quiz was added once; delete it to have the Demo quiz added again (only into an empty quiz list) |
+
+Copy the whole folder to back everything up or move it to another computer; see
+[backing up and restoring](troubleshooting.md#backing-up-and-restoring).
