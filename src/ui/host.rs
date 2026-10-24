@@ -83,7 +83,7 @@ fn HostScreen(code: String) -> Element {
     let mut muted = use_signal(sfx::is_muted);
     use_sound_effects(live.view, live.received_at, now);
 
-    let send = move |command: HostCommand| async move {
+    let send = move |command: HostCommand| {
         // Stopping the clock by hand stops the soundtrack too; when time runs out, the music
         // plays on through the reveal.
         let stopping = command == HostCommand::Next
@@ -96,7 +96,7 @@ fn HostScreen(code: String) -> Element {
                 "const a = document.getElementById('soundtrack'); if (a) { a.pause(); }",
             );
         }
-        let _ = live.socket.send(command).await;
+        live.send(command);
     };
 
     if gone() {
@@ -136,7 +136,7 @@ fn HostScreen(code: String) -> Element {
             },
             // Presentation clickers send → / PageDown and ← / PageUp. Enter and Space are left
             // alone because they also activate a focused button, which would act twice.
-            onkeydown: move |e: KeyboardEvent| async move {
+            onkeydown: move |e: KeyboardEvent| {
                 let command = match e.key() {
                     Key::ArrowRight | Key::PageDown => HostCommand::Next,
                     Key::ArrowLeft | Key::PageUp => HostCommand::Back,
@@ -146,7 +146,7 @@ fn HostScreen(code: String) -> Element {
                     _ => return,
                 };
                 e.prevent_default();
-                send(command).await;
+                send(command);
             },
             header { class: "host-bar",
                 Brand {}
@@ -499,14 +499,11 @@ fn TeamsPanel(
     on_close: EventHandler<()>,
 ) -> Element {
     let live: Live<HostCommand, HostView> = use_context();
-    let set_joining = move |e: FormEvent| async move {
-        let _ = live.socket.send(HostCommand::SetJoining(e.checked())).await;
+    let set_joining = move |e: FormEvent| {
+        live.send(HostCommand::SetJoining(e.checked()));
     };
-    let set_pictures = move |e: FormEvent| async move {
-        let _ = live
-            .socket
-            .send(HostCommand::SetPictures(e.checked()))
-            .await;
+    let set_pictures = move |e: FormEvent| {
+        live.send(HostCommand::SetPictures(e.checked()));
     };
     rsx! {
         div {
@@ -590,23 +587,17 @@ fn TeamRow(team: TeamInfo, taken: Vec<String>) -> Element {
     let id = team.id;
     let rename = move |e: FormEvent| {
         let name = e.value().trim().to_owned();
-        let taken = taken.clone();
-        async move {
-            if name.is_empty() {
-                error.set(Some("A team needs a name."));
-            } else if taken.contains(&name.to_lowercase()) {
-                error.set(Some("Another team already has that name."));
-            } else {
-                error.set(None);
-                let _ = live
-                    .socket
-                    .send(HostCommand::RenameTeam { team: id, name })
-                    .await;
-            }
+        if name.is_empty() {
+            error.set(Some("A team needs a name."));
+        } else if taken.contains(&name.to_lowercase()) {
+            error.set(Some("Another team already has that name."));
+        } else {
+            error.set(None);
+            live.send(HostCommand::RenameTeam { team: id, name });
         }
     };
-    let remove = move |_| async move {
-        let _ = live.socket.send(HostCommand::RemoveTeam { team: id }).await;
+    let remove = move |_| {
+        live.send(HostCommand::RemoveTeam { team: id });
     };
     rsx! {
         li { class: "list-row team-row",
@@ -1496,15 +1487,12 @@ fn PartCards(labels: Vec<String>, images: Vec<Option<String>>) -> Element {
 #[component]
 fn TextReveal(question: usize, accepted: Vec<String>, groups: Vec<TextGroup>) -> Element {
     let live: Live<HostCommand, HostView> = use_context();
-    let judge = move |key: String, judgement: Judgement| async move {
-        let _ = live
-            .socket
-            .send(HostCommand::Judge {
-                question,
-                key,
-                judgement,
-            })
-            .await;
+    let judge = move |key: String, judgement: Judgement| {
+        live.send(HostCommand::Judge {
+            question,
+            key,
+            judgement,
+        });
     };
     rsx! {
         div { class: "open-reveal",
@@ -1588,19 +1576,16 @@ const BONUS_STEP: i32 = 100;
 #[component]
 fn NumberReveal(question: usize, answer: f64, guesses: Vec<Guess>) -> Element {
     let live: Live<HostCommand, HostView> = use_context();
-    let judge = move |key: String, bonus: i32| async move {
+    let judge = move |key: String, bonus: i32| {
         let judgement = Judgement {
             grade: Grade::Full,
             bonus,
         };
-        let _ = live
-            .socket
-            .send(HostCommand::Judge {
-                question,
-                key,
-                judgement,
-            })
-            .await;
+        live.send(HostCommand::Judge {
+            question,
+            key,
+            judgement,
+        });
     };
     rsx! {
         div { class: "open-reveal",

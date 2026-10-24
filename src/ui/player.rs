@@ -755,15 +755,12 @@ fn AnswerPad(
     let locked = submitted.is_some() || left <= 0.0;
     let chosen = submitted.clone().unwrap_or_else(|| selected.cloned());
 
-    let send = move |answer: Vec<usize>| async move {
-        let _ = live_socket
-            .socket
-            .send(PlayerCommand::Answer {
-                response: Response::Choice(answer),
-                joker: armed(),
-                bonus: has_bonus.then(|| bonus_text.cloned()),
-            })
-            .await;
+    let send = move |answer: Vec<usize>| {
+        live_socket.send(PlayerCommand::Answer {
+            response: Response::Choice(answer),
+            joker: armed(),
+            bonus: has_bonus.then(|| bonus_text.cloned()),
+        });
     };
     let (question, labels) = match text {
         Some((question, texts)) => (Some(question), Some(texts)),
@@ -825,7 +822,7 @@ fn AnswerPad(
                                 class,
                                 disabled: locked,
                                 aria_label,
-                                onclick: move |_| async move {
+                                onclick: move |_| {
                                     if multi {
                                         selected.with_mut(|s| {
                                             if let Some(pos) = s.iter().position(|&x| x == i) {
@@ -838,7 +835,7 @@ fn AnswerPad(
                                         selected.set(vec![i]);
                                     } else {
                                         selected.set(vec![i]);
-                                        send(vec![i]).await;
+                                        send(vec![i]);
                                     }
                                 },
                                 AnswerShape { index: i }
@@ -857,7 +854,7 @@ fn AnswerPad(
                 button {
                     class: "button primary big",
                     disabled: selected().is_empty(),
-                    onclick: move |_| async move { send(selected()).await },
+                    onclick: move |_| send(selected()),
                     "Submit"
                 }
             }
@@ -888,7 +885,7 @@ fn OpenPad(
     let (left, width) = clock.at(now());
     let locked = submitted.is_some() || left <= 0.0;
 
-    let submit = move |evt: FormEvent| async move {
+    let submit = move |evt: FormEvent| {
         evt.prevent_default();
         let text = draft().trim().to_owned();
         let response = if number {
@@ -907,14 +904,11 @@ fn OpenPad(
             Response::Text(text)
         };
         error.set(None);
-        let _ = live_socket
-            .socket
-            .send(PlayerCommand::Answer {
-                response,
-                joker: armed(),
-                bonus: has_bonus.then(|| bonus_text.cloned()),
-            })
-            .await;
+        live_socket.send(PlayerCommand::Answer {
+            response,
+            joker: armed(),
+            bonus: has_bonus.then(|| bonus_text.cloned()),
+        });
     };
 
     rsx! {
@@ -1061,16 +1055,13 @@ fn PinPad(
     let (left, width) = clock.at(now());
     let locked = submitted.is_some() || left <= 0.0;
     let shown = submitted.or(pin());
-    let send = move |_| async move {
+    let send = move |_| {
         if let Some(at) = pin() {
-            let _ = live_socket
-                .socket
-                .send(PlayerCommand::Answer {
-                    response: Response::Pin(at),
-                    joker: armed(),
-                    bonus: has_bonus.then(|| bonus_text.cloned()),
-                })
-                .await;
+            live_socket.send(PlayerCommand::Answer {
+                response: Response::Pin(at),
+                joker: armed(),
+                bonus: has_bonus.then(|| bonus_text.cloned()),
+            });
         }
     };
     rsx! {
@@ -1146,16 +1137,13 @@ fn PartsPad(
     let (left, width) = clock.at(now());
     let locked = submitted.is_some() || left <= 0.0;
     let anything = drafts.read().iter().any(|d| !d.trim().is_empty());
-    let submit = move |evt: FormEvent| async move {
+    let submit = move |evt: FormEvent| {
         evt.prevent_default();
-        let _ = live_socket
-            .socket
-            .send(PlayerCommand::Answer {
-                response: Response::Parts(drafts()),
-                joker: armed(),
-                bonus: None,
-            })
-            .await;
+        live_socket.send(PlayerCommand::Answer {
+            response: Response::Parts(drafts()),
+            joker: armed(),
+            bonus: None,
+        });
     };
     rsx! {
         main { class: "player-main top",
@@ -1244,15 +1232,12 @@ fn OrderPad(
     let locked = submitted.is_some() || left <= 0.0;
     let order = submitted.clone().unwrap_or_else(|| picked.cloned());
     let complete = picked.read().len() == items.len();
-    let send = move |_| async move {
-        let _ = live_socket
-            .socket
-            .send(PlayerCommand::Answer {
-                response: Response::Order(picked()),
-                joker: armed(),
-                bonus: has_bonus.then(|| bonus_text.cloned()),
-            })
-            .await;
+    let send = move |_| {
+        live_socket.send(PlayerCommand::Answer {
+            response: Response::Order(picked()),
+            joker: armed(),
+            bonus: has_bonus.then(|| bonus_text.cloned()),
+        });
     };
     rsx! {
         main { class: "player-main top",
@@ -1399,15 +1384,12 @@ fn PairsPad(
             }
         }
     };
-    let send = move |_| async move {
-        let _ = live_socket
-            .socket
-            .send(PlayerCommand::Answer {
-                response: Response::Pairs(links()),
-                joker: armed(),
-                bonus: has_bonus.then(|| bonus_text.cloned()),
-            })
-            .await;
+    let send = move |_| {
+        live_socket.send(PlayerCommand::Answer {
+            response: Response::Pairs(links()),
+            joker: armed(),
+            bonus: has_bonus.then(|| bonus_text.cloned()),
+        });
     };
     rsx! {
         main { class: "player-main top",
