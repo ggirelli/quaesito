@@ -35,7 +35,7 @@ use std::{
 
 use serde::{Deserialize, Serialize};
 
-use super::matching::normalize;
+use crate::matching::normalize;
 use crate::{
     model::{
         AdvanceMode, Bonus, MAX_TEXT_ANSWER_CHARS, NumberScoring, PointsMode, Question,
@@ -231,11 +231,16 @@ impl std::fmt::Display for Refusal {
 impl std::error::Error for Refusal {}
 
 impl Game {
-    /// Starts a session in the lobby.
+    /// Starts a session in the lobby. `random_below(n)` must return a number in `0..n`; it shows
+    /// the items of order and pairs questions in a random order.
     ///
     /// # Errors
     /// Refuses quizzes that are not playable.
-    pub fn new(code: String, quiz: Quiz) -> Result<Self, Refusal> {
+    pub fn new(
+        code: String,
+        quiz: Quiz,
+        mut random_below: impl FnMut(usize) -> usize,
+    ) -> Result<Self, Refusal> {
         if !quiz.validate().is_empty() {
             return Err(Refusal("This quiz is not ready to be played yet."));
         }
@@ -244,8 +249,8 @@ impl Game {
             .questions
             .iter()
             .map(|q| match &q.kind {
-                QuestionKind::Order { items } => shuffled(items.len()),
-                QuestionKind::Pairs { pairs } => shuffled(pairs.len()),
+                QuestionKind::Order { items } => shuffled(items.len(), &mut random_below),
+                QuestionKind::Pairs { pairs } => shuffled(pairs.len(), &mut random_below),
                 _ => Vec::new(),
             })
             .collect();
@@ -528,7 +533,7 @@ impl Game {
     pub fn team_for_token(&self, token: &str) -> Option<u32> {
         self.teams
             .iter()
-            .find(|t| super::auth::constant_time_eq(t.token.as_bytes(), token.as_bytes()))
+            .find(|t| crate::constant_time_eq(t.token.as_bytes(), token.as_bytes()))
             .map(|t| t.id)
     }
 
@@ -2270,18 +2275,12 @@ fn tidy(accepted: &[String]) -> Vec<String> {
         .collect()
 }
 
-/// A random number in `0..n` (`n` must not be 0).
-#[must_use]
-pub fn random_below(n: usize) -> usize {
-    let random = uuid::Uuid::new_v4().as_u128();
-    usize::try_from(random % n as u128).unwrap_or(0)
-}
-
-/// A random order of `0..n` that differs from the original one when it can.
-fn shuffled(n: usize) -> Vec<usize> {
+/// A random order of `0..n` that differs from the original one when it can. `random_below(n)`
+/// must return a number in `0..n`.
+fn shuffled(n: usize, random_below: &mut impl FnMut(usize) -> usize) -> Vec<usize> {
     let mut order: Vec<usize> = (0..n).collect();
     for i in (1..n).rev() {
-        order.swap(i, random_below(i + 1));
+        order.swap(i, random_below(i + 1).min(i));
     }
     if n > 1 && order.iter().enumerate().all(|(i, &v)| i == v) {
         order.rotate_left(1);
@@ -2336,8 +2335,13 @@ mod tests {
         }
     }
 
+    /// Not random, so that tests repeat: always the last choice.
+    fn random_below(n: usize) -> usize {
+        n - 1
+    }
+
     fn game(settings: QuizSettings) -> Game {
-        Game::new("123456".to_owned(), quiz(settings)).unwrap()
+        Game::new("123456".to_owned(), quiz(settings), random_below).unwrap()
     }
 
     fn join(game: &mut Game, name: &str) -> u32 {
@@ -2467,7 +2471,7 @@ mod tests {
                 image: None,
             })
             .collect();
-        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let mut g = Game::new("123456".to_owned(), quiz, random_below).unwrap();
         let teams: Vec<u32> = (0..8).map(|i| join(&mut g, &format!("Team {i}"))).collect();
         g.next(t0).unwrap();
         let order = |g: &Game, team| match g.player_view(team, t0).unwrap().phase {
@@ -2489,7 +2493,7 @@ mod tests {
     #[test]
     fn invalid_quizzes_cannot_start_a_game() {
         let empty = Quiz::new("id".to_owned(), "Empty".to_owned());
-        assert!(Game::new("1".to_owned(), empty).is_err());
+        assert!(Game::new("1".to_owned(), empty, random_below).is_err());
     }
 
     #[test]
@@ -2811,7 +2815,7 @@ mod tests {
         quiz.questions[0].kind = QuestionKind::Order {
             items: vec!["A".to_owned(), "B".to_owned(), "C".to_owned()],
         };
-        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let mut g = Game::new("123456".to_owned(), quiz, random_below).unwrap();
         assert_ne!(g.shown[0], vec![0, 1, 2]);
         // Shown as C, A, B.
         g.shown[0] = vec![2, 0, 1];
@@ -2880,7 +2884,7 @@ mod tests {
         quiz.questions[0].kind = QuestionKind::Pairs {
             pairs: pairs.clone(),
         };
-        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let mut g = Game::new("123456".to_owned(), quiz, random_below).unwrap();
         assert_ne!(g.shown[0], vec![0, 1, 2]);
         // The right column shows Madrid, Paris, Rome.
         g.shown[0] = vec![2, 0, 1];
@@ -3023,6 +3027,30 @@ mod tests {
         assert_eq!(rows[1].score, 750);
     }
 
+    /// Saved games are read back after an upgrade: the snapshot format must not drift.
+    #[test]
+    fn snapshots_keep_their_saved_format() {
+        let t0 = Instant::now();
+        let mut g = game(QuizSettings {
+            joker: true,
+            ..QuizSettings::default()
+        });
+        let owls = join(&mut g, "Owls");
+        join(&mut g, "Cats");
+        g.next(t0).unwrap();
+        g.answer(owls, pick(&[0]), true, t0 + secs(2)).unwrap();
+        g.pause(t0 + secs(3)).unwrap();
+        let saved = serde_json::to_value(g.snapshot(t0 + secs(4))).unwrap();
+        if std::env::var_os("QUAESITO_PRINT_SNAPSHOT").is_some() {
+            println!("{}", serde_json::to_string_pretty(&saved).unwrap());
+        }
+        let golden: serde_json::Value =
+            serde_json::from_str(include_str!("snapshot-golden.json")).unwrap();
+        assert_eq!(saved, golden);
+        let restored = Game::restore(serde_json::from_value(golden.clone()).unwrap(), t0);
+        assert_eq!(serde_json::to_value(restored.snapshot(t0)).unwrap(), golden);
+    }
+
     #[test]
     fn a_multiplier_scales_points_before_the_joker() {
         let t0 = Instant::now();
@@ -3031,7 +3059,7 @@ mod tests {
             ..QuizSettings::default()
         });
         quiz.questions[0].multiplier = Some(3);
-        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let mut g = Game::new("123456".to_owned(), quiz, random_below).unwrap();
         let owls = join(&mut g, "Owls");
         let cats = join(&mut g, "Cats");
         g.next(t0).unwrap();
@@ -3051,7 +3079,7 @@ mod tests {
         let mut quiz = quiz(QuizSettings::default());
         quiz.questions[0].kind = QuestionKind::TrueFalse { answer: false };
         quiz.questions[0].answers.clear();
-        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let mut g = Game::new("123456".to_owned(), quiz, random_below).unwrap();
         let owls = join(&mut g, "Owls");
         let cats = join(&mut g, "Cats");
         g.next(t0).unwrap();
@@ -3100,7 +3128,7 @@ mod tests {
                 part(" ", &["The Beatles", "Beatles"]),
             ],
         };
-        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let mut g = Game::new("123456".to_owned(), quiz, random_below).unwrap();
         let owls = join(&mut g, "Owls");
         let cats = join(&mut g, "Cats");
         let pigs = join(&mut g, "Pigs");
@@ -3170,7 +3198,7 @@ mod tests {
             aspect: 0.5,
             tolerance: PinTolerance::Normal,
         };
-        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let mut g = Game::new("123456".to_owned(), quiz, random_below).unwrap();
         let owls = join(&mut g, "Owls");
         let cats = join(&mut g, "Cats");
         let pigs = join(&mut g, "Pigs");
@@ -3373,7 +3401,7 @@ mod tests {
             quiz.questions[0].explanation_image = Some("rings.jpg".to_owned());
             quiz.questions[0].explanation_audio = Some("fanfare.mp3".to_owned());
             quiz.questions[1].explanation = "  ".to_owned();
-            let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+            let mut g = Game::new("123456".to_owned(), quiz, random_below).unwrap();
             join(&mut g, "Owls");
             g
         };
@@ -3445,7 +3473,7 @@ mod tests {
         more[1].text = "four".to_owned();
         quiz.questions.push(Question::results_slide());
         quiz.questions.extend(more);
-        let mut g = Game::new("123456".to_owned(), quiz.clone()).unwrap();
+        let mut g = Game::new("123456".to_owned(), quiz.clone(), random_below).unwrap();
         let owls = join(&mut g, "Owls");
         let cats = join(&mut g, "Cats");
 
@@ -3530,7 +3558,7 @@ mod tests {
             ..QuizSettings::default()
         });
         quiz.questions.push(Question::results_slide());
-        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let mut g = Game::new("123456".to_owned(), quiz, random_below).unwrap();
         join(&mut g, "Owls");
         let mut path = Vec::new();
         for _ in 0..6 {
@@ -3570,7 +3598,7 @@ mod tests {
         };
         quiz.questions.insert(0, slide("Round 1"));
         quiz.questions.insert(2, slide("Round 2"));
-        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let mut g = Game::new("123456".to_owned(), quiz, random_below).unwrap();
         let owls = join(&mut g, "Owls");
 
         g.next(t0).unwrap();
@@ -3645,7 +3673,7 @@ mod tests {
             accepted: vec!["Freddie Mercury".to_owned()],
             percent: 50,
         });
-        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let mut g = Game::new("123456".to_owned(), quiz, random_below).unwrap();
         let owls = join(&mut g, "Owls");
         let cats = join(&mut g, "Cats");
         let bats = join(&mut g, "Bats");
@@ -3786,7 +3814,7 @@ mod tests {
             ..QuizSettings::default()
         });
         settings.questions[1].audio = Some("song.mp3".to_owned());
-        let mut g = Game::new("123456".to_owned(), settings).unwrap();
+        let mut g = Game::new("123456".to_owned(), settings, random_below).unwrap();
         let owls = join(&mut g, "Owls");
         g.next(t0).unwrap();
         g.answer(owls, pick(&[0]), false, t0).unwrap();
@@ -3817,7 +3845,7 @@ mod tests {
         let mut quiz = quiz(settings);
         quiz.questions.truncate(1);
         quiz.questions[0].kind = kind;
-        Game::new("123456".to_owned(), quiz).unwrap()
+        Game::new("123456".to_owned(), quiz, random_below).unwrap()
     }
 
     fn text(answer: &str) -> Response {
@@ -3976,7 +4004,7 @@ mod tests {
             accepted: vec!["Cristofori".to_owned()],
             percent: 25,
         });
-        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let mut g = Game::new("123456".to_owned(), quiz, random_below).unwrap();
         let owls = join(&mut g, "Owls");
         let cats = join(&mut g, "Cats");
         g.next(t0).unwrap();
@@ -4157,7 +4185,7 @@ mod tests {
             ..QuizSettings::default()
         });
         quiz.questions[0].passage = " Is this the real life?\nIs this just fantasy? ".to_owned();
-        let mut g = Game::new("123456".to_owned(), quiz).unwrap();
+        let mut g = Game::new("123456".to_owned(), quiz, random_below).unwrap();
         let owls = join(&mut g, "Owls");
         g.next(t0).unwrap();
         let HostPhase::Question { question, .. } = g.host_view(t0).phase else {

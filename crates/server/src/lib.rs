@@ -1,13 +1,12 @@
-//! Server-only state and HTTP routes.
+//! Quaesito's server: its state (quizzes, media, the question library, live sessions), admin
+//! sign-in, WebSocket loops and HTTP routes. The game rules come from `quaesito-core`.
 
 pub mod auth;
 pub mod bundle;
 pub mod demo;
 pub mod docs;
-pub mod engine;
 pub mod library;
 pub mod live;
-pub mod matching;
 pub mod media;
 pub mod net;
 pub mod peer;
@@ -28,12 +27,19 @@ use dioxus::fullstack::{
     routing::{get, post},
 };
 
+use quaesito_core::model::{ImportOutcome, ImportProgress, Quiz};
 use tower_http::set_header::SetResponseHeaderLayer;
 
 use self::{
     auth::Auth, media::MediaStore, sessions::Sessions, store::QuizStore, throttle::Throttle,
 };
-use crate::model::{ImportOutcome, ImportProgress, Quiz};
+
+/// A random number in `0..n` (`n` must not be 0).
+#[must_use]
+pub fn random_below(n: usize) -> usize {
+    let random = uuid::Uuid::new_v4().as_u128();
+    usize::try_from(random % n as u128).unwrap_or(0)
+}
 
 /// Everything the server keeps for its lifetime.
 pub struct AppState {
@@ -46,7 +52,7 @@ pub struct AppState {
     /// The categories and topics this server added to the question library.
     pub library_topics: library::AddedTopics,
     /// The largest uploads accepted.
-    pub limits: crate::protocol::UploadLimits,
+    pub limits: quaesito_core::protocol::UploadLimits,
     /// Wrong admin passwords.
     pub logins: Throttle,
     /// Join codes asked for that no game has.

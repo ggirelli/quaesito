@@ -4,7 +4,7 @@ use std::path::{Path, PathBuf};
 
 use anyhow::Context;
 
-use crate::model::{Quiz, QuizSummary};
+use quaesito_core::model::{Quiz, QuizSummary};
 
 /// A time as seconds since 1970.
 fn seconds(time: std::time::SystemTime) -> Option<u64> {

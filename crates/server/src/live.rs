@@ -3,9 +3,12 @@
 use std::sync::Arc;
 
 use dioxus::fullstack::TypedWebsocket;
+use quaesito_core::{
+    engine::Game,
+    protocol::{HostCommand, HostView, PlayerCommand, PlayerView},
+};
 
-use super::{engine::Game, sessions::Session};
-use crate::protocol::{HostCommand, HostView, PlayerCommand, PlayerView};
+use super::sessions::Session;
 
 /// Most time the host can add in one go.
 const MAX_EXTRA_SECS: u32 = 60;

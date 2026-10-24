@@ -1,5 +1,5 @@
-//! The bundled question library (see [`crate::library`]), and this server's edits to it: changed
-//! questions, and questions saved from quizzes.
+//! The bundled question library (see [`quaesito_core::library`]), and this server's edits to it:
+//! changed questions, and questions saved from quizzes.
 
 use std::{collections::BTreeMap, path::PathBuf, sync::OnceLock};
 
@@ -7,7 +7,7 @@ use anyhow::Context;
 use serde::{Deserialize, Serialize};
 use tokio::sync::Mutex;
 
-use crate::{
+use quaesito_core::{
     library::{
         Added, AddedCategory, AddedTopic, CATEGORY_COLORS, CATEGORY_ICONS, CategoryLook,
         LibraryCategory, LibraryEdit, LibraryEntry,
@@ -40,7 +40,7 @@ pub fn entries() -> &'static [LibraryEntry] {
 /// A stable id for a bundled entry, from its content: edits stay with their question across
 /// restarts and new versions, and are left behind when the bundled question itself changes.
 fn id_of(entry: &LibraryEntry) -> String {
-    crate::library::fnv(&serde_json::to_string(entry).expect("entries serialise"))
+    quaesito_core::library::fnv(&serde_json::to_string(entry).expect("entries serialise"))
 }
 
 /// An edit as kept in `library-edits.json`: with where the question came from, so
@@ -108,7 +108,7 @@ impl LibraryEdits {
             "Pick a category and a topic first."
         );
         let mut entry = LibraryEntry {
-            id: crate::server::store::new_id(),
+            id: crate::store::new_id(),
             edited: false,
             added: false,
             category: String::new(),
@@ -154,7 +154,7 @@ impl LibraryEdits {
                 text: entry.question.text.clone(),
                 edit: LibraryEdit {
                     difficulty: edit.difficulty,
-                    question: crate::library::shared(&edit.question),
+                    question: quaesito_core::library::shared(&edit.question),
                 },
             },
         );
@@ -210,7 +210,7 @@ fn file(entry: &mut LibraryEntry, mut question: Question) {
         entry.category = std::mem::take(&mut question.category);
         entry.topic = std::mem::take(&mut question.topic);
     }
-    entry.question = crate::library::shared(&question);
+    entry.question = quaesito_core::library::shared(&question);
 }
 
 /// The JSON at `path`, or the default if there is no file.
@@ -256,7 +256,7 @@ impl AddedTopics {
 
     /// Every category with its topics: those of `entries`, and the ones added here.
     pub async fn subjects(&self, entries: &[LibraryEntry]) -> Vec<LibraryCategory> {
-        crate::library::subjects(entries, &*self.added.lock().await)
+        quaesito_core::library::subjects(entries, &*self.added.lock().await)
     }
 
     /// Adds `topic` to `category`, one of the existing ones (whatever the case it is typed in) or
@@ -283,7 +283,7 @@ impl AddedTopics {
         );
         let mut added = self.added.lock().await;
         let same = |a: &str, b: &str| a.to_lowercase() == b.to_lowercase();
-        let existing = crate::library::subjects(entries, &added);
+        let existing = quaesito_core::library::subjects(entries, &added);
         let name = if let Some(found) = existing.iter().find(|c| same(&c.name, category)) {
             if let Some(known) = found.topics.iter().find(|t| same(&t.name, topic)) {
                 anyhow::bail!("{} already has the topic {}.", found.name, known.name);
@@ -313,7 +313,7 @@ impl AddedTopics {
             topic: topic.to_owned(),
         });
         write(&self.path, &*added).await?;
-        Ok(crate::library::subjects(entries, &added))
+        Ok(quaesito_core::library::subjects(entries, &added))
     }
 
     /// Removes a topic added here, and its category if it has no other, and returns every
@@ -338,7 +338,7 @@ impl AddedTopics {
             added.categories.retain(|c| c.name != category);
         }
         write(&self.path, &*added).await?;
-        Ok(crate::library::subjects(entries, &added))
+        Ok(quaesito_core::library::subjects(entries, &added))
     }
 }
 
@@ -362,7 +362,7 @@ fn apply(entry: &LibraryEntry, edit: Option<&StoredEdit>) -> LibraryEntry {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::model::QuestionKind;
+    use quaesito_core::model::QuestionKind;
 
     #[test]
     fn every_library_question_is_playable() {

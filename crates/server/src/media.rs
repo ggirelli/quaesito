@@ -15,8 +15,7 @@ use dioxus::fullstack::{
     body::Body,
 };
 use image::{DynamicImage, ImageFormat, ImageReader, Limits, imageops::FilterType};
-
-use crate::protocol::UploadLimits;
+use quaesito_core::protocol::UploadLimits;
 
 /// Upload limits from `QUAESITO_MAX_PICTURE_MB`, `QUAESITO_MAX_AUDIO_MB`,
 /// `QUAESITO_MAX_VIDEO_MB` and `QUAESITO_MAX_IMPORT_MB`, with defaults of 15, 40, 200 and 500 MB.

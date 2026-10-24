@@ -1,0 +1,30 @@
+[package]
+name = "quaesito-server"
+# Internal crate, versioned with the app (the root package).
+version = "0.0.0"
+edition = "2024"
+description = "Quaesito's server: storage, admin sign-in, live sessions and HTTP routes"
+repository = "https://github.com/ggirelli/quaesito"
+license = "MIT"
+publish = false
+
+[dependencies]
+anyhow.workspace = true
+dioxus = { workspace = true, features = ["fullstack", "server"] }
+futures-util = "0.3"
+image = { version = "0.25", default-features = false, features = ["gif", "jpeg", "png", "webp"] }
+quaesito-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tokio = { version = "1", features = ["fs", "macros", "net", "rt", "rt-multi-thread", "sync", "time"] }
+tower-http = { version = "0.6", features = ["fs", "set-header"] }
+uuid.workspace = true
+zip = { version = "9", default-features = false, features = ["deflate"] }
+
+[dev-dependencies]
+quaesito-core = { workspace = true, features = ["schema"] }
+schemars.workspace = true
+tokio = { version = "1", features = ["macros", "rt", "test-util"] }
+
+[lints]
+workspace = true

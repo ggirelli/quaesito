@@ -7,21 +7,32 @@ repository = "https://github.com/ggirelli/quaesito"
 license = "MIT"
 publish = false
 
-[dependencies]
-dioxus = { version = "0.7", features = ["router", "fullstack"] }
-qrcode = { version = "0.14", default-features = false, features = ["svg"] }
+# The app is the root package; its domain logic and server live in member crates.
+[workspace]
+members = ["crates/core", "crates/server"]
+resolver = "3"
+
+# Versions shared by several crates of the workspace.
+[workspace.dependencies]
+anyhow = "1"
+dioxus = "0.7"
+quaesito-core = { path = "crates/core", version = "0.0.0" }
+quaesito-server = { path = "crates/server", version = "0.0.0" }
+schemars = "1"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+uuid = { version = "1", features = ["v4"] }
+
+[dependencies]
+dioxus = { workspace = true, features = ["router", "fullstack"] }
+qrcode = { version = "0.14", default-features = false, features = ["svg"] }
+quaesito-core.workspace = true
+serde.workspace = true
 
 # Server only
-anyhow = { version = "1", optional = true }
-futures-util = { version = "0.3", optional = true }
-image = { version = "0.25", default-features = false, features = ["gif", "jpeg", "png", "webp"], optional = true }
-tokio = { version = "1", features = ["fs", "macros", "net", "rt", "rt-multi-thread", "sync", "time"], optional = true }
-tower-http = { version = "0.6", features = ["fs", "set-header"], optional = true }
-unicode-normalization = { version = "0.1", optional = true }
-uuid = { version = "1", features = ["v4"], optional = true }
-zip = { version = "9", default-features = false, features = ["deflate"], optional = true }
+anyhow = { workspace = true, optional = true }
+quaesito-server = { workspace = true, optional = true }
+uuid = { workspace = true, optional = true }
 
 # Browser only
 [target.'cfg(target_arch = "wasm32")'.dependencies]
@@ -29,29 +40,18 @@ gloo-timers = { version = "0.3", features = ["futures"] }
 js-sys = "0.3"
 web-sys = { version = "0.3", features = ["Location", "Storage", "Window"] }
 
-[dev-dependencies]
-schemars = "1"
-tokio = { version = "1", features = ["macros", "rt", "test-util"] }
-
 [features]
 default = ["web"]
 web = ["dioxus/web"]
-server = [
-    "dioxus/server",
-    "dep:anyhow",
-    "dep:futures-util",
-    "dep:image",
-    "dep:tokio",
-    "dep:tower-http",
-    "dep:unicode-normalization",
-    "dep:uuid",
-    "dep:zip",
-]
+server = ["dioxus/server", "dep:anyhow", "dep:quaesito-server", "dep:uuid"]
 
-[lints.rust]
+[lints]
+workspace = true
+
+[workspace.lints.rust]
 unsafe_code = "forbid"
 
-[lints.clippy]
+[workspace.lints.clippy]
 all = { level = "deny", priority = -1 }
 pedantic = { level = "warn", priority = -1 }
 

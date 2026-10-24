@@ -25,9 +25,9 @@ use crate::{
 /// to wait.
 #[post("/api/admin/login")]
 pub async fn admin_login(password: String) -> ServerFnResult<String> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     let (client, now) = (
-        crate::server::peer::Peer::current().client(),
+        quaesito_server::peer::Peer::current().client(),
         std::time::Instant::now(),
     );
     if !state.logins.allows(client, now) {
@@ -47,13 +47,13 @@ pub async fn admin_login(password: String) -> ServerFnResult<String> {
 /// Whether an admin token is still valid (tokens expire 12 hours after logging in).
 #[post("/api/admin/check")]
 pub async fn admin_check(token: String) -> ServerFnResult<bool> {
-    Ok(crate::server::state().auth.is_valid(&token))
+    Ok(quaesito_server::state().auth.is_valid(&token))
 }
 
 /// All quizzes, sorted by title.
 #[post("/api/admin/quizzes")]
 pub async fn list_quizzes(token: String) -> ServerFnResult<Vec<QuizSummary>> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     Ok(state.quizzes.list().await?)
 }
@@ -61,7 +61,7 @@ pub async fn list_quizzes(token: String) -> ServerFnResult<Vec<QuizSummary>> {
 /// One quiz, for editing.
 #[post("/api/admin/quiz/get")]
 pub async fn get_quiz(token: String, id: String) -> ServerFnResult<Quiz> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     state
         .quizzes
@@ -73,9 +73,9 @@ pub async fn get_quiz(token: String, id: String) -> ServerFnResult<Quiz> {
 /// Creates an empty quiz and returns its id.
 #[post("/api/admin/quiz/create")]
 pub async fn create_quiz(token: String, title: String) -> ServerFnResult<String> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
-    let quiz = Quiz::new(crate::server::store::new_id(), title.trim().to_owned());
+    let quiz = Quiz::new(quaesito_server::store::new_id(), title.trim().to_owned());
     state.quizzes.save(&quiz).await?;
     Ok(quiz.id)
 }
@@ -83,7 +83,7 @@ pub async fn create_quiz(token: String, title: String) -> ServerFnResult<String>
 /// Saves a quiz (drafts may be incomplete) and returns what still keeps it from being playable.
 #[post("/api/admin/quiz/save")]
 pub async fn save_quiz(token: String, quiz: Quiz) -> ServerFnResult<Vec<ValidationIssue>> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     if state.quizzes.get(&quiz.id).await?.is_none() {
         return Err(ServerFnError::new("This quiz does not exist anymore."));
@@ -95,7 +95,7 @@ pub async fn save_quiz(token: String, quiz: Quiz) -> ServerFnResult<Vec<Validati
 /// Deletes a quiz.
 #[post("/api/admin/quiz/delete")]
 pub async fn delete_quiz(token: String, id: String) -> ServerFnResult<()> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     state.quizzes.delete(&id).await?;
     Ok(())
@@ -104,14 +104,14 @@ pub async fn delete_quiz(token: String, id: String) -> ServerFnResult<()> {
 /// Copies a quiz under a new id and returns that id.
 #[post("/api/admin/quiz/duplicate")]
 pub async fn duplicate_quiz(token: String, id: String) -> ServerFnResult<String> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     let mut quiz = state
         .quizzes
         .get(&id)
         .await?
         .ok_or_else(|| ServerFnError::new("This quiz does not exist."))?;
-    quiz.id = crate::server::store::new_id();
+    quiz.id = quaesito_server::store::new_id();
     // A copy is new: it is created now.
     quiz.created = None;
     quiz.title = format!("{} (copy)", quiz.title);
@@ -122,7 +122,7 @@ pub async fn duplicate_quiz(token: String, id: String) -> ServerFnResult<String>
 /// Every question of the library, with this server's edits, to browse and pick from.
 #[post("/api/admin/library")]
 pub async fn question_library(token: String) -> ServerFnResult<Vec<LibraryEntry>> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     Ok(state.library_edits.entries().await)
 }
@@ -151,7 +151,7 @@ pub async fn edit_library_question(
     id: String,
     edit: LibraryEdit,
 ) -> ServerFnResult<LibraryEntry> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     check_library_question(edit.difficulty, &edit.question)?;
     Ok(state.library_edits.save(&id, edit).await?)
@@ -164,7 +164,7 @@ pub async fn add_library_question(
     token: String,
     edit: LibraryEdit,
 ) -> ServerFnResult<LibraryEntry> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     check_library_question(edit.difficulty, &edit.question)?;
     Ok(state
@@ -176,7 +176,7 @@ pub async fn add_library_question(
 /// Deletes library question `id`, one added on this server.
 #[post("/api/admin/library/delete")]
 pub async fn delete_library_question(token: String, id: String) -> ServerFnResult<()> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     Ok(state.library_edits.delete(&id).await?)
 }
@@ -188,7 +188,7 @@ pub async fn library_question_uses(
     id: String,
     quiz: String,
 ) -> ServerFnResult<usize> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     let quizzes = state.quizzes.all().await?;
     Ok(quizzes
@@ -205,7 +205,7 @@ pub async fn library_question_uses(
 /// Drops this server's edit of library question `id` and returns the question as it came.
 #[post("/api/admin/library/revert")]
 pub async fn revert_library_question(token: String, id: String) -> ServerFnResult<LibraryEntry> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     Ok(state.library_edits.revert(&id).await?)
 }
@@ -214,7 +214,7 @@ pub async fn revert_library_question(token: String, id: String) -> ServerFnResul
 /// questions can be filed under.
 #[post("/api/admin/library/subjects")]
 pub async fn library_subjects(token: String) -> ServerFnResult<Vec<LibraryCategory>> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     let entries = state.library_edits.entries().await;
     Ok(state.library_topics.subjects(&entries).await)
@@ -229,7 +229,7 @@ pub async fn add_library_topic(
     topic: String,
     look: Option<CategoryLook>,
 ) -> ServerFnResult<Vec<LibraryCategory>> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     let entries = state.library_edits.entries().await;
     Ok(state
@@ -245,7 +245,7 @@ pub async fn remove_library_topic(
     category: String,
     topic: String,
 ) -> ServerFnResult<Vec<LibraryCategory>> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     let entries = state.library_edits.entries().await;
     Ok(state
@@ -257,26 +257,26 @@ pub async fn remove_library_topic(
 /// Uploads a picture (for an answer or a part) and returns its media name.
 #[post("/api/admin/media?token")]
 pub async fn upload_question_image(token: String, file: FileStream) -> ServerFnResult<String> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
-    crate::server::peer::Peer::current().require_this_machine()?;
-    let bytes = crate::server::media::read_upload(file, state.limits.picture).await?;
+    quaesito_server::peer::Peer::current().require_this_machine()?;
+    let bytes = quaesito_server::media::read_upload(file, state.limits.picture).await?;
     Ok(state
         .media
-        .store(bytes, crate::server::media::ImageKind::Question)
+        .store(bytes, quaesito_server::media::ImageKind::Question)
         .await?)
 }
 
 /// Uploads a question's or slide's picture or video and returns its media name.
 #[post("/api/admin/question-media?token")]
 pub async fn upload_question_media(token: String, file: FileStream) -> ServerFnResult<String> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
-    crate::server::peer::Peer::current().require_this_machine()?;
+    quaesito_server::peer::Peer::current().require_this_machine()?;
     let limits = state.limits;
-    let bytes = crate::server::media::read_upload(file, limits.picture.max(limits.video)).await?;
+    let bytes = quaesito_server::media::read_upload(file, limits.picture.max(limits.video)).await?;
     let mb = crate::protocol::UploadLimits::megabytes;
-    if crate::server::media::video_extension(&bytes).is_some() {
+    if quaesito_server::media::video_extension(&bytes).is_some() {
         if bytes.len() as u64 > limits.video {
             return Err(ServerFnError::new(format!(
                 "The video is too large (max {} MB).",
@@ -293,14 +293,14 @@ pub async fn upload_question_media(token: String, file: FileStream) -> ServerFnR
     }
     Ok(state
         .media
-        .store(bytes, crate::server::media::ImageKind::Question)
+        .store(bytes, quaesito_server::media::ImageKind::Question)
         .await?)
 }
 
 /// The largest uploads the server accepts, for the editor's hints and checks.
 #[post("/api/admin/upload-limits")]
 pub async fn upload_limits(token: String) -> ServerFnResult<UploadLimits> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     Ok(state.limits)
 }
@@ -308,10 +308,10 @@ pub async fn upload_limits(token: String) -> ServerFnResult<UploadLimits> {
 /// Uploads a question soundtrack and returns its media name.
 #[post("/api/admin/audio?token")]
 pub async fn upload_question_audio(token: String, file: FileStream) -> ServerFnResult<String> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
-    crate::server::peer::Peer::current().require_this_machine()?;
-    let bytes = crate::server::media::read_upload(file, state.limits.audio).await?;
+    quaesito_server::peer::Peer::current().require_this_machine()?;
+    let bytes = quaesito_server::media::read_upload(file, state.limits.audio).await?;
     Ok(state.media.store_audio(bytes).await?)
 }
 
@@ -328,7 +328,7 @@ pub async fn start_session(
     shuffle_answers: Option<bool>,
     team_pictures: Option<bool>,
 ) -> ServerFnResult<String> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     let mut quiz = state
         .quizzes
@@ -336,7 +336,7 @@ pub async fn start_session(
         .await?
         .ok_or_else(|| ServerFnError::new("This quiz does not exist."))?;
     if shuffle_answers == Some(true) {
-        quiz.shuffle_answers(crate::server::engine::random_below);
+        quiz.shuffle_answers(quaesito_server::random_below);
     }
     state
         .sessions
@@ -363,7 +363,7 @@ pub async fn start_test(
     quiz_id: String,
     from: Option<usize>,
 ) -> ServerFnResult<String> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     let quiz = state
         .quizzes
@@ -416,7 +416,7 @@ pub async fn add_test_phone(token: String, code: String) -> ServerFnResult<()> {
     session
         .update(|g, _| {
             if g.team_count() >= MAX_TEST_PHONES {
-                return Err(crate::server::engine::Refusal(
+                return Err(quaesito_core::engine::Refusal(
                     "That is enough phones for a test.",
                 ));
             }
@@ -425,7 +425,7 @@ pub async fn add_test_phone(token: String, code: String) -> ServerFnResult<()> {
             (1..=MAX_TEST_PHONES + 1)
                 .find_map(|n| g.join(&format!("Phone {n}"), ticket.clone()).ok())
                 .map(|_| ())
-                .ok_or(crate::server::engine::Refusal("Could not add a phone."))
+                .ok_or(quaesito_core::engine::Refusal("Could not add a phone."))
         })
         .map_err(|refusal| ServerFnError::new(refusal.0))
 }
@@ -447,8 +447,8 @@ pub async fn remove_test_phone(token: String, code: String, ticket: String) -> S
 fn test_session(
     token: &str,
     code: &str,
-) -> Result<std::sync::Arc<crate::server::sessions::Session>, ServerFnError> {
-    let state = crate::server::state();
+) -> Result<std::sync::Arc<quaesito_server::sessions::Session>, ServerFnError> {
+    let state = quaesito_server::state();
     state.auth.require(token)?;
     state
         .sessions
@@ -460,7 +460,7 @@ fn test_session(
 /// Live sessions.
 #[post("/api/admin/sessions")]
 pub async fn list_sessions(token: String) -> ServerFnResult<Vec<SessionSummary>> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     Ok(state.sessions.list())
 }
@@ -468,19 +468,19 @@ pub async fn list_sessions(token: String) -> ServerFnResult<Vec<SessionSummary>>
 /// Every team's points on every question of a live session.
 #[post("/api/admin/session/results")]
 pub async fn game_results(token: String, code: String) -> ServerFnResult<GameResults> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     let session = state
         .sessions
         .get(&code)
         .ok_or_else(|| ServerFnError::new("This game is not running anymore."))?;
-    Ok(session.read(crate::server::engine::Game::results))
+    Ok(session.read(quaesito_core::engine::Game::results))
 }
 
 /// Ends a live session.
 #[post("/api/admin/session/end")]
 pub async fn end_session(token: String, code: String) -> ServerFnResult<()> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     state.sessions.remove(&code);
     Ok(())
@@ -493,8 +493,8 @@ pub async fn join_origin(
     page_origin: String,
     page_port: String,
 ) -> ServerFnResult<String> {
-    crate::server::state().auth.require(&token)?;
-    Ok(crate::server::net::join_origin(&page_origin, &page_port))
+    quaesito_server::state().auth.require(&token)?;
+    Ok(quaesito_server::net::join_origin(&page_origin, &page_port))
 }
 
 /// Title of the quiz behind a join code, or `None` if no such session is live.
@@ -520,10 +520,10 @@ pub async fn join_game(code: String, name: String) -> ServerFnResult<JoinTicket>
 #[cfg(feature = "server")]
 fn find_game(
     code: &str,
-) -> Result<Option<std::sync::Arc<crate::server::sessions::Session>>, ServerFnError> {
-    let state = crate::server::state();
+) -> Result<Option<std::sync::Arc<quaesito_server::sessions::Session>>, ServerFnError> {
+    let state = quaesito_server::state();
     let (client, now) = (
-        crate::server::peer::Peer::current().client(),
+        quaesito_server::peer::Peer::current().client(),
         std::time::Instant::now(),
     );
     if !state.join_codes.allows(client, now) {
@@ -546,8 +546,8 @@ fn find_game(
 fn my_team(
     code: &str,
     token: &str,
-) -> Result<(std::sync::Arc<crate::server::sessions::Session>, u32), ServerFnError> {
-    crate::server::state()
+) -> Result<(std::sync::Arc<quaesito_server::sessions::Session>, u32), ServerFnError> {
+    quaesito_server::state()
         .sessions
         .get(code)
         .and_then(|session| Some((session.clone(), session.read(|g| g.team_for_token(token))?)))
@@ -557,7 +557,7 @@ fn my_team(
 /// Whether a stored ticket still belongs to a team in the session.
 #[post("/api/game/check-ticket")]
 pub async fn check_ticket(code: String, token: String) -> ServerFnResult<bool> {
-    Ok(crate::server::state()
+    Ok(quaesito_server::state()
         .sessions
         .get(&code)
         .is_some_and(|s| s.read(|g| g.team_for_token(&token).is_some())))
@@ -567,7 +567,7 @@ pub async fn check_ticket(code: String, token: String) -> ServerFnResult<bool> {
 /// so nobody on the internet can put pictures on the big screen.
 #[post("/api/game/pictures-here")]
 pub async fn pictures_from_here() -> ServerFnResult<bool> {
-    Ok(crate::server::peer::Peer::current().is_local_network())
+    Ok(quaesito_server::peer::Peer::current().is_local_network())
 }
 
 /// Why a team picture from the internet was refused.
@@ -583,19 +583,19 @@ pub async fn upload_avatar(
     token: String,
     file: FileStream,
 ) -> ServerFnResult<String> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     let (session, team) = my_team(&code, &token)?;
     session.pace(team).await;
-    if !crate::server::peer::Peer::current().is_local_network() {
+    if !quaesito_server::peer::Peer::current().is_local_network() {
         return Err(HttpError::new(StatusCode::FORBIDDEN, PICTURES_FROM_NETWORK).into());
     }
-    if !session.read(crate::server::engine::Game::pictures) {
+    if !session.read(quaesito_core::engine::Game::pictures) {
         return Err(ServerFnError::new("This game does not take team pictures."));
     }
-    let bytes = crate::server::media::read_upload(file, state.limits.picture).await?;
+    let bytes = quaesito_server::media::read_upload(file, state.limits.picture).await?;
     let name = state
         .media
-        .store(bytes, crate::server::media::ImageKind::Avatar)
+        .store(bytes, quaesito_server::media::ImageKind::Avatar)
         .await?;
     session
         .update(|g, _| g.set_avatar(team, name.clone()))
@@ -609,7 +609,7 @@ pub async fn upload_avatar(
 pub async fn rename_my_team(code: String, token: String, name: String) -> ServerFnResult<()> {
     let (session, team) = my_team(&code, &token)?;
     session.pace(team).await;
-    if !session.read(crate::server::engine::Game::in_lobby) {
+    if !session.read(quaesito_core::engine::Game::in_lobby) {
         return Err(ServerFnError::new(
             "The quiz has started: ask the host to rename your team.",
         ));
@@ -655,13 +655,13 @@ pub async fn host_socket(
     token: String,
     options: WebSocketOptions,
 ) -> ServerFnResult<Websocket<HostCommand, HostView>> {
-    let state = crate::server::state();
+    let state = quaesito_server::state();
     state.auth.require(&token)?;
     let session = state
         .sessions
         .get(&code)
         .ok_or_else(|| ServerFnError::new("This game is not running anymore."))?;
-    Ok(options.on_upgrade(move |socket| crate::server::live::host(socket, session)))
+    Ok(options.on_upgrade(move |socket| quaesito_server::live::host(socket, session)))
 }
 
 /// Live updates for a team leader's phone.
@@ -672,5 +672,5 @@ pub async fn player_socket(
     options: WebSocketOptions,
 ) -> ServerFnResult<Websocket<PlayerCommand, PlayerView>> {
     let (session, team) = my_team(&code, &token)?;
-    Ok(options.on_upgrade(move |socket| crate::server::live::player(socket, session, team)))
+    Ok(options.on_upgrade(move |socket| quaesito_server::live::player(socket, session, team)))
 }

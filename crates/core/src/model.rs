@@ -33,7 +33,7 @@ pub const MAX_NETWORK_PASSWORD_CHARS: usize = 63;
 
 /// A complete quiz: settings plus an ordered list of questions and slides.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 pub struct Quiz {
     pub id: String,
     pub title: String,
@@ -251,11 +251,11 @@ impl Quiz {
 
 /// Per-quiz options chosen by the admin.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct QuizSettings {
     /// Time limit for questions that do not set their own.
-    #[cfg_attr(test, schemars(range(min = MIN_TIME_LIMIT_SECS, max = MAX_TIME_LIMIT_SECS)))]
+    #[cfg_attr(feature = "schema", schemars(range(min = MIN_TIME_LIMIT_SECS, max = MAX_TIME_LIMIT_SECS)))]
     pub default_time_limit_secs: u32,
     pub reveal: RevealMode,
     pub multi_scoring: MultiScoring,
@@ -286,7 +286,7 @@ impl Default for QuizSettings {
 /// The Wi-Fi network teams join before the game, shown on a first slide with a QR code that
 /// connects phones to it. The name and password are kept while the slide is off.
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 #[serde(default)]
 pub struct NetworkSlide {
     /// Whether the game opens on the slide, before the join code.
@@ -340,7 +340,7 @@ impl NetworkSlide {
 
 /// When correct answers and scores are shown.
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 pub enum RevealMode {
     /// After every question, with the current standings.
     #[default]
@@ -351,7 +351,7 @@ pub enum RevealMode {
 
 /// How questions with several correct answers are scored.
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 pub enum MultiScoring {
     /// Points only for selecting exactly the correct set.
     #[default]
@@ -362,7 +362,7 @@ pub enum MultiScoring {
 
 /// What a correct answer is worth.
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 pub enum PointsMode {
     /// Faster answers earn more: from 1000 points when instant down to 500 at the buzzer.
     #[default]
@@ -373,7 +373,7 @@ pub enum PointsMode {
 
 /// Who moves the quiz forward between questions.
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 pub enum AdvanceMode {
     /// The host clicks to continue.
     #[default]
@@ -384,7 +384,7 @@ pub enum AdvanceMode {
 
 /// What team leaders see on their phones while answering.
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 pub enum PhoneDisplay {
     /// Only coloured shapes; the question is read on the big screen.
     #[default]
@@ -395,7 +395,7 @@ pub enum PhoneDisplay {
 
 /// A single question, or a slide between questions.
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 pub struct Question {
     /// The question, or the body text of a slide.
     pub text: String,
@@ -425,11 +425,11 @@ pub struct Question {
     pub audio: Option<String>,
     /// Overrides the quiz-wide time limit when set.
     #[serde(default)]
-    #[cfg_attr(test, schemars(range(min = MIN_TIME_LIMIT_SECS, max = MAX_TIME_LIMIT_SECS)))]
+    #[cfg_attr(feature = "schema", schemars(range(min = MIN_TIME_LIMIT_SECS, max = MAX_TIME_LIMIT_SECS)))]
     pub time_limit_secs: Option<u32>,
     /// The question is worth this many times a usual one (`None` counts once).
     #[serde(default)]
-    #[cfg_attr(test, schemars(range(min = 1, max = MAX_MULTIPLIER)))]
+    #[cfg_attr(feature = "schema", schemars(range(min = 1, max = MAX_MULTIPLIER)))]
     pub multiplier: Option<u32>,
     /// The options of a multiple-choice question (kept, but unused, for other kinds).
     #[serde(default)]
@@ -437,7 +437,7 @@ pub struct Question {
     /// A typed bonus question asked together with this one (see [`Question::takes_bonus`]).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[cfg_attr(
-        test,
+        feature = "schema",
         schemars(description = "A typed bonus question, answered together with this one.")
     )]
     pub bonus: Option<Bonus>,
@@ -464,7 +464,7 @@ pub struct Question {
 
 /// Ties a quiz question to a library question (see [`crate::library::sync`]).
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 pub struct LibraryLink {
     /// The library question's id.
     pub id: String,
@@ -476,7 +476,7 @@ pub struct LibraryLink {
 /// A bonus question: teams type its answer together with the main answer, and the judge can
 /// amend the verdict as for typed answers. A right answer adds a share of the question's points.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 pub struct Bonus {
     /// The bonus question, e.g. "Who sings it?".
     #[serde(default)]
@@ -510,7 +510,7 @@ impl Default for Bonus {
 
 /// How a question's picture is revealed on the big screen while the clock runs.
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 pub enum ImageReveal {
     /// Shown as is.
     #[default]
@@ -540,11 +540,11 @@ fn deserialize_image_reveal<'de, D: serde::Deserializer<'de>>(
 
 /// A spot on a picture, as fractions of its width (`x`) and height (`y`) from the top left.
 #[derive(Debug, Clone, Copy, Default, PartialEq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 pub struct Point {
-    #[cfg_attr(test, schemars(range(min = 0.0, max = 1.0)))]
+    #[cfg_attr(feature = "schema", schemars(range(min = 0.0, max = 1.0)))]
     pub x: f64,
-    #[cfg_attr(test, schemars(range(min = 0.0, max = 1.0)))]
+    #[cfg_attr(feature = "schema", schemars(range(min = 0.0, max = 1.0)))]
     pub y: f64,
 }
 
@@ -565,7 +565,7 @@ impl Point {
 /// How close a pin must be: within the first distance it earns full points, beyond the second
 /// none, and in between a share falling evenly. Distances are in picture widths.
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 pub enum PinTolerance {
     Tight,
     #[default]
@@ -587,7 +587,7 @@ impl PinTolerance {
 
 /// One answer of a [`QuestionKind::Parts`] question.
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 pub struct Part {
     /// What to type, e.g. "Title" or "Poster 3".
     #[serde(default)]
@@ -602,7 +602,7 @@ pub struct Part {
 
 /// One side of a [`QuestionKind::Pairs`] pair: a text, a picture, or both.
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 pub struct PairItem {
     #[serde(default)]
     pub text: String,
@@ -626,7 +626,7 @@ impl PairItem {
 
 /// Two items that go together in a [`QuestionKind::Pairs`] question.
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 pub struct Pair {
     #[serde(default)]
     pub left: PairItem,
@@ -694,7 +694,7 @@ fn number_problems(
 
 /// The numbers a closest-number question accepts, both ends included.
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 pub struct NumberRange {
     pub min: f64,
     pub max: f64,
@@ -721,7 +721,7 @@ impl NumberRange {
 
 /// How a number question is scored.
 #[derive(Debug, Clone, Copy, Default, PartialEq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 pub enum NumberScoring {
     /// The closest guesses win a set amount, however long they took; the others nothing.
     #[default]
@@ -768,7 +768,7 @@ pub const MAX_PARTS: usize = 8;
 
 /// How a question is answered.
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 pub enum QuestionKind {
     /// Pick one or more of the listed answers.
     #[default]
@@ -1080,7 +1080,7 @@ impl Question {
 
 /// One answer option.
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
-#[cfg_attr(test, derive(schemars::JsonSchema))]
+#[cfg_attr(feature = "schema", derive(schemars::JsonSchema))]
 pub struct Answer {
     /// May be empty when the answer has a picture.
     pub text: String,

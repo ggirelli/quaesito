@@ -5,13 +5,13 @@ use std::io::{Cursor, Read, Write};
 
 use anyhow::Context;
 use futures_util::StreamExt;
-use zip::{CompressionMethod, ZipArchive, ZipWriter, write::SimpleFileOptions};
-
-use super::media::{ImageKind, MediaStore};
-use crate::{
+use quaesito_core::{
     model::{ImportWarning, QUIZ_FORMAT, Question, QuestionKind, Quiz, UnknownQuestion, is_video},
     protocol::UploadLimits,
 };
+use zip::{CompressionMethod, ZipArchive, ZipWriter, write::SimpleFileOptions};
+
+use super::media::{ImageKind, MediaStore};
 
 /// The quiz document inside a bundle.
 const QUIZ_FILE: &str = "quiz.json";
@@ -291,7 +291,7 @@ fn read_entry(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::model::Answer;
+    use quaesito_core::model::Answer;
 
     /// The quiz an import brought, failing if it asked for consent.
     fn quiz_of(imported: Imported) -> Quiz {
@@ -317,7 +317,7 @@ mod tests {
     }
 
     fn limits() -> UploadLimits {
-        crate::server::media::limits_from_env()
+        crate::media::limits_from_env()
     }
 
     #[tokio::test]
@@ -540,7 +540,7 @@ mod tests {
     /// The published schema of the file format, in `docs/schema`.
     fn schema_path() -> std::path::PathBuf {
         std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
-            .join(format!("docs/schema/quiz-{QUIZ_FORMAT}.json"))
+            .join(format!("../../docs/schema/quiz-{QUIZ_FORMAT}.json"))
     }
 
     /// The schema the quiz types describe, as published.

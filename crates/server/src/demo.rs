@@ -3,11 +3,12 @@
 
 use std::path::Path;
 
+use quaesito_core::model::Quiz;
+
 use super::{
     media::{ImageKind, MediaStore},
     store::{QuizStore, new_id},
 };
-use crate::model::Quiz;
 
 const QUIZ: &str = include_str!("demo-quiz.json");
 /// The quiz's one picture, named `lobby.jpg` in the quiz.
