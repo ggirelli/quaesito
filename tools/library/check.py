@@ -22,7 +22,7 @@ from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
 
 ROOT = Path(__file__).resolve().parents[2]
-SCHEMA = ROOT / "docs/schema/quiz-2.json"
+SCHEMA = ROOT / "docs/schema/quiz-3.json"
 ENTRY_KEYS = {"category", "topic", "difficulty", "question"}
 # Fields a text-only library question must leave out: the library has no media, and per-question
 # timing and bonuses are the host's choice. Points are set by the kind of question (see check_kind).

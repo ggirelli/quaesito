@@ -1,0 +1,825 @@
+{
+  "$defs": {
+    "AdvanceMode": {
+      "description": "Who moves the quiz forward between questions.",
+      "oneOf": [
+        {
+          "const": "Manual",
+          "description": "The host clicks to continue.",
+          "type": "string"
+        },
+        {
+          "const": "Auto",
+          "description": "The quiz continues by itself after a short pause.",
+          "type": "string"
+        }
+      ]
+    },
+    "Answer": {
+      "description": "One answer option.",
+      "properties": {
+        "correct": {
+          "default": false,
+          "type": "boolean"
+        },
+        "image": {
+          "default": null,
+          "description": "Name of an uploaded picture, if any.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "text": {
+          "description": "May be empty when the answer has a picture.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "type": "object"
+    },
+    "Bonus": {
+      "description": "A bonus question: teams type its answer together with the main answer, and the judge can\namend the verdict as for typed answers. A right answer adds a share of the question's points.",
+      "properties": {
+        "accepted": {
+          "default": [],
+          "description": "Accepted spellings, matched like a typed answer.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "percent": {
+          "default": 50,
+          "description": "What a right answer adds, in percent of the points the main answer can earn.",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "text": {
+          "default": "",
+          "description": "The bonus question, e.g. \"Who sings it?\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ImageReveal": {
+      "description": "How a question's picture is revealed on the big screen while the clock runs.",
+      "oneOf": [
+        {
+          "const": "Shown",
+          "description": "Shown as is.",
+          "type": "string"
+        },
+        {
+          "const": "Zoom",
+          "description": "Starts as a close-up of its centre and zooms out to the whole picture.",
+          "type": "string"
+        },
+        {
+          "const": "Tiles",
+          "description": "Starts covered by tiles that drop away one by one.",
+          "type": "string"
+        }
+      ]
+    },
+    "LibraryLink": {
+      "description": "Ties a quiz question to a library question (see `sync`).",
+      "properties": {
+        "id": {
+          "description": "The library question's id.",
+          "type": "string"
+        },
+        "synced": {
+          "description": "The `fingerprint` of the question when the quiz and the library last\nhad the same one: which of the two changed since.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "synced"
+      ],
+      "type": "object"
+    },
+    "MultiScoring": {
+      "description": "How questions with several correct answers are scored.",
+      "oneOf": [
+        {
+          "const": "AllOrNothing",
+          "description": "Points only for selecting exactly the correct set.",
+          "type": "string"
+        },
+        {
+          "const": "Partial",
+          "description": "Credit proportional to correct picks minus wrong picks.",
+          "type": "string"
+        }
+      ]
+    },
+    "NetworkSlide": {
+      "description": "The Wi-Fi network teams join before the game, shown on a first slide with a QR code that\nconnects phones to it. The name and password are kept while the slide is off.",
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Whether the game opens on the slide, before the join code.",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "description": "The network name (SSID).",
+          "type": "string"
+        },
+        "password": {
+          "default": "",
+          "description": "Empty for an open network.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NumberRange": {
+      "description": "The numbers a closest-number question accepts, both ends included.",
+      "properties": {
+        "max": {
+          "format": "double",
+          "type": "number"
+        },
+        "min": {
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "required": [
+        "min",
+        "max"
+      ],
+      "type": "object"
+    },
+    "NumberScoring": {
+      "description": "How a number question is scored.",
+      "oneOf": [
+        {
+          "const": "Closest",
+          "description": "The closest guesses win a set amount, however long they took; the others nothing.",
+          "type": "string"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Full points up to `full_within` from the correct number, nothing beyond `none_beyond`,\nand a share falling evenly in between.",
+          "properties": {
+            "Distance": {
+              "properties": {
+                "full_within": {
+                  "format": "double",
+                  "type": "number"
+                },
+                "none_beyond": {
+                  "format": "double",
+                  "type": "number"
+                }
+              },
+              "required": [
+                "full_within",
+                "none_beyond"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "Distance"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Full points up to `margin` from the correct number (0: only the exact number), nothing\nbeyond.",
+          "properties": {
+            "Margin": {
+              "properties": {
+                "margin": {
+                  "format": "double",
+                  "type": "number"
+                }
+              },
+              "required": [
+                "margin"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "Margin"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "Pair": {
+      "description": "Two items that go together in a `Pairs` question.",
+      "properties": {
+        "left": {
+          "$ref": "#/$defs/PairItem",
+          "default": {
+            "image": null,
+            "text": ""
+          }
+        },
+        "right": {
+          "$ref": "#/$defs/PairItem",
+          "default": {
+            "image": null,
+            "text": ""
+          }
+        }
+      },
+      "type": "object"
+    },
+    "PairItem": {
+      "description": "One side of a `Pairs` pair: a text, a picture, or both.",
+      "properties": {
+        "image": {
+          "default": null,
+          "description": "Name of an uploaded picture, if any.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "text": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Part": {
+      "description": "One answer of a `Parts` question.",
+      "properties": {
+        "accepted": {
+          "default": [],
+          "description": "Accepted spellings, matched like a typed answer.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "image": {
+          "default": null,
+          "description": "A picture just for this part (a poster, a face…).",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "label": {
+          "default": "",
+          "description": "What to type, e.g. \"Title\" or \"Poster 3\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PhoneDisplay": {
+      "description": "What team leaders see on their phones while answering.",
+      "oneOf": [
+        {
+          "const": "ButtonsOnly",
+          "description": "Only coloured shapes; the question is read on the big screen.",
+          "type": "string"
+        },
+        {
+          "const": "FullText",
+          "description": "The question and answer texts as well.",
+          "type": "string"
+        }
+      ]
+    },
+    "PinTolerance": {
+      "description": "How close a pin must be: within the first distance it earns full points, beyond the second\nnone, and in between a share falling evenly. Distances are in picture widths.",
+      "enum": [
+        "Tight",
+        "Normal",
+        "Loose"
+      ],
+      "type": "string"
+    },
+    "Point": {
+      "description": "A spot on a picture, as fractions of its width (`x`) and height (`y`) from the top left.",
+      "properties": {
+        "x": {
+          "format": "double",
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "type": "number"
+        },
+        "y": {
+          "format": "double",
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "type": "object"
+    },
+    "PointsMode": {
+      "description": "What a correct answer is worth.",
+      "oneOf": [
+        {
+          "const": "Speed",
+          "description": "Faster answers earn more: from 1000 points when instant down to 500 at the buzzer.",
+          "type": "string"
+        },
+        {
+          "const": "Flat",
+          "description": "Every correct answer earns 1000 points, however long it took.",
+          "type": "string"
+        }
+      ]
+    },
+    "Question": {
+      "description": "A single question, or a slide between questions.",
+      "properties": {
+        "answers": {
+          "default": [],
+          "description": "The options of a multiple-choice question (kept, but unused, for other kinds).",
+          "items": {
+            "$ref": "#/$defs/Answer"
+          },
+          "type": "array"
+        },
+        "audio": {
+          "default": null,
+          "description": "Name of an uploaded soundtrack, if any. The host starts it, and the clock with it.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bonus": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bonus"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "A typed bonus question, answered together with this one."
+        },
+        "category": {
+          "description": "What the question is about, e.g. \"Geography\", shown on the big screen. Library questions\nkeep the category they come from.",
+          "type": "string"
+        },
+        "explanation": {
+          "description": "Shown on the big screen only once the answer is revealed: an explanation, a fun fact…",
+          "type": "string"
+        },
+        "explanation_audio": {
+          "description": "Name of an uploaded soundtrack the big screen plays once the answer is revealed.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "explanation_image": {
+          "description": "Name of an uploaded picture or video shown with the `explanation`.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "image": {
+          "default": null,
+          "description": "Name of an uploaded picture, if any.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "image_hold_secs": {
+          "default": 0,
+          "description": "With a gradual reveal, how many seconds before the buzzer the picture is fully shown: the\nreveal takes the rest of the time.",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "image_reveal": {
+          "$ref": "#/$defs/ImageReveal",
+          "default": "Shown",
+          "description": "How the picture is revealed while the clock runs. Reads the former `blur_image` flag\nas `Zoom`."
+        },
+        "kind": {
+          "$ref": "#/$defs/QuestionKind",
+          "default": "Choice",
+          "description": "How teams answer. Older quizzes without it are multiple choice."
+        },
+        "library": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LibraryLink"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "The library question this one was added from or saved as, to keep the two in step."
+        },
+        "multiplier": {
+          "default": null,
+          "description": "The question is worth this many times a usual one (`None` counts once).",
+          "format": "uint32",
+          "maximum": 5,
+          "minimum": 1,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "passage": {
+          "description": "Text shown with the question, line breaks kept: lyrics, a quote, a riddle…",
+          "type": "string"
+        },
+        "text": {
+          "description": "The question, or the body text of a slide.",
+          "type": "string"
+        },
+        "time_limit_secs": {
+          "default": null,
+          "description": "Overrides the quiz-wide time limit when set.",
+          "format": "uint32",
+          "maximum": 300,
+          "minimum": 5,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "topic": {
+          "description": "The subject within the category, e.g. \"Capitals\", shown with it.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "type": "object"
+    },
+    "QuestionKind": {
+      "description": "How a question is answered.",
+      "oneOf": [
+        {
+          "const": "Choice",
+          "description": "Pick one or more of the listed answers.",
+          "type": "string"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Type a short answer, right when it matches an accepted one (the judge may amend).",
+          "properties": {
+            "Text": {
+              "properties": {
+                "accepted": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "accepted"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "Text"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Enter a number; by default the closest guess wins.",
+          "properties": {
+            "Number": {
+              "properties": {
+                "answer": {
+                  "format": "double",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "range": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/NumberRange"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "description": "The numbers teams can give, if limited: phones then also show a slider."
+                },
+                "scoring": {
+                  "$ref": "#/$defs/NumberScoring"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "required": [
+            "Number"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Put items in order; `items` are listed in the right order and shown shuffled.",
+          "properties": {
+            "Order": {
+              "properties": {
+                "items": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "items"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "Order"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Is the statement true or false? Played like a two-answer multiple choice.",
+          "properties": {
+            "TrueFalse": {
+              "properties": {
+                "answer": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "answer"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "TrueFalse"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Several typed answers at once (title and artist, five posters…), each judged on its own;\nthe question's points are split evenly between the parts.",
+          "properties": {
+            "Parts": {
+              "properties": {
+                "parts": {
+                  "items": {
+                    "$ref": "#/$defs/Part"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "parts"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "Parts"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Drop a pin on the question's picture (a map, a floor plan…); closer pins earn more.",
+          "properties": {
+            "Pin": {
+              "properties": {
+                "answer": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/Point"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "description": "The right spot, as fractions of the picture's width and height."
+                },
+                "aspect": {
+                  "description": "The picture's height divided by its width, so distances are measured evenly.",
+                  "format": "double",
+                  "type": "number"
+                },
+                "tolerance": {
+                  "$ref": "#/$defs/PinTolerance",
+                  "default": "Normal"
+                }
+              },
+              "required": [
+                "aspect"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "Pin"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Match each item on the left with its partner on the right; `pairs` are listed matched,\nand the right column is shown shuffled. Each pair rightly matched earns its share.",
+          "properties": {
+            "Pairs": {
+              "properties": {
+                "pairs": {
+                  "items": {
+                    "$ref": "#/$defs/Pair"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "pairs"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "Pairs"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Not a question: a title, text and/or picture shown on the big screen, with nothing to\nanswer.",
+          "properties": {
+            "Slide": {
+              "properties": {
+                "results": {
+                  "description": "A results slide: when answers are revealed at the end, it walks through the answers\nto the questions since the previous results slide, then shows the standings (an\nintermission, say). Its title heads the standings; it has no text or picture.",
+                  "type": "boolean"
+                },
+                "title": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "title"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "Slide"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "QuizSettings": {
+      "description": "Per-quiz options chosen by the admin.",
+      "properties": {
+        "advance": {
+          "$ref": "#/$defs/AdvanceMode",
+          "default": "Manual"
+        },
+        "default_time_limit_secs": {
+          "default": 20,
+          "description": "Time limit for questions that do not set their own.",
+          "format": "uint32",
+          "maximum": 300,
+          "minimum": 5,
+          "type": "integer"
+        },
+        "joker": {
+          "default": false,
+          "description": "Each team may double one question's points.",
+          "type": "boolean"
+        },
+        "multi_scoring": {
+          "$ref": "#/$defs/MultiScoring",
+          "default": "AllOrNothing"
+        },
+        "network": {
+          "$ref": "#/$defs/NetworkSlide",
+          "default": {
+            "enabled": false,
+            "name": "",
+            "password": ""
+          },
+          "description": "A first slide telling the room how to get on the Wi-Fi."
+        },
+        "phone_display": {
+          "$ref": "#/$defs/PhoneDisplay",
+          "default": "ButtonsOnly"
+        },
+        "points": {
+          "$ref": "#/$defs/PointsMode",
+          "default": "Speed"
+        },
+        "reveal": {
+          "$ref": "#/$defs/RevealMode",
+          "default": "AfterEachQuestion"
+        }
+      },
+      "type": "object"
+    },
+    "RevealMode": {
+      "description": "When correct answers and scores are shown.",
+      "oneOf": [
+        {
+          "const": "AfterEachQuestion",
+          "description": "After every question, with the current standings.",
+          "type": "string"
+        },
+        {
+          "const": "AtEnd",
+          "description": "Only once all questions have been played, keeping the suspense.",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "$id": "https://ggirelli.github.io/quaesito/schema/quiz-3.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A quiz exported by Quaesito, file format 3.",
+  "properties": {
+    "$schema": {
+      "description": "Where this format is described, for editors that check JSON files.",
+      "type": "string"
+    },
+    "created": {
+      "description": "When the quiz was created, in seconds since 1970; set when it is first saved.",
+      "format": "uint64",
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "format": {
+      "description": "Version of the file format. Files without it are version 1.",
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "id": {
+      "type": "string"
+    },
+    "questions": {
+      "default": [],
+      "description": "Questions and slides, in playing order.",
+      "items": {
+        "$ref": "#/$defs/Question"
+      },
+      "type": "array"
+    },
+    "settings": {
+      "$ref": "#/$defs/QuizSettings",
+      "default": {
+        "advance": "Manual",
+        "default_time_limit_secs": 20,
+        "joker": false,
+        "multi_scoring": "AllOrNothing",
+        "network": {
+          "enabled": false,
+          "name": "",
+          "password": ""
+        },
+        "phone_display": "ButtonsOnly",
+        "points": "Speed",
+        "reveal": "AfterEachQuestion"
+      }
+    },
+    "title": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "title"
+  ],
+  "title": "Quaesito quiz",
+  "type": "object"
+}

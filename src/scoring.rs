@@ -3,7 +3,7 @@
 use std::time::Duration;
 
 use crate::{
-    model::{MultiScoring, PointsMode, Question},
+    model::{MultiScoring, NumberScoring, PointsMode, Question},
     protocol::{Grade, Judgement},
 };
 
@@ -90,14 +90,40 @@ pub fn order_points(full: u32, in_place: usize, items: usize) -> u32 {
 #[must_use]
 pub fn pin_points(full: u32, distance: f64, tolerance: crate::model::PinTolerance) -> u32 {
     let (near, far) = tolerance.distances();
-    let share = if distance <= near {
+    to_points(f64::from(full) * falling_share(distance, near, far))
+}
+
+/// Points for a guess `distance` from the correct number, where a fully correct answer is worth
+/// `full` (see [`full_points`]), under a scoring that does not compare guesses: nothing for
+/// [`NumberScoring::Closest`].
+#[must_use]
+pub fn number_points(full: u32, distance: f64, scoring: NumberScoring) -> u32 {
+    let share = match scoring {
+        NumberScoring::Closest => 0.0,
+        NumberScoring::Distance {
+            full_within,
+            none_beyond,
+        } => falling_share(distance, full_within, none_beyond),
+        NumberScoring::Margin { margin } => {
+            if distance <= margin {
+                1.0
+            } else {
+                0.0
+            }
+        }
+    };
+    to_points(f64::from(full) * share)
+}
+
+/// 1 up to `near`, 0 from `far` on, falling evenly in between.
+fn falling_share(distance: f64, near: f64, far: f64) -> f64 {
+    if distance <= near {
         1.0
     } else if distance >= far {
         0.0
     } else {
         (far - distance) / (far - near)
-    };
-    to_points(f64::from(full) * share)
+    }
 }
 
 /// Points for a typed answer: `full` (see [`full_points`]) scaled by the judge's grade, plus the
@@ -267,6 +293,25 @@ mod tests {
         assert_eq!(pin_points(1000, 0.17, Normal), 500);
         assert_eq!(pin_points(1000, 0.3, Normal), 0);
         assert_eq!(pin_points(1000, 2.0, Normal), 0);
+    }
+
+    #[test]
+    fn number_points_follow_the_scoring() {
+        let distance = NumberScoring::Distance {
+            full_within: 10.0,
+            none_beyond: 50.0,
+        };
+        assert_eq!(number_points(1000, 0.0, distance), 1000);
+        assert_eq!(number_points(1000, 10.0, distance), 1000);
+        assert_eq!(number_points(1000, 30.0, distance), 500);
+        assert_eq!(number_points(1000, 50.0, distance), 0);
+        let exact = NumberScoring::Margin { margin: 0.0 };
+        assert_eq!(number_points(800, 0.0, exact), 800);
+        assert_eq!(number_points(800, 0.5, exact), 0);
+        let margin = NumberScoring::Margin { margin: 5.0 };
+        assert_eq!(number_points(800, 5.0, margin), 800);
+        assert_eq!(number_points(800, 5.1, margin), 0);
+        assert_eq!(number_points(1000, 0.0, NumberScoring::Closest), 0);
     }
 
     #[test]

@@ -12,7 +12,7 @@ pub fn is_video(name: &str) -> bool {
 
 /// Version of the exported quiz file format. Raise it whenever an older version would misread
 /// or lose something in a newer file: a new question kind, setting value or field.
-pub const QUIZ_FORMAT: u32 = 2;
+pub const QUIZ_FORMAT: u32 = 3;
 
 /// Fewest answers a question may offer.
 pub const MIN_ANSWERS: usize = 2;
@@ -670,8 +670,13 @@ fn pair_problems(pairs: &[Pair]) -> Vec<String> {
     problems
 }
 
-/// What is missing from a closest-number question: its answer, and a sensible range around it.
-fn number_problems(answer: Option<f64>, range: Option<NumberRange>) -> Vec<String> {
+/// What is missing from a number question: its answer, a sensible range around it, and sensible
+/// distances to score by.
+fn number_problems(
+    answer: Option<f64>,
+    range: Option<NumberRange>,
+    scoring: NumberScoring,
+) -> Vec<String> {
     let mut problems = Vec::new();
     if !answer.is_some_and(f64::is_finite) {
         problems.push("Enter the correct number.".to_owned());
@@ -683,6 +688,7 @@ fn number_problems(answer: Option<f64>, range: Option<NumberRange>) -> Vec<Strin
             problems.push("The correct number must be within the range.".to_owned());
         }
     }
+    problems.extend(scoring.problem().map(str::to_owned));
     problems
 }
 
@@ -713,6 +719,48 @@ impl NumberRange {
     }
 }
 
+/// How a number question is scored.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(test, derive(schemars::JsonSchema))]
+pub enum NumberScoring {
+    /// The closest guesses win a set amount, however long they took; the others nothing.
+    #[default]
+    Closest,
+    /// Full points up to `full_within` from the correct number, nothing beyond `none_beyond`,
+    /// and a share falling evenly in between.
+    Distance { full_within: f64, none_beyond: f64 },
+    /// Full points up to `margin` from the correct number (0: only the exact number), nothing
+    /// beyond.
+    Margin { margin: f64 },
+}
+
+impl NumberScoring {
+    #[must_use]
+    pub fn is_closest(&self) -> bool {
+        *self == Self::Closest
+    }
+
+    /// What is wrong with the scoring's distances, if anything.
+    #[must_use]
+    pub fn problem(self) -> Option<&'static str> {
+        match self {
+            Self::Closest => None,
+            Self::Distance {
+                full_within,
+                none_beyond,
+            } => (!(full_within.is_finite()
+                && none_beyond.is_finite()
+                && 0.0 <= full_within
+                && full_within < none_beyond))
+                .then_some(
+                    "The distance for full points must be smaller than the one for no points.",
+                ),
+            Self::Margin { margin } => (!(margin.is_finite() && margin >= 0.0))
+                .then_some("The margin must be zero or a positive number."),
+        }
+    }
+}
+
 /// Fewest parts a several-answers question has.
 pub const MIN_PARTS: usize = 2;
 /// Most parts a several-answers question has.
@@ -727,12 +775,14 @@ pub enum QuestionKind {
     Choice,
     /// Type a short answer, right when it matches an accepted one (the judge may amend).
     Text { accepted: Vec<String> },
-    /// Enter a number; the closest guess wins.
+    /// Enter a number; by default the closest guess wins.
     Number {
         answer: Option<f64>,
         /// The numbers teams can give, if limited: phones then also show a slider.
         #[serde(default, skip_serializing_if = "Option::is_none")]
         range: Option<NumberRange>,
+        #[serde(default, skip_serializing_if = "NumberScoring::is_closest")]
+        scoring: NumberScoring,
     },
     /// Put items in order; `items` are listed in the right order and shown shuffled.
     Order { items: Vec<String> },
@@ -966,9 +1016,11 @@ impl Question {
                     problems.push("Add at least one accepted answer.".to_owned());
                 }
             }
-            QuestionKind::Number { answer, range } => {
-                problems.extend(number_problems(*answer, *range));
-            }
+            QuestionKind::Number {
+                answer,
+                range,
+                scoring,
+            } => problems.extend(number_problems(*answer, *range, *scoring)),
             QuestionKind::Order { items } => {
                 if !(MIN_ANSWERS..=MAX_ANSWERS).contains(&items.len()) {
                     problems.push(format!(
@@ -1636,22 +1688,26 @@ mod tests {
         q.kind = QuestionKind::Number {
             answer: None,
             range: None,
+            scoring: NumberScoring::Closest,
         };
         assert_eq!(q.problems(), vec!["Enter the correct number."]);
         q.kind = QuestionKind::Number {
             answer: Some(330.0),
             range: None,
+            scoring: NumberScoring::Closest,
         };
         assert_eq!(q.problems(), Vec::<String>::new());
         let range = |min, max| Some(NumberRange { min, max });
         q.kind = QuestionKind::Number {
             answer: Some(330.0),
             range: range(0.0, 1000.0),
+            scoring: NumberScoring::Closest,
         };
         assert_eq!(q.problems(), Vec::<String>::new());
         q.kind = QuestionKind::Number {
             answer: Some(330.0),
             range: range(0.0, 100.0),
+            scoring: NumberScoring::Closest,
         };
         assert_eq!(
             q.problems(),
@@ -1660,10 +1716,36 @@ mod tests {
         q.kind = QuestionKind::Number {
             answer: Some(330.0),
             range: range(10.0, 10.0),
+            scoring: NumberScoring::Closest,
         };
         assert_eq!(
             q.problems(),
             vec!["The range must go from a smaller to a larger number."]
+        );
+        let scored = |scoring| QuestionKind::Number {
+            answer: Some(330.0),
+            range: None,
+            scoring,
+        };
+        q.kind = scored(NumberScoring::Margin { margin: 0.0 });
+        assert_eq!(q.problems(), Vec::<String>::new());
+        q.kind = scored(NumberScoring::Margin { margin: -1.0 });
+        assert_eq!(
+            q.problems(),
+            vec!["The margin must be zero or a positive number."]
+        );
+        q.kind = scored(NumberScoring::Distance {
+            full_within: 10.0,
+            none_beyond: 50.0,
+        });
+        assert_eq!(q.problems(), Vec::<String>::new());
+        q.kind = scored(NumberScoring::Distance {
+            full_within: 50.0,
+            none_beyond: 50.0,
+        });
+        assert_eq!(
+            q.problems(),
+            vec!["The distance for full points must be smaller than the one for no points."]
         );
         // Leftover choices of a converted question do not count.
         q.answers = vec![answer("a", true), answer("b", true)];

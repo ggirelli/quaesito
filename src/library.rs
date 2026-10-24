@@ -708,6 +708,7 @@ mod tests {
                 QuestionKind::Number {
                     answer: Some(1969.0),
                     range: None,
+                    scoring: crate::model::NumberScoring::Closest,
                 },
             ),
         ]

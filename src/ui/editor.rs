@@ -26,8 +26,8 @@ use crate::{
         AdvanceMode, Answer, BONUS_PERCENTS, Bonus, ImageReveal, LibraryLink, MAX_ANSWERS,
         MAX_MULTIPLIER, MAX_NETWORK_NAME_BYTES, MAX_NETWORK_PASSWORD_CHARS, MAX_PARTS,
         MAX_TIME_LIMIT_SECS, MIN_ANSWERS, MIN_PARTS, MIN_TIME_LIMIT_SECS, MultiScoring,
-        NetworkSlide, NumberRange, Pair, PairItem, Part, PhoneDisplay, PinTolerance, Point,
-        PointsMode, Question, QuestionKind, Quiz, QuizSettings, RevealMode, ValidationIssue,
+        NetworkSlide, NumberRange, NumberScoring, Pair, PairItem, Part, PhoneDisplay, PinTolerance,
+        Point, PointsMode, Question, QuestionKind, Quiz, QuizSettings, RevealMode, ValidationIssue,
         is_video,
     },
     protocol::UploadLimits,
@@ -1770,7 +1770,7 @@ fn QuestionCard(
                         ("Choices", "Teams pick from coloured answers."),
                         ("True/false", "Teams say whether the statement is true or false."),
                         ("Typed answer", "Teams type a short answer. You can amend the verdict on each answer when they are revealed."),
-                        ("Number", "Teams guess a number; the closest guess wins 1000 points."),
+                        ("Number", "Teams guess a number: the closest guess wins, or the closer the more points, or close enough is right."),
                         ("Order", "Teams put the items in order; each item in its right place earns its share of the points."),
                         ("Several answers", "Teams type a few answers at once (title and artist, five posters…); each is judged on its own and the points are shared between them."),
                         ("Pin", "Teams drop a pin on the picture (a map, a floor plan…); the closer, the more points."),
@@ -1823,8 +1823,9 @@ fn QuestionCard(
                     QuestionKind::Text { accepted } => rsx! {
                         AcceptedAnswers { question: index, accepted: accepted.clone() }
                     },
-                    QuestionKind::Number { answer, range } => rsx! {
+                    QuestionKind::Number { answer, range, scoring } => rsx! {
                         NumberAnswer { question: index, answer: *answer, range: *range }
+                        NumberScoringChoice { question: index, answer: *answer, range: *range, scoring: *scoring }
                     },
                     QuestionKind::Order { items } => rsx! {
                         OrderItems { question: index, items: items.clone() }
@@ -2314,6 +2315,7 @@ fn set_kind(question: &mut Question, choice: usize) {
         (3, _) => QuestionKind::Number {
             answer: None,
             range: None,
+            scoring: NumberScoring::Closest,
         },
         _ => {
             if question.answers.len() < MIN_ANSWERS {
@@ -2737,7 +2739,7 @@ fn OrderItems(question: usize, items: Vec<String>) -> Element {
     }
 }
 
-/// The correct number of a closest-number question.
+/// The correct number of a number question, and the range teams answer in.
 #[component]
 fn NumberAnswer(question: usize, answer: Option<f64>, range: Option<NumberRange>) -> Element {
     let draft: Draft = use_context();
@@ -2812,6 +2814,114 @@ fn NumberAnswer(question: usize, answer: Option<f64>, range: Option<NumberRange>
         }
         if let Some(problem) = range_problem(answer, range) {
             p { class: "field-error", "{problem}" }
+        }
+    }
+}
+
+/// How a number question is scored, with the distances its scoring needs.
+#[component]
+fn NumberScoringChoice(
+    question: usize,
+    answer: Option<f64>,
+    range: Option<NumberRange>,
+    scoring: NumberScoring,
+) -> Element {
+    let draft: Draft = use_context();
+    let set_scoring = move |scoring: NumberScoring| {
+        draft.edit_question(question, |q| {
+            if let QuestionKind::Number { scoring: s, .. } = &mut q.kind {
+                *s = scoring;
+            }
+        });
+    };
+    rsx! {
+        Choice {
+            label: "Scoring",
+            options: vec![
+                ("Closest wins", "The closest guesses win 1000 points, however long they took; the others none."),
+                ("Closer earns more", "Full points up to the first distance from the correct number, none beyond the second, and fewer the farther in between."),
+                ("Close enough", "Full points up to a margin from the correct number (0: only the exact number), none beyond."),
+            ],
+            selected: match scoring {
+                NumberScoring::Closest => 0,
+                NumberScoring::Distance { .. } => 1,
+                NumberScoring::Margin { .. } => 2,
+            },
+            on_select: move |i| set_scoring(match (i, scoring) {
+                (1, NumberScoring::Distance { .. }) | (2, NumberScoring::Margin { .. }) => scoring,
+                (1, _) => NumberScoring::Distance {
+                    full_within: 0.0,
+                    none_beyond: default_spread(answer, range),
+                },
+                (2, _) => NumberScoring::Margin { margin: 0.0 },
+                _ => NumberScoring::Closest,
+            }),
+        }
+        match scoring {
+            NumberScoring::Closest => rsx! {},
+            NumberScoring::Distance { full_within, none_beyond } => rsx! {
+                div { class: "row number-edit",
+                    DistanceField {
+                        key: "full-within",
+                        label: "Full points within",
+                        value: full_within,
+                        on_change: move |full_within| set_scoring(NumberScoring::Distance { full_within, none_beyond }),
+                    }
+                    DistanceField {
+                        key: "none-beyond",
+                        label: "No points beyond",
+                        value: none_beyond,
+                        on_change: move |none_beyond| set_scoring(NumberScoring::Distance { full_within, none_beyond }),
+                    }
+                }
+            },
+            NumberScoring::Margin { margin } => rsx! {
+                div { class: "row number-edit",
+                    DistanceField {
+                        key: "margin",
+                        label: "Right within ±",
+                        value: margin,
+                        on_change: move |margin| set_scoring(NumberScoring::Margin { margin }),
+                    }
+                }
+            },
+        }
+        if let Some(problem) = scoring.problem() {
+            p { class: "field-error", "{problem}" }
+        }
+    }
+}
+
+/// A starting "no points beyond" distance: a quarter of the range, or a tenth of the answer.
+fn default_spread(answer: Option<f64>, range: Option<NumberRange>) -> f64 {
+    let spread = match (range, answer) {
+        (Some(range), _) if range.is_valid() => (range.max - range.min) / 4.0,
+        (_, Some(answer)) => answer.abs() / 10.0,
+        _ => 10.0,
+    };
+    spread.round().max(1.0)
+}
+
+/// A distance from the correct number, kept as typed until it is a number.
+#[component]
+fn DistanceField(label: &'static str, value: f64, on_change: EventHandler<f64>) -> Element {
+    let mut raw = use_signal(|| value.to_string());
+    rsx! {
+        label { class: "field inline",
+            span { "{label}" }
+            input {
+                r#type: "text",
+                inputmode: "decimal",
+                class: "short",
+                value: raw,
+                oninput: move |e| {
+                    let value = e.value();
+                    if let Some(distance) = parse_number(&value) {
+                        on_change.call(distance);
+                    }
+                    raw.set(value);
+                },
+            }
         }
     }
 }

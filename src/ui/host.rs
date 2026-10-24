@@ -1281,7 +1281,10 @@ fn AnswersOrPrompt(question: QuestionInfo) -> Element {
         }
         InputKind::Pin => "📍 Drop a pin on your phone",
         InputKind::Text => "✍️ Type your answer on your phone",
-        InputKind::Number => "🔢 Enter a number on your phone: closest wins",
+        InputKind::Number if question.closest_wins => {
+            "🔢 Enter a number on your phone: closest wins"
+        }
+        InputKind::Number => "🔢 Enter a number on your phone",
     };
     rsx! {
         p { class: "open-prompt", "{prompt}" }
@@ -1341,7 +1344,7 @@ fn RevealBody(question: QuestionInfo, reveal: Reveal) -> Element {
             }
         },
         Reveal::Number { answer, guesses } => rsx! {
-            NumberReveal { answer, guesses }
+            NumberReveal { question: question.index, answer, guesses }
         },
         Reveal::Pairs { pairs, matched } => rsx! {
             PairsReveal { columns: question.pairs.clone().unwrap_or_default(), pairs, matched }
@@ -1508,11 +1511,7 @@ fn TextReveal(question: usize, accepted: Vec<String>, groups: Vec<TextGroup>) ->
                             Grade::Half => "text-group half",
                             Grade::Wrong => "text-group wrong",
                         };
-                        let bonus = match j.bonus {
-                            0 => String::new(),
-                            b if b > 0 => format!("+{b}"),
-                            b => b.to_string(),
-                        };
+                        let bonus = bonus_label(j.bonus);
                         let grade_button = |grade: Grade, label: &'static str, title: &'static str| {
                             let key = group.key.clone();
                             rsx! {
@@ -1560,12 +1559,36 @@ fn TextReveal(question: usize, accepted: Vec<String>, groups: Vec<TextGroup>) ->
     }
 }
 
+/// A bonus as the judge's controls show it: signed, and blank when there is none.
+fn bonus_label(bonus: i32) -> String {
+    match bonus {
+        0 => String::new(),
+        b if b > 0 => format!("+{b}"),
+        b => b.to_string(),
+    }
+}
+
 /// Points added or removed per click on the bonus buttons.
 const BONUS_STEP: i32 = 100;
 
-/// The right number and the guesses, closest first.
+/// The right number and the guesses, closest first, each with the judge's bonus and malus.
 #[component]
-fn NumberReveal(answer: f64, guesses: Vec<Guess>) -> Element {
+fn NumberReveal(question: usize, answer: f64, guesses: Vec<Guess>) -> Element {
+    let live: Live<HostCommand, HostView> = use_context();
+    let judge = move |key: String, bonus: i32| async move {
+        let judgement = Judgement {
+            grade: Grade::Full,
+            bonus,
+        };
+        let _ = live
+            .socket
+            .send(HostCommand::Judge {
+                question,
+                key,
+                judgement,
+            })
+            .await;
+    };
     rsx! {
         div { class: "open-reveal",
             p { class: "number-answer", {format_number(answer)} }
@@ -1573,11 +1596,35 @@ fn NumberReveal(answer: f64, guesses: Vec<Guess>) -> Element {
                 p { class: "muted", "Nobody answered." }
             }
             ol { class: "guesses",
-                for (i, guess) in guesses.into_iter().enumerate() {
-                    li { key: "{i}", class: if guess.closest { "guess closest" } else { "guess" },
-                        span { class: "strong", "{guess.team}" }
-                        span { {format_number(guess.value)} }
-                        span { class: "muted small", "off by {format_number((guess.value - answer).abs())}" }
+                for guess in guesses {
+                    {
+                        let bonus_button = |delta: i32, label: &'static str, title: &'static str| {
+                            let key = guess.key.clone();
+                            let bonus = guess.bonus + delta;
+                            rsx! {
+                                button {
+                                    class: "judge-button",
+                                    title,
+                                    disabled: bonus.abs() > MAX_BONUS,
+                                    onclick: move |_| judge(key.clone(), bonus),
+                                    "{label}"
+                                }
+                            }
+                        };
+                        let bonus = bonus_label(guess.bonus);
+                        rsx! {
+                            li { key: "{guess.key}", class: if guess.full { "guess closest" } else { "guess" },
+                                span { class: "strong", "{guess.team}" }
+                                span { {format_number(guess.value)} }
+                                span { class: "muted small", "off by {format_number((guess.value - answer).abs())}" }
+                                span { if guess.points > 0 { "+{guess.points}" } else { "{guess.points}" } }
+                                div { class: "judge",
+                                    {bonus_button(-BONUS_STEP, "−", "Malus")}
+                                    span { class: "bonus", "{bonus}" }
+                                    {bonus_button(BONUS_STEP, "+", "Bonus")}
+                                }
+                            }
+                        }
                     }
                 }
             }
