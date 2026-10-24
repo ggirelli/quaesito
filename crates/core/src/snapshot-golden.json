@@ -1,0 +1,135 @@
+{
+  "code": "123456",
+  "joining": true,
+  "judgements": [
+    {},
+    {}
+  ],
+  "max_teams": 50,
+  "next_team_id": 3,
+  "phase": {
+    "Question": {
+      "elapsed": {
+        "nanos": 0,
+        "secs": 3
+      },
+      "index": 0,
+      "left": {
+        "nanos": 0,
+        "secs": 7
+      }
+    }
+  },
+  "pictures": true,
+  "played": [
+    false,
+    false
+  ],
+  "quiz": {
+    "id": "id",
+    "questions": [
+      {
+        "answers": [
+          {
+            "correct": true,
+            "image": null,
+            "text": "right"
+          },
+          {
+            "correct": false,
+            "image": null,
+            "text": "wrong"
+          }
+        ],
+        "audio": null,
+        "image": null,
+        "image_hold_secs": 0,
+        "image_reveal": "Shown",
+        "kind": "Choice",
+        "multiplier": null,
+        "text": "one",
+        "time_limit_secs": 10
+      },
+      {
+        "answers": [
+          {
+            "correct": true,
+            "image": null,
+            "text": "right"
+          },
+          {
+            "correct": false,
+            "image": null,
+            "text": "wrong"
+          }
+        ],
+        "audio": null,
+        "image": null,
+        "image_hold_secs": 0,
+        "image_reveal": "Shown",
+        "kind": "Choice",
+        "multiplier": null,
+        "text": "two",
+        "time_limit_secs": 10
+      }
+    ],
+    "settings": {
+      "advance": "Manual",
+      "default_time_limit_secs": 20,
+      "joker": true,
+      "multi_scoring": "AllOrNothing",
+      "network": {
+        "enabled": false,
+        "name": "",
+        "password": ""
+      },
+      "phone_display": "ButtonsOnly",
+      "points": "Speed",
+      "reveal": "AfterEachQuestion"
+    },
+    "title": "Test"
+  },
+  "shown": [
+    [],
+    []
+  ],
+  "teams": [
+    {
+      "avatar": null,
+      "backdrop": null,
+      "id": 1,
+      "joker": 0,
+      "mascot": null,
+      "name": "Owls",
+      "submissions": [
+        {
+          "bonus": null,
+          "elapsed": {
+            "nanos": 0,
+            "secs": 2
+          },
+          "response": {
+            "Choice": [
+              0
+            ]
+          }
+        },
+        null
+      ],
+      "token": "token-Owls"
+    },
+    {
+      "avatar": null,
+      "backdrop": null,
+      "id": 2,
+      "joker": null,
+      "mascot": null,
+      "name": "Cats",
+      "submissions": [
+        null,
+        null
+      ],
+      "token": "token-Cats"
+    }
+  ]
+}

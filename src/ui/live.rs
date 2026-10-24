@@ -1,9 +1,13 @@
 //! Live connection to a session: the latest view pushed by the server, with reconnection.
+//!
+//! Screens only see a [`Live`]: the latest view, and [`Live::send`] for their commands. They do
+//! not know where views come from, so another source (such as a game running in the browser)
+//! could drive the same screens.
 
 use std::future::Future;
 
 use dioxus::{
-    fullstack::{UseWebsocket, Websocket, use_websocket},
+    fullstack::{Websocket, use_websocket},
     prelude::*,
 };
 use serde::{Serialize, de::DeserializeOwned};
@@ -13,15 +17,15 @@ use super::client;
 /// Pause before reconnecting a dropped socket.
 const RECONNECT_DELAY_MS: u32 = 1500;
 
-/// A live socket and what it last received.
+/// A live game as a screen sees it: what it last received, and where its commands go.
 pub struct Live<In: 'static, Out: 'static> {
-    pub socket: UseWebsocket<In, Out>,
     /// The latest view, `None` until the first one arrives.
     pub view: Signal<Option<Out>>,
     /// Browser time (ms) when `view` arrived, to run countdowns locally.
     pub received_at: Signal<f64>,
     /// Whether the socket is currently up.
     pub connected: Signal<bool>,
+    commands: Callback<In>,
 }
 
 impl<In, Out> Clone for Live<In, Out> {
@@ -31,6 +35,13 @@ impl<In, Out> Clone for Live<In, Out> {
 }
 
 impl<In, Out> Copy for Live<In, Out> {}
+
+impl<In, Out> Live<In, Out> {
+    /// Sends a command; the screen learns its effect from the next view.
+    pub fn send(&self, command: In) {
+        self.commands.call(command);
+    }
+}
 
 /// Connects with `connect` and keeps the connection alive.
 pub fn use_live<In, Out, Fut>(connect: impl FnMut() -> Fut + Copy + 'static) -> Live<In, Out>
@@ -43,6 +54,11 @@ where
     let mut view = use_signal(|| None);
     let mut received_at = use_signal(|| 0.0);
     let mut connected = use_signal(|| true);
+    let commands = use_callback(move |command: In| {
+        spawn(async move {
+            let _ = socket.send(command).await;
+        });
+    });
     use_future(move || {
         let mut connect = connect;
         async move {
@@ -60,10 +76,10 @@ where
         }
     });
     Live {
-        socket,
         view,
         received_at,
         connected,
+        commands,
     }
 }
 

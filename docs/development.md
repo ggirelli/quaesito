@@ -21,12 +21,28 @@ git clone https://github.com/ggirelli/quaesito
 cd quaesito
 just serve   # hot-reloading dev server on the LAN; admin password "quaesito"
 just test    # the test suite
+just core    # the rules crate alone, and its wasm build
 just check   # formatting, lints, tests and licence checks, as in CI
 just play    # release build served on the LAN, with its data in ./data
 just docs    # this site, live at http://127.0.0.1:8000
 ```
 
 `just` on its own lists every command.
+
+## How the code is organised
+
+The repository is a Cargo workspace of three crates, each depending only on the ones below it:
+
+- **`quaesito`** (the root: `src/`): the app. `main.rs` starts it, `src/ui/` holds the pages and
+  screens, and `src/api.rs` declares the server functions the browser calls. Built for the browser
+  (the default `web` feature) and for the server (`--features server`, which adds `quaesito-server`).
+- **`quaesito-server`** (`crates/server`): everything that needs a server: quiz, media and
+  library storage, admin sign-in, live sessions and their WebSockets, HTTP routes. Its `build.rs`
+  bundles the question library from `library/`.
+- **`quaesito-core`** (`crates/core`): the rules, with no server, runtime, files or network: quizzes
+  and their validation, the messages of a live game, scoring, typed-answer matching and the game
+  engine. Time and randomness are passed in, so its tests need no tricks; it also builds for the
+  browser. `just core` tests it on its own and checks that it builds for wasm.
 
 ## Running it from source
 
@@ -51,7 +67,8 @@ which plays a sample quiz in a headless browser; the demo videos come from `just
 The [quiz file format](quiz-file-format.md) schema in `docs/schema` is generated from the quiz types,
 and a test fails when they drift apart. After changing what a quiz holds, `just schema` rewrites it;
 if an older version would misread or lose the change (a new kind of question, a new setting value),
-raise `QUIZ_FORMAT` in `src/model.rs` first, so the new schema is published next to the old one.
+raise `QUIZ_FORMAT` in `crates/core/src/model.rs` first, so the new schema is published next to the
+old one.
 
 ## Contributing
 

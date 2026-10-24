@@ -14,13 +14,15 @@ use std::{
 };
 
 use anyhow::Context;
+use quaesito_core::{
+    engine::{Game, Refusal, Snapshot},
+    model::Quiz,
+    protocol::SessionSummary,
+};
 use tokio::{
     sync::{oneshot, watch},
     time::Instant,
 };
-
-use super::engine::{Game, Refusal, Snapshot};
-use crate::{model::Quiz, protocol::SessionSummary};
 
 /// How long changes settle before a game is saved.
 const SAVE_DELAY: Duration = Duration::from_millis(300);
@@ -188,7 +190,7 @@ impl Sessions {
     /// # Errors
     /// Refuses quizzes that are not playable.
     pub fn create_test(&self, quiz: Quiz) -> Result<String, Refusal> {
-        self.create_with(quiz, true, crate::protocol::DEFAULT_MAX_TEAMS, true)
+        self.create_with(quiz, true, quaesito_core::protocol::DEFAULT_MAX_TEAMS, true)
     }
 
     fn create_with(
@@ -205,7 +207,7 @@ impl Sessions {
                 break candidate;
             }
         };
-        let mut game = Game::new(code.clone(), quiz)?;
+        let mut game = Game::new(code.clone(), quiz, super::random_below)?;
         game.set_max_teams(max_teams)?;
         game.set_pictures(pictures);
         self.start(&mut map, code.clone(), game, test);
@@ -338,7 +340,7 @@ async fn run_timers(session: Weak<Session>, mut updates: watch::Receiver<u64>) {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::model::{Answer, Question};
+    use quaesito_core::model::{Answer, Question};
 
     fn quiz() -> Quiz {
         Quiz {
@@ -363,7 +365,10 @@ mod tests {
     }
 
     fn session() -> Session {
-        Session::new(Game::new("123456".to_owned(), quiz()).unwrap(), true)
+        Session::new(
+            Game::new("123456".to_owned(), quiz(), crate::random_below).unwrap(),
+            true,
+        )
     }
 
     #[test]
@@ -413,7 +418,7 @@ mod tests {
         let dir = std::env::temp_dir().join(format!("quaesito-games-{}", uuid::Uuid::new_v4()));
         let sessions = Sessions::open(&dir).await.unwrap();
         let code = sessions
-            .create(quiz(), crate::protocol::DEFAULT_MAX_TEAMS, true)
+            .create(quiz(), quaesito_core::protocol::DEFAULT_MAX_TEAMS, true)
             .unwrap();
         let session = sessions.get(&code).unwrap();
         let team = session.update(|g, _| g.join("Owls", "ticket".to_owned()).unwrap());

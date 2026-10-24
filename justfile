@@ -30,29 +30,34 @@ fmt:
 fmt-check:
     cargo fmt --all -- --check
 
-# Lint the server build
+# Lint the server build (every crate of the workspace)
 clippy-server:
-    cargo clippy --no-default-features --features server --all-targets --locked -- -D warnings
+    cargo clippy --workspace --no-default-features --features quaesito/server --all-targets --locked -- -D warnings
 
-# Lint the wasm client build
+# Lint the wasm client build (the app and the crates it builds into the browser)
 clippy-web:
-    cargo clippy --target wasm32-unknown-unknown --all-targets --locked -- -D warnings
+    cargo clippy --target wasm32-unknown-unknown -p quaesito -p quaesito-core --all-targets --locked -- -D warnings
 
 # Lint both builds
 clippy: clippy-server clippy-web
 
 # Check the API docs of both builds, failing on warnings (such as links to private items)
 doc:
-    RUSTDOCFLAGS="-D warnings" cargo doc --no-deps --no-default-features --features server --locked
-    RUSTDOCFLAGS="-D warnings" cargo doc --no-deps --target wasm32-unknown-unknown --locked
+    RUSTDOCFLAGS="-D warnings" cargo doc --workspace --no-deps --no-default-features --features quaesito/server --locked
+    RUSTDOCFLAGS="-D warnings" cargo doc --no-deps --target wasm32-unknown-unknown -p quaesito -p quaesito-core --locked
 
-# Run the test suite
+# Test the rules crate on its own, and check it builds for the browser (no server code)
+core:
+    cargo test -p quaesito-core --locked
+    cargo check -p quaesito-core --target wasm32-unknown-unknown --locked
+
+# Run the test suite of every crate
 test:
-    cargo test --no-default-features --features server --locked
+    cargo test --workspace --no-default-features --features quaesito/server --locked
 
 # Rewrite the published schema of the quiz file format (docs/schema) from the quiz types
 schema:
-    QUAESITO_WRITE_SCHEMA=1 cargo test --no-default-features --features server --locked the_published_schema_is_current
+    QUAESITO_WRITE_SCHEMA=1 cargo test -p quaesito-server --locked the_published_schema_is_current
 
 # Copy the question edits saved in the app (data/library-edits.json) into the library's topic files
 library-apply-edits edits="data/library-edits.json":
@@ -63,7 +68,7 @@ deny:
     cargo deny --locked check
 
 # Everything CI checks
-check: fmt-check clippy doc test deny
+check: fmt-check clippy doc test core deny
 
 # Print the workspace's version
 version:

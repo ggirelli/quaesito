@@ -1,5 +1,6 @@
-//! Combines the question library's topic files (`library/<category>/<category>-<topic>.json`,
-//! each a JSON array of entries) into one array, which the server bundles.
+//! Combines the question library's topic files (`library/<category>/<category>-<topic>.json` at
+//! the root of the repository, each a JSON array of entries) into one array, which the server
+//! bundles.
 
 use std::{
     env, fs,
@@ -7,9 +8,10 @@ use std::{
 };
 
 fn main() {
-    println!("cargo::rerun-if-changed=library");
+    let library = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../library");
+    println!("cargo::rerun-if-changed={}", library.display());
     let mut files = Vec::new();
-    collect(Path::new("library"), &mut files);
+    collect(&library, &mut files);
     files.sort();
     let mut entries = Vec::new();
     for file in &files {

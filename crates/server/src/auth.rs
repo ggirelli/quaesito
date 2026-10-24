@@ -10,6 +10,7 @@ use std::{
 };
 
 use dioxus::prelude::{HttpError, ServerFnError, StatusCode};
+use quaesito_core::constant_time_eq;
 use serde::{Deserialize, Serialize};
 
 /// Most tokens kept; the oldest are forgotten first.
@@ -158,11 +159,6 @@ fn write_private(path: &std::path::Path, bytes: &[u8]) -> std::io::Result<()> {
         std::fs::set_permissions(path, std::fs::Permissions::from_mode(0o600))?;
     }
     Ok(())
-}
-
-/// Compares secrets in a time that does not tell how much of them matched.
-pub(crate) fn constant_time_eq(a: &[u8], b: &[u8]) -> bool {
-    a.len() == b.len() && a.iter().zip(b).fold(0, |acc, (x, y)| acc | (x ^ y)) == 0
 }
 
 #[cfg(test)]

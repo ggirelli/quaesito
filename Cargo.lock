@@ -2594,19 +2594,41 @@ version = "0.7.0"
 dependencies = [
  "anyhow",
  "dioxus",
- "futures-util",
  "gloo-timers",
- "image",
  "js-sys",
  "qrcode",
+ "quaesito-core",
+ "quaesito-server",
+ "serde",
+ "uuid",
+ "web-sys",
+]
+
+[[package]]
+name = "quaesito-core"
+version = "0.0.0"
+dependencies = [
+ "schemars",
+ "serde",
+ "serde_json",
+ "unicode-normalization",
+]
+
+[[package]]
+name = "quaesito-server"
+version = "0.0.0"
+dependencies = [
+ "anyhow",
+ "dioxus",
+ "futures-util",
+ "image",
+ "quaesito-core",
  "schemars",
  "serde",
  "serde_json",
  "tokio",
  "tower-http",
- "unicode-normalization",
  "uuid",
- "web-sys",
  "zip",
 ]
 

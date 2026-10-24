@@ -1,0 +1,22 @@
+[package]
+name = "quaesito-core"
+# Internal crate, versioned with the app (the root package).
+version = "0.0.0"
+edition = "2024"
+description = "Quaesito's domain logic: quizzes, scoring and the game engine, without a server"
+repository = "https://github.com/ggirelli/quaesito"
+license = "MIT"
+publish = false
+
+[dependencies]
+schemars = { workspace = true, optional = true }
+serde.workspace = true
+serde_json.workspace = true
+unicode-normalization = "0.1"
+
+[features]
+# JSON Schema derives on the quiz types, to publish the quiz file format (tests only).
+schema = ["dep:schemars"]
+
+[lints]
+workspace = true
