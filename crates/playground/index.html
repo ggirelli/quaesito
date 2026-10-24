@@ -9,10 +9,13 @@
         <!-- Until the app sets its icon, so the browser does not ask for /favicon.ico outside the Playground. -->
         <link rel="icon" href="data:,">
         <!-- The app adds main.css only once its WebAssembly runs: until then, paint the theme's
-             background (as in main.css) so the page does not flash white, or dark on light. -->
+             background (as in main.css) so the page does not flash white, or dark on light.
+             The app draws its page as it adds main.css, before the browser has loaded it: keep
+             the page hidden until main.css shows it, so it does not flash unstyled. -->
         <style>
             :root { color-scheme: dark; background: #14121f; }
             :root[data-theme="light"] { color-scheme: light; background: #f4f1ff; }
+            #main { visibility: hidden; }
         </style>
         <script>
             // As THEME_SCRIPT, which the app runs too late to stop the flash.
