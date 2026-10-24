@@ -16,7 +16,7 @@ use super::{
     },
 };
 use crate::{
-    api::{end_session, game_results, host_socket, join_origin},
+    api::{end_session, game_results, host_socket, join_origin, list_sessions},
     model::{ImageReveal, NetworkSlide, Pair, Point},
     protocol::{
         Explanation, Fastest, Grade, Guess, HostCommand, HostPhase, HostView, InputKind, Judgement,
@@ -63,6 +63,18 @@ fn HostScreen(code: String) -> Element {
     let code = use_signal(|| code);
     let live = use_live(move || host_socket(code(), token.get(), WebSocketOptions::new()));
     use_context_provider(|| live);
+    // The browser can't tell a refused socket from a dropped one, so on every drop ask whether
+    // the game is still running.
+    let mut gone = use_signal(|| false);
+    use_effect(move || {
+        if !(live.connected)() {
+            spawn(async move {
+                if let Ok(sessions) = list_sessions(token.get()).await {
+                    gone.set(!sessions.iter().any(|s| s.code == *code.peek()));
+                }
+            });
+        }
+    });
     let categories = Categories::use_loaded();
     use_context_provider(|| categories);
     let now = use_clock(200);
@@ -87,17 +99,18 @@ fn HostScreen(code: String) -> Element {
         let _ = live.socket.send(command).await;
     };
 
+    if gone() {
+        return rsx! {
+            div { class: "page center",
+                h1 { "This game is not running" }
+                BackToAdmin { class: "button", code: code() }
+            }
+        };
+    }
     let view = live.view.read();
     let Some(view) = view.as_ref() else {
         return rsx! {
-            div { class: "page center",
-                if live.socket.is_err() {
-                    h1 { "This game is not running" }
-                    BackToAdmin { class: "button", code: code() }
-                } else {
-                    Spinner {}
-                }
-            }
+            div { class: "page center", Spinner {} }
         };
     };
     let received_at = (live.received_at)();
