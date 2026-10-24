@@ -56,22 +56,25 @@ extra_javascript:
 
 nav:
   - Home: index.md
-  - Guide:
-      - Getting started: getting-started.md
+  - Getting started: getting-started.md
+  - Demo videos: demo.md
+  - Creating quizzes:
       - Building a quiz: building-a-quiz.md
       - Question types: question-types.md
       - Quiz settings: quiz-settings.md
       - Testing a quiz: testing.md
+      - Quiz file format: quiz-file-format.md
+  - Question library: question-library.md
+  - Playing:
       - Running the game: running-the-game.md
       - After the game: after-the-game.md
-      - Troubleshooting: troubleshooting.md
+  - Hosting:
       - Configuration: configuration.md
       - Hosting on the internet: deployment.md
-      - Quiz file format: quiz-file-format.md
-  - Demo videos: demo.md
-  - Development: development.md
-  - Question library: question-library.md
-  - How it was made: how-it-was-made.md
+  - Troubleshooting: troubleshooting.md
+  - Development:
+      - Development: development.md
+      - How it was made: how-it-was-made.md
 
 markdown_extensions:
   - admonition
