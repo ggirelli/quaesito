@@ -17,6 +17,7 @@ All notable changes to quaesito are listed here. The format follows
 ### Changed
 
 - The table view hides the navigator strip.
+- When its port is already in use, quaesito says so in plain words and how to start it on another port.
 - The user guide is easier to start with: a quick start and a table of downloads in getting started, a much longer
   troubleshooting page (starting, connecting, missing quizzes, backups, reporting a problem), the question library on
   one page with where the questions come from, a comparison of the local network and the internet in the hosting

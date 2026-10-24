@@ -12,9 +12,10 @@ Keep it open, and look there first.
 - **Windows says "Windows protected your PC"**, or **macOS says it cannot verify the app:**
   quaesito is not signed by a paying publisher. Follow the steps for your system in
   [getting started](getting-started.md#1-download-and-start-it).
-- **The log says `listening on 0.0.0.0:8080: …`** (with "address already in use" or similar):
-  something else already uses port 8080, often quaesito itself, started earlier in another
-  window. Close the other one, or start this one on another port:
+- **The log says `listening on 0.0.0.0:8080: …`** and "Another program, perhaps another
+  quaesito window, already uses port 8080": something else already uses port 8080, often
+  quaesito itself, started earlier in another window. Close the other one, or start this one on
+  another port:
 
     === "macOS and Linux"
 
