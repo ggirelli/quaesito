@@ -11,6 +11,7 @@ here=$(cd "$(dirname "$0")" && pwd)
 root=$(cd "$here/../.." && pwd)
 port=${PORT:-8093}
 target="$root/target/e2e"
+mkdir -p "$target" "$here/out"
 cd "$root"
 if [ -n "${RELEASE:-}" ]; then
   CARGO_TARGET_DIR="$target" dx bundle --platform web --release --out-dir "$target/dist" >"$target.build.log" 2>&1 ||
