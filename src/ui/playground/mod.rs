@@ -11,7 +11,7 @@ use super::{
     host::HostBoard,
     player::PlayerBoard,
     sfx::SFX_JS,
-    widgets::{ErrorBox, THEME_SCRIPT},
+    widgets::{ErrorBox, Icon, IconKind, THEME_SCRIPT},
 };
 use crate::model::Quiz;
 
@@ -46,6 +46,13 @@ pub fn Playground(quiz: Quiz) -> Element {
                 }
                 // The Playground is published next to the user guide.
                 a { class: "button ghost", href: "../", "What is Quaesito?" }
+                a {
+                    class: "button ghost icon",
+                    href: env!("CARGO_PKG_REPOSITORY"),
+                    title: "Quaesito on GitHub",
+                    aria_label: "Quaesito on GitHub",
+                    Icon { kind: IconKind::GitHub }
+                }
             }
             // Keys only tell apart the items of a list: a list of one game, so that a new key
             // replaces it.

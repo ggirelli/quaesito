@@ -197,12 +197,14 @@ pub fn HostBoard(
             }
             footer { class: "host-controls",
                 div { class: "row host-tools",
-                    button {
-                        class: "button ghost",
-                        title: "Back (← or B)",
-                        disabled: view.phase.is_start(),
-                        onclick: move |_| send(HostCommand::Back),
-                        "◀ Back"
+                    // Nothing comes before the start, so no Back there.
+                    if !view.phase.is_start() {
+                        button {
+                            class: "button ghost",
+                            title: "Back (← or B)",
+                            onclick: move |_| send(HostCommand::Back),
+                            "◀ Back"
+                        }
                     }
                     if can_reopen {
                         button {
