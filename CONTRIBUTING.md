@@ -65,8 +65,9 @@ with the big screen and two phones side by side.
    justfile), runs `just check`, sets the new version and moves the CHANGELOG's "Unreleased" notes
    under it, in two commits: "build: update dependencies" and "build: tag vX.Y.Z".
 2. Open a pull request with them.
-3. Once it's merged, tag `main` and push the tag (`git tag vX.Y.Z && git push origin vX.Y.Z`): the
-   release workflow builds the downloads and publishes them with the version's CHANGELOG notes.
+3. Once it's merged, tag `main` with an annotated tag and push it
+   (`git tag -a vX.Y.Z -m "quaesito X.Y.Z" && git push origin vX.Y.Z`): the release workflow builds
+   the downloads and publishes them with the version's CHANGELOG notes.
 
 ## Style
 
