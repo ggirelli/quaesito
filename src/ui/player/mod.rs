@@ -88,179 +88,11 @@ fn PhaseView(view: PlayerView, live_received: f64, lobby: Element, done: Element
                 p { class: "muted", "Answers open when the music starts." }
             }
         },
-        PlayerPhase::Question {
-            index,
-            total,
-            input: input @ (InputKind::Text | InputKind::Number),
-            text,
-            remaining_ms: left,
-            paused,
-            time_limit_ms,
-            submitted,
-            bonus,
-            range,
-            ..
-        } => rsx! {
-            OpenPad {
-                range,
-                bonus,
-                key: "{index}",
-                joker: view.joker,
-                index,
-                total,
-                number: input == InputKind::Number,
-                question: text.map(|(question, _)| question),
-                clock: Clock { left_ms: left, limit_ms: time_limit_ms, paused, received_at: live_received },
-                submitted,
-            }
-        },
-        PlayerPhase::Question {
-            index,
-            total,
-            input: InputKind::Pin,
-            map,
-            text,
-            remaining_ms: left,
-            paused,
-            time_limit_ms,
-            submitted,
-            bonus,
-            ..
-        } => rsx! {
-            PinPad {
-                bonus,
-                key: "{index}",
-                joker: view.joker,
-                index,
-                total,
-                map: map.unwrap_or_default(),
-                question: text.map(|(question, _)| question),
-                clock: Clock { left_ms: left, limit_ms: time_limit_ms, paused, received_at: live_received },
-                submitted: match submitted {
-                    Some(Response::Pin(at)) => Some(at),
-                    _ => None,
-                },
-            }
-        },
-        PlayerPhase::Question {
-            index,
-            total,
-            input: InputKind::Parts,
-            items,
-            text,
-            remaining_ms: left,
-            paused,
-            time_limit_ms,
-            submitted,
-            ..
-        } => rsx! {
-            PartsPad {
-                key: "{index}",
-                joker: view.joker,
-                index,
-                total,
-                labels: items,
-                question: text.map(|(question, _)| question),
-                clock: Clock { left_ms: left, limit_ms: time_limit_ms, paused, received_at: live_received },
-                submitted: match submitted {
-                    Some(Response::Parts(texts)) => Some(texts),
-                    _ => None,
-                },
-            }
-        },
-        PlayerPhase::Question {
-            index,
-            total,
-            input: InputKind::Pairs,
-            pairs,
-            text,
-            remaining_ms: left,
-            paused,
-            time_limit_ms,
-            submitted,
-            bonus,
-            ..
-        } => rsx! {
-            PairsPad {
-                bonus,
-                key: "{index}",
-                joker: view.joker,
-                index,
-                total,
-                columns: pairs.unwrap_or_default(),
-                question: text.map(|(question, _)| question),
-                clock: Clock { left_ms: left, limit_ms: time_limit_ms, paused, received_at: live_received },
-                submitted: match submitted {
-                    Some(Response::Pairs(links)) => Some(links),
-                    _ => None,
-                },
-            }
-        },
-        PlayerPhase::Question {
-            index,
-            total,
-            input: InputKind::Order,
-            items,
-            text,
-            remaining_ms: left,
-            paused,
-            time_limit_ms,
-            submitted,
-            bonus,
-            ..
-        } => rsx! {
-            OrderPad {
-                bonus,
-                key: "{index}",
-                joker: view.joker,
-                index,
-                total,
-                items,
-                question: text.map(|(question, _)| question),
-                clock: Clock { left_ms: left, limit_ms: time_limit_ms, paused, received_at: live_received },
-                submitted: match submitted {
-                    Some(Response::Order(order)) => Some(order),
-                    _ => None,
-                },
-            }
-        },
-        PlayerPhase::Question {
-            index,
-            total,
-            input: InputKind::Choice,
-            answer_count,
-            order,
-            items,
-            text,
-            answer_images,
-            map: _,
-            multi,
-            remaining_ms: left,
-            paused,
-            time_limit_ms,
-            submitted,
-            bonus,
-            range: _,
-            pairs: _,
-        } => rsx! {
-            AnswerPad {
-                bonus,
-                key: "{index}",
-                joker: view.joker,
-                index,
-                total,
-                answer_count,
-                order,
-                text,
-                labels: items,
-                images: answer_images,
-                multi,
-                clock: Clock { left_ms: left, limit_ms: time_limit_ms, paused, received_at: live_received },
-                submitted: match submitted {
-                    Some(Response::Choice(selected)) => Some(selected),
-                    _ => None,
-                },
-                display: view.display,
+        // Keys only count among list siblings: a one-item list makes a new question remount its
+        // pad, so a phone that reconnects straight into the next question starts with a blank one.
+        PlayerPhase::Question { index, .. } => rsx! {
+            for index in [index] {
+                QuestionView { key: "{index}", view: view.clone(), live_received }
             }
         },
         PlayerPhase::Closed {
@@ -333,6 +165,183 @@ fn PhaseView(view: PlayerView, live_received: f64, lobby: Element, done: Element
                 }
             }
         },
+    }
+}
+
+/// The pad for the open question, by its kind of answer.
+#[component]
+fn QuestionView(view: PlayerView, live_received: f64) -> Element {
+    match view.phase {
+        PlayerPhase::Question {
+            index,
+            total,
+            input: input @ (InputKind::Text | InputKind::Number),
+            text,
+            remaining_ms: left,
+            paused,
+            time_limit_ms,
+            submitted,
+            bonus,
+            range,
+            ..
+        } => rsx! {
+            OpenPad {
+                range,
+                bonus,
+                joker: view.joker,
+                index,
+                total,
+                number: input == InputKind::Number,
+                question: text.map(|(question, _)| question),
+                clock: Clock { left_ms: left, limit_ms: time_limit_ms, paused, received_at: live_received },
+                submitted,
+            }
+        },
+        PlayerPhase::Question {
+            index,
+            total,
+            input: InputKind::Pin,
+            map,
+            text,
+            remaining_ms: left,
+            paused,
+            time_limit_ms,
+            submitted,
+            bonus,
+            ..
+        } => rsx! {
+            PinPad {
+                bonus,
+                joker: view.joker,
+                index,
+                total,
+                map: map.unwrap_or_default(),
+                question: text.map(|(question, _)| question),
+                clock: Clock { left_ms: left, limit_ms: time_limit_ms, paused, received_at: live_received },
+                submitted: match submitted {
+                    Some(Response::Pin(at)) => Some(at),
+                    _ => None,
+                },
+            }
+        },
+        PlayerPhase::Question {
+            index,
+            total,
+            input: InputKind::Parts,
+            items,
+            text,
+            remaining_ms: left,
+            paused,
+            time_limit_ms,
+            submitted,
+            ..
+        } => rsx! {
+            PartsPad {
+                joker: view.joker,
+                index,
+                total,
+                labels: items,
+                question: text.map(|(question, _)| question),
+                clock: Clock { left_ms: left, limit_ms: time_limit_ms, paused, received_at: live_received },
+                submitted: match submitted {
+                    Some(Response::Parts(texts)) => Some(texts),
+                    _ => None,
+                },
+            }
+        },
+        PlayerPhase::Question {
+            index,
+            total,
+            input: InputKind::Pairs,
+            pairs,
+            text,
+            remaining_ms: left,
+            paused,
+            time_limit_ms,
+            submitted,
+            bonus,
+            ..
+        } => rsx! {
+            PairsPad {
+                bonus,
+                joker: view.joker,
+                index,
+                total,
+                columns: pairs.unwrap_or_default(),
+                question: text.map(|(question, _)| question),
+                clock: Clock { left_ms: left, limit_ms: time_limit_ms, paused, received_at: live_received },
+                submitted: match submitted {
+                    Some(Response::Pairs(links)) => Some(links),
+                    _ => None,
+                },
+            }
+        },
+        PlayerPhase::Question {
+            index,
+            total,
+            input: InputKind::Order,
+            items,
+            text,
+            remaining_ms: left,
+            paused,
+            time_limit_ms,
+            submitted,
+            bonus,
+            ..
+        } => rsx! {
+            OrderPad {
+                bonus,
+                joker: view.joker,
+                index,
+                total,
+                items,
+                question: text.map(|(question, _)| question),
+                clock: Clock { left_ms: left, limit_ms: time_limit_ms, paused, received_at: live_received },
+                submitted: match submitted {
+                    Some(Response::Order(order)) => Some(order),
+                    _ => None,
+                },
+            }
+        },
+        PlayerPhase::Question {
+            index,
+            total,
+            input: InputKind::Choice,
+            answer_count,
+            order,
+            items,
+            text,
+            answer_images,
+            map: _,
+            multi,
+            remaining_ms: left,
+            paused,
+            time_limit_ms,
+            submitted,
+            bonus,
+            range: _,
+            pairs: _,
+        } => rsx! {
+            AnswerPad {
+                bonus,
+                joker: view.joker,
+                index,
+                total,
+                answer_count,
+                order,
+                text,
+                labels: items,
+                images: answer_images,
+                multi,
+                clock: Clock { left_ms: left, limit_ms: time_limit_ms, paused, received_at: live_received },
+                submitted: match submitted {
+                    Some(Response::Choice(selected)) => Some(selected),
+                    _ => None,
+                },
+                display: view.display,
+            }
+        },
+        _ => rsx! {},
     }
 }
 
