@@ -41,6 +41,15 @@ jobs:
         uses: taiki-e/install-action@v2
         with:
           tool: dioxus-cli@${{ env.DIOXUS_CLI_VERSION }}
+      # dx's prebuilt wasm-bindgen for arm64 Linux needs a newer glibc than Ubuntu 22.04's (since
+      # 0.2.130): build it there instead, at Cargo.lock's version, where dx keeps its own.
+      - if: matrix.name == 'linux-arm64'
+        run: |
+          version=$(awk '$0 == "name = \"wasm-bindgen\"" { getline; gsub(/version = |"/, ""); print }' Cargo.lock)
+          cargo install wasm-bindgen-cli --version "$version" --locked --root "$RUNNER_TEMP/wasm-bindgen"
+          dir="$HOME/.local/share/.dx/tools/wasm-bindgen-$version"
+          mkdir -p "$dir"
+          cp "$RUNNER_TEMP/wasm-bindgen/bin/wasm-bindgen" "$dir/"
       # Naming a target for the server build replaces dx's own server arguments, so the features too.
       - name: Bundle
         run: dx bundle --platform web --release --out-dir dist ${{ matrix.target && format('@server --target {0} --no-default-features --features server', matrix.target) || '' }}

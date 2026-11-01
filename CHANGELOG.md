@@ -6,6 +6,11 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+### Fixed
+
+- The Linux arm64 download builds again: 0.8.1 failed to build it, so it was never released and this version
+  replaces it.
+
 ## [0.8.1] - 2026-11-01
 
 ### Fixed
