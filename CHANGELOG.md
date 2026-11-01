@@ -6,6 +6,11 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+### Fixed
+
+- A phone that reconnects straight into the next question no longer shows its answer to the previous one in the
+  answer field ([#119](https://github.com/ggirelli/quaesito/issues/119)).
+
 ## [0.8.0] - 2026-10-24
 
 ### Added
