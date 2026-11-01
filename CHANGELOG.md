@@ -6,6 +6,11 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+### Fixed
+
+- The macOS downloads build again, on GitHub's macOS 15 runners now that macOS 14's are retired: 0.8.2 failed to
+  build them, so it was never released and this version replaces it (as it did 0.8.1).
+
 ## [0.8.2] - 2026-11-01
 
 ### Fixed
