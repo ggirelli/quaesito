@@ -6,6 +6,8 @@ All notable changes to quaesito are listed here. The format follows
 
 ## [Unreleased]
 
+## [0.8.1] - 2026-11-01
+
 ### Fixed
 
 - A phone that reconnects straight into the next question no longer shows its answer to the previous one in the
